@@ -15,16 +15,42 @@
  */
 package gui.pkgfor.some.projects;
 
+import java.nio.file.Path;
+
 /**
  *
  * @author Администратор
  */
 public class GuiGridBagAndHelper {
+    private static FsWorkerDirFiles workerForFsDo;
+    private static GuiGridBagTwo numberTwo;
+    private static GuiGridBagOne numberOne;
     GuiGridBagAndHelper(){
         GuiGridBagTwo helperForThisParams = new GuiGridBagTwo();
         GuiGridBagOne helperParams = new GuiGridBagOne();
         
         helperParams.setElementedParams();
         helperParams.runMainExec();
+        
+        numberTwo = helperForThisParams;
+        numberOne = helperParams;
+        
+        workerForFsDo = new FsWorkerDirFiles();
+        operationsInFsForAppExec();
+        
+        writeObjectToFs();
+    }
+    protected Object getWindowOne(){
+        return this.numberOne;
+        
+    }
+    protected void writeObjectToFs(){
+        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object\\", numberOne);
+        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object\\", numberTwo);
+        
+    }
+    private void operationsInFsForAppExec(){
+        Path dirForXls = workerForFsDo.getDirForXls();
+        
     }
 }

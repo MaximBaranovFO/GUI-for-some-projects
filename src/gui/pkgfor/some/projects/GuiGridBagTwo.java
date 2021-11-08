@@ -24,6 +24,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.io.Serializable;
 //import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,7 +38,7 @@ import javax.swing.SwingWorker;
  *
  * @author Администратор
  */
-public class GuiGridBagTwo {
+public class GuiGridBagTwo implements Serializable{
     private int gridx, gridy;
     private GridBagConstraints constraints;
     public GridBagConstraints get(){

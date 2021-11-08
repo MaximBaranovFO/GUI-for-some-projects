@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.io.Serializable;
 //import java.awt.Container;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -40,7 +41,7 @@ import javax.swing.SwingWorker;
  *
  * @author Администратор
  */
-public class GuiGridBagOne extends JFrame {
+public class GuiGridBagOne extends JFrame implements Serializable{
     public static GuiGridBagOne windowClass;
     GuiGridBagOne(){
         super("guiGridBagOne");

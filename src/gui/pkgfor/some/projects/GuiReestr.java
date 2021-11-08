@@ -65,7 +65,7 @@ public class GuiReestr {
     }
     
     
-    public static void main(String[] args){
+    public static void GuiSomeTimeEarlyMain(String[] args){
         GuiReestr idReestrIteration = new GuiReestr();
         idReestrIteration.idFM.makeNewStorage();
         Path workStorage = idReestrIteration.idFM.getCurrentStorage();

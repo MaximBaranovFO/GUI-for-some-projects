@@ -164,5 +164,11 @@ public class GUIForSomeProjects extends JFrame
                 new GuiGridBagAndHelper();
             }
         });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GuiTableTree guiTableTree = new GuiTableTree();
+                guiTableTree.openAndShow();
+            }
+        });
     }
 }

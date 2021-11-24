@@ -105,7 +105,9 @@ public class WokerBuilderJob {
    }
  }
      */
-    /** 
+    /**
+      //javax.swiing.SwingWorker
+      //public abstract class SwingWorker<T,V>
       class PrimeNumbersTask extends
          SwingWorker<List<Integer>, Integer> {
      PrimeNumbersTask(JTextArea textArea, int numbersToFind) {

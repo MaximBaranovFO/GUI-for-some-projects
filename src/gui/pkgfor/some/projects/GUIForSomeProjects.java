@@ -170,5 +170,11 @@ public class GUIForSomeProjects extends JFrame
                 guiTableTree.openAndShow();
             }
         });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ThSimpleCR threadSimpleCodeRunForEnd = new ThSimpleCR();
+                threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
+            }
+        });
     }
 }

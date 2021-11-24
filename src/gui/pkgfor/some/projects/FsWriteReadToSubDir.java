@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.NotActiveException;
 import java.io.ObjectInputFilter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -309,7 +310,10 @@ The following code would then create a thread and start it running:
             
         } catch (IOException ex) {
             Logger.getLogger(FsWriteReadToSubDir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            return oosInputed;
+        }/* catch (NotActiveException exNotActive){
+            Logger.getLogger(FsWriteReadToSubDir.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         return oosInputed;
     }
     protected void writeToSubDir(String fileForWrite, Object ofwito){

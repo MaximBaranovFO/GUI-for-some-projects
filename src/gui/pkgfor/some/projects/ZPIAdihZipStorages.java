@@ -44,11 +44,11 @@ public class ZPIAdihZipStorages {
         //fillOpenStoreList();
     }
     /**
-     * This list of parameters changed in {@link ru.newcontrol.ncfv.AdihHelper#getStoragesNames AdihHelper.getStoragesNames()}
+     * This list of parameters changed in {@link ru.newcontrol.ncfv.ZPIAdihHelper#getStoragesNames ZPIAdihHelper.getStoragesNames()}
      * @return 
      */
     private String[] getStoragesNames(){
-        return AdihHelper.getStoragesNames();
+        return ZPIAdihHelper.getStoragesNames();
     }
     /**
      * <ul>
@@ -70,13 +70,13 @@ public class ZPIAdihZipStorages {
      * <li>  12 -   lw-indexLongWordList
      * <li>  13 -   ln-indexLongWordData
      * </ul>
-     * This list of parameters changed in {@link ru.newcontrol.ncfv.AdihHelper#getStoragesNames AdihHelper.getStoragesNames()}
+     * This list of parameters changed in {@link ru.newcontrol.ncfv.ZPIAdihHelper#getStoragesNames ZPIAdihHelper.getStoragesNames()}
      * Return code of parameter by his number, calculeted from some fileds
      * @param numParam
      * @return hashCode for Parameter by his number
      * @throws IllegalArgumentException when inputed number of parameter
      * out of bounds or not natural number <code>numParam &lt 0 (Zero)</code>
-     * @see ru.newcontrol.ncfv.AdihHelper#getStoragesNames AdihHelper.getStoragesNames()
+     * @see ru.newcontrol.ncfv.ZPIAdihHelper#getStoragesNames ZPIAdihHelper.getStoragesNames()
      */
     private Integer getParamCodeByNumber(int numParam){
         String[] paramNames;
@@ -122,7 +122,7 @@ public class ZPIAdihZipStorages {
      * @return name of param by his number
      * @throws IllegalArgumentException when inputed number of parameter
      * out of bounds or not natural number <code>numParam &lt 0 (Zero)</code>
-     * @see ru.newcontrol.ncfv.AdihHelper#getParamNames AdihHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdihHelper#getParamNames ZPIAdihHelper.getParamNames()
      */
     private String getParamNameByNumber(int numParam){
         String[] paramNames;
@@ -165,11 +165,11 @@ public class ZPIAdihZipStorages {
             countParamsDataFsForSet = getParamCount();
             
             paramCodeByNumber = getParamCodeByNumber(0);
-            toAddIntoList = AdihFileOperations.getUserHomeCheckedPath();
+            toAddIntoList = ZPIAdihFileOperations.getUserHomeCheckedPath();
             this.zipStoreFileList.put(paramCodeByNumber, toAddIntoList);
             
             paramCodeByNumber = getParamCodeByNumber(1);
-            toAddIntoList = AdihFileOperations.getAppCheckedPath();
+            toAddIntoList = ZPIAdihFileOperations.getAppCheckedPath();
             this.zipStoreFileList.put(paramCodeByNumber, toAddIntoList);
             
             paramCodeByNumber = getParamCodeByNumber(2);
@@ -178,9 +178,9 @@ public class ZPIAdihZipStorages {
             this.zipStoreFileList.put(paramCodeByNumber, toAddIntoList);
             
             for(idx = 3; idx < countParamsDataFsForSet; idx++ ){
-                prefixStorageByNumber = AdihHelper.getPrefixStorageByNumber(idx);
+                prefixStorageByNumber = ZPIAdihHelper.getPrefixStorageByNumber(idx);
                 toAddIntoList = buildZipStoragesPath(subDirIndex, prefixStorageByNumber);
-                uriZipIndexStorage = URI.create(AppFileNamesConstants.PREFIX_TO_URI_STORAGES + toAddIntoList.toUri());
+                uriZipIndexStorage = URI.create(ZPIAppFileNamesConstants.PREFIX_TO_URI_STORAGES + toAddIntoList.toUri());
                 paramCodeByNumber = getParamCodeByNumber(idx);
                 this.zipStoreFileList.put(paramCodeByNumber, toAddIntoList);
                 this.storagesUriList.put(paramCodeByNumber, uriZipIndexStorage);
@@ -189,7 +189,7 @@ public class ZPIAdihZipStorages {
             toAddIntoList = null;
             subDirIndex = null;
             uriZipIndexStorage = null;
-            AdihUtilization.utilizeStringValues(new String[]{prefixStorageByNumber});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{prefixStorageByNumber});
             prefixStorageByNumber = null;
             paramCodeByNumber = null;
             countParamsDataFsForSet = null;
@@ -231,7 +231,7 @@ public class ZPIAdihZipStorages {
             if( getOpenedStore == null ){
                 storageFile = this.zipStoreFileList.get(paramCodeByNumber);
                 uriForStorage = this.storagesUriList.get(paramCodeByNumber);
-                getOpenedStore = AdihFileOperations.getStorageFileSystem(storageFile, uriForStorage);
+                getOpenedStore = ZPIAdihFileOperations.getStorageFileSystem(storageFile, uriForStorage);
                 this.openedZipStoreList.put(paramCodeByNumber, getOpenedStore);
             }
         return getOpenedStore;
@@ -314,37 +314,37 @@ public class ZPIAdihZipStorages {
         if( prefixStr.toLowerCase().equalsIgnoreCase(prefixStr) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_TMP) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_TMP) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST) ){
             return getStoreFileSystemByNumber(3);
         }
-        if( prefixStr.toLowerCase().equalsIgnoreCase(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA) ){
+        if( prefixStr.toLowerCase().equalsIgnoreCase(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA) ){
             return getStoreFileSystemByNumber(3);
         }
         return null;
@@ -362,7 +362,7 @@ public class ZPIAdihZipStorages {
                 storageFile = this.zipStoreFileList.get(itemOfURI.getKey());
                 if( storageFile != null ){
                     uriForStorage = itemOfURI.getValue();
-                    storageFileSystem = AdihFileOperations.getStorageFileSystem(storageFile, uriForStorage);
+                    storageFileSystem = ZPIAdihFileOperations.getStorageFileSystem(storageFile, uriForStorage);
                     if( storageFileSystem != null ){
                         this.openedZipStoreList.put(itemOfURI.getKey(), storageFileSystem);
                     }
@@ -384,7 +384,7 @@ public class ZPIAdihZipStorages {
         try {
             for( Map.Entry<Integer, FileSystem> itemOfFileSystems : this.openedZipStoreList.entrySet() ){
                 removedStorageItem = itemOfFileSystems.getValue();
-                closeOpenedStorage = AdihFileOperations.closeOpenedStorage(removedStorageItem);
+                closeOpenedStorage = ZPIAdihFileOperations.closeOpenedStorage(removedStorageItem);
                 if( !closeOpenedStorage ){
                     //not closed, retry in other procedure or not opened
                 }
@@ -470,21 +470,21 @@ public class ZPIAdihZipStorages {
         String parentDir = new String();
         String buildedName = new String();
         try{
-            searchinIndexDirStorageByPrefix = AdihFileOperations.searchinIndexDirStorageByPrefix(parenForStorage, prefixStorage);
+            searchinIndexDirStorageByPrefix = ZPIAdihFileOperations.searchinIndexDirStorageByPrefix(parenForStorage, prefixStorage);
             if( searchinIndexDirStorageByPrefix != null ){
                 return searchinIndexDirStorageByPrefix;
             }
             parentDir = parenForStorage.toString();
             buildedName = prefixStorage
-                    .concat(AdihGetvalues.getNowTimeStringMillisFsNames())
-                    .concat(AppFileNamesConstants.FILE_INDEX_EXT);
+                    .concat(ZPIAdihGetvalues.getNowTimeStringMillisFsNames())
+                    .concat(ZPIAppFileNamesConstants.FILE_INDEX_EXT);
             try {
                     forReturnStorage = Paths.get(parentDir, buildedName);
             } catch(InvalidPathException exInvPath) {
-                System.err.println(AdihZipStorages.class.getCanonicalName() 
+                System.err.println(ZPIAdihZipStorages.class.getCanonicalName() 
                         + "[ERROR] Index SubDirectory build not complete path is " 
                         + parentDir + " and builded name " + buildedName
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exInvPath.getMessage()
                 );
                 exInvPath.printStackTrace();
@@ -493,7 +493,7 @@ public class ZPIAdihZipStorages {
             return forReturnStorage;
         } finally {
             forReturnStorage = null;
-            AdihUtilization.utilizeStringValues(new String[]{parentDir, buildedName});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{parentDir, buildedName});
             searchinIndexDirStorageByPrefix = null;
         }
     }
@@ -504,29 +504,29 @@ public class ZPIAdihZipStorages {
     private static Path createIfNotExistSubDirIndex(){
         Boolean createDirIfNotExist = null;
         Path userHomeSubDirIndex = null;
-        Path userHomeCheckedPath = AdihFileOperations.getUserHomeCheckedPath();
+        Path userHomeCheckedPath = ZPIAdihFileOperations.getUserHomeCheckedPath();
         String userHomeStr = userHomeCheckedPath.toString();
-        String prefixStorageByNumber = AdihHelper.getPrefixStorageByNumber(2);
+        String prefixStorageByNumber = ZPIAdihHelper.getPrefixStorageByNumber(2);
         try{
             try {
                     userHomeSubDirIndex = Paths.get(userHomeStr,prefixStorageByNumber);
             } catch(InvalidPathException exInvPath) {
-                System.err.println(AdihZipStorages.class.getCanonicalName() 
+                System.err.println(ZPIAdihZipStorages.class.getCanonicalName() 
                         + "[ERROR] Index SubDirectory build not complete path is " 
                         + userHomeStr + " and subDir " + prefixStorageByNumber
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exInvPath.getMessage()
                 );
                 exInvPath.printStackTrace();
                 System.exit(0);
             }
 
-            createDirIfNotExist = AdihFileOperations.createDirIfNotExist(userHomeSubDirIndex);
+            createDirIfNotExist = ZPIAdihFileOperations.createDirIfNotExist(userHomeSubDirIndex);
             if( !createDirIfNotExist ){
-                System.err.println(AdihZipStorages.class.getCanonicalName() 
+                System.err.println(ZPIAdihZipStorages.class.getCanonicalName() 
                             + "[ERROR] Index SubDirectory build not complete path is " 
                             + userHomeSubDirIndex.toString() + " "
-                            + AdihFileOperations.class.getCanonicalName() 
+                            + ZPIAdihFileOperations.class.getCanonicalName() 
                             + ".createDirIfNotExist() return "
                             + String.valueOf(createDirIfNotExist)
                     );
@@ -537,7 +537,7 @@ public class ZPIAdihZipStorages {
             createDirIfNotExist = null;
             userHomeSubDirIndex = null;
             userHomeCheckedPath = null;
-            AdihUtilization.utilizeStringValues(new String[]{userHomeStr, prefixStorageByNumber});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{userHomeStr, prefixStorageByNumber});
         }
     }
     /**

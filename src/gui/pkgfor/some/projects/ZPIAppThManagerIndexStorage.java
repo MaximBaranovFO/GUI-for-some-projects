@@ -31,16 +31,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThManagerIndexStorage implements Runnable {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
 
-    public ZPIAppThManagerIndexStorage(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIAppThManagerIndexStorage(ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         super();
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
     
     @Override
     public void run() {
-        AppFileStorageIndex currentIndexStorages = this.innerRuleForDirListWorkers.getWorkDirListState().getIndexRule().getIndexState().currentIndexStorages();
+        ZPIAppFileStorageIndex currentIndexStorages = this.innerRuleForDirListWorkers.getWorkDirListState().getIndexRule().getIndexState().currentIndexStorages();
         /*Path pathIndexFile = NcFsIdxStorageInit.buildPathToFileOfIdxStorage();
         Map<String, String> fsProperties = NcFsIdxStorageInit.getFsPropExist();
         
@@ -56,14 +56,14 @@ public class ZPIAppThManagerIndexStorage implements Runnable {
         try(FileSystem fsZipIndexStorage = 
             FileSystems.newFileSystem(uriZipIndexStorage, fsProperties)){*/
         Boolean ifException = Boolean.FALSE;
-        URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
-        Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+        URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+        Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
         try(FileSystem fsZipIndexStorage = 
             FileSystems.newFileSystem(byPrefixGetUri, 
                     byPrefixGetMap)){
             
             innerRuleForDirListWorkers.setFsZipIndexStorage(fsZipIndexStorage);
-            AppThWorkDirListState workDirListState = innerRuleForDirListWorkers.getWorkDirListState();
+            ZPIAppThWorkDirListState workDirListState = innerRuleForDirListWorkers.getWorkDirListState();
             int countForSetWaitReader = 0;
             while( !innerRuleForDirListWorkers.isDirListReaderSetted() ){
                 countForSetWaitReader++;

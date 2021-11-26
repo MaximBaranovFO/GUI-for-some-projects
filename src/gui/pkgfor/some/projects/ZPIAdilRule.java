@@ -25,12 +25,12 @@ import java.util.concurrent.LinkedTransferQueue;
 public class ZPIAdilRule {
     private ZPIThIndexRule indexRule;
     
-    private AdilWorkerWrite runnableAdilWorkWrite;
+    private ZPIAdilWorkerWrite runnableAdilWorkWrite;
     private Boolean isRunAdilWorkWrite;
     private Boolean isSetAdilWorkWrite;
     
-    private AdilState currentAdilState;
-    private Boolean isSetAdilState;
+    private ZPIAdilState currentZPIAdilState;
+    private Boolean isSetZPIAdilState;
     
     private LinkedTransferQueue<UUID> queueForRunLogger;
     
@@ -39,7 +39,7 @@ public class ZPIAdilRule {
         this.queueForRunLogger = new LinkedTransferQueue<UUID>();
         setFalseRunnerAdilWorkWrite();
         setFalseAdilWorkWrite();
-        setFalseAdilState();
+        setFalseZPIAdilState();
     }
     /**
      * ZPIThIndexRule
@@ -49,20 +49,20 @@ public class ZPIAdilRule {
         return (ZPIThIndexRule) this.indexRule;
     }
     /**
-     * AdilWorkerWrite
+     * ZPIAdilWorkerWrite
      * @return 
      */
-    protected AdilWorkerWrite getAdilWorkWrite(){
+    protected ZPIAdilWorkerWrite getAdilWorkWrite(){
         if( !this.isAdilWorkWrite() ){
-            throw new IllegalArgumentException(AdilWorkerWrite.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIAdilWorkerWrite.class.getCanonicalName() 
                     + " object not set in " 
-                    + AdilRule.class.getCanonicalName()
+                    + ZPIAdilRule.class.getCanonicalName()
             );
         }
         return this.runnableAdilWorkWrite;
     }
-    protected void setAdilWorkWrite(final AdilWorkerWrite runnableAdilWorkWriteOuter){
-        this.runnableAdilWorkWrite = (AdilWorkerWrite) runnableAdilWorkWriteOuter;
+    protected void setAdilWorkWrite(final ZPIAdilWorkerWrite runnableAdilWorkWriteOuter){
+        this.runnableAdilWorkWrite = (ZPIAdilWorkerWrite) runnableAdilWorkWriteOuter;
         setTrueAdilWorkWrite();
     }
     protected void setTrueAdilWorkWrite(){
@@ -118,27 +118,27 @@ public class ZPIAdilRule {
         }
     }
     /**
-     * AdilState
+     * ZPIAdilState
      * @return 
      */
-    protected AdilState getAdilState(){
-        if( !this.isAdilState() ){
-            throw new IllegalArgumentException(AdilState.class.getCanonicalName() + " object not set in " + AdilRule.class.getCanonicalName());
+    protected ZPIAdilState getZPIAdilState(){
+        if( !this.isZPIAdilState() ){
+            throw new IllegalArgumentException(ZPIAdilState.class.getCanonicalName() + " object not set in " + ZPIAdilRule.class.getCanonicalName());
         }
-        return this.currentAdilState;
+        return this.currentZPIAdilState;
     }
-    protected void setAdilState(final AdilState stateAdilOuter){
-        this.currentAdilState = (AdilState) stateAdilOuter;
-        setTrueAdilState();
+    protected void setZPIAdilState(final ZPIAdilState stateAdilOuter){
+        this.currentZPIAdilState = (ZPIAdilState) stateAdilOuter;
+        setTrueZPIAdilState();
     }
-    protected void setTrueAdilState(){
-        this.isSetAdilState = Boolean.TRUE;
+    protected void setTrueZPIAdilState(){
+        this.isSetZPIAdilState = Boolean.TRUE;
     }
-    protected void setFalseAdilState(){
-        this.isSetAdilState = Boolean.FALSE;
+    protected void setFalseZPIAdilState(){
+        this.isSetZPIAdilState = Boolean.FALSE;
     }
-    protected Boolean isAdilState(){
-        if( this.isSetAdilState ){
+    protected Boolean isZPIAdilState(){
+        if( this.isSetZPIAdilState ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

@@ -35,7 +35,7 @@ public class ZPIAppThManager {
         this.messagesQueueForLogging = objectsForApp.getLoggingQueue();
         
     }
-    protected AppObjectsList getListOfObjects(){
+    protected ZPIAppObjectsList getListOfObjects(){
         return this.outerObectsForApp;
     }
     protected void setIndexRule(final ZPIThIndexRule outerThIndexRule){

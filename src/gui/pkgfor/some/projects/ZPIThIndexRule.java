@@ -38,8 +38,8 @@ public class ZPIThIndexRule {
     private ZPIThIndexState currentIndexState;
     private Boolean isSetIndexState;
     
-    private AdilRule loggerRule;
-    private Boolean isSetAdilRule;
+    private ZPIAdilRule loggerRule;
+    private Boolean isSetZPIAdilRule;
     
     private ZPIThIndexStatistic currentIndexStatistic;
     private Boolean isSetIndexStatistic;
@@ -53,7 +53,7 @@ public class ZPIThIndexRule {
         setFalseRunnedThreadIndexDirList();
         setFalseRunnedThreadIndexMaker();
         setFalseIndexStatistic();
-        setFalseAdilRule();
+        setFalseZPIAdilRule();
         this.namesWorkerDirList = new ArrayBlockingQueue<String>(50);
     }
     protected void addThreadNameInQueue(String forAdd){
@@ -204,27 +204,27 @@ public class ZPIThIndexRule {
         return Boolean.FALSE;
     }
     /**
-     * AdilRule
+     * ZPIAdilRule
      * @return 
      */
-    protected AdilRule getAdilRule(){
-        if( !this.isAdilRule() ){
-            throw new IllegalArgumentException(AdilRule.class.getCanonicalName() + " object not set in " + ZPIThIndexRule.class.getCanonicalName());
+    protected ZPIAdilRule getZPIAdilRule(){
+        if( !this.isZPIAdilRule() ){
+            throw new IllegalArgumentException(ZPIAdilRule.class.getCanonicalName() + " object not set in " + ZPIThIndexRule.class.getCanonicalName());
         }
         return this.loggerRule;
     }
-    protected void setAdilRule(final AdilRule loggerAdilRuleOuter){
-        this.loggerRule = loggerAdilRuleOuter;
-        setTrueAdilRule();
+    protected void setZPIAdilRule(final ZPIAdilRule loggerZPIAdilRuleOuter){
+        this.loggerRule = loggerZPIAdilRuleOuter;
+        setTrueZPIAdilRule();
     }
-    protected void setTrueAdilRule(){
-        this.isSetAdilRule = Boolean.TRUE;
+    protected void setTrueZPIAdilRule(){
+        this.isSetZPIAdilRule = Boolean.TRUE;
     }
-    protected void setFalseAdilRule(){
-        this.isSetAdilRule = Boolean.FALSE;
+    protected void setFalseZPIAdilRule(){
+        this.isSetZPIAdilRule = Boolean.FALSE;
     }
-    protected Boolean isAdilRule(){
-        if( this.isSetAdilRule ){
+    protected Boolean isZPIAdilRule(){
+        if( this.isSetZPIAdilRule ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

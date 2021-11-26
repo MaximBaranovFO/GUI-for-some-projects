@@ -29,172 +29,172 @@ package gui.pkgfor.some.projects;
  */
 public class ZPIAdimRule {
     /**
-     * AdibProcessCommand
+     * ZPIAdibProcessCommand
      */
-    private AdibProcessCommand commandProcess;
-    private Boolean isSetAdibProcessCommand;
+    private ZPIAdibProcessCommand commandProcess;
+    private Boolean isSetZPIAdibProcessCommand;
     /**
-     * AdifControlFlag
+     * ZPIAdifControlFlag
      */
-    private AdifControlFlag controlFlag;
-    private Boolean isSetAdifControlFlag;
+    private ZPIAdifControlFlag controlFlag;
+    private Boolean isSetZPIAdifControlFlag;
     /**
-     * AdilRule
+     * ZPIAdilRule
      */
-    private AdilRule loggerRule;
-    private Boolean isSetAdilRule;
+    private ZPIAdilRule loggerRule;
+    private Boolean isSetZPIAdilRule;
     
     public ZPIAdimRule(){
-        setFalseAdilRule();
-        setFalseAdibProcessCommand();
-        setFalseAdifControlFlag();
+        setFalseZPIAdilRule();
+        setFalseZPIAdibProcessCommand();
+        setFalseZPIAdifControlFlag();
     }
     /**
-     * AdilRule
+     * ZPIAdilRule
      * @return 
      * @throws IllegalArgumentException if not set
      */
-    protected AdilRule getAdilRule(){
-        if( !this.isAdilRule() ){
-            throw new IllegalArgumentException(AdilRule.class.getCanonicalName() 
+    protected ZPIAdilRule getZPIAdilRule(){
+        if( !this.isZPIAdilRule() ){
+            throw new IllegalArgumentException(ZPIAdilRule.class.getCanonicalName() 
                     + " object not set in " 
-                    + AdimRule.class.getCanonicalName());
+                    + ZPIAdimRule.class.getCanonicalName());
         }
         return this.loggerRule;
     }
     /**
      * 
-     * @param loggerAdilRuleOuter 
+     * @param loggerZPIAdilRuleOuter 
      */
-    protected void setAdilRule(final AdilRule loggerAdilRuleOuter){
-        if( loggerAdilRuleOuter != null){
-            this.loggerRule = (AdilRule) loggerAdilRuleOuter;
-            setTrueAdilRule();
+    protected void setZPIAdilRule(final ZPIAdilRule loggerZPIAdilRuleOuter){
+        if( loggerZPIAdilRuleOuter != null){
+            this.loggerRule = (ZPIAdilRule) loggerZPIAdilRuleOuter;
+            setTrueZPIAdilRule();
         } else {
-            throw new NullPointerException(AdilRule.class.getCanonicalName() 
+            throw new NullPointerException(ZPIAdilRule.class.getCanonicalName() 
                     + " object for set in " 
-                    + AdimRule.class.getCanonicalName() 
+                    + ZPIAdimRule.class.getCanonicalName() 
                     + " is null");
         }
     }
     /**
      * Set in field <code>true</code>
      */
-    protected void setTrueAdilRule(){
-        this.isSetAdilRule = Boolean.TRUE;
+    protected void setTrueZPIAdilRule(){
+        this.isSetZPIAdilRule = Boolean.TRUE;
     }
     /**
      * Set in field <code>false</code>
      */
-    protected void setFalseAdilRule(){
-        this.isSetAdilRule = Boolean.FALSE;
+    protected void setFalseZPIAdilRule(){
+        this.isSetZPIAdilRule = Boolean.FALSE;
     }
     /**
      * 
-     * @return true if AdilRule object set
+     * @return true if ZPIAdilRule object set
      */
-    protected Boolean isAdilRule(){
-        if( this.isSetAdilRule ){
+    protected Boolean isZPIAdilRule(){
+        if( this.isSetZPIAdilRule ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
     /**
-     * AdibProcessCommand
+     * ZPIAdibProcessCommand
      * @return 
      * @throws IllegalArgumentException if not set
      */
-    protected AdibProcessCommand getAdibProcessCommand(){
-        if( !this.isAdibProcessCommand() ){
-            throw new IllegalArgumentException(AdibProcessCommand.class.getCanonicalName() 
+    protected ZPIAdibProcessCommand getZPIAdibProcessCommand(){
+        if( !this.isZPIAdibProcessCommand() ){
+            throw new IllegalArgumentException(ZPIAdibProcessCommand.class.getCanonicalName() 
                     + " object not set in " 
-                    + AdimRule.class.getCanonicalName());
+                    + ZPIAdimRule.class.getCanonicalName());
         }
         return this.commandProcess;
     }
     /**
      * 
-     * @param loggerAdibProcessCommandOuter 
+     * @param loggerZPIAdibProcessCommandOuter 
      */
-    protected void setAdibProcessCommand(final AdibProcessCommand loggerAdibProcessCommandOuter){
-        if( loggerAdibProcessCommandOuter != null){
-            this.commandProcess = (AdibProcessCommand) loggerAdibProcessCommandOuter;
-            setTrueAdibProcessCommand();
+    protected void setZPIAdibProcessCommand(final ZPIAdibProcessCommand loggerZPIAdibProcessCommandOuter){
+        if( loggerZPIAdibProcessCommandOuter != null){
+            this.commandProcess = (ZPIAdibProcessCommand) loggerZPIAdibProcessCommandOuter;
+            setTrueZPIAdibProcessCommand();
         } else {
-            throw new NullPointerException(AdibProcessCommand.class.getCanonicalName() 
+            throw new NullPointerException(ZPIAdibProcessCommand.class.getCanonicalName() 
                     + " object for set in " 
-                    + AdimRule.class.getCanonicalName() 
+                    + ZPIAdimRule.class.getCanonicalName() 
                     + " is null");
         }
     }
     /**
      * Set in field <code>true</code>
      */
-    protected void setTrueAdibProcessCommand(){
-        this.isSetAdibProcessCommand = Boolean.TRUE;
+    protected void setTrueZPIAdibProcessCommand(){
+        this.isSetZPIAdibProcessCommand = Boolean.TRUE;
     }
     /**
      * Set in field <code>false</code>
      */
-    protected void setFalseAdibProcessCommand(){
-        this.isSetAdibProcessCommand = Boolean.FALSE;
+    protected void setFalseZPIAdibProcessCommand(){
+        this.isSetZPIAdibProcessCommand = Boolean.FALSE;
     }
     /**
      * 
-     * @return true if AdibProcessCommand object set
+     * @return true if ZPIAdibProcessCommand object set
      */
-    protected Boolean isAdibProcessCommand(){
-        if( this.isSetAdibProcessCommand ){
+    protected Boolean isZPIAdibProcessCommand(){
+        if( this.isSetZPIAdibProcessCommand ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
     }
     /**
-     * AdifControlFlag
+     * ZPIAdifControlFlag
      * @return 
      * @throws IllegalArgumentException if not set
      */
-    protected AdifControlFlag getAdifControlFlag(){
-        if( !this.isAdifControlFlag() ){
-            throw new IllegalArgumentException(AdifControlFlag.class.getCanonicalName() 
+    protected ZPIAdifControlFlag getZPIAdifControlFlag(){
+        if( !this.isZPIAdifControlFlag() ){
+            throw new IllegalArgumentException(ZPIAdifControlFlag.class.getCanonicalName() 
                     + " object not set in " 
-                    + AdimRule.class.getCanonicalName());
+                    + ZPIAdimRule.class.getCanonicalName());
         }
         return this.controlFlag;
     }
     /**
      * 
-     * @param loggerAdifControlFlagOuter 
+     * @param loggerZPIAdifControlFlagOuter 
      */
-    protected void setAdifControlFlag(final AdifControlFlag controlAdifControlFlagOuter){
-        if( controlAdifControlFlagOuter != null){
-            this.controlFlag = (AdifControlFlag) controlAdifControlFlagOuter;
-            setTrueAdifControlFlag();
+    protected void setZPIAdifControlFlag(final ZPIAdifControlFlag controlZPIAdifControlFlagOuter){
+        if( controlZPIAdifControlFlagOuter != null){
+            this.controlFlag = (ZPIAdifControlFlag) controlZPIAdifControlFlagOuter;
+            setTrueZPIAdifControlFlag();
         } else {
-            throw new NullPointerException(AdifControlFlag.class.getCanonicalName() 
+            throw new NullPointerException(ZPIAdifControlFlag.class.getCanonicalName() 
                     + " object for set in " 
-                    + AdimRule.class.getCanonicalName() 
+                    + ZPIAdimRule.class.getCanonicalName() 
                     + " is null");
         }
     }
     /**
      * Set in field <code>true</code>
      */
-    protected void setTrueAdifControlFlag(){
-        this.isSetAdifControlFlag = Boolean.TRUE;
+    protected void setTrueZPIAdifControlFlag(){
+        this.isSetZPIAdifControlFlag = Boolean.TRUE;
     }
     /**
      * Set in field <code>false</code>
      */
-    protected void setFalseAdifControlFlag(){
-        this.isSetAdifControlFlag = Boolean.FALSE;
+    protected void setFalseZPIAdifControlFlag(){
+        this.isSetZPIAdifControlFlag = Boolean.FALSE;
     }
     /**
      * 
-     * @return true if AdifControlFlag object set
+     * @return true if ZPIAdifControlFlag object set
      */
-    protected Boolean isAdifControlFlag(){
-        if( this.isSetAdifControlFlag ){
+    protected Boolean isZPIAdifControlFlag(){
+        if( this.isSetZPIAdifControlFlag ){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

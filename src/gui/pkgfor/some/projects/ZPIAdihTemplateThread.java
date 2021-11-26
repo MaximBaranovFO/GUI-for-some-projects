@@ -62,7 +62,7 @@ public class ZPIAdihTemplateThread extends Thread{
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (ZPIAdilState) this.ruleAdim.getAdilRule().getZPIAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getZPIAdilRule().getZPIAdilState();
     }
     
     @Override

@@ -107,7 +107,7 @@ public class ZPIThWordBusReader {
                 }
                 nowNanoTime = System.nanoTime();
                 if( nowNanoTime > getAccTime ){
-                    if( (nowNanoTime - getAccTime) > AppConstants.NOT_USED_ABOVE_TIME_LIMIT){
+                    if( (nowNanoTime - getAccTime) > ZPIAppConstants.NOT_USED_ABOVE_TIME_LIMIT){
                         this.lastLastAccessUsedBusNanoTime.remove(itemKey);
                     }
                 }

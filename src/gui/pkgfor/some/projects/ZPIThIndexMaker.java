@@ -31,12 +31,12 @@ public class ZPIThIndexMaker extends Thread{
     @Override
     public void run(){
         this.ruleThIndex.setTrueRunnedThreadIndexMaker();
-        AppObjectsList objectsForApp = new AppObjectsList();
-        //@todo AppThManager, AppObjectsManagerState create one it two or... ?
-        AppThManager loggerByThreadsMain = new AppThManager(objectsForApp);
+        ZPIAppObjectsList objectsForApp = new ZPIAppObjectsList();
+        //@todo ZPIAppThManager, ZPIAppObjectsManagerState create one it two or... ?
+        ZPIAppThManager loggerByThreadsMain = new ZPIAppThManager(objectsForApp);
         loggerByThreadsMain.setIndexRule(this.ruleThIndex);
         ZPINcfv.logInitState(loggerByThreadsMain);
-        AppObjectsManagerState withOutLogger = new AppObjectsManagerState(loggerByThreadsMain);
+        ZPIAppObjectsManagerState withOutLogger = new ZPIAppObjectsManagerState(loggerByThreadsMain);
         withOutLogger.runWorkMakeDirList();
         loggerByThreadsMain.getListOfObjects().getWorkerList().clear();
         //runVersionOfAppBeforeThreadsInUse(args);

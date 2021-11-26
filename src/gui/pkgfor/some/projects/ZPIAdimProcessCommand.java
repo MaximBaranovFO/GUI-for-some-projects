@@ -30,7 +30,7 @@ public class ZPIAdimProcessCommand {
      * @param numberProcessInputed
      * @return 
      */
-    protected static ConcurrentSkipListMap<Integer, Integer> commandDetector(AdimRule ruleAdimInputed, Integer numberProcessInputed){
+    protected static ConcurrentSkipListMap<Integer, Integer> commandDetector(ZPIAdimRule ruleAdimInputed, Integer numberProcessInputed){
         
         ConcurrentSkipListMap<Integer, Integer> resultProcessorCommand = new ConcurrentSkipListMap<Integer, Integer>();
         if( ruleAdimInputed == null ){
@@ -40,22 +40,22 @@ public class ZPIAdimProcessCommand {
             return resultProcessorCommand;
         }
         Integer numberProcess = numberProcessInputed;
-        AdimRule ruleAdimFunc = (AdimRule) ruleAdimInputed;
-        AdilState adilStateFunc = (AdilState) ruleAdimFunc.getAdilRule().getAdilState();
-        String msgLog = new String().concat(AdilConstants.CANONICALNAME
-                .concat(AdimProcessCommand.class.getCanonicalName()))
-                .concat(AdilConstants.METHOD)
+        ZPIAdimRule ruleAdimFunc = (ZPIAdimRule) ruleAdimInputed;
+        ZPIAdilState adilStateFunc = (ZPIAdilState) ruleAdimFunc.getZPIAdilRule().getZPIAdilState();
+        String msgLog = new String().concat(ZPIAdilConstants.CANONICALNAME
+                .concat(ZPIAdimProcessCommand.class.getCanonicalName()))
+                .concat(ZPIAdilConstants.METHOD)
                 .concat("commandDetector()");
-        adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, msgLog.concat(AdilConstants.START));
+        adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, msgLog.concat(ZPIAdilConstants.START));
         
-        AdifControlFlag adifControlFlag = ruleAdimFunc.getAdifControlFlag();
+        ZPIAdifControlFlag adifControlFlag = ruleAdimFunc.getZPIAdifControlFlag();
         UUID runnerId = UUID.fromString(Thread.currentThread().getName());
         adifControlFlag.createForRunnerUuidFlagList(runnerId);
         
         
         
         
-        AdibProcessCommand adibProcessCommand = (AdibProcessCommand) ruleAdimFunc.getAdibProcessCommand();
+        ZPIAdibProcessCommand adibProcessCommand = (ZPIAdibProcessCommand) ruleAdimFunc.getZPIAdibProcessCommand();
         ConcurrentSkipListMap<Integer, Integer> commandsList = adibProcessCommand.getCommandsList();
         Boolean commandListValide = adibProcessCommand.isCommandListValide(commandsList);
         
@@ -69,10 +69,10 @@ public class ZPIAdimProcessCommand {
         Integer cancelPauseFromUserCommandCode = commandsList.get(3);
         Boolean isSetPauseFromUser = adifControlFlag.getRunnerFlagByNumber(runnerId, 1);
         adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "isSetPauseFromUser",
                                             String.valueOf(isSetPauseFromUser),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("get flags from flow control"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("get flags from flow control"));
         try {
             
             /**
@@ -89,7 +89,7 @@ public class ZPIAdimProcessCommand {
                             commandPoll = adibProcessCommand.commandPoll(commandType, numberProcess);
                             commandQueueSize = adibProcessCommand.commandSizeQueue(commandType, numberProcess);
                             adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "isSetPauseFromUser",
                                             String.valueOf(isSetPauseFromUser),
                                             "commandQueueSize",
@@ -98,14 +98,14 @@ public class ZPIAdimProcessCommand {
                                             String.valueOf(commandPoll),
                                             "commandOldValue",
                                             String.valueOf(commandOldValue),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("poll command from processCommand"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("poll command from processCommand"));
                             if( commandPoll.equals(Integer.MIN_VALUE) ){
                                 if( isSetPauseFromUser ){
                                      commandPoll = commandOldValue;
                                 }
                             }
                             adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "isSetPauseFromUser",
                                             String.valueOf(isSetPauseFromUser),
                                             "numberProcess",
@@ -114,7 +114,7 @@ public class ZPIAdimProcessCommand {
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("new command readed, decode command"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("new command readed, decode command"));
                             if( isSetPauseFromUser ){
                                 if( startCommandCode.equals(commandPoll) ){
                                     isSetPauseFromUser = Boolean.FALSE;
@@ -130,47 +130,47 @@ public class ZPIAdimProcessCommand {
                             }
                             if( startCommandCode.equals(commandPoll) ){
                                 adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "commandPoll",
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("commandStart"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("commandStart"));
                                 adilStateFunc.logStackTrace(numberProcess);
-                                //@todo AdimFactory logic procedure key number put into returned list for exit from this procedure
+                                //@todo ZPIAdimFactory logic procedure key number put into returned list for exit from this procedure
                                 resultProcessorCommand.put(0, numberProcess);
                             }
                             if( stopCommandCode.equals(commandPoll) ){
                                 adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "commandPoll",
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("commandStop"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("commandStop"));
                                 adilStateFunc.logStackTrace(numberProcess);
-                                //@todo AdimFactory logic procedure key number put into returned list for exit from this procedure
+                                //@todo ZPIAdimFactory logic procedure key number put into returned list for exit from this procedure
                                 resultProcessorCommand.put(1, numberProcess);
                             }
                             if( setPauseFromUserCommandCode.equals(commandPoll) ){
                                 isSetPauseFromUser = Boolean.TRUE;
                                 adifControlFlag.changeFlagValueByNumber(runnerId, 1, isSetPauseFromUser);
                                 adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "commandPoll",
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("SetPauseFromUser goto sleep"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("SetPauseFromUser goto sleep"));
                                 adilStateFunc.logStackTrace(numberProcess);
-                                AdimFactory.workerSleep();
+                                ZPIAdimFactory.workerSleep();
                                 adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "commandPoll",
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("SetPauseFromUser wakeup"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("SetPauseFromUser wakeup"));
                                 adilStateFunc.logStackTrace(numberProcess);
                                 //break readNextCommandAfterSleepPause;
                             }
@@ -178,12 +178,12 @@ public class ZPIAdimProcessCommand {
                                 isSetPauseFromUser = Boolean.FALSE;
                                 adifControlFlag.changeFlagValueByNumber(runnerId, 1, isSetPauseFromUser);
                                 adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, 
-                                        msgLog.concat(AdilHelper.variableNameValue(new String[]{
+                                        msgLog.concat(ZPIAdilHelper.variableNameValue(new String[]{
                                             "commandPoll",
                                             String.valueOf(commandPoll),
                                             "commandQueueSize",
                                             String.valueOf(commandQueueSize),
-                                        })).concat(AdilConstants.DESCRIPTION).concat("CancelPauseFromUser"));
+                                        })).concat(ZPIAdilConstants.DESCRIPTION).concat("CancelPauseFromUser"));
                                 adilStateFunc.logStackTrace(numberProcess);
                                 resultProcessorCommand.put(0, numberProcess);
                             }
@@ -193,7 +193,7 @@ public class ZPIAdimProcessCommand {
             }
             return resultProcessorCommand;
         } finally {
-            adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, msgLog.concat(AdilConstants.FINISH));
+            adilStateFunc.putLogLineByProcessNumberMsgInfo(numberProcess, msgLog.concat(ZPIAdilConstants.FINISH));
             adifControlFlag = null;
             runnerId = null;
             numberProcess = null;
@@ -202,7 +202,7 @@ public class ZPIAdimProcessCommand {
             adibProcessCommand = null;
             commandsList = null;
             commandListValide = null;
-            AdihUtilization.utilizeStringValues(new String[] {msgLog});
+            ZPIAdihUtilization.utilizeStringValues(new String[] {msgLog});
         }
     }
 }

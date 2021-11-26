@@ -28,8 +28,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThWorkDirListState {
-    private AppObjectsList currentListOfObject;
-    private AppThWorkDirListRule ruleForDirListWorkers;
+    private ZPIAppObjectsList currentListOfObject;
+    private ZPIAppThWorkDirListRule ruleForDirListWorkers;
     
     private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeFromRunnerToTacker;
     private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeFromTackerToPacker;
@@ -46,29 +46,29 @@ public class ZPIAppThWorkDirListState {
     private ZPIThIndexRule currentIndexRule;
     
 
-    public ZPIAppThWorkDirListState(AppObjectsList outerListOfObject, Path makeIndex) {
+    public ZPIAppThWorkDirListState(ZPIAppObjectsList outerListOfObject, Path makeIndex) {
         
         this.currentListOfObject = outerListOfObject;
-        this.ruleForDirListWorkers = new AppThWorkDirListRule(makeIndex);
+        this.ruleForDirListWorkers = new ZPIAppThWorkDirListRule(makeIndex);
         
         this.pipeFromRunnerToTacker = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(ZPIAppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
         this.pipeFromTackerToPacker = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(ZPIAppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
         this.pipeFromPackerToWriter = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(ZPIAppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
 //threads init
         
         this.indexStorageManager = new Thread(
                 this.ruleForDirListWorkers.getThreadGroupWorkerDirList(),
-                new AppThManagerIndexStorage(this.ruleForDirListWorkers),
+                new ZPIAppThManagerIndexStorage(this.ruleForDirListWorkers),
                 this.ruleForDirListWorkers.getNameIndexStorage());
         this.currentListOfObject.addAnyThread(this.indexStorageManager,
                 this.ruleForDirListWorkers.getNameIndexStorage());
         
         this.runDirlistReader = new Thread(
                 this.ruleForDirListWorkers.getThreadGroupWorkerDirList(),
-                new AppThWorkDirListRun(this.ruleForDirListWorkers),
+                new ZPIAppThWorkDirListRun(this.ruleForDirListWorkers),
                 this.ruleForDirListWorkers.getNameDirlistReader());
         this.currentListOfObject.addAnyThread(this.runDirlistReader,
                 this.ruleForDirListWorkers.getNameDirlistReader());
@@ -76,7 +76,7 @@ public class ZPIAppThWorkDirListState {
         
         this.runDirlistTacker = new Thread(
                 this.ruleForDirListWorkers.getThreadGroupWorkerDirList(),
-                new AppThWorkDirListTake(this.ruleForDirListWorkers),
+                new ZPIAppThWorkDirListTake(this.ruleForDirListWorkers),
                 this.ruleForDirListWorkers.getNameDirlistTacker());
         this.currentListOfObject.addAnyThread(this.runDirlistTacker,
                 this.ruleForDirListWorkers.getNameDirlistTacker());
@@ -84,7 +84,7 @@ public class ZPIAppThWorkDirListState {
         
         this.runDirListPacker = new Thread(
                 this.ruleForDirListWorkers.getThreadGroupWorkerDirList(),
-                new AppThWorkDirListPack(this.ruleForDirListWorkers),
+                new ZPIAppThWorkDirListPack(this.ruleForDirListWorkers),
                 this.ruleForDirListWorkers.getNameDirListPacker());
         this.currentListOfObject.addAnyThread(this.runDirListPacker,
                 this.ruleForDirListWorkers.getNameDirListPacker());
@@ -92,7 +92,7 @@ public class ZPIAppThWorkDirListState {
         
         this.runDirListWriter = new Thread(
                 this.ruleForDirListWorkers.getThreadGroupWorkerDirList(),
-                new AppThWorkDirListWrite(this.ruleForDirListWorkers),
+                new ZPIAppThWorkDirListWrite(this.ruleForDirListWorkers),
                 this.ruleForDirListWorkers.getNameDirListWriter());
         this.currentListOfObject.addAnyThread(this.runDirListWriter,
                 this.ruleForDirListWorkers.getNameDirListWriter());
@@ -198,7 +198,7 @@ public class ZPIAppThWorkDirListState {
             ex.printStackTrace();
         }
     }
-    protected AppObjectsList getListOfObjectAndLogger(){
+    protected ZPIAppObjectsList getListOfObjectAndLogger(){
         return this.currentListOfObject;
     }
     

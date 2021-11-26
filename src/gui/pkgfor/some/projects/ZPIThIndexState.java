@@ -30,7 +30,7 @@ public class ZPIThIndexState {
     private ZPIThIndexWordBusWrited busWritedJob;
     private Boolean isSetWritedJob;
     
-    private AppFileStorageIndex storagesForIndexList;
+    private ZPIAppFileStorageIndex storagesForIndexList;
     private Boolean isSetStoriesForIndexList;
     /**
      * ZPIThFileListRule
@@ -56,14 +56,14 @@ public class ZPIThIndexState {
         setFalseReadedJob();
         setFalseWritedJob();
     }
-    protected AppFileStorageIndex currentIndexStorages(){
+    protected ZPIAppFileStorageIndex currentIndexStorages(){
         if( this.storagesForIndexList == null ){
             setTrueStoriesForIndexList();
-            this.storagesForIndexList = new AppFileStorageIndex();
+            this.storagesForIndexList = new ZPIAppFileStorageIndex();
         }
         if( !this.isStoriesForIndexList() ){
             setTrueStoriesForIndexList();
-            this.storagesForIndexList = new AppFileStorageIndex();
+            this.storagesForIndexList = new ZPIAppFileStorageIndex();
         }
         return this.storagesForIndexList;
     }

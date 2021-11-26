@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 
  * @author wladimirowichbiaran
  */
-public class ZPIZPIAdibWorker {
+public class ZPIAdibWorker {
     private final Long timeCreation;
     private final UUID objectLabel;
     private final Integer numberProcessIndexSystem;
@@ -50,7 +50,7 @@ public class ZPIZPIAdibWorker {
      * @param ruleMechanics 
      * @throws NullPointerException if <code>ruleMechanics</code> is null
      */
-    public ZPIZPIAdibWorker(final ZPIAdimRule ruleMechanics){
+    public ZPIAdibWorker(final ZPIAdimRule ruleMechanics){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         

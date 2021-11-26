@@ -138,8 +138,8 @@ public class ZPIThWordEventLogic {
         Integer sizeBusFlowUuids;
         String exMessage = new String();
         try {
-            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            ZPIAdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 13;
             String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
                     + ZPIAdilConstants.CANONICALNAME
@@ -314,8 +314,8 @@ public class ZPIThWordEventLogic {
         Boolean localIsUuidFinished;
         Boolean isFileDeleted = Boolean.FALSE;
         try {
-            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            ZPIAdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 13;
             String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
                     + ZPIAdilConstants.CANONICALNAME
@@ -475,8 +475,8 @@ public class ZPIThWordEventLogic {
     protected void readDataFromStorage(FileSystem fsForReadData, UUID pollNextUuid){
         Boolean isCacheReaded = Boolean.FALSE;
         try {
-            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            ZPIAdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 13;
             String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
                     + ZPIAdilConstants.CANONICALNAME

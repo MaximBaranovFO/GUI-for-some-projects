@@ -31,13 +31,13 @@ import java.util.Map;
  * for managment in runned threads create class AppThWorkDirListRule
  * Run and check state of work process, for example:
  * need create file and directory list of storage, this work in iteration list:
- * 1. init and create index storage in zip (in AppThManagerIndexStorage class) 
+ * 1. init and create index storage in zip (in ZPIAppThManagerIndexStorage class) 
  *              (by static functions AppFileManagerIndexStorageHelper)
  * 1.1. found for existing storage and open it, if not exist create new (in this class)
  *              (by static functions AppFileManagerIndexStorageHelper)
  * 1.2. get for start of process directory, if new storage: (in this class)
  * 1.2.1. get roots of storages, select first root  (in this class)
- * - 1.2.2. create new Objects for working process by list:  (in AppThWorkDirListState class)
+ * - 1.2.2. create new Objects for working process by list:  (in ZPIAppThWorkDirListState class)
  *              put to constructor of class, selected Path of root
  * - 1.2.2.1. AppThWorkDirListRun - Run NIO 2 File.walker, create and make Objects for Directory List
  * - 1.2.2.2. AppThWorkDirListTake - Get List elements in buffer and make sort for directory or file
@@ -69,17 +69,17 @@ import java.util.Map;
  */
 public class ZPIAppObjectsManagerState {
     private Path currentSelectedPathForMakeIndex;
-    private AppThWorkDirListState currentWorkState;
-    private AppObjectsList currentListOfObjects;
-    private AppThManager thManager;
+    private ZPIAppThWorkDirListState currentWorkState;
+    private ZPIAppObjectsList currentListOfObjects;
+    private ZPIAppThManager thManager;
     private ZPIThIndexRule indexRule;
 
-    public ZPIAppObjectsManagerState(AppThManager appThManager) {
+    public ZPIAppObjectsManagerState(ZPIAppThManager appThManager) {
         this.thManager = appThManager;
         this.currentListOfObjects = appThManager.getListOfObjects();
         this.currentSelectedPathForMakeIndex = Paths.get("/usr/");
         this.indexRule = appThManager.getIndexRule();
-        this.currentWorkState = new AppThWorkDirListState(this.currentListOfObjects,
+        this.currentWorkState = new ZPIAppThWorkDirListState(this.currentListOfObjects,
                 this.currentSelectedPathForMakeIndex);
         this.currentWorkState.setIndexRule(indexRule);
         

@@ -57,7 +57,7 @@ public class ZPIAdihTemplateRunnable implements Runnable {
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (ZPIAdilState) this.ruleAdim.getAdilRule().getZPIAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getZPIAdilRule().getZPIAdilState();
     }
     /**
      * @todo read command into static method of switch (ZPIAdimProcessCommand) class, log recived

@@ -35,7 +35,7 @@ public class ZPIAdilState {
     private final ConcurrentSkipListMap<Integer, LinkedTransferQueue<String>> logLinesTypedBus;
     private Boolean logWithStackTrace;
     
-    ZPIAdilState(final AdilRule outerRule){
+    ZPIAdilState(final ZPIAdilRule outerRule){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.logLinesTypedBus = new ConcurrentSkipListMap<Integer, LinkedTransferQueue<String>>();
@@ -73,18 +73,18 @@ public class ZPIAdilState {
      * <li>  12 -   WordWriter
      * <li>  13 -   WordEvent
      * </ul> 
-     * This list of parameters changed in {@link ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()}
+     * This list of parameters changed in {@link ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()}
      * Return code of parameter by his number, calculeted from some fileds
      * @param numParam
      * @return hashCode for Parameter by his number
      * @throws IllegalArgumentException when inputed number of parameter
      * out of bounds or not natural number <code>numParam &lt 0 (Zero)</code>
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     private Integer getParamCodeByNumber(int numParam){
         String[] paramNames;
         try {
-            paramNames = AdilHelper.getParamNames();
+            paramNames = ZPIAdilHelper.getParamNames();
             if( numParam < 0 ){
                 throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
@@ -113,7 +113,7 @@ public class ZPIAdilState {
     private Integer getParamCount(){
         String[] paramNames;
         try {
-            paramNames = AdilHelper.getParamNames();
+            paramNames = ZPIAdilHelper.getParamNames();
             return paramNames.length;
         } finally {
             paramNames = null;
@@ -125,13 +125,13 @@ public class ZPIAdilState {
      * @return name of param by his number
      * @throws IllegalArgumentException when inputed number of parameter
      * out of bounds or not natural number <code>numParam &lt 0 (Zero)</code>
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     private String getParamNameByNumber(int numParam){
         String[] paramNames;
         String paramName;
         try {
-            paramNames = AdilHelper.getParamNames();
+            paramNames = ZPIAdilHelper.getParamNames();
             if( numParam < 0 ){
                 throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
@@ -178,7 +178,7 @@ public class ZPIAdilState {
      * 
      * @param numberTypedBus
      * @return bus with lines for log by type of number
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     private LinkedTransferQueue<String> getLogLinesBusByNumber(final Integer numberTypedBus){
         Integer paramCodeByNumber;
@@ -213,19 +213,19 @@ public class ZPIAdilState {
      * </ul>  
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsg(Integer typeBus, String strForLogInputed){
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = strForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG 
+                    + ZPIAdilConstants.MSG 
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -253,19 +253,19 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgInfo(Integer typeBus, String strForLogInputed){
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = strForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG_INFO
+                    + ZPIAdilConstants.MSG_INFO
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -293,19 +293,19 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgWarning(Integer typeBus, String strForLogInputed){
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = strForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG_WARNING
+                    + ZPIAdilConstants.MSG_WARNING
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -333,19 +333,19 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgError(Integer typeBus, String strForLogInputed){
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = strForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG_ERROR
+                    + ZPIAdilConstants.MSG_ERROR
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -373,19 +373,19 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgErrorCritical(Integer typeBus, String strForLogInputed){
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = strForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG_ERROR_CRITICAL
+                    + ZPIAdilConstants.MSG_ERROR_CRITICAL
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -413,7 +413,7 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgExceptions(Integer typeBus,
             String exceptionClassCanonicalName,
@@ -423,20 +423,20 @@ public class ZPIAdilState {
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = messageForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME.concat(
+                    ZPIAdilConstants.TIME.concat(
                     instanceStartTimeWithMS).concat(
-                    AdilConstants.MSG).concat(
-                    AdilConstants.EXCEPTION).concat(
+                    ZPIAdilConstants.MSG).concat(
+                    ZPIAdilConstants.EXCEPTION).concat(
                     exceptionClassCanonicalName).concat(
-                    AdilConstants.CANONICALNAME).concat(
+                    ZPIAdilConstants.CANONICALNAME).concat(
                     srcClassCanonicalName).concat(
-                    AdilConstants.METHOD).concat(
+                    ZPIAdilConstants.METHOD).concat(
                     methodName).concat(
-                    AdilConstants.DESCRIPTION).concat(
+                    ZPIAdilConstants.DESCRIPTION).concat(
                     messageForLogInputed));
         } finally {
             logLinesBusByNumber = null;
@@ -464,7 +464,7 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     protected void putLogLineByProcessNumberMsgWarning(Integer typeBus,
             String classCanonicalName,
@@ -473,19 +473,19 @@ public class ZPIAdilState {
         LinkedTransferQueue<String> logLinesBusByNumber;
         String strForInput = new String();
         try {
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             strForInput = messageForLogInputed;
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             logLinesBusByNumber.add(
-                    AdilConstants.TIME 
+                    ZPIAdilConstants.TIME 
                     + instanceStartTimeWithMS 
-                    + AdilConstants.MSG
-                    + AdilConstants.WARNING
-                    + AdilConstants.CANONICALNAME
+                    + ZPIAdilConstants.MSG
+                    + ZPIAdilConstants.WARNING
+                    + ZPIAdilConstants.CANONICALNAME
                     + classCanonicalName
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + methodName
-                    + AdilConstants.DESCRIPTION
+                    + ZPIAdilConstants.DESCRIPTION
                     + messageForLogInputed);
         } finally {
             logLinesBusByNumber = null;
@@ -500,13 +500,13 @@ public class ZPIAdilState {
         if( isLogWithTrace() ){
             LinkedTransferQueue<String> logLinesBusByNumber;
             String strForInput = new String();
-            String instanceStartTimeWithMS = AdilHelper.getNowTimeString();
+            String instanceStartTimeWithMS = ZPIAdilHelper.getNowTimeString();
             logLinesBusByNumber = (LinkedTransferQueue<String>) getLogLinesBusByNumber(typeBus);
             Integer stackNum = 0;
             try {
-                strForInput = strForInput.concat(AdilConstants.TIME) 
+                strForInput = strForInput.concat(ZPIAdilConstants.TIME) 
                             .concat(instanceStartTimeWithMS) 
-                            .concat(AdilConstants.STACK);
+                            .concat(ZPIAdilConstants.STACK);
                 try {
                     throw new Throwable();
                 } catch (Throwable t) {
@@ -514,17 +514,17 @@ public class ZPIAdilState {
                     for( StackTraceElement itemStack : stackTrace ){
                         logLinesBusByNumber.add(strForInput
                             .concat("[").concat(String.valueOf(stackNum++)).concat("]")
-                            .concat(AdilConstants.TOSTRING)
+                            .concat(ZPIAdilConstants.TOSTRING)
                             .concat(itemStack.toString())    
-                            .concat(AdilConstants.CLASSNAME) 
+                            .concat(ZPIAdilConstants.CLASSNAME) 
                             .concat(itemStack.getClassName())
-                            .concat(AdilConstants.METHODNAME)
+                            .concat(ZPIAdilConstants.METHODNAME)
                             .concat(itemStack.getMethodName())
-                            .concat(AdilConstants.FILENAME) 
+                            .concat(ZPIAdilConstants.FILENAME) 
                             .concat(itemStack.getFileName())
-                            .concat(AdilConstants.LINENUM)
+                            .concat(ZPIAdilConstants.LINENUM)
                             .concat(String.valueOf(itemStack.getLineNumber()))
-                            .concat(AdilConstants.NATIVE)
+                            .concat(ZPIAdilConstants.NATIVE)
                             .concat(String.valueOf(itemStack.isNativeMethod()))
                         );
                     }
@@ -557,7 +557,7 @@ public class ZPIAdilState {
      * </ul> 
      * @param typeBus
      * @param strForLogInputed 
-     * @see ru.newcontrol.ncfv.AdilHelper#getParamNames AdilHelper.getParamNames()
+     * @see ru.newcontrol.ncfv.ZPIAdilHelper#getParamNames ZPIAdilHelper.getParamNames()
      */
     private LinkedTransferQueue<String> pollLinesByProcessNumber(Integer typeBus){
         LinkedTransferQueue<String> logLinesBusByNumber;

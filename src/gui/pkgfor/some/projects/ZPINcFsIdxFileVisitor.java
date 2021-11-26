@@ -49,15 +49,15 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
     private Long sleepInPostVisitDir;
     private Long sleepTimeDownScanSpeed;
     
-    private BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> buffDirList;
+    private BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> buffDirList;
     
     
     public ZPINcFsIdxFileVisitor(
-            BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> inputDirList){
+            BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> inputDirList){
         
         
         
-        System.out.println("NcFsIdxFileVisitor.constructor new ThreadLocal");
+        System.out.println("ZPINcFsIdxFileVisitor.constructor new ThreadLocal");
         this.visitResult = FileVisitResult.CONTINUE;
         this.countVisitFile = 0L;
         this.countVisitFileFailed = 0L;
@@ -77,7 +77,7 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
         this.sleepTimeDownScanSpeed = 100L;
         
     }
-    protected BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getBuffDirList(){
+    protected BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getBuffDirList(){
         return buffDirList;
     }
     protected long getCountVisitFile(){
@@ -96,7 +96,7 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
         return this.countPostVisitDir;
     }
     private void makeListAttrForStorage(Object objectFile, BasicFileAttributes attrs){
-        ConcurrentSkipListMap<UUID, NcDataListAttr> toPipe = new ConcurrentSkipListMap<UUID, NcDataListAttr>();
+        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> toPipe = new ConcurrentSkipListMap<UUID, ZPINcDataListAttr>();
         
         Path file = getPathFromObject(objectFile);
         Path fileName = file.getFileName();
@@ -136,31 +136,31 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
         try {
             hidden = Files.isHidden(file);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             exHidden = Boolean.TRUE;
         }
         try {
             posixFilePermissions = Files.getPosixFilePermissions(file, LinkOption.NOFOLLOW_LINKS);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             exPosix = Boolean.TRUE;
         }
         try {
             fileRealPath = file.toRealPath(LinkOption.NOFOLLOW_LINKS);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             exReal = Boolean.TRUE;
         }
         try {
             filesSize = Files.size(file);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             exSize = Boolean.TRUE;
         }
         if( filesSize != size ){
             notEqualSize = Boolean.TRUE;
         }
-        NcDataListAttr attrEntity = new NcDataListAttr(
+        ZPINcDataListAttr attrEntity = new ZPINcDataListAttr(
             file,
             fileName,
             fileRealPath,
@@ -194,22 +194,22 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
  */
         if( this.buffDirList.size() > 950 ){
             try {
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-                NcAppHelper.outMessage(
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+                ZPINcAppHelper.outMessage(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_WARNING.getStr()
+                    + ZPINcStrLogMsgField.MSG_WARNING.getStr()
                     + "Queue size limit, go to sleep time, "
                     + this.sleepTimeDownScanSpeed + " ms");
                 Thread.sleep(this.sleepTimeDownScanSpeed);
             } catch (InterruptedException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             }
         }
         try {
             this.buffDirList.put(toPipe);
             //System.out.println("[Runner]buffDirList-" + this.buffDirList.size());
         } catch (InterruptedException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
         }
         
         this.count++;
@@ -219,15 +219,15 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
         if( !Path.class.isInstance(objectFile) ){
             String strMethod = "makeListAttrForStorage()";
             try {
-                strMethod = NcFsIdxFileVisitor.class.getDeclaredMethod("makeListAttrForStorage").toGenericString();
+                strMethod = ZPINcFsIdxFileVisitor.class.getDeclaredMethod("makeListAttrForStorage").toGenericString();
             } catch (NoSuchMethodException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             } catch (SecurityException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             }
             String strException = "For method "
                 + strMethod + " of class "
-                + NcFsIdxFileVisitor.class.getCanonicalName()
+                + ZPINcFsIdxFileVisitor.class.getCanonicalName()
                 + " need instance of "
                 + Path.class.getCanonicalName()
                 + " passed class "
@@ -294,22 +294,22 @@ public class ZPINcFsIdxFileVisitor implements FileVisitor {
     private static void needSleep(long sleepTime) throws IOException{
         if( sleepTime > 0 ){
             try {
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-                NcAppHelper.outMessage(
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+                ZPINcAppHelper.outMessage(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_WARNING.getStr()
+                    + ZPINcStrLogMsgField.MSG_WARNING.getStr()
                     + "Go to sleep time, "
                     + sleepTime + " ms");
                 Thread.sleep(sleepTime);
             } catch (InterruptedException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
                 
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
                 throw new IOException(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_INFO.getStr()
+                    + ZPINcStrLogMsgField.MSG_INFO.getStr()
                     + "Thread interrupted, reason "
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                     + ex.getMessage());
             }
         }

@@ -46,7 +46,7 @@ public class ZPIAppThWorkDirListWrite implements Runnable {
         } finally {
             logicWriter.remove();
         }
-        AppObjectsInfo.dumpAllStackToHtml();
+        ZPIAppObjectsInfo.dumpAllStackToHtml();
     }
     
 }

@@ -29,24 +29,24 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class ZPINcThMifRunDirList extends Thread {
     private String typeObject;
-    private NcFsIdxFileVisitor fv;
+    private ZPINcFsIdxFileVisitor fv;
     private Path ps;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pd;
-    private NcThExStatus jobStatus;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pd;
+    private ZPINcThExStatus jobStatus;
     
     
     public ZPINcThMifRunDirList(
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirListOuter,
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirListOuter,
             Path pathToStartOuter,
-            NcThExStatus outerJobStatus) {
+            ZPINcThExStatus outerJobStatus) {
         this.pd = pipeDirListOuter;
-        NcFsIdxFileVisitor ncFsIdxFileVisitor = new NcFsIdxFileVisitor(pd);
+        ZPINcFsIdxFileVisitor ncFsIdxFileVisitor = new ZPINcFsIdxFileVisitor(pd);
         this.fv = ncFsIdxFileVisitor;
         Path realPath = Paths.get("/");
         this.ps = realPath;
         this.typeObject = "[MIFRUNDIRLIST]" + this.toString();
         this.jobStatus = outerJobStatus;
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
 
     
@@ -56,11 +56,11 @@ public class ZPINcThMifRunDirList extends Thread {
         try {
             Files.walkFileTree(this.ps, this.fv);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcThMifRunDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifRunDirList.class.getCanonicalName(), ex);
         } catch (IllegalStateException ex) {
-            NcAppHelper.logException(NcThMifRunDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifRunDirList.class.getCanonicalName(), ex);
         } catch (SecurityException ex) {
-            NcAppHelper.logException(NcThMifRunDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifRunDirList.class.getCanonicalName(), ex);
         }
         System.out.println("[RUNNER][FINISH][EXIT]");
     }

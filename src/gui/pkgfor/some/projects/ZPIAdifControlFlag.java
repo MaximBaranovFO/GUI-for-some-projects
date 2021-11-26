@@ -28,32 +28,32 @@ public class ZPIAdifControlFlag {
     private final UUID objectLabel;
     private final Integer numberProcessIndexSystem;
     private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Boolean>> poolRunnerFlag;
-    private final AdimRule ruleAdim;
-    private final AdilState adilState;
+    private final ZPIAdimRule ruleAdim;
+    private final ZPIAdilState adilState;
     
     public ZPIAdifControlFlag(final Integer processIndexSystemNumber,
-            final AdimRule outerRule){
+            final ZPIAdimRule outerRule){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         if( outerRule == null ){
-            throw new UnsupportedOperationException(AdimRule.class.getCanonicalName() 
+            throw new UnsupportedOperationException(ZPIAdimRule.class.getCanonicalName() 
                     + " object for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
-        this.ruleAdim = (AdimRule) outerRule;
+        this.ruleAdim = (ZPIAdimRule) outerRule;
         if( processIndexSystemNumber == null ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
         if( processIndexSystemNumber < 0 ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (AdilState) this.ruleAdim.getAdilRule().getAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getZPIAdilRule().getZPIAdilState();
         this.poolRunnerFlag = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Boolean>>();
     }
     /**
@@ -70,7 +70,7 @@ public class ZPIAdifControlFlag {
             if( getRunnerFlagFormPool == null ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getRunnerFlagForKeyPointFlow()".concat(
                         " key in list FlowControl not exist for Runner UUID ".concat(inputedVal.toString()))));
             }
@@ -92,7 +92,7 @@ public class ZPIAdifControlFlag {
             this.adilState.putLogLineByProcessNumberMsgExceptions(
                     this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(),
-                    AdifControlFlag.class.getCanonicalName(), 
+                    ZPIAdifControlFlag.class.getCanonicalName(), 
                     "getFromListRunnerFlag()", 
                     exClCast.getMessage());
             this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -101,7 +101,7 @@ public class ZPIAdifControlFlag {
             this.adilState.putLogLineByProcessNumberMsgExceptions(
                     this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(),
-                    AdifControlFlag.class.getCanonicalName(), 
+                    ZPIAdifControlFlag.class.getCanonicalName(), 
                     "getFromListRunnerFlag()", 
                     exPointer.getMessage());
             this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -124,7 +124,7 @@ public class ZPIAdifControlFlag {
             this.adilState.putLogLineByProcessNumberMsgExceptions(
                     this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(), 
-                    AdifControlFlag.class.getCanonicalName(), 
+                    ZPIAdifControlFlag.class.getCanonicalName(), 
                     "getFromListValues()", 
                     exClCast.getMessage());
             this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -133,7 +133,7 @@ public class ZPIAdifControlFlag {
             this.adilState.putLogLineByProcessNumberMsgExceptions(
                     this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(), 
-                    AdifControlFlag.class.getCanonicalName(), 
+                    ZPIAdifControlFlag.class.getCanonicalName(), 
                     "getFromListValues()", 
                     exPointer.getMessage());
             this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -157,7 +157,7 @@ public class ZPIAdifControlFlag {
             if( getRemovedRunnerFlagFormPool == null ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "removeRunnerFlagForKeyPointFlow()".concat(
                         " key in list FlowControl not exist for Runner UUID ".concat(inputedVal.toString()))));
                 return Boolean.FALSE;
@@ -215,7 +215,7 @@ public class ZPIAdifControlFlag {
             if( isRunnerFlagNotExist(keyForRunnerUuid) ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getRunnerFlagByNumber()".concat(
                         " key in list FlowControl not exist for Runner UUID ".concat(keyForRunnerUuid.toString()))));
                 return null;
@@ -225,7 +225,7 @@ public class ZPIAdifControlFlag {
             if( getListValues == null){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getRunnerFlagByNumber()".concat(
                         " key in list FlowControl not exist for Runner UUID ".concat(keyForRunnerUuid.toString()))));
                 return null;
@@ -320,7 +320,7 @@ public class ZPIAdifControlFlag {
                     this.adilState.putLogLineByProcessNumberMsgExceptions(
                             this.numberProcessIndexSystem, 
                             ClassCastException.class.getCanonicalName(), 
-                            AdifControlFlag.class.getCanonicalName(), 
+                            ZPIAdifControlFlag.class.getCanonicalName(), 
                             "changeFlagValueByNumber()", 
                             exClCast.getMessage());
                     this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -329,7 +329,7 @@ public class ZPIAdifControlFlag {
                     this.adilState.putLogLineByProcessNumberMsgExceptions(
                             this.numberProcessIndexSystem, 
                             NullPointerException.class.getCanonicalName(), 
-                            AdifControlFlag.class.getCanonicalName(), 
+                            ZPIAdifControlFlag.class.getCanonicalName(), 
                             "changeFlagValueByNumber()", 
                             exPointer.getMessage());
                     this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -351,11 +351,11 @@ public class ZPIAdifControlFlag {
      * <li>0 - isDoCommnadStop
      * <li>1 - isSetPauseFromUser
      * </ul>
-     * see {@link ru.newcontrol.ncfv.AdifControlHelper#getRunnerFlagNames() AdifControlHelper.getRunnerFlagNames()}
+     * see {@link ru.newcontrol.ncfv.ZPIAdifControlHelper#getRunnerFlagNames() ZPIAdifControlHelper.getRunnerFlagNames()}
      * @return 
      */
     private String[] getFlagNames(){
-        return AdifControlHelper.getRunnerFlagNames();
+        return ZPIAdifControlHelper.getRunnerFlagNames();
     }
     /**
      * Return code of parameter by his number, calculeted from some fileds
@@ -375,7 +375,7 @@ public class ZPIAdifControlFlag {
             if( numParam < 0 ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getFlagCodeByNumber()".concat(
                         " negative index sended, 0 (zero) > "
                         .concat(String.valueOf(numParam))
@@ -385,7 +385,7 @@ public class ZPIAdifControlFlag {
             if( numParam > (flagNames.length - 1) ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getFlagCodeByNumber()".concat(
                         " out of bounds index "
                         .concat(String.valueOf(numParam))
@@ -431,7 +431,7 @@ public class ZPIAdifControlFlag {
             if( numParam < 0 ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getFlagNameByNumber()".concat(
                         " negative index sended, 0 (zero) > "
                         .concat(String.valueOf(numParam))
@@ -441,7 +441,7 @@ public class ZPIAdifControlFlag {
             if( numParam > (flagNames.length - 1) ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "getFlagNameByNumber()".concat(
                         " out of bounds index "
                         .concat(String.valueOf(numParam))
@@ -474,7 +474,7 @@ public class ZPIAdifControlFlag {
             if( keyPointFlowWorkersFunc == null ){
                 this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "isValidFlagList()".concat(
                         " runner Uuid for check is null ")));
                 return Boolean.FALSE;
@@ -486,7 +486,7 @@ public class ZPIAdifControlFlag {
                 if( !sizeRec.equals(flagCount) ){
                     this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "isValidFlagList()".concat(
                         " runner Uuid for check is "
                         .concat(keyPointFlowWorkersFunc.toString())
@@ -502,7 +502,7 @@ public class ZPIAdifControlFlag {
                         flagNameByNumber = getFlagNameByNumber(idxFlag);
                         this.adilState.putLogLineByProcessNumberMsgWarning(
                         this.numberProcessIndexSystem, 
-                        AdifControlFlag.class.getCanonicalName().concat( 
+                        ZPIAdifControlFlag.class.getCanonicalName().concat( 
                         "isValidFlagList()".concat(
                         " runner Uuid for check is "
                         .concat(keyPointFlowWorkersFunc.toString())

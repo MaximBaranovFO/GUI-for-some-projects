@@ -31,7 +31,7 @@ public class ZPIAdilStorage {
         String nowTimeStringMillisFsNames = new String();
         Path iterationLogSubDir;
         try {
-            nowTimeStringMillisFsNames = AdihGetvalues.getNowTimeStringMillisFsNames();
+            nowTimeStringMillisFsNames = ZPIAdihGetvalues.getNowTimeStringMillisFsNames();
             iterationLogSubDir = getIterationLogSubDir(nowTimeStringMillisFsNames);
             if( iterationLogSubDir == null ){
                 return null;
@@ -39,7 +39,7 @@ public class ZPIAdilStorage {
             return iterationLogSubDir;
         } finally {
             iterationLogSubDir = null;
-            AdihUtilization.utilizeStringValues(new String[]{nowTimeStringMillisFsNames});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{nowTimeStringMillisFsNames});
         }
     }
     /**
@@ -67,18 +67,18 @@ public class ZPIAdilStorage {
                 return null;
             }
             toReturn = Paths.get(logAppSubDir, iterationTimeStamp);
-            isCreated = AdihFileOperations.createDirIfNotExist(toReturn);
+            isCreated = ZPIAdihFileOperations.createDirIfNotExist(toReturn);
             if( !isCreated ){
                 return null;
             }
-            isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( !isReadWriteNotLink ){
                 return null;
             }
             return toReturn;
         } finally {
             toReturn = null;
-            AdihUtilization.utilizeStringValues(new String[]{iterationTimeStamp, logAppSubDir});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{iterationTimeStamp, logAppSubDir});
             isCreated = null;
             isReadWriteNotLink = null;
         }    
@@ -95,25 +95,25 @@ public class ZPIAdilStorage {
         Boolean isCreated;
         Boolean isReadWriteNotLink;
         try {
-            appCheckedPath = AdihFileOperations.getForLogDirectory();
+            appCheckedPath = ZPIAdihFileOperations.getForLogDirectory();
             if( appCheckedPath == null ){
                 return null;
             }
             strAppCheckedPath = appCheckedPath.toString();
             subDirPrefix = getSubDirPrefix();
             toReturn = Paths.get(strAppCheckedPath, subDirPrefix);
-            isCreated = AdihFileOperations.createDirIfNotExist(toReturn);
+            isCreated = ZPIAdihFileOperations.createDirIfNotExist(toReturn);
             if( !isCreated ){
                 return null;
             }
-            isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( !isReadWriteNotLink ){
                 return null;
             }
             return toReturn;
         } finally {
             appCheckedPath = null;
-            AdihUtilization.utilizeStringValues(new String[]{strAppCheckedPath, subDirPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{strAppCheckedPath, subDirPrefix});
             toReturn = null;
             isCreated = null;
             isReadWriteNotLink = null;
@@ -125,6 +125,6 @@ public class ZPIAdilStorage {
      * @return 
      */
     private static String getSubDirPrefix(){
-        return new String(AdilConstants.LOG_SUB_DIR_PREFIX);
+        return new String(ZPIAdilConstants.LOG_SUB_DIR_PREFIX);
     }
 }

@@ -32,7 +32,7 @@ public class ZPIAdimFactory {
     protected static void workerSleep(){
         try {
             Thread currentThread = Thread.currentThread();
-            currentThread.sleep(AdihGetvalues.getDefaultSleepValue());
+            currentThread.sleep(ZPIAdihGetvalues.getDefaultSleepValue());
         } catch (InterruptedException ex){
                 ex.printStackTrace();
                 System.out.println(ex.getMessage());

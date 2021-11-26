@@ -77,10 +77,10 @@ public class ZPIAdilHelper {
      * @return 
      */
     protected static String getNowTimeString(){
-        if(AdilConstants.LOGNOWTIMEINHUMANFORMAT){
-            return AppFileOperationsSimple.getNowTimeStringWithMsHuman();
+        if(ZPIAdilConstants.LOGNOWTIMEINHUMANFORMAT){
+            return ZPIAppFileOperationsSimple.getNowTimeStringWithMsHuman();
         }
-        return AppFileOperationsSimple.getNowTimeStringWithMS();
+        return ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
     }
     protected static String variableNameValue(String[] inputedValues){
         String strForReturn = new String();
@@ -88,17 +88,17 @@ public class ZPIAdilHelper {
         try {
             for(String itemVars : inputedValues){
                 if( isName ){
-                    strForReturn = strForReturn.concat(AdilConstants.VARNAME).concat(itemVars);
+                    strForReturn = strForReturn.concat(ZPIAdilConstants.VARNAME).concat(itemVars);
                     isName = Boolean.FALSE;
                 } else {
-                    strForReturn = strForReturn.concat(AdilConstants.VARVAL).concat(itemVars);
+                    strForReturn = strForReturn.concat(ZPIAdilConstants.VARVAL).concat(itemVars);
                     isName = Boolean.TRUE;
                 }
             }
             return strForReturn;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{strForReturn});
-            AdihUtilization.utilizeStringValues(inputedValues);
+            ZPIAdihUtilization.utilizeStringValues(new String[]{strForReturn});
+            ZPIAdihUtilization.utilizeStringValues(inputedValues);
         }
     }
 }

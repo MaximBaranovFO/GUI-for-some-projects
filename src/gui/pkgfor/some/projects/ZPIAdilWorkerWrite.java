@@ -20,21 +20,21 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ZPIAdilWorkerWrite implements Runnable {
-    private AdilRule ruleAdilWrite;
+    private ZPIAdilRule ruleAdilWrite;
     
-    ZPIAdilWorkerWrite(final AdilRule outerRuleAdilWrite){
+    ZPIAdilWorkerWrite(final ZPIAdilRule outerRuleAdilWrite){
         this.ruleAdilWrite = outerRuleAdilWrite;
     }
     
     @Override
     public void run(){
-        System.out.println(AdilWorkerWrite.class.getCanonicalName() 
+        System.out.println(ZPIAdilWorkerWrite.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleAdilWrite.toString());
         this.ruleAdilWrite.setTrueRunnerAdilWorkWrite();
-        AdilLogicWrite logicLogLinesWrite;
+        ZPIAdilLogicWrite logicLogLinesWrite;
         try{
-            logicLogLinesWrite = new AdilLogicWrite();
+            logicLogLinesWrite = new ZPIAdilLogicWrite();
             logicLogLinesWrite.doWriteLinesIntoLog(this.ruleAdilWrite);
         } finally {
             logicLogLinesWrite = null;

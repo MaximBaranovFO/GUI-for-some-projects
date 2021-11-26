@@ -32,14 +32,14 @@ import java.util.concurrent.LinkedTransferQueue;
 public class ZPIAdilLogicWrite {
     private String iterationStartTime;
     ZPIAdilLogicWrite(){
-        this.iterationStartTime = AppFileOperationsSimple.getNowTimeStringWithMS();
+        this.iterationStartTime = ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
     }
     /**
      * 
      * @param ruleAdil 
      */
-    protected void doWriteLinesIntoLog(AdilRule ruleAdil){
-        AdilState adilState = ruleAdil.getAdilState();
+    protected void doWriteLinesIntoLog(ZPIAdilRule ruleAdil){
+        ZPIAdilState adilState = ruleAdil.getZPIAdilState();
         ConcurrentSkipListMap<String, LinkedTransferQueue<String>> pollBusData = adilState.pollBusData();
         if( pollBusData != null ){
             Path storageLogIterationDir = null;
@@ -47,7 +47,7 @@ public class ZPIAdilLogicWrite {
             for(Map.Entry<String, LinkedTransferQueue<String>> itemBusName : pollBusData.entrySet()){
                 if( !itemBusName.getValue().isEmpty() ){
                     if( storageLogIterationDir == null ){
-                        storageLogIterationDir = AdilStorage.getStorageLogIterationDir();
+                        storageLogIterationDir = ZPIAdilStorage.getStorageLogIterationDir();
                     } 
                     if( storageLogIterationDir != null ) {
                         String keyBusName = itemBusName.getKey();

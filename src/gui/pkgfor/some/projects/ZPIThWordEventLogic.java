@@ -138,17 +138,17 @@ public class ZPIThWordEventLogic {
         Integer sizeBusFlowUuids;
         String exMessage = new String();
         try {
-            AdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
+            ZPIAdilState adilState = adilRule.getAdilState();
             Integer numberProcessIndexSystem = 13;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordEventLogic.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "insertIntoCacheData()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             if( typeWordOfBusOutput == null ){
                 throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " typeWord is null");
             }
@@ -188,30 +188,30 @@ public class ZPIThWordEventLogic {
                     this.eventIndex.putMainFlowUuidSubString(createInitMainFlow, subStringFromBusOutput);
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "typeWordOfBusOutput"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(typeWordOfBusOutput)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "hexTagNameFromBusOutput"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + hexTagNameFromBusOutput
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "subStringFromBusOutput"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + subStringFromBusOutput
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "setDataIntoCacheFlow"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(setDataIntoCacheFlow)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "isNeedCreateNewUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(isNeedCreateNewUuid)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "createInitMainFlow"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(createInitMainFlow)
                         );
                 }
@@ -275,7 +275,7 @@ public class ZPIThWordEventLogic {
             //end after insert into cache
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             createInitMainFlow = null;
             setDataIntoCacheFlow = null;
@@ -314,17 +314,17 @@ public class ZPIThWordEventLogic {
         Boolean localIsUuidFinished;
         Boolean isFileDeleted = Boolean.FALSE;
         try {
-            AdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
+            ZPIAdilState adilState = adilRule.getAdilState();
             Integer numberProcessIndexSystem = 13;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordEventLogic.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "writeDataToStorage()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             localIsUuidFinished = Boolean.TRUE; 
             localPrevDataWrited = Boolean.FALSE; 
             localPrevDataMoved = Boolean.FALSE;
@@ -357,7 +357,7 @@ public class ZPIThWordEventLogic {
                 throw new IllegalStateException(ZPIThWordEventLogic.class.getCanonicalName() + strExReturn);
             }
             Boolean isDataToVol = Boolean.FALSE;
-            if( pollTypeWordTagFileNameData.size() > AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ){
+            if( pollTypeWordTagFileNameData.size() > ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ){
                 isDataToVol = Boolean.TRUE;
             }
             Integer datafsVolumeNumber = 
@@ -374,7 +374,7 @@ public class ZPIThWordEventLogic {
                     writedFromCacheData.put(pollFirstEntry.getKey(), pollFirstEntry.getValue());
                 }
                 localDestSize = writedFromCacheData.size();
-                localIsLimitForWrite = ( localDestSize == AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT );
+                localIsLimitForWrite = ( localDestSize == ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT );
                 if( localIsLimitForWrite || pollTypeWordTagFileNameData.isEmpty() ){
                     String localSrcFileName = ZPIThWordHelper.fileNameBuilder(prefixFileName, localSrcSize, datafsVolumeNumber);
                     Path localNowWritedFile = fsForWriteData.getPath(storageTypeWordWritedFile.toString(), localSrcFileName);
@@ -423,34 +423,34 @@ public class ZPIThWordEventLogic {
                     }
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "typeWordByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(typeWordByMainFlowUuid)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "hexTagNameByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + hexTagNameByMainFlowUuid
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "subStringByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + subStringByMainFlowUuid
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "localIsWritedToStorage"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(localIsWritedToStorage)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "workersIsNeedDeleteOldFile"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(workersIsNeedDeleteOldFile)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "isFileDeleted"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(isFileDeleted)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "localPrevDataMoved"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(localPrevDataMoved)
                         );
                 }
@@ -467,7 +467,7 @@ public class ZPIThWordEventLogic {
             }
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             
         }
@@ -475,17 +475,17 @@ public class ZPIThWordEventLogic {
     protected void readDataFromStorage(FileSystem fsForReadData, UUID pollNextUuid){
         Boolean isCacheReaded = Boolean.FALSE;
         try {
-            AdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = this.ruleWord.getIndexRule().getAdilRule();
+            ZPIAdilState adilState = adilRule.getAdilState();
             Integer numberProcessIndexSystem = 13;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordEventLogic.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "readDataFromStorage()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             String hexTagNameByMainFlowUuid = this.eventIndex.getHexTagNameByMainFlowUuid(pollNextUuid);
             String subStringByMainFlowUuid = this.eventIndex.getSubStringByMainFlowUuid(pollNextUuid);
             Integer typeWordByMainFlowUuid = this.eventIndex.getTypeWordByMainFlowUuid(pollNextUuid);
@@ -517,41 +517,41 @@ public class ZPIThWordEventLogic {
                     //change main flow params
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "typeWordByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(typeWordByMainFlowUuid)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "hexTagNameByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + hexTagNameByMainFlowUuid
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "subStringByMainFlowUuid"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + subStringByMainFlowUuid
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "readedFromStorageData.size()"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(readedFromStorageData.size())
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "isReadedDataValide"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(isReadedDataValide)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "forReadFileName.toUri().toString()"//***
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(forReadFileName.toUri().toString())
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "isCacheReaded"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(isCacheReaded)
                         );
                 }
             }
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             isCacheReaded = null;
         }

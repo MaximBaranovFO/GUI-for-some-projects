@@ -24,10 +24,10 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPIThLogicDirListTacker {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
     private ThreadLocal<Long> counterReadedData;
 
-    public ZPIThLogicDirListTacker(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIThLogicDirListTacker(ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
     protected void doTacker(){
@@ -54,7 +54,7 @@ public class ZPIThLogicDirListTacker {
                 }
             }while( !this.innerRuleForDirListWorkers.isDirListReaderLogicRunned() );
             
-            if( AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_PIPE_TO_STRING ){
+            if( ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_PIPE_TO_STRING ){
                 outStatesOfWorkLogic(pipeReaderToTacker.toString() + " size " + pipeReaderToTacker.size());
             }
             if( pipeReaderToTacker != null){
@@ -82,10 +82,10 @@ public class ZPIThLogicDirListTacker {
         outStatesOfWorkLogic(" Tacker end run part");
     }
     private void outStatesOfWorkLogic(String strForOutPut){
-        String strRunLogicLabel = AppThWorkDirListTake.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIAppThWorkDirListTake.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_RUN);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long reciveIn, Long sendOut){
         String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
@@ -94,6 +94,6 @@ public class ZPIThLogicDirListTacker {
                             + String.valueOf(reciveIn) 
                             + "  out   "
                             + String.valueOf(sendOut);
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_DATA_COUNT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_DATA_COUNT);
     }
 }

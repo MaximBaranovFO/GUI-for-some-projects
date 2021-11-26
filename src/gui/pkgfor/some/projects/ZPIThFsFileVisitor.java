@@ -48,7 +48,7 @@ public class ZPIThFsFileVisitor implements FileVisitor {
     private Long sleepInPreVisitDir;
     private Long sleepInPostVisitDir;
     private Long sleepTimeDownScanSpeed;
-    private AppObjectsList objectListAndLogger;
+    private ZPIAppObjectsList objectListAndLogger;
     private Boolean isNotHaveLoggerThread;
     
     private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> buffDirList;
@@ -56,7 +56,7 @@ public class ZPIThFsFileVisitor implements FileVisitor {
     
     public ZPIThFsFileVisitor(
             final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> inputDirList,
-            final AppObjectsList objectListAndLogger) throws IOException{
+            final ZPIAppObjectsList objectListAndLogger) throws IOException{
         
         if( objectListAndLogger != null ){
             isNotHaveLoggerThread = Boolean.FALSE;
@@ -247,10 +247,10 @@ public class ZPIThFsFileVisitor implements FileVisitor {
          */
         if( this.buffDirList.size() > 950 ){
             try {
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-                NcAppHelper.outMessage(
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+                ZPINcAppHelper.outMessage(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_WARNING.getStr()
+                    + ZPINcStrLogMsgField.MSG_WARNING.getStr()
                     + "Queue size limit, go to sleep time, "
                     + this.sleepTimeDownScanSpeed + " ms");
                 Thread.sleep(this.sleepTimeDownScanSpeed);
@@ -286,15 +286,15 @@ public class ZPIThFsFileVisitor implements FileVisitor {
         if( !Path.class.isInstance(objectFile) ){
             String strMethod = "makeListAttrForStorage()";
             try {
-                strMethod = NcFsIdxFileVisitor.class.getDeclaredMethod("makeListAttrForStorage").toGenericString();
+                strMethod = ZPINcFsIdxFileVisitor.class.getDeclaredMethod("makeListAttrForStorage").toGenericString();
             } catch (NoSuchMethodException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             } catch (SecurityException ex) {
-                NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
             }
             String strException = "For method "
                 + strMethod + " of class "
-                + NcFsIdxFileVisitor.class.getCanonicalName()
+                + ZPINcFsIdxFileVisitor.class.getCanonicalName()
                 + " need instance of "
                 + Path.class.getCanonicalName()
                 + " passed class "
@@ -365,23 +365,23 @@ public class ZPIThFsFileVisitor implements FileVisitor {
             String valueFile, 
             Exception exOuter){
         if( isNotHaveLoggerThread ){
-            NcAppHelper.logException(ZPIThFsFileVisitor.class.getCanonicalName(), exOuter);
+            ZPINcAppHelper.logException(ZPIThFsFileVisitor.class.getCanonicalName(), exOuter);
         } else {
             String strErrorInApp = functionText
-                    + AppMsgEnFiledForLog.F_VALUE
+                    + ZPIAppMsgEnFiledForLog.F_VALUE
                     + valueFile
-                    + AppMsgEnFiledForLog.F_EX_MSG
+                    + ZPIAppMsgEnFiledForLog.F_EX_MSG
                     + exOuter.getMessage();
-            String toLoggerMsg = NcAppHelper.exceptionToString(exClass, ZPIThFsFileVisitor.class, strErrorInApp);
+            String toLoggerMsg = ZPINcAppHelper.exceptionToString(exClass, ZPIThFsFileVisitor.class, strErrorInApp);
             this.objectListAndLogger.putLogMessageError(toLoggerMsg);
         }
     }
     private void outStatesOfWorkLogic(String strForOutPut){
-        String strRunLogicLabel = AppThWorkDirListTake.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIAppThWorkDirListTake.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, 
-                AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_FILE_VISITOR);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, 
+                ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_FILE_VISITOR);
     }
     
 }

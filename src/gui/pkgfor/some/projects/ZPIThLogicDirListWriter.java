@@ -31,13 +31,13 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPIThLogicDirListWriter {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
     //private NcParamFs currentWriterFs;
     
     private ThreadLocal<Long> counterPackCount;
     private ThreadLocal<Long> counterDataSize;
 
-    public ZPIThLogicDirListWriter(AppThWorkDirListRule ruleForDirListWorkers){//,
+    public ZPIThLogicDirListWriter(ZPIAppThWorkDirListRule ruleForDirListWorkers){//,
             //NcParamFs currentStorageFs) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
         //this.currentWriterFs = currentStorageFs;
@@ -56,7 +56,7 @@ public class ZPIThLogicDirListWriter {
         final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipePackerToWriter = 
                 this.innerRuleForDirListWorkers.getWorkDirListState().getPipePackerToWriter();
         outStatesOfWorkLogic(" Writer start run part");
-        Map<String, String> fsProperties = NcFsIdxStorageInit.getFsPropCreate();
+        Map<String, String> fsProperties = ZPINcFsIdxStorageInit.getFsPropCreate();
         //try(FileSystem fsZipIndexStorage = 
         //    FileSystems.getFileSystem(this.currentWriterFs)){
         do{
@@ -70,7 +70,7 @@ public class ZPIThLogicDirListWriter {
                 }
             }while( !this.innerRuleForDirListWorkers.isDirListPackerLogicRunned() );
             
-            if( AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_PIPE_TO_STRING ){
+            if( ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_PIPE_TO_STRING ){
                 outStatesOfWorkLogic(pipePackerToWriter.toString() + " size " + pipePackerToWriter.size());
             }
             if( pipePackerToWriter != null){
@@ -124,7 +124,7 @@ public class ZPIThLogicDirListWriter {
         String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_RUN);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long packIn, Long dataIn, Integer pipeSize){
         String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
@@ -135,7 +135,7 @@ public class ZPIThLogicDirListWriter {
                             + String.valueOf(dataIn) 
                             + "  ptwPs     "
                             + String.valueOf(pipeSize);
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_DATA_COUNT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_DATA_COUNT);
     }
     private void writeDataToStorage(final ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> forWriteData){//,
            //NcParamFs indexStorage){

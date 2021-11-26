@@ -24,9 +24,9 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThWorkDirListTake implements Runnable {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
 
-    public ZPIAppThWorkDirListTake(final AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIAppThWorkDirListTake(final ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         super();
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }

@@ -24,9 +24,9 @@ import java.util.Map;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThWorkDirListWrite implements Runnable {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
 
-    public ZPIAppThWorkDirListWrite(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIAppThWorkDirListWrite(ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         super();
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }

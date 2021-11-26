@@ -23,9 +23,9 @@ import java.nio.file.Path;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThWorkDirListRun implements Runnable {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
 
-    public ZPIAppThWorkDirListRun(final AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIAppThWorkDirListRun(final ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         super();
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
@@ -41,8 +41,8 @@ public class ZPIAppThWorkDirListRun implements Runnable {
                 logicWalker.set(new ZPIThLogicDirListWalker(this.innerRuleForDirListWorkers));
                 logicWalker.get().doReadFsToPipe();
             
-                NcAppHelper.outToConsoleIfDevAndParamTrue("ThLogicDirListWalker.doReadFsToPipe end", 
-                AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue("ThLogicDirListWalker.doReadFsToPipe end", 
+                ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE);
             } catch(IOException ex){
                 ex.printStackTrace();
             }

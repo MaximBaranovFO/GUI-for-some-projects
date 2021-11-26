@@ -38,22 +38,22 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZPIThFsFileIndexStorage {
     protected static Path getNewDirListFile(ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollDataToDirListFile,
-            AppThWorkDirListRule outerRuleDirListWork,
+            ZPIAppThWorkDirListRule outerRuleDirListWork,
             Boolean notFull) {
         
         
         
         FileSystem indexStorage = outerRuleDirListWork.getFsZipIndexStorage();
-        String newTmpFileName = AppFileNamesConstants.SZFS_DIR_LIST_FILE_PREFIX;
+        String newTmpFileName = ZPIAppFileNamesConstants.SZFS_DIR_LIST_FILE_PREFIX;
         /*if( notFull ){
-            newTmpFileName = newTmpFileName + AppFileNamesConstants.SZFS_DIR_LIST_FILE_NOT_LIMITED;
+            newTmpFileName = newTmpFileName + ZPIAppFileNamesConstants.SZFS_DIR_LIST_FILE_NOT_LIMITED;
         }*/
         newTmpFileName = newTmpFileName + UUID.randomUUID().toString();
-        AppThWorkDirListState workDirListState = outerRuleDirListWork.getWorkDirListState();
+        ZPIAppThWorkDirListState workDirListState = outerRuleDirListWork.getWorkDirListState();
         ZPIThIndexRule indexRule = workDirListState.getIndexRule();
         ZPIThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
         String createNewNameForWriteWithAllAddRecords = indexStatistic.createNewNameForWriteWithAllAddRecords(
-                AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, 
+                ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, 
                 newTmpFileName, 
                 pollDataToDirListFile);
         
@@ -62,12 +62,12 @@ public class ZPIThFsFileIndexStorage {
     }
 
     protected static void writeData(ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollDataToDirListFile,
-            AppThWorkDirListRule outerRuleDirListWork){
+            ZPIAppThWorkDirListRule outerRuleDirListWork){
         //NcParamFs indexStorage){
-        AppThWorkDirListState workDirListState = outerRuleDirListWork.getWorkDirListState();
+        ZPIAppThWorkDirListState workDirListState = outerRuleDirListWork.getWorkDirListState();
         ZPIThIndexRule indexRule = workDirListState.getIndexRule();
         ZPIThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
-        //String createNewNameForWriteWithAllAddRecords = indexStatistic.createNewNameForWriteWithAllAddRecords(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, tagFileName, pollDataToDirListFile);
+        //String createNewNameForWriteWithAllAddRecords = indexStatistic.createNewNameForWriteWithAllAddRecords(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, tagFileName, pollDataToDirListFile);
         
         Boolean fileWriteException = Boolean.FALSE;
         Path newDirListFile = ZPIThFsFileIndexStorage.getNewDirListFile(pollDataToDirListFile, outerRuleDirListWork, Boolean.TRUE);
@@ -83,7 +83,7 @@ public class ZPIThFsFileIndexStorage {
                 new ObjectOutputStream(Files.newOutputStream(newDirListFile)))
             {
                 oos.writeObject(pollDataToDirListFile);
-                indexStatistic.addToListSizeRemoveListProcess(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, newDirListFile);
+                indexStatistic.addToListSizeRemoveListProcess(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST, newDirListFile);
             } catch(Exception ex){
                 ex.printStackTrace();
                 fileWriteException = Boolean.TRUE;

@@ -70,7 +70,7 @@ public class ZPIAppThWorkDirListRule {
     private Thread runDirListWriter;
     
     
-    private AppThWorkDirListState workDirListState;
+    private ZPIAppThWorkDirListState workDirListState;
 
     public ZPIAppThWorkDirListRule(Path pathForMakeIndex) {
         
@@ -104,7 +104,7 @@ public class ZPIAppThWorkDirListRule {
         this.needFinishDirListPacker = Boolean.FALSE;
         this.needFinishDirListWriter = Boolean.FALSE;
     }
-    protected void setWorkDirListState(AppThWorkDirListState outerWorkDirListState){
+    protected void setWorkDirListState(ZPIAppThWorkDirListState outerWorkDirListState){
         this.workDirListState = outerWorkDirListState;
         this.storageSetted = Boolean.TRUE;
     }
@@ -200,7 +200,7 @@ public class ZPIAppThWorkDirListRule {
         this.dirListWriterLogicFinished = Boolean.TRUE;
     }
     
-    protected AppThWorkDirListState getWorkDirListState(){
+    protected ZPIAppThWorkDirListState getWorkDirListState(){
         return this.workDirListState;
     }
     protected String getNameIndexStorage(){

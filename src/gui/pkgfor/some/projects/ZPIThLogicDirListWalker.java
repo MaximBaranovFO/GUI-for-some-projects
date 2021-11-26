@@ -39,38 +39,38 @@ public class ZPIThLogicDirListWalker {
     
     private final ThreadLocal<Boolean> isNotHaveLoggerThread;
     
-    private final ThreadLocal<AppThWorkDirListRule> objectDirListRule;
-    private final ThreadLocal<AppThWorkDirListState> objectListAndLogger;
+    private final ThreadLocal<ZPIAppThWorkDirListRule> objectDirListRule;
+    private final ThreadLocal<ZPIAppThWorkDirListState> objectListAndLogger;
     
     private final ThreadLocal<Path> currentPathForMakeIndex;
     
     private final ThreadLocal<ZPIThFsFileVisitor> fileVisitor;
     private final ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>> pipeVisitorToTacker;
     
-    public ZPIThLogicDirListWalker( final AppThWorkDirListRule objectDirListRule ) throws IOException {
+    public ZPIThLogicDirListWalker( final ZPIAppThWorkDirListRule objectDirListRule ) throws IOException {
         this.isNotHaveLoggerThread = new ThreadLocal<Boolean>();
         
         if( objectDirListRule == null ){
             this.isNotHaveLoggerThread.set(Boolean.TRUE);
-            throw new NullPointerException(AppMsgEnFiledForLog.CREATE
+            throw new NullPointerException(ZPIAppMsgEnFiledForLog.CREATE
                     + "Logic in DirListWalker work not init "
-                    + AppMsgEnFiledForLog.CONSTRUCTOR
+                    + ZPIAppMsgEnFiledForLog.CONSTRUCTOR
                     + ZPIThLogicDirListWalker.class.getCanonicalName()
-                    + AppMsgEnFiledForLog.EX_SRC_CLASS
-                    + AppObjectsList.class.getCanonicalName()
-                    + AppMsgEnFiledForLog.F_FIELD_NAME
+                    + ZPIAppMsgEnFiledForLog.EX_SRC_CLASS
+                    + ZPIAppObjectsList.class.getCanonicalName()
+                    + ZPIAppMsgEnFiledForLog.F_FIELD_NAME
                     + "objectListAndLogger"
-                    + AppMsgEnFiledForLog.F_VALUE
+                    + ZPIAppMsgEnFiledForLog.F_VALUE
                     + "null ");
         }
-        this.objectDirListRule = new ThreadLocal<AppThWorkDirListRule>();
+        this.objectDirListRule = new ThreadLocal<ZPIAppThWorkDirListRule>();
         this.objectDirListRule.set(objectDirListRule);
         
         this.currentPathForMakeIndex = new ThreadLocal<Path>();
         this.currentPathForMakeIndex.set(this.objectDirListRule.get().getCurrentPathForMakeIndex());
         
         this.isNotHaveLoggerThread.set(Boolean.FALSE);
-        this.objectListAndLogger = new ThreadLocal<AppThWorkDirListState>();
+        this.objectListAndLogger = new ThreadLocal<ZPIAppThWorkDirListState>();
         this.objectListAndLogger.set(this.objectDirListRule.get().getWorkDirListState());
         
         
@@ -83,11 +83,11 @@ public class ZPIThLogicDirListWalker {
             fv = new ZPIThFsFileVisitor(this.pipeVisitorToTacker.get(),
                 this.objectListAndLogger.get().getListOfObjectAndLogger());
         } catch (IOException ex){
-            this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(AppMsgEnFiledForLog.CREATE
+            this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(ZPIAppMsgEnFiledForLog.CREATE
                     + "Pipe in DirListWalker work not init "
-                    + AppMsgEnFiledForLog.CONSTRUCTOR 
+                    + ZPIAppMsgEnFiledForLog.CONSTRUCTOR 
                     + ZPIThLogicDirListWalker.class.getCanonicalName() 
-                    + AppMsgEnFiledForLog.EX_DESCR
+                    + ZPIAppMsgEnFiledForLog.EX_DESCR
                     + ex.getMessage()
             );
             this.objectListAndLogger.get().getListOfObjectAndLogger().doLogger();
@@ -95,20 +95,20 @@ public class ZPIThLogicDirListWalker {
         if( fv != null){
             this.fileVisitor.set(fv);
         } else {
-            throw new IOException( AppMsgEnFiledForLog.CREATE
+            throw new IOException( ZPIAppMsgEnFiledForLog.CREATE
                     + "Logic in DirListWalker work not init "
-                    + AppMsgEnFiledForLog.CONSTRUCTOR
+                    + ZPIAppMsgEnFiledForLog.CONSTRUCTOR
                     + ZPIThLogicDirListWalker.class.getCanonicalName()
-                    + AppMsgEnFiledForLog.EX_SRC_CLASS
+                    + ZPIAppMsgEnFiledForLog.EX_SRC_CLASS
                     + ZPIThFsFileVisitor.class.getCanonicalName()
-                    + AppMsgEnFiledForLog.F_FIELD_NAME
+                    + ZPIAppMsgEnFiledForLog.F_FIELD_NAME
                     + "fileVisitor"
-                    + AppMsgEnFiledForLog.F_VALUE
+                    + ZPIAppMsgEnFiledForLog.F_VALUE
                     + "null " 
                     
             );
         }
-        objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(AppMsgEnFiledForLog.CREATE 
+        objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(ZPIAppMsgEnFiledForLog.CREATE 
                 + ZPIThLogicDirListWalker.class.getCanonicalName());
         objectListAndLogger.get().getListOfObjectAndLogger().doLogger();
     }
@@ -116,14 +116,14 @@ public class ZPIThLogicDirListWalker {
             String valueFile, 
             Exception exOuter){
         if( isNotHaveLoggerThread.get() ){
-            NcAppHelper.logException(ZPIThFsFileVisitor.class.getCanonicalName(), exOuter);
+            ZPINcAppHelper.logException(ZPIThFsFileVisitor.class.getCanonicalName(), exOuter);
         } else {
             String strErrorInApp = functionText
-                    + AppMsgEnFiledForLog.F_VALUE
+                    + ZPIAppMsgEnFiledForLog.F_VALUE
                     + valueFile
-                    + AppMsgEnFiledForLog.F_EX_MSG
+                    + ZPIAppMsgEnFiledForLog.F_EX_MSG
                     + exOuter.getMessage();
-            String toLoggerMsg = NcAppHelper.exceptionToString(exClass, ZPIThFsFileVisitor.class, strErrorInApp);
+            String toLoggerMsg = ZPINcAppHelper.exceptionToString(exClass, ZPIThFsFileVisitor.class, strErrorInApp);
             this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageError(toLoggerMsg);
         }
     }
@@ -132,9 +132,9 @@ public class ZPIThLogicDirListWalker {
             do{
                 this.objectDirListRule.get().setDirListReaderLogicRunned();
             }while( !this.objectDirListRule.get().isDirListReaderLogicRunned() );
-            NcAppHelper.outToConsoleIfDevAndParamTrue(this.objectDirListRule.get().getNameDirlistReader() 
+            ZPINcAppHelper.outToConsoleIfDevAndParamTrue(this.objectDirListRule.get().getNameDirlistReader() 
                     + ".setDirListReaderLogicRunned", 
-                    AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE_SET_STARTED);
+                    ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE_SET_STARTED);
             try {
                 Files.walkFileTree(this.currentPathForMakeIndex.get(), this.fileVisitor.get());
             } catch (IOException ex) {
@@ -168,9 +168,9 @@ public class ZPIThLogicDirListWalker {
             do{
                 this.objectDirListRule.get().setDirListReaderLogicFinished();
             }while( !this.objectDirListRule.get().isDirListReaderLogicRunned() );
-            NcAppHelper.outToConsoleIfDevAndParamTrue(this.objectDirListRule.get().getNameDirlistReader() 
+            ZPINcAppHelper.outToConsoleIfDevAndParamTrue(this.objectDirListRule.get().getNameDirlistReader() 
                     + ".setDirListReaderLogicFinished", 
-                    AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE_SET_STARTED);
+                    ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DO_READ_FS_TO_PIPE_SET_STARTED);
         } finally {
             this.isNotHaveLoggerThread.remove();
             this.objectDirListRule.remove();
@@ -187,6 +187,6 @@ public class ZPIThLogicDirListWalker {
                             + String.valueOf(reciveIn) 
                             + "  out   "
                             + String.valueOf(sendOut);
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DATA_COUNT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WALKER_DATA_COUNT);
     }
 }

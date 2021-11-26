@@ -26,12 +26,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author wladimirowichbiaran
  */
 public class ZPIThLogicDirListPacker {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
     private ThreadLocal<Long> counterReadedData;
     private ThreadLocal<Long> counterWritedData;
     private ThreadLocal<Long> counterPackData;
 
-    public ZPIThLogicDirListPacker(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIThLogicDirListPacker(ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
     protected void doPacker(){
@@ -68,7 +68,7 @@ public class ZPIThLogicDirListPacker {
                 }
             }while( !this.innerRuleForDirListWorkers.isDirListTackerLogicRunned() );
             
-            if( AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_PIPE_TO_STRING ){
+            if( ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_PIPE_TO_STRING ){
                 outStatesOfWorkLogic(pipeTackerToPacker.toString() + " +++++ size " + pipeTackerToPacker.size());
             }
             
@@ -97,9 +97,9 @@ public class ZPIThLogicDirListPacker {
                             if( pollFromTacker.isEmpty() ){
                                 break;
                             }
-                        } while( packetForOut.size() < (AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT + 1) );
+                        } while( packetForOut.size() < (ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT + 1) );
                         
-                        if( packetForOut.size() == AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
+                        if( packetForOut.size() == ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
                             pipePackerToWriter.add(packetForOut);
                             
                             Long tmpSumPack = this.counterPackData.get() + 1L;
@@ -156,7 +156,7 @@ public class ZPIThLogicDirListPacker {
                 Long tmpSumLastWrite = this.counterWritedData.get() + 1L;
                 this.counterWritedData.set( tmpSumLastWrite );
                 
-                if( packetForLatestData.size() == AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
+                if( packetForLatestData.size() == ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
                     pipePackerToWriter.add(packetForLatestData);
                             
                     Long tmpSumPack = this.counterPackData.get() + 1L;
@@ -203,9 +203,9 @@ public class ZPIThLogicDirListPacker {
                 if( pollFromTacker.isEmpty() ){
                     break;
                 }
-            } while( packetForOutAfterStopTacker.size() < (AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT + 1) );
+            } while( packetForOutAfterStopTacker.size() < (ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT + 1) );
 
-            if( packetForOutAfterStopTacker.size() == AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
+            if( packetForOutAfterStopTacker.size() == ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT ){
                 pipePackerToWriter.add(packetForOutAfterStopTacker);
                 
                 Long tmpSumPack = this.counterPackData.get() + 1L;
@@ -240,7 +240,7 @@ public class ZPIThLogicDirListPacker {
         String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_RUN);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long reciveIn, Long sendOut, Long packetsOut, Integer pipeSize ){
         String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
@@ -253,7 +253,7 @@ public class ZPIThLogicDirListPacker {
                             + String.valueOf(packetsOut)
                             + " pS "
                             + pipeSize;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_DATA_COUNT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_DATA_COUNT);
     }
     
     private void setPackerLogicRunned(){

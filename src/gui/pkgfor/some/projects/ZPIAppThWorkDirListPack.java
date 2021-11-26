@@ -20,9 +20,9 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ZPIAppThWorkDirListPack implements Runnable {
-    private AppThWorkDirListRule innerRuleForDirListWorkers;
+    private ZPIAppThWorkDirListRule innerRuleForDirListWorkers;
 
-    public ZPIAppThWorkDirListPack(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIAppThWorkDirListPack(ZPIAppThWorkDirListRule ruleForDirListWorkers) {
         super();
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }

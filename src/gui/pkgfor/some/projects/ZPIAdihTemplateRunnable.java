@@ -27,8 +27,8 @@ public class ZPIAdihTemplateRunnable implements Runnable {
     private final Long timeCreation;
     private final UUID objectLabel;
     private final Integer numberProcessIndexSystem;
-    private final AdimRule ruleAdim;
-    private final AdilState adilState;
+    private final ZPIAdimRule ruleAdim;
+    private final ZPIAdilState adilState;
     /**
      * 
      * @param processIndexSystemNumber
@@ -36,31 +36,31 @@ public class ZPIAdihTemplateRunnable implements Runnable {
      * @throws UnsupportedOperationException
      */
     public ZPIAdihTemplateRunnable(final Integer processIndexSystemNumber,
-            final AdimRule outerRule){
+            final ZPIAdimRule outerRule){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         if( outerRule == null ){
-            throw new UnsupportedOperationException(AdimRule.class.getCanonicalName() 
+            throw new UnsupportedOperationException(ZPIAdimRule.class.getCanonicalName() 
                     + " object for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
-        this.ruleAdim = (AdimRule) outerRule;
+        this.ruleAdim = (ZPIAdimRule) outerRule;
         if( processIndexSystemNumber == null ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
         if( processIndexSystemNumber < 0 ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (AdilState) this.ruleAdim.getAdilRule().getAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getAdilRule().getZPIAdilState();
     }
     /**
-     * @todo read command into static method of switch (AdimProcessCommand) class, log recived
+     * @todo read command into static method of switch (ZPIAdimProcessCommand) class, log recived
      * command and call control object (AdimFactory) method with logic for command do
      * 
      * worker list controled by main class with see threads in stacktrace, app and 
@@ -71,7 +71,7 @@ public class ZPIAdihTemplateRunnable implements Runnable {
     
     @Override
     public void run(){
-        AdifControlFlag adifControlFlag = this.ruleAdim.getAdifControlFlag();
+        ZPIAdifControlFlag adifControlFlag = this.ruleAdim.getZPIAdifControlFlag();
         UUID runnerId = UUID.fromString(Thread.currentThread().getName());
         adifControlFlag.createForRunnerUuidFlagList(runnerId);
         Boolean isDoCommnadStop = Boolean.FALSE;
@@ -79,9 +79,9 @@ public class ZPIAdihTemplateRunnable implements Runnable {
         if( flowFlagIsDoCommnadStop != null ){
             isDoCommnadStop = flowFlagIsDoCommnadStop;
         }
-        String msgToLog = new String().concat(AdilConstants.CANONICALNAME
-                .concat(AdihTemplateRunnable.class.getCanonicalName()))
-                .concat(AdilConstants.METHOD)
+        String msgToLog = new String().concat(ZPIAdilConstants.CANONICALNAME
+                .concat(ZPIAdihTemplateRunnable.class.getCanonicalName()))
+                .concat(ZPIAdilConstants.METHOD)
                 .concat("run()");
         ConcurrentSkipListMap<Integer, Integer> commandDetectorResult = null;
         Integer decocedCommand;
@@ -91,10 +91,10 @@ public class ZPIAdihTemplateRunnable implements Runnable {
                 if( !isDoCommnadStop ){
                     this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                         msgToLog
-                        + AdilConstants.START);
+                        + ZPIAdilConstants.START);
                     this.adilState.logStackTrace(this.numberProcessIndexSystem);
                     commandDetectorResult = 
-                            AdimProcessCommand.commandDetector(this.ruleAdim, this.numberProcessIndexSystem);
+                            ZPIAdimProcessCommand.commandDetector(this.ruleAdim, this.numberProcessIndexSystem);
                     for(Map.Entry<Integer, Integer> itemCommands : commandDetectorResult.entrySet()){
                         commandForProcess = itemCommands.getValue();
                         if( commandForProcess.equals(this.numberProcessIndexSystem) ){
@@ -107,7 +107,7 @@ public class ZPIAdihTemplateRunnable implements Runnable {
                             if( decocedCommand.equals(0) ){
                                 this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                                 msgToLog
-                                + AdilConstants.START.concat("command logic start"));
+                                + ZPIAdilConstants.START.concat("command logic start"));
                             }
                         }
                     }
@@ -119,7 +119,7 @@ public class ZPIAdihTemplateRunnable implements Runnable {
         } finally {
             this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
             commandDetectorResult = null;
         } 
     }

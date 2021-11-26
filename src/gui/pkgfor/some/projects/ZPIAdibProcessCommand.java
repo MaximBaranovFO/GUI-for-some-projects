@@ -30,8 +30,8 @@ import java.util.concurrent.LinkedTransferQueue;
  * </ul>
  * Contains Bus with commands for runners (runnable inside workers), 
  * Type bus:  wait, do, ready
- * process number: 0..13 from {@link AdihHelper#getProcessNames() AdihHelper.getProcessNames()}
- * command code: 0..13 from {@link AdihHelper#getCommandNames() AdihHelper.getCommandNames()}
+ * process number: 0..13 from {@link ZPIAdihHelper#getProcessNames() ZPIAdihHelper.getProcessNames()}
+ * command code: 0..13 from {@link ZPIAdihHelper#getCommandNames() ZPIAdihHelper.getCommandNames()}
  * {@code typedProcessCode = this.timeCreation + this.objectLabel + sufFix = ([busTypeCode]*[processCode])}
  * {@code <Integer  typedProcessCode, <Integer commandCode>>}
  * @author wladimirowichbiaran
@@ -243,25 +243,25 @@ public class ZPIAdibProcessCommand {
         }
     }
     /**
-     * see {@link ru.newcontrol.ncfv.AdihHelper#getBusTypeNames() AdihHelper.getBusTypeNames()}
+     * see {@link ru.newcontrol.ncfv.ZPIAdihHelper#getBusTypeNames() ZPIAdihHelper.getBusTypeNames()}
      * @return 
      */
     private String[] getBusTypeNames(){
-        return AdihHelper.getBusTypeNames();
+        return ZPIAdihHelper.getBusTypeNames();
     }
     /**
-     * see {@link ru.newcontrol.ncfv.AdihHelper#getProcessNames() AdihHelper.getProcessNames()}
+     * see {@link ru.newcontrol.ncfv.ZPIAdihHelper#getProcessNames() ZPIAdihHelper.getProcessNames()}
      * @return 
      */
     private String[] getProcessNames(){
-        return AdihHelper.getProcessNames();
+        return ZPIAdihHelper.getProcessNames();
     }
     /**
-     * see {@link ru.newcontrol.ncfv.AdihHelper#getCommandNames() AdihHelper.getCommandNames()}
+     * see {@link ru.newcontrol.ncfv.ZPIAdihHelper#getCommandNames() ZPIAdihHelper.getCommandNames()}
      * @return 
      */
     private String[] getCommandNames(){
-        return AdihHelper.getCommandNames();
+        return ZPIAdihHelper.getCommandNames();
     }
     /**
      * @todo comand list not valide
@@ -360,7 +360,7 @@ public class ZPIAdibProcessCommand {
             return new String(oneOfReturnedCommand[commandNum]);
         }finally {
             commandNum = null;
-            AdihUtilization.utilizeStringValues(oneOfReturnedCommand);
+            ZPIAdihUtilization.utilizeStringValues(oneOfReturnedCommand);
         }
     }
     /**
@@ -428,7 +428,7 @@ public class ZPIAdibProcessCommand {
         }finally {
             commandNum = null;
             forReturnCodeCommand = null;
-            AdihUtilization.utilizeStringValues(oneOfReturnedCommand);
+            ZPIAdihUtilization.utilizeStringValues(oneOfReturnedCommand);
         }
     }
     /**
@@ -486,7 +486,7 @@ public class ZPIAdibProcessCommand {
         }finally {
             idxForList = null;
             commandValue = null;
-            AdihUtilization.utilizeStringValues(oneOfReturnedCommand);
+            ZPIAdihUtilization.utilizeStringValues(oneOfReturnedCommand);
         }
     }
     /**
@@ -524,7 +524,7 @@ public class ZPIAdibProcessCommand {
             return new String(oneOfReturnedType[typeNum]);
         }finally {
             typeNum = null;
-            AdihUtilization.utilizeStringValues(oneOfReturnedType);
+            ZPIAdihUtilization.utilizeStringValues(oneOfReturnedType);
         }
     }
     /**
@@ -600,7 +600,7 @@ public class ZPIAdibProcessCommand {
             processNamesArray = null;
             codeForEventReadyName = null;
             numProcessNameFunc = null;
-            AdihUtilization.utilizeStringValues(new String[]{typeBusNameFunc});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{typeBusNameFunc});
         }
     }
     /**

@@ -23,8 +23,8 @@ import java.util.UUID;
  */
 public class ZPIAdihTemplateThread extends Thread{
     private final Integer numberProcessIndexSystem;
-    private final AdimRule ruleAdim;
-    private final AdilState adilState;
+    private final ZPIAdimRule ruleAdim;
+    private final ZPIAdilState adilState;
     private final Runnable runnerForWork;
     /**
      * 
@@ -34,55 +34,55 @@ public class ZPIAdihTemplateThread extends Thread{
      * @throws UnsupportedOperationException
      */
     public ZPIAdihTemplateThread(final Integer processIndexSystemNumber,
-            final AdimRule outerRule,
+            final ZPIAdimRule outerRule,
             final Runnable outerRunner){
         super(outerRunner, UUID.randomUUID().toString());
         if( outerRule == null ){
-            throw new UnsupportedOperationException(AdimRule.class.getCanonicalName() 
+            throw new UnsupportedOperationException(ZPIAdimRule.class.getCanonicalName() 
                     + " object for set in "
-                    + AdihTemplateThread.class.getCanonicalName()
+                    + ZPIAdihTemplateThread.class.getCanonicalName()
                     + " is null");
         }
-        this.ruleAdim = (AdimRule) outerRule;
+        this.ruleAdim = (ZPIAdimRule) outerRule;
         if( outerRunner == null ){
             throw new UnsupportedOperationException(Runnable.class.getCanonicalName() 
                     + " object for set in "
-                    + AdihTemplateThread.class.getCanonicalName()
+                    + ZPIAdihTemplateThread.class.getCanonicalName()
                     + " is null");
         }
         this.runnerForWork = (Runnable) outerRunner;
         if( processIndexSystemNumber == null ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateThread.class.getCanonicalName()
+                    + ZPIAdihTemplateThread.class.getCanonicalName()
                     + " is null");
         }
         if( processIndexSystemNumber < 0 ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateThread.class.getCanonicalName()
+                    + ZPIAdihTemplateThread.class.getCanonicalName()
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (AdilState) this.ruleAdim.getAdilRule().getAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getAdilRule().getZPIAdilState();
     }
     
     @Override
     public void run() {
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
-                + AdihTemplateThread.class.getCanonicalName()
-                + AdilConstants.METHOD
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
+                + ZPIAdihTemplateThread.class.getCanonicalName()
+                + ZPIAdilConstants.METHOD
                 + "run()";
         try {
             this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
             try {
                 this.runnerForWork.run();
             } catch(Throwable trEx) {
                 this.adilState.putLogLineByProcessNumberMsgExceptions(
                         this.numberProcessIndexSystem, 
                         Throwable.class.getCanonicalName(),
-                        AdihTemplateThread.class.getCanonicalName(), 
+                        ZPIAdihTemplateThread.class.getCanonicalName(), 
                         this.runnerForWork.getClass().getCanonicalName() + ".run()", 
                         trEx.getMessage());
                 this.adilState.logStackTrace(this.numberProcessIndexSystem);
@@ -91,28 +91,28 @@ public class ZPIAdihTemplateThread extends Thread{
             }
         /*this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                         msgToLog
-                        + AdilConstants.STATE
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.STATE
+                        + ZPIAdilConstants.VARNAME
                         + "typeWordOfBusOutputFunc"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + String.valueOf(typeWordOfBusOutputFunc)
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.VARNAME
                         + "itemKey"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + itemKey
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.VARNAME
                         + "hexTagName"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + hexTagName
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.VARNAME
                         + "subString"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + subString
                     );*/
         } finally {
             this.adilState.putLogLineByProcessNumberMsg(this.numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         }
     }
 }

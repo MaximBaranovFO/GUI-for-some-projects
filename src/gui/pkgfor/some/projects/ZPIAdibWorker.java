@@ -33,41 +33,41 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 
  * @author wladimirowichbiaran
  */
-public class ZPIAdibWorker {
+public class ZPIZPIAdibWorker {
     private final Long timeCreation;
     private final UUID objectLabel;
     private final Integer numberProcessIndexSystem;
     
-    private final ConcurrentSkipListMap<Integer, AdihTemplateThread> workerListCreated;
-    private final ConcurrentSkipListMap<Integer, AdihTemplateThread> workerListRunned;
-    private final ConcurrentSkipListMap<Integer, AdihTemplateThread> workerListFinished;
-    private final ConcurrentSkipListMap<Integer, AdihTemplateRunnable> runnerTypedList;
+    private final ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread> workerListCreated;
+    private final ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread> workerListRunned;
+    private final ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread> workerListFinished;
+    private final ConcurrentSkipListMap<Integer, ZPIAdihTemplateRunnable> runnerTypedList;
     
-    private final AdimRule ruleAdim;
-    private final AdilState adilState;
+    private final ZPIAdimRule ruleAdim;
+    private final ZPIAdilState adilState;
     /**
      * 
      * @param ruleMechanics 
      * @throws NullPointerException if <code>ruleMechanics</code> is null
      */
-    public ZPIAdibWorker(final AdimRule ruleMechanics){
+    public ZPIZPIAdibWorker(final ZPIAdimRule ruleMechanics){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         
         this.numberProcessIndexSystem = 14;
         
-        this.workerListCreated = new ConcurrentSkipListMap<Integer, AdihTemplateThread>();
-        this.workerListRunned = new ConcurrentSkipListMap<Integer, AdihTemplateThread>();
-        this.workerListFinished = new ConcurrentSkipListMap<Integer, AdihTemplateThread>();
-        this.runnerTypedList = new ConcurrentSkipListMap<Integer, AdihTemplateRunnable>();
+        this.workerListCreated = new ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread>();
+        this.workerListRunned = new ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread>();
+        this.workerListFinished = new ConcurrentSkipListMap<Integer, ZPIAdihTemplateThread>();
+        this.runnerTypedList = new ConcurrentSkipListMap<Integer, ZPIAdihTemplateRunnable>();
         
         if(  ruleMechanics != null ) {
-            this.ruleAdim = (AdimRule) ruleMechanics;
-            this.adilState = (AdilState) this.ruleAdim.getAdilRule().getAdilState();
+            this.ruleAdim = (ZPIAdimRule) ruleMechanics;
+            this.adilState = (ZPIAdilState) this.ruleAdim.getZPIAdilRule().getZPIAdilState();
         } else {
-            throw new NullPointerException(AdilRule.class.getCanonicalName() 
+            throw new NullPointerException(ZPIAdilRule.class.getCanonicalName() 
                     + " object for set in " 
-                    + AdibWorker.class.getCanonicalName() 
+                    + ZPIAdibWorker.class.getCanonicalName() 
                     + " is null");
         }
         createWorker();
@@ -76,8 +76,8 @@ public class ZPIAdibWorker {
      * create new thread object for typed runner and add it into workerListCreated
      */
     private void createWorker(){
-        AdihTemplateRunnable createdRunner;
-        AdihTemplateThread createdWorker;
+        ZPIAdihTemplateRunnable createdRunner;
+        ZPIAdihTemplateThread createdWorker;
         
         Boolean isWorkerCreated = Boolean.FALSE;
         Boolean isWorkerRunned = Boolean.FALSE;
@@ -87,14 +87,14 @@ public class ZPIAdibWorker {
         Integer countParamsDataFsForSet;
         Integer idx;
         
-        AdihTemplateThread preRemoveWorker;
-        AdihTemplateThread removeWorker;
+        ZPIAdihTemplateThread preRemoveWorker;
+        ZPIAdihTemplateThread removeWorker;
         try {
             countParamsDataFsForSet = getParamCount();
             for(idx = 0; idx < countParamsDataFsForSet; idx++ ){
                 paramCodeByNumber = getParamCodeByNumber(idx);
                 if( !runnerInTypedList(paramCodeByNumber) ){
-                    createdRunner = new AdihTemplateRunnable(idx, this.ruleAdim);
+                    createdRunner = new ZPIAdihTemplateRunnable(idx, this.ruleAdim);
                     this.runnerTypedList.put(paramCodeByNumber, createdRunner);
                 } else {
                     createdRunner = this.runnerTypedList.get(paramCodeByNumber);
@@ -108,10 +108,10 @@ public class ZPIAdibWorker {
                             preRemoveWorker = this.workerListCreated.get(paramCodeByNumber);
                             if( preRemoveWorker.getState() == Thread.State.TERMINATED ){
                                 removeWorker = this.workerListCreated.remove(paramCodeByNumber);
-                                AdihUtilization.utilizeFinishedThread(removeWorker);
+                                ZPIAdihUtilization.utilizeFinishedThread(removeWorker);
                             }
                         }
-                        createdWorker = new AdihTemplateThread(idx, this.ruleAdim, createdRunner);
+                        createdWorker = new ZPIAdihTemplateThread(idx, this.ruleAdim, createdRunner);
                         this.workerListCreated.put(paramCodeByNumber, createdWorker);
                     }
                 }
@@ -125,10 +125,10 @@ public class ZPIAdibWorker {
         }
     }
     protected void runAllWorker(){
-        Map.Entry<Integer, AdihTemplateThread> pollFirstEntry;
+        Map.Entry<Integer, ZPIAdihTemplateThread> pollFirstEntry;
         Integer keyWorker;
         Boolean isWorkerRunned;
-        AdihTemplateThread value;
+        ZPIAdihTemplateThread value;
         try {
             do{
                 pollFirstEntry = this.workerListCreated.pollFirstEntry();
@@ -136,12 +136,12 @@ public class ZPIAdibWorker {
                 isWorkerRunned = workerInRunned(keyWorker);
                 if( !isWorkerRunned ){
                     value = pollFirstEntry.getValue();
-                    if( AdihTemplateThread.State.NEW == value.getState() ){
+                    if( ZPIAdihTemplateThread.State.NEW == value.getState() ){
                         this.workerListRunned.put(keyWorker, value);
                         value.start();
                     } else {
                         keyWorker = null;
-                        AdihUtilization.utilizeFinishedThread(value);
+                        ZPIAdihUtilization.utilizeFinishedThread(value);
                     }
                 }
             }while( !this.workerListCreated.isEmpty() );
@@ -154,10 +154,10 @@ public class ZPIAdibWorker {
     }
     protected Boolean isHasRunnedWorkers(){
         Integer keyThreadForRemove;
-        AdihTemplateThread removedThread;
-        AdihTemplateThread valueRunnedWorker;
+        ZPIAdihTemplateThread removedThread;
+        ZPIAdihTemplateThread valueRunnedWorker;
         try {
-            for( Map.Entry<Integer, AdihTemplateThread> itemOfRunnedList : this.workerListRunned.entrySet() ){
+            for( Map.Entry<Integer, ZPIAdihTemplateThread> itemOfRunnedList : this.workerListRunned.entrySet() ){
                 valueRunnedWorker = itemOfRunnedList.getValue();
                 if( valueRunnedWorker.getState() != Thread.State.TERMINATED ) {
                     return Boolean.TRUE;
@@ -185,14 +185,14 @@ public class ZPIAdibWorker {
         } catch (ClassCastException exClass) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exClass.getMessage());
             
         } catch (NullPointerException exNull) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exNull.getMessage());
         }
@@ -209,14 +209,14 @@ public class ZPIAdibWorker {
         } catch (ClassCastException exClass) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exClass.getMessage());
             
         } catch (NullPointerException exNull) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exNull.getMessage());
         }
@@ -233,14 +233,14 @@ public class ZPIAdibWorker {
         } catch (ClassCastException exClass) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exClass.getMessage());
             
         } catch (NullPointerException exNull) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exNull.getMessage());
         }
@@ -257,14 +257,14 @@ public class ZPIAdibWorker {
         } catch (ClassCastException exClass) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     ClassCastException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exClass.getMessage());
             
         } catch (NullPointerException exNull) {
             this.adilState.putLogLineByProcessNumberMsgExceptions(this.numberProcessIndexSystem, 
                     NullPointerException.class.getCanonicalName(), 
-                    AdibWorker.class.getCanonicalName(), 
+                    ZPIAdibWorker.class.getCanonicalName(), 
                     "threadInCreated()", 
                     exNull.getMessage());
         }
@@ -287,7 +287,7 @@ public class ZPIAdibWorker {
      * @return 
      */
     private String[] getProcessNames(){
-        return AdihHelper.getProcessNames();
+        return ZPIAdihHelper.getProcessNames();
     }
     /**
      * <ul>

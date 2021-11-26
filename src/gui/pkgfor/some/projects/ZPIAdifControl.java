@@ -43,31 +43,31 @@ public class ZPIAdifControl {
     private final UUID objectLabel;
     private final Integer numberProcessIndexSystem;
     private final ConcurrentSkipListMap<Integer, UUID> processNumberedList;
-    private final AdimRule ruleAdim;
-    private final AdilState adilState;
+    private final ZPIAdimRule ruleAdim;
+    private final ZPIAdilState adilState;
     public ZPIAdifControl(final Integer processIndexSystemNumber,
-            final AdimRule outerRule){
+            final ZPIAdimRule outerRule){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         if( outerRule == null ){
-            throw new UnsupportedOperationException(AdimRule.class.getCanonicalName() 
+            throw new UnsupportedOperationException(ZPIAdimRule.class.getCanonicalName() 
                     + " object for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
-        this.ruleAdim = (AdimRule) outerRule;
+        this.ruleAdim = (ZPIAdimRule) outerRule;
         if( processIndexSystemNumber == null ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is null");
         }
         if( processIndexSystemNumber < 0 ){
             throw new UnsupportedOperationException("processIndexSystemNumber for set in "
-                    + AdihTemplateRunnable.class.getCanonicalName()
+                    + ZPIAdihTemplateRunnable.class.getCanonicalName()
                     + " is not natural ( processIndexSystemNumber < 0 (Zero) )");
         }
         this.numberProcessIndexSystem = processIndexSystemNumber;
-        this.adilState = (AdilState) this.ruleAdim.getAdilRule().getAdilState();
+        this.adilState = (ZPIAdilState) this.ruleAdim.getAdilRule().getZPIAdilState();
         this.processNumberedList = new ConcurrentSkipListMap<Integer, UUID>();
     }
 }

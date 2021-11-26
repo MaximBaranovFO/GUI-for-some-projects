@@ -982,10 +982,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected Integer getValueForMainUuidByNumberDataFs(final TdataWord fromBusReadedData,
+    protected Integer getValueForMainUuidByNumberDataFs(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -995,7 +995,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -1029,10 +1029,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected Long getValueForMainUuidByNumberActivity(final TdataWord fromBusReadedData,
+    protected Long getValueForMainUuidByNumberActivity(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -1042,7 +1042,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -1078,10 +1078,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected Integer getValueForMainUuidByNumberDataCache(final TdataWord fromBusReadedData,
+    protected Integer getValueForMainUuidByNumberDataCache(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -1091,7 +1091,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -1127,10 +1127,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected Integer getValueForMainUuidByNumberError(final TdataWord fromBusReadedData,
+    protected Integer getValueForMainUuidByNumberError(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -1140,7 +1140,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -1177,10 +1177,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected String getValueForMainUuidByNumberName(final TdataWord fromBusReadedData,
+    protected String getValueForMainUuidByNumberName(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -1190,7 +1190,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -1234,10 +1234,10 @@ public class ThWordStatusMainFlow {
      * @return 
      * @throw NullPointerException is mainFlowUuidForReturnValue null
      */
-    protected Boolean getValueForMainUuidByNumberWorkers(final TdataWord fromBusReadedData,
+    protected Boolean getValueForMainUuidByNumberWorkers(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForReturnValue,
             Integer numberParam){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -1247,7 +1247,7 @@ public class ThWordStatusMainFlow {
 
         try {
             numberParamFunc = (Integer) numberParam;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
@@ -2163,11 +2163,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberDataFs(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberDataFs(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             Integer changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2178,7 +2178,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (Integer) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( createdMainFlow != null ){
@@ -2210,11 +2210,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberName(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberName(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             String changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2225,7 +2225,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (String) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
@@ -2255,11 +2255,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberActivity(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberActivity(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             Long changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2270,7 +2270,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (Long) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
@@ -2302,11 +2302,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberDataCache(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberDataCache(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             Integer changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2317,7 +2317,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (Integer) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( createdMainFlow != null ){
@@ -2356,11 +2356,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberWorkers(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberWorkers(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             Boolean changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2371,7 +2371,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (Boolean) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( createdMainFlow != null ){
@@ -2402,11 +2402,11 @@ public class ThWordStatusMainFlow {
      * </ul>
      * @param changedValue 
      */
-    protected void changeParamForMainUuidByDataWordForNumberError(final TdataWord fromBusReadedData,
+    protected void changeParamForMainUuidByDataWordForNumberError(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForChange,
             Integer numberParam,
             Integer changedValue){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -2417,7 +2417,7 @@ public class ThWordStatusMainFlow {
         try {
             numberParamFunc = (Integer) numberParam;
             changedValueFunc = (Integer) changedValue;
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForChange;
             
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
@@ -2442,7 +2442,7 @@ public class ThWordStatusMainFlow {
      * @return 
      */
     protected UUID createInitMainFlow(
-            final TdataWord dataInputed,
+            final ZPITdataWord dataInputed,
             ThWordEventIndexFlow eventIndexFlow){
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> initMainFlow;
         ConcurrentSkipListMap<Integer, UUID> initValues;
@@ -2502,18 +2502,18 @@ public class ThWordStatusMainFlow {
      * @param checkForExistUuid
      * @return 
      */
-    protected Boolean isUuidExistInFlowByDataWord(final TdataWord dataInputed,
+    protected Boolean isUuidExistInFlowByDataWord(final ZPITdataWord dataInputed,
             UUID checkForExistUuid){
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> dataTypeWordTagNameSubStr;
         
-        TdataWord dataInputedFunc;
+        ZPITdataWord dataInputedFunc;
         UUID checkForExistUuidFunc;
         
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
         try {
-            dataInputedFunc = (TdataWord) dataInputed;
+            dataInputedFunc = (ZPITdataWord) dataInputed;
             checkForExistUuidFunc = (UUID) checkForExistUuid;
             
             tagNameFunc = dataInputedFunc.hexSubString;
@@ -2673,20 +2673,20 @@ public class ThWordStatusMainFlow {
      * @param dataInputed
      * @return 
      */
-    private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> getFlowUuidsByDataWord(final TdataWord dataInputed){
+    private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> getFlowUuidsByDataWord(final ZPITdataWord dataInputed){
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> dataTypeWordTagNameSubStr;
-        TdataWord dataFunc;
+        ZPITdataWord dataFunc;
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
         Boolean tdataWordValid;
         try {
-            dataFunc = (TdataWord) dataInputed;
+            dataFunc = (ZPITdataWord) dataInputed;
             
             tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
                 throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
-                        + " not valid data for get from cache object class " + TdataWord.class.getCanonicalName() 
+                        + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             tagNameFunc = dataFunc.hexSubString;
@@ -2696,12 +2696,12 @@ public class ThWordStatusMainFlow {
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
                 throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
-                        + " not have UUIDs in MainFlow for key type " + TdataWord.class.getCanonicalName() 
+                        + " not have UUIDs in MainFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
                 throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
-                        + " not have UUIDs in MainFlow for key type " + TdataWord.class.getCanonicalName() 
+                        + " not have UUIDs in MainFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             return dataTypeWordTagNameSubStr;
@@ -2932,21 +2932,21 @@ public class ThWordStatusMainFlow {
      * @param dataInputed
      * @param mainFlowContentInputed 
      */
-    private void setParamFlowUuidsByDataWord(final TdataWord dataInputed,
+    private void setParamFlowUuidsByDataWord(final ZPITdataWord dataInputed,
             final ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> mainFlowContentInputed){
-        TdataWord dataFunc;
+        ZPITdataWord dataFunc;
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
         Boolean tdataWordValid;
         try {
-            dataFunc = (TdataWord) dataInputed;
+            dataFunc = (ZPITdataWord) dataInputed;
             
             tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
             try {
                 if( !tdataWordValid ){
                     throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
-                            + " not valid data for get from cache object class " + TdataWord.class.getCanonicalName() 
+                            + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                             + " object data " + dataFunc.toString());
                 }
             } catch(IllegalArgumentException exxIll) {
@@ -3024,9 +3024,9 @@ public class ThWordStatusMainFlow {
      * @param fromBusReadedData
      * @param mainFlowUuidForCheck 
      */
-    protected void validateInFlowAllPointsByDataWord(final TdataWord fromBusReadedData,
+    protected void validateInFlowAllPointsByDataWord(final ZPITdataWord fromBusReadedData,
             final UUID mainFlowUuidForCheck){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
@@ -3045,7 +3045,7 @@ public class ThWordStatusMainFlow {
         UUID valueUUIDWorkers;
         UUID valueUUIDError;
         try {
-            dataFromBusFunc = (TdataWord) fromBusReadedData;
+            dataFromBusFunc = (ZPITdataWord) fromBusReadedData;
             createdMainFlow = (UUID) mainFlowUuidForCheck;
             
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
@@ -3105,7 +3105,7 @@ public class ThWordStatusMainFlow {
             final String strSubStringInputed,
             final String tagNameInputed, 
             final UUID mainFlowUuidForCheck){
-        TdataWord dataFromBusFunc;
+        ZPITdataWord dataFromBusFunc;
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;

@@ -69,9 +69,9 @@ public class ThWordBusFlowEvent {
      * @return 
      * @throws IllegalArgumentException when inputed data not valid
      */
-    protected LinkedTransferQueue<UUID> pollDataReadedFlowUuidsByDataWord(final TdataWord dataInputed){
+    protected LinkedTransferQueue<UUID> pollDataReadedFlowUuidsByDataWord(final ZPITdataWord dataInputed){
         ConcurrentSkipListMap<String, LinkedTransferQueue<UUID>> dataTypeWordTagNameSubStr;
-        TdataWord dataFunc;
+        ZPITdataWord dataFunc;
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
@@ -79,12 +79,12 @@ public class ThWordBusFlowEvent {
         LinkedTransferQueue<UUID> removedForReturn;
         UUID poll;
         try {
-            dataFunc = (TdataWord) dataInputed;
+            dataFunc = (ZPITdataWord) dataInputed;
             
             tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
                 throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
-                        + " not valid data for get from cache object class " + TdataWord.class.getCanonicalName() 
+                        + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             tagNameFunc = dataFunc.hexSubString;
@@ -94,12 +94,12 @@ public class ThWordBusFlowEvent {
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
                 throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
-                        + " not have UUIDs in ReadedFlow for key type " + TdataWord.class.getCanonicalName() 
+                        + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
                 throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
-                        + " not have UUIDs in ReadedFlow for key type " + TdataWord.class.getCanonicalName() 
+                        + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             LinkedTransferQueue<UUID> getCurrentList = dataTypeWordTagNameSubStr.get(tagNameFunc);

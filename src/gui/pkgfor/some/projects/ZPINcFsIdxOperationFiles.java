@@ -92,7 +92,7 @@ public class ZPINcFsIdxOperationFiles {
                         + "[VAl]" + value.toString();
                 arrStr.add(strOut);
             }
-            NcThWorkerUpGUITreeOutput.outputTreeAddChildren(lComp, arrStr);
+            ZPINcThWorkerUpGUITreeOutput.outputTreeAddChildren(lComp, arrStr);
         } catch (IOException ex) {
             NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
         }

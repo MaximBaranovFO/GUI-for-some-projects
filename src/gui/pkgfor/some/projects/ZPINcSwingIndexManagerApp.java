@@ -123,7 +123,7 @@ public class ZPINcSwingIndexManagerApp {
      * make record in log file
      */
     private static void toLALRcreateGui(){
-        if( NcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
+        if( ZPINcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogMsgText.APP_GUI_START.getStr()
@@ -141,7 +141,7 @@ public class ZPINcSwingIndexManagerApp {
      * make record in log file
      */
     private static void toLALRcreateGuiPanel(){
-        if( NcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
+        if( ZPINcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogMsgText.GUI_CREATE_JPANEL_FOR_MAIN_FRAME.getStr()
@@ -159,7 +159,7 @@ public class ZPINcSwingIndexManagerApp {
      * make record in log file
      */
     private static void toLALRendOfCreateGUI(){
-        if( NcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_SET_VISIBLE_GUI.getStr()

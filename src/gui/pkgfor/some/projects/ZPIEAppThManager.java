@@ -30,7 +30,7 @@ public class ZPIEAppThManager {
     private ConcurrentSkipListMap<String,Runnable> currentWorkerList;
     private ArrayBlockingQueue<String> messagesQueueForLogging;
     private AppObjectsList outerObectsForApp;
-    private ThIndexRule thIndexRule;
+    private ZPIThIndexRule thIndexRule;
 
     public ZPIEAppThManager(AppObjectsList objectsForApp) {
         this.outerObectsForApp = objectsForApp;
@@ -41,10 +41,10 @@ public class ZPIEAppThManager {
     protected AppObjectsList getListOfObjects(){
         return this.outerObectsForApp;
     }
-    protected void setIndexRule(final ThIndexRule outerThIndexRule){
+    protected void setIndexRule(final ZPIThIndexRule outerThIndexRule){
         this.thIndexRule = outerThIndexRule;
     }
-    protected ThIndexRule getIndexRule(){
+    protected ZPIThIndexRule getIndexRule(){
         return this.thIndexRule;
     }
     protected static void createNewWorkerGroup(){

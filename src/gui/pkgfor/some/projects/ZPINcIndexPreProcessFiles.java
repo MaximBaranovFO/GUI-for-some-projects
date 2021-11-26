@@ -158,7 +158,7 @@ public class ZPINcIndexPreProcessFiles {
         String isIdx = ncwd.getIndexLastModifiedForDirectoryOrFile(ncFile) > 0 ? "In index" : "Not Indexed";
         NcIndexManageIDs ncThisManageIDs = ncwd.getNcIndexManageIDs();
         
-        NcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
+        ZPINcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
         
         String[] fstroA = {
             "getIndexLastModifiedForDirectoryOrFile: " + isIdx,
@@ -527,7 +527,7 @@ public class ZPINcIndexPreProcessFiles {
         
         long startTime = System.nanoTime();
         
-        NcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
+        ZPINcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
         
         TreeMap<Long, NcDiskInfo> ncDiskInfo = ncwd.getDiskInfo();
         String strAbsolutlePath = NcIdxFileManager.getStrCanPathFromFile(ncFile);

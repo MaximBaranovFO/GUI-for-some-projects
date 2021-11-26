@@ -455,7 +455,7 @@ public class ZPINcPreIdxWork {
                 + NcStrServiceMsg.NOT_EXIST_OR_WRONG.getStr());
         }
         if( !fileGet ){
-            NcTmpNowProcessInfo readedTmpIDsData= NcIndexManageIDs.getTmpIDsData(fileTmpIDs);
+            ZPINcTmpNowProcessInfo readedTmpIDsData= NcIndexManageIDs.getTmpIDsData(fileTmpIDs);
             boolean isTmpIdsDataWrong = NcIndexManageIDs.isTmpIDsDataWrong(readedTmpIDsData);
             if( !isTmpIdsDataWrong ){
                 getTmpIdsDataToConsole(readedTmpIDsData);
@@ -477,7 +477,7 @@ public class ZPINcPreIdxWork {
      * </ul>
      * @param readedTmpIDsData
      */
-    private static void getTmpIdsDataToConsole(NcTmpNowProcessInfo readedTmpIDsData){
+    private static void getTmpIdsDataToConsole(ZPINcTmpNowProcessInfo readedTmpIDsData){
         NcAppHelper.outMessageToConsole("TmpIdsData: ");
         NcAppHelper.outMessageToConsole("journalid: " + readedTmpIDsData.journalid + " \tjournalname: " + readedTmpIDsData.journalname);
         NcAppHelper.outMessageToConsole("listnameid: " + readedTmpIDsData.listnameid + " \tlistnameid: " + readedTmpIDsData.listname);

@@ -38,19 +38,19 @@ public class ZPIAdihUtilization {
      * @param prevData
      * @return 
      */
-    protected static ConcurrentSkipListMap<UUID, TdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, TdataWord> prevData){
+    protected static ConcurrentSkipListMap<UUID, ZPITdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, ZPITdataWord> prevData){
         utilizeTdataWord(prevData);
-        return new ConcurrentSkipListMap<UUID, TdataWord>();
+        return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
     }
     /**
      * 
      * @param forUtilizationData 
      */
-    protected static void utilizeTdataWord(ConcurrentSkipListMap<UUID, TdataWord> forUtilizationData){
+    protected static void utilizeTdataWord(ConcurrentSkipListMap<UUID, ZPITdataWord> forUtilizationData){
         UUID keyForDelete;
-        TdataWord removedData;
+        ZPITdataWord removedData;
         try {
-            for( Map.Entry<UUID, TdataWord> deletingItem : forUtilizationData.entrySet() ){
+            for( Map.Entry<UUID, ZPITdataWord> deletingItem : forUtilizationData.entrySet() ){
                 keyForDelete = deletingItem.getKey();
                 removedData = forUtilizationData.remove(keyForDelete);
                 removedData.dirListFile = null;

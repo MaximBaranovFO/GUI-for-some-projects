@@ -23,7 +23,7 @@ import java.util.concurrent.LinkedTransferQueue;
  * @author wladimirowichbiaran
  */
 public class ZPIAdilRule {
-    private ThIndexRule indexRule;
+    private ZPIThIndexRule indexRule;
     
     private AdilWorkerWrite runnableAdilWorkWrite;
     private Boolean isRunAdilWorkWrite;
@@ -34,19 +34,19 @@ public class ZPIAdilRule {
     
     private LinkedTransferQueue<UUID> queueForRunLogger;
     
-    ZPIAdilRule(ThIndexRule indexRuleOuter){
-        this.indexRule = (ThIndexRule) indexRuleOuter;
+    ZPIAdilRule(ZPIThIndexRule indexRuleOuter){
+        this.indexRule = (ZPIThIndexRule) indexRuleOuter;
         this.queueForRunLogger = new LinkedTransferQueue<UUID>();
         setFalseRunnerAdilWorkWrite();
         setFalseAdilWorkWrite();
         setFalseAdilState();
     }
     /**
-     * ThIndexRule
+     * ZPIThIndexRule
      * @return 
      */
-    protected ThIndexRule getIndexRule(){
-        return (ThIndexRule) this.indexRule;
+    protected ZPIThIndexRule getIndexRule(){
+        return (ZPIThIndexRule) this.indexRule;
     }
     /**
      * AdilWorkerWrite

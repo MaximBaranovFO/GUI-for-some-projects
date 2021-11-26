@@ -35,7 +35,7 @@ public class ThWordCacheHaReaded {
     private ConcurrentHashMap<Integer, 
             ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>>> cachedData;
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>> cachedData;
     
     public ThWordCacheHaReaded() {
         this.cachedData = createNewListStoragesMapEmpty();
@@ -43,11 +43,11 @@ public class ThWordCacheHaReaded {
     private ConcurrentHashMap<Integer, 
         ConcurrentHashMap<String, 
             ConcurrentHashMap<Integer, 
-                ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>>> createNewListStoragesMapEmpty(){
+                ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>> createNewListStoragesMapEmpty(){
         return new ConcurrentHashMap<Integer, 
                         ConcurrentHashMap<String, 
                             ConcurrentHashMap<Integer, 
-                                ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>>>();
+                                ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>>();
     }
     /**
      * @todo remove keys for empty lists
@@ -69,64 +69,64 @@ public class ThWordCacheHaReaded {
                 ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>>>> pollAllData(){
+                ConcurrentHashMap<UUID, ZPITdataWord>>>>> pollAllData(){
         
         Integer keyTypeWordList;
         ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>>>> createNewListStoragesMapCleaned;
+                ConcurrentHashMap<UUID, ZPITdataWord>>>>> createNewListStoragesMapCleaned;
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>>> removeIfNullCachedData;
+                ConcurrentHashMap<UUID, ZPITdataWord>>>> removeIfNullCachedData;
         ConcurrentHashMap<String, 
                         ConcurrentHashMap<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>>> valueTypeWordList;
+                        ConcurrentHashMap<UUID, ZPITdataWord>>>> valueTypeWordList;
         ConcurrentHashMap<String, 
                         ConcurrentHashMap<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>>> valueTypeWordListCleaned;
+                        ConcurrentHashMap<UUID, ZPITdataWord>>>> valueTypeWordListCleaned;
         ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>> removeIfNullTypeWordList;
+                ConcurrentHashMap<UUID, ZPITdataWord>>> removeIfNullTypeWordList;
         String keyHexTagNameLetter;
         ConcurrentHashMap<Integer,
                         ConcurrentHashMap<String,
-                        ConcurrentHashMap<UUID, TdataWord>>> valueHexTagNameLetter;
+                        ConcurrentHashMap<UUID, ZPITdataWord>>> valueHexTagNameLetter;
         ConcurrentHashMap<Integer,
                         ConcurrentHashMap<String,
-                        ConcurrentHashMap<UUID, TdataWord>>> valueHexTagNameLetterCleaned;
+                        ConcurrentHashMap<UUID, ZPITdataWord>>> valueHexTagNameLetterCleaned;
         ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>> removeIfNullHexTagNameLetter;
+                ConcurrentHashMap<UUID, ZPITdataWord>> removeIfNullHexTagNameLetter;
         Integer keySubStringLength;
         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>> valueSubStringLength;
+                        ConcurrentHashMap<UUID, ZPITdataWord>> valueSubStringLength;
         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>> valueSubStringLengthCleaned;
-        ConcurrentHashMap<UUID, TdataWord> removeSubStringLength;
+                        ConcurrentHashMap<UUID, ZPITdataWord>> valueSubStringLengthCleaned;
+        ConcurrentHashMap<UUID, ZPITdataWord> removeSubStringLength;
         String keyHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> valueHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> dataByHexTagName;
+        ConcurrentHashMap<UUID, ZPITdataWord> valueHexTagName;
+        ConcurrentHashMap<UUID, ZPITdataWord> dataByHexTagName;
         UUID keyData;
-        TdataWord removedData;
-        TdataWord removeIfNullData;
+        ZPITdataWord removedData;
+        ZPITdataWord removeIfNullData;
         try {
             createNewListStoragesMapCleaned = createNewListStoragesMapEmpty();
             for( Map.Entry<Integer, 
                     ConcurrentHashMap<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
                 
                 keyTypeWordList = (Integer) entrySetTypeWord.getKey();
                 
                 valueTypeWordList = (ConcurrentHashMap<String, 
                         ConcurrentHashMap<Integer,
                         ConcurrentHashMap<String,
-                        ConcurrentHashMap<UUID, TdataWord>>>>) entrySetTypeWord.getValue();
+                        ConcurrentHashMap<UUID, ZPITdataWord>>>>) entrySetTypeWord.getValue();
                 if( keyTypeWordList == null ){
                     continue;
                 }
@@ -143,16 +143,16 @@ public class ThWordCacheHaReaded {
                 valueTypeWordListCleaned = new ConcurrentHashMap<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>>();
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>>();
                 for( Map.Entry<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
                     
                     keyHexTagNameLetter = entrySetHexTagNameLetter.getKey();
                     valueHexTagNameLetter = (ConcurrentHashMap<Integer,
                         ConcurrentHashMap<String,
-                        ConcurrentHashMap<UUID, TdataWord>>>) entrySetHexTagNameLetter.getValue();
+                        ConcurrentHashMap<UUID, ZPITdataWord>>>) entrySetHexTagNameLetter.getValue();
                     if( keyHexTagNameLetter == null ){
                         continue;
                     }
@@ -168,14 +168,14 @@ public class ThWordCacheHaReaded {
                     }
                     valueHexTagNameLetterCleaned = new ConcurrentHashMap<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>>();
+                        ConcurrentHashMap<UUID, ZPITdataWord>>>();
                     for( Map.Entry<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
+                        ConcurrentHashMap<UUID, ZPITdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
                         
                         keySubStringLength = (Integer) entrySetSubStringLength.getKey();
                         valueSubStringLength = (ConcurrentHashMap<String, 
-                                                    ConcurrentHashMap<UUID, TdataWord>>) entrySetSubStringLength.getValue();
+                                                    ConcurrentHashMap<UUID, ZPITdataWord>>) entrySetSubStringLength.getValue();
                         if( keySubStringLength == null ){
                             continue;
                         }
@@ -190,11 +190,11 @@ public class ThWordCacheHaReaded {
                             continue;
                         }
                         valueSubStringLengthCleaned = new ConcurrentHashMap<String, 
-                            ConcurrentHashMap<UUID, TdataWord>>();
+                            ConcurrentHashMap<UUID, ZPITdataWord>>();
                         for( Map.Entry<String, 
-                            ConcurrentHashMap<UUID, TdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
+                            ConcurrentHashMap<UUID, ZPITdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
                             keyHexTagName = (String) entrySetHexTagName.getKey();
-                            valueHexTagName = (ConcurrentHashMap<UUID, TdataWord>) entrySetHexTagName.getValue();
+                            valueHexTagName = (ConcurrentHashMap<UUID, ZPITdataWord>) entrySetHexTagName.getValue();
                             if( keyHexTagName == null ){
                                 continue;
                             }
@@ -208,16 +208,16 @@ public class ThWordCacheHaReaded {
                             if( valueHexTagName.isEmpty() ){
                                 continue;
                             }
-                            dataByHexTagName = new ConcurrentHashMap<UUID, TdataWord>();
-                            for( Map.Entry<UUID, TdataWord> itemFromHexTagNameList : valueHexTagName.entrySet() ){
+                            dataByHexTagName = new ConcurrentHashMap<UUID, ZPITdataWord>();
+                            for( Map.Entry<UUID, ZPITdataWord> itemFromHexTagNameList : valueHexTagName.entrySet() ){
                                 keyData = (UUID) itemFromHexTagNameList.getKey();
-                                removedData = (TdataWord) valueHexTagName.remove(keyData);
+                                removedData = (ZPITdataWord) valueHexTagName.remove(keyData);
                                 if( keyData == null ){
                                     continue;
                                 }
                                 if( removedData == null ){
                                     
-                                    removeIfNullData = (TdataWord) valueHexTagName.remove(keyData);
+                                    removeIfNullData = (ZPITdataWord) valueHexTagName.remove(keyData);
                                     removeIfNullData = null;
                                     keyData = null;
                                     continue;
@@ -261,42 +261,42 @@ public class ThWordCacheHaReaded {
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>>> valueTypeWordList;
+                ConcurrentHashMap<UUID, ZPITdataWord>>>> valueTypeWordList;
         Integer keyRemovedTypeWordList;
-        ConcurrentHashMap<String, ConcurrentHashMap<Integer, ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>> valueRemovedTypeWordList;
+        ConcurrentHashMap<String, ConcurrentHashMap<Integer, ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>> valueRemovedTypeWordList;
         ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>> valueHexTagNameLetter;
+                ConcurrentHashMap<UUID, ZPITdataWord>>> valueHexTagNameLetter;
         String keyRemovedHexTagNameLetter;
-        ConcurrentHashMap<Integer, ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>> valueRemovedHexTagNameLetter;
+        ConcurrentHashMap<Integer, ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>> valueRemovedHexTagNameLetter;
         ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>> valueSubStringLength;
+                ConcurrentHashMap<UUID, ZPITdataWord>> valueSubStringLength;
         Integer keyRemovedSubStringLength;
-        ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>> valueRemovedSubStringLength;
-        ConcurrentHashMap<UUID, TdataWord> dataByHexTagName;
+        ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>> valueRemovedSubStringLength;
+        ConcurrentHashMap<UUID, ZPITdataWord> dataByHexTagName;
         String keyRemovedHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> valueRemovedHexTagName;
+        ConcurrentHashMap<UUID, ZPITdataWord> valueRemovedHexTagName;
         try{
             for( Map.Entry<Integer, 
                     ConcurrentHashMap<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
                 
                 valueTypeWordList = entrySetTypeWord.getValue();
                 for( Map.Entry<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
                     
                     valueHexTagNameLetter = entrySetHexTagNameLetter.getValue();
                     for( Map.Entry<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
+                        ConcurrentHashMap<UUID, ZPITdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
                         
                         valueSubStringLength = entrySetSubStringLength.getValue();
                         for( Map.Entry<String, 
-                            ConcurrentHashMap<UUID, TdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
+                            ConcurrentHashMap<UUID, ZPITdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
                             
                             dataByHexTagName = entrySetHexTagName.getValue();
                             if( dataByHexTagName.isEmpty() ){
@@ -355,34 +355,34 @@ public class ThWordCacheHaReaded {
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>>> valueTypeWordList;
+                ConcurrentHashMap<UUID, ZPITdataWord>>>> valueTypeWordList;
         ConcurrentHashMap<Integer, 
                 ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>>> valueHexTagNameLetter;
+                ConcurrentHashMap<UUID, ZPITdataWord>>> valueHexTagNameLetter;
         ConcurrentHashMap<String, 
-                ConcurrentHashMap<UUID, TdataWord>> valueSubStringLength;
-        ConcurrentHashMap<UUID, TdataWord> dataByHexTagName;
+                ConcurrentHashMap<UUID, ZPITdataWord>> valueSubStringLength;
+        ConcurrentHashMap<UUID, ZPITdataWord> dataByHexTagName;
         try{
             for( Map.Entry<Integer, 
                     ConcurrentHashMap<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>>> entrySetTypeWord : this.cachedData.entrySet() ){
                 
                 valueTypeWordList = entrySetTypeWord.getValue();
                 for( Map.Entry<String, 
                     ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, 
-                    ConcurrentHashMap<UUID, TdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
+                    ConcurrentHashMap<UUID, ZPITdataWord>>>> entrySetHexTagNameLetter : valueTypeWordList.entrySet() ){
                     
                     valueHexTagNameLetter = entrySetHexTagNameLetter.getValue();
                     for( Map.Entry<Integer, 
                         ConcurrentHashMap<String, 
-                        ConcurrentHashMap<UUID, TdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
+                        ConcurrentHashMap<UUID, ZPITdataWord>>> entrySetSubStringLength : valueHexTagNameLetter.entrySet() ){
                         
                         valueSubStringLength = entrySetSubStringLength.getValue();
                         for( Map.Entry<String, 
-                            ConcurrentHashMap<UUID, TdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
+                            ConcurrentHashMap<UUID, ZPITdataWord>> entrySetHexTagName : valueSubStringLength.entrySet() ){
                             
                             dataByHexTagName = entrySetHexTagName.getValue();
                             if( !dataByHexTagName.isEmpty() ){
@@ -407,20 +407,20 @@ public class ThWordCacheHaReaded {
      * @return 
      * @throws IllegalArgumentException when inputed data not valid
      */
-    private ConcurrentHashMap<UUID, TdataWord> getDataByDataWord(final TdataWord dataInputed){
-        ConcurrentHashMap<UUID, TdataWord> dataTypeWordTagNameSubStr;
-        TdataWord dataFunc;
+    private ConcurrentHashMap<UUID, ZPITdataWord> getDataByDataWord(final ZPITdataWord dataInputed){
+        ConcurrentHashMap<UUID, ZPITdataWord> dataTypeWordTagNameSubStr;
+        ZPITdataWord dataFunc;
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
         Boolean tdataWordValid;
         try {
-            dataFunc = (TdataWord) dataInputed;
+            dataFunc = (ZPITdataWord) dataInputed;
             
             tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
                 throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
-                        + " not valid data for get from cache object class " + TdataWord.class.getCanonicalName() 
+                        + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             tagNameFunc = dataFunc.hexSubString;
@@ -445,23 +445,23 @@ public class ThWordCacheHaReaded {
      * @param strSubStringInput
      * @param tagHexNameInput
      * @return 
-     * ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>> (3) - 
-     * <hexWord (tagFileName), <UUID, TdataWord>>
+     * ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>> (3) - 
+ <hexWord (tagFileName), <UUID, ZPITdataWord>>
      */
-    private ConcurrentHashMap<UUID, TdataWord> getDataTypeWordTagNameSubStr(
+    private ConcurrentHashMap<UUID, ZPITdataWord> getDataTypeWordTagNameSubStr(
             final Integer typeWordInput,
             final String strSubStringInput,
             final String tagHexNameInput){
         //(1)
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>> valListByTypeWord;
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>> valListByTypeWord;
         //(2a)
         ConcurrentHashMap<Integer, 
-                ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>> valListByTagNameCode;
+                ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>> valListByTagNameCode;
         //(2b)
-        ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>> valListBySubStrLength;
-        ConcurrentHashMap<UUID, TdataWord> valTagNameListData;
+        ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>> valListBySubStrLength;
+        ConcurrentHashMap<UUID, ZPITdataWord> valTagNameListData;
         
         String tagNameFunction;
         String strSubStringFunction;
@@ -490,17 +490,17 @@ public class ThWordCacheHaReaded {
             valListByTagNameCode = valListByTypeWord.get(substringTagName);
             if( valListByTagNameCode == null ){
                 valListByTagNameCode = new ConcurrentHashMap<Integer, 
-                                                ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>();
+                                                ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>();
                 valListByTypeWord.put(substringTagName, valListByTagNameCode);
             }
             valListBySubStrLength = valListByTagNameCode.get(strSubStringlength);
             if( valListBySubStrLength == null ){
-                valListBySubStrLength = new ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>();
+                valListBySubStrLength = new ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>();
                 valListByTagNameCode.put(strSubStringlength, valListBySubStrLength);
             }
             valTagNameListData = valListBySubStrLength.get(tagNameFunction);
             if( valTagNameListData == null ){
-                valTagNameListData = new ConcurrentHashMap<UUID, TdataWord>();
+                valTagNameListData = new ConcurrentHashMap<UUID, ZPITdataWord>();
                 valListBySubStrLength.put(tagNameFunction, valTagNameListData);
             }
             return valTagNameListData;
@@ -520,21 +520,21 @@ public class ThWordCacheHaReaded {
      * @return 
      * @throws IllegalArgumentException when inputed data not valid
      */
-    protected ConcurrentHashMap<UUID, TdataWord> pollDataByDataWord(
-            final TdataWord dataInputed){
-        ConcurrentHashMap<UUID, TdataWord> dataTypeWordTagNameSubStr;
-        TdataWord dataFunc;
+    protected ConcurrentHashMap<UUID, ZPITdataWord> pollDataByDataWord(
+            final ZPITdataWord dataInputed){
+        ConcurrentHashMap<UUID, ZPITdataWord> dataTypeWordTagNameSubStr;
+        ZPITdataWord dataFunc;
         String tagNameFunc;
         String strSubStringFunc;
         Integer typeWordFunc;
         Boolean tdataWordValid;
         try {
-            dataFunc = (TdataWord) dataInputed;
+            dataFunc = (ZPITdataWord) dataInputed;
             tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
                 throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
                         + " inputed not valid data for poll from cache object class " 
-                        + TdataWord.class.getCanonicalName() 
+                        + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             tagNameFunc = dataFunc.hexSubString;
@@ -569,14 +569,14 @@ public class ThWordCacheHaReaded {
     /**
      * Remove and return data from cache
      * {@code ConcurrentHashMap<Integer, 
-     *      ConcurrentHashMap<String, 
-     *           ConcurrentHashMap<Integer, 
-     *               ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>>>}
+      ConcurrentHashMap<String, 
+           ConcurrentHashMap<Integer, 
+               ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>>}
      * {@code <TypeWord,
-     *      <hexTagName.substring(0, 3),
-     *           <subString.length(),
-     *               <hexTagName, --- removed key for list return
-     *                   <data.randomUUID, (TdataWord) data>>>>>}
+      <hexTagName.substring(0, 3),
+           <subString.length(),
+               <hexTagName, --- removed key for list return
+                   <data.randomUUID, (ZPITdataWord) data>>>>>}
      * @param typeWord
      * @param strSubString
      * @param tagName
@@ -586,20 +586,20 @@ public class ThWordCacheHaReaded {
      * @throws IllegalArgumentException when data not valid
      * @throws NullPointerException when data in cache for keys not exist
      */
-    protected ConcurrentHashMap<UUID, TdataWord> pollTypeWordTagFileNameData(
+    protected ConcurrentHashMap<UUID, ZPITdataWord> pollTypeWordTagFileNameData(
             final Integer typeWordInput,
             final String strSubStringInput,
             final String tagHexNameInput){
         //(1)
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>> valListByTypeWord;
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>> valListByTypeWord;
         //(2a)
         ConcurrentHashMap<Integer, 
-                ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>> valListByTagNameCode;
+                ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>> valListByTagNameCode;
         //(2b)
-        ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>> valListBySubStrLength;
-        ConcurrentHashMap<UUID, TdataWord> valTagNameListData;
+        ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>> valListBySubStrLength;
+        ConcurrentHashMap<UUID, ZPITdataWord> valTagNameListData;
         
         String tagNameFunc;
         String strSubStringFunc;
@@ -695,16 +695,16 @@ public class ThWordCacheHaReaded {
      */
     private ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>> getListByType(final int typeWordOuter){
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>> getListByType(final int typeWordOuter){
         ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>> forListReturn;
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>> forListReturn;
         try{
             forListReturn = this.cachedData.get(typeWordOuter);
             if( forListReturn == null ){
                 forListReturn = new ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
-                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, TdataWord>>>>();
+                    ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>();
                 this.cachedData.put(typeWordOuter, forListReturn);
             }
             return forListReturn;
@@ -726,22 +726,22 @@ public class ThWordCacheHaReaded {
      * @throws IllegalArgumentException when inputed data not valid
      */
     protected Boolean setDataIntoCacheFlow(
-            final TdataWord dataForSet){
+            final ZPITdataWord dataForSet){
         Integer funcTypeWord;
         String funcSubString;
         String funcHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> inputedData;
-        ConcurrentHashMap<UUID, TdataWord> typeWordTagFileNameFlowUuids;
+        ConcurrentHashMap<UUID, ZPITdataWord> inputedData;
+        ConcurrentHashMap<UUID, ZPITdataWord> typeWordTagFileNameFlowUuids;
         UUID recordUUID;
-        TdataWord funcData;
+        ZPITdataWord funcData;
         Boolean tdataWordValid;
         try {
-            funcData = (TdataWord) dataForSet;
+            funcData = (ZPITdataWord) dataForSet;
             tdataWordValid = ThWordHelper.isTdataWordValid(funcData);
             if( !tdataWordValid ){
                 throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
                         + " inputed not valid data for set into cache object class " 
-                        + TdataWord.class.getCanonicalName() 
+                        + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + funcData.toString());
             }
             funcTypeWord = (Integer) funcData.typeWord;
@@ -757,7 +757,7 @@ public class ThWordCacheHaReaded {
                 System.err.println(exSetInCahe.getMessage());
                 return Boolean.FALSE;
             }
-            inputedData = new ConcurrentHashMap<UUID, TdataWord>();
+            inputedData = new ConcurrentHashMap<UUID, ZPITdataWord>();
             inputedData.put(recordUUID, funcData);
             
             typeWordTagFileNameFlowUuids.putAll(inputedData);
@@ -788,21 +788,21 @@ public class ThWordCacheHaReaded {
      *          <ThWordStatusWorkers.hashCode(), recordUUID>
      */
     protected Boolean addAllDataIntoCache(
-            final ConcurrentHashMap<UUID, TdataWord> outerInputedData){
-        ConcurrentHashMap<UUID, TdataWord> inputedData;
-        TdataWord removeElementForAdd;
+            final ConcurrentHashMap<UUID, ZPITdataWord> outerInputedData){
+        ConcurrentHashMap<UUID, ZPITdataWord> inputedData;
+        ZPITdataWord removeElementForAdd;
         try {
-            inputedData = (ConcurrentHashMap<UUID, TdataWord>) outerInputedData;
+            inputedData = (ConcurrentHashMap<UUID, ZPITdataWord>) outerInputedData;
             if( inputedData == null ) {
                 return Boolean.FALSE;
             }
             if( inputedData.isEmpty() ){
                 return Boolean.FALSE;
             }
-            for(Map.Entry<UUID, TdataWord> itemsForAdd : inputedData.entrySet()){
+            for(Map.Entry<UUID, ZPITdataWord> itemsForAdd : inputedData.entrySet()){
                 removeElementForAdd = inputedData.remove(itemsForAdd.getKey());
                 if( removeElementForAdd != null){
-                    setDataIntoCacheFlow((TdataWord) itemsForAdd.getValue());
+                    setDataIntoCacheFlow((ZPITdataWord) itemsForAdd.getValue());
                 }
             }
             return Boolean.TRUE;
@@ -828,13 +828,13 @@ public class ThWordCacheHaReaded {
         Integer funcTypeWord;
         String funcSubString;
         String funcHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> typeWordTagFileNameFlowUuids;
+        ConcurrentHashMap<UUID, ZPITdataWord> typeWordTagFileNameFlowUuids;
         try {
             funcTypeWord = (Integer) typeWord;
             funcSubString = (String) strSubString;
             funcHexTagName = (String) tagName;
             try{
-                typeWordTagFileNameFlowUuids = (ConcurrentHashMap<UUID, TdataWord>) getDataTypeWordTagNameSubStr(
+                typeWordTagFileNameFlowUuids = (ConcurrentHashMap<UUID, ZPITdataWord>) getDataTypeWordTagNameSubStr(
                         funcTypeWord,
                         funcSubString,
                         funcHexTagName);
@@ -877,7 +877,7 @@ public class ThWordCacheHaReaded {
         Integer funcTypeWord;
         String funcSubString;
         String funcHexTagName;
-        ConcurrentHashMap<UUID, TdataWord> typeWordTagFileNameFlowUuids;
+        ConcurrentHashMap<UUID, ZPITdataWord> typeWordTagFileNameFlowUuids;
         Integer returnedValue;
         try {
             funcTypeWord = (Integer) typeWord;

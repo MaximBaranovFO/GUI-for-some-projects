@@ -38,10 +38,10 @@ public class ZPIAppThManager {
     protected AppObjectsList getListOfObjects(){
         return this.outerObectsForApp;
     }
-    protected void setIndexRule(final ThIndexRule outerThIndexRule){
+    protected void setIndexRule(final ZPIThIndexRule outerThIndexRule){
         this.thIndexRule = outerThIndexRule;
     }
-    protected ThIndexRule getIndexRule(){
+    protected ZPIThIndexRule getIndexRule(){
         return this.thIndexRule;
     }
     protected static void createNewWorkerGroup(){

@@ -27,7 +27,7 @@ public class ZPINcLogLogicCfg {
      * </ul>
      */
     protected static void NcParamFvReaderReadDataRead(){
-        if( NcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
+        if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_CFG_WORK_READ_FROM_FILE.getStr();
@@ -41,7 +41,7 @@ public class ZPINcLogLogicCfg {
      * </ul>
      */
     protected static void NcParamFvReaderReadDataGenerate(){
-        if( NcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
+        if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_CFG_WORK_GENERATE_ZERO.getStr();
@@ -55,7 +55,7 @@ public class ZPINcLogLogicCfg {
      * </ul>
      */
     protected static void NcPreRunFileViewerGetCurrentWorkCfg(){
-        if( NcfvRunVariables.isLALRNcPreRunFileViewerGetCurrentWorkCfg() ){
+        if( ZPINcfvRunVariables.isLALRNcPreRunFileViewerGetCurrentWorkCfg() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_CFG_WORK_GET_CURRENT.getStr();
@@ -69,7 +69,7 @@ public class ZPINcLogLogicCfg {
      * </ul>
      */
     protected static void NcPreRunFileViewerValidateAndApplyCfg(){
-        if( NcfvRunVariables.isLALRNcPreRunFileViewerValidateAndApplyCfg() ){
+        if( ZPINcfvRunVariables.isLALRNcPreRunFileViewerValidateAndApplyCfg() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_CFG_WORK_VALIDATE_APPLY.getStr();

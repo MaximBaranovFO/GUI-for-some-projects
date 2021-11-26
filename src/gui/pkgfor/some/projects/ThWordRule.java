@@ -23,18 +23,18 @@ import java.util.UUID;
  */
 public class ThWordRule {
     private final ThreadGroup workerThWord;
-    private final ThIndexRule indexRule;
+    private final ZPIThIndexRule indexRule;
 
     /**
-     * ThWordWorkRouter
+     * ZPIThWordWorkRouter
      */
-    private ThWordWorkRouter runnableWorkerWordRouter;
+    private ZPIThWordWorkRouter runnableWorkerWordRouter;
     private Boolean isSetWordWorkRouter;
     private Boolean isRunWordWorkRouter;
     /**
-     * ThWordWorkWrite
+     * ZPIThWordWorkWrite
      */
-    private ThWordWorkWrite runnableWorkerWordWrite;
+    private ZPIThWordWorkWrite runnableWorkerWordWrite;
     private Boolean isSetWordWorkWrite;
     private Boolean isRunWordWorkWrite;
     /**
@@ -55,8 +55,8 @@ public class ThWordRule {
     private Boolean isSetWordStatusMainFlow;
     
     
-    public ThWordRule(final ThIndexRule outerRuleIndex) {
-        this.indexRule = (ThIndexRule) outerRuleIndex;
+    public ThWordRule(final ZPIThIndexRule outerRuleIndex) {
+        this.indexRule = (ZPIThIndexRule) outerRuleIndex;
         this.workerThWord = new ThreadGroup(UUID.randomUUID().toString());
         /**
          * ThWordState
@@ -83,27 +83,27 @@ public class ThWordRule {
         setFalseRunnedWordWorkRead();
     }
     /**
-     * ThIndexRule
+     * ZPIThIndexRule
      * @return 
      */
-    protected ThIndexRule getIndexRule(){
-        return (ThIndexRule) this.indexRule;
+    protected ZPIThIndexRule getIndexRule(){
+        return (ZPIThIndexRule) this.indexRule;
     }
     /**
-     * ThWordWorkRouter
+     * ZPIThWordWorkRouter
      * @return 
      */
-    protected ThWordWorkRouter getWordWorkRouter(){
+    protected ZPIThWordWorkRouter getWordWorkRouter(){
         if( !this.isWordWorkRouter() ){
-            throw new IllegalArgumentException(ThWordWorkRouter.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThWordWorkRouter.class.getCanonicalName() 
                     + " object not set in " 
                     + ThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordRouter;
     }
-    protected void setWordWorkRouter(final ThWordWorkRouter runnableWorkerWordRouterOuter){
-        this.runnableWorkerWordRouter = (ThWordWorkRouter) runnableWorkerWordRouterOuter;
+    protected void setWordWorkRouter(final ZPIThWordWorkRouter runnableWorkerWordRouterOuter){
+        this.runnableWorkerWordRouter = (ZPIThWordWorkRouter) runnableWorkerWordRouterOuter;
         setTrueWordWorkRouter();
     }
     protected void setTrueWordWorkRouter(){
@@ -144,20 +144,20 @@ public class ThWordRule {
         }
     }
     /**
-     * ThWordWorkWrite
+     * ZPIThWordWorkWrite
      * @return 
      */
-    protected ThWordWorkWrite getWordWorkWrite(){
+    protected ZPIThWordWorkWrite getWordWorkWrite(){
         if( !this.isWordWorkWrite() ){
-            throw new IllegalArgumentException(ThWordWorkWrite.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThWordWorkWrite.class.getCanonicalName() 
                     + " object not set in " 
                     + ThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordWrite;
     }
-    protected void setWordWorkWrite(final ThWordWorkWrite runnableWorkerWordWriteOuter){
-        this.runnableWorkerWordWrite = (ThWordWorkWrite) runnableWorkerWordWriteOuter;
+    protected void setWordWorkWrite(final ZPIThWordWorkWrite runnableWorkerWordWriteOuter){
+        this.runnableWorkerWordWrite = (ZPIThWordWorkWrite) runnableWorkerWordWriteOuter;
         setTrueWordWorkWrite();
     }
     protected void setTrueWordWorkWrite(){

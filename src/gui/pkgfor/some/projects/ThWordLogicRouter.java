@@ -31,8 +31,8 @@ public class ThWordLogicRouter {
      */
     protected void doRouterForIndexWord(final ThWordRule outerRuleWord){
         ThWordRule wordRuleFunc;
-        ThIndexRule indexRuleFunc;
-        ThIndexState indexState;
+        ZPIThIndexRule indexRuleFunc;
+        ZPIThIndexState indexState;
         ThStorageWordRule storageWordRuleFunc;
         ThStorageWordState storageWordState;
         ThStorageWordBusOutput busOutputForWordRouter;
@@ -75,11 +75,11 @@ public class ThWordLogicRouter {
             ThWordRule outerRuleWord, 
             ThStorageWordBusOutput busOutputForWordRouterInputed){
         ThStorageWordBusOutput busOutputForWordRouterFunc;
-        LinkedTransferQueue<TdataWord> busOutputByTypeWord;
+        LinkedTransferQueue<ZPITdataWord> busOutputByTypeWord;
         Integer typeWordOfBusOutput;
         try {
             busOutputForWordRouterFunc = (ThStorageWordBusOutput) busOutputForWordRouterInputed;
-            for( Map.Entry<Integer, LinkedTransferQueue<TdataWord>> itemsBusByTypeWord : busOutputForWordRouterFunc.getExistBusEntrySetForTypeWord() ){
+            for( Map.Entry<Integer, LinkedTransferQueue<ZPITdataWord>> itemsBusByTypeWord : busOutputForWordRouterFunc.getExistBusEntrySetForTypeWord() ){
                 //make event indexes, main flow, set stop flags and insert data into cache
                 typeWordOfBusOutput = itemsBusByTypeWord.getKey();
                 busOutputByTypeWord = itemsBusByTypeWord.getValue();
@@ -98,15 +98,15 @@ public class ThWordLogicRouter {
     protected void generateMainFlowForDataFromBusOutput(
             ThWordRule outerRuleWord, 
             Integer typeWordOfBusOutputInputed, 
-            LinkedTransferQueue<TdataWord> busOutputByTypeWordInputed){
+            LinkedTransferQueue<ZPITdataWord> busOutputByTypeWordInputed){
         ThWordEventLogic eventLogic;
         Boolean labelTypeData;
         Integer typeWordOfBusOutputFunc;
         String hexTagName;
         String subString;
-        LinkedTransferQueue<TdataWord> busOutputByTypeWordFunc;
-        ConcurrentSkipListMap<UUID, TdataWord> pollFromBusOutputDataPacket;
-        TdataWord pollDataItem;
+        LinkedTransferQueue<ZPITdataWord> busOutputByTypeWordFunc;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> pollFromBusOutputDataPacket;
+        ZPITdataWord pollDataItem;
         UUID itemKey;
         try {
             AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
@@ -121,7 +121,7 @@ public class ThWordLogicRouter {
                     msgToLog
                     + AdilConstants.START);
             typeWordOfBusOutputFunc = (Integer) typeWordOfBusOutputInputed;
-            busOutputByTypeWordFunc = (LinkedTransferQueue<TdataWord>) busOutputByTypeWordInputed;
+            busOutputByTypeWordFunc = (LinkedTransferQueue<ZPITdataWord>) busOutputByTypeWordInputed;
             hexTagName = new String();
             eventLogic = (ThWordEventLogic) outerRuleWord.getWordState().getEventLogic();
             

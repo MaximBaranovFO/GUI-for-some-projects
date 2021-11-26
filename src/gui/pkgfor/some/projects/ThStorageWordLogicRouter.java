@@ -50,8 +50,8 @@ public class ThStorageWordLogicRouter {
                 msgToLog
                 + AdilConstants.START);
         
-        ThIndexRule indexRule = funcRuleStorageWord.getIndexRule();
-        ThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
+        ZPIThIndexRule indexRule = funcRuleStorageWord.getIndexRule();
+        ZPIThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
         ThStorageWordState storageWordState = funcRuleStorageWord.getStorageWordState();
         ThStorageWordStatusMainFlow storageWordStatusMainFlow = funcRuleStorageWord.getStorageWordStatusMainFlow();
         Integer countRecToConsole = 0;

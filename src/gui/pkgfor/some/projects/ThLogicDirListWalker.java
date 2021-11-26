@@ -44,8 +44,8 @@ public class ThLogicDirListWalker {
     
     private final ThreadLocal<Path> currentPathForMakeIndex;
     
-    private final ThreadLocal<ThFsFileVisitor> fileVisitor;
-    private final ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>>> pipeVisitorToTacker;
+    private final ThreadLocal<ZPIThFsFileVisitor> fileVisitor;
+    private final ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>> pipeVisitorToTacker;
     
     public ThLogicDirListWalker( final AppThWorkDirListRule objectDirListRule ) throws IOException {
         this.isNotHaveLoggerThread = new ThreadLocal<Boolean>();
@@ -74,13 +74,13 @@ public class ThLogicDirListWalker {
         this.objectListAndLogger.set(this.objectDirListRule.get().getWorkDirListState());
         
         
-        this.pipeVisitorToTacker = new ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>>>();
+        this.pipeVisitorToTacker = new ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>>();
         
         this.pipeVisitorToTacker.set(this.objectDirListRule.get().getWorkDirListState().getPipeReaderToTacker());
-        this.fileVisitor = new ThreadLocal<ThFsFileVisitor>();
-        ThFsFileVisitor fv = null;
+        this.fileVisitor = new ThreadLocal<ZPIThFsFileVisitor>();
+        ZPIThFsFileVisitor fv = null;
         try{
-            fv = new ThFsFileVisitor(this.pipeVisitorToTacker.get(),
+            fv = new ZPIThFsFileVisitor(this.pipeVisitorToTacker.get(),
                 this.objectListAndLogger.get().getListOfObjectAndLogger());
         } catch (IOException ex){
             this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(
@@ -101,7 +101,7 @@ public class ThLogicDirListWalker {
                     + AppMsgEnFiledForLog.CONSTRUCTOR
                     + ThLogicDirListWalker.class.getCanonicalName()
                     + AppMsgEnFiledForLog.EX_SRC_CLASS
-                    + ThFsFileVisitor.class.getCanonicalName()
+                    + ZPIThFsFileVisitor.class.getCanonicalName()
                     + AppMsgEnFiledForLog.F_FIELD_NAME
                     + "fileVisitor"
                     + AppMsgEnFiledForLog.F_VALUE
@@ -117,14 +117,14 @@ public class ThLogicDirListWalker {
             String valueFile, 
             Exception exOuter){
         if( isNotHaveLoggerThread.get() ){
-            NcAppHelper.logException(ThFsFileVisitor.class.getCanonicalName(), exOuter);
+            NcAppHelper.logException(ZPIThFsFileVisitor.class.getCanonicalName(), exOuter);
         } else {
             String strErrorInApp = functionText
                     + AppMsgEnFiledForLog.F_VALUE
                     + valueFile
                     + AppMsgEnFiledForLog.F_EX_MSG
                     + exOuter.getMessage();
-            String toLoggerMsg = NcAppHelper.exceptionToString(exClass, ThFsFileVisitor.class, strErrorInApp);
+            String toLoggerMsg = NcAppHelper.exceptionToString(exClass, ZPIThFsFileVisitor.class, strErrorInApp);
             this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageError(toLoggerMsg);
         }
     }

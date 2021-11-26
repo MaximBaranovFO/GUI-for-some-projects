@@ -40,8 +40,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ThStorageWordLogicWrite {
     protected void doWriteToIndexStorageWord(final ThStorageWordRule outerRuleStorageWord){
-        ThIndexRule indexRule;
-        ThIndexStatistic indexStatistic;
+        ZPIThIndexRule indexRule;
+        ZPIThIndexStatistic indexStatistic;
         ThStorageWordRule funcRuleStorageWord;
         AppFileStorageIndex currentIndexStorages;
         try{

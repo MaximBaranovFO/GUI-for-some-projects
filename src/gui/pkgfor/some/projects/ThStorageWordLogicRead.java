@@ -38,8 +38,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ThStorageWordLogicRead {
     protected void doReadFromIndexStorageWord(ThStorageWordRule outerRuleStorageWord){
-        ThIndexRule indexRule;
-        ThIndexStatistic indexStatistic;
+        ZPIThIndexRule indexRule;
+        ZPIThIndexStatistic indexStatistic;
         ThStorageWordRule funcRuleStorageWord;
         AppFileStorageIndex currentIndexStorages;
         try{

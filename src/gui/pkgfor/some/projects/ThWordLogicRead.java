@@ -33,8 +33,8 @@ import java.util.concurrent.LinkedTransferQueue;
  */
 public class ThWordLogicRead {
     protected void doReadFromIndexWord(final ThWordRule outerRuleWord){
-        ThIndexRule indexRule;
-        ThIndexStatistic indexStatistic;
+        ZPIThIndexRule indexRule;
+        ZPIThIndexStatistic indexStatistic;
         ThWordRule funcRuleWord;
         AppFileStorageIndex currentIndexStorages;
         UUID pollNextUuid;
@@ -168,15 +168,15 @@ public class ThWordLogicRead {
     }
     
 
-    private static ConcurrentSkipListMap<UUID, TdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, TdataWord> prevData){
+    private static ConcurrentSkipListMap<UUID, ZPITdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, ZPITdataWord> prevData){
         utilizeTdataWord(prevData);
-        return new ConcurrentSkipListMap<UUID, TdataWord>();
+        return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
     }
-    private static void utilizeTdataWord(ConcurrentSkipListMap<UUID, TdataWord> forUtilizationData){
+    private static void utilizeTdataWord(ConcurrentSkipListMap<UUID, ZPITdataWord> forUtilizationData){
         UUID keyForDelete;
-        TdataWord removedData;
+        ZPITdataWord removedData;
         try {
-            for( Map.Entry<UUID, TdataWord> deletingItem : forUtilizationData.entrySet() ){
+            for( Map.Entry<UUID, ZPITdataWord> deletingItem : forUtilizationData.entrySet() ){
                 keyForDelete = deletingItem.getKey();
                 removedData = forUtilizationData.remove(keyForDelete);
                 removedData.dirListFile = null;

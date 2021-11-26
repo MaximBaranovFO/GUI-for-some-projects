@@ -105,7 +105,7 @@ public class ZPINcFsIdxStorage {
             + "[count VisitFileFailed]"
             + fileVisitor.getCountVisitFileFailed());
         //NcThWorkerUpGUITreeOutput.outputTreeAddChildren(lComp, arrStr);*/
-        NcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
+        ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
     }
     
     protected static void getDataFromIndex(NcSwGUIComponentStatus lComp){

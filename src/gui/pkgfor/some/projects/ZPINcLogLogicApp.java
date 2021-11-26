@@ -27,7 +27,7 @@ public class ZPINcLogLogicApp {
      * </ul>
      */
     protected static void NcAppLoaderLoadApp(){
-        if( NcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
+        if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogMsgText.APP_LOADER_START.getStr();
@@ -35,7 +35,7 @@ public class ZPINcLogLogicApp {
         }
     }
     protected static void NcIdxFileManagerFileExistRWAccessChecker(String strFile){
-        if( NcfvRunVariables.isLALRNcIdxFileManagerFileExistRWAccessChecker() ){
+        if( ZPINcfvRunVariables.isLALRNcIdxFileManagerFileExistRWAccessChecker() ){
             String strLogMsg = NcStrLogMsgField.ERROR.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogMsgText.NOT_EXIST_OR_READ_WRITE_PERMISSIONS_FOR_FILE.getStr()

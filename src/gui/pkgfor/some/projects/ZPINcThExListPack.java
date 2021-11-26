@@ -171,10 +171,10 @@ public class ZPINcThExListPack<V>
                 listStrArr.add("[packetCreator][run][report][listPack(" + key + ").size]"
                 + value.size());
             }
-            NcThWorkerUpGUITreeWork.workTreeAddChildren(this.lComp, listStrArr);
+            ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(this.lComp, listStrArr);
             this.avalableThToScan.release();
         } catch (InterruptedException ex) {
-            NcAppHelper.logException(NcThScanListAttr.class.getCanonicalName(), ex);
+            NcAppHelper.logException(ZPINcThScanListAttr.class.getCanonicalName(), ex);
         }
         return this.listPack;
     }

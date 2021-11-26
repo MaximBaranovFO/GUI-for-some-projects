@@ -34,7 +34,7 @@ public class ZPIAdihZipStorages {
     private final ConcurrentSkipListMap<Integer, URI> storagesUriList;
     private final ConcurrentSkipListMap<Integer, Path> zipStoreFileList;
     private final ConcurrentSkipListMap<Integer, FileSystem> openedZipStoreList;
-    ZPIAdihZipStorages(final ThIndexRule ruleIndexOuter){
+    ZPIAdihZipStorages(final ZPIThIndexRule ruleIndexOuter){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.storagesUriList = new ConcurrentSkipListMap<Integer, URI>();

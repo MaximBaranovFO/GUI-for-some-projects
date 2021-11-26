@@ -38,7 +38,7 @@ public class ZPINcIdxDirListManager {
         NcIMinFS ncwd = new NcIMinFS();
         NcIndexManageIDs ncThisManagmentIDs = ncwd.getNcIndexManageIDs();
         
-        NcTmpNowProcessInfo ncNewManageIDs = ncThisManagmentIDs.getIdsReadedData();
+        ZPINcTmpNowProcessInfo ncNewManageIDs = ncThisManagmentIDs.getIdsReadedData();
         
         long nextID = forRecordData.dirListID;
         int writedSize = -1;

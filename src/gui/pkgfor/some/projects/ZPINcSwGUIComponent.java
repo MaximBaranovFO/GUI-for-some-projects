@@ -126,7 +126,7 @@ public class ZPINcSwGUIComponent {
             ncButton.addActionListener(new ActionListener(){
                 public void  actionPerformed(ActionEvent e){
                         try {
-                            NcThScanListAttr.fsScanListAttr(ncButton, lComp, itemDisk.toPath());
+                            ZPINcThScanListAttr.fsScanListAttr(ncButton, lComp, itemDisk.toPath());
                             //NcThWorkerGUIDirListScan.scanDirToIdxDirList(lComp, itemDisk.toPath());
                         } catch (Exception ex) {
                             NcAppHelper.logException(NcSwGUIComponent.class.getCanonicalName(), ex);

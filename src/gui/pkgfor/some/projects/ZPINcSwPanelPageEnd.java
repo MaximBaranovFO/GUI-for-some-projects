@@ -54,7 +54,7 @@ public class ZPINcSwPanelPageEnd {
         buttonGetStack.addActionListener(new ActionListener(){
             public void  actionPerformed(ActionEvent e){
                 NcSwStatusPanel.indicationStartProgressBar(lComp);
-                NcThWorkerUpGUITreeState.stateTreeAddChildren(lComp);
+                ZPINcThWorkerUpGUITreeState.stateTreeAddChildren(lComp);
                 NcSwStatusPanel.indicationStopProgressBar(lComp);
             }
         });
@@ -71,7 +71,7 @@ public class ZPINcSwPanelPageEnd {
      * make record in log file
      */
     private static void toLALRgetPanel(){
-        if( NcfvRunVariables.isLALRNcSwPanelPageEndgetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelPageEndgetPanel() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_JPANEL_PAGEEND.getStr()

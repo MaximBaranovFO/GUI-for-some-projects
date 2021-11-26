@@ -34,9 +34,9 @@ public class ZPINcIndexManageIDs {
     /** Work directory object*/
     private File workDir;
     /** Data about count of IDs in Indexes readed from saved on Disk tempFile*/
-    //private NcTmpNowProcessInfo idsReadedData;
+    //private ZPINcTmpNowProcessInfo idsReadedData;
     /** Data about count of IDs in Indexes ready to save on Disk tempFile*/
-    private NcTmpNowProcessInfo idsToWriteData;
+    private ZPINcTmpNowProcessInfo idsToWriteData;
     /** Flag set to true if data about IDs changed and ready to save */
     private boolean idsReadyToWrite;
     /** Flag set to true when method checkDataForAllDirListFiles() finished
@@ -49,7 +49,7 @@ public class ZPINcIndexManageIDs {
      */
     private boolean existLastIDs;
     /** Data about count of IDs in Indexes calculate from Files in work Dirictories*/
-    private NcTmpNowProcessInfo idsInDirData;
+    private ZPINcTmpNowProcessInfo idsInDirData;
     /** Data readed from maximus Directory List File */
     private TreeMap<Long, NcDcIdxDirListToFileAttr> lastRecDataDFL;
     /** Data readed from maximus Directory List Hashes File */
@@ -92,12 +92,12 @@ public class ZPINcIndexManageIDs {
          * attemt to check folders and repair data or write Zero data in file
          */
         int retWriteTmpIDs = -1;
-        NcTmpNowProcessInfo retReadTmpIDs = readTmpIds();
+        ZPINcTmpNowProcessInfo retReadTmpIDs = readTmpIds();
         if( isTmpIDsDataEmpty(retReadTmpIDs) ){
             retReadTmpIDs = checkDataForAllDirListFiles();
             if( isTmpIDsDataEmpty(retReadTmpIDs) ){
                 retReadTmpIDs = 
-                    new NcTmpNowProcessInfo("",
+                    new ZPINcTmpNowProcessInfo("",
                         -1,
                         "",
                         -1,
@@ -122,7 +122,7 @@ public class ZPINcIndexManageIDs {
      * </ul>
      * @return
      */
-    protected NcTmpNowProcessInfo getIdsReadedData(){
+    protected ZPINcTmpNowProcessInfo getIdsReadedData(){
         return readTmpIds();
     }
 
@@ -134,7 +134,7 @@ public class ZPINcIndexManageIDs {
      * @param fIdsToWrite
      * @return
      */
-    protected int setNewIdsData(NcTmpNowProcessInfo fIdsToWrite){
+    protected int setNewIdsData(ZPINcTmpNowProcessInfo fIdsToWrite){
         int retWriteTmpIDs = writeTmpIDs(fIdsToWrite);
         if ( retWriteTmpIDs < 1 ){
             return retWriteTmpIDs;
@@ -150,7 +150,7 @@ public class ZPINcIndexManageIDs {
      * @param fIdsToWrite
      * @return 
      */
-    private int writeTmpIDs(NcTmpNowProcessInfo fIdsToWrite){
+    private int writeTmpIDs(ZPINcTmpNowProcessInfo fIdsToWrite){
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
                 new FileOutputStream(NcIdxFileManager.getTmpIdsFile())))
@@ -173,16 +173,16 @@ public class ZPINcIndexManageIDs {
      * </ul>
      * @return 
      */
-    private static NcTmpNowProcessInfo readTmpIds(){
-        NcTmpNowProcessInfo idsReadData;
+    private static ZPINcTmpNowProcessInfo readTmpIds(){
+        ZPINcTmpNowProcessInfo idsReadData;
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NcIdxFileManager.getTmpIdsFile())))
         {
-            idsReadData = (NcTmpNowProcessInfo)ois.readObject();
+            idsReadData = (ZPINcTmpNowProcessInfo)ois.readObject();
         }
         catch(Exception ex){
             NcAppHelper.logException(
                     NcIndexManageIDs.class.getCanonicalName(), ex);
-            return new NcTmpNowProcessInfo();
+            return new ZPINcTmpNowProcessInfo();
         }
         return idsReadData;
     }
@@ -195,7 +195,7 @@ public class ZPINcIndexManageIDs {
      * @param inFuncTmpIds
      * @return
      */
-    protected static NcTmpNowProcessInfo getTmpIDsData(File inFuncTmpIds){
+    protected static ZPINcTmpNowProcessInfo getTmpIDsData(File inFuncTmpIds){
         return readTmpIds();
     }
 
@@ -207,7 +207,7 @@ public class ZPINcIndexManageIDs {
      * @param inFuncData
      * @return
      */
-    protected static boolean isTmpIDsDataWrong(NcTmpNowProcessInfo inFuncData){
+    protected static boolean isTmpIDsDataWrong(ZPINcTmpNowProcessInfo inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -222,7 +222,7 @@ public class ZPINcIndexManageIDs {
      * @param inFuncData
      * @return
      */
-    private static boolean isTmpIDsDataHasEmptyField(NcTmpNowProcessInfo inFuncData){
+    private static boolean isTmpIDsDataHasEmptyField(ZPINcTmpNowProcessInfo inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -252,7 +252,7 @@ public class ZPINcIndexManageIDs {
      * @param inFuncData
      * @return
      */
-    protected static boolean isTmpIDsDataEmpty(NcTmpNowProcessInfo inFuncData){
+    protected static boolean isTmpIDsDataEmpty(ZPINcTmpNowProcessInfo inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -286,7 +286,7 @@ public class ZPINcIndexManageIDs {
      * @param inFuncData
      * @return
      */
-    private static boolean isTmpIDsDataHashTrue(NcTmpNowProcessInfo inFuncData){
+    private static boolean isTmpIDsDataHashTrue(ZPINcTmpNowProcessInfo inFuncData){
         return inFuncData.recordHash == (""
                 + inFuncData.journalname
                 + inFuncData.journalid
@@ -311,28 +311,28 @@ public class ZPINcIndexManageIDs {
      * recorded into new file
      * @return 
      */
-    private NcTmpNowProcessInfo checkDataForAllDirListFiles(){
+    private ZPINcTmpNowProcessInfo checkDataForAllDirListFiles(){
         TreeMap<Integer, File> indexWorkSubDirFilesList = NcIdxFileManager.getIndexWorkSubDirFilesList();
         File ncmfsDFL = indexWorkSubDirFilesList.get("/fl".hashCode());
         if( NcIdxFileManager.isErrorForFileOperation(ncmfsDFL) ){
             NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
             + "/fl directory check error"
             + NcIdxFileManager.getStrCanPathFromFile(ncmfsDFL));
-            return new NcTmpNowProcessInfo();
+            return new ZPINcTmpNowProcessInfo();
         }
         File ncmfsDFHL = indexWorkSubDirFilesList.get("/fx".hashCode());
         if( NcIdxFileManager.isErrorForFileOperation(ncmfsDFHL) ){
             NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
             + "/fx directory check error"
             + NcIdxFileManager.getStrCanPathFromFile(ncmfsDFHL));
-            return new NcTmpNowProcessInfo();
+            return new ZPINcTmpNowProcessInfo();
         }
         File ncmfsDLWL = indexWorkSubDirFilesList.get("/lw".hashCode());
         if( NcIdxFileManager.isErrorForFileOperation(ncmfsDLWL) ){
             NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
             + "/lw directory check error"
             + NcIdxFileManager.getStrCanPathFromFile(ncmfsDLWL));
-            return new NcTmpNowProcessInfo();
+            return new ZPINcTmpNowProcessInfo();
         }
         
         TreeMap<Integer, File> listDFL = NcIdxFileManager.getFileListFromSubDir(ncmfsDFL);
@@ -364,7 +364,7 @@ public class ZPINcIndexManageIDs {
             fClongwordlistnameid = lastRecDataDLWL.get(lastRecDataDLWL.size() - 1).nameID;
         }
 
-        NcTmpNowProcessInfo inDirIdsData = new NcTmpNowProcessInfo(
+        ZPINcTmpNowProcessInfo inDirIdsData = new ZPINcTmpNowProcessInfo(
             fCjournalname,
             fCjournalid, 
             fClistname,

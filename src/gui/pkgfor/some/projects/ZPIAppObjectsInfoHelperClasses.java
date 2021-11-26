@@ -789,10 +789,10 @@ public class ZPIAppObjectsInfoHelperClasses {
         int stackIdx = 0;
         for(StackTraceElement itemT : nowT ){
             if( stackIdx > 1
-                || NcfvRunVariables.isOutToLogFileTraceWithPrintFunc() ){
+                || ZPINcfvRunVariables.isOutToLogFileTraceWithPrintFunc() ){
 
                 String strOutFile = "";
-                if( NcfvRunVariables.isOutToLogFileIncludeFile() ){
+                if( ZPINcfvRunVariables.isOutToLogFileIncludeFile() ){
 
                     strOutFile = NcStrLogMsgField.FILENAME.getStr()
                         + itemT.getFileName();

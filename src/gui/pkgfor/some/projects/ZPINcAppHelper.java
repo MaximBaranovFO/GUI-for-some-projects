@@ -224,18 +224,18 @@ public class ZPINcAppHelper {
      * @param strMessage
      */
     protected static void outMessage(String strMessage){
-        if( NcfvRunVariables.getStage() ){
-            if( !NcfvRunVariables.isNoOutToConsole() ){
-                if( NcfvRunVariables.getWithTrace() ){
+        if( ZPINcfvRunVariables.getStage() ){
+            if( !ZPINcfvRunVariables.isNoOutToConsole() ){
+                if( ZPINcfvRunVariables.getWithTrace() ){
                     String strNowTime = java.time.LocalDateTime.now().toString();
                     outMessageToConsole("at " + strNowTime + "\n");
                     Thread t = Thread.currentThread();
                     StackTraceElement[] nowT = t.getStackTrace();
                     int idx = 0;
                     for(StackTraceElement itemT : nowT ){
-                        if( idx > 1 || NcfvRunVariables.getTraceWithPrintFunc() ){
+                        if( idx > 1 || ZPINcfvRunVariables.getTraceWithPrintFunc() ){
                             String strOutFile = "";
-                            if( NcfvRunVariables.getIncludeFile() ){
+                            if( ZPINcfvRunVariables.getIncludeFile() ){
                                 strOutFile = itemT.getFileName() + "\t";
                             }
                             String strOut = 
@@ -285,14 +285,14 @@ public class ZPINcAppHelper {
      * @param strMessage
      */
     protected static void outMessageToAppLogFile(String strMessage){
-        if( NcfvRunVariables.isOutToLogFile() ){
+        if( ZPINcfvRunVariables.isOutToLogFile() ){
             
             String strNowTime =  NcStrLogMsgField.TIME.getStr()
                 + java.time.LocalDateTime.now().toString();
             String strTimeAndMsg = strNowTime
                     + NcStrLogMsgField.MSG.getStr() + strMessage;
             String strTrace = "";
-            if( NcfvRunVariables.isOutToLogFileWithTrace() ){
+            if( ZPINcfvRunVariables.isOutToLogFileWithTrace() ){
                 TreeMap<Long, String> strForLog = new TreeMap<Long, String>();
                 Thread t = Thread.currentThread();
                 
@@ -341,10 +341,10 @@ public class ZPINcAppHelper {
                 int stackIdx = 0;
                 for(StackTraceElement itemT : nowT ){
                     if( stackIdx > 1
-                        || NcfvRunVariables.isOutToLogFileTraceWithPrintFunc() ){
+                        || ZPINcfvRunVariables.isOutToLogFileTraceWithPrintFunc() ){
                         
                         String strOutFile = "";
-                        if( NcfvRunVariables.isOutToLogFileIncludeFile() ){
+                        if( ZPINcfvRunVariables.isOutToLogFileIncludeFile() ){
                             
                             strOutFile = NcStrLogMsgField.FILENAME.getStr()
                                 + itemT.getFileName();

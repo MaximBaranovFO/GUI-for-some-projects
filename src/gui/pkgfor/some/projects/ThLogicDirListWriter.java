@@ -53,7 +53,7 @@ public class ThLogicDirListWriter {
             this.innerRuleForDirListWorkers.setDirListWriterLogicRunned();
         } while( !this.innerRuleForDirListWorkers.isDirListWriterLogicRunned() );
         
-        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipePackerToWriter = 
+        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipePackerToWriter = 
                 this.innerRuleForDirListWorkers.getWorkDirListState().getPipePackerToWriter();
         outStatesOfWorkLogic(" Writer start run part");
         Map<String, String> fsProperties = NcFsIdxStorageInit.getFsPropCreate();
@@ -75,7 +75,7 @@ public class ThLogicDirListWriter {
             }
             if( pipePackerToWriter != null){
                 do{
-                    ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> poll = pipePackerToWriter.poll();
+                    ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> poll = pipePackerToWriter.poll();
                     if( poll != null ){
                         outStatesOfWorkLogic(" polled from pipePackerToWriter size is " + poll.size());
                         if( poll.size() == 100 ){
@@ -97,7 +97,7 @@ public class ThLogicDirListWriter {
         }while( !this.innerRuleForDirListWorkers.isDirListPackerLogicFinished() );
 
         do{
-            ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> poll = pipePackerToWriter.poll();
+            ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> poll = pipePackerToWriter.poll();
             if( poll != null ){
                 outStatesOfWorkLogic(" polled from pipePackerToWriter size is " + poll.size());
                 if( poll.size() == 100 ){
@@ -137,9 +137,9 @@ public class ThLogicDirListWriter {
                             + String.valueOf(pipeSize);
         NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_DATA_COUNT);
     }
-    private void writeDataToStorage(final ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> forWriteData){//,
+    private void writeDataToStorage(final ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> forWriteData){//,
            //NcParamFs indexStorage){
-        ThFsFileIndexStorage.writeData(forWriteData, this.innerRuleForDirListWorkers);
+        ZPIThFsFileIndexStorage.writeData(forWriteData, this.innerRuleForDirListWorkers);
                 //, indexStorage);
     }
 }

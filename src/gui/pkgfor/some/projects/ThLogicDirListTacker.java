@@ -36,10 +36,10 @@ public class ThLogicDirListTacker {
         do{
             this.innerRuleForDirListWorkers.setDirListTackerLogicRunned();
         }while( !this.innerRuleForDirListWorkers.isDirListTackerLogicRunned() );
-        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeReaderToTacker = 
+        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeReaderToTacker = 
                     this.innerRuleForDirListWorkers.getWorkDirListState().getPipeReaderToTacker();
         
-        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeTackerToPacker = 
+        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeTackerToPacker = 
                                 this.innerRuleForDirListWorkers.getWorkDirListState().getPipeTackerToPacker();
         
         outStatesOfWorkLogic(" Tacker start run part");
@@ -59,7 +59,7 @@ public class ThLogicDirListTacker {
             }
             if( pipeReaderToTacker != null){
                 do{
-                    ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> poll = pipeReaderToTacker.poll();
+                    ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> poll = pipeReaderToTacker.poll();
                     if( poll != null ){
                         
                         Long tmpSum = this.counterReadedData.get() + (long) poll.size();

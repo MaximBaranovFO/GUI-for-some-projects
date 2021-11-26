@@ -26,32 +26,32 @@ public interface ZPINcThProcGUICallbackInterface {
     /**
      * Not used
      */
-    @NcThProcTypeDetectInterface
+    @ZPINcThProcTypeDetectInterface
     void appendSrchResult();
     /**
      * Not used
      */
-    @NcThProcTypeDetectInterface
+    @ZPINcThProcTypeDetectInterface
     void setSrcResult();
     /**
      * Not used
      */
-    @NcThProcTypeDetectInterface
+    @ZPINcThProcTypeDetectInterface
     void showProgressSwitch();
     /**
      * Not used
      */
-    @NcThProcTypeDetectInterface
+    @ZPINcThProcTypeDetectInterface
     void startSrch();
     /**
      * Not used
      */
-    @NcThProcTypeDetectInterface
+    @ZPINcThProcTypeDetectInterface
     void stopSrch();
     /**
      * Not used
      * @param strMessage 
      */
-    @NcThProcTypeDetectInterface(NcThProcType.SYNC)
+    @ZPINcThProcTypeDetectInterface(ZPINcThProcType.SYNC)
     void showError(String strMessage);
 }

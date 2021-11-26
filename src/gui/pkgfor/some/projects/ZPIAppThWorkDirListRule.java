@@ -33,7 +33,7 @@ import java.security.ProtectionDomain;
 public class ZPIAppThWorkDirListRule {
     private ThreadGroup workerDirList;
     
-    private ThIndexRule currentIndexRule;
+    private ZPIThIndexRule currentIndexRule;
     
     private String nameIndexStorage;
     private String nameDirlistReader;

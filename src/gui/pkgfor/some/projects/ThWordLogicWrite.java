@@ -32,8 +32,8 @@ import java.util.concurrent.LinkedTransferQueue;
  */
 public class ThWordLogicWrite {
     protected void doWriteToIndexWord(final ThWordRule outerRuleWord){
-        ThIndexRule indexRule;
-        ThIndexStatistic indexStatistic;
+        ZPIThIndexRule indexRule;
+        ZPIThIndexStatistic indexStatistic;
         ThWordRule funcRuleWord;
         AppFileStorageIndex currentIndexStorages;
         UUID pollNextUuid;

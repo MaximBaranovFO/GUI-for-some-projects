@@ -60,7 +60,7 @@ public class ZPINcSwPanelLineStart {
      * make record in log file
      */
     private static void toLALRgetPanel(){
-        if( NcfvRunVariables.isLALRNcSwPanelLineStartgetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelLineStartgetPanel() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_PANEL_LINESTART.getStr()

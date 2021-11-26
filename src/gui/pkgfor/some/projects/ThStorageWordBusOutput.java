@@ -37,10 +37,10 @@ public class ThStorageWordBusOutput {
      * <typeWordBus, <TdataStorageWord>>
      * ThWordLogicFilter.getWordCode(inputedPath.codePointAt(int idexCharCodePoint))
      */
-    private ConcurrentHashMap<Integer, LinkedTransferQueue<TdataWord>> poolBusWordData;
+    private ConcurrentHashMap<Integer, LinkedTransferQueue<ZPITdataWord>> poolBusWordData;
     
     ThStorageWordBusOutput(){
-        this.poolBusWordData = new ConcurrentHashMap<Integer, LinkedTransferQueue<TdataWord>>();
+        this.poolBusWordData = new ConcurrentHashMap<Integer, LinkedTransferQueue<ZPITdataWord>>();
         this.lastLastAccessUsedBusNanoTime = new ConcurrentHashMap<Integer, Long>();
     }
     /**
@@ -48,14 +48,14 @@ public class ThStorageWordBusOutput {
      * @param typeWordByDetectedCodePoint
      * @return 
      */
-    protected LinkedTransferQueue<TdataWord> getBusForTypeWord(final int typeWordByDetectedCodePoint){
+    protected LinkedTransferQueue<ZPITdataWord> getBusForTypeWord(final int typeWordByDetectedCodePoint){
         Integer inputedVal;
-        LinkedTransferQueue<TdataWord> getBusFormPool;
+        LinkedTransferQueue<ZPITdataWord> getBusFormPool;
         try{
             inputedVal = (int) typeWordByDetectedCodePoint;
             getBusFormPool = this.poolBusWordData.get(inputedVal);
             if( getBusFormPool == null ){
-                getBusFormPool = new LinkedTransferQueue<TdataWord>();
+                getBusFormPool = new LinkedTransferQueue<ZPITdataWord>();
                 this.poolBusWordData.put(inputedVal, getBusFormPool);
             }
             setLastAccessForUseTime(inputedVal);
@@ -65,8 +65,8 @@ public class ThStorageWordBusOutput {
             getBusFormPool = null;
         }
     }
-    protected Set<Entry<Integer, LinkedTransferQueue<TdataWord>>> getExistBusEntrySetForTypeWord(){
-        Set<Entry<Integer, LinkedTransferQueue<TdataWord>>> entrySet;
+    protected Set<Entry<Integer, LinkedTransferQueue<ZPITdataWord>>> getExistBusEntrySetForTypeWord(){
+        Set<Entry<Integer, LinkedTransferQueue<ZPITdataWord>>> entrySet;
         try{
             entrySet = this.poolBusWordData.entrySet();
         return entrySet;
@@ -137,7 +137,7 @@ public class ThStorageWordBusOutput {
      */
     protected Boolean isBusNotEmpty(final int typeWordByDetectedCodePoint){
         Integer inputedTypBusValue;
-        LinkedTransferQueue<TdataWord> testedBusForTypeWord;
+        LinkedTransferQueue<ZPITdataWord> testedBusForTypeWord;
         try{
             inputedTypBusValue = typeWordByDetectedCodePoint;
             
@@ -160,7 +160,7 @@ public class ThStorageWordBusOutput {
      */
     protected Boolean isBusNotExist(final int typeWordByDetectedCodePoint){
         Integer inputedTypBusValue;
-        LinkedTransferQueue<TdataWord> testedBusForTypeWord;
+        LinkedTransferQueue<ZPITdataWord> testedBusForTypeWord;
         try{
             inputedTypBusValue = typeWordByDetectedCodePoint;
             

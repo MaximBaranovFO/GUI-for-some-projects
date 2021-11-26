@@ -160,30 +160,30 @@ public class ZPINcIdxStorageWordManager {
     private static TreeMap<Long, File> getStorageWordExistFiles(String typeWords, String inFuncWordInHex, String inFuncWord){
         switch (typeWords){
             case "NCLVLABC":
-                return NcTypeOfWord.NCLVLABC.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
+                return ZPINcTypeOfWord.NCLVLABC.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
             case "NCLVLRABC":
-                return NcTypeOfWord.NCLVLRABC.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
+                return ZPINcTypeOfWord.NCLVLRABC.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
             case "NCLVLNUM":
-                return NcTypeOfWord.NCLVLNUM.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
+                return ZPINcTypeOfWord.NCLVLNUM.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
             case "NCLVLSYM":
-                return NcTypeOfWord.NCLVLSYM.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
+                return ZPINcTypeOfWord.NCLVLSYM.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
             case "NCLVLSPACE":
-                return NcTypeOfWord.NCLVLSPACE.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
+                return ZPINcTypeOfWord.NCLVLSPACE.getStorageWordExistFileName(inFuncWordInHex, inFuncWord);
         }
         return new TreeMap<Long, File>();
     }
     private static TreeMap<Long, File> getStorageWordAllExistFiles(String typeWords){
         switch (typeWords){
             case "NCLVLABC":
-                return NcTypeOfWord.NCLVLABC.getStorageWordAllExistFileName();
+                return ZPINcTypeOfWord.NCLVLABC.getStorageWordAllExistFileName();
             case "NCLVLRABC":
-                return NcTypeOfWord.NCLVLRABC.getStorageWordAllExistFileName();
+                return ZPINcTypeOfWord.NCLVLRABC.getStorageWordAllExistFileName();
             case "NCLVLNUM":
-                return NcTypeOfWord.NCLVLNUM.getStorageWordAllExistFileName();
+                return ZPINcTypeOfWord.NCLVLNUM.getStorageWordAllExistFileName();
             case "NCLVLSYM":
-                return NcTypeOfWord.NCLVLSYM.getStorageWordAllExistFileName();
+                return ZPINcTypeOfWord.NCLVLSYM.getStorageWordAllExistFileName();
             case "NCLVLSPACE":
-                return NcTypeOfWord.NCLVLSPACE.getStorageWordAllExistFileName();
+                return ZPINcTypeOfWord.NCLVLSPACE.getStorageWordAllExistFileName();
         }
         return new TreeMap<Long, File>();
     }
@@ -202,15 +202,15 @@ public class ZPINcIdxStorageWordManager {
     private static String getStorageWordByIdFile(String typeWords, String inFuncWordInHex, String inFuncWord, long inFuncId){
         switch (typeWords){
             case "NCLVLABC":
-                return NcTypeOfWord.NCLVLABC.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
+                return ZPINcTypeOfWord.NCLVLABC.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
             case "NCLVLRABC":
-                return NcTypeOfWord.NCLVLRABC.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
+                return ZPINcTypeOfWord.NCLVLRABC.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
             case "NCLVLNUM":
-                return NcTypeOfWord.NCLVLNUM.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
+                return ZPINcTypeOfWord.NCLVLNUM.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
             case "NCLVLSYM":
-                return NcTypeOfWord.NCLVLSYM.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
+                return ZPINcTypeOfWord.NCLVLSYM.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
             case "NCLVLSPACE":
-                return NcTypeOfWord.NCLVLSPACE.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
+                return ZPINcTypeOfWord.NCLVLSPACE.getStorageWordByIdFileName(inFuncWordInHex, inFuncWord, inFuncId);
         }
         return "canNotCreateName";
     }

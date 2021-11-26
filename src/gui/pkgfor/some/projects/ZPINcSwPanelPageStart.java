@@ -63,7 +63,7 @@ public class ZPINcSwPanelPageStart {
                 //NcSwStatusPanel.indicationStartProgressBar(lComp);
                 String strSearch = addNorthWordSearch.getText();
                 //NcSwThreadManager.setToViewSearchedResult(lComp, strSearch);
-                NcThWorkerUpGUIKeyWordSearch.searchKeyWordGetResult(lComp);
+                ZPINcThWorkerUpGUIKeyWordSearch.searchKeyWordGetResult(lComp);
                 
                 //NcSwStatusPanel.indicationStopProgressBar(lComp);
             }
@@ -82,7 +82,7 @@ public class ZPINcSwPanelPageStart {
      * make record in log file
      */
     private static void toLALRgetPanel(){
-        if( NcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_JPANEL_PAGESTART.getStr()

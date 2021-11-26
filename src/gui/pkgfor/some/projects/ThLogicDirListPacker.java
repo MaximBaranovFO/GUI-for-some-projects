@@ -46,16 +46,16 @@ public class ThLogicDirListPacker {
         
         this.setPackerLogicRunned();
         
-        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeTackerToPacker = 
+        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeTackerToPacker = 
                 this.innerRuleForDirListWorkers.getWorkDirListState().getPipeTackerToPacker();
         
-        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipePackerToWriter = 
+        final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipePackerToWriter = 
                                 this.innerRuleForDirListWorkers.getWorkDirListState().getPipePackerToWriter();
         
         outStatesOfWorkLogic(" +++++ Packer start run part");
         
-        ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> packetForOut = 
-                                        new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+        ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> packetForOut = 
+                                        new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         
         do{
             outStatesOfWorkLogic(" +++++ Packer start part wait for Tacker finished");
@@ -77,7 +77,7 @@ public class ThLogicDirListPacker {
                 if( !pipeTackerToPacker.isEmpty() ){
                     
                     do{
-                        ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> pollFromTacker = pipeTackerToPacker.poll();
+                        ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollFromTacker = pipeTackerToPacker.poll();
                         if( pollFromTacker == null ){
                             continue;
                         }
@@ -86,7 +86,7 @@ public class ThLogicDirListPacker {
                         this.counterReadedData.set( tmpSum );
                         
                         do{
-                            Map.Entry<UUID, TdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
+                            Map.Entry<UUID, ZPITdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
                             if( pollFirstEntry != null ){
                                 packetForOut.put(pollFirstEntry.getKey(), pollFirstEntry.getValue());
                                 
@@ -105,7 +105,7 @@ public class ThLogicDirListPacker {
                             Long tmpSumPack = this.counterPackData.get() + 1L;
                             this.counterPackData.set( tmpSumPack );
                             
-                            packetForOut = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+                            packetForOut = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
                         }
                         outDataProcessedOfWorkLogic(this.counterReadedData.get(), 
                             this.counterWritedData.get(), 
@@ -124,19 +124,19 @@ public class ThLogicDirListPacker {
                 outStatesOfWorkLogic(" +++++ pipeTackerToPacker is null");
             }
         } while( !this.innerRuleForDirListWorkers.isDirListTackerLogicFinished() );
-        ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> packetForOutAfterStopTacker =
-                new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+        ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> packetForOutAfterStopTacker =
+                new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         
         packetForOutAfterStopTacker.putAll(packetForOut);
         
         Long tmpSumWrite = this.counterWritedData.get() + (long) packetForOut.size();
         this.counterWritedData.set( tmpSumWrite );
         
-        packetForOut = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+        packetForOut = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         
         do{
             
-            final ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> pollLatestFromTacker = pipeTackerToPacker.poll();
+            final ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollLatestFromTacker = pipeTackerToPacker.poll();
             if( pollLatestFromTacker != null ){
                 packetForOutAfterStopTacker.putAll(pollLatestFromTacker);
                 
@@ -145,11 +145,11 @@ public class ThLogicDirListPacker {
             }
         } while( !pipeTackerToPacker.isEmpty() );
         
-        ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> packetForLatestData =
-                new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+        ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> packetForLatestData =
+                new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         
         do{
-            Map.Entry<UUID, TdataDirListFsObjAttr> pollFirstEntry = packetForOutAfterStopTacker.pollFirstEntry();
+            Map.Entry<UUID, ZPITdataDirListFsObjAttr> pollFirstEntry = packetForOutAfterStopTacker.pollFirstEntry();
             if( pollFirstEntry != null ){
                 packetForLatestData.put(pollFirstEntry.getKey(), pollFirstEntry.getValue());
                 
@@ -167,7 +167,7 @@ public class ThLogicDirListPacker {
                             this.counterPackData.get(), 
                             pipeTackerToPacker.size());
 
-                    packetForLatestData = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+                    packetForLatestData = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
                 }
             }
         } while( !packetForOutAfterStopTacker.isEmpty() );
@@ -183,17 +183,17 @@ public class ThLogicDirListPacker {
                             this.counterPackData.get(), 
                             pipeTackerToPacker.size());
 
-            packetForLatestData = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+            packetForLatestData = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         }
         
         /*do{
             
-            ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> pollFromTacker = pipeTackerToPacker.poll();
+            ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollFromTacker = pipeTackerToPacker.poll();
             if( pollFromTacker == null ){
                 continue;
             }
             do{
-                Map.Entry<UUID, TdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
+                Map.Entry<UUID, ZPITdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
                 if( pollFirstEntry != null ){
                     packetForOutAfterStopTacker.put(pollFirstEntry.getKey(), pollFirstEntry.getValue());
                     
@@ -211,7 +211,7 @@ public class ThLogicDirListPacker {
                 Long tmpSumPack = this.counterPackData.get() + 1L;
                 this.counterPackData.set( tmpSumPack );
                 
-                packetForOutAfterStopTacker = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+                packetForOutAfterStopTacker = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
             }
 
             outDataProcessedOfWorkLogic(this.counterReadedData.get(), 
@@ -226,7 +226,7 @@ public class ThLogicDirListPacker {
             Long tmpSumWrite = this.counterWritedData.get() + (long) packetForOutAfterStopTacker.size();
             this.counterWritedData.set( tmpSumWrite );
 
-            packetForOutAfterStopTacker = new ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>();
+            packetForOutAfterStopTacker = new ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>();
         }*/
         outDataProcessedOfWorkLogic(this.counterReadedData.get(), 
                             this.counterWritedData.get(), 
@@ -267,7 +267,7 @@ public class ThLogicDirListPacker {
         } while( !this.innerRuleForDirListWorkers.isDirListPackerLogicFinished() );
     }
     private void oldProcessingData(){
-        /*ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr> pollFromTacker = null;
+        /*ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr> pollFromTacker = null;
         pollFromTacker = pipeTackerToPacker.poll();
 
         if( pollFromTacker != null ){
@@ -296,7 +296,7 @@ public class ThLogicDirListPacker {
                 }
                 if( (pollFromTacker.size() + packetForOut.size()) > 100 ){
                     do{
-                        Map.Entry<UUID, TdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
+                        Map.Entry<UUID, ZPITdataDirListFsObjAttr> pollFirstEntry = pollFromTacker.pollFirstEntry();
                         if( pollFirstEntry != null ){
                             packetForOut.put(pollFirstEntry.getKey(), pollFirstEntry.getValue());
 

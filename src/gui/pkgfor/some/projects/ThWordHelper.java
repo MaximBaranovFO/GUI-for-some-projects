@@ -146,7 +146,7 @@ public class ThWordHelper {
      * @param dataForWrite
      * @return 
      */
-    protected static Boolean writeDataToStorage(Path nowWritedFile, ConcurrentSkipListMap<UUID, TdataWord> dataForWrite){
+    protected static Boolean writeDataToStorage(Path nowWritedFile, ConcurrentSkipListMap<UUID, ZPITdataWord> dataForWrite){
         try( ObjectOutputStream oos = 
             new ObjectOutputStream(Files.newOutputStream(nowWritedFile)) )
         {
@@ -218,13 +218,13 @@ public class ThWordHelper {
             resultOperation = null;
         }
     }
-    protected static ConcurrentSkipListMap<UUID, TdataWord> readFromFile(Path forReadFileName){
-        ConcurrentSkipListMap<UUID, TdataWord> readedFromFileData = new ConcurrentSkipListMap<UUID, TdataWord>();
+    protected static ConcurrentSkipListMap<UUID, ZPITdataWord> readFromFile(Path forReadFileName){
+        ConcurrentSkipListMap<UUID, ZPITdataWord> readedFromFileData = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
         try{
             try( ObjectInputStream ois =
                 new ObjectInputStream(Files.newInputStream(forReadFileName)) )
             {
-                readedFromFileData.putAll((ConcurrentSkipListMap<UUID, TdataWord>) ois.readObject());
+                readedFromFileData.putAll((ConcurrentSkipListMap<UUID, ZPITdataWord>) ois.readObject());
                 return readedFromFileData;
             } catch(ClassNotFoundException exCnf){
                 System.err.println(exCnf.getMessage());
@@ -242,7 +242,7 @@ public class ThWordHelper {
                 System.err.println(exIo.getMessage());
                 exIo.printStackTrace();
             }
-            return new ConcurrentSkipListMap<UUID, TdataWord>();
+            return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
         } finally {
             ThWordHelper.utilizeTdataWord(readedFromFileData);
             readedFromFileData = null;
@@ -253,12 +253,12 @@ public class ThWordHelper {
      * @param forValidateInputed
      * @return 
      */
-    protected static Boolean isTdataWordValid(final TdataWord forValidateInputed){
-        TdataWord forValidateFunction;
+    protected static Boolean isTdataWordValid(final ZPITdataWord forValidateInputed){
+        ZPITdataWord forValidateFunction;
         Integer recordHash;
         Integer calculatedHash;
         try {
-            forValidateFunction = (TdataWord) forValidateInputed;
+            forValidateFunction = (ZPITdataWord) forValidateInputed;
             recordHash = (Integer) forValidateFunction.recordHash;
             calculatedHash = (
                 new String("")
@@ -293,19 +293,19 @@ public class ThWordHelper {
      * @param prevData
      * @return 
      */
-    protected static ConcurrentSkipListMap<UUID, TdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, TdataWord> prevData){
+    protected static ConcurrentSkipListMap<UUID, ZPITdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, ZPITdataWord> prevData){
         utilizeTdataWord(prevData);
-        return new ConcurrentSkipListMap<UUID, TdataWord>();
+        return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
     }
     /**
      * 
      * @param forUtilizationData 
      */
-    protected static void utilizeTdataWord(ConcurrentSkipListMap<UUID, TdataWord> forUtilizationData){
+    protected static void utilizeTdataWord(ConcurrentSkipListMap<UUID, ZPITdataWord> forUtilizationData){
         UUID keyForDelete;
-        TdataWord removedData;
+        ZPITdataWord removedData;
         try {
-            for( Map.Entry<UUID, TdataWord> deletingItem : forUtilizationData.entrySet() ){
+            for( Map.Entry<UUID, ZPITdataWord> deletingItem : forUtilizationData.entrySet() ){
                 keyForDelete = deletingItem.getKey();
                 removedData = forUtilizationData.remove(keyForDelete);
                 removedData.dirListFile = null;

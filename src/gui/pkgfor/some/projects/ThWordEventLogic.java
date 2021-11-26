@@ -123,7 +123,7 @@ public class ThWordEventLogic {
     protected void insertIntoCacheData(Integer typeWordOfBusOutput, 
             String hexTagNameFromBusOutput, 
             String subStringFromBusOutput, 
-            TdataWord pollFromBusOutputDataPacket){
+            ZPITdataWord pollFromBusOutputDataPacket){
         UUID createInitMainFlow;
         Boolean setDataIntoCacheFlow;
         Boolean removeAllFlowStatusByUUID;
@@ -306,8 +306,8 @@ public class ThWordEventLogic {
      * </ul>
      */
     protected void writeDataToStorage(FileSystem fsForWriteData, UUID pollNextUuid){
-        ConcurrentSkipListMap<UUID, TdataWord> writedFromCacheData;
-        Map.Entry<UUID, TdataWord> pollFirstEntry;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> writedFromCacheData;
+        Map.Entry<UUID, ZPITdataWord> pollFirstEntry;
         Boolean localIsLimitForWrite;
         Boolean localPrevDataWrited; 
         Boolean localPrevDataMoved;
@@ -336,7 +336,7 @@ public class ThWordEventLogic {
                 throw new IllegalStateException(ThWordEventLogic.class.getCanonicalName() + " Main Flow UUID: "
                     + pollNextUuid.toString() + " now writed in other worker");
             }
-            ConcurrentSkipListMap<UUID, TdataWord> pollTypeWordTagFileNameData = null;
+            ConcurrentSkipListMap<UUID, ZPITdataWord> pollTypeWordTagFileNameData = null;
             try{
                 pollTypeWordTagFileNameData = this.wordCache.pollTypeWordTagFileNameData(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid);
             } catch (NullPointerException exRetNull) {
@@ -367,7 +367,7 @@ public class ThWordEventLogic {
             localDestSize = pollTypeWordTagFileNameData.size();
             String prefixFileName = this.wordStatusMainFlow.getValueForMainFlowUuidByNumberName(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid, pollNextUuid, 4);
 
-            writedFromCacheData = new ConcurrentSkipListMap<UUID, TdataWord>();
+            writedFromCacheData = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
             do {
                 pollFirstEntry = pollTypeWordTagFileNameData.pollFirstEntry();
                 if( pollFirstEntry != null ){
@@ -495,12 +495,12 @@ public class ThWordEventLogic {
             String newFileName = this.wordStatusMainFlow.getValueForMainFlowUuidByNumberName(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid, pollNextUuid, 2);
             if( currentFileName.equalsIgnoreCase(newFileName) ){
                 Path forReadFileName = fsForReadData.getPath(storageDirectoryName, currentFileName);
-                ConcurrentSkipListMap<UUID, TdataWord> readedFromStorageData = new ConcurrentSkipListMap<UUID, TdataWord>();
+                ConcurrentSkipListMap<UUID, ZPITdataWord> readedFromStorageData = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
                 if( Files.exists(forReadFileName) ){
                     readedFromStorageData.putAll(ThWordHelper.readFromFile(forReadFileName));
                     //insert into cache readed, after that insert into cache
                     Boolean isReadedDataValide = Boolean.TRUE;
-                    for( Map.Entry<UUID, TdataWord> forValidate : readedFromStorageData.entrySet() ){
+                    for( Map.Entry<UUID, ZPITdataWord> forValidate : readedFromStorageData.entrySet() ){
                         if( !ThWordHelper.isTdataWordValid(forValidate.getValue()) ){
                             isReadedDataValide = Boolean.FALSE;
                         }
@@ -568,7 +568,7 @@ public class ThWordEventLogic {
             String hexTagNameFromBusOutput, 
             String subStringFromBusOutput){
         //
-        ConcurrentSkipListMap<UUID, TdataWord> pollTypeWordTagFileNameData = null;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> pollTypeWordTagFileNameData = null;
         try {
                 pollTypeWordTagFileNameData = this.wordCacheReaded.pollTypeWordTagFileNameData(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput);
         } catch(NullPointerException exNull) {
@@ -604,7 +604,7 @@ public class ThWordEventLogic {
     protected void deleteOldDataFromStorage(Integer typeWordOfBusOutput, 
             String hexTagNameFromBusOutput, 
             String subStringFromBusOutput, 
-            TdataWord pollFromBusOutputDataPacket){
+            ZPITdataWord pollFromBusOutputDataPacket){
         try {
             
         } finally {
@@ -614,7 +614,7 @@ public class ThWordEventLogic {
     protected void cleanReadedCache(Integer typeWordOfBusOutput, 
             String hexTagNameFromBusOutput, 
             String subStringFromBusOutput, 
-            TdataWord pollFromBusOutputDataPacket){
+            ZPITdataWord pollFromBusOutputDataPacket){
         try {
             
         } finally {
@@ -624,7 +624,7 @@ public class ThWordEventLogic {
     protected void cleanCache(Integer typeWordOfBusOutput, 
             String hexTagNameFromBusOutput, 
             String subStringFromBusOutput, 
-            TdataWord pollFromBusOutputDataPacket){
+            ZPITdataWord pollFromBusOutputDataPacket){
         try {
             
         } finally {

@@ -68,7 +68,7 @@ public class ZPINcFsIdxStorageInit {
             NcAppHelper.logException(NcFsIdxStorageInit.class.getCanonicalName(), ex);
         }*/
         
-        NcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
+        ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
         return toReturn;
     }
     
@@ -131,23 +131,23 @@ public class ZPINcFsIdxStorageInit {
         NcFsIdxOperationDirs.create(dirStorageWord);
         
         Path dirStorageWordAbc = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
-                NcTypeOfWord.NCLVLABC.getName());
+                ZPINcTypeOfWord.NCLVLABC.getName());
         NcFsIdxOperationDirs.create(dirStorageWordAbc);
         
         Path dirStorageWordNum = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
-                NcTypeOfWord.NCLVLNUM.getName());
+                ZPINcTypeOfWord.NCLVLNUM.getName());
         NcFsIdxOperationDirs.create(dirStorageWordNum);
         
         Path dirStorageWordRabc = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
-                NcTypeOfWord.NCLVLRABC.getName());
+                ZPINcTypeOfWord.NCLVLRABC.getName());
         NcFsIdxOperationDirs.create(dirStorageWordRabc);
         
         Path dirStorageWordSpace = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
-                NcTypeOfWord.NCLVLSPACE.getName());
+                ZPINcTypeOfWord.NCLVLSPACE.getName());
         NcFsIdxOperationDirs.create(dirStorageWordSpace);
         
         Path dirStorageWordSym = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
-                NcTypeOfWord.NCLVLSYM.getName());
+                ZPINcTypeOfWord.NCLVLSYM.getName());
         NcFsIdxOperationDirs.create(dirStorageWordSym);
         
         Path dirTmp = inFS.getPath(NcStrFileDir.DIR_TMP.getStr());

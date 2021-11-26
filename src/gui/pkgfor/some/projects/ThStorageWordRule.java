@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class ThStorageWordRule {
     private final ThreadGroup workerThStorageWord;
-    private final ThIndexRule indexRule;
+    private final ZPIThIndexRule indexRule;
     /**
      * ThStorageWordWorkFilter
      */
@@ -60,8 +60,8 @@ public class ThStorageWordRule {
     private Boolean isSetStorageWordStatusMainFlow;
     
     
-    public ThStorageWordRule(final ThIndexRule outerRuleIndex) {
-        this.indexRule = (ThIndexRule) outerRuleIndex;
+    public ThStorageWordRule(final ZPIThIndexRule outerRuleIndex) {
+        this.indexRule = (ZPIThIndexRule) outerRuleIndex;
         this.workerThStorageWord = new ThreadGroup(UUID.randomUUID().toString());
         /**
          * ThStorageWordState
@@ -94,11 +94,11 @@ public class ThStorageWordRule {
         setFalseRunnedStorageWordWorkRead();
     }
     /**
-     * ThIndexRule
+     * ZPIThIndexRule
      * @return 
      */
-    protected ThIndexRule getIndexRule(){
-        return (ThIndexRule) this.indexRule;
+    protected ZPIThIndexRule getIndexRule(){
+        return (ZPIThIndexRule) this.indexRule;
     }
     /**
      * ThStorageWordWorkFilter

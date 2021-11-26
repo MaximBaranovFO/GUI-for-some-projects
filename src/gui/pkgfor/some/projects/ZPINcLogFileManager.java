@@ -73,7 +73,7 @@ public class ZPINcLogFileManager {
                     + ncStrCfgPath + "\n";
             NcAppHelper.appExitWithMessage(strExitMsg + ex.getMessage());
         }
-        NcfvRunVariables.setCanRecord();
+        ZPINcfvRunVariables.setCanRecord();
     }
     /**
      * Used in 
@@ -89,7 +89,7 @@ public class ZPINcLogFileManager {
             strCurrentLog.putAll(readFromLog());
             int idx = strCurrentLog.size();
 
-            if( NcfvRunVariables.isOutToLogNewRecordAppend() ){
+            if( ZPINcfvRunVariables.isOutToLogNewRecordAppend() ){
                 String strTime = java.time.LocalDateTime.now().toString();
                 String text = NcStrLogMsgField.TIME.getStr() + strTime;
                 String strMsg = text + NcStrLogMsgField.MSG_INFO.getStr()
@@ -115,7 +115,7 @@ public class ZPINcLogFileManager {
             strCurrentLog.putAll(readFromLog());
             int idx = strCurrentLog.size();
 
-            if( NcfvRunVariables.isOutToLogNewRecordAppend() ){
+            if( ZPINcfvRunVariables.isOutToLogNewRecordAppend() ){
                 String strTime = java.time.LocalDateTime.now().toString();
                 String text = NcStrLogMsgField.TIME.getStr() + strTime;
                 String strMsg = text + NcStrLogMsgField.MSG_INFO.getStr()
@@ -168,7 +168,7 @@ public class ZPINcLogFileManager {
      * @param toLogAllStr 
      */
     private static void writeInLogLimitLines(TreeMap<Long, String> toLogAllStr){
-        int logCountLines = NcfvRunVariables.getLogLinesCount();
+        int logCountLines = ZPINcfvRunVariables.getLogLinesCount();
         if( (toLogAllStr.size()) > logCountLines ){
                 long idxLimit = toLogAllStr.size() - logCountLines;
                 if( idxLimit < 1 ){

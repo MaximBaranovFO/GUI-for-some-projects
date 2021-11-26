@@ -72,7 +72,7 @@ public class ZPIAppObjectsManagerState {
     private AppThWorkDirListState currentWorkState;
     private AppObjectsList currentListOfObjects;
     private AppThManager thManager;
-    private ThIndexRule indexRule;
+    private ZPIThIndexRule indexRule;
 
     public ZPIAppObjectsManagerState(AppThManager appThManager) {
         this.thManager = appThManager;

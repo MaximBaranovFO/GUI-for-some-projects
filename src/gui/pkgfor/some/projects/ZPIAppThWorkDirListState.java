@@ -31,9 +31,9 @@ public class ZPIAppThWorkDirListState {
     private AppObjectsList currentListOfObject;
     private AppThWorkDirListRule ruleForDirListWorkers;
     
-    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeFromRunnerToTacker;
-    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeFromTackerToPacker;
-    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> pipeFromPackerToWriter;
+    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeFromRunnerToTacker;
+    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeFromTackerToPacker;
+    private final ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> pipeFromPackerToWriter;
     
     private Thread indexStorageManager;
     
@@ -43,7 +43,7 @@ public class ZPIAppThWorkDirListState {
     private Thread runDirListWriter;
     private FileSystem currentFsZipIndexStorage;
     
-    private ThIndexRule currentIndexRule;
+    private ZPIThIndexRule currentIndexRule;
     
 
     public ZPIAppThWorkDirListState(AppObjectsList outerListOfObject, Path makeIndex) {
@@ -52,11 +52,11 @@ public class ZPIAppThWorkDirListState {
         this.ruleForDirListWorkers = new AppThWorkDirListRule(makeIndex);
         
         this.pipeFromRunnerToTacker = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
         this.pipeFromTackerToPacker = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
         this.pipeFromPackerToWriter = 
-                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
+                new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>(AppConstants.PIPE_READ_FS_TO_TACKER_WORKER_QUEUE_SIZE);
 //threads init
         
         this.indexStorageManager = new Thread(
@@ -101,10 +101,10 @@ public class ZPIAppThWorkDirListState {
         //this.currentListOfObject.putLogMessageInfo("Create objects for WorkDirList");
         //this.currentListOfObject.doLogger();
     }
-    protected void setIndexRule(final ThIndexRule outerThIndexRule){
+    protected void setIndexRule(final ZPIThIndexRule outerThIndexRule){
         this.currentIndexRule = outerThIndexRule;
     }
-    protected ThIndexRule getIndexRule(){
+    protected ZPIThIndexRule getIndexRule(){
         return this.currentIndexRule;
     }
     protected void initWorkerGroup(){
@@ -202,13 +202,13 @@ public class ZPIAppThWorkDirListState {
         return this.currentListOfObject;
     }
     
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> getPipeReaderToTacker(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> getPipeReaderToTacker(){
         return this.pipeFromRunnerToTacker;
     }
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> getPipeTackerToPacker(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> getPipeTackerToPacker(){
         return this.pipeFromTackerToPacker;
     }
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, TdataDirListFsObjAttr>> getPipePackerToWriter(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>> getPipePackerToWriter(){
         return this.pipeFromPackerToWriter;
     }
 }

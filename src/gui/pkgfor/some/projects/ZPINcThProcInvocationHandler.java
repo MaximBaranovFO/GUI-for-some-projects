@@ -28,7 +28,7 @@ import javax.swing.SwingUtilities;
  */
 public class ZPINcThProcInvocationHandler implements InvocationHandler {
     private Object invocationResult = null;
-    private NcThProcGUICallbackInterface ui;
+    private ZPINcThProcGUICallbackInterface ui;
     /**
      * Used in
      * <ul>
@@ -36,7 +36,7 @@ public class ZPINcThProcInvocationHandler implements InvocationHandler {
      * </ul>
      * @param ui 
      */
-    protected ZPINcThProcInvocationHandler(NcThProcGUICallbackInterface ui){
+    protected ZPINcThProcInvocationHandler(ZPINcThProcGUICallbackInterface ui){
         this.ui = ui;
     }
     /**
@@ -49,7 +49,7 @@ public class ZPINcThProcInvocationHandler implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        NcThProcTypeDetectInterface typeProc = method.getAnnotation(NcThProcTypeDetectInterface.class);
+        ZPINcThProcTypeDetectInterface typeProc = method.getAnnotation(ZPINcThProcTypeDetectInterface.class);
         if( typeProc != null ){
             if( SwingUtilities.isEventDispatchThread() ){
                 invocationResult = method.invoke(ui, args);
@@ -66,7 +66,7 @@ public class ZPINcThProcInvocationHandler implements InvocationHandler {
                         }
                     }
                 };
-                if( NcThProcType.ASYNC.equals(typeProc.value()) ){
+                if( ZPINcThProcType.ASYNC.equals(typeProc.value()) ){
                     SwingUtilities.invokeLater(shellThread);
                 }
                 else{

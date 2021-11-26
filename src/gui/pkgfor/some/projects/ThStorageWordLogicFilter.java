@@ -40,11 +40,11 @@ public class ThStorageWordLogicFilter {
                 msgToLog
                 + AdilConstants.START);
         //bus from FileListBusToNext throw NullPointerException
-        ThIndexRule indexRule = outerRuleStorageWord.getIndexRule();
-        ThIndexState indexState = indexRule.getIndexState();
-        ThFileListRule ruleFileList = indexState.getRuleFileList();
-        ThFileListState fileListState = ruleFileList.getFileListState();
-        ThFileListBusToNext busJobForFileListToNext = fileListState.getBusJobForFileListToNext();
+        ZPIThIndexRule indexRule = outerRuleStorageWord.getIndexRule();
+        ZPIThIndexState indexState = indexRule.getIndexState();
+        ZPIThFileListRule ruleFileList = indexState.getRuleFileList();
+        ZPIThFileListState fileListState = ruleFileList.getFileListState();
+        ZPIThFileListBusToNext busJobForFileListToNext = fileListState.getBusJobForFileListToNext();
         ThStorageWordState storageWordState = outerRuleStorageWord.getStorageWordState();
         
         /**
@@ -205,8 +205,8 @@ public class ThStorageWordLogicFilter {
             final String storagePath, 
             final String inputedNamePartPath){
         String funcNamePartPath;
-        ConcurrentSkipListMap<UUID, TdataWord> forReturnLongWord;
-        ConcurrentSkipListMap<UUID, TdataWord> forReturnWord;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> forReturnLongWord;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> forReturnWord;
         char[] toCharArray;
         int idexChar;
         int prevWordCodeType;
@@ -217,11 +217,11 @@ public class ThStorageWordLogicFilter {
         String tmpToHexSym;
         int startPos;
         int lengthWord;
-        TdataWord forLastAddData;
-        TdataWord forAddData;
+        ZPITdataWord forLastAddData;
+        ZPITdataWord forAddData;
         try{
-            //forReturnLongWord = new ConcurrentSkipListMap<UUID, TdataWord>();
-            //forReturnWord = new ConcurrentSkipListMap<UUID, TdataWord>();
+            //forReturnLongWord = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
+            //forReturnWord = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
             funcNamePartPath = (String) inputedNamePartPath;
             
             toCharArray = funcNamePartPath.toCharArray();
@@ -332,7 +332,7 @@ public class ThStorageWordLogicFilter {
                     /**
                      * create data for transfer into LongWord, Word indexes
                      */
-                    forAddData= new TdataWord(recordId, storagePath, word, prevWordCodeType, heximalWord, startPos, lengthWord);
+                    forAddData= new ZPITdataWord(recordId, storagePath, word, prevWordCodeType, heximalWord, startPos, lengthWord);
                     /**
                      * put job to Bus by type ThWordState
                      */
@@ -346,7 +346,7 @@ public class ThStorageWordLogicFilter {
                         //busForTypeLongWord.add(forAddData);
                     } else {
                         ThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
-                        LinkedTransferQueue<TdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
+                        LinkedTransferQueue<ZPITdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
                         busForTypeWord.add(forAddData);
                     }
                     String[] oldVal = {word, heximalWord};
@@ -385,7 +385,7 @@ public class ThStorageWordLogicFilter {
             /**
              * tmp comment before not released StorageWord part
              **/
-            forLastAddData = new TdataWord(recordId, storagePath, word, prevWordCodeType, heximalWord, startPos, lengthWord);
+            forLastAddData = new ZPITdataWord(recordId, storagePath, word, prevWordCodeType, heximalWord, startPos, lengthWord);
             if( lengthWord > 25){
                 /*ThStorageWordBusOutput busJobForLongWordWrite = inputedStorageWordState.getBusJobForLongWordWrite();
                 ArrayBlockingQueue<TdataWord> busForTypeLongWord = busJobForLongWordWrite.getBusForTypeWord(prevWordCodeType);
@@ -396,7 +396,7 @@ public class ThStorageWordLogicFilter {
                 
             } else {
                 ThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
-                LinkedTransferQueue<TdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
+                LinkedTransferQueue<ZPITdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
                 busForTypeWord.add(forLastAddData);
                 int size = busForTypeWord.size();
                 //System.out.println(">    >    >    >    >    >Word bus for typeWord " 
@@ -423,8 +423,8 @@ public class ThStorageWordLogicFilter {
             final String inputedNamePartPath){
         String funcNamePartPath;
         
-        ConcurrentSkipListMap<UUID, TdataWord> forReturnLongWord;
-        ConcurrentSkipListMap<UUID, TdataWord> forReturnWord;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> forReturnLongWord;
+        ConcurrentSkipListMap<UUID, ZPITdataWord> forReturnWord;
         char[] toCharArray;
         int idexChar;
         int prevWordCodeType;
@@ -433,8 +433,8 @@ public class ThStorageWordLogicFilter {
         String toHexString;
         int startPos;
         int lengthWord;
-        TdataWord forLastAddData;
-        TdataWord forAddData;
+        ZPITdataWord forLastAddData;
+        ZPITdataWord forAddData;
         try{
             funcNamePartPath = (String) inputedNamePartPath;
             

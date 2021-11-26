@@ -29,7 +29,7 @@ public class ZPINcLogLogicGUI {
      * make record in log file
      */
     protected static void NcSwMainMenuGetMainMenu(){
-        if( NcfvRunVariables.isLALRNcSwMainMenuMainMenu() ){
+        if( ZPINcfvRunVariables.isLALRNcSwMainMenuMainMenu() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_JMENUBAR.getStr()
@@ -47,7 +47,7 @@ public class ZPINcLogLogicGUI {
      * make record in log file
      */
     protected static void NcSwPanelCenterGetPanel(){
-        if( NcfvRunVariables.isLALRNcSwPanelCentergetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelCentergetPanel() ){
             String strLogMsg = NcStrLogMsgField.INFO.getStr()
                 + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + NcStrLogLogicVar.LA_JPANEL_CENTER.getStr()

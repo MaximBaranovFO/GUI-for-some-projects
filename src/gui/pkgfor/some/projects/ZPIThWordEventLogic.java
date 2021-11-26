@@ -62,20 +62,20 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * </ol>
  * @author wladimirowichbiaran
  */
-public class ThWordEventLogic {
+public class ZPIThWordEventLogic {
     private final Long timeCreation;
     private final UUID objectLabel;
     //Sources
     //private final ThStorageWordBusOutput busJobForWordRouter;
-    private final ThWordRule ruleWord;
-    private final ThWordState wordState;
+    private final ZPIThWordRule ruleWord;
+    private final ZPIThWordState wordState;
     private final ThWordStatusMainFlow wordStatusMainFlow;
-    private final ThWordCacheSk wordCache;
-    private final ThWordCacheSk wordCacheReaded;
-    private final ThWordEventIndex eventIndex;
-    private final ThWordEventIndexFlow eventIndexFlow;
+    private final ZPIThWordCacheSk wordCache;
+    private final ZPIThWordCacheSk wordCacheReaded;
+    private final ZPIThWordEventIndex eventIndex;
+    private final ZPIThWordEventIndexFlow eventIndexFlow;
     
-    public ThWordEventLogic(final ThWordRule ruleWordInputed) {
+    public ZPIThWordEventLogic(final ZPIThWordRule ruleWordInputed) {
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         //this.busJobForWordRouter = ruleWordInputed.getIndexRule().getIndexState().getRuleStorageWord().getStorageWordState().getBusJobForWordWrite();
@@ -110,7 +110,7 @@ public class ThWordEventLogic {
             typeWordByMainFlowUuid = null;
             countRecordsForReturn = null;
             subStringByMainFlowUuid = null;
-            ThWordHelper.utilizeStringValues(new String[]{hexTagNameByMainFlowUuid, subStringByMainFlowUuid});
+            ZPIThWordHelper.utilizeStringValues(new String[]{hexTagNameByMainFlowUuid, subStringByMainFlowUuid});
         }
     }
     /**
@@ -127,8 +127,8 @@ public class ThWordEventLogic {
         UUID createInitMainFlow;
         Boolean setDataIntoCacheFlow;
         Boolean removeAllFlowStatusByUUID;
-        ThWordBusFlowEvent eventDoBusByNumber;
-        ThWordBusFlowEvent eventReadyBusByNumber;
+        ZPIThWordBusFlowEvent eventDoBusByNumber;
+        ZPIThWordBusFlowEvent eventReadyBusByNumber;
         String buildTypeWordStoreSubDirictories = new String();
         Integer valueForMainUuidByNumberDataCache;
         Integer valueLimitForMainUuidByNumberDataCache;
@@ -143,23 +143,23 @@ public class ThWordEventLogic {
             Integer numberProcessIndexSystem = 13;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordEventLogic.class.getCanonicalName()
+                    + ZPIThWordEventLogic.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "insertIntoCacheData()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
                     + AdilConstants.START);
             if( typeWordOfBusOutput == null ){
-                throw new IllegalArgumentException(ThWordEventLogic.class.getCanonicalName() + " typeWord is null");
+                throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " typeWord is null");
             }
             if( hexTagNameFromBusOutput.isEmpty() || hexTagNameFromBusOutput == null ){
-                throw new IllegalArgumentException(ThWordEventLogic.class.getCanonicalName() + " not set hexTagName");
+                throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " not set hexTagName");
             }
             if( subStringFromBusOutput.isEmpty() || subStringFromBusOutput == null ){
-                throw new IllegalArgumentException(ThWordEventLogic.class.getCanonicalName() + " not set subString");
+                throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " not set subString");
             }
             if( pollFromBusOutputDataPacket == null ){
-                throw new IllegalArgumentException(ThWordEventLogic.class.getCanonicalName() + " data from output bus for insert into cache is null");
+                throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " data from output bus for insert into cache is null");
             }
             //start before insert into cache
             //@todo if size in cache > 0, get last uuid
@@ -221,10 +221,10 @@ public class ThWordEventLogic {
                 //set inital flags to workers
                 this.wordStatusMainFlow.changeInWorkers(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput, createInitMainFlow, 3, setDataIntoCacheFlow);
                 //set inital flags to name
-                buildTypeWordStoreSubDirictories = ThWordHelper.buildTypeWordStoreSubDirictories(typeWordOfBusOutput, hexTagNameFromBusOutput, subStringFromBusOutput.length());
+                buildTypeWordStoreSubDirictories = ZPIThWordHelper.buildTypeWordStoreSubDirictories(typeWordOfBusOutput, hexTagNameFromBusOutput, subStringFromBusOutput.length());
                 this.wordStatusMainFlow.changeInName(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput, createInitMainFlow, 0, buildTypeWordStoreSubDirictories);
                 this.wordStatusMainFlow.changeInName(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput, createInitMainFlow, 4, hexTagNameFromBusOutput);
-                System.out.println(ThWordEventLogic.class.getCanonicalName() + " init UUID " + createInitMainFlow.toString());
+                System.out.println(ZPIThWordEventLogic.class.getCanonicalName() + " init UUID " + createInitMainFlow.toString());
                 valueForMainUuidByNumberDataCache = this.wordStatusMainFlow.getValueForMainUuidByNumberDataCache(pollFromBusOutputDataPacket, createInitMainFlow, 2);
                 valueLimitForMainUuidByNumberDataCache = this.wordStatusMainFlow.getValueForMainUuidByNumberDataCache(pollFromBusOutputDataPacket, createInitMainFlow, 3);
                 //set inital flags to cache
@@ -258,7 +258,7 @@ public class ThWordEventLogic {
                 eventReadyBusByNumber.addToListOfFlowEventUuids(typeWordOfBusOutput, hexTagNameFromBusOutput, subStringFromBusOutput, createInitMainFlow);
                 eventDoBusByNumber.removeMainFlowUuid(createInitMainFlow, this.eventIndex);
                 this.wordState.getBusEventShort().addUuidToShortEvent(2, 3, createInitMainFlow);
-                ThWordBusFlowEvent eventReadyBusByNumberWrite = this.wordState.getEventReadyBusByNumber(2);
+                ZPIThWordBusFlowEvent eventReadyBusByNumberWrite = this.wordState.getEventReadyBusByNumber(2);
                 sizeBusFlowUuids = eventReadyBusByNumberWrite.sizeBusFlowUuids(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput);
                 if( sizeBusFlowUuids == 0 ){
                     this.wordState.getBusEventShortNextStep().addUuidToShortEvent(0, 2, createInitMainFlow);
@@ -268,7 +268,7 @@ public class ThWordEventLogic {
             } else {
                 removeAllFlowStatusByUUID = this.wordStatusMainFlow.removeAllFlowStatusByUUID(createInitMainFlow);
                 if( !removeAllFlowStatusByUUID ){
-                    throw new IllegalArgumentException(ThWordEventLogic.class.getCanonicalName() + " data from output bus is not set "
+                    throw new IllegalArgumentException(ZPIThWordEventLogic.class.getCanonicalName() + " data from output bus is not set "
                             + " into cache, reason: " + exMessage);
                 }
             }
@@ -288,7 +288,7 @@ public class ThWordEventLogic {
             forLimitOnFsNeedAppendSize = null;
             valueForSetInDataCache = null;
             sizeBusFlowUuids = null;
-            ThWordHelper.utilizeStringValues(new String[] {
+            ZPIThWordHelper.utilizeStringValues(new String[] {
                 exMessage,
                 buildTypeWordStoreSubDirictories
             });
@@ -319,7 +319,7 @@ public class ThWordEventLogic {
             Integer numberProcessIndexSystem = 13;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordEventLogic.class.getCanonicalName()
+                    + ZPIThWordEventLogic.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "writeDataToStorage()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -333,7 +333,7 @@ public class ThWordEventLogic {
             Integer typeWordByMainFlowUuid = this.eventIndex.getTypeWordByMainFlowUuid(pollNextUuid);
             Boolean valueForMainFlowUuidByNumberWorkers = this.wordStatusMainFlow.getValueForMainFlowUuidByNumberWorkers(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid, pollNextUuid, 0);
             if( valueForMainFlowUuidByNumberWorkers ){
-                throw new IllegalStateException(ThWordEventLogic.class.getCanonicalName() + " Main Flow UUID: "
+                throw new IllegalStateException(ZPIThWordEventLogic.class.getCanonicalName() + " Main Flow UUID: "
                     + pollNextUuid.toString() + " now writed in other worker");
             }
             ConcurrentSkipListMap<UUID, ZPITdataWord> pollTypeWordTagFileNameData = null;
@@ -348,13 +348,13 @@ public class ThWordEventLogic {
             }
             if( pollTypeWordTagFileNameData.isEmpty() || pollTypeWordTagFileNameData == null ){
                 String strExReturn = pollTypeWordTagFileNameData.isEmpty() ? " received empty value for write from cache" : " from cache returned null for write to storage";
-                throw new IllegalStateException(ThWordEventLogic.class.getCanonicalName() + strExReturn);
+                throw new IllegalStateException(ZPIThWordEventLogic.class.getCanonicalName() + strExReturn);
             }
             String storageDirectoryName = this.wordStatusMainFlow.getValueForMainFlowUuidByNumberName(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid, pollNextUuid, 0);
             Path storageTypeWordWritedFile = fsForWriteData.getPath(storageDirectoryName);
-            if( !ThWordHelper.createDirIfNotExist(storageTypeWordWritedFile) ){
+            if( !ZPIThWordHelper.createDirIfNotExist(storageTypeWordWritedFile) ){
                 String strExReturn = "Storage directory not created " + storageTypeWordWritedFile.toUri().toString();
-                throw new IllegalStateException(ThWordEventLogic.class.getCanonicalName() + strExReturn);
+                throw new IllegalStateException(ZPIThWordEventLogic.class.getCanonicalName() + strExReturn);
             }
             Boolean isDataToVol = Boolean.FALSE;
             if( pollTypeWordTagFileNameData.size() > AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ){
@@ -376,9 +376,9 @@ public class ThWordEventLogic {
                 localDestSize = writedFromCacheData.size();
                 localIsLimitForWrite = ( localDestSize == AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT );
                 if( localIsLimitForWrite || pollTypeWordTagFileNameData.isEmpty() ){
-                    String localSrcFileName = ThWordHelper.fileNameBuilder(prefixFileName, localSrcSize, datafsVolumeNumber);
+                    String localSrcFileName = ZPIThWordHelper.fileNameBuilder(prefixFileName, localSrcSize, datafsVolumeNumber);
                     Path localNowWritedFile = fsForWriteData.getPath(storageTypeWordWritedFile.toString(), localSrcFileName);
-                    Boolean localIsWritedToStorage = ThWordHelper.writeDataToStorage(localNowWritedFile, writedFromCacheData);
+                    Boolean localIsWritedToStorage = ZPIThWordHelper.writeDataToStorage(localNowWritedFile, writedFromCacheData);
                     if( !localIsWritedToStorage ){
                         //if not write data
                         localIsUuidFinished = Boolean.FALSE;
@@ -390,7 +390,7 @@ public class ThWordEventLogic {
                         String nameForDeleteFileName = this.wordStatusMainFlow.getValueForMainFlowUuidByNumberName(typeWordByMainFlowUuid, subStringByMainFlowUuid, hexTagNameByMainFlowUuid, pollNextUuid, 3);
                         Path localDeleteOldFileName = fsForWriteData.getPath(storageTypeWordWritedFile.toString(), nameForDeleteFileName);
                         
-                        isFileDeleted = ThWordHelper.deleteFileFromStorage(localDeleteOldFileName);
+                        isFileDeleted = ZPIThWordHelper.deleteFileFromStorage(localDeleteOldFileName);
                         if( !isFileDeleted ){
                             //if not delete file
                             localIsUuidFinished = Boolean.FALSE;
@@ -400,9 +400,9 @@ public class ThWordEventLogic {
                         localIsUuidFinished = Boolean.FALSE;
                     }
                     
-                    String newFileName = ThWordHelper.fileNameBuilder(prefixFileName, localDestSize, datafsVolumeNumber);
+                    String newFileName = ZPIThWordHelper.fileNameBuilder(prefixFileName, localDestSize, datafsVolumeNumber);
                     Path localFileNameForMove = fsForWriteData.getPath(storageTypeWordWritedFile.toString(), newFileName);
-                    localPrevDataMoved = ThWordHelper.moveAfterWrite(localNowWritedFile, localFileNameForMove);
+                    localPrevDataMoved = ZPIThWordHelper.moveAfterWrite(localNowWritedFile, localFileNameForMove);
                     if( !localPrevDataMoved ){
                         //if not move file
                         localIsUuidFinished = Boolean.FALSE;
@@ -419,7 +419,7 @@ public class ThWordEventLogic {
                         if( localIsLimitForWrite ){
                             datafsVolumeNumber++;
                         }
-                        writedFromCacheData = ThWordHelper.doUtilizationDataInitNew(writedFromCacheData);
+                        writedFromCacheData = ZPIThWordHelper.doUtilizationDataInitNew(writedFromCacheData);
                     }
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
@@ -480,7 +480,7 @@ public class ThWordEventLogic {
             Integer numberProcessIndexSystem = 13;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordEventLogic.class.getCanonicalName()
+                    + ZPIThWordEventLogic.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "readDataFromStorage()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -497,11 +497,11 @@ public class ThWordEventLogic {
                 Path forReadFileName = fsForReadData.getPath(storageDirectoryName, currentFileName);
                 ConcurrentSkipListMap<UUID, ZPITdataWord> readedFromStorageData = new ConcurrentSkipListMap<UUID, ZPITdataWord>();
                 if( Files.exists(forReadFileName) ){
-                    readedFromStorageData.putAll(ThWordHelper.readFromFile(forReadFileName));
+                    readedFromStorageData.putAll(ZPIThWordHelper.readFromFile(forReadFileName));
                     //insert into cache readed, after that insert into cache
                     Boolean isReadedDataValide = Boolean.TRUE;
                     for( Map.Entry<UUID, ZPITdataWord> forValidate : readedFromStorageData.entrySet() ){
-                        if( !ThWordHelper.isTdataWordValid(forValidate.getValue()) ){
+                        if( !ZPIThWordHelper.isTdataWordValid(forValidate.getValue()) ){
                             isReadedDataValide = Boolean.FALSE;
                         }
                     }
@@ -572,7 +572,7 @@ public class ThWordEventLogic {
         try {
                 pollTypeWordTagFileNameData = this.wordCacheReaded.pollTypeWordTagFileNameData(typeWordOfBusOutput, subStringFromBusOutput, hexTagNameFromBusOutput);
         } catch(NullPointerException exNull) {
-            System.err.println(ThWordEventLogic.class.getCanonicalName() + " from ReadedCache poll failure: " + exNull.getMessage());
+            System.err.println(ZPIThWordEventLogic.class.getCanonicalName() + " from ReadedCache poll failure: " + exNull.getMessage());
         }
         if( pollTypeWordTagFileNameData != null ){
             if( !pollTypeWordTagFileNameData.isEmpty() ){

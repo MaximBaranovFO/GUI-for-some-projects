@@ -24,7 +24,7 @@ import java.util.concurrent.LinkedTransferQueue;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordBusEventShort {
+public class ZPIThWordBusEventShort {
     /**
      * Global list for queue uuids where set flags for logic stop, do, ready do
      * {@code <vectorCodeName, <mainFlowUUID>>}
@@ -35,7 +35,7 @@ public class ThWordBusEventShort {
     private ConcurrentSkipListMap<Integer, LinkedTransferQueue<UUID>> doEventsBus;
     private ConcurrentSkipListMap<Integer, LinkedTransferQueue<UUID>> readyEventsBus;
     
-    ThWordBusEventShort(){
+    ZPIThWordBusEventShort(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.waitEventsBus = new ConcurrentSkipListMap<Integer, LinkedTransferQueue<UUID>>();
@@ -375,7 +375,7 @@ public class ThWordBusEventShort {
         try {
             return oneOfReturnedPrefix[prefixNum];
         }finally {
-            ThWordHelper.utilizeStringValues(oneOfReturnedPrefix);
+            ZPIThWordHelper.utilizeStringValues(oneOfReturnedPrefix);
         }
     }
     /**

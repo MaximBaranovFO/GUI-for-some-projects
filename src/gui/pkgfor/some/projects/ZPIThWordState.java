@@ -23,42 +23,42 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * Contains method and values for control word index process
  * @author wladimirowichbiaran
  */
-public class ThWordState {
+public class ZPIThWordState {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
      * ThWordBusWriter
      */
-    private ThWordBusFlowEvent busWordRouterJobToWriter;
+    private ZPIThWordBusFlowEvent busWordRouterJobToWriter;
     private Boolean isSetWordRouterJobToWriter;
     /**
      * ThWordBusReader
      */
-    private ThWordBusFlowEvent busWordRouterJobToReader;
+    private ZPIThWordBusFlowEvent busWordRouterJobToReader;
     private Boolean isSetWordRouterJobToReader;
     /**
-     * ThWordBusReadedFlow thWordFlowRead
+     * ZPIThWordBusReadedFlow thWordFlowRead
      * @todo Bus into State
      */
-    private ThWordBusFlowEvent thWordFlowRead;
+    private ZPIThWordBusFlowEvent thWordFlowRead;
     private Boolean isSetWordFlowReaded;
-    private ConcurrentSkipListMap<Integer, ThWordBusFlowEvent> eventsBusReadyList;
-    private ConcurrentSkipListMap<Integer, ThWordBusFlowEvent> eventsBusWaitList;
-    private ConcurrentSkipListMap<Integer, ThWordBusFlowEvent> eventsBusDoList;
-    private ThWordEventLogic eventsLogic;
-    private ThWordEventIndex eventsIndex;
+    private ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent> eventsBusReadyList;
+    private ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent> eventsBusWaitList;
+    private ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent> eventsBusDoList;
+    private ZPIThWordEventLogic eventsLogic;
+    private ZPIThWordEventIndex eventsIndex;
     private ThWordStatusMainFlow mainFlow;
-    private ThWordBusEventShort eventShort;
-    private ThWordBusEventShort eventShortNextStep;
-    private ThWordEventIndexFlow eventIndexFlow;
+    private ZPIThWordBusEventShort eventShort;
+    private ZPIThWordBusEventShort eventShortNextStep;
+    private ZPIThWordEventIndexFlow eventIndexFlow;
     
-    public ThWordState(ThWordRule ruleWordInputed) {
+    public ZPIThWordState(ZPIThWordRule ruleWordInputed) {
         this.mainFlow = (ThWordStatusMainFlow) ruleWordInputed.getWordStatusMainFlow();
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
-        this.eventIndexFlow = new ThWordEventIndexFlow();
-        this.eventShort = new ThWordBusEventShort();
-        this.eventShortNextStep = new ThWordBusEventShort();
+        this.eventIndexFlow = new ZPIThWordEventIndexFlow();
+        this.eventShort = new ZPIThWordBusEventShort();
+        this.eventShortNextStep = new ZPIThWordBusEventShort();
         newInstanceOfReadyListBus(ruleWordInputed);
         newInstanceOfWaitListBus(ruleWordInputed);
         newInstanceOfDoListBus(ruleWordInputed);
@@ -72,7 +72,7 @@ public class ThWordState {
          */
         setFalseWordFlowReaded();
     }
-    protected ThWordEventIndexFlow getEventIndexFlow(){
+    protected ZPIThWordEventIndexFlow getEventIndexFlow(){
         return this.eventIndexFlow;
     }
     /**
@@ -80,7 +80,7 @@ public class ThWordState {
      * used with getBusEventShortNextStep()
      * @return 
      */
-    protected ThWordBusEventShort getBusEventShort(){
+    protected ZPIThWordBusEventShort getBusEventShort(){
         return this.eventShort;
     }
     /**
@@ -104,38 +104,38 @@ public class ThWordState {
      * 
      * @return 
      */
-    protected ThWordBusEventShort getBusEventShortNextStep(){
+    protected ZPIThWordBusEventShort getBusEventShortNextStep(){
         return this.eventShortNextStep;
     }
-    protected void newInstanceEventLogic(final ThWordRule ruleInputed){
+    protected void newInstanceEventLogic(final ZPIThWordRule ruleInputed){
         if( this.eventsLogic == null ){
-            this.eventsLogic = new ThWordEventLogic(ruleInputed);
+            this.eventsLogic = new ZPIThWordEventLogic(ruleInputed);
         }
     }
-    protected void newInstanceEventIndex(final ThWordRule ruleInputed){
+    protected void newInstanceEventIndex(final ZPIThWordRule ruleInputed){
         if( this.eventsIndex == null ){
-            this.eventsIndex = new ThWordEventIndex(ruleInputed);
+            this.eventsIndex = new ZPIThWordEventIndex(ruleInputed);
         }
     }
     /**
      * Create Buses for list objects of Ready Events
      * @param ruleInputed 
      */
-    private void newInstanceOfReadyListBus(final ThWordRule ruleInputed){
+    private void newInstanceOfReadyListBus(final ZPIThWordRule ruleInputed){
         Integer eventReadyCount;
         Integer idxReady;
         Integer currentEventReadyCode;
-        ThWordBusFlowEvent newEventReadyBus;
-        ThWordRule ruleFunc;
+        ZPIThWordBusFlowEvent newEventReadyBus;
+        ZPIThWordRule ruleFunc;
         ThWordStatusMainFlow wordStatusMainFlow;
         try {
-            ruleFunc = (ThWordRule) ruleInputed;
+            ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
-            this.eventsBusReadyList = new ConcurrentSkipListMap<Integer, ThWordBusFlowEvent>();
+            this.eventsBusReadyList = new ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent>();
             eventReadyCount = getEventReadyCount();
             for( idxReady = 0; idxReady < eventReadyCount ; idxReady++ ){
                 currentEventReadyCode = getEventReadyCodeByNumber(idxReady);
-                newEventReadyBus = new ThWordBusFlowEvent(wordStatusMainFlow);
+                newEventReadyBus = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
                 this.eventsBusReadyList.put(currentEventReadyCode, newEventReadyBus);
             }
         } finally {
@@ -151,21 +151,21 @@ public class ThWordState {
      * Create Buses for list objects of Ready Events
      * @param ruleInputed 
      */
-    private void newInstanceOfWaitListBus(final ThWordRule ruleInputed){
+    private void newInstanceOfWaitListBus(final ZPIThWordRule ruleInputed){
         Integer eventWaitCount;
         Integer idxWait;
         Integer currentEventWaitCode;
-        ThWordBusFlowEvent newEventWaitBus;
-        ThWordRule ruleFunc;
+        ZPIThWordBusFlowEvent newEventWaitBus;
+        ZPIThWordRule ruleFunc;
         ThWordStatusMainFlow wordStatusMainFlow;
         try {
-            ruleFunc = (ThWordRule) ruleInputed;
+            ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
-            this.eventsBusWaitList = new ConcurrentSkipListMap<Integer, ThWordBusFlowEvent>();
+            this.eventsBusWaitList = new ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent>();
             eventWaitCount = getEventWaitCount();
             for( idxWait = 0; idxWait < eventWaitCount ; idxWait++ ){
                 currentEventWaitCode = getEventWaitCodeByNumber(idxWait);
-                newEventWaitBus = new ThWordBusFlowEvent(wordStatusMainFlow);
+                newEventWaitBus = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
                 this.eventsBusWaitList.put(currentEventWaitCode, newEventWaitBus);
             }
         } finally {
@@ -181,21 +181,21 @@ public class ThWordState {
      * Create Buses for list objects of Ready Events
      * @param ruleInputed 
      */
-    private void newInstanceOfDoListBus(final ThWordRule ruleInputed){
+    private void newInstanceOfDoListBus(final ZPIThWordRule ruleInputed){
         Integer eventDoCount;
         Integer idxDo;
         Integer currentEventDoCode;
-        ThWordBusFlowEvent newEventDoBus;
-        ThWordRule ruleFunc;
+        ZPIThWordBusFlowEvent newEventDoBus;
+        ZPIThWordRule ruleFunc;
         ThWordStatusMainFlow wordStatusMainFlow;
         try {
-            ruleFunc = (ThWordRule) ruleInputed;
+            ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
-            this.eventsBusDoList = new ConcurrentSkipListMap<Integer, ThWordBusFlowEvent>();
+            this.eventsBusDoList = new ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent>();
             eventDoCount = getEventDoCount();
             for( idxDo = 0; idxDo < eventDoCount ; idxDo++ ){
                 currentEventDoCode = getEventDoCodeByNumber(idxDo);
-                newEventDoBus = new ThWordBusFlowEvent(wordStatusMainFlow);
+                newEventDoBus = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
                 this.eventsBusDoList.put(currentEventDoCode, newEventDoBus);
             }
         } finally {
@@ -207,10 +207,10 @@ public class ThWordState {
             wordStatusMainFlow = null;
         }
     }
-    protected ThWordEventIndex getEventIndex(){
+    protected ZPIThWordEventIndex getEventIndex(){
         return this.eventsIndex;
     }
-    protected ThWordEventLogic getEventLogic(){
+    protected ZPIThWordEventLogic getEventLogic(){
         return this.eventsLogic;
     }
     /**
@@ -218,9 +218,9 @@ public class ThWordState {
      */
     protected void destructorOfListReadyBus(){
         Integer keyRemovedEventReadyBus;
-        ThWordBusFlowEvent removedEventReadyBus;
+        ZPIThWordBusFlowEvent removedEventReadyBus;
         try {
-            for( Map.Entry<Integer, ThWordBusFlowEvent> destoyedItem : this.eventsBusReadyList.entrySet() ){
+            for( Map.Entry<Integer, ZPIThWordBusFlowEvent> destoyedItem : this.eventsBusReadyList.entrySet() ){
                 destoyedItem.getValue().destructorBusFlowEvent();
                 keyRemovedEventReadyBus = destoyedItem.getKey();
                 removedEventReadyBus = this.eventsBusReadyList.remove(keyRemovedEventReadyBus);
@@ -238,9 +238,9 @@ public class ThWordState {
      */
     protected void destructorOfListWaitBus(){
         Integer keyRemovedEventWaitBus;
-        ThWordBusFlowEvent removedEventWaitBus;
+        ZPIThWordBusFlowEvent removedEventWaitBus;
         try {
-            for( Map.Entry<Integer, ThWordBusFlowEvent> destoyedItem : this.eventsBusWaitList.entrySet() ){
+            for( Map.Entry<Integer, ZPIThWordBusFlowEvent> destoyedItem : this.eventsBusWaitList.entrySet() ){
                 destoyedItem.getValue().destructorBusFlowEvent();
                 keyRemovedEventWaitBus = destoyedItem.getKey();
                 removedEventWaitBus = this.eventsBusWaitList.remove(keyRemovedEventWaitBus);
@@ -258,9 +258,9 @@ public class ThWordState {
      */
     protected void destructorOfListDoBus(){
         Integer keyRemovedEventDoBus;
-        ThWordBusFlowEvent removedEventDoBus;
+        ZPIThWordBusFlowEvent removedEventDoBus;
         try {
-            for( Map.Entry<Integer, ThWordBusFlowEvent> destoyedItem : this.eventsBusDoList.entrySet() ){
+            for( Map.Entry<Integer, ZPIThWordBusFlowEvent> destoyedItem : this.eventsBusDoList.entrySet() ){
                 destoyedItem.getValue().destructorBusFlowEvent();
                 keyRemovedEventDoBus = destoyedItem.getKey();
                 removedEventDoBus = this.eventsBusDoList.remove(keyRemovedEventDoBus);
@@ -285,16 +285,16 @@ public class ThWordState {
      * @param numEventNameInputed
      * @return 
      */
-    protected ThWordBusFlowEvent getEventReadyBusByNumber(final Integer numEventNameInputed){
+    protected ZPIThWordBusFlowEvent getEventReadyBusByNumber(final Integer numEventNameInputed){
         Integer numEventReadyNameFunc;
         Integer eventReadyCodeByNumber;
-        ThWordBusFlowEvent returnedEventReadyBus;
+        ZPIThWordBusFlowEvent returnedEventReadyBus;
         try {
             numEventReadyNameFunc = (Integer) numEventNameInputed;
             eventReadyCodeByNumber = getEventReadyCodeByNumber(numEventReadyNameFunc);
-            returnedEventReadyBus = (ThWordBusFlowEvent) this.eventsBusReadyList.get(eventReadyCodeByNumber);
+            returnedEventReadyBus = (ZPIThWordBusFlowEvent) this.eventsBusReadyList.get(eventReadyCodeByNumber);
             if( returnedEventReadyBus == null  ){
-                returnedEventReadyBus = new ThWordBusFlowEvent(this.mainFlow);
+                returnedEventReadyBus = new ZPIThWordBusFlowEvent(this.mainFlow);
                 this.eventsBusReadyList.put(eventReadyCodeByNumber, returnedEventReadyBus);
             }
             return returnedEventReadyBus;
@@ -316,16 +316,16 @@ public class ThWordState {
      * @param numEventNameInputed
      * @return 
      */
-    protected ThWordBusFlowEvent getEventWaitBusByNumber(final Integer numEventNameInputed){
+    protected ZPIThWordBusFlowEvent getEventWaitBusByNumber(final Integer numEventNameInputed){
         Integer numEventWaitNameFunc;
         Integer eventWaitCodeByNumber;
-        ThWordBusFlowEvent returnedEventWaitBus;
+        ZPIThWordBusFlowEvent returnedEventWaitBus;
         try {
             numEventWaitNameFunc = (Integer) numEventNameInputed;
             eventWaitCodeByNumber = getEventWaitCodeByNumber(numEventWaitNameFunc);
-            returnedEventWaitBus = (ThWordBusFlowEvent) this.eventsBusWaitList.get(eventWaitCodeByNumber);
+            returnedEventWaitBus = (ZPIThWordBusFlowEvent) this.eventsBusWaitList.get(eventWaitCodeByNumber);
             if( returnedEventWaitBus == null  ){
-                returnedEventWaitBus = new ThWordBusFlowEvent(this.mainFlow);
+                returnedEventWaitBus = new ZPIThWordBusFlowEvent(this.mainFlow);
                 this.eventsBusWaitList.put(eventWaitCodeByNumber, returnedEventWaitBus);
             }
             return returnedEventWaitBus;
@@ -347,16 +347,16 @@ public class ThWordState {
      * @param numEventNameInputed
      * @return 
      */
-    protected ThWordBusFlowEvent getEventDoBusByNumber(final Integer numEventNameInputed){
+    protected ZPIThWordBusFlowEvent getEventDoBusByNumber(final Integer numEventNameInputed){
         Integer numEventDoNameFunc;
         Integer eventDoCodeByNumber;
-        ThWordBusFlowEvent returnedEventDoBus;
+        ZPIThWordBusFlowEvent returnedEventDoBus;
         try {
             numEventDoNameFunc = (Integer) numEventNameInputed;
             eventDoCodeByNumber = getEventDoCodeByNumber(numEventDoNameFunc);
             returnedEventDoBus = null;
             try {
-                returnedEventDoBus = (ThWordBusFlowEvent) this.eventsBusDoList.get(eventDoCodeByNumber);
+                returnedEventDoBus = (ZPIThWordBusFlowEvent) this.eventsBusDoList.get(eventDoCodeByNumber);
             } catch(ClassCastException exClassCast) {
                 System.err.println(exClassCast.getMessage());
                 exClassCast.getStackTrace();
@@ -366,7 +366,7 @@ public class ThWordState {
             }
             //ClassCastException - if the specified key cannot be compared with the keys currently in the map NullPointerException
             if( returnedEventDoBus == null  ){
-                returnedEventDoBus = new ThWordBusFlowEvent(this.mainFlow);
+                returnedEventDoBus = new ZPIThWordBusFlowEvent(this.mainFlow);
                 this.eventsBusDoList.put(eventDoCodeByNumber, returnedEventDoBus);
             }
             return returnedEventDoBus;
@@ -381,14 +381,14 @@ public class ThWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThWordBusFlowEvent getBusJobForWordRouterJobToWriter(){
+    protected ZPIThWordBusFlowEvent getBusJobForWordRouterJobToWriter(){
         if( !this.isWordRouterJobToWriter() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThWordState.class.getCanonicalName());
         }
-        return (ThWordBusFlowEvent) this.busWordRouterJobToWriter;
+        return (ZPIThWordBusFlowEvent) this.busWordRouterJobToWriter;
     }
-    protected void setBusJobForWordRouterJobToWriter(final ThWordBusFlowEvent busWordRouterJobToWriterOuter){
-        this.busWordRouterJobToWriter = (ThWordBusFlowEvent) busWordRouterJobToWriterOuter;
+    protected void setBusJobForWordRouterJobToWriter(final ZPIThWordBusFlowEvent busWordRouterJobToWriterOuter){
+        this.busWordRouterJobToWriter = (ZPIThWordBusFlowEvent) busWordRouterJobToWriterOuter;
         setTrueWordRouterJobToWriter();
     }
     protected void setTrueWordRouterJobToWriter(){
@@ -408,14 +408,14 @@ public class ThWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThWordBusFlowEvent getBusJobForWordRouterJobToReader(){
+    protected ZPIThWordBusFlowEvent getBusJobForWordRouterJobToReader(){
         if( !this.isWordRouterJobToReader() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThWordState.class.getCanonicalName());
         }
-        return (ThWordBusFlowEvent) this.busWordRouterJobToReader;
+        return (ZPIThWordBusFlowEvent) this.busWordRouterJobToReader;
     }
-    protected void setBusJobForWordRouterJobToReader(final ThWordBusFlowEvent busWordRouterJobToReaderOuter){
-        this.busWordRouterJobToReader = (ThWordBusFlowEvent) busWordRouterJobToReaderOuter;
+    protected void setBusJobForWordRouterJobToReader(final ZPIThWordBusFlowEvent busWordRouterJobToReaderOuter){
+        this.busWordRouterJobToReader = (ZPIThWordBusFlowEvent) busWordRouterJobToReaderOuter;
         setTrueWordRouterJobToReader();
     }
     protected void setTrueWordRouterJobToReader(){
@@ -431,16 +431,16 @@ public class ThWordState {
         return Boolean.FALSE;
     }
      /**
-     * ThWordBusReadedFlow
+     * ZPIThWordBusReadedFlow
      * @return 
      */
-    protected ThWordBusFlowEvent getWordFlowReaded(){
+    protected ZPIThWordBusFlowEvent getWordFlowReaded(){
         if( !this.isWordFlowReaded() ){
-            throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.thWordFlowRead;
     }
-    protected void setWordFlowReaded(final ThWordBusFlowEvent stateWordOuter){
+    protected void setWordFlowReaded(final ZPIThWordBusFlowEvent stateWordOuter){
         this.thWordFlowRead = stateWordOuter;
         setTrueWordFlowReaded();
     }

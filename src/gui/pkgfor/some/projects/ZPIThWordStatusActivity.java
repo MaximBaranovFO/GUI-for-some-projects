@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *                before write, count++ sended jobWrite
  * @author wladimirowichbiaran
  */
-public class ThWordStatusActivity {
+public class ZPIThWordStatusActivity {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -38,7 +38,7 @@ public class ThWordStatusActivity {
      */
     private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Long>> poolStatusActivity;
     
-    public ThWordStatusActivity(){
+    public ZPIThWordStatusActivity(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusActivity = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Long>>();
@@ -56,7 +56,7 @@ public class ThWordStatusActivity {
             inputedVal = (UUID) keyPointFlowActivity;
             getStatusActivityFormPool = this.poolStatusActivity.get(inputedVal);
             if( getStatusActivityFormPool == null ){
-                throw new IllegalStateException(ThWordStatusActivity.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusActivity.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -260,13 +260,13 @@ public class ThWordStatusActivity {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -306,13 +306,13 @@ public class ThWordStatusActivity {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -344,7 +344,7 @@ public class ThWordStatusActivity {
         try {
             keyPointFlowActivityFunc = (UUID) keyPointFlowActivity;
             if( keyPointFlowActivityFunc == null ){
-                throw new NullPointerException(ThWordStatusActivity.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusActivity.class.getCanonicalName() 
                         + " need point flow uuid, argument for validate is null");
             }
             if( !isStatusActivityNotExist(keyPointFlowActivityFunc) ){
@@ -354,7 +354,7 @@ public class ThWordStatusActivity {
                 paramCount = (Integer) getParamCount();
                 if( sizeRec != paramCount ){
                     
-                    throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                             + " parameters of flow statusActivity in Word is not valid, "
                             + "count records " + sizeRec + " not equal " + paramCount);
                 }
@@ -365,7 +365,7 @@ public class ThWordStatusActivity {
                     if( !statusActivityForKeyPointFlow.containsKey(paramCodeByNumber) ){
                         
                         paramNameByNumber = getParamNameByNumber(idxParam);
-                        throw new IllegalArgumentException(ThWordStatusActivity.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThWordStatusActivity.class.getCanonicalName() 
                             + " parameter "
                             + " for name: " + paramNameByNumber
                             + " in inputed data for set into flow statusActivity not exist");

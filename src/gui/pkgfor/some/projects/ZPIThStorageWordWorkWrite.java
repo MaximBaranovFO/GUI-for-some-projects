@@ -19,16 +19,16 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordWorkWrite implements Runnable{
+public class ZPIThStorageWordWorkWrite implements Runnable{
     private ZPIThStorageWordRule ruleStorageWordWrite;
     
-    ThStorageWordWorkWrite(final ZPIThStorageWordRule outerRuleStorageWordWrite){
+    ZPIThStorageWordWorkWrite(final ZPIThStorageWordRule outerRuleStorageWordWrite){
         this.ruleStorageWordWrite = outerRuleStorageWordWrite;
     }
     
     @Override
     public void run(){
-        System.out.println(ThStorageWordWorkWrite.class.getCanonicalName() 
+        System.out.println(ZPIThStorageWordWorkWrite.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleStorageWordWrite.toString());
         this.ruleStorageWordWrite.setTrueRunnedStorageWordWorkWrite();

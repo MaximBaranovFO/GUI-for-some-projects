@@ -24,42 +24,43 @@ import java.nio.file.FileSystems;
 import java.nio.file.ProviderNotFoundException;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.LinkedTransferQueue;
 
 /**
  *
  * @author wladimirowichbiaran
  */
-public class ThWordLogicRead {
-    protected void doReadFromIndexWord(final ThWordRule outerRuleWord){
+public class ZPIThWordLogicWrite {
+    protected void doWriteToIndexWord(final ZPIThWordRule outerRuleWord){
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
-        ThWordRule funcRuleWord;
+        ZPIThWordRule funcRuleWord;
         AppFileStorageIndex currentIndexStorages;
         UUID pollNextUuid;
         URI byPrefixGetUri;
         Map<String, String> byPrefixGetMap;
-        ThWordEventLogic eventLogic;
+        ZPIThWordEventLogic eventLogic;
         try {
             AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
             AdilState adilState = adilRule.getAdilState();
-            Integer numberProcessIndexSystem = 11;
+            Integer numberProcessIndexSystem = 12;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordLogicRead.class.getCanonicalName()
+                    + ZPIThWordLogicWrite.class.getCanonicalName()
                     + AdilConstants.METHOD
-                    + "doReadFromIndexWord()";
+                    + "doWriteToIndexWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
                     + AdilConstants.START);
-            funcRuleWord = (ThWordRule) outerRuleWord;
+            funcRuleWord = (ZPIThWordRule) outerRuleWord;
             
             indexRule = funcRuleWord.getIndexRule();
             //indexStatistic = indexRule.getIndexStatistic();
             //indexStatistic.updateDataStorages();
             currentIndexStorages = funcRuleWord.getIndexRule().getIndexState().currentIndexStorages();
+            
             byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
+            
             byPrefixGetMap = currentIndexStorages.byPrefixGetMap( 
                     AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
             for( Map.Entry<String, String> itemByPrefixGetMap : byPrefixGetMap.entrySet() ){
@@ -80,53 +81,56 @@ public class ThWordLogicRead {
                     + itemByPrefixGetMap.getValue()
                 );
             }
-            try( FileSystem fsForReadData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){
+            
+            try( FileSystem fsForWriteData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){
+                System.out.println("   ---   ---   ---   ---   ---   ---   ---   ---   ---   " 
+                    + ZPIThWordLogicWrite.class.getCanonicalName() + " open storage " + fsForWriteData.getPath("/").toUri().toString());
                 do {
-                    pollNextUuid = outerRuleWord.getWordState().getBusEventShort().pollNextUuid(2, 2);
-                    if( checkStateForUuidOnDoRead(outerRuleWord, pollNextUuid) ){
+                    pollNextUuid = outerRuleWord.getWordState().getBusEventShort().pollNextUuid(2, 3);
+                    if( checkStateForUuidOnDoWrite(outerRuleWord, pollNextUuid) ){
                         //move uuid in bus event shot
                         //move uuid in statebuseventlocal
-                        //do read data
+                        //do write data
                         //move uuid into wait read
-                        eventLogic = (ThWordEventLogic) outerRuleWord.getWordState().getEventLogic();
+                        eventLogic = (ZPIThWordEventLogic) outerRuleWord.getWordState().getEventLogic();
                         try {
-                            eventLogic.readDataFromStorage(fsForReadData, pollNextUuid);
+                            eventLogic.writeDataToStorage(fsForWriteData, pollNextUuid);
                         } catch(IllegalStateException exIllState) {
                             System.err.println(exIllState.getMessage());
                             exIllState.printStackTrace();
                         }
                     } else {
-                        //not founded in nextStep ready write uuids go into...
+                        //not founded in nextStep ready insertToCache uuids go into...
                     }
                 } while( funcRuleWord.isRunnedWordWorkRouter() );
-                //need read all cached data after end for all read jobs
+                //need write all cached data after end for all read jobs
             } catch(FileSystemAlreadyExistsException exAlExist){
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exAlExist.getMessage());
                 exAlExist.printStackTrace();
             } catch(FileSystemNotFoundException exFsNotExist){
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exFsNotExist.getMessage());
                 exFsNotExist.printStackTrace();
             } catch(ProviderNotFoundException exProvNotFound){
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exProvNotFound.getMessage());
                 exProvNotFound.printStackTrace();
             } catch(IllegalArgumentException exIllArg){
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exIllArg.getMessage());
                 exIllArg.printStackTrace();
             } catch(SecurityException exSec){
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exSec.getMessage());
                 exSec.printStackTrace();
             } catch (IOException exIo) {
-                System.err.println(ThWordLogicRead.class.getCanonicalName() 
+                System.err.println(ZPIThWordLogicWrite.class.getCanonicalName() 
                         + " error for open storage for index, reason " 
                         + exIo.getMessage());
                 exIo.printStackTrace();
@@ -145,7 +149,7 @@ public class ThWordLogicRead {
             eventLogic = null;
         }
     }
-    protected Boolean checkStateForUuidOnDoRead(ThWordRule outerRuleWord, UUID checkedReturnedUuid){
+    protected Boolean checkStateForUuidOnDoWrite(ZPIThWordRule outerRuleWord, UUID checkedReturnedUuid){
         LinkedTransferQueue<Integer[]> foundedNodes;
         try {
             if( checkedReturnedUuid != null ){
@@ -156,6 +160,9 @@ public class ThWordLogicRead {
                         continue;
                     }
                     if( foundUuidInList[0] == 0 || foundUuidInList[1] == 1 ){
+                        continue;
+                    }
+                    if( foundUuidInList[0] == 0 && foundUuidInList[1] == 2 ){
                         return Boolean.TRUE;
                     }
                 }
@@ -166,72 +173,20 @@ public class ThWordLogicRead {
             foundedNodes = null;
         }
     }
-    
-
-    private static ConcurrentSkipListMap<UUID, ZPITdataWord> doUtilizationDataInitNew(ConcurrentSkipListMap<UUID, ZPITdataWord> prevData){
-        utilizeTdataWord(prevData);
-        return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
+    protected void readNextUuidFromEventShot(){
+        
     }
-    private static void utilizeTdataWord(ConcurrentSkipListMap<UUID, ZPITdataWord> forUtilizationData){
-        UUID keyForDelete;
-        ZPITdataWord removedData;
-        try {
-            for( Map.Entry<UUID, ZPITdataWord> deletingItem : forUtilizationData.entrySet() ){
-                keyForDelete = deletingItem.getKey();
-                removedData = forUtilizationData.remove(keyForDelete);
-                removedData.dirListFile = null;
-                removedData.hexSubString = null;
-                removedData.hexSubStringHash = null;
-                removedData.lengthSubString = null;
-                removedData.positionSubString = null;
-                removedData.randomUUID = null;
-                removedData.recordHash = null;
-                removedData.recordTime = null;
-                removedData.recordUUID = null;
-                removedData.strSubString = null;
-                removedData.strSubStringHash = null;
-                removedData.typeWord = null;
-                removedData = null;
-                keyForDelete = null;
-            }
-            forUtilizationData = null;
-        } finally {
-            keyForDelete = null;
-            removedData = null;
-        }
+    protected void readExtendedInfoForUUID(){
+        
     }
-    /**
-     * 
-     * @param namePrefixFileNameFromFlowInputed
-     * @param recordsCountInputed
-     * @param volumeNumberInputed
-     * @return 
-     */
-    private static String fileNameBuilder(
-            final String namePrefixFileNameFromFlowInputed,
-            final Integer recordsCountInputed,
-            final Integer volumeNumberInputed){
-        String namePrefixFunc;
-        Integer recordsCountFunc;
-        Integer volumeNumberFunc;
-        String buildedFileName;
-        try {
-            namePrefixFunc = new String(namePrefixFileNameFromFlowInputed);
-            recordsCountFunc = (Integer) recordsCountInputed;
-            volumeNumberFunc = (Integer) volumeNumberInputed;
-            buildedFileName = new String()
-                .concat(AppFileNamesConstants.SZFS_WORD_FILE_PREFIX)
-                .concat(namePrefixFunc.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
-                .concat(String.valueOf(recordsCountFunc))
-                .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
-                .concat(String.valueOf(volumeNumberFunc));
-            return buildedFileName;
-        } finally {
-            namePrefixFunc = null;
-            recordsCountFunc = null;
-            volumeNumberFunc = null;
-            buildedFileName = null;
-        }
+    protected void readDataFromCache(){
+        
+    }
+    protected void writeDataToStorage(){
+        
+    }
+    protected void deleteOldDataFromStorage(){
+        
     }
 
 }

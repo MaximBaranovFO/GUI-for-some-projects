@@ -37,9 +37,9 @@ public class ZPIThStorageWordRule {
     private Boolean isSetStorageWordWorkRouter;
     private Boolean isRunStorageWordWorkRouter;
     /**
-     * ThStorageWordWorkWrite
+     * ZPIThStorageWordWorkWrite
      */
-    private ThStorageWordWorkWrite runnableWorkerStorageWordWrite;
+    private ZPIThStorageWordWorkWrite runnableWorkerStorageWordWrite;
     private Boolean isSetStorageWordWorkWrite;
     private Boolean isRunStorageWordWorkWrite;
     /**
@@ -108,7 +108,7 @@ public class ZPIThStorageWordRule {
         if( !this.isStorageWordWorkFilter() ){
             throw new IllegalArgumentException(ZPIThStorageWordWorkFilter.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordFilter;
@@ -166,7 +166,7 @@ public class ZPIThStorageWordRule {
         if( !this.isStorageWordWorkRouter() ){
             throw new IllegalArgumentException(ZPIThStorageWordWorkRouter.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordRouter;
@@ -213,20 +213,20 @@ public class ZPIThStorageWordRule {
         }
     }
     /**
-     * ThStorageWordWorkWrite
+     * ZPIThStorageWordWorkWrite
      * @return 
      */
-    protected ThStorageWordWorkWrite getStorageWordWorkWrite(){
+    protected ZPIThStorageWordWorkWrite getStorageWordWorkWrite(){
         if( !this.isStorageWordWorkWrite() ){
-            throw new IllegalArgumentException(ThStorageWordWorkWrite.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThStorageWordWorkWrite.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordWrite;
     }
-    protected void setStorageWordWorkWrite(final ThStorageWordWorkWrite runnableWorkerStorageWordWriteOuter){
-        this.runnableWorkerStorageWordWrite = (ThStorageWordWorkWrite) runnableWorkerStorageWordWriteOuter;
+    protected void setStorageWordWorkWrite(final ZPIThStorageWordWorkWrite runnableWorkerStorageWordWriteOuter){
+        this.runnableWorkerStorageWordWrite = (ZPIThStorageWordWorkWrite) runnableWorkerStorageWordWriteOuter;
         setTrueStorageWordWorkWrite();
     }
     protected void setTrueStorageWordWorkWrite(){
@@ -274,7 +274,7 @@ public class ZPIThStorageWordRule {
         if( !this.isStorageWordWorkRead() ){
             throw new IllegalArgumentException(ZPIThStorageWordWorkRead.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordRead;
@@ -326,7 +326,7 @@ public class ZPIThStorageWordRule {
      */
     protected ZPIThStorageWordState getStorageWordState(){
         if( !this.isStorageWordState() ){
-            throw new IllegalArgumentException(ZPIThStorageWordState.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordState.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.currentStorageWordState;
     }
@@ -352,7 +352,7 @@ public class ZPIThStorageWordRule {
      */
     protected ZPIThStorageWordStatusMainFlow getStorageWordStatusMainFlow(){
         if( !this.isStorageWordStatusMainFlow() ){
-            throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.currentStorageWordStatusMainFlow;
     }

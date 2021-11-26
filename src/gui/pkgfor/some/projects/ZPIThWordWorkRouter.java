@@ -20,9 +20,9 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ZPIThWordWorkRouter implements Runnable{
-    private ThWordRule ruleWordRouter;
+    private ZPIThWordRule ruleWordRouter;
     
-    ZPIThWordWorkRouter(final ThWordRule outerRuleWordRouter){
+    ZPIThWordWorkRouter(final ZPIThWordRule outerRuleWordRouter){
         this.ruleWordRouter = outerRuleWordRouter;
     }
     
@@ -32,9 +32,9 @@ public class ZPIThWordWorkRouter implements Runnable{
                 + " run and say " 
                 + this.ruleWordRouter.toString());
         this.ruleWordRouter.setTrueRunnedWordWorkRouter();
-        ThreadLocal<ThWordLogicRouter> logicWordWorkRouter = new ThreadLocal<ThWordLogicRouter>();
+        ThreadLocal<ZPIThWordLogicRouter> logicWordWorkRouter = new ThreadLocal<ZPIThWordLogicRouter>();
         try{
-            logicWordWorkRouter.set(new ThWordLogicRouter());
+            logicWordWorkRouter.set(new ZPIThWordLogicRouter());
             logicWordWorkRouter.get().doRouterForIndexWord(this.ruleWordRouter);
         } finally {
             logicWordWorkRouter.remove();

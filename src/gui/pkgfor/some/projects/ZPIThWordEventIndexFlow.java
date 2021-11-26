@@ -22,14 +22,14 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordEventIndexFlow {
+public class ZPIThWordEventIndexFlow {
     private ConcurrentSkipListMap<UUID, UUID> workers;
     private ConcurrentSkipListMap<UUID, UUID> activity;
     private ConcurrentSkipListMap<UUID, UUID> dataCache;
     private ConcurrentSkipListMap<UUID, UUID> dataFs;
     private ConcurrentSkipListMap<UUID, UUID> error;
     private ConcurrentSkipListMap<UUID, UUID> name;
-    ThWordEventIndexFlow(){
+    ZPIThWordEventIndexFlow(){
         this.workers = new ConcurrentSkipListMap<UUID, UUID>();
         this.activity = new ConcurrentSkipListMap<UUID, UUID>();
         this.dataCache = new ConcurrentSkipListMap<UUID, UUID>();

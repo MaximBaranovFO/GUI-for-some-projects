@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * from word index folder
  * @author wladimirowichbiaran
  */
-public class ThWordHelper {
+public class ZPIThWordHelper {
     private static String storagePrefix = AppFileNamesConstants.SZFS_WORD_FILE_PREFIX;
     /**
      * create strinc for directory by typeWord
@@ -244,7 +244,7 @@ public class ThWordHelper {
             }
             return new ConcurrentSkipListMap<UUID, ZPITdataWord>();
         } finally {
-            ThWordHelper.utilizeTdataWord(readedFromFileData);
+            ZPIThWordHelper.utilizeTdataWord(readedFromFileData);
             readedFromFileData = null;
         }
     }
@@ -276,7 +276,7 @@ public class ThWordHelper {
             if( recordHash.equals(calculatedHash) ){
                 return Boolean.TRUE;
             }
-            System.err.println(ThWordHelper.class.getCanonicalName() + " Not valide data, in transfered record hash value is "
+            System.err.println(ZPIThWordHelper.class.getCanonicalName() + " Not valide data, in transfered record hash value is "
                     + String.valueOf(recordHash)
                     + ", calculated value is "
                     + String.valueOf(calculatedHash));

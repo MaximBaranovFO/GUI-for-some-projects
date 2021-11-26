@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *     ConcurrentHashMap<String, String> (3) - <hexWord (tagFileName), subString>
  * @author wladimirowichbiaran
  */
-public class ThWordCacheHaReaded {
+public class ZPIThWordCacheHaReaded {
     /**
      * @todo
      * <typeWord, <tagName.substring(0,3), strName.length, <tagName, <UUID, TdataWord>>>>
@@ -37,7 +37,7 @@ public class ThWordCacheHaReaded {
                 ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, ConcurrentHashMap<UUID, ZPITdataWord>>>>> cachedData;
     
-    public ThWordCacheHaReaded() {
+    public ZPIThWordCacheHaReaded() {
         this.cachedData = createNewListStoragesMapEmpty();
     }
     private ConcurrentHashMap<Integer, 
@@ -417,9 +417,9 @@ public class ThWordCacheHaReaded {
         try {
             dataFunc = (ZPITdataWord) dataInputed;
             
-            tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
+            tdataWordValid = ZPIThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -473,14 +473,14 @@ public class ThWordCacheHaReaded {
             int strSubStringlength = strSubStringFunction.length();
             int tagNamelength = tagNameFunction.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunction + " lengthHex: " + tagNameFunction.length()
                         + " strSubString: " + strSubStringFunction + " lengthStr: " + strSubStringFunction.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunction + " length: " + tagNameFunction.length()
                         + " < 4 ");
@@ -530,9 +530,9 @@ public class ThWordCacheHaReaded {
         Boolean tdataWordValid;
         try {
             dataFunc = (ZPITdataWord) dataInputed;
-            tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
+            tdataWordValid = ZPIThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " inputed not valid data for poll from cache object class " 
                         + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
@@ -549,7 +549,7 @@ public class ThWordCacheHaReaded {
                 throw new NullPointerException(exNull.getMessage());
             }
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordCacheHa.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc
@@ -611,14 +611,14 @@ public class ThWordCacheHaReaded {
             int strSubStringlength = strSubStringFunc.length();
             int tagNamelength = tagNameFunc.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNameFunc.length()
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringFunc.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -627,7 +627,7 @@ public class ThWordCacheHaReaded {
             String substringTagName = tagNameFunc.substring(0, 3);
             valListByTagNameCode = valListByTypeWord.get(substringTagName);
             if( valListByTagNameCode == null ){
-                throw new NullPointerException(ThWordCacheHa.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc
@@ -635,7 +635,7 @@ public class ThWordCacheHaReaded {
             }
             valListBySubStrLength = valListByTagNameCode.get(strSubStringlength);
             if( valListBySubStrLength == null ){
-                throw new NullPointerException(ThWordCacheHa.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc
@@ -643,7 +643,7 @@ public class ThWordCacheHaReaded {
             }
             valTagNameListData = valListBySubStrLength.remove(tagNameFunc);
             if( valTagNameListData == null ){
-                throw new NullPointerException(ThWordCacheHa.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc
@@ -737,9 +737,9 @@ public class ThWordCacheHaReaded {
         Boolean tdataWordValid;
         try {
             funcData = (ZPITdataWord) dataForSet;
-            tdataWordValid = ThWordHelper.isTdataWordValid(funcData);
+            tdataWordValid = ZPIThWordHelper.isTdataWordValid(funcData);
             if( !tdataWordValid ){
-                throw new IllegalArgumentException(ThWordCacheHa.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordCacheHa.class.getCanonicalName() 
                         + " inputed not valid data for set into cache object class " 
                         + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + funcData.toString());

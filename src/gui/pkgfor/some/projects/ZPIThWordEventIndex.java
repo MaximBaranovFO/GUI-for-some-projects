@@ -67,17 +67,17 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *  from markProcListReading to readReadyDataEvent when process end
  * @author wladimirowichbiaran
  */
-public class ThWordEventIndex {
+public class ZPIThWordEventIndex {
     private final Long timeCreation;
     private final UUID objectLabel;
     private ThWordStatusMainFlow wordStatusMainFlow;
-    private ThWordState wordState;
+    private ZPIThWordState wordState;
     private ConcurrentSkipListMap<UUID, String> idxMainFlowHexTagName;
     private ConcurrentSkipListMap<UUID, String> idxMainFlowSubString;
     private ConcurrentSkipListMap<UUID, Integer> idxMainFlowTypeWord;
     private ConcurrentSkipListMap<UUID, Integer> idxMainFlowEventBusNumber;
     
-    public ThWordEventIndex(ThWordRule ruleInputed) {
+    public ZPIThWordEventIndex(ZPIThWordRule ruleInputed) {
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.wordStatusMainFlow = ruleInputed.getWordStatusMainFlow();
@@ -97,7 +97,7 @@ public class ThWordEventIndex {
         try {
             getHexTagName = this.idxMainFlowHexTagName.get(mainFlowUUID);
             if( getHexTagName == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " returned HexTagName is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " returned HexTagName is null");
             }
             return getHexTagName;
         } finally {
@@ -115,7 +115,7 @@ public class ThWordEventIndex {
         try {
             getTypeWord = this.idxMainFlowTypeWord.get(mainFlowUUID);
             if( getTypeWord == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " returned TypeWord is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " returned TypeWord is null");
             }
             return getTypeWord;
         } finally {
@@ -133,7 +133,7 @@ public class ThWordEventIndex {
         try {
             getSubString = this.idxMainFlowSubString.get(mainFlowUUID);
             if( getSubString == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " returned SubString is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " returned SubString is null");
             }
             return getSubString;
         } finally {
@@ -155,15 +155,15 @@ public class ThWordEventIndex {
             funcTypeWord = (Integer) inputedTypeWord;
             funcMainFlowUUID = (UUID) inputedMainFlowUUID;
             if( funcTypeWord == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed TypeWord is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed TypeWord is null");
             }
             if( funcMainFlowUUID == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
             }
             pervValue = this.idxMainFlowTypeWord.put(funcMainFlowUUID, funcTypeWord);
             if( pervValue != null ){
                 this.idxMainFlowTypeWord.put(funcMainFlowUUID, pervValue);
-                throw new IllegalArgumentException(ThWordEventIndex.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordEventIndex.class.getCanonicalName() 
                         + " value: " + String.valueOf(pervValue)
                         + " for UUID: " + funcMainFlowUUID.toString()
                         + " exist in index, new value: " + String.valueOf(funcTypeWord)
@@ -190,18 +190,18 @@ public class ThWordEventIndex {
             funcHexTagName = (String) inputedHexTagName;
             funcMainFlowUUID = (UUID) inputedMainFlowUUID;
             if( funcHexTagName == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed HexTagName is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed HexTagName is null");
             }
             if( funcHexTagName.isEmpty() ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed HexTagName is empty");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed HexTagName is empty");
             }
             if( funcMainFlowUUID == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
             }
             pervValue = this.idxMainFlowHexTagName.put(funcMainFlowUUID, funcHexTagName);
             if( pervValue != null ){
                 this.idxMainFlowHexTagName.put(funcMainFlowUUID, pervValue);
-                throw new IllegalArgumentException(ThWordEventIndex.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordEventIndex.class.getCanonicalName() 
                         + " value: " + String.valueOf(pervValue)
                         + " for UUID: " + funcMainFlowUUID.toString()
                         + " exist in index, new value: " + String.valueOf(funcHexTagName)
@@ -228,18 +228,18 @@ public class ThWordEventIndex {
             funcSubString = (String) inputedSubString;
             funcMainFlowUUID = (UUID) inputedMainFlowUUID;
             if( funcSubString == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed SubString is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed SubString is null");
             }
             if( funcSubString.isEmpty() ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed SubString is empty");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed SubString is empty");
             }
             if( funcMainFlowUUID == null ){
-                throw new NullPointerException(ThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
+                throw new NullPointerException(ZPIThWordEventIndex.class.getCanonicalName() + " inputed MainFlowUUID is null");
             }
             pervValue = this.idxMainFlowSubString.put(funcMainFlowUUID, funcSubString);
             if( pervValue != null ){
                 this.idxMainFlowSubString.put(funcMainFlowUUID, pervValue);
-                throw new IllegalArgumentException(ThWordEventIndex.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordEventIndex.class.getCanonicalName() 
                         + " value: " + String.valueOf(pervValue)
                         + " for UUID: " + funcMainFlowUUID.toString()
                         + " exist in index, new value: " + String.valueOf(funcSubString)
@@ -265,8 +265,8 @@ public class ThWordEventIndex {
         String tagNameFunc;
         UUID checkForExistUuidFunc;
         Boolean uuidExistInFlowByTypeWordHexTagName;
-        ThWordBusFlowEvent eventBusProcDeleting;
-        ThWordBusFlowEvent eventBusEventDeleting;
+        ZPIThWordBusFlowEvent eventBusProcDeleting;
+        ZPIThWordBusFlowEvent eventBusEventDeleting;
         Boolean existUUIDByTypeWordHexTagName;
         try {
             typeWordFunc = (Integer) typeWordInputed;

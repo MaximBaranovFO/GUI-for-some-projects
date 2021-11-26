@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordBusReadedFlow {
+public class ZPIThWordBusReadedFlow {
     /**
      * ConcurrentSkipListMap<Integer, Integer> (<hashFieldCode, Value>)
      * hashFieldCode:
@@ -57,7 +57,7 @@ public class ThWordBusReadedFlow {
 
     private ThWordStatusMainFlow mainWordFlow;
     
-    public ThWordBusReadedFlow(ThWordStatusMainFlow storageWordStatisticOuter) {
+    public ZPIThWordBusReadedFlow(ThWordStatusMainFlow storageWordStatisticOuter) {
         this.mainWordFlow = storageWordStatisticOuter;
         this.uuidReadedFlowMap = createNewListStoragesMapEmpty();
 
@@ -78,9 +78,9 @@ public class ThWordBusReadedFlow {
         try {
             dataFunc = (ZPITdataWord) dataInputed;
             
-            tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
+            tdataWordValid = ZPIThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
-                throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -90,12 +90,12 @@ public class ThWordBusReadedFlow {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -152,14 +152,14 @@ public class ThWordBusReadedFlow {
             substringTagName = tagName.substring(0, 3);
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringlength
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNamelength
                         + " < 4 ");
@@ -233,7 +233,7 @@ public class ThWordBusReadedFlow {
                     ConcurrentSkipListMap<Integer, UUID>> typeWordTagFileNameFlowUuidsFromMain;
         try {
             if( !this.mainWordFlow.isUuidExistInFlow(typeWord, tagName, strSubString, mainFlowContentInputed) ){
-                throw new IllegalArgumentException(ThWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusReadedFlow.class.getCanonicalName() 
                         + " UUID: "
                         + mainFlowContentInputed.toString() 
                         + " in mainFlow not exist, hexTagName: "

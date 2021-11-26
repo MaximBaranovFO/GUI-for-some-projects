@@ -20,9 +20,9 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ThWordWorkRead implements Runnable {
-    private ThWordRule ruleWordRead;
+    private ZPIThWordRule ruleWordRead;
     
-    ThWordWorkRead(final ThWordRule outerRuleWordRead){
+    ThWordWorkRead(final ZPIThWordRule outerRuleWordRead){
         this.ruleWordRead = outerRuleWordRead;
     }
     
@@ -32,9 +32,9 @@ public class ThWordWorkRead implements Runnable {
                 + " run and say " 
                 + this.ruleWordRead.toString());
         this.ruleWordRead.setTrueRunnedWordWorkRead();
-        ThreadLocal<ThWordLogicRead> logicWordWorkRead = new ThreadLocal<ThWordLogicRead>();
+        ThreadLocal<ZPIThWordLogicRead> logicWordWorkRead = new ThreadLocal<ZPIThWordLogicRead>();
         try{
-            logicWordWorkRead.set(new ThWordLogicRead());
+            logicWordWorkRead.set(new ZPIThWordLogicRead());
             logicWordWorkRead.get().doReadFromIndexWord(this.ruleWordRead);
         } finally {
             logicWordWorkRead.remove();

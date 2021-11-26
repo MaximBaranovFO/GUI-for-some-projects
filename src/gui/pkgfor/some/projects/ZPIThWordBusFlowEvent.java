@@ -25,7 +25,7 @@ import java.util.concurrent.LinkedTransferQueue;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordBusFlowEvent {
+public class ZPIThWordBusFlowEvent {
     /**
      * ConcurrentSkipListMap<Integer, Integer> (<hashFieldCode, Value>)
      * hashFieldCode:
@@ -58,7 +58,7 @@ public class ThWordBusFlowEvent {
 
     private ThWordStatusMainFlow mainWordFlow;
     
-    public ThWordBusFlowEvent(ThWordStatusMainFlow storageWordStatisticOuter) {
+    public ZPIThWordBusFlowEvent(ThWordStatusMainFlow storageWordStatisticOuter) {
         this.mainWordFlow = (ThWordStatusMainFlow) storageWordStatisticOuter;
         this.uuidReadedFlowMap = createNewListStoragesMapEmpty();
 
@@ -81,9 +81,9 @@ public class ThWordBusFlowEvent {
         try {
             dataFunc = (ZPITdataWord) dataInputed;
             
-            tdataWordValid = ThWordHelper.isTdataWordValid(dataFunc);
+            tdataWordValid = ZPIThWordHelper.isTdataWordValid(dataFunc);
             if( !tdataWordValid ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not valid data for get from cache object class " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -93,12 +93,12 @@ public class ThWordBusFlowEvent {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in ReadedFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -149,14 +149,14 @@ public class ThWordBusFlowEvent {
             tagNamelength = tagName.length();
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringlength
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNamelength
                         + " < 4 ");
@@ -164,13 +164,13 @@ public class ThWordBusFlowEvent {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
@@ -224,14 +224,14 @@ public class ThWordBusFlowEvent {
             tagNamelength = tagName.length();
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringlength
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNamelength
                         + " < 4 ");
@@ -239,13 +239,13 @@ public class ThWordBusFlowEvent {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
@@ -284,7 +284,7 @@ public class ThWordBusFlowEvent {
      */
     protected Boolean removeMainFlowUuid(
             UUID mainFlowUuidInputed,
-            ThWordEventIndex eventIndexInputed){
+            ZPIThWordEventIndex eventIndexInputed){
         ConcurrentSkipListMap<String, LinkedTransferQueue<UUID>> dataTypeWordTagNameSubStr;
 
         LinkedTransferQueue<UUID> getCurrentList;
@@ -305,14 +305,14 @@ public class ThWordBusFlowEvent {
             tagNamelength = tagNameFunc.length();
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringlength
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNamelength
                         + " < 4 ");
@@ -320,13 +320,13 @@ public class ThWordBusFlowEvent {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc);
@@ -370,12 +370,12 @@ public class ThWordBusFlowEvent {
             mainFlowContentFunc = getFlowUuidsByTypeWordHexTagName(typeWordFunc, uuidFlowContentFunc, tagNameFunc);
             
             if( mainFlowContentFunc == null ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength);
             }
             if( mainFlowContentFunc.isEmpty() ){
-                throw new NullPointerException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " not have UUIDs in for key type, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength);
             }
@@ -440,14 +440,14 @@ public class ThWordBusFlowEvent {
             substringTagName = tagName.substring(0, 3);
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNamelength
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringlength
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNamelength
                         + " < 4 ");
@@ -642,7 +642,7 @@ public class ThWordBusFlowEvent {
             mainFlowContentFunc = getFlowUuidsByTypeWordHexTagName(typeWordFunc, uuidFlowContentFunc, tagNameFunc);
             
             if( isExistInEventQueue(mainFlowContentFunc, uuidFlowContentFunc) ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " UUID: "
                         + uuidFlowContentFunc.toString() 
                         + " exist in event flow, hexTagName: "
@@ -703,7 +703,7 @@ public class ThWordBusFlowEvent {
             strSubStringFunc = (String) strSubString;
             uuidFlowContentFunc = (UUID) mainFlowContentInputed;
             if( !this.mainWordFlow.isUuidExistInFlow(typeWordFunc, tagNameFunc, strSubStringFunc, uuidFlowContentFunc) ){
-                throw new IllegalArgumentException(ThWordBusFlowEvent.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordBusFlowEvent.class.getCanonicalName() 
                         + " UUID: "
                         + uuidFlowContentFunc.toString() 
                         + " in mainFlow not exist, hexTagName: "

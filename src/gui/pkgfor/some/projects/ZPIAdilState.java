@@ -229,7 +229,7 @@ public class ZPIAdilState {
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -269,7 +269,7 @@ public class ZPIAdilState {
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -309,7 +309,7 @@ public class ZPIAdilState {
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -349,7 +349,7 @@ public class ZPIAdilState {
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -389,7 +389,7 @@ public class ZPIAdilState {
                     + strForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -440,7 +440,7 @@ public class ZPIAdilState {
                     messageForLogInputed));
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -489,7 +489,7 @@ public class ZPIAdilState {
                     + messageForLogInputed);
         } finally {
             logLinesBusByNumber = null;
-            ThWordHelper.utilizeStringValues(new String[]{strForInput});
+            ZPIThWordHelper.utilizeStringValues(new String[]{strForInput});
         }
     }
     /**
@@ -532,7 +532,7 @@ public class ZPIAdilState {
                 }
             } finally {
                 logLinesBusByNumber = null;
-                ThWordHelper.utilizeStringValues(new String[]{strForInput, instanceStartTimeWithMS});
+                ZPIThWordHelper.utilizeStringValues(new String[]{strForInput, instanceStartTimeWithMS});
             }
         }
     }
@@ -574,7 +574,7 @@ public class ZPIAdilState {
             } while( !logLinesBusByNumber.isEmpty() );
             return strForInput;
         } finally {
-            ThWordHelper.utilizeStringValues(new String[]{poll});
+            ZPIThWordHelper.utilizeStringValues(new String[]{poll});
             logLinesBusByNumber = null;
         }
     }
@@ -599,7 +599,7 @@ public class ZPIAdilState {
         } finally {
             idx = null;
             countParamsDataFsForSet = null;
-            ThWordHelper.utilizeStringValues(new String[]{paramNameByNumber});
+            ZPIThWordHelper.utilizeStringValues(new String[]{paramNameByNumber});
             returnedArrayLinesByNumber = null;
             forReturnList = null;
         }

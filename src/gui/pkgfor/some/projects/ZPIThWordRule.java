@@ -21,7 +21,7 @@ import java.util.UUID;
  * 
  * @author wladimirowichbiaran
  */
-public class ThWordRule {
+public class ZPIThWordRule {
     private final ThreadGroup workerThWord;
     private final ZPIThIndexRule indexRule;
 
@@ -44,9 +44,9 @@ public class ThWordRule {
     private Boolean isSetWordWorkRead;
     private Boolean isRunWordWorkRead;
     /**
-     * ThWordState
+     * ZPIThWordState
      */
-    private ThWordState currentWordState;
+    private ZPIThWordState currentWordState;
     private Boolean isSetWordState;
     /**
      * ThWordStatusMainFlow
@@ -55,7 +55,7 @@ public class ThWordRule {
     private Boolean isSetWordStatusMainFlow;
     
     
-    public ThWordRule(final ZPIThIndexRule outerRuleIndex) {
+    public ZPIThWordRule(final ZPIThIndexRule outerRuleIndex) {
         this.indexRule = (ZPIThIndexRule) outerRuleIndex;
         this.workerThWord = new ThreadGroup(UUID.randomUUID().toString());
         /**
@@ -97,7 +97,7 @@ public class ThWordRule {
         if( !this.isWordWorkRouter() ){
             throw new IllegalArgumentException(ZPIThWordWorkRouter.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordRouter;
@@ -151,7 +151,7 @@ public class ThWordRule {
         if( !this.isWordWorkWrite() ){
             throw new IllegalArgumentException(ZPIThWordWorkWrite.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordWrite;
@@ -205,7 +205,7 @@ public class ThWordRule {
         if( !this.isWordWorkRead() ){
             throw new IllegalArgumentException(ThWordWorkRead.class.getCanonicalName() 
                     + " object not set in " 
-                    + ThWordRule.class.getCanonicalName()
+                    + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordRead;
@@ -252,17 +252,17 @@ public class ThWordRule {
         }
     }
     /**
-     * ThWordState
+     * ZPIThWordState
      * @return 
      */
-    protected ThWordState getWordState(){
+    protected ZPIThWordState getWordState(){
         if( !this.isWordState() ){
-            throw new IllegalArgumentException(ThWordState.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThWordState.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.currentWordState;
     }
-    protected void setWordState(final ThWordState stateWordOuter){
-        this.currentWordState = (ThWordState) stateWordOuter;
+    protected void setWordState(final ZPIThWordState stateWordOuter){
+        this.currentWordState = (ZPIThWordState) stateWordOuter;
         setTrueWordState();
     }
     protected void setTrueWordState(){
@@ -283,7 +283,7 @@ public class ThWordRule {
      */
     protected ThWordStatusMainFlow getWordStatusMainFlow(){
         if( !this.isWordStatusMainFlow() ){
-            throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.currentWordStatusMainFlow;
     }

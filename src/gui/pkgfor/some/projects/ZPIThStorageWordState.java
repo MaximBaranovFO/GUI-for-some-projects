@@ -151,7 +151,7 @@ public class ZPIThStorageWordState {
      */
     protected ZPIThStorageWordBusOutput getBusJobForWordWrite(){
         if( !this.isWordWritedJob() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThWordState.class.getCanonicalName());
         }
         return this.busWordWritedJob;
     }
@@ -178,7 +178,7 @@ public class ZPIThStorageWordState {
      */
     protected ZPIThStorageWordBusOutput getBusJobForLongWordWrite(){
         if( !this.isLongWordWritedJob() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThWordState.class.getCanonicalName());
         }
         return this.busLongWordWritedJob;
     }
@@ -204,7 +204,7 @@ public class ZPIThStorageWordState {
      */
     protected ZPIThStorageWordBusReadedFlow getStorageWordFlowReaded(){
         if( !this.isStorageWordFlowReaded() ){
-            throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.thStorageWordFlowRead;
     }

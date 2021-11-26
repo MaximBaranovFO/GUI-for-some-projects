@@ -20,9 +20,9 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ZPIThWordWorkWrite implements Runnable{
-    private ThWordRule ruleWordWrite;
+    private ZPIThWordRule ruleWordWrite;
     
-    ZPIThWordWorkWrite(final ThWordRule outerRuleWordWrite){
+    ZPIThWordWorkWrite(final ZPIThWordRule outerRuleWordWrite){
         this.ruleWordWrite = outerRuleWordWrite;
     }
     
@@ -32,9 +32,9 @@ public class ZPIThWordWorkWrite implements Runnable{
                 + " run and say " 
                 + this.ruleWordWrite.toString());
         this.ruleWordWrite.setTrueRunnedWordWorkWrite();
-        ThWordLogicWrite logicWordWorkWrite;
+        ZPIThWordLogicWrite logicWordWorkWrite;
         try{
-            logicWordWorkWrite = new ThWordLogicWrite();
+            logicWordWorkWrite = new ZPIThWordLogicWrite();
             logicWordWorkWrite.doWriteToIndexWord(this.ruleWordWrite);
         } finally {
             logicWordWorkWrite = null;

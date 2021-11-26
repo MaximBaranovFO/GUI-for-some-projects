@@ -34,14 +34,14 @@ public class ZPIThIndexWord extends Thread{
         System.out.println(ZPIThIndexWord.class.getCanonicalName() 
                 + " do it +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         //ThIndexState indexState = this.ruleThIndex.getIndexState();
-        ThWordRule thWordRule = new ThWordRule(this.ruleThIndex);
+        ZPIThWordRule thWordRule = new ZPIThWordRule(this.ruleThIndex);
         //init State
         ThWordStatusMainFlow wordStatusMainFlow = new ThWordStatusMainFlow();
         thWordRule.setWordStatusMainFlow(wordStatusMainFlow);
-        ThWordBusFlowEvent busWordRouterJobToReaderOuter = new ThWordBusFlowEvent(wordStatusMainFlow);
-        ThWordBusFlowEvent busWordRouterJobToWriterOuter = new ThWordBusFlowEvent(wordStatusMainFlow);
-        ThWordBusFlowEvent stateWordReadedOuter = new ThWordBusFlowEvent(wordStatusMainFlow);
-        ThWordState thWordState = new ThWordState(thWordRule);
+        ZPIThWordBusFlowEvent busWordRouterJobToReaderOuter = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
+        ZPIThWordBusFlowEvent busWordRouterJobToWriterOuter = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
+        ZPIThWordBusFlowEvent stateWordReadedOuter = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
+        ZPIThWordState thWordState = new ZPIThWordState(thWordRule);
         thWordRule.setWordState(thWordState);
         thWordState.setBusJobForWordRouterJobToReader(busWordRouterJobToReaderOuter);
         thWordState.setBusJobForWordRouterJobToWriter(busWordRouterJobToWriterOuter);

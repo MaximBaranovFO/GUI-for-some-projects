@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * <mainFlowContentFunc, <String.hashCode(), String.Value>>
  * @author wladimirowichbiaran
  */
-public class ThWordBusWriter {
+public class ZPIThWordBusReader {
     /**
      * ConcurrentSkipListMap<Integer, Long>
      * <typeWordBus, System.nanoTime>
@@ -38,7 +38,7 @@ public class ThWordBusWriter {
      */
     private ConcurrentSkipListMap<Integer, ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<String, String>>> poolBusWordData;
     
-    ThWordBusWriter(){
+    ZPIThWordBusReader(){
         this.poolBusWordData = new ConcurrentSkipListMap<Integer, ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<String, String>>>();
         this.lastLastAccessUsedBusNanoTime = new ConcurrentSkipListMap<Integer, Long>();
     }

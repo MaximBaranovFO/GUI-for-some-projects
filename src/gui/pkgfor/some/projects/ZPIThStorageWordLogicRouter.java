@@ -112,7 +112,7 @@ public class ZPIThStorageWordLogicRouter {
                     if( countRecToConsole > 2503 ){
                         countRecToConsole = 0;
                     }
-                    ThWordHelper.utilizeStringValues(new String[]{keyHexTagName, removedSubString, busNumber});
+                    ZPIThWordHelper.utilizeStringValues(new String[]{keyHexTagName, removedSubString, busNumber});
                 }
                 /**
                  * @todo IllegalArgumentException catch
@@ -152,7 +152,7 @@ public class ZPIThStorageWordLogicRouter {
                     if( countRecToConsole > 503 ){
                         countRecToConsole = 0;
                     }
-                    ThWordHelper.utilizeStringValues(new String[]{removedStr, busNumber});
+                    ZPIThWordHelper.utilizeStringValues(new String[]{removedStr, busNumber});
 
                 }
                 /**

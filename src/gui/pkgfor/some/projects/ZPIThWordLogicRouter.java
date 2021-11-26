@@ -24,13 +24,13 @@ import java.util.concurrent.LinkedTransferQueue;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordLogicRouter {
+public class ZPIThWordLogicRouter {
     /**
      * with events logic version
      * @param outerRuleWord 
      */
-    protected void doRouterForIndexWord(final ThWordRule outerRuleWord){
-        ThWordRule wordRuleFunc;
+    protected void doRouterForIndexWord(final ZPIThWordRule outerRuleWord){
+        ZPIThWordRule wordRuleFunc;
         ZPIThIndexRule indexRuleFunc;
         ZPIThIndexState indexState;
         ZPIThStorageWordRule storageWordRuleFunc;
@@ -42,13 +42,13 @@ public class ThWordLogicRouter {
             Integer numberProcessIndexSystem = 10;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordLogicRouter.class.getCanonicalName()
+                    + ZPIThWordLogicRouter.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "doRouterForIndexWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
                     + AdilConstants.START);
-            wordRuleFunc = (ThWordRule) outerRuleWord;
+            wordRuleFunc = (ZPIThWordRule) outerRuleWord;
             indexRuleFunc = wordRuleFunc.getIndexRule();
             indexState = indexRuleFunc.getIndexState();
             storageWordRuleFunc = indexRuleFunc.getIndexState().getRuleStorageWord();
@@ -72,7 +72,7 @@ public class ThWordLogicRouter {
         }
     }
     protected void outerBusIterator(
-            ThWordRule outerRuleWord, 
+            ZPIThWordRule outerRuleWord, 
             ZPIThStorageWordBusOutput busOutputForWordRouterInputed){
         ZPIThStorageWordBusOutput busOutputForWordRouterFunc;
         LinkedTransferQueue<ZPITdataWord> busOutputByTypeWord;
@@ -96,10 +96,10 @@ public class ThWordLogicRouter {
         }
     }
     protected void generateMainFlowForDataFromBusOutput(
-            ThWordRule outerRuleWord, 
+            ZPIThWordRule outerRuleWord, 
             Integer typeWordOfBusOutputInputed, 
             LinkedTransferQueue<ZPITdataWord> busOutputByTypeWordInputed){
-        ThWordEventLogic eventLogic;
+        ZPIThWordEventLogic eventLogic;
         Boolean labelTypeData;
         Integer typeWordOfBusOutputFunc;
         String hexTagName;
@@ -114,7 +114,7 @@ public class ThWordLogicRouter {
             Integer numberProcessIndexSystem = 10;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThWordLogicRouter.class.getCanonicalName()
+                    + ZPIThWordLogicRouter.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "generateMainFlowForDataFromBusOutput()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -123,7 +123,7 @@ public class ThWordLogicRouter {
             typeWordOfBusOutputFunc = (Integer) typeWordOfBusOutputInputed;
             busOutputByTypeWordFunc = (LinkedTransferQueue<ZPITdataWord>) busOutputByTypeWordInputed;
             hexTagName = new String();
-            eventLogic = (ThWordEventLogic) outerRuleWord.getWordState().getEventLogic();
+            eventLogic = (ZPIThWordEventLogic) outerRuleWord.getWordState().getEventLogic();
             
             do {
                 pollDataItem = busOutputByTypeWordFunc.poll();
@@ -131,7 +131,7 @@ public class ThWordLogicRouter {
                     hexTagName = pollDataItem.hexSubString;
                     subString = pollDataItem.strSubString;
                     itemKey = pollDataItem.randomUUID;
-                    /*System.out.println(ThWordLogicRouter.class.getCanonicalName() 
+                    /*System.out.println(ZPIThWordLogicRouter.class.getCanonicalName() 
                             + "          ====        ++++      ====      <<< Logic Word"
                             + "----- <   <   <   ---   tagname " + hexTagName + " string " + subString);*/
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 

@@ -172,7 +172,7 @@ public class GUIForSomeProjects extends JFrame
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ThSimpleCR threadSimpleCodeRunForEnd = new ThSimpleCR();
+                ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
             }
         });

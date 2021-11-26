@@ -38,9 +38,9 @@ public class ZPIAppThWorkDirListWrite implements Runnable {
         
         //NcParamFs dataStorage = NcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
         
-        ThreadLocal<ThLogicDirListWriter> logicWriter = new ThreadLocal<ThLogicDirListWriter>();
+        ThreadLocal<ZPIThLogicDirListWriter> logicWriter = new ThreadLocal<ZPIThLogicDirListWriter>();
         try{
-            logicWriter.set(new ThLogicDirListWriter(this.innerRuleForDirListWorkers));//,
+            logicWriter.set(new ZPIThLogicDirListWriter(this.innerRuleForDirListWorkers));//,
                 //dataStorage));
             logicWriter.get().doWriter();
         } finally {

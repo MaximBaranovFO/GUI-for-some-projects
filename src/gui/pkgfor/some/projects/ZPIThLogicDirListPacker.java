@@ -25,13 +25,13 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author wladimirowichbiaran
  */
-public class ThLogicDirListPacker {
+public class ZPIThLogicDirListPacker {
     private AppThWorkDirListRule innerRuleForDirListWorkers;
     private ThreadLocal<Long> counterReadedData;
     private ThreadLocal<Long> counterWritedData;
     private ThreadLocal<Long> counterPackData;
 
-    public ThLogicDirListPacker(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIThLogicDirListPacker(AppThWorkDirListRule ruleForDirListWorkers) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
     protected void doPacker(){
@@ -237,13 +237,13 @@ public class ThLogicDirListPacker {
         outStatesOfWorkLogic(" Packer end run part");
     }
     private void outStatesOfWorkLogic(String strForOutPut){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
         NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_PACKER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long reciveIn, Long sendOut, Long packetsOut, Integer pipeSize ){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + "                          in    " 
                             + String.valueOf(reciveIn) 

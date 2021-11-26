@@ -23,11 +23,11 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThLogicDirListTacker {
+public class ZPIThLogicDirListTacker {
     private AppThWorkDirListRule innerRuleForDirListWorkers;
     private ThreadLocal<Long> counterReadedData;
 
-    public ThLogicDirListTacker(AppThWorkDirListRule ruleForDirListWorkers) {
+    public ZPIThLogicDirListTacker(AppThWorkDirListRule ruleForDirListWorkers) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
     }
     protected void doTacker(){
@@ -88,7 +88,7 @@ public class ThLogicDirListTacker {
         NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_TACKER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long reciveIn, Long sendOut){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + "  in    " 
                             + String.valueOf(reciveIn) 

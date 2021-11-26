@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 
-public class ThLogicDirListWalker {
+public class ZPIThLogicDirListWalker {
     
     private final ThreadLocal<Boolean> isNotHaveLoggerThread;
     
@@ -47,7 +47,7 @@ public class ThLogicDirListWalker {
     private final ThreadLocal<ZPIThFsFileVisitor> fileVisitor;
     private final ThreadLocal<ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPITdataDirListFsObjAttr>>> pipeVisitorToTacker;
     
-    public ThLogicDirListWalker( final AppThWorkDirListRule objectDirListRule ) throws IOException {
+    public ZPIThLogicDirListWalker( final AppThWorkDirListRule objectDirListRule ) throws IOException {
         this.isNotHaveLoggerThread = new ThreadLocal<Boolean>();
         
         if( objectDirListRule == null ){
@@ -55,7 +55,7 @@ public class ThLogicDirListWalker {
             throw new NullPointerException(AppMsgEnFiledForLog.CREATE
                     + "Logic in DirListWalker work not init "
                     + AppMsgEnFiledForLog.CONSTRUCTOR
-                    + ThLogicDirListWalker.class.getCanonicalName()
+                    + ZPIThLogicDirListWalker.class.getCanonicalName()
                     + AppMsgEnFiledForLog.EX_SRC_CLASS
                     + AppObjectsList.class.getCanonicalName()
                     + AppMsgEnFiledForLog.F_FIELD_NAME
@@ -83,11 +83,10 @@ public class ThLogicDirListWalker {
             fv = new ZPIThFsFileVisitor(this.pipeVisitorToTacker.get(),
                 this.objectListAndLogger.get().getListOfObjectAndLogger());
         } catch (IOException ex){
-            this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(
-                    AppMsgEnFiledForLog.CREATE
+            this.objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(AppMsgEnFiledForLog.CREATE
                     + "Pipe in DirListWalker work not init "
                     + AppMsgEnFiledForLog.CONSTRUCTOR 
-                    + ThLogicDirListWalker.class.getCanonicalName() 
+                    + ZPIThLogicDirListWalker.class.getCanonicalName() 
                     + AppMsgEnFiledForLog.EX_DESCR
                     + ex.getMessage()
             );
@@ -99,7 +98,7 @@ public class ThLogicDirListWalker {
             throw new IOException( AppMsgEnFiledForLog.CREATE
                     + "Logic in DirListWalker work not init "
                     + AppMsgEnFiledForLog.CONSTRUCTOR
-                    + ThLogicDirListWalker.class.getCanonicalName()
+                    + ZPIThLogicDirListWalker.class.getCanonicalName()
                     + AppMsgEnFiledForLog.EX_SRC_CLASS
                     + ZPIThFsFileVisitor.class.getCanonicalName()
                     + AppMsgEnFiledForLog.F_FIELD_NAME
@@ -110,7 +109,7 @@ public class ThLogicDirListWalker {
             );
         }
         objectListAndLogger.get().getListOfObjectAndLogger().putLogMessageState(AppMsgEnFiledForLog.CREATE 
-                + ThLogicDirListWalker.class.getCanonicalName());
+                + ZPIThLogicDirListWalker.class.getCanonicalName());
         objectListAndLogger.get().getListOfObjectAndLogger().doLogger();
     }
     private void errorInFunctionsProcess(Class<?> exClass, String functionText, 
@@ -182,7 +181,7 @@ public class ThLogicDirListWalker {
         }
     }
     private void outDataProcessedOfWorkLogic(Long reciveIn, Long sendOut){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + "  in    " 
                             + String.valueOf(reciveIn) 

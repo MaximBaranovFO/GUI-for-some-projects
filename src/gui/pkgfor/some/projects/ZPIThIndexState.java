@@ -38,9 +38,9 @@ public class ZPIThIndexState {
     private ZPIThFileListRule ruleFileListObject;
     private Boolean isSetFileListRule;
     /**
-     * ThStorageWordRule
+     * ZPIThStorageWordRule
      */
-    private ThStorageWordRule ruleStorageWordObject;
+    private ZPIThStorageWordRule ruleStorageWordObject;
     private Boolean isSetStorageWordRule;
     ZPIThIndexState(){
         /**
@@ -167,22 +167,22 @@ public class ZPIThIndexState {
     }
     /**
      * 
-     * @return ThStorageWordRule objects for manage index system StorageWord
+     * @return ZPIThStorageWordRule objects for manage index system StorageWord
      * @throws #java.lang.IllegalArgumentException when object not set
      */
-    protected ThStorageWordRule getRuleStorageWord(){
+    protected ZPIThStorageWordRule getRuleStorageWord(){
         if( !this.isRuleStorageWord() ){
-            throw new IllegalArgumentException(ThStorageWordRule.class.getCanonicalName()
+            throw new IllegalArgumentException(ZPIThStorageWordRule.class.getCanonicalName()
                     + "not set in " + ZPIThIndexState.class.getCanonicalName());
         }
-        return (ThStorageWordRule) this.ruleStorageWordObject;
+        return (ZPIThStorageWordRule) this.ruleStorageWordObject;
     }
     /**
-     * set ThStorageWordRule objects for manage index system StorageWord
+     * set ZPIThStorageWordRule objects for manage index system StorageWord
      * @param busReadOuter 
      */
-    protected void setRuleStorageWord(final ThStorageWordRule busReadOuter){
-        this.ruleStorageWordObject = (ThStorageWordRule) busReadOuter;
+    protected void setRuleStorageWord(final ZPIThStorageWordRule busReadOuter){
+        this.ruleStorageWordObject = (ZPIThStorageWordRule) busReadOuter;
         setTrueRuleStorageWord();
     }
     protected void setTrueRuleStorageWord(){

@@ -19,11 +19,11 @@ package gui.pkgfor.some.projects;
  *
  * @author Администратор
  */
-public class ThSimpleCR {
+public class ZPIThSimpleCR {
     private Boolean isErroredRun = Boolean.FALSE;
     private Boolean isRunIteration = Boolean.TRUE;
     private Boolean isClassIterationRunAndFinish = Boolean.FALSE;
-    ThSimpleCR(){
+    ZPIThSimpleCR(){
         isErroredRun = Boolean.FALSE;
         isRunIteration = Boolean.TRUE;
         isClassIterationRunAndFinish = Boolean.FALSE;

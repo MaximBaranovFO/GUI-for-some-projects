@@ -20,34 +20,34 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ThStorageWordStatusWorkers
- * flagsProc  - (3a.5) - Boolean isWriteProcess - when this param init do it
- *     - (3a.5) - Boolean isReadProcess - when this param init do it
- *     - (3a.5) - Boolean isNeedReadData - when in flow data has write, this flag
- *                  set in TRUE for start reader job before write data, also
- *                  in StatusName, currentFileName set equal newFileName
- *                  in name generate functions add query for names equals and
- *                  flags about needRead isNeedReadData, writer process poll data
- *                  from ReadedCache, builder newFileName, build name with data from
- *                  ReaderCache when set isCachedReadedData to TRUE
- *     - (3a.5) - Boolean isCachedData - when this param init do it
- *     - (3a.5) - Boolean isCachedReadedData - when read process finished set
- *                  this flag, set to false, writer process poll data
- *                  from ReadedCache, builder newFileName, build name with data from
- *                  ReaderCache when set isCachedReadedData to TRUE
- *     - (3a.5) - Boolean isCalculatedData
- *     - (3a.5) - Boolean isUdatedDataInHashMap
- *     - (3a.5) - Boolean isMoveFileReady - when move file process is finished,
- *                  set isNeedRead to TRUE, StatusName currentFileName set equal to
- *                  newFileName
- *     - (3a.5) - Boolean isFlowInWriteBus when data insert into Bus for Writer
- *     - (3a.5) - Boolean isFlowInReadBus when data insert into Bus for Reader
- *     - (3a.5) - Boolean isNeedDeleteOldFile when flow write, read iteration end
- *     - (3a.5) - Boolean isOldFileDeleted  when writer delete file woth old writed
- *                  and readed data
+ * ZPIThStorageWordStatusWorkers
+ flagsProc  - (3a.5) - Boolean isWriteProcess - when this param init do it
+     - (3a.5) - Boolean isReadProcess - when this param init do it
+     - (3a.5) - Boolean isNeedReadData - when in flow data has write, this flag
+                  set in TRUE for start reader job before write data, also
+                  in StatusName, currentFileName set equal newFileName
+                  in name generate functions add query for names equals and
+                  flags about needRead isNeedReadData, writer process poll data
+                  from ReadedCache, builder newFileName, build name with data from
+                  ReaderCache when set isCachedReadedData to TRUE
+     - (3a.5) - Boolean isCachedData - when this param init do it
+     - (3a.5) - Boolean isCachedReadedData - when read process finished set
+                  this flag, set to false, writer process poll data
+                  from ReadedCache, builder newFileName, build name with data from
+                  ReaderCache when set isCachedReadedData to TRUE
+     - (3a.5) - Boolean isCalculatedData
+     - (3a.5) - Boolean isUdatedDataInHashMap
+     - (3a.5) - Boolean isMoveFileReady - when move file process is finished,
+                  set isNeedRead to TRUE, StatusName currentFileName set equal to
+                  newFileName
+     - (3a.5) - Boolean isFlowInWriteBus when data insert into Bus for Writer
+     - (3a.5) - Boolean isFlowInReadBus when data insert into Bus for Reader
+     - (3a.5) - Boolean isNeedDeleteOldFile when flow write, read iteration end
+     - (3a.5) - Boolean isOldFileDeleted  when writer delete file woth old writed
+                  and readed data
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusWorkers {
+public class ZPIThStorageWordStatusWorkers {
     /**
      * ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Long>>
      * <keyPointFlowWorkers, <lastAccessNanotime.hashCode(), Long Value>>
@@ -57,7 +57,7 @@ public class ThStorageWordStatusWorkers {
     private final UUID objectLabel;
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Boolean>> poolStatusWorkers;
     
-    ThStorageWordStatusWorkers(){
+    ZPIThStorageWordStatusWorkers(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusWorkers = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Boolean>>();
@@ -75,7 +75,7 @@ public class ThStorageWordStatusWorkers {
             inputedVal = (UUID) keyPointFlowWorkers;
             getStatusWorkersFormPool = this.poolStatusWorkers.get(inputedVal);
             if( getStatusWorkersFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusWorkers.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusWorkers.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -338,7 +338,7 @@ public class ThStorageWordStatusWorkers {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                                 + " parameters of flow statusWorkers in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -378,7 +378,7 @@ public class ThStorageWordStatusWorkers {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                                 + " parameters of flow statusWorkers in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -475,72 +475,72 @@ public class ThStorageWordStatusWorkers {
                             countThStorageWordStatusWorkersStorageOldFileDeleted++;
                             continue;
                     }
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, has more values");
                 }
                 if( countSummaryOfParameters != 12 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records not equal six");
                 }
                 if( countThStorageWordStatusWorkersStorageWriteProcess != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for WriteProcess not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageReadProcess != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for ReadProcess not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageNeedReadData != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for NeedReadData not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageCachedData != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for CachedData not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageCachedReadedData != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for CachedReadedData not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageCalculatedData != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for CalculatedData not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageUdatedDataInHashMap != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for UdatedDataInHashMap not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageMoveFileReady != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for MoveFileReady not equal one");
                 }
                 
                 if( countThStorageWordStatusWorkersStorageFlowInWriteBus != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for FlowInWriteBus not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageFlowInReadBus != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for FlowInReadBus not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageNeedDeleteOldFile != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for NeedDeleteOldFile not equal one");
                 }
                 if( countThStorageWordStatusWorkersStorageOldFileDeleted != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusWorkers.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusWorkers.class.getCanonicalName() 
                             + " parameters of flow statusWorkers in StorageWord is not valid, "
                             + "count records for OldFileDeleted not equal one");
                 }

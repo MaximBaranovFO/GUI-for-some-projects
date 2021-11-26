@@ -19,22 +19,22 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordWorkRead implements Runnable{
-    private ThStorageWordRule ruleStorageWordRead;
+public class ZPIThStorageWordWorkRead implements Runnable{
+    private ZPIThStorageWordRule ruleStorageWordRead;
     
-    ThStorageWordWorkRead(final ThStorageWordRule outerRuleStorageWordRead){
+    ZPIThStorageWordWorkRead(final ZPIThStorageWordRule outerRuleStorageWordRead){
         this.ruleStorageWordRead = outerRuleStorageWordRead;
     }
     
     @Override
     public void run(){
-        System.out.println(ThStorageWordWorkRead.class.getCanonicalName() 
+        System.out.println(ZPIThStorageWordWorkRead.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleStorageWordRead.toString());
         this.ruleStorageWordRead.setTrueRunnedStorageWordWorkRead();
-        ThreadLocal<ThStorageWordLogicRead> logicStorageWordWorkRead = new ThreadLocal<ThStorageWordLogicRead>();
+        ThreadLocal<ZPIThStorageWordLogicRead> logicStorageWordWorkRead = new ThreadLocal<ZPIThStorageWordLogicRead>();
         try{
-            logicStorageWordWorkRead.set(new ThStorageWordLogicRead());
+            logicStorageWordWorkRead.set(new ZPIThStorageWordLogicRead());
             logicStorageWordWorkRead.get().doReadFromIndexStorageWord(this.ruleStorageWordRead);
         } finally {
             logicStorageWordWorkRead.remove();

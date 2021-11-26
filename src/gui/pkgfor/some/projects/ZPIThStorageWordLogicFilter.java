@@ -26,14 +26,14 @@ import java.util.concurrent.LinkedTransferQueue;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordLogicFilter {
-    protected static void doFilterForIndexStorageWord(final ThStorageWordRule outerRuleStorageWord){
+public class ZPIThStorageWordLogicFilter {
+    protected static void doFilterForIndexStorageWord(final ZPIThStorageWordRule outerRuleStorageWord){
         AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
         AdilState adilState = adilRule.getAdilState();
         Integer numberProcessIndexSystem = 6;
         String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                 + AdilConstants.CANONICALNAME
-                + ThStorageWordLogicFilter.class.getCanonicalName()
+                + ZPIThStorageWordLogicFilter.class.getCanonicalName()
                 + AdilConstants.METHOD
                 + "doFilterForIndexStorageWord()";
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -45,7 +45,7 @@ public class ThStorageWordLogicFilter {
         ZPIThFileListRule ruleFileList = indexState.getRuleFileList();
         ZPIThFileListState fileListState = ruleFileList.getFileListState();
         ZPIThFileListBusToNext busJobForFileListToNext = fileListState.getBusJobForFileListToNext();
-        ThStorageWordState storageWordState = outerRuleStorageWord.getStorageWordState();
+        ZPIThStorageWordState storageWordState = outerRuleStorageWord.getStorageWordState();
         
         /**
          * funcReadedPath - 1506682974
@@ -71,12 +71,12 @@ public class ThStorageWordLogicFilter {
      * @param inputedStructure 
      */
     private static void resortInputedStructure(
-            final ThStorageWordState inputedStorageWordState,
+            final ZPIThStorageWordState inputedStorageWordState,
             final ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, ?>> inputedStructure){
         ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Path>> ouputStructure;
-        ThStorageWordState valStorageWordState;
+        ZPIThStorageWordState valStorageWordState;
         try{
-            valStorageWordState = (ThStorageWordState) inputedStorageWordState;
+            valStorageWordState = (ZPIThStorageWordState) inputedStorageWordState;
             if( valStorageWordState == null ){
                 
             }
@@ -95,7 +95,7 @@ public class ThStorageWordLogicFilter {
         }
     }
     private static void transferDataToBusesWordLongWord(
-        final ThStorageWordState inStorageWordState,
+        final ZPIThStorageWordState inStorageWordState,
         UUID keyInProcessData,
         final ConcurrentHashMap<Integer, Path> forTransferData){
         Path namePartItem;
@@ -134,14 +134,14 @@ public class ThStorageWordLogicFilter {
             Path getReadedPath = (Path) inputedData.get(1506682974);
             forDataOutput = new ConcurrentHashMap<Integer, Path>();
             if( getReadedPath == null ){
-                throw new NullPointerException(ThStorageWordLogicFilter.class.getCanonicalName()
+                throw new NullPointerException(ZPIThStorageWordLogicFilter.class.getCanonicalName()
                     + " read from bus null key value");
             }
             funcReadedPath = getReadedPath;
             forDataOutput.put(1506682974, funcReadedPath);
             Path getNamePart = (Path) inputedData.get(-589260798);
             if( getNamePart == null ){
-                throw new NullPointerException(ThStorageWordLogicFilter.class.getCanonicalName()
+                throw new NullPointerException(ZPIThStorageWordLogicFilter.class.getCanonicalName()
                     + " read from bus null key value");
             }
             funcNamePart = getNamePart;
@@ -165,7 +165,7 @@ public class ThStorageWordLogicFilter {
     private static Integer getWordCode(int codePoint){
         int forReturnType = 0;
         if( !Character.isValidCodePoint(codePoint) ){
-            throw new IllegalArgumentException(ThStorageWordLogicFilter.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThStorageWordLogicFilter.class.getCanonicalName() 
                             + " not valid character ");
         }
         int unicodeBlockToString = Character.UnicodeBlock.of(codePoint).hashCode();
@@ -200,7 +200,7 @@ public class ThStorageWordLogicFilter {
      * @throws IllegalArgumentException
      */
     private static void doWordForIndex(
-            final ThStorageWordState inputedStorageWordState,
+            final ZPIThStorageWordState inputedStorageWordState,
             final UUID recordId, 
             final String storagePath, 
             final String inputedNamePartPath){
@@ -233,7 +233,7 @@ public class ThStorageWordLogicFilter {
             do{
                 isNotValid = Boolean.FALSE;
                 try {
-                    prevWordCodeType = (int) ThStorageWordLogicFilter.getWordCode(funcNamePartPath.codePointAt(idexChar));
+                    prevWordCodeType = (int) ZPIThStorageWordLogicFilter.getWordCode(funcNamePartPath.codePointAt(idexChar));
                 } catch(IllegalArgumentException exArg) {
                         System.err.println(exArg.getMessage());
                         isNotValid = Boolean.TRUE;
@@ -244,7 +244,7 @@ public class ThStorageWordLogicFilter {
             } while( isNotValid );
             
             idexChar = 0;
-            prevWordCodeType = (int) ThStorageWordLogicFilter.getWordCode(funcNamePartPath.codePointAt(idexChar));
+            prevWordCodeType = (int) ZPIThStorageWordLogicFilter.getWordCode(funcNamePartPath.codePointAt(idexChar));
             
             word = new String();
             heximalWord = new String();
@@ -260,7 +260,7 @@ public class ThStorageWordLogicFilter {
                 int wordCodeType = Integer.MIN_VALUE;
                 Boolean intMinValOfTypeTrue = Boolean.FALSE;
                 try {
-                    tmpType = (int) ThStorageWordLogicFilter.getWordCode(codePointAt);
+                    tmpType = (int) ZPIThStorageWordLogicFilter.getWordCode(codePointAt);
                     if( tmpType == Integer.MIN_VALUE ){
                         intMinValOfTypeTrue = Boolean.TRUE;
                     }
@@ -307,14 +307,14 @@ public class ThStorageWordLogicFilter {
                      * - (1) - heximalWord
                      * - (2) - word
                      */
-                    ThStorageWordBusInput busJobForStorageWordRouter = (ThStorageWordBusInput) inputedStorageWordState.getBusJobForStorageWordRouterJob();
+                    ZPIThStorageWordBusInput busJobForStorageWordRouter = (ZPIThStorageWordBusInput) inputedStorageWordState.getBusJobForStorageWordRouterJob();
                     ConcurrentHashMap<String, String> busForTypeStorageWordRouter = busJobForStorageWordRouter.getBusForTypeWord(prevWordCodeType);
                     int hexLenVal = (int) heximalWord.length();
                     int wordLenVal = (int) word.length();
                     wordLenVal *= 4;
                     
                     if( hexLenVal != wordLenVal ){
-                        throw new IllegalArgumentException(ThStorageWordLogicFilter.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThStorageWordLogicFilter.class.getCanonicalName() 
                             + " illegal length of inputed in index string, hexTagName: "
                             + heximalWord + " lengthHex: " + hexLenVal
                             + " strSubString: " + word + " lengthStr: " + wordLenVal
@@ -322,7 +322,7 @@ public class ThStorageWordLogicFilter {
                             + (codePointsCount));
                     }
                     if( hexLenVal < 4 ){
-                        throw new IllegalArgumentException(ThStorageWordLogicFilter.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThStorageWordLogicFilter.class.getCanonicalName() 
                                 + " illegal length of inputed in index string, hexTagName: "
                                 + heximalWord + " length: " + hexLenVal
                                 + " < 4 ");
@@ -345,7 +345,7 @@ public class ThStorageWordLogicFilter {
                         //LinkedTransferQueue<TdataWord> busForTypeLongWord = busJobForLongWordWrite.getBusForTypeWord(prevWordCodeType);
                         //busForTypeLongWord.add(forAddData);
                     } else {
-                        ThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
+                        ZPIThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
                         LinkedTransferQueue<ZPITdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
                         busForTypeWord.add(forAddData);
                     }
@@ -375,7 +375,7 @@ public class ThStorageWordLogicFilter {
              * - (1) - heximalWord
              * - (2) - word
              */
-            ThStorageWordBusInput busJobForStorageWordRouter = inputedStorageWordState.getBusJobForStorageWordRouterJob();
+            ZPIThStorageWordBusInput busJobForStorageWordRouter = inputedStorageWordState.getBusJobForStorageWordRouterJob();
             ConcurrentHashMap<String, String> busForTypeStorageWordRouter = busJobForStorageWordRouter.getBusForTypeWord(prevWordCodeType);
             busForTypeStorageWordRouter.put(heximalWord, word);
             
@@ -387,7 +387,7 @@ public class ThStorageWordLogicFilter {
              **/
             forLastAddData = new ZPITdataWord(recordId, storagePath, word, prevWordCodeType, heximalWord, startPos, lengthWord);
             if( lengthWord > 25){
-                /*ThStorageWordBusOutput busJobForLongWordWrite = inputedStorageWordState.getBusJobForLongWordWrite();
+                /*ZPIThStorageWordBusOutput busJobForLongWordWrite = inputedStorageWordState.getBusJobForLongWordWrite();
                 ArrayBlockingQueue<TdataWord> busForTypeLongWord = busJobForLongWordWrite.getBusForTypeWord(prevWordCodeType);
                 busForTypeLongWord.add(forLastAddData);
                 int size = busForTypeLongWord.size();
@@ -395,7 +395,7 @@ public class ThStorageWordLogicFilter {
                         + prevWordCodeType + " size " + size);*/
                 
             } else {
-                ThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
+                ZPIThStorageWordBusOutput busJobForWordWrite = inputedStorageWordState.getBusJobForWordWrite();
                 LinkedTransferQueue<ZPITdataWord> busForTypeWord = busJobForWordWrite.getBusForTypeWord(prevWordCodeType);
                 busForTypeWord.add(forLastAddData);
                 int size = busForTypeWord.size();
@@ -417,7 +417,7 @@ public class ThStorageWordLogicFilter {
     }
     
     protected void doWordIndexCharacters(
-            final ThStorageWordState inputedStorageWordState,
+            final ZPIThStorageWordState inputedStorageWordState,
             final UUID recordId, 
             final String storagePath, 
             final String inputedNamePartPath){
@@ -439,7 +439,7 @@ public class ThStorageWordLogicFilter {
             funcNamePartPath = (String) inputedNamePartPath;
             
             idexChar = 0;
-            prevWordCodeType = (int) ThStorageWordLogicFilter.getWordCode(inputedNamePartPath.codePointAt(idexChar));
+            prevWordCodeType = (int) ZPIThStorageWordLogicFilter.getWordCode(inputedNamePartPath.codePointAt(idexChar));
             word = new String();
             heximalWord = new String();
             startPos = 0;

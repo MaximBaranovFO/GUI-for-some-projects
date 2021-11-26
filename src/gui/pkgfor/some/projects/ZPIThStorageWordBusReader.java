@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * <mainFlowContentFunc, <String.hashCode(), String.Value>>
  * @author wladimirowichbiaran
  */
-public class ThStorageWordBusReader {
+public class ZPIThStorageWordBusReader {
     /**
      * ConcurrentHashMap<Integer, Long>
      * <typeWordBus, System.nanoTime>
@@ -37,7 +37,7 @@ public class ThStorageWordBusReader {
      */
     private ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, ConcurrentHashMap<String, String>>> poolBusWordData;
     
-    ThStorageWordBusReader(){
+    ZPIThStorageWordBusReader(){
         this.poolBusWordData = new ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, ConcurrentHashMap<String, String>>>();
         this.lastLastAccessUsedBusNanoTime = new ConcurrentHashMap<Integer, Long>();
     }

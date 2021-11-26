@@ -20,16 +20,16 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ThStorageWordStatusDataFs
- * countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
- *                before write (Read, Write into old file name, 
- *                after write Files.move to newFileName
- *     - (3a.1) - Integer volumeNumber - update onWrite, before
- *                write = ifLimit ? update : none
+ * ZPIThStorageWordStatusDataFs
+ countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
+                before write (Read, Write into old file name, 
+                after write Files.move to newFileName
+     - (3a.1) - Integer volumeNumber - update onWrite, before
+                write = ifLimit ? update : none
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusDataFs {
+public class ZPIThStorageWordStatusDataFs {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -39,7 +39,7 @@ public class ThStorageWordStatusDataFs {
      */
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>> poolStatusDataFs;
     
-    ThStorageWordStatusDataFs(){
+    ZPIThStorageWordStatusDataFs(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusDataFs = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>>();
@@ -57,7 +57,7 @@ public class ThStorageWordStatusDataFs {
             inputedVal = (UUID) keyPointFlowDataFs;
             getStatusDataFsFormPool = this.poolStatusDataFs.get(inputedVal);
             if( getStatusDataFsFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusDataFs.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusDataFs.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -209,7 +209,7 @@ public class ThStorageWordStatusDataFs {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                                 + " parameters of flow statusDataFs in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -249,7 +249,7 @@ public class ThStorageWordStatusDataFs {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                                 + " parameters of flow statusDataFs in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -293,21 +293,21 @@ public class ThStorageWordStatusDataFs {
                             countThStorageWordStatusDataFsVolumeNumber++;
                             continue;
                     }
-                    new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                             + " parameters of flow statusDataFs in StorageWord is not valid, has more values");
                 }
                 if( countSummaryOfParameters != 2 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                             + " parameters of flow statusDataFs in StorageWord is not valid, "
                             + "count records not equal two");
                 }
                 if( countThStorageWordStatusDataFsCountRecordsOnFileSystem != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                             + " parameters of flow statusDataFs in StorageWord is not valid, "
                             + "count records for CountRecordsOnFileSystem not equal one");
                 }
                 if( countThStorageWordStatusDataFsVolumeNumber != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataFs.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataFs.class.getCanonicalName() 
                             + " parameters of flow statusDataFs in StorageWord is not valid, "
                             + "count records for VolumeNumber not equal one");
                 }

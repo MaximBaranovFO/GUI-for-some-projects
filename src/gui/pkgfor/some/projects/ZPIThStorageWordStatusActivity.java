@@ -20,15 +20,15 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ThStorageWordStatusActivity
- * timeUSE    
- *     - (3a.3) - Long lastAccessNanotime - update onWrite, before 
- *                write
- *     - (3a.3) - Long countDataUseIterationsSummary - update onWrite, 
- *                before write, count++ sended jobWrite
+ * ZPIThStorageWordStatusActivity
+ timeUSE    
+     - (3a.3) - Long lastAccessNanotime - update onWrite, before 
+                write
+     - (3a.3) - Long countDataUseIterationsSummary - update onWrite, 
+                before write, count++ sended jobWrite
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusActivity {
+public class ZPIThStorageWordStatusActivity {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -38,7 +38,7 @@ public class ThStorageWordStatusActivity {
      */
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Long>> poolStatusActivity;
     
-    ThStorageWordStatusActivity(){
+    ZPIThStorageWordStatusActivity(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusActivity = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Long>>();
@@ -56,7 +56,7 @@ public class ThStorageWordStatusActivity {
             inputedVal = (UUID) keyPointFlowActivity;
             getStatusActivityFormPool = this.poolStatusActivity.get(inputedVal);
             if( getStatusActivityFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusActivity.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusActivity.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -216,7 +216,7 @@ public class ThStorageWordStatusActivity {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -256,7 +256,7 @@ public class ThStorageWordStatusActivity {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusActivity.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusActivity.class.getCanonicalName() 
                                 + " parameters of flow statusActivity in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -299,21 +299,21 @@ public class ThStorageWordStatusActivity {
                             countThStorageWordStatusActivityDataUseIterationsSummary++;
                             continue;
                     }
-                    new IllegalArgumentException(ThStorageWordStatusActivity.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusActivity.class.getCanonicalName() 
                             + " parameters of flow statusActivity in StorageWord is not valid, has more values");
                 }
                 if( countSummaryOfParameters != 2 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters of flow statusActivity in StorageWord is not valid, "
                             + "count records not equal two");
                 }
                 if( countThStorageWordStatusActivityLastAccessNanotime != 1 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters of flow statusActivity in StorageWord is not valid, "
                             + "count records for lastAccessNanotime not equal one");
                 }
                 if( countThStorageWordStatusActivityDataUseIterationsSummary != 1 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters of flow statusActivity in StorageWord is not valid, "
                             + "count records for countDataUseIterationsSummary not equal one");
                 }

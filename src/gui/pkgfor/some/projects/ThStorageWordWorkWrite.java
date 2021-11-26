@@ -20,9 +20,9 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ThStorageWordWorkWrite implements Runnable{
-    private ThStorageWordRule ruleStorageWordWrite;
+    private ZPIThStorageWordRule ruleStorageWordWrite;
     
-    ThStorageWordWorkWrite(final ThStorageWordRule outerRuleStorageWordWrite){
+    ThStorageWordWorkWrite(final ZPIThStorageWordRule outerRuleStorageWordWrite){
         this.ruleStorageWordWrite = outerRuleStorageWordWrite;
     }
     
@@ -32,9 +32,9 @@ public class ThStorageWordWorkWrite implements Runnable{
                 + " run and say " 
                 + this.ruleStorageWordWrite.toString());
         this.ruleStorageWordWrite.setTrueRunnedStorageWordWorkWrite();
-        ThreadLocal<ThStorageWordLogicWrite> logicStorageWordWorkWrite = new ThreadLocal<ThStorageWordLogicWrite>();
+        ThreadLocal<ZPIThStorageWordLogicWrite> logicStorageWordWorkWrite = new ThreadLocal<ZPIThStorageWordLogicWrite>();
         try{
-            logicStorageWordWorkWrite.set(new ThStorageWordLogicWrite());
+            logicStorageWordWorkWrite.set(new ZPIThStorageWordLogicWrite());
             logicStorageWordWorkWrite.get().doWriteToIndexStorageWord(this.ruleStorageWordWrite);
         } finally {
             logicStorageWordWorkWrite.remove();

@@ -21,19 +21,19 @@ import java.util.UUID;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordRule {
+public class ZPIThStorageWordRule {
     private final ThreadGroup workerThStorageWord;
     private final ZPIThIndexRule indexRule;
     /**
-     * ThStorageWordWorkFilter
+     * ZPIThStorageWordWorkFilter
      */
-    private ThStorageWordWorkFilter runnableWorkerStorageWordFilter;
+    private ZPIThStorageWordWorkFilter runnableWorkerStorageWordFilter;
     private Boolean isSetStorageWordWorkFilter;
     private Boolean isRunStorageWordWorkFilter;
     /**
-     * ThStorageWordWorkRouter
+     * ZPIThStorageWordWorkRouter
      */
-    private ThStorageWordWorkRouter runnableWorkerStorageWordRouter;
+    private ZPIThStorageWordWorkRouter runnableWorkerStorageWordRouter;
     private Boolean isSetStorageWordWorkRouter;
     private Boolean isRunStorageWordWorkRouter;
     /**
@@ -43,24 +43,24 @@ public class ThStorageWordRule {
     private Boolean isSetStorageWordWorkWrite;
     private Boolean isRunStorageWordWorkWrite;
     /**
-     * ThStorageWordWorkRead
+     * ZPIThStorageWordWorkRead
      */
-    private ThStorageWordWorkRead runnableWorkerStorageWordRead;
+    private ZPIThStorageWordWorkRead runnableWorkerStorageWordRead;
     private Boolean isSetStorageWordWorkRead;
     private Boolean isRunStorageWordWorkRead;
     /**
-     * ThStorageWordState
+     * ZPIThStorageWordState
      */
-    private ThStorageWordState currentStorageWordState;
+    private ZPIThStorageWordState currentStorageWordState;
     private Boolean isSetStorageWordState;
     /**
-     * ThStorageWordStatusMainFlow
+     * ZPIThStorageWordStatusMainFlow
      */
-    private ThStorageWordStatusMainFlow currentStorageWordStatusMainFlow;
+    private ZPIThStorageWordStatusMainFlow currentStorageWordStatusMainFlow;
     private Boolean isSetStorageWordStatusMainFlow;
     
     
-    public ThStorageWordRule(final ZPIThIndexRule outerRuleIndex) {
+    public ZPIThStorageWordRule(final ZPIThIndexRule outerRuleIndex) {
         this.indexRule = (ZPIThIndexRule) outerRuleIndex;
         this.workerThStorageWord = new ThreadGroup(UUID.randomUUID().toString());
         /**
@@ -101,20 +101,20 @@ public class ThStorageWordRule {
         return (ZPIThIndexRule) this.indexRule;
     }
     /**
-     * ThStorageWordWorkFilter
+     * ZPIThStorageWordWorkFilter
      * @return 
      */
-    protected ThStorageWordWorkFilter getStorageWordWorkFilter(){
+    protected ZPIThStorageWordWorkFilter getStorageWordWorkFilter(){
         if( !this.isStorageWordWorkFilter() ){
-            throw new IllegalArgumentException(ThStorageWordWorkFilter.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThStorageWordWorkFilter.class.getCanonicalName() 
                     + " object not set in " 
                     + ThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordFilter;
     }
-    protected void setStorageWordWorkFilter(final ThStorageWordWorkFilter runnableWorkerStorageWordFilterOuter){
-        this.runnableWorkerStorageWordFilter = (ThStorageWordWorkFilter) runnableWorkerStorageWordFilterOuter;
+    protected void setStorageWordWorkFilter(final ZPIThStorageWordWorkFilter runnableWorkerStorageWordFilterOuter){
+        this.runnableWorkerStorageWordFilter = (ZPIThStorageWordWorkFilter) runnableWorkerStorageWordFilterOuter;
         setTrueStorageWordWorkFilter();
     }
     protected void setTrueStorageWordWorkFilter(){
@@ -159,20 +159,20 @@ public class ThStorageWordRule {
         }
     }
     /**
-     * ThStorageWordWorkRouter
+     * ZPIThStorageWordWorkRouter
      * @return 
      */
-    protected ThStorageWordWorkRouter getStorageWordWorkRouter(){
+    protected ZPIThStorageWordWorkRouter getStorageWordWorkRouter(){
         if( !this.isStorageWordWorkRouter() ){
-            throw new IllegalArgumentException(ThStorageWordWorkRouter.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThStorageWordWorkRouter.class.getCanonicalName() 
                     + " object not set in " 
                     + ThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordRouter;
     }
-    protected void setStorageWordWorkRouter(final ThStorageWordWorkRouter runnableWorkerStorageWordRouterOuter){
-        this.runnableWorkerStorageWordRouter = (ThStorageWordWorkRouter) runnableWorkerStorageWordRouterOuter;
+    protected void setStorageWordWorkRouter(final ZPIThStorageWordWorkRouter runnableWorkerStorageWordRouterOuter){
+        this.runnableWorkerStorageWordRouter = (ZPIThStorageWordWorkRouter) runnableWorkerStorageWordRouterOuter;
         setTrueStorageWordWorkRouter();
     }
     protected void setTrueStorageWordWorkRouter(){
@@ -267,20 +267,20 @@ public class ThStorageWordRule {
         }
     }
     /**
-     * ThStorageWordWorkRead
+     * ZPIThStorageWordWorkRead
      * @return 
      */
-    protected ThStorageWordWorkRead getStorageWordWorkRead(){
+    protected ZPIThStorageWordWorkRead getStorageWordWorkRead(){
         if( !this.isStorageWordWorkRead() ){
-            throw new IllegalArgumentException(ThStorageWordWorkRead.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThStorageWordWorkRead.class.getCanonicalName() 
                     + " object not set in " 
                     + ThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerStorageWordRead;
     }
-    protected void setStorageWordWorkRead(final ThStorageWordWorkRead runnableWorkerStorageWordReadOuter){
-        this.runnableWorkerStorageWordRead = (ThStorageWordWorkRead) runnableWorkerStorageWordReadOuter;
+    protected void setStorageWordWorkRead(final ZPIThStorageWordWorkRead runnableWorkerStorageWordReadOuter){
+        this.runnableWorkerStorageWordRead = (ZPIThStorageWordWorkRead) runnableWorkerStorageWordReadOuter;
         setTrueStorageWordWorkRead();
     }
     protected void setTrueStorageWordWorkRead(){
@@ -321,17 +321,17 @@ public class ThStorageWordRule {
         }
     }
     /**
-     * ThStorageWordState
+     * ZPIThStorageWordState
      * @return 
      */
-    protected ThStorageWordState getStorageWordState(){
+    protected ZPIThStorageWordState getStorageWordState(){
         if( !this.isStorageWordState() ){
-            throw new IllegalArgumentException(ThStorageWordState.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordState.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
         }
         return this.currentStorageWordState;
     }
-    protected void setStorageWordState(final ThStorageWordState stateWordOuter){
-        this.currentStorageWordState = (ThStorageWordState) stateWordOuter;
+    protected void setStorageWordState(final ZPIThStorageWordState stateWordOuter){
+        this.currentStorageWordState = (ZPIThStorageWordState) stateWordOuter;
         setTrueStorageWordState();
     }
     protected void setTrueStorageWordState(){
@@ -347,16 +347,16 @@ public class ThStorageWordRule {
         return Boolean.FALSE;
     }
     /**
-     * ThStorageWordStatusMainFlow
+     * ZPIThStorageWordStatusMainFlow
      * @return 
      */
-    protected ThStorageWordStatusMainFlow getStorageWordStatusMainFlow(){
+    protected ZPIThStorageWordStatusMainFlow getStorageWordStatusMainFlow(){
         if( !this.isStorageWordStatusMainFlow() ){
-            throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
         }
         return this.currentStorageWordStatusMainFlow;
     }
-    protected void setStorageWordStatusMainFlow(final ThStorageWordStatusMainFlow stateWordOuter){
+    protected void setStorageWordStatusMainFlow(final ZPIThStorageWordStatusMainFlow stateWordOuter){
         this.currentStorageWordStatusMainFlow = stateWordOuter;
         setTrueStorageWordStatusMainFlow();
     }

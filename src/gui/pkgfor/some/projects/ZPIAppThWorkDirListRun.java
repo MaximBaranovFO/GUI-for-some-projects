@@ -35,10 +35,10 @@ public class ZPIAppThWorkDirListRun implements Runnable {
         //this.innerRuleForDirListWorkers.startDirlistTacker();
         Boolean needFinishStateDirlistReader = innerRuleForDirListWorkers.getNeedFinishStateDirlistReader();
         Path currentPathForMakeIndex = this.innerRuleForDirListWorkers.getCurrentPathForMakeIndex();
-        ThreadLocal<ThLogicDirListWalker> logicWalker = new ThreadLocal<ThLogicDirListWalker>();
+        ThreadLocal<ZPIThLogicDirListWalker> logicWalker = new ThreadLocal<ZPIThLogicDirListWalker>();
         try{
             try{
-                logicWalker.set(new ThLogicDirListWalker(this.innerRuleForDirListWorkers));
+                logicWalker.set(new ZPIThLogicDirListWalker(this.innerRuleForDirListWorkers));
                 logicWalker.get().doReadFsToPipe();
             
                 NcAppHelper.outToConsoleIfDevAndParamTrue("ThLogicDirListWalker.doReadFsToPipe end", 

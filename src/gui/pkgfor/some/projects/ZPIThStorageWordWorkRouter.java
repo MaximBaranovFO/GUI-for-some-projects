@@ -19,22 +19,22 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordWorkRouter implements Runnable{
-    private ThStorageWordRule ruleStorageWordRouter;
+public class ZPIThStorageWordWorkRouter implements Runnable{
+    private ZPIThStorageWordRule ruleStorageWordRouter;
     
-    ThStorageWordWorkRouter(final ThStorageWordRule outerRuleStorageWordRouter){
+    ZPIThStorageWordWorkRouter(final ZPIThStorageWordRule outerRuleStorageWordRouter){
         this.ruleStorageWordRouter = outerRuleStorageWordRouter;
     }
     
     @Override
     public void run(){
-        System.out.println(ThStorageWordWorkRouter.class.getCanonicalName() 
+        System.out.println(ZPIThStorageWordWorkRouter.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleStorageWordRouter.toString());
         this.ruleStorageWordRouter.setTrueRunnedStorageWordWorkRouter();
-        ThreadLocal<ThStorageWordLogicRouter> logicStorageWordWorkRouter = new ThreadLocal<ThStorageWordLogicRouter>();
+        ThreadLocal<ZPIThStorageWordLogicRouter> logicStorageWordWorkRouter = new ThreadLocal<ZPIThStorageWordLogicRouter>();
         try{
-            logicStorageWordWorkRouter.set(new ThStorageWordLogicRouter());
+            logicStorageWordWorkRouter.set(new ZPIThStorageWordLogicRouter());
             logicStorageWordWorkRouter.get().doRouterForIndexStorageWord(this.ruleStorageWordRouter);
         } finally {
             logicStorageWordWorkRouter.remove();

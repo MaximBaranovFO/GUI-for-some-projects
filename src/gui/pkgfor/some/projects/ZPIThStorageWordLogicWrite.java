@@ -38,11 +38,11 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordLogicWrite {
-    protected void doWriteToIndexStorageWord(final ThStorageWordRule outerRuleStorageWord){
+public class ZPIThStorageWordLogicWrite {
+    protected void doWriteToIndexStorageWord(final ZPIThStorageWordRule outerRuleStorageWord){
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
-        ThStorageWordRule funcRuleStorageWord;
+        ZPIThStorageWordRule funcRuleStorageWord;
         AppFileStorageIndex currentIndexStorages;
         try{
             AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
@@ -50,7 +50,7 @@ public class ThStorageWordLogicWrite {
             Integer numberProcessIndexSystem = 9;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThStorageWordLogicWrite.class.getCanonicalName()
+                    + ZPIThStorageWordLogicWrite.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "doWriteToIndexStorageWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -62,7 +62,7 @@ public class ThStorageWordLogicWrite {
              * Rule
              * Statistic for this index system
              */
-            funcRuleStorageWord = (ThStorageWordRule) outerRuleStorageWord;
+            funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
             
             indexRule = funcRuleStorageWord.getIndexRule();
             //indexStatistic = indexRule.getIndexStatistic();
@@ -93,7 +93,7 @@ public class ThStorageWordLogicWrite {
             try( FileSystem fsForWriteData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){
         
             System.out.println("   ---   ---   ---   ---   ---   ---   ---   ---   ---   " 
-                    + ThStorageWordLogicWrite.class.getCanonicalName() + " open storage " + fsForWriteData.getPath("/").toUri().toString());
+                    + ZPIThStorageWordLogicWrite.class.getCanonicalName() + " open storage " + fsForWriteData.getPath("/").toUri().toString());
             do { 
                 try {
 
@@ -104,8 +104,8 @@ public class ThStorageWordLogicWrite {
                  * 
                  * save data in limited file packets
                  */
-                ThStorageWordState wordState = (ThStorageWordState) funcRuleStorageWord.getStorageWordState();
-                ThStorageWordBusWriter busJobForWrite = wordState.getBusJobForStorageWordRouterJobToWriter();
+                ZPIThStorageWordState wordState = (ZPIThStorageWordState) funcRuleStorageWord.getStorageWordState();
+                ZPIThStorageWordBusWriter busJobForWrite = wordState.getBusJobForStorageWordRouterJobToWriter();
 
 
                 ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, ConcurrentHashMap<String, String>>> maxUsedBusesSet = busJobForWrite.getMaxUsedBusesSet();
@@ -128,7 +128,7 @@ public class ThStorageWordLogicWrite {
                             String hexTagName = itemsTagNames.getKey();
                             String subStringValue = itemsTagNames.getValue();
 
-                            ThStorageWordStatusMainFlow storageWordStatistic = (ThStorageWordStatusMainFlow) outerRuleStorageWord.getStorageWordStatusMainFlow();
+                            ZPIThStorageWordStatusMainFlow storageWordStatistic = (ZPIThStorageWordStatusMainFlow) outerRuleStorageWord.getStorageWordStatusMainFlow();
 
                             ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>> typeWordTagFileNameFlowUuids = 
                                 (ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>) storageWordStatistic.getTypeWordTagFileNameFlowUuids(
@@ -205,10 +205,10 @@ public class ThStorageWordLogicWrite {
                                         /**
                                          * validate values, write to file
                                          */
-                                        ThStorageWordCache storageWordCache = 
-                                                (ThStorageWordCache) storageWordStatistic.getStorageWordCache();
-                                        ThStorageWordStatusActivity storageWordStatusActivity = 
-                                                (ThStorageWordStatusActivity) storageWordStatistic.getStorageWordStatusActivity();
+                                        ZPIThStorageWordCache storageWordCache = 
+                                                (ZPIThStorageWordCache) storageWordStatistic.getStorageWordCache();
+                                        ZPIThStorageWordStatusActivity storageWordStatusActivity = 
+                                                (ZPIThStorageWordStatusActivity) storageWordStatistic.getStorageWordStatusActivity();
                                         
                                         UUID getKeyActivity = (UUID) flowPointsUUID.get("ThStorageWordStatusActivity".hashCode());
                                         try{
@@ -226,8 +226,8 @@ public class ThStorageWordLogicWrite {
                                                     + mainFlowLabel.toString());
                                             continue;
                                         }
-                                        ThStorageWordStatusDataCache storageWordStatusDataCache = 
-                                                (ThStorageWordStatusDataCache) storageWordStatistic.getStorageWordStatusDataCache();
+                                        ZPIThStorageWordStatusDataCache storageWordStatusDataCache = 
+                                                (ZPIThStorageWordStatusDataCache) storageWordStatistic.getStorageWordStatusDataCache();
                                         
                                         UUID getKeyDataCache = (UUID) flowPointsUUID.get("ThStorageWordStatusDataCache".hashCode());
                                         try{
@@ -246,8 +246,8 @@ public class ThStorageWordLogicWrite {
                                             continue;
                                         }
                                         
-                                        ThStorageWordStatusDataFs storageWordStatusDataFs = 
-                                                (ThStorageWordStatusDataFs) storageWordStatistic.getStorageWordStatusDataFs();
+                                        ZPIThStorageWordStatusDataFs storageWordStatusDataFs = 
+                                                (ZPIThStorageWordStatusDataFs) storageWordStatistic.getStorageWordStatusDataFs();
                                         
                                         UUID getKeyDataFs = (UUID) flowPointsUUID.get("ThStorageWordStatusDataFs".hashCode());
                                         try{
@@ -267,8 +267,8 @@ public class ThStorageWordLogicWrite {
                                         }
                                         
                                         
-                                        ThStorageWordStatusName storageWordStatusName = 
-                                                (ThStorageWordStatusName) storageWordStatistic.getStorageWordStatusName();
+                                        ZPIThStorageWordStatusName storageWordStatusName = 
+                                                (ZPIThStorageWordStatusName) storageWordStatistic.getStorageWordStatusName();
                                         
                                         UUID getKeyName = (UUID) flowPointsUUID.get("ThStorageWordStatusName".hashCode());
                                         try{
@@ -288,8 +288,8 @@ public class ThStorageWordLogicWrite {
                                         }
                                         
                                         
-                                        ThStorageWordStatusWorkers storageWordStatusWorkers = 
-                                                (ThStorageWordStatusWorkers) storageWordStatistic.getStorageWordStatusWorkers();
+                                        ZPIThStorageWordStatusWorkers storageWordStatusWorkers = 
+                                                (ZPIThStorageWordStatusWorkers) storageWordStatistic.getStorageWordStatusWorkers();
                                         
                                         UUID getKeyWorkers = (UUID) flowPointsUUID.get("ThStorageWordStatusWorkers".hashCode());
                                         try{
@@ -413,7 +413,7 @@ public class ThStorageWordLogicWrite {
                                                  */
                                                 oos.writeObject(pollTypeWordTagFileNameData);
                                                 oos.flush();
-                                                /*System.out.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+                                                /*System.out.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                                                         + " => => =>                                             => => => " 
                                                         + nowWritedFile.toUri().toString() 
                                                         + " writed size " + pollTypeWordTagFileNameData.size());*/
@@ -449,7 +449,7 @@ public class ThStorageWordLogicWrite {
                                             try {
                                                 isFileForMoveExist = Files.exists(moveToFile, LinkOption.NOFOLLOW_LINKS);
                                             } catch(SecurityException exSecure) {
-                                                System.err.println(ThStorageWordLogicWrite.class.getCanonicalName()
+                                                System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName()
                                                     + " security error " + exSecure.getMessage());
                                             }
                                             if( isFileForMoveExist ){
@@ -524,7 +524,7 @@ public class ThStorageWordLogicWrite {
                                                                 new ObjectOutputStream(Files.newOutputStream(nowWritedFile)) )
                                                             {
                                                                 oos.writeObject(packetForWriteData);
-                                                                System.out.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+                                                                System.out.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                                                                         + " => => =>                                             => => => " 
                                                                         + nowWritedFile.toUri().toString() 
                                                                         + " writed size " + pollTypeWordTagFileNameData.size());
@@ -546,7 +546,7 @@ public class ThStorageWordLogicWrite {
                                                             try {
                                                                 isFileForMoveExist = Files.exists(moveToFile, LinkOption.NOFOLLOW_LINKS);
                                                             } catch(SecurityException exSecure) {
-                                                                System.err.println(ThStorageWordLogicWrite.class.getCanonicalName()
+                                                                System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName()
                                                                     + " security error " + exSecure.getMessage());
                                                             }
                                                             if( isFileForMoveExist ){
@@ -640,32 +640,32 @@ public class ThStorageWordLogicWrite {
              */
             
         } catch(FileSystemAlreadyExistsException exAlExist){
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exAlExist.getMessage());
             exAlExist.printStackTrace();
         } catch(FileSystemNotFoundException exFsNotExist){
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exFsNotExist.getMessage());
             exFsNotExist.printStackTrace();
         } catch(ProviderNotFoundException exProvNotFound){
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exProvNotFound.getMessage());
             exProvNotFound.printStackTrace();
         } catch(IllegalArgumentException exIllArg){
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exIllArg.getMessage());
             exIllArg.printStackTrace();
         } catch(SecurityException exSec){
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exSec.getMessage());
             exSec.printStackTrace();
         } catch (IOException exIo) {
-            System.err.println(ThStorageWordLogicWrite.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exIo.getMessage());
             exIo.printStackTrace();
@@ -680,7 +680,7 @@ public class ThStorageWordLogicWrite {
         
     }
     private void checkDataForWrite(
-            final ThStorageWordRule outerRuleStorageWord,
+            final ZPIThStorageWordRule outerRuleStorageWord,
             final Integer typeWordBusNumberInputed,
             final String hexTagNameInputed,
             final String subStringValueInputed
@@ -696,15 +696,15 @@ public class ThStorageWordLogicWrite {
             hexTagNameFunc = (String) hexTagNameInputed;
             subStringValueFunc = (String) subStringValueInputed;
             
-            ThStorageWordState wordState = outerRuleStorageWord.getStorageWordState();
-            ThStorageWordBusWriter busJobForWrite = wordState.getBusJobForStorageWordRouterJobToWriter();
-            ThStorageWordStatusMainFlow storageWordStatistic = outerRuleStorageWord.getStorageWordStatusMainFlow();
-            ThStorageWordCache storageWordCache = storageWordStatistic.getStorageWordCache();
-            ThStorageWordStatusActivity storageWordStatusActivity = storageWordStatistic.getStorageWordStatusActivity();
-            ThStorageWordStatusDataCache storageWordStatusDataCache = storageWordStatistic.getStorageWordStatusDataCache();
-            ThStorageWordStatusDataFs storageWordStatusDataFs = storageWordStatistic.getStorageWordStatusDataFs();
-            ThStorageWordStatusName storageWordStatusName = storageWordStatistic.getStorageWordStatusName();
-            ThStorageWordStatusWorkers storageWordStatusWorkers = storageWordStatistic.getStorageWordStatusWorkers();
+            ZPIThStorageWordState wordState = outerRuleStorageWord.getStorageWordState();
+            ZPIThStorageWordBusWriter busJobForWrite = wordState.getBusJobForStorageWordRouterJobToWriter();
+            ZPIThStorageWordStatusMainFlow storageWordStatistic = outerRuleStorageWord.getStorageWordStatusMainFlow();
+            ZPIThStorageWordCache storageWordCache = storageWordStatistic.getStorageWordCache();
+            ZPIThStorageWordStatusActivity storageWordStatusActivity = storageWordStatistic.getStorageWordStatusActivity();
+            ZPIThStorageWordStatusDataCache storageWordStatusDataCache = storageWordStatistic.getStorageWordStatusDataCache();
+            ZPIThStorageWordStatusDataFs storageWordStatusDataFs = storageWordStatistic.getStorageWordStatusDataFs();
+            ZPIThStorageWordStatusName storageWordStatusName = storageWordStatistic.getStorageWordStatusName();
+            ZPIThStorageWordStatusWorkers storageWordStatusWorkers = storageWordStatistic.getStorageWordStatusWorkers();
             
             ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>> typeWordTagFileNameFlowUuids = 
                     (ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>) storageWordStatistic.getTypeWordTagFileNameFlowUuids(
@@ -738,28 +738,28 @@ public class ThStorageWordLogicWrite {
                             countThStorageWordStatusWorkers++;
                             continue; //ThStorageWordStatusWorkers
                     }
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters of data for write into file of StorageWord is not valid");
                 }
 
                 if( countThStorageWordStatusDataFs != 2 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters flowDataFs is not valid");
                 }
                 if( countThStorageWordStatusName != 3 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters flowName is not valid");
                     }
                 if( countThStorageWordStatusActivity != 2 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters flowActivity is not valid");  
                 }     
                 if( countThStorageWordStatusDataCache != 2 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters flowDataCache is not valid");
                 }
                 if( countThStorageWordStatusWorkers != 5 ){
-                    new IllegalArgumentException(ThStorageWordLogicWrite.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordLogicWrite.class.getCanonicalName() 
                             + " parameters flowWorkers is not valid");
                 }
 

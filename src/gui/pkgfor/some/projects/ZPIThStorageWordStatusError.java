@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusError {
+public class ZPIThStorageWordStatusError {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -33,7 +33,7 @@ public class ThStorageWordStatusError {
      */
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>> poolStatusError;
     
-    ThStorageWordStatusError(){
+    ZPIThStorageWordStatusError(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusError = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>>();
@@ -51,7 +51,7 @@ public class ThStorageWordStatusError {
             inputedVal = (UUID) keyPointFlowError;
             getStatusErrorFormPool = this.poolStatusError.get(inputedVal);
             if( getStatusErrorFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusError.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusError.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -194,7 +194,7 @@ public class ThStorageWordStatusError {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusError in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -234,7 +234,7 @@ public class ThStorageWordStatusError {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusError in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -266,7 +266,7 @@ public class ThStorageWordStatusError {
                 int sizeRec = statusErrorForKeyPointFlow.size();
                 int paramCount = getParamCount();
                 if( sizeRec != paramCount ){
-                    new IllegalArgumentException(ThStorageWordStatusError.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusError.class.getCanonicalName() 
                             + " parameters of flow statusError in StorageWord is not valid, "
                             + "count records " + sizeRec + " not equal " + paramCount);
                 }
@@ -275,7 +275,7 @@ public class ThStorageWordStatusError {
                     int paramCodeByNumber = getParamCodeByNumber(idxParam);
                     if( statusErrorForKeyPointFlow.containsKey(paramCodeByNumber) ){
                         paramNameByNumber = getParamNameByNumber(idxParam);
-                        new IllegalArgumentException(ThStorageWordStatusError.class.getCanonicalName() 
+                        new IllegalArgumentException(ZPIThStorageWordStatusError.class.getCanonicalName() 
                             + " parameters of flow statusError in StorageWord is not valid, "
                             + "count records for " + paramNameByNumber + " not equal one");
                     }

@@ -22,7 +22,7 @@ import java.nio.file.Paths;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordHelperFileSystem {
+public class ZPIThStorageWordHelperFileSystem {
     /**
      * create strinc for directory by typeWord
      * buildName for word Store in format:

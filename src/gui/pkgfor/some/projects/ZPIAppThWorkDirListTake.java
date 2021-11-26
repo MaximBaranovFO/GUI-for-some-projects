@@ -36,9 +36,9 @@ public class ZPIAppThWorkDirListTake implements Runnable {
         Boolean needFinishStateDirlistTacker = innerRuleForDirListWorkers.getNeedFinishStateDirlistTacker();
         //this.innerRuleForDirListWorkers.startDirListPacker();
         
-        ThreadLocal<ThLogicDirListTacker> logicTacker = new ThreadLocal<ThLogicDirListTacker>();
+        ThreadLocal<ZPIThLogicDirListTacker> logicTacker = new ThreadLocal<ZPIThLogicDirListTacker>();
         try{
-            logicTacker.set(new ThLogicDirListTacker(this.innerRuleForDirListWorkers));
+            logicTacker.set(new ZPIThLogicDirListTacker(this.innerRuleForDirListWorkers));
             logicTacker.get().doTacker();
         } finally {
             logicTacker.remove();

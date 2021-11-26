@@ -19,6 +19,6 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatistic {
+public class ZPIThStorageWordStatistic {
     
 }

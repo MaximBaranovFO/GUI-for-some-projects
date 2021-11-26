@@ -30,14 +30,14 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThLogicDirListWriter {
+public class ZPIThLogicDirListWriter {
     private AppThWorkDirListRule innerRuleForDirListWorkers;
     //private NcParamFs currentWriterFs;
     
     private ThreadLocal<Long> counterPackCount;
     private ThreadLocal<Long> counterDataSize;
 
-    public ThLogicDirListWriter(AppThWorkDirListRule ruleForDirListWorkers){//,
+    public ZPIThLogicDirListWriter(AppThWorkDirListRule ruleForDirListWorkers){//,
             //NcParamFs currentStorageFs) {
         this.innerRuleForDirListWorkers = ruleForDirListWorkers;
         //this.currentWriterFs = currentStorageFs;
@@ -121,13 +121,13 @@ public class ThLogicDirListWriter {
         outStatesOfWorkLogic(" Writer end run part");
     }
     private void outStatesOfWorkLogic(String strForOutPut){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + strForOutPut;
         NcAppHelper.outToConsoleIfDevAndParamTrue(strRunLogicLabel, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_DIR_LIST_WRITER_RUN);
     }
     private void outDataProcessedOfWorkLogic(Long packIn, Long dataIn, Integer pipeSize){
-        String strRunLogicLabel = ThLogicDirListPacker.class.getCanonicalName() 
+        String strRunLogicLabel = ZPIThLogicDirListPacker.class.getCanonicalName() 
                             + "[THREADNAME]" + Thread.currentThread().getName()
                             + "                                                   pack in    " 
                             + String.valueOf(packIn) 

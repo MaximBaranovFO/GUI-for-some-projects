@@ -20,12 +20,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ThStorageWordStatusDataCache
- * countTMP   - (3a.4) - Integer currentInCache 
- *  - records count, need when 
- *                get job for write for example:
- *                fromJobToWriteDataSize + countRecordsOnFileSystem + 
- *                currentInCache = resultNowData < indexSystemLimitOnStorage
+ * ZPIThStorageWordStatusDataCache
+ countTMP   - (3a.4) - Integer currentInCache 
+  - records count, need when 
+                get job for write for example:
+                fromJobToWriteDataSize + countRecordsOnFileSystem + 
+                currentInCache = resultNowData < indexSystemLimitOnStorage
  *                => readFormFileSystem -> summaryReadedCacheFromJob ->
  *                setNew VolumeNumber -> setNew in countRecordsOnFileSystem
  *                -> sendJobForWriter about writeMove -> setNew NewFileName
@@ -50,7 +50,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusDataCache {
+public class ZPIThStorageWordStatusDataCache {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -60,7 +60,7 @@ public class ThStorageWordStatusDataCache {
      */
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>> poolStatusDataCache;
     
-    ThStorageWordStatusDataCache(){
+    ZPIThStorageWordStatusDataCache(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusDataCache = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, Integer>>();
@@ -78,7 +78,7 @@ public class ThStorageWordStatusDataCache {
             inputedVal = (UUID) keyPointFlowDataCache;
             getStatusDataCacheFormPool = this.poolStatusDataCache.get(inputedVal);
             if( getStatusDataCacheFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusDataCache.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusDataCache.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -260,7 +260,7 @@ public class ThStorageWordStatusDataCache {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -300,7 +300,7 @@ public class ThStorageWordStatusDataCache {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -353,31 +353,31 @@ public class ThStorageWordStatusDataCache {
                             countThStorageWordStatusIndexSystemLimitOnStorage++;
                             continue;
                     }
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, has more values");
                 }
                 if( countSummaryOfParameters != 4 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, "
                             + "count records not equal three");
                 }
                 if( countThStorageWordStatusDataCacheCurrentInCache != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, "
                             + "count records for CurrentInCache not equal one");
                 }
                 if( countThStorageWordStatusDataCacheCurrentInCacheReaded != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, "
                             + "count records for CurrentInCacheReaded not equal one");
                 }
                 if( countThStorageWordStatusAddNeedToFileSystemLimit != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, "
                             + "count records for AddNeedToFileSystemLimit not equal one");
                 }
                 if( countThStorageWordStatusIndexSystemLimitOnStorage != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusDataCache.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in StorageWord is not valid, "
                             + "count records for IndexSystemLimitOnStorage not equal one");
                 }

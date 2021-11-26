@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordBusReadedFlow {
+public class ZPIThStorageWordBusReadedFlow {
     /**
      * ConcurrentHashMap<Integer, Integer> (<hashFieldCode, Value>)
      * hashFieldCode:
@@ -55,9 +55,9 @@ public class ThStorageWordBusReadedFlow {
                     ConcurrentHashMap<Integer, 
                         ConcurrentHashMap<String, ConcurrentHashMap<Long, UUID>>>>> uuidReadedFlowMap;
 
-    private ThStorageWordStatusMainFlow mainStorageWordFlow;
+    private ZPIThStorageWordStatusMainFlow mainStorageWordFlow;
     
-    public ThStorageWordBusReadedFlow(ThStorageWordStatusMainFlow storageWordStatisticOuter) {
+    public ZPIThStorageWordBusReadedFlow(ZPIThStorageWordStatusMainFlow storageWordStatisticOuter) {
         this.mainStorageWordFlow = storageWordStatisticOuter;
         this.uuidReadedFlowMap = createNewListStoragesMapEmpty();
 
@@ -93,14 +93,14 @@ public class ThStorageWordBusReadedFlow {
             int strSubStringlength = strSubString.length();
             int tagNamelength = tagName.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThStorageWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagName + " lengthHex: " + tagName.length()
                         + " strSubString: " + strSubString + " lengthStr: " + strSubString.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThStorageWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagName + " length: " + tagName.length()
                         + " < 4 ");
@@ -169,7 +169,7 @@ public class ThStorageWordBusReadedFlow {
 
             ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>> typeWordTagFileNameFlowUuids1 = this.mainStorageWordFlow.getTypeWordTagFileNameFlowUuids(typeWord, tagName, strSubString);
             if( !typeWordTagFileNameFlowUuids1.containsKey(mainFlowContentInputed) ){
-                throw new IllegalArgumentException(ThStorageWordBusReadedFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() 
                         + " UUID: "
                         + mainFlowContentInputed.toString() 
                         + " in mainFlow not exist, hexTagName: "

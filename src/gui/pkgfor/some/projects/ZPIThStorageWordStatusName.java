@@ -20,31 +20,31 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * ThStorageWordStatusName
- * namesFS    - (3a.2) - String currentFileName - full file name where read 
- *                from data
- *                  when flow read in storage data this names set equal newFileName
- *                  after move process, in StatusWorkers set flag isNeedRead
- *     - (3a.2) - String newFileName - full file name for Files.move 
- *                operation after write created when readJobDataSize
- *     - (3a.2) - String storageDirectoryName - full directory name
- *                in storage for data files save
- *     - (3a.2) - String deletedFileName name of file data from prev iteration of
- *                  write, read flow
- *     - (3a.2) - String flowFileNamePrefix name prefix for add in the writer before
- *                  write to storage and after read from DataCahe, and calculate
- *                  readed from cache data size, if need readed data limited by
- *                  vol size for index storages system, in the flow system add last
- *                  vol file name if it not limited
+ * ZPIThStorageWordStatusName
+ namesFS    - (3a.2) - String currentFileName - full file name where read 
+                from data
+                  when flow read in storage data this names set equal newFileName
+                  after move process, in StatusWorkers set flag isNeedRead
+     - (3a.2) - String newFileName - full file name for Files.move 
+                operation after write created when readJobDataSize
+     - (3a.2) - String storageDirectoryName - full directory name
+                in storage for data files save
+     - (3a.2) - String deletedFileName name of file data from prev iteration of
+                  write, read flow
+     - (3a.2) - String flowFileNamePrefix name prefix for add in the writer before
+                  write to storage and after read from DataCahe, and calculate
+                  readed from cache data size, if need readed data limited by
+                  vol size for index storages system, in the flow system add last
+                  vol file name if it not limited
  * 
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusName {
+public class ZPIThStorageWordStatusName {
     private final Long timeCreation;
     private final UUID objectLabel;
     private ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, String>> poolStatusName;
     
-    ThStorageWordStatusName(){
+    ZPIThStorageWordStatusName(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusName = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, String>>();
@@ -62,7 +62,7 @@ public class ThStorageWordStatusName {
             inputedVal = (UUID) keyPointFlowName;
             getStatusNameFormPool = (ConcurrentHashMap<Integer, String>) this.poolStatusName.get(inputedVal);
             if( getStatusNameFormPool == null ){
-                throw new IllegalStateException(ThStorageWordStatusName.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThStorageWordStatusName.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -263,7 +263,7 @@ public class ThStorageWordStatusName {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -303,7 +303,7 @@ public class ThStorageWordStatusName {
         try {
             paramNames = getParamNames();
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -361,36 +361,36 @@ public class ThStorageWordStatusName {
                             countThStorageWordStatusNameFlowFileNamePrefix++;
                             continue;
                     }
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, has more values");
                 }
                 if( countSummaryOfParameters != 5 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records not equal three");
                 }
                 if( countThStorageWordStatusNameStorageDirectoryName != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records for StorageDirectoryName not equal one");
                 }
                 if( countThStorageWordStatusNameCurrentFileName != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records for CurrentFileName not equal one");
                 }
                 if( countThStorageWordStatusNameNewFileName != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records for IndexSystemLimitOnStorage not equal one");
                 }
                 if( countThStorageWordStatusNameDeletedFileName != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records for DeletedFileName not equal one");
                 }
                 if( countThStorageWordStatusNameFlowFileNamePrefix != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusName.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in StorageWord is not valid, "
                             + "count records for FileNamePrefix not equal one");
                 }

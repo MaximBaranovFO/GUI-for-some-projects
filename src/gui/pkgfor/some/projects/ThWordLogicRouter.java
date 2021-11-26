@@ -33,9 +33,9 @@ public class ThWordLogicRouter {
         ThWordRule wordRuleFunc;
         ZPIThIndexRule indexRuleFunc;
         ZPIThIndexState indexState;
-        ThStorageWordRule storageWordRuleFunc;
-        ThStorageWordState storageWordState;
-        ThStorageWordBusOutput busOutputForWordRouter;
+        ZPIThStorageWordRule storageWordRuleFunc;
+        ZPIThStorageWordState storageWordState;
+        ZPIThStorageWordBusOutput busOutputForWordRouter;
         try {
             AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
             AdilState adilState = adilRule.getAdilState();
@@ -73,12 +73,12 @@ public class ThWordLogicRouter {
     }
     protected void outerBusIterator(
             ThWordRule outerRuleWord, 
-            ThStorageWordBusOutput busOutputForWordRouterInputed){
-        ThStorageWordBusOutput busOutputForWordRouterFunc;
+            ZPIThStorageWordBusOutput busOutputForWordRouterInputed){
+        ZPIThStorageWordBusOutput busOutputForWordRouterFunc;
         LinkedTransferQueue<ZPITdataWord> busOutputByTypeWord;
         Integer typeWordOfBusOutput;
         try {
-            busOutputForWordRouterFunc = (ThStorageWordBusOutput) busOutputForWordRouterInputed;
+            busOutputForWordRouterFunc = (ZPIThStorageWordBusOutput) busOutputForWordRouterInputed;
             for( Map.Entry<Integer, LinkedTransferQueue<ZPITdataWord>> itemsBusByTypeWord : busOutputForWordRouterFunc.getExistBusEntrySetForTypeWord() ){
                 //make event indexes, main flow, set stop flags and insert data into cache
                 typeWordOfBusOutput = itemsBusByTypeWord.getKey();

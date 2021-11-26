@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordStatusMainFlow {
+public class ZPIThStorageWordStatusMainFlow {
     /**
      * ConcurrentHashMap<Integer, Integer> (<hashFieldCode, Value>)
      * hashFieldCode:
@@ -47,36 +47,36 @@ public class ThStorageWordStatusMainFlow {
      *     ConcurrentHashMap<String,  - (3) - tagFileName with hex view
      * > >   ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>
      *          <UUID MainFlow, Field.hashCode(), valueUUID>
-     *          <ThStorageWordStatusDataFs.hashCode(), recordUUID>
-     *          <ThStorageWordStatusName.hashCode(), recordUUID>
-     *          <ThStorageWordStatusActivity.hashCode(), recordUUID>
-     *          <ThStorageWordStatusDataCache.hashCode(), recordUUID>
-     *          <ThStorageWordStatusWorkers.hashCode(), recordUUID>>
-     * -------------------------------------------------------------------------
-     * ThStorageWordStatusDataFs
-     * countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
-     *                before write (Read, Write into old file name, 
-     *                after write Files.move to newFileName
-     *     - (3a.1) - Integer volumeNumber - update onWrite, before
-     *                write = ifLimit ? update : none
-     * -------------------------------------------------------------------------
-     * ThStorageWordStatusName
-     * namesFS    - (3a.2) - String currentFileName - full file name where read 
-     *                from data
-     *     - (3a.2) - String newFileName - full file name for Files.move 
-     *                operation after write created when readJobDataSize
-     * -------------------------------------------------------------------------
-     * ThStorageWordStatusActivity
-     * timeUSE    - (3a.3) - Long lastAccessNanotime - update onWrite, before 
-     *                write
-     *     - (3a.3) - Long countDataUseIterationsSummary - update onWrite, 
-     *                before write, count++ sended jobWrite
-     * -------------------------------------------------------------------------
-     * ThStorageWordStatusDataCache
-     * countTMP   - (3a.4) - Integer currentInCache - records count, need when 
-     *                get job for write for example:
-     *                fromJobToWriteDataSize + countRecordsOnFileSystem + 
-     *                currentInCache = resultNowData < indexSystemLimitOnStorage
+     *          <ZPIThStorageWordStatusDataFs.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusName.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusActivity.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusDataCache.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusWorkers.hashCode(), recordUUID>>
+ -------------------------------------------------------------------------
+ ZPIThStorageWordStatusDataFs
+ countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
+                before write (Read, Write into old file name, 
+                after write Files.move to newFileName
+     - (3a.1) - Integer volumeNumber - update onWrite, before
+                write = ifLimit ? update : none
+ -------------------------------------------------------------------------
+ ZPIThStorageWordStatusName
+ namesFS    - (3a.2) - String currentFileName - full file name where read 
+                from data
+     - (3a.2) - String newFileName - full file name for Files.move 
+                operation after write created when readJobDataSize
+ -------------------------------------------------------------------------
+ ZPIThStorageWordStatusActivity
+ timeUSE    - (3a.3) - Long lastAccessNanotime - update onWrite, before 
+                write
+     - (3a.3) - Long countDataUseIterationsSummary - update onWrite, 
+                before write, count++ sended jobWrite
+ -------------------------------------------------------------------------
+ ZPIThStorageWordStatusDataCache
+ countTMP   - (3a.4) - Integer currentInCache - records count, need when 
+                get job for write for example:
+                fromJobToWriteDataSize + countRecordsOnFileSystem + 
+                currentInCache = resultNowData < indexSystemLimitOnStorage
      *                => readFormFileSystem -> summaryReadedCacheFromJob ->
      *                setNew VolumeNumber -> setNew in countRecordsOnFileSystem
      *                -> sendJobForWriter about writeMove -> setNew NewFileName
@@ -108,28 +108,28 @@ public class ThStorageWordStatusMainFlow {
                         ConcurrentHashMap<String, 
                             ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>>>>> fileStoragesMap;
     
-    private ThStorageWordCache thStorageWordCache;
-    private ThStorageWordCacheReaded thStorageWordCacheReaded;
-    private ThStorageWordStatusDataFs thStorageWordStatusDataFs;
-    private ThStorageWordStatusName thStorageWordStatusName;
-    private ThStorageWordStatusActivity thStorageWordStatusActivity;
-    private ThStorageWordStatusDataCache thStorageWordStatusDataCache;
-    private ThStorageWordStatusWorkers thStorageWordStatusWorkers;
+    private ZPIThStorageWordCache thStorageWordCache;
+    private ZPIThStorageWordCacheReaded thStorageWordCacheReaded;
+    private ZPIThStorageWordStatusDataFs thStorageWordStatusDataFs;
+    private ZPIThStorageWordStatusName thStorageWordStatusName;
+    private ZPIThStorageWordStatusActivity thStorageWordStatusActivity;
+    private ZPIThStorageWordStatusDataCache thStorageWordStatusDataCache;
+    private ZPIThStorageWordStatusWorkers thStorageWordStatusWorkers;
     /**
      * @todo StatusError
      */
     
-    public ThStorageWordStatusMainFlow() {
+    public ZPIThStorageWordStatusMainFlow() {
         this.fileStoragesMap = createNewListStoragesMapEmpty();
         
-        this.thStorageWordCache = new ThStorageWordCache();
-        this.thStorageWordCacheReaded = new ThStorageWordCacheReaded();
+        this.thStorageWordCache = new ZPIThStorageWordCache();
+        this.thStorageWordCacheReaded = new ZPIThStorageWordCacheReaded();
         
-        this.thStorageWordStatusDataFs = new ThStorageWordStatusDataFs();
-        this.thStorageWordStatusName = new ThStorageWordStatusName();
-        this.thStorageWordStatusActivity = new ThStorageWordStatusActivity();
-        this.thStorageWordStatusDataCache = new ThStorageWordStatusDataCache();
-        this.thStorageWordStatusWorkers = new ThStorageWordStatusWorkers();
+        this.thStorageWordStatusDataFs = new ZPIThStorageWordStatusDataFs();
+        this.thStorageWordStatusName = new ZPIThStorageWordStatusName();
+        this.thStorageWordStatusActivity = new ZPIThStorageWordStatusActivity();
+        this.thStorageWordStatusDataCache = new ZPIThStorageWordStatusDataCache();
+        this.thStorageWordStatusWorkers = new ZPIThStorageWordStatusWorkers();
     }
     /**
      * 
@@ -179,25 +179,25 @@ public class ThStorageWordStatusMainFlow {
         
         }
     }
-    protected ThStorageWordCache getStorageWordCache(){
+    protected ZPIThStorageWordCache getStorageWordCache(){
         return this.thStorageWordCache;
     }
-    protected ThStorageWordCacheReaded getStorageWordCacheReaded(){
+    protected ZPIThStorageWordCacheReaded getStorageWordCacheReaded(){
         return this.thStorageWordCacheReaded;
     }
-    protected ThStorageWordStatusDataFs getStorageWordStatusDataFs(){
+    protected ZPIThStorageWordStatusDataFs getStorageWordStatusDataFs(){
         return this.thStorageWordStatusDataFs;
     }
-    protected ThStorageWordStatusName getStorageWordStatusName(){
+    protected ZPIThStorageWordStatusName getStorageWordStatusName(){
         return this.thStorageWordStatusName;
     }
-    protected ThStorageWordStatusActivity getStorageWordStatusActivity(){
+    protected ZPIThStorageWordStatusActivity getStorageWordStatusActivity(){
         return this.thStorageWordStatusActivity;
     }
-    protected ThStorageWordStatusDataCache getStorageWordStatusDataCache(){
+    protected ZPIThStorageWordStatusDataCache getStorageWordStatusDataCache(){
         return this.thStorageWordStatusDataCache;
     }
-    protected ThStorageWordStatusWorkers getStorageWordStatusWorkers(){
+    protected ZPIThStorageWordStatusWorkers getStorageWordStatusWorkers(){
         return this.thStorageWordStatusWorkers;
     }
     
@@ -256,14 +256,14 @@ public class ThStorageWordStatusMainFlow {
             int strSubStringlength = strSubString.length();
             int tagNamelength = tagName.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagName + " lengthHex: " + tagName.length()
                         + " strSubString: " + strSubString + " lengthStr: " + strSubString.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagName + " length: " + tagName.length()
                         + " < 4 ");
@@ -333,11 +333,11 @@ public class ThStorageWordStatusMainFlow {
      * @param tagName
      * @param strSubString
      * @param keysPointsFlow ConcurrentHashMap<Integer, UUID>
-     *          <ThStorageWordStatusDataFs.hashCode(), recordUUID>
-     *          <ThStorageWordStatusName.hashCode(), recordUUID>
-     *          <ThStorageWordStatusActivity.hashCode(), recordUUID>
-     *          <ThStorageWordStatusDataCache.hashCode(), recordUUID>
-     *          <ThStorageWordStatusWorkers.hashCode(), recordUUID>
+     *          <ZPIThStorageWordStatusDataFs.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusName.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusActivity.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusDataCache.hashCode(), recordUUID>
+          <ZPIThStorageWordStatusWorkers.hashCode(), recordUUID>
      */
     protected void setParamsPointsFlow(
             final Integer typeWord, 
@@ -350,7 +350,7 @@ public class ThStorageWordStatusMainFlow {
             mainFlowContentFunc = new ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>();
             for(Map.Entry<UUID, ConcurrentHashMap<Integer, UUID>> itemsContent : mainFlowContentInputed.entrySet()){
                 if( itemsContent.getValue().isEmpty() ){
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() + " parameters of data for set into cache is empty");
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() + " parameters of data for set into cache is empty");
                 }
                 
                 int countThStorageWordStatusDataFs = 0;
@@ -378,27 +378,27 @@ public class ThStorageWordStatusMainFlow {
                             continue; //ThStorageWordStatusWorkers
                     }
                     
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() + " parameters of data for set into cache not valid");
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() + " parameters of data for set into cache not valid");
                 }
                 
                 if( countThStorageWordStatusDataFs != 1 ){
-                                new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                                new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                                         + " parameters flowDataFs not valid");
                 }
                 if( countThStorageWordStatusName != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                             + " parameters flowName not valid");
                     }
                 if( countThStorageWordStatusActivity != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                             + " parameters flowActivity not valid");  
                 }     
                 if( countThStorageWordStatusDataCache != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                             + " parameters flowDataCache not valid");
                 }
                 if( countThStorageWordStatusWorkers != 1 ){
-                    new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                    new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                             + " parameters flowWorkers not valid");
                 }
                 

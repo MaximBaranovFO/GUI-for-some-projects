@@ -32,9 +32,9 @@ public class ZPIAppThWorkDirListPack implements Runnable {
         Boolean needFinishStateDirListPacker = innerRuleForDirListWorkers.getNeedFinishStateDirListPacker();
         //this.innerRuleForDirListWorkers.startDirListWriter();
         
-        ThreadLocal<ThLogicDirListPacker> logicPacker = new ThreadLocal<ThLogicDirListPacker>();
+        ThreadLocal<ZPIThLogicDirListPacker> logicPacker = new ThreadLocal<ZPIThLogicDirListPacker>();
         try{
-            logicPacker.set(new ThLogicDirListPacker(this.innerRuleForDirListWorkers));
+            logicPacker.set(new ZPIThLogicDirListPacker(this.innerRuleForDirListWorkers));
             logicPacker.get().doPacker();
         } finally {
             logicPacker.remove();

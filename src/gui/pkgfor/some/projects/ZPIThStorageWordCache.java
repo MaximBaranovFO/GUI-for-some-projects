@@ -27,14 +27,14 @@ import java.util.concurrent.ConcurrentHashMap;
  *     ConcurrentHashMap<String, String> (3) - <hexWord (tagFileName), subString>
  * @author wladimirowichbiaran
  */
-public class ThStorageWordCache {
+public class ZPIThStorageWordCache {
     
     private ConcurrentHashMap<Integer, 
             ConcurrentHashMap<String, 
                 ConcurrentHashMap<Integer, 
                     ConcurrentHashMap<String, String>>>> cachedData;
     
-    public ThStorageWordCache() {
+    public ZPIThStorageWordCache() {
         this.cachedData = createNewListStoragesMapEmpty();
     }
     protected ConcurrentHashMap<Integer, 
@@ -193,14 +193,14 @@ public class ThStorageWordCache {
             strSubStringlength = strSubStringFunc.length();
             tagNamelength = tagNameFunc.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNameFunc.length()
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringFunc.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameInputed + " length: " + tagNameInputed.length()
                         + " < 4 ");
@@ -270,14 +270,14 @@ public class ThStorageWordCache {
             int strSubStringlength = strSubStringFunc.length();
             int tagNamelength = tagNameFunc.length();
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNameFunc.length()
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringFunc.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThStorageWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThStorageWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -303,14 +303,14 @@ public class ThStorageWordCache {
                 returnFormCacheNull = Boolean.TRUE;
             }
             if( getListBySubStrLength == null ){
-                throw new NullPointerException(ThStorageWordCache.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThStorageWordCache.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc
                         + " data in cache is null");
             }
             if( returnFormCacheNull ){
-                throw new NullPointerException(ThStorageWordCache.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThStorageWordCache.class.getCanonicalName() 
                         + " for word by type " + String.valueOf(typeWordFunc)
                         + " tagName " + tagNameFunc
                         + " subString " + strSubStringFunc

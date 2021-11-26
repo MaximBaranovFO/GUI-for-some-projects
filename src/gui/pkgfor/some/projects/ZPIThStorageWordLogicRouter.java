@@ -27,23 +27,23 @@ import java.util.concurrent.ConcurrentHashMap;
  first four bytes, create or add to sub path, calculate length for subString 
  value, generate name for list file in format wl-(UUID)-(Size)-(Volume Number)
  
- ThStorageWordStatusMainFlow - search directories and list file names
- ThStorageWordCache - temp storages for data
- ThStorageWordHelperFileSystem - static functions for create, move, scan 
+ ZPIThStorageWordStatusMainFlow - search directories and list file names
+ ZPIThStorageWordCache - temp storages for data
+ ZPIThStorageWordHelperFileSystem - static functions for create, move, scan 
  directories and list files
  * 
  * @author wladimirowichbiaran
  */
-public class ThStorageWordLogicRouter {
-    protected void doRouterForIndexStorageWord(final ThStorageWordRule outerRuleStorageWord){
-        final ThStorageWordRule funcRuleStorageWord = (ThStorageWordRule) outerRuleStorageWord;
+public class ZPIThStorageWordLogicRouter {
+    protected void doRouterForIndexStorageWord(final ZPIThStorageWordRule outerRuleStorageWord){
+        final ZPIThStorageWordRule funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
         
         AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
         AdilState adilState = adilRule.getAdilState();
         Integer numberProcessIndexSystem = 7;
         String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                 + AdilConstants.CANONICALNAME
-                + ThStorageWordLogicRouter.class.getCanonicalName()
+                + ZPIThStorageWordLogicRouter.class.getCanonicalName()
                 + AdilConstants.METHOD
                 + "doRouterForIndexStorageWord()";
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -52,11 +52,11 @@ public class ThStorageWordLogicRouter {
         
         ZPIThIndexRule indexRule = funcRuleStorageWord.getIndexRule();
         ZPIThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
-        ThStorageWordState storageWordState = funcRuleStorageWord.getStorageWordState();
-        ThStorageWordStatusMainFlow storageWordStatusMainFlow = funcRuleStorageWord.getStorageWordStatusMainFlow();
+        ZPIThStorageWordState storageWordState = funcRuleStorageWord.getStorageWordState();
+        ZPIThStorageWordStatusMainFlow storageWordStatusMainFlow = funcRuleStorageWord.getStorageWordStatusMainFlow();
         Integer countRecToConsole = 0;
-        System.out.println("++++++++++++++++++++++++++++++start " + ThStorageWordLogicRouter.class.getCanonicalName());
-        ThStorageWordBusInput busJobForStorageWordRouter = storageWordState.getBusJobForStorageWordRouterJob();
+        System.out.println("++++++++++++++++++++++++++++++start " + ZPIThStorageWordLogicRouter.class.getCanonicalName());
+        ZPIThStorageWordBusInput busJobForStorageWordRouter = storageWordState.getBusJobForStorageWordRouterJob();
         do{
             ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> busForTypeStorageWordRouter = busJobForStorageWordRouter.getMaxUsedBusesSet();
             for(Map.Entry<Integer, ConcurrentHashMap<String, String>> items : busForTypeStorageWordRouter.entrySet()){
@@ -141,8 +141,7 @@ public class ThStorageWordLogicRouter {
                 for(Map.Entry<String, String> itemsOfBus : items.getValue().entrySet()){
                     String removedStr = items.getValue().remove(itemsOfBus.getKey());
                     if( countRecToConsole > 500 ){
-                        System.out.println(
-                                ThStorageWordLogicRouter.class.getCanonicalName() + " For bus " 
+                        System.out.println(ZPIThStorageWordLogicRouter.class.getCanonicalName() + " For bus " 
                                 + busNumber
                                 + " hexWord " 
                                 + itemsOfBus.getKey() 
@@ -176,7 +175,7 @@ public class ThStorageWordLogicRouter {
         /**
          * @todo procedure for read all caches data and write it
          */
-        ThStorageWordCache storageWordCache = (ThStorageWordCache) storageWordStatusMainFlow.getStorageWordCache();
+        ZPIThStorageWordCache storageWordCache = (ZPIThStorageWordCache) storageWordStatusMainFlow.getStorageWordCache();
         
         ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> listTypTagSubStr = storageWordCache.pollListTypeTagSubStr();
         do{
@@ -198,7 +197,7 @@ public class ThStorageWordLogicRouter {
             listTypTagSubStr = storageWordCache.pollListTypeTagSubStr();
         }
         while( listTypTagSubStr != null );
-        System.out.println("++++++++++++++++++++++++++++++stop " + ThStorageWordLogicRouter.class.getCanonicalName());
+        System.out.println("++++++++++++++++++++++++++++++stop " + ZPIThStorageWordLogicRouter.class.getCanonicalName());
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
                 + AdilConstants.FINISH);
@@ -211,14 +210,14 @@ public class ThStorageWordLogicRouter {
      * @throws IllegalArgumentException
      */
     private static void removeDataForCurrentTypeWordBus(
-            final ThStorageWordRule outerRuleStorageWord,
+            final ZPIThStorageWordRule outerRuleStorageWord,
             final Integer fromBusItemKey, 
             final ConcurrentHashMap<String, String> fromBusItemValue){
         Integer typeWord;
         ConcurrentHashMap<String, String> hexTagNameSubString;
-        ThStorageWordRule funcRuleStorageWord;
+        ZPIThStorageWordRule funcRuleStorageWord;
         try {
-            funcRuleStorageWord = (ThStorageWordRule) outerRuleStorageWord;
+            funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
             typeWord = fromBusItemKey;
             hexTagNameSubString = fromBusItemValue;
             for(Map.Entry<String, String> itemsHexTagSubStr : hexTagNameSubString.entrySet()){
@@ -228,7 +227,7 @@ public class ThStorageWordLogicRouter {
                 int strSubStringlength = (int) recSubString.length();
                 
                 if( (strSubStringlength * 4) != tagNamelength ){
-                    throw new IllegalArgumentException(ThStorageWordLogicRouter.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThStorageWordLogicRouter.class.getCanonicalName() 
                             + " illegal length of inputed in index string, hexTagName: "
                             + recHexTagName + " lengthHex: " + recHexTagName.length()
                             + " strSubString: " + recSubString + " lengthStr: " + recSubString.length()
@@ -236,7 +235,7 @@ public class ThStorageWordLogicRouter {
                 }
                 
                 if( tagNamelength < 4 ){
-                    throw new IllegalArgumentException(ThStorageWordLogicRouter.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThStorageWordLogicRouter.class.getCanonicalName() 
                             + " illegal length of inputed in index string, hexTagName: "
                             + recHexTagName + " length: " + recHexTagName.length()
                             + " < 4 ");
@@ -270,24 +269,24 @@ public class ThStorageWordLogicRouter {
         
     }
     private static void setFlagsToStatisticsList(
-            final ThStorageWordRule outerRuleStorageWord,
+            final ZPIThStorageWordRule outerRuleStorageWord,
             final Integer typeWordInputed, 
             final String tagNameInputed, 
             final String strSubStringInputed){
-        ThStorageWordRule funcRuleStorageWord;
-        ThStorageWordStatusMainFlow currentStorageWordStatistic;
-        ThStorageWordBusReadedFlow storageWordFlowReaded;
-        ThStorageWordState storageWordState;
-        ThStorageWordBusWriter busJobForStorageWordRouterJobToWriter;
-        ThStorageWordBusReader busJobForStorageWordRouterJobToReader;
+        ZPIThStorageWordRule funcRuleStorageWord;
+        ZPIThStorageWordStatusMainFlow currentStorageWordStatistic;
+        ZPIThStorageWordBusReadedFlow storageWordFlowReaded;
+        ZPIThStorageWordState storageWordState;
+        ZPIThStorageWordBusWriter busJobForStorageWordRouterJobToWriter;
+        ZPIThStorageWordBusReader busJobForStorageWordRouterJobToReader;
         
-        ThStorageWordStatusName thStorageWordStatusName;
-        ThStorageWordStatusActivity thStorageWordStatusActivity;
-        ThStorageWordStatusDataCache thStorageWordStatusDataCache;
-        ThStorageWordCache thStorageWordCache;
-        ThStorageWordCacheReaded thStorageWordCacheReaded;
-        ThStorageWordStatusWorkers thStorageWordStatusWorkers;
-        ThStorageWordStatusDataFs thStorageWordStatusDataFs;
+        ZPIThStorageWordStatusName thStorageWordStatusName;
+        ZPIThStorageWordStatusActivity thStorageWordStatusActivity;
+        ZPIThStorageWordStatusDataCache thStorageWordStatusDataCache;
+        ZPIThStorageWordCache thStorageWordCache;
+        ZPIThStorageWordCacheReaded thStorageWordCacheReaded;
+        ZPIThStorageWordStatusWorkers thStorageWordStatusWorkers;
+        ZPIThStorageWordStatusDataFs thStorageWordStatusDataFs;
         
         Integer typeWordFunc;
         String tagNameFunc;
@@ -312,15 +311,15 @@ public class ThStorageWordLogicRouter {
         
         Boolean isMainFlowExist;
         try{
-            funcRuleStorageWord = (ThStorageWordRule) outerRuleStorageWord;
-            currentStorageWordStatistic = (ThStorageWordStatusMainFlow) funcRuleStorageWord.getStorageWordStatusMainFlow();
-            storageWordFlowReaded = (ThStorageWordBusReadedFlow) funcRuleStorageWord.getStorageWordState().getStorageWordFlowReaded();
+            funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
+            currentStorageWordStatistic = (ZPIThStorageWordStatusMainFlow) funcRuleStorageWord.getStorageWordStatusMainFlow();
+            storageWordFlowReaded = (ZPIThStorageWordBusReadedFlow) funcRuleStorageWord.getStorageWordState().getStorageWordFlowReaded();
             
-            storageWordState = (ThStorageWordState) funcRuleStorageWord.getStorageWordState();
-            busJobForStorageWordRouterJobToWriter = (ThStorageWordBusWriter) 
+            storageWordState = (ZPIThStorageWordState) funcRuleStorageWord.getStorageWordState();
+            busJobForStorageWordRouterJobToWriter = (ZPIThStorageWordBusWriter) 
                     storageWordState.getBusJobForStorageWordRouterJobToWriter();
             
-            busJobForStorageWordRouterJobToReader = (ThStorageWordBusReader) 
+            busJobForStorageWordRouterJobToReader = (ZPIThStorageWordBusReader) 
                     storageWordState.getBusJobForStorageWordRouterJobToReader();
             
             typeWordFunc = (Integer) typeWordInputed;
@@ -358,8 +357,8 @@ public class ThStorageWordLogicRouter {
                 storageWordFlowReaded.getTypeWordTagFileNameReadedFlowUuids(typeWordFunc, tagNameFunc, strSubStringFunc);
             
             if( typeWordTagFileNameMainFlowUuids == null ){
-                throw new NullPointerException(ThStorageWordLogicRouter.class.getCanonicalName() 
-                            + " return null from " + ThStorageWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThStorageWordLogicRouter.class.getCanonicalName() 
+                            + " return null from " + ZPIThStorageWordStatusMainFlow.class.getCanonicalName()
                             + ".getTypeWordTagFileNameFlowUuids(typeWord, hexTagName, strSubString), for params values:"
                             + " typeWord: "
                             + String.valueOf(typeWordFunc) + ", hexTagName: "
@@ -368,8 +367,8 @@ public class ThStorageWordLogicRouter {
                             + " lengthStr * 4: " + strSubStringFunc.length());
             }
             if( typeWordTagFileNameReadedFlowUuids == null ){
-                throw new NullPointerException(ThStorageWordLogicRouter.class.getCanonicalName() 
-                            + " return null from " + ThStorageWordBusReadedFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThStorageWordLogicRouter.class.getCanonicalName() 
+                            + " return null from " + ZPIThStorageWordBusReadedFlow.class.getCanonicalName()
                             + ".getTypeWordTagFileNameReadedFlowUuids(typeWord, hexTagName, strSubString), for params values:"
                             + " typeWord: "
                             + String.valueOf(typeWordFunc) + ", hexTagName: "
@@ -644,7 +643,7 @@ public class ThStorageWordLogicRouter {
              */
             
             
-            buildTypeWordStoreSubDirictoriesFunc = (String) ThStorageWordHelperFileSystem.buildTypeWordStoreSubDirictories(
+            buildTypeWordStoreSubDirictoriesFunc = (String) ZPIThStorageWordHelperFileSystem.buildTypeWordStoreSubDirictories(
                         typeWordFunc,
                         tagNameFunc.substring(0, 3), 
                         strSubStringFunc.length());

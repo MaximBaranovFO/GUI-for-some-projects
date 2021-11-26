@@ -36,11 +36,11 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordLogicRead {
-    protected void doReadFromIndexStorageWord(ThStorageWordRule outerRuleStorageWord){
+public class ZPIThStorageWordLogicRead {
+    protected void doReadFromIndexStorageWord(ZPIThStorageWordRule outerRuleStorageWord){
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
-        ThStorageWordRule funcRuleStorageWord;
+        ZPIThStorageWordRule funcRuleStorageWord;
         AppFileStorageIndex currentIndexStorages;
         try{
             AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
@@ -48,7 +48,7 @@ public class ThStorageWordLogicRead {
             Integer numberProcessIndexSystem = 8;
             String msgToLog = AdilConstants.INFO_LOGIC_POSITION
                     + AdilConstants.CANONICALNAME
-                    + ThStorageWordLogicRead.class.getCanonicalName()
+                    + ZPIThStorageWordLogicRead.class.getCanonicalName()
                     + AdilConstants.METHOD
                     + "doReadFromIndexStorageWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
@@ -61,8 +61,8 @@ public class ThStorageWordLogicRead {
              * Rule
              * Statistic for this index system
              */
-            funcRuleStorageWord = (ThStorageWordRule) outerRuleStorageWord;
-            ThStorageWordBusReadedFlow storageWordFlowReaded = funcRuleStorageWord.getStorageWordState().getStorageWordFlowReaded();
+            funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
+            ZPIThStorageWordBusReadedFlow storageWordFlowReaded = funcRuleStorageWord.getStorageWordState().getStorageWordFlowReaded();
             indexRule = funcRuleStorageWord.getIndexRule();
             //indexStatistic = indexRule.getIndexStatistic();
             //indexStatistic.updateDataStorages();
@@ -95,9 +95,9 @@ public class ThStorageWordLogicRead {
         
             do{ 
                 try{
-                    ThStorageWordState wordState = (ThStorageWordState) funcRuleStorageWord.getStorageWordState();
-                    ThStorageWordBusReader busJobForStorageWordRouterJobToReader = 
-                            (ThStorageWordBusReader) wordState.getBusJobForStorageWordRouterJobToReader();
+                    ZPIThStorageWordState wordState = (ZPIThStorageWordState) funcRuleStorageWord.getStorageWordState();
+                    ZPIThStorageWordBusReader busJobForStorageWordRouterJobToReader = 
+                            (ZPIThStorageWordBusReader) wordState.getBusJobForStorageWordRouterJobToReader();
                     
                     ConcurrentHashMap<Integer, ConcurrentHashMap<UUID, ConcurrentHashMap<String, String>>> 
                             maxUsedBusesSet = busJobForStorageWordRouterJobToReader.getMaxUsedBusesSet();
@@ -120,7 +120,7 @@ public class ThStorageWordLogicRead {
                                 String hexTagName = itemsTagNames.getKey();
                                 String subStringValue = itemsTagNames.getValue();
 
-                                ThStorageWordStatusMainFlow storageWordStatistic = (ThStorageWordStatusMainFlow) outerRuleStorageWord.getStorageWordStatusMainFlow();
+                                ZPIThStorageWordStatusMainFlow storageWordStatistic = (ZPIThStorageWordStatusMainFlow) outerRuleStorageWord.getStorageWordStatusMainFlow();
 
                                 ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>> typeWordTagFileNameFlowUuids = 
                                     (ConcurrentHashMap<UUID, ConcurrentHashMap<Integer, UUID>>) storageWordStatistic.getTypeWordTagFileNameFlowUuids(
@@ -197,10 +197,10 @@ public class ThStorageWordLogicRead {
                                             /**
                                              * validate values, read from file
                                              */
-                                            ThStorageWordCache storageWordCache = 
-                                                    (ThStorageWordCache) storageWordStatistic.getStorageWordCache();
-                                            ThStorageWordStatusActivity storageWordStatusActivity = 
-                                                    (ThStorageWordStatusActivity) storageWordStatistic.getStorageWordStatusActivity();
+                                            ZPIThStorageWordCache storageWordCache = 
+                                                    (ZPIThStorageWordCache) storageWordStatistic.getStorageWordCache();
+                                            ZPIThStorageWordStatusActivity storageWordStatusActivity = 
+                                                    (ZPIThStorageWordStatusActivity) storageWordStatistic.getStorageWordStatusActivity();
 
                                             UUID getKeyActivity = (UUID) flowPointsUUID.get("ThStorageWordStatusActivity".hashCode());
                                             try{
@@ -218,8 +218,8 @@ public class ThStorageWordLogicRead {
                                                         + mainFlowLabel.toString());
                                                 continue;
                                             }
-                                            ThStorageWordStatusDataCache storageWordStatusDataCache = 
-                                                    (ThStorageWordStatusDataCache) storageWordStatistic.getStorageWordStatusDataCache();
+                                            ZPIThStorageWordStatusDataCache storageWordStatusDataCache = 
+                                                    (ZPIThStorageWordStatusDataCache) storageWordStatistic.getStorageWordStatusDataCache();
 
                                             UUID getKeyDataCache = (UUID) flowPointsUUID.get("ThStorageWordStatusDataCache".hashCode());
                                             try{
@@ -238,8 +238,8 @@ public class ThStorageWordLogicRead {
                                                 continue;
                                             }
 
-                                            ThStorageWordStatusDataFs storageWordStatusDataFs = 
-                                                    (ThStorageWordStatusDataFs) storageWordStatistic.getStorageWordStatusDataFs();
+                                            ZPIThStorageWordStatusDataFs storageWordStatusDataFs = 
+                                                    (ZPIThStorageWordStatusDataFs) storageWordStatistic.getStorageWordStatusDataFs();
 
                                             UUID getKeyDataFs = (UUID) flowPointsUUID.get("ThStorageWordStatusDataFs".hashCode());
                                             try{
@@ -259,8 +259,8 @@ public class ThStorageWordLogicRead {
                                             }
 
 
-                                            ThStorageWordStatusName storageWordStatusName = 
-                                                    (ThStorageWordStatusName) storageWordStatistic.getStorageWordStatusName();
+                                            ZPIThStorageWordStatusName storageWordStatusName = 
+                                                    (ZPIThStorageWordStatusName) storageWordStatistic.getStorageWordStatusName();
 
                                             UUID getKeyName = (UUID) flowPointsUUID.get("ThStorageWordStatusName".hashCode());
                                             try{
@@ -280,8 +280,8 @@ public class ThStorageWordLogicRead {
                                             }
 
 
-                                            ThStorageWordStatusWorkers storageWordStatusWorkers = 
-                                                    (ThStorageWordStatusWorkers) storageWordStatistic.getStorageWordStatusWorkers();
+                                            ZPIThStorageWordStatusWorkers storageWordStatusWorkers = 
+                                                    (ZPIThStorageWordStatusWorkers) storageWordStatistic.getStorageWordStatusWorkers();
 
                                             UUID getKeyWorkers = (UUID) flowPointsUUID.get("ThStorageWordStatusWorkers".hashCode());
                                             try{
@@ -336,7 +336,7 @@ public class ThStorageWordLogicRead {
                                                 {
                                                     readedFormData.putAll((ConcurrentHashMap<String, String>) ois.readObject());
 
-                                                    ThStorageWordCacheReaded thStorageWordCacheReaded = storageWordStatistic.getStorageWordCacheReaded();
+                                                    ZPIThStorageWordCacheReaded thStorageWordCacheReaded = storageWordStatistic.getStorageWordCacheReaded();
 
                                                     Boolean isCachedReadedData = Boolean.FALSE;
 
@@ -451,32 +451,32 @@ public class ThStorageWordLogicRead {
                 }
             } while( outerRuleStorageWord.isRunnedStorageWordWorkRouter() );
         } catch(FileSystemAlreadyExistsException exAlExist){
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exAlExist.getMessage());
             exAlExist.printStackTrace();
         } catch(FileSystemNotFoundException exFsNotExist){
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exFsNotExist.getMessage());
             exFsNotExist.printStackTrace();
         } catch(ProviderNotFoundException exProvNotFound){
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exProvNotFound.getMessage());
             exProvNotFound.printStackTrace();
         } catch(IllegalArgumentException exIllArg){
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exIllArg.getMessage());
             exIllArg.printStackTrace();
         } catch(SecurityException exSec){
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exSec.getMessage());
             exSec.printStackTrace();
         } catch (IOException exIo) {
-            System.err.println(ThStorageWordLogicRead.class.getCanonicalName() 
+            System.err.println(ZPIThStorageWordLogicRead.class.getCanonicalName() 
                     + " error for open storage for index, reason " 
                     + exIo.getMessage());
             exIo.printStackTrace();

@@ -17,28 +17,28 @@ package gui.pkgfor.some.projects;
 
 /**
  * java.lang.OutOfMemoryError: GC overhead limit exceeded
- * ThStorageWordLogicFilter.java:283
- * ThStorageWordLogicWrite.java:380
- * ThStorageWordCache.java:202
+ ZPIThStorageWordLogicFilter.java:283
+ ThStorageWordLogicWrite.java:380
+ ThStorageWordCache.java:202
  * 
  * @author wladimirowichbiaran
  */
-public class ThStorageWordWorkFilter implements Runnable{
-    private ThStorageWordRule ruleStorageWordFilter;
+public class ZPIThStorageWordWorkFilter implements Runnable{
+    private ZPIThStorageWordRule ruleStorageWordFilter;
     
-    ThStorageWordWorkFilter(final ThStorageWordRule outerRuleStorageWordFilter){
+    ZPIThStorageWordWorkFilter(final ZPIThStorageWordRule outerRuleStorageWordFilter){
         this.ruleStorageWordFilter = outerRuleStorageWordFilter;
     }
     
     @Override
     public void run(){
-        System.out.println(ThStorageWordWorkFilter.class.getCanonicalName() 
+        System.out.println(ZPIThStorageWordWorkFilter.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleStorageWordFilter.toString());
         this.ruleStorageWordFilter.setTrueRunnedStorageWordWorkFilter();
-        ThreadLocal<ThStorageWordLogicFilter> logicStorageWordWorkFilter = new ThreadLocal<ThStorageWordLogicFilter>();
+        ThreadLocal<ZPIThStorageWordLogicFilter> logicStorageWordWorkFilter = new ThreadLocal<ZPIThStorageWordLogicFilter>();
         try{
-            logicStorageWordWorkFilter.set(new ThStorageWordLogicFilter());
+            logicStorageWordWorkFilter.set(new ZPIThStorageWordLogicFilter());
             logicStorageWordWorkFilter.get().doFilterForIndexStorageWord(this.ruleStorageWordFilter);
         } finally {
             logicStorageWordWorkFilter.remove();

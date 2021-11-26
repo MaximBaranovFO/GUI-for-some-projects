@@ -19,40 +19,40 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordState {
+public class ZPIThStorageWordState {
     /**
-     * ThStorageWordBusInput
+     * ZPIThStorageWordBusInput
      */
-    private ThStorageWordBusInput busStorageWordRouterJob;
+    private ZPIThStorageWordBusInput busStorageWordRouterJob;
     private Boolean isSetStorageWordRouterJob;
     /**
-     * ThStorageWordBusWriter
+     * ZPIThStorageWordBusWriter
      */
-    private ThStorageWordBusWriter busStorageWordRouterJobToWriter;
+    private ZPIThStorageWordBusWriter busStorageWordRouterJobToWriter;
     private Boolean isSetStorageWordRouterJobToWriter;
     /**
-     * ThStorageWordBusReader
+     * ZPIThStorageWordBusReader
      */
-    private ThStorageWordBusReader busStorageWordRouterJobToReader;
+    private ZPIThStorageWordBusReader busStorageWordRouterJobToReader;
     private Boolean isSetStorageWordRouterJobToReader;
     /**
-     * ThStorageWordBusOutput
+     * ZPIThStorageWordBusOutput
      */
-    private ThStorageWordBusOutput busWordWritedJob;
+    private ZPIThStorageWordBusOutput busWordWritedJob;
     private Boolean isSetWordWritedJob;
     /**
-     * ThStorageWordBusOutput
+     * ZPIThStorageWordBusOutput
      */
-    private ThStorageWordBusOutput busLongWordWritedJob;
+    private ZPIThStorageWordBusOutput busLongWordWritedJob;
     private Boolean isSetLongWordWritedJob;
     /**
-     * ThStorageWordBusReadedFlow thStorageWordFlowRead
+     * ZPIThStorageWordBusReadedFlow thStorageWordFlowRead
      * @todo Bus into State
      */
-    private ThStorageWordBusReadedFlow thStorageWordFlowRead;
+    private ZPIThStorageWordBusReadedFlow thStorageWordFlowRead;
     private Boolean isSetStorageWordFlowReaded;
     
-    public ThStorageWordState() {
+    public ZPIThStorageWordState() {
         setFalseStorageWordRouterJob();
         setFalseWordWritedJob();
         setFalseLongWordWritedJob();
@@ -68,13 +68,13 @@ public class ThStorageWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThStorageWordBusInput getBusJobForStorageWordRouterJob(){
+    protected ZPIThStorageWordBusInput getBusJobForStorageWordRouterJob(){
         if( !this.isStorageWordRouterJob() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThStorageWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThStorageWordState.class.getCanonicalName());
         }
         return this.busStorageWordRouterJob;
     }
-    protected void setBusJobForStorageWordRouterJob(final ThStorageWordBusInput busStorageWordRouterJobOuter){
+    protected void setBusJobForStorageWordRouterJob(final ZPIThStorageWordBusInput busStorageWordRouterJobOuter){
         this.busStorageWordRouterJob = busStorageWordRouterJobOuter;
         setTrueStorageWordRouterJob();
     }
@@ -95,14 +95,14 @@ public class ThStorageWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThStorageWordBusWriter getBusJobForStorageWordRouterJobToWriter(){
+    protected ZPIThStorageWordBusWriter getBusJobForStorageWordRouterJobToWriter(){
         if( !this.isStorageWordRouterJobToWriter() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThStorageWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThStorageWordState.class.getCanonicalName());
         }
-        return (ThStorageWordBusWriter) this.busStorageWordRouterJobToWriter;
+        return (ZPIThStorageWordBusWriter) this.busStorageWordRouterJobToWriter;
     }
-    protected void setBusJobForStorageWordRouterJobToWriter(final ThStorageWordBusWriter busStorageWordRouterJobToWriterOuter){
-        this.busStorageWordRouterJobToWriter = (ThStorageWordBusWriter) busStorageWordRouterJobToWriterOuter;
+    protected void setBusJobForStorageWordRouterJobToWriter(final ZPIThStorageWordBusWriter busStorageWordRouterJobToWriterOuter){
+        this.busStorageWordRouterJobToWriter = (ZPIThStorageWordBusWriter) busStorageWordRouterJobToWriterOuter;
         setTrueStorageWordRouterJobToWriter();
     }
     protected void setTrueStorageWordRouterJobToWriter(){
@@ -122,14 +122,14 @@ public class ThStorageWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThStorageWordBusReader getBusJobForStorageWordRouterJobToReader(){
+    protected ZPIThStorageWordBusReader getBusJobForStorageWordRouterJobToReader(){
         if( !this.isStorageWordRouterJobToReader() ){
-            throw new IllegalArgumentException("Bus jobs for output not set in " + ThStorageWordState.class.getCanonicalName());
+            throw new IllegalArgumentException("Bus jobs for output not set in " + ZPIThStorageWordState.class.getCanonicalName());
         }
-        return (ThStorageWordBusReader) this.busStorageWordRouterJobToReader;
+        return (ZPIThStorageWordBusReader) this.busStorageWordRouterJobToReader;
     }
-    protected void setBusJobForStorageWordRouterJobToReader(final ThStorageWordBusReader busStorageWordRouterJobToReaderOuter){
-        this.busStorageWordRouterJobToReader = (ThStorageWordBusReader) busStorageWordRouterJobToReaderOuter;
+    protected void setBusJobForStorageWordRouterJobToReader(final ZPIThStorageWordBusReader busStorageWordRouterJobToReaderOuter){
+        this.busStorageWordRouterJobToReader = (ZPIThStorageWordBusReader) busStorageWordRouterJobToReaderOuter;
         setTrueStorageWordRouterJobToReader();
     }
     protected void setTrueStorageWordRouterJobToReader(){
@@ -149,13 +149,13 @@ public class ThStorageWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThStorageWordBusOutput getBusJobForWordWrite(){
+    protected ZPIThStorageWordBusOutput getBusJobForWordWrite(){
         if( !this.isWordWritedJob() ){
             throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
         }
         return this.busWordWritedJob;
     }
-    protected void setBusJobForWordWrite(final ThStorageWordBusOutput busWordWriteOuter){
+    protected void setBusJobForWordWrite(final ZPIThStorageWordBusOutput busWordWriteOuter){
         this.busWordWritedJob = busWordWriteOuter;
         setTrueWordWritedJob();
     }
@@ -176,13 +176,13 @@ public class ThStorageWordState {
      * @return 
      * @throws #java.lang.IllegalArgumentException
      */
-    protected ThStorageWordBusOutput getBusJobForLongWordWrite(){
+    protected ZPIThStorageWordBusOutput getBusJobForLongWordWrite(){
         if( !this.isLongWordWritedJob() ){
             throw new IllegalArgumentException("Bus jobs for output not set in " + ThWordState.class.getCanonicalName());
         }
         return this.busLongWordWritedJob;
     }
-    protected void setBusJobForLongWordWrite(final ThStorageWordBusOutput busLongWordWriteOuter){
+    protected void setBusJobForLongWordWrite(final ZPIThStorageWordBusOutput busLongWordWriteOuter){
         this.busLongWordWritedJob = busLongWordWriteOuter;
         setTrueLongWordWritedJob();
     }
@@ -199,16 +199,16 @@ public class ThStorageWordState {
         return Boolean.FALSE;
     }
      /**
-     * ThStorageWordBusReadedFlow
+     * ZPIThStorageWordBusReadedFlow
      * @return 
      */
-    protected ThStorageWordBusReadedFlow getStorageWordFlowReaded(){
+    protected ZPIThStorageWordBusReadedFlow getStorageWordFlowReaded(){
         if( !this.isStorageWordFlowReaded() ){
-            throw new IllegalArgumentException(ThStorageWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThStorageWordBusReadedFlow.class.getCanonicalName() + " object not set in " + ThWordRule.class.getCanonicalName());
         }
         return this.thStorageWordFlowRead;
     }
-    protected void setStorageWordFlowReaded(final ThStorageWordBusReadedFlow stateWordOuter){
+    protected void setStorageWordFlowReaded(final ZPIThStorageWordBusReadedFlow stateWordOuter){
         this.thStorageWordFlowRead = stateWordOuter;
         setTrueStorageWordFlowReaded();
     }

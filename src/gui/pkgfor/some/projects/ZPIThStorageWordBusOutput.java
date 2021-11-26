@@ -15,15 +15,17 @@
  */
 package gui.pkgfor.some.projects;
 
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.LinkedTransferQueue;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentHashMap.KeySetView;
 
 /**
  *
  * @author wladimirowichbiaran
  */
-public class ThStorageWordBusInput {
+public class ZPIThStorageWordBusOutput {
     /**
      * ConcurrentHashMap<Integer, Long>
      * <typeWordBus, System.nanoTime>
@@ -31,14 +33,14 @@ public class ThStorageWordBusInput {
      */
     private ConcurrentHashMap<Integer, Long> lastLastAccessUsedBusNanoTime;
     /**
-     * ConcurrentHashMap<Integer, ArrayBlockingQueue<TdataStorageWord>>
+     * ConcurrentHashMap<Integer, LinkedTransferQueue<TdataStorageWord>>
      * <typeWordBus, <TdataStorageWord>>
      * ThWordLogicFilter.getWordCode(inputedPath.codePointAt(int idexCharCodePoint))
      */
-    private ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> poolBusWordData;
+    private ConcurrentHashMap<Integer, LinkedTransferQueue<ZPITdataWord>> poolBusWordData;
     
-    ThStorageWordBusInput(){
-        this.poolBusWordData = new ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>>();
+    ZPIThStorageWordBusOutput(){
+        this.poolBusWordData = new ConcurrentHashMap<Integer, LinkedTransferQueue<ZPITdataWord>>();
         this.lastLastAccessUsedBusNanoTime = new ConcurrentHashMap<Integer, Long>();
     }
     /**
@@ -46,20 +48,30 @@ public class ThStorageWordBusInput {
      * @param typeWordByDetectedCodePoint
      * @return 
      */
-    protected ConcurrentHashMap<String, String> getBusForTypeWord(final int typeWordByDetectedCodePoint){
-        int inputedVal;
-        ConcurrentHashMap<String, String> getBusFormPool;
+    protected LinkedTransferQueue<ZPITdataWord> getBusForTypeWord(final int typeWordByDetectedCodePoint){
+        Integer inputedVal;
+        LinkedTransferQueue<ZPITdataWord> getBusFormPool;
         try{
             inputedVal = (int) typeWordByDetectedCodePoint;
             getBusFormPool = this.poolBusWordData.get(inputedVal);
             if( getBusFormPool == null ){
-                getBusFormPool = new ConcurrentHashMap<String, String>();
+                getBusFormPool = new LinkedTransferQueue<ZPITdataWord>();
                 this.poolBusWordData.put(inputedVal, getBusFormPool);
             }
             setLastAccessForUseTime(inputedVal);
             return getBusFormPool;
         } finally {
+            inputedVal = null;
             getBusFormPool = null;
+        }
+    }
+    protected Set<Entry<Integer, LinkedTransferQueue<ZPITdataWord>>> getExistBusEntrySetForTypeWord(){
+        Set<Entry<Integer, LinkedTransferQueue<ZPITdataWord>>> entrySet;
+        try{
+            entrySet = this.poolBusWordData.entrySet();
+        return entrySet;
+        } finally {
+            entrySet = null;
         }
     }
     /**
@@ -67,7 +79,7 @@ public class ThStorageWordBusInput {
      * @param typeWordByDetectedCodePoint 
      */
     private void setLastAccessForUseTime(final int typeWordByDetectedCodePoint){
-        int inputedTypeVal;
+        Integer inputedTypeVal;
         Long outerTimesPool;
         try{
             inputedTypeVal = (int) typeWordByDetectedCodePoint;
@@ -77,6 +89,7 @@ public class ThStorageWordBusInput {
             }
             this.lastLastAccessUsedBusNanoTime.put(inputedTypeVal, outerTimesPool);
         } finally {
+            inputedTypeVal = null;
             outerTimesPool = null;
         }
     }
@@ -123,8 +136,8 @@ public class ThStorageWordBusInput {
      * @return 
      */
     protected Boolean isBusNotEmpty(final int typeWordByDetectedCodePoint){
-        int inputedTypBusValue;
-        ConcurrentHashMap<String, String> testedBusForTypeWord;
+        Integer inputedTypBusValue;
+        LinkedTransferQueue<ZPITdataWord> testedBusForTypeWord;
         try{
             inputedTypBusValue = typeWordByDetectedCodePoint;
             
@@ -136,6 +149,7 @@ public class ThStorageWordBusInput {
             }
             return Boolean.FALSE;
         } finally {
+            inputedTypBusValue = null;
             testedBusForTypeWord = null;
         }
     }
@@ -145,8 +159,8 @@ public class ThStorageWordBusInput {
      * @return 
      */
     protected Boolean isBusNotExist(final int typeWordByDetectedCodePoint){
-        int inputedTypBusValue;
-        ConcurrentHashMap<String, String> testedBusForTypeWord;
+        Integer inputedTypBusValue;
+        LinkedTransferQueue<ZPITdataWord> testedBusForTypeWord;
         try{
             inputedTypBusValue = typeWordByDetectedCodePoint;
             
@@ -156,28 +170,8 @@ public class ThStorageWordBusInput {
             }
             return Boolean.FALSE;
         } finally {
+            inputedTypBusValue = null;
             testedBusForTypeWord = null;
-        }
-    }
-    protected ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> getMaxUsedBusesSet(){
-        Long nowNanoTime;
-        ConcurrentHashMap.KeySetView<Integer, ConcurrentHashMap<String, String>> keySet;
-        ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> keySetReturnedNotEmpty;
-        Long usedSize;
-        try{
-            keySetReturnedNotEmpty = new ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>>();
-            keySet = this.poolBusWordData.keySet();
-            for(Integer itemKey : keySet){
-                ConcurrentHashMap<String, String> getItemBus = this.poolBusWordData.get(itemKey);
-                if( !getItemBus.isEmpty() ){
-                    keySetReturnedNotEmpty.put(itemKey, getItemBus);
-                }
-            }
-            return keySetReturnedNotEmpty;
-        } finally {
-            nowNanoTime = null;
-            keySet = null;
-            keySetReturnedNotEmpty = null;
         }
     }
 }

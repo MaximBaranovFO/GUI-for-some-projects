@@ -38,9 +38,9 @@ public class ZPIThWordRule {
     private Boolean isSetWordWorkWrite;
     private Boolean isRunWordWorkWrite;
     /**
-     * ThWordWorkRead
+     * ZPIThWordWorkRead
      */
-    private ThWordWorkRead runnableWorkerWordRead;
+    private ZPIThWordWorkRead runnableWorkerWordRead;
     private Boolean isSetWordWorkRead;
     private Boolean isRunWordWorkRead;
     /**
@@ -49,9 +49,9 @@ public class ZPIThWordRule {
     private ZPIThWordState currentWordState;
     private Boolean isSetWordState;
     /**
-     * ThWordStatusMainFlow
+     * ZPIThWordStatusMainFlow
      */
-    private ThWordStatusMainFlow currentWordStatusMainFlow;
+    private ZPIThWordStatusMainFlow currentWordStatusMainFlow;
     private Boolean isSetWordStatusMainFlow;
     
     
@@ -198,20 +198,20 @@ public class ZPIThWordRule {
         }
     }
     /**
-     * ThWordWorkRead
+     * ZPIThWordWorkRead
      * @return 
      */
-    protected ThWordWorkRead getWordWorkRead(){
+    protected ZPIThWordWorkRead getWordWorkRead(){
         if( !this.isWordWorkRead() ){
-            throw new IllegalArgumentException(ThWordWorkRead.class.getCanonicalName() 
+            throw new IllegalArgumentException(ZPIThWordWorkRead.class.getCanonicalName() 
                     + " object not set in " 
                     + ZPIThWordRule.class.getCanonicalName()
             );
         }
         return this.runnableWorkerWordRead;
     }
-    protected void setWordWorkRead(final ThWordWorkRead runnableWorkerWordReadOuter){
-        this.runnableWorkerWordRead = (ThWordWorkRead) runnableWorkerWordReadOuter;
+    protected void setWordWorkRead(final ZPIThWordWorkRead runnableWorkerWordReadOuter){
+        this.runnableWorkerWordRead = (ZPIThWordWorkRead) runnableWorkerWordReadOuter;
         setTrueWordWorkRead();
     }
     protected void setTrueWordWorkRead(){
@@ -278,17 +278,17 @@ public class ZPIThWordRule {
         return Boolean.FALSE;
     }
     /**
-     * ThWordStatusMainFlow
+     * ZPIThWordStatusMainFlow
      * @return 
      */
-    protected ThWordStatusMainFlow getWordStatusMainFlow(){
+    protected ZPIThWordStatusMainFlow getWordStatusMainFlow(){
         if( !this.isWordStatusMainFlow() ){
-            throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
+            throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() + " object not set in " + ZPIThWordRule.class.getCanonicalName());
         }
         return this.currentWordStatusMainFlow;
     }
-    protected void setWordStatusMainFlow(final ThWordStatusMainFlow stateWordOuter){
-        this.currentWordStatusMainFlow = (ThWordStatusMainFlow) stateWordOuter;
+    protected void setWordStatusMainFlow(final ZPIThWordStatusMainFlow stateWordOuter){
+        this.currentWordStatusMainFlow = (ZPIThWordStatusMainFlow) stateWordOuter;
         setTrueWordStatusMainFlow();
     }
     protected void setTrueWordStatusMainFlow(){

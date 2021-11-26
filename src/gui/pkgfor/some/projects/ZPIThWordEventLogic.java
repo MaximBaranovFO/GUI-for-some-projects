@@ -69,7 +69,7 @@ public class ZPIThWordEventLogic {
     //private final ThStorageWordBusOutput busJobForWordRouter;
     private final ZPIThWordRule ruleWord;
     private final ZPIThWordState wordState;
-    private final ThWordStatusMainFlow wordStatusMainFlow;
+    private final ZPIThWordStatusMainFlow wordStatusMainFlow;
     private final ZPIThWordCacheSk wordCache;
     private final ZPIThWordCacheSk wordCacheReaded;
     private final ZPIThWordEventIndex eventIndex;

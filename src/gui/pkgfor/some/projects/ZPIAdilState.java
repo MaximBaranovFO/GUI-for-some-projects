@@ -86,13 +86,13 @@ public class ZPIAdilState {
         try {
             paramNames = AdilHelper.getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + " 0 (zero) > , need for return " + numParam + "count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -133,13 +133,13 @@ public class ZPIAdilState {
         try {
             paramNames = AdilHelper.getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + " 0 (zero) > , need for return " + numParam + "count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 

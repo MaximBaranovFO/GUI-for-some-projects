@@ -56,10 +56,10 @@ public class ZPIThWordBusFlowEvent {
                     ConcurrentSkipListMap<Integer, 
                         ConcurrentSkipListMap<String, LinkedTransferQueue<UUID>>>>> uuidReadedFlowMap;
 
-    private ThWordStatusMainFlow mainWordFlow;
+    private ZPIThWordStatusMainFlow mainWordFlow;
     
-    public ZPIThWordBusFlowEvent(ThWordStatusMainFlow storageWordStatisticOuter) {
-        this.mainWordFlow = (ThWordStatusMainFlow) storageWordStatisticOuter;
+    public ZPIThWordBusFlowEvent(ZPIThWordStatusMainFlow storageWordStatisticOuter) {
+        this.mainWordFlow = (ZPIThWordStatusMainFlow) storageWordStatisticOuter;
         this.uuidReadedFlowMap = createNewListStoragesMapEmpty();
 
     }
@@ -515,11 +515,11 @@ public class ZPIThWordBusFlowEvent {
             tagNameFunc = (String) tagNameInputed;
             tagNamelength = (Integer) tagNameFunc.length();
             if( mainFlowUuidFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " Main Flow UUID is null");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -529,25 +529,25 @@ public class ZPIThWordBusFlowEvent {
             
             listTypeWordData = this.uuidReadedFlowMap.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
             flowUuidsFunc = listTagName.get(tagNameFunc);
             if(flowUuidsFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagName: "
                         + tagNameFunc);
             }

@@ -404,13 +404,13 @@ public class ZPIThWordBusEventShort {
         try {
             numEventReadyNameFunc = (Integer) numEventReadyNameInputed;
             if( numEventReadyNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventReadyNameFunc);
             }
             eventNamesArray = getEventNames();
             if( numEventReadyNameFunc > (eventNamesArray.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + eventNamesArray.length 

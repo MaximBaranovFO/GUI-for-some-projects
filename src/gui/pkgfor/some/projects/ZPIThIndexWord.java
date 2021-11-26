@@ -36,7 +36,7 @@ public class ZPIThIndexWord extends Thread{
         //ThIndexState indexState = this.ruleThIndex.getIndexState();
         ZPIThWordRule thWordRule = new ZPIThWordRule(this.ruleThIndex);
         //init State
-        ThWordStatusMainFlow wordStatusMainFlow = new ThWordStatusMainFlow();
+        ZPIThWordStatusMainFlow wordStatusMainFlow = new ZPIThWordStatusMainFlow();
         thWordRule.setWordStatusMainFlow(wordStatusMainFlow);
         ZPIThWordBusFlowEvent busWordRouterJobToReaderOuter = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
         ZPIThWordBusFlowEvent busWordRouterJobToWriterOuter = new ZPIThWordBusFlowEvent(wordStatusMainFlow);
@@ -60,7 +60,7 @@ public class ZPIThIndexWord extends Thread{
         thWordRule.setWordWorkRouter(thWordWorkRouter);
         ZPIThWordWorkWrite thWordWorkWrite = new ZPIThWordWorkWrite(thWordRule);
         thWordRule.setWordWorkWrite(thWordWorkWrite);
-        ThWordWorkRead thWordWorkRead = new ThWordWorkRead(thWordRule);
+        ZPIThWordWorkRead thWordWorkRead = new ZPIThWordWorkRead(thWordRule);
         thWordRule.setWordWorkRead(thWordWorkRead);
         
         //set Word Rule in indexState

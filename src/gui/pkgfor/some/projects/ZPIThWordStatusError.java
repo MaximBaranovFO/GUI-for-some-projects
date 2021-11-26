@@ -20,44 +20,38 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
- * ThStorageWordStatusDataFs
- * countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
- *                before write (Read, Write into old file name, 
- *                after write Files.move to newFileName
- *     - (3a.1) - Integer volumeNumber - update onWrite, before
- *                write = ifLimit ? update : none
  *
  * @author wladimirowichbiaran
  */
-public class ThWordStatusDataFs {
+public class ZPIThWordStatusError {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
      * ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Long>>
-     * <keyPointFlowDataFs, <lastAccessNanotime.hashCode(), Long Value>>
+     * <keyPointFlowError, <lastAccessNanotime.hashCode(), Long Value>>
      *                        <countDataUseIterationsSummary.hashCode(), Long Value>
      */
-    private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>> poolStatusDataFs;
+    private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>> poolStatusError;
     
-    public ThWordStatusDataFs(){
+    public ZPIThWordStatusError(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
-        this.poolStatusDataFs = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>>();
+        this.poolStatusError = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>>();
     }
     /**
      * 
-     * @param keyPointFlowActivity
+     * @param keyPointFlowError
      * @return 
-     * @throws IllegalStateException
+     * @throws IllegalStateException when UUID not exist
      */
-    private ConcurrentSkipListMap<Integer, Integer> getStatusDataFsForKeyPointFlow(final UUID keyPointFlowDataFs){
+    private ConcurrentSkipListMap<Integer, Integer> getStatusErrorForKeyPointFlow(final UUID keyPointFlowError){
         UUID inputedVal;
-        ConcurrentSkipListMap<Integer, Integer> getStatusDataFsFormPool;
+        ConcurrentSkipListMap<Integer, Integer> getStatusErrorFormPool;
         try{
-            inputedVal = (UUID) keyPointFlowDataFs;
-            getStatusDataFsFormPool = this.poolStatusDataFs.get(inputedVal);
-            if( getStatusDataFsFormPool == null ){
-                throw new IllegalStateException(ThWordStatusDataFs.class.getCanonicalName()
+            inputedVal = (UUID) keyPointFlowError;
+            getStatusErrorFormPool = this.poolStatusError.get(inputedVal);
+            if( getStatusErrorFormPool == null ){
+                throw new IllegalStateException(ZPIThWordStatusError.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -66,49 +60,49 @@ public class ThWordStatusDataFs {
              * update access time for point flow if in one point of all flow get
              * increment 
              */
-            return getStatusDataFsFormPool;
+            return getStatusErrorFormPool;
         } finally {
             inputedVal = null;
-            getStatusDataFsFormPool = null;
+            getStatusErrorFormPool = null;
         }
     }
     /**
      * 
-     * @param keyPointFlowDataFs
+     * @param keyPointFlowError
      * @return true if found and delete data
      */
-    protected Boolean removeStatusDataFsForKeyPointFlow(final UUID keyPointFlowDataFs){
+    protected Boolean removeStatusErrorForKeyPointFlow(final UUID keyPointFlowError){
         UUID inputedVal;
-        ConcurrentSkipListMap<Integer, Integer> getRemovedStatusDataFsFormPool;
+        ConcurrentSkipListMap<Integer, Integer> getRemovedStatusErrorFormPool;
         try{
-            inputedVal = (UUID) keyPointFlowDataFs;
-            getRemovedStatusDataFsFormPool = (ConcurrentSkipListMap<Integer, Integer>) this.poolStatusDataFs.remove(inputedVal);
-            if( getRemovedStatusDataFsFormPool == null ){
+            inputedVal = (UUID) keyPointFlowError;
+            getRemovedStatusErrorFormPool = (ConcurrentSkipListMap<Integer, Integer>) this.poolStatusError.remove(inputedVal);
+            if( getRemovedStatusErrorFormPool == null ){
                 return Boolean.FALSE;
             }
-            for( Map.Entry<Integer, Integer> itemOfPoint : getRemovedStatusDataFsFormPool.entrySet() ){
+            for( Map.Entry<Integer, Integer> itemOfPoint : getRemovedStatusErrorFormPool.entrySet() ){
                 Integer removedKey = itemOfPoint.getKey();
-                Integer removedVal = getRemovedStatusDataFsFormPool.remove(removedKey);
+                Integer removedVal = getRemovedStatusErrorFormPool.remove(removedKey);
                 removedVal = null;
                 removedKey = null;
             }
-            getRemovedStatusDataFsFormPool = null;
+            getRemovedStatusErrorFormPool = null;
             return Boolean.TRUE;
         } finally {
             inputedVal = null;
-            getRemovedStatusDataFsFormPool = null;
+            getRemovedStatusErrorFormPool = null;
         }
     }
     /**
-     * not exist bus
+     * not exist UUID in flow
      * @param typeWordByDetectedCodePoint
-     * @return 
+     * @return true if key not exist (not contains in flow)
      */
-    protected Boolean isStatusDataFsNotExist(final UUID keyPointFlowDataFs){
+    protected Boolean isStatusErrorNotExist(final UUID keyPointFlowError){
         UUID inputedVal;
         try{
-            inputedVal = (UUID) keyPointFlowDataFs;
-            if( !this.poolStatusDataFs.containsKey(inputedVal) ){
+            inputedVal = (UUID) keyPointFlowError;
+            if( !this.poolStatusError.containsKey(inputedVal) ){
                 return Boolean.TRUE;
             }
             return Boolean.FALSE;
@@ -118,110 +112,116 @@ public class ThWordStatusDataFs {
     }
     /**
      * <ul>
-     * <li>0 - countRecordsOnFileSystem
-     * <li>1 - volumeNumber
+     * <li>0 - isErrorOnWrite
+     * <li>1 - isErrorOnMove
+     * <li>2 - isNullOnDataInCache
+     * <li>3 - isErrorOnDataInCache
      * </ul>
-     * @param keyPointFlowDataFsInputed
+     * @param keyPointFlowErrorInputed
      * @param paramNumber
      * @return 
-     * @throw IllegalStateException is keyPointFlowDataFsInputed not exist
+     * @throw IllegalStateException is keyPointFlowErrorInputed not exist
      */
     protected Integer getValueForFlowPointByNumber(
             final UUID keyPointFlowDataFsInputed, 
             final Integer paramNumber){
         ConcurrentSkipListMap<Integer, Integer> getListValues;
         Integer returnedParamValue;
-        UUID keyPointFlowDataFsFunc;
+        UUID keyPointFlowErrorFunc;
         try{
-            keyPointFlowDataFsFunc = (UUID) keyPointFlowDataFsInputed;
+            keyPointFlowErrorFunc = (UUID) keyPointFlowDataFsInputed;
             returnedParamValue = (Integer) paramNumber;
-            if( isStatusDataFsNotExist(keyPointFlowDataFsFunc) ){
-                throw new IllegalStateException(ThWordStatusDataFs.class.getCanonicalName()
+            if( isStatusErrorNotExist(keyPointFlowErrorFunc) ){
+                throw new IllegalStateException(ZPIThWordStatusDataFs.class.getCanonicalName()
                         + " not exist values for UUID "
-                        + keyPointFlowDataFsFunc.toString()
+                        + keyPointFlowErrorFunc.toString()
                 );
             }
-            getListValues = this.poolStatusDataFs.get(keyPointFlowDataFsFunc);
+            getListValues = this.poolStatusError.get(keyPointFlowErrorFunc);
             Integer paramCodeByNumber = getParamCodeByNumber(returnedParamValue);
             Integer getParamForReturn = getListValues.get(paramCodeByNumber);
             return new Integer(getParamForReturn.intValue());
         } finally {
-            keyPointFlowDataFsFunc = null;
+            keyPointFlowErrorFunc = null;
             getListValues = null;
         }
     }
     /**
-     * 
-     * @param keyPointFlowDataFsInputed 
+     * create new structure for UUID, and set all values to 0 (zero)
+     * @param keyPointFlowErrorInputed
+     * @see setInitParamError()
      */
-    protected void createStructureParamsDataFs(
-                        final UUID keyPointFlowDataFsInputed){
-        ConcurrentSkipListMap<Integer, Integer> countDataFs;
-        UUID keyPointFlowDataFsFunc;
+    protected void createStructureParamsError(
+                        final UUID keyPointFlowErrorInputed){
+        ConcurrentSkipListMap<Integer, Integer> countError;
+        UUID keyPointFlowErrorFunc;
         try{
-            keyPointFlowDataFsFunc = (UUID) keyPointFlowDataFsInputed;
-            if( isStatusDataFsNotExist(keyPointFlowDataFsFunc) ){
-                countDataFs = setInitParamDataFs();
-                this.poolStatusDataFs.put(keyPointFlowDataFsFunc, countDataFs);
+            keyPointFlowErrorFunc = (UUID) keyPointFlowErrorInputed;
+            if( isStatusErrorNotExist(keyPointFlowErrorFunc) ){
+                countError = setInitParamError();
+                this.poolStatusError.put(keyPointFlowErrorFunc, countError);
             }
         } finally {
-            countDataFs = null;
-            keyPointFlowDataFsFunc = null;
+            countError = null;
+            keyPointFlowErrorFunc = null;
         }
     }
     /**
      * 
      * @return 
      */
-    private ConcurrentSkipListMap<Integer, Integer> setInitParamDataFs(){
+    private ConcurrentSkipListMap<Integer, Integer> setInitParamError(){
         ConcurrentSkipListMap<Integer, Integer> returnedHashMap;
         Integer paramCodeByNumber;
-        Integer countParamsDataFsForSet;
+        Integer countParamsErrorForSet;
         Integer idx;
         try {
             returnedHashMap = new ConcurrentSkipListMap<Integer, Integer>();
-            countParamsDataFsForSet = getParamCount();
-            for(idx = 0; idx < countParamsDataFsForSet; idx++ ){
+            countParamsErrorForSet = getParamCount();
+            for(idx = 0; idx < countParamsErrorForSet; idx++ ){
                 paramCodeByNumber = getParamCodeByNumber(idx);
                 returnedHashMap.put(paramCodeByNumber, 0);
             }
+
             return returnedHashMap;
         } finally {
             idx = null;
             paramCodeByNumber = null;
-            countParamsDataFsForSet = null;
+            countParamsErrorForSet = null;
             returnedHashMap = null;
         }
     }
     /**
      * <ul>
-     * <li>0 - countRecordsOnFileSystem
-     * <li>1 - volumeNumber
-     * </ul> 
-     * @param changedKeyPointFlowDataFs
+     * <li>0 - isErrorOnWrite
+     * <li>1 - isErrorOnMove
+     * <li>2 - isNullOnDataInCache
+     * <li>3 - isErrorOnDataInCache
+     * </ul>
+     * @param changedKeyPointFlowError
      * @param paramNumber
-     * @param changedVal 
+     * @param changedVal
      * 
      * @throws IllegalArgumentException when inputed number of parameter
      * out of bounds
      */
-    protected void changeParamValByNumber(final UUID changedKeyPointFlowDataFs, final Integer paramNumber, final Integer changedVal){
-        UUID changedKeyPointFlowDataFsFunc;
+    protected void changeParamValByNumber(final UUID changedKeyPointFlowError, final Integer paramNumber, final Integer changedVal){
+        UUID changedKeyPointFlowErrorFunc;
         Integer paramNumberFunc;
         Integer changedValFunc;
         Integer paramCodeByNumber;
         ConcurrentSkipListMap<Integer, Integer> fromCurrentFlow;
         try{
-            changedKeyPointFlowDataFsFunc = (UUID) changedKeyPointFlowDataFs;
-            validateCountParams(changedKeyPointFlowDataFsFunc);
+            changedKeyPointFlowErrorFunc = (UUID) changedKeyPointFlowError;
+            validateCountParams(changedKeyPointFlowErrorFunc);
             paramNumberFunc = (Integer) paramNumber;
             changedValFunc = (Integer) changedVal;
-            fromCurrentFlow = (ConcurrentSkipListMap<Integer, Integer>) this.poolStatusDataFs.get(changedKeyPointFlowDataFsFunc);
+            fromCurrentFlow = (ConcurrentSkipListMap<Integer, Integer>) this.poolStatusError.get(changedKeyPointFlowErrorFunc);
             paramCodeByNumber = (Integer) getParamCodeByNumber(paramNumberFunc);
             fromCurrentFlow.put(paramCodeByNumber, changedValFunc);
-            this.poolStatusDataFs.put(changedKeyPointFlowDataFsFunc, fromCurrentFlow);
+            this.poolStatusError.put(changedKeyPointFlowErrorFunc, fromCurrentFlow);
         } finally {
-            changedKeyPointFlowDataFsFunc = null;
+            changedKeyPointFlowErrorFunc = null;
             paramNumberFunc = null;
             changedValFunc = null;
             paramCodeByNumber = null;
@@ -230,8 +230,10 @@ public class ThWordStatusDataFs {
     }
     /**
      * <ul>
-     * <li>0 - countRecordsOnFileSystem
-     * <li>1 - volumeNumber
+     * <li>0 - isErrorOnWrite
+     * <li>1 - isErrorOnMove
+     * <li>2 - isNullOnDataInCache
+     * <li>3 - isErrorOnDataInCache
      * </ul>
      * @return 
      */
@@ -239,8 +241,10 @@ public class ThWordStatusDataFs {
         String[] namesForReturn;
         try {
             namesForReturn = new String[] {
-                "countRecordsOnFileSystem",
-                "volumeNumber"
+                "isErrorOnWrite", 
+                "isErrorOnMove", 
+                "isNullOnDataInCache",
+                "isErrorOnDataInCache"
             };
             return namesForReturn;
         } finally {
@@ -260,14 +264,14 @@ public class ThWordStatusDataFs {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
-                                + " parameters of flow statusDataFs in StorageWord is not valid, "
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
+                                + " parameters of flow statusError in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
-                                + " parameters of flow statusDataFs in StorageWord is not valid, "
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
+                                + " parameters of flow statusError in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
                                 + ", need for return " + numParam);
@@ -306,14 +310,14 @@ public class ThWordStatusDataFs {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
-                                + " parameters of flow statusDataFs in StorageWord is not valid, "
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
+                                + " parameters of flow statusError in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
-                                + " parameters of flow statusDataFs in StorageWord is not valid, "
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
+                                + " parameters of flow statusError in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
                                 + ", need for return " + numParam);
@@ -326,15 +330,17 @@ public class ThWordStatusDataFs {
         }
     }
     /**
-     * 
-     * @param keyPointFlowDataFs
+     * create, set, validate -do- for change
+     * change -do- for add
+     * @param keyPointFlowError
      * 
      * @throw IllegalArgumentException if count of parameters or his
      * names not equal concept
      */
-    protected void validateCountParams(final UUID keyPointFlowDataFs){
-        UUID keyPointFlowDataFsFunc;
-        ConcurrentSkipListMap<Integer, Integer> statusDataFsForKeyPointFlow;
+    
+    protected void validateCountParams(final UUID keyPointFlowError){
+        UUID keyPointFlowErrorFunc;
+        ConcurrentSkipListMap<Integer, Integer> statusErrorForKeyPointFlow;
         Integer sizeRec;
         Integer paramCount;
         Integer idxParam;
@@ -342,33 +348,33 @@ public class ThWordStatusDataFs {
         String paramNameByNumber;
         
         try {
-            keyPointFlowDataFsFunc = (UUID) keyPointFlowDataFs;
-            if( keyPointFlowDataFsFunc == null ){
-                throw new NullPointerException(ThWordStatusDataFs.class.getCanonicalName() 
+            keyPointFlowErrorFunc = (UUID) keyPointFlowError;
+            if( keyPointFlowErrorFunc == null ){
+                throw new NullPointerException(ZPIThWordStatusError.class.getCanonicalName() 
                         + " need point flow uuid, argument for validate is null");
             }
-            if( !isStatusDataFsNotExist(keyPointFlowDataFsFunc) ){
+            if( !isStatusErrorNotExist(keyPointFlowErrorFunc) ){
                 
-                statusDataFsForKeyPointFlow = (ConcurrentSkipListMap<Integer, Integer>) getStatusDataFsForKeyPointFlow(keyPointFlowDataFsFunc);
-                sizeRec = (Integer) statusDataFsForKeyPointFlow.size();
+                statusErrorForKeyPointFlow = (ConcurrentSkipListMap<Integer, Integer>) getStatusErrorForKeyPointFlow(keyPointFlowErrorFunc);
+                sizeRec = (Integer) statusErrorForKeyPointFlow.size();
                 paramCount = (Integer) getParamCount();
                 if( sizeRec != paramCount ){
                     
-                    throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
-                            + " parameters of flow statusDataFs in Word is not valid, "
+                    throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
+                            + " parameters of flow statusError in Word is not valid, "
                             + "count records " + sizeRec + " not equal " + paramCount);
                 }
                 
                 for(idxParam = 0; idxParam < paramCount; idxParam++ ){
                     
                     paramCodeByNumber = getParamCodeByNumber(idxParam);
-                    if( !statusDataFsForKeyPointFlow.containsKey(paramCodeByNumber) ){
+                    if( !statusErrorForKeyPointFlow.containsKey(paramCodeByNumber) ){
                         
                         paramNameByNumber = getParamNameByNumber(idxParam);
-                        throw new IllegalArgumentException(ThWordStatusDataFs.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                             + " parameter "
                             + " for name: " + paramNameByNumber
-                            + " in inputed data for set into flow statusDataFs not exist");
+                            + " in inputed data for set into flow statusError not exist");
                     }
                 }
             }
@@ -377,8 +383,8 @@ public class ThWordStatusDataFs {
             sizeRec = null;
             paramCount = null;
             idxParam = null;
-            statusDataFsForKeyPointFlow = null;
-            keyPointFlowDataFsFunc = null;
+            statusErrorForKeyPointFlow = null;
+            keyPointFlowErrorFunc = null;
             paramCodeByNumber = null;
             paramNameByNumber = null;
         }

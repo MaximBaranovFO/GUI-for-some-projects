@@ -47,13 +47,13 @@ public class ZPIThWordState {
     private ConcurrentSkipListMap<Integer, ZPIThWordBusFlowEvent> eventsBusDoList;
     private ZPIThWordEventLogic eventsLogic;
     private ZPIThWordEventIndex eventsIndex;
-    private ThWordStatusMainFlow mainFlow;
+    private ZPIThWordStatusMainFlow mainFlow;
     private ZPIThWordBusEventShort eventShort;
     private ZPIThWordBusEventShort eventShortNextStep;
     private ZPIThWordEventIndexFlow eventIndexFlow;
     
     public ZPIThWordState(ZPIThWordRule ruleWordInputed) {
-        this.mainFlow = (ThWordStatusMainFlow) ruleWordInputed.getWordStatusMainFlow();
+        this.mainFlow = (ZPIThWordStatusMainFlow) ruleWordInputed.getWordStatusMainFlow();
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.eventIndexFlow = new ZPIThWordEventIndexFlow();
@@ -127,7 +127,7 @@ public class ZPIThWordState {
         Integer currentEventReadyCode;
         ZPIThWordBusFlowEvent newEventReadyBus;
         ZPIThWordRule ruleFunc;
-        ThWordStatusMainFlow wordStatusMainFlow;
+        ZPIThWordStatusMainFlow wordStatusMainFlow;
         try {
             ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
@@ -157,7 +157,7 @@ public class ZPIThWordState {
         Integer currentEventWaitCode;
         ZPIThWordBusFlowEvent newEventWaitBus;
         ZPIThWordRule ruleFunc;
-        ThWordStatusMainFlow wordStatusMainFlow;
+        ZPIThWordStatusMainFlow wordStatusMainFlow;
         try {
             ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
@@ -187,7 +187,7 @@ public class ZPIThWordState {
         Integer currentEventDoCode;
         ZPIThWordBusFlowEvent newEventDoBus;
         ZPIThWordRule ruleFunc;
-        ThWordStatusMainFlow wordStatusMainFlow;
+        ZPIThWordStatusMainFlow wordStatusMainFlow;
         try {
             ruleFunc = (ZPIThWordRule) ruleInputed;
             wordStatusMainFlow = ruleFunc.getWordStatusMainFlow();
@@ -637,13 +637,13 @@ public class ZPIThWordState {
         try {
             numEventReadyNameFunc = (Integer) numEventReadyNameInputed;
             if( numEventReadyNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventReadyNameFunc);
             }
             eventNamesArray = getEventReadyNames();
             if( numEventReadyNameFunc > (eventNamesArray.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + eventNamesArray.length 
@@ -671,13 +671,13 @@ public class ZPIThWordState {
         try {
             numEventWaitNameFunc = (Integer) numEventWaitNameInputed;
             if( numEventWaitNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventWaitNameFunc);
             }
             eventNamesArray = getEventWaitNames();
             if( numEventWaitNameFunc > (eventNamesArray.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + eventNamesArray.length 
@@ -706,13 +706,13 @@ public class ZPIThWordState {
         try {
             numEventDoNameFunc = (Integer) numEventDoNameInputed;
             if( numEventDoNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventDoNameFunc);
             }
             eventNamesArray = getEventDoNames();
             if( numEventDoNameFunc > (eventNamesArray.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + eventNamesArray.length 
@@ -741,13 +741,13 @@ public class ZPIThWordState {
         try {
             numEventReadyNameFunc = (Integer) numEventReadyNameInputed;
             if( numEventReadyNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventReadyNameFunc);
             }
             eventNames = getEventReadyNames();
             if( numEventReadyNameFunc > (eventNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + "count eventeters: " 
                                 + eventNames.length 
@@ -770,13 +770,13 @@ public class ZPIThWordState {
         try {
             numEventWaitNameFunc = (Integer) numEventWaitNameInputed;
             if( numEventWaitNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventWaitNameFunc);
             }
             eventNames = getEventWaitNames();
             if( numEventWaitNameFunc > (eventNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + "count eventeters: " 
                                 + eventNames.length 
@@ -799,13 +799,13 @@ public class ZPIThWordState {
         try {
             numEventDoNameFunc = (Integer) numEventDoNameInputed;
             if( numEventDoNameFunc < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numEventDoNameFunc);
             }
             eventNames = getEventDoNames();
             if( numEventDoNameFunc > (eventNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " eventeters of flow statusName in StorageWord is not valid, "
                                 + "count eventeters: " 
                                 + eventNames.length 

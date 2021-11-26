@@ -132,7 +132,7 @@ public class ZPIThWordStatusActivity {
             keyPointFlowActivityFunc = (UUID) keyPointFlowDataFsInputed;
             returnedParamValue = (Integer) paramNumber;
             if( isStatusActivityNotExist(keyPointFlowActivityFunc) ){
-                throw new IllegalStateException(ThWordStatusDataFs.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusDataFs.class.getCanonicalName()
                         + " not exist values for UUID "
                         + keyPointFlowActivityFunc.toString()
                 );

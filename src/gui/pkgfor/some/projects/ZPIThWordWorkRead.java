@@ -19,16 +19,16 @@ package gui.pkgfor.some.projects;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordWorkRead implements Runnable {
+public class ZPIThWordWorkRead implements Runnable {
     private ZPIThWordRule ruleWordRead;
     
-    ThWordWorkRead(final ZPIThWordRule outerRuleWordRead){
+    ZPIThWordWorkRead(final ZPIThWordRule outerRuleWordRead){
         this.ruleWordRead = outerRuleWordRead;
     }
     
     @Override
     public void run(){
-        System.out.println(ThWordWorkRead.class.getCanonicalName() 
+        System.out.println(ZPIThWordWorkRead.class.getCanonicalName() 
                 + " run and say " 
                 + this.ruleWordRead.toString());
         this.ruleWordRead.setTrueRunnedWordWorkRead();

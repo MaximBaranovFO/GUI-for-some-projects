@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  *
  * @author wladimirowichbiaran
  */
-public class ThWordStatusMainFlow {
+public class ZPIThWordStatusMainFlow {
     /**
      * ConcurrentSkipListMap<Integer, Integer> (<hashFieldCode, Value>)
      * hashFieldCode:
@@ -47,20 +47,20 @@ public class ThWordStatusMainFlow {
      *     ConcurrentSkipListMap<String,  - (3) - tagFileName with hex view
      * > >   ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>>
      *          <UUID MainFlow, Field.hashCode(), valueUUID>
-     *          <ThWordStatusDataFs.hashCode(), recordUUID>
-     *          <ThWordStatusName.hashCode(), recordUUID>
-     *          <ZPIThWordStatusActivity.hashCode(), recordUUID>
-          <ThWordStatusDataCache.hashCode(), recordUUID>
-     *          <ThWordStatusWorkers.hashCode(), recordUUID>>
+     *          <ZPIThWordStatusDataFs.hashCode(), recordUUID>
+          <ZPIThWordStatusName.hashCode(), recordUUID>
+          <ZPIThWordStatusActivity.hashCode(), recordUUID>
+          <ZPIThWordStatusDataCache.hashCode(), recordUUID>
+          <ZPIThWordStatusWorkers.hashCode(), recordUUID>>
  -------------------------------------------------------------------------
- ThWordStatusDataFs
+ ZPIThWordStatusDataFs
  countFS    - (3a.1) - Integer countRecordsOnFileSystem - updated onWrite, 
                 before write (Read, Write into old file name, 
                 after write Files.move to newFileName
      - (3a.1) - Integer volumeNumber - update onWrite, before
                 write = ifLimit ? update : none
  -------------------------------------------------------------------------
- ThWordStatusName
+ ZPIThWordStatusName
  namesFS    - (3a.2) - String currentFileName - full file name where read 
                 from data
      - (3a.2) - String newFileName - full file name for Files.move 
@@ -72,7 +72,7 @@ public class ThWordStatusMainFlow {
      - (3a.3) - Long countDataUseIterationsSummary - update onWrite, 
                 before write, count++ sended jobWrite
  -------------------------------------------------------------------------
- ThWordStatusDataCache
+ ZPIThWordStatusDataCache
  countTMP   - (3a.4) - Integer currentInCache - records count, need when 
                 get job for write for example:
                 fromJobToWriteDataSize + countRecordsOnFileSystem + 
@@ -115,16 +115,16 @@ public class ThWordStatusMainFlow {
     private final ZPIThWordCacheSk thWordCacheReaded;
     
     private final ZPIThWordStatusActivity thWordStatusActivity;
-    private final ThWordStatusDataCache thWordStatusDataCache;
-    private final ThWordStatusDataFs thWordStatusDataFs;
-    private final ThWordStatusError thWordStatusError;
-    private final ThWordStatusName thWordStatusName;
-    private final ThWordStatusWorkers thWordStatusWorkers;
+    private final ZPIThWordStatusDataCache thWordStatusDataCache;
+    private final ZPIThWordStatusDataFs thWordStatusDataFs;
+    private final ZPIThWordStatusError thWordStatusError;
+    private final ZPIThWordStatusName thWordStatusName;
+    private final ZPIThWordStatusWorkers thWordStatusWorkers;
     /**
      * @todo StatusError
      */
     
-    public ThWordStatusMainFlow() {
+    public ZPIThWordStatusMainFlow() {
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         
@@ -133,11 +133,11 @@ public class ThWordStatusMainFlow {
         this.thWordCache = new ZPIThWordCacheSk();
         this.thWordCacheReaded = new ZPIThWordCacheSk();
         this.thWordStatusActivity = new ZPIThWordStatusActivity();
-        this.thWordStatusDataCache = new ThWordStatusDataCache();
-        this.thWordStatusDataFs = new ThWordStatusDataFs();
-        this.thWordStatusError = new ThWordStatusError();
-        this.thWordStatusName = new ThWordStatusName();
-        this.thWordStatusWorkers = new ThWordStatusWorkers();
+        this.thWordStatusDataCache = new ZPIThWordStatusDataCache();
+        this.thWordStatusDataFs = new ZPIThWordStatusDataFs();
+        this.thWordStatusError = new ZPIThWordStatusError();
+        this.thWordStatusName = new ZPIThWordStatusName();
+        this.thWordStatusWorkers = new ZPIThWordStatusWorkers();
         
         
     }
@@ -239,19 +239,19 @@ public class ThWordStatusMainFlow {
     private ZPIThWordStatusActivity getWordStatusActivity(){
         return this.thWordStatusActivity;
     }
-    private ThWordStatusDataCache getWordStatusDataCache(){
+    private ZPIThWordStatusDataCache getWordStatusDataCache(){
         return this.thWordStatusDataCache;
     }
-    private ThWordStatusDataFs getWordStatusDataFs(){
+    private ZPIThWordStatusDataFs getWordStatusDataFs(){
         return this.thWordStatusDataFs;
     }
-    private ThWordStatusError getWordStatusError(){
+    private ZPIThWordStatusError getWordStatusError(){
         return this.thWordStatusError;
     }
-    private ThWordStatusName getWordStatusName(){
+    private ZPIThWordStatusName getWordStatusName(){
         return this.thWordStatusName;
     }
-    private ThWordStatusWorkers getWordStatusWorkers(){
+    private ZPIThWordStatusWorkers getWordStatusWorkers(){
         return this.thWordStatusWorkers;
     }
     /**
@@ -280,7 +280,7 @@ public class ThWordStatusMainFlow {
         Integer numberParameterFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer valueForFlowPointByNumber;
         try {
@@ -292,7 +292,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordInputedFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordInputedFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordInputedFunc) + " for tagHexName: "
@@ -348,7 +348,7 @@ public class ThWordStatusMainFlow {
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
         UUID valueUUIDName;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         String valueForFlowPointByNumber;
         try {
             typeWordFunc = (Integer) typeWordInputed;
@@ -359,7 +359,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -424,7 +424,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -478,7 +478,7 @@ public class ThWordStatusMainFlow {
         Integer numberParameterFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-    ThWordStatusDataCache wordStatusDataCache;
+    ZPIThWordStatusDataCache wordStatusDataCache;
     UUID valueUUIDDataCache;
         Integer valueForFlowPointByNumber;
         try {
@@ -490,7 +490,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -552,7 +552,7 @@ public class ThWordStatusMainFlow {
         Integer numberParameterFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Boolean valueForFlowPointByNumber;
         try {
@@ -564,7 +564,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -618,7 +618,7 @@ public class ThWordStatusMainFlow {
         Integer numberParameterFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer valueForFlowPointByNumber;
         try {
@@ -630,7 +630,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, tagNameFunc, mainFlowUuidFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, tagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + mainFlowUuidFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -679,7 +679,7 @@ public class ThWordStatusMainFlow {
         String tagNameInputedFunc;
         Integer numberParameterFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer valueForFlowPointByNumber;
         try {
@@ -733,7 +733,7 @@ public class ThWordStatusMainFlow {
         Integer numberParameterFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
         UUID valueUUIDName;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         String valueForFlowPointByNumber;
         try {
             typeWordInputedFunc = (Integer) typeWordInputed;
@@ -834,7 +834,7 @@ public class ThWordStatusMainFlow {
         String tagNameInputedFunc;
         Integer numberParameterFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-    ThWordStatusDataCache wordStatusDataCache;
+    ZPIThWordStatusDataCache wordStatusDataCache;
     UUID valueUUIDDataCache;
         Integer valueForFlowPointByNumber;
         try {
@@ -893,7 +893,7 @@ public class ThWordStatusMainFlow {
         String tagNameInputedFunc;
         Integer numberParameterFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Boolean valueForFlowPointByNumber;
         try {
@@ -944,7 +944,7 @@ public class ThWordStatusMainFlow {
         String tagNameInputedFunc;
         Integer numberParameterFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByTypeWordHexTagName;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer valueForFlowPointByNumber;
         try {
@@ -989,7 +989,7 @@ public class ThWordStatusMainFlow {
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer numberParamFunc;
 
@@ -999,7 +999,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1046,7 +1046,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1085,7 +1085,7 @@ public class ThWordStatusMainFlow {
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer numberParamFunc;
 
@@ -1095,7 +1095,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1134,7 +1134,7 @@ public class ThWordStatusMainFlow {
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer numberParamFunc;
 
@@ -1144,7 +1144,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1184,7 +1184,7 @@ public class ThWordStatusMainFlow {
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         UUID valueUUIDName;
         Integer numberParamFunc;
 
@@ -1194,7 +1194,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1241,7 +1241,7 @@ public class ThWordStatusMainFlow {
         UUID returnValueMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Integer numberParamFunc;
 
@@ -1251,7 +1251,7 @@ public class ThWordStatusMainFlow {
             returnValueMainFlow = (UUID) mainFlowUuidForReturnValue;
             flowUuidsByDataWord = this.getFlowUuidsByDataWord(dataFromBusFunc);
             if( returnValueMainFlow == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                         + " not exist values for UUID "
                         + returnValueMainFlow.toString()
                 );
@@ -1284,7 +1284,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> typeWordTagFileNameFlowUuids;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1296,7 +1296,7 @@ public class ThWordStatusMainFlow {
             changedMainFlowFunc = (UUID) mainFlowUuidForChange;
             typeWordTagFileNameFlowUuids = this.getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( typeWordTagFileNameFlowUuids == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1332,7 +1332,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> typeWordTagFileNameFlowUuids;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1344,7 +1344,7 @@ public class ThWordStatusMainFlow {
             changedMainFlowFunc = (UUID) mainFlowUuidForChange;
             typeWordTagFileNameFlowUuids = this.getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( typeWordTagFileNameFlowUuids == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1381,7 +1381,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> typeWordTagFileNameFlowUuids;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1393,7 +1393,7 @@ public class ThWordStatusMainFlow {
             changedMainFlowFunc = (UUID) mainFlowUuidForChange;
             typeWordTagFileNameFlowUuids = this.getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( typeWordTagFileNameFlowUuids == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1437,7 +1437,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuid;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1454,7 +1454,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1504,7 +1504,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuid;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         UUID valueUUIDName;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1521,7 +1521,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1584,7 +1584,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1632,7 +1632,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuid;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1649,7 +1649,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1705,7 +1705,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuid;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1722,7 +1722,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1770,7 +1770,7 @@ public class ThWordStatusMainFlow {
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsList;
         ConcurrentSkipListMap<Integer, UUID> flowUuid;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer typeWordFunc;
         String subStringFunc;
@@ -1787,7 +1787,7 @@ public class ThWordStatusMainFlow {
             validateInFlowAllPoints(typeWordFunc, subStringFunc, hexTagNameFunc, changedMainFlowFunc);
             flowUuidsList = getTypeWordTagFileNameFlowUuids(typeWordFunc, subStringFunc, hexTagNameFunc);
             if( flowUuidsList == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName()
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName()
                 + " get null for UUID: "
                 + changedMainFlowFunc.toString() + " for typeWord: "
                 + String.valueOf(typeWordFunc) + " for tagHexName: "
@@ -1795,7 +1795,7 @@ public class ThWordStatusMainFlow {
                 + subStringFunc + ", need for return list of UUIDs");
             }
             flowUuid = flowUuidsList.get(changedMainFlowFunc);
-            wordStatusError = (ThWordStatusError) getWordStatusError();
+            wordStatusError = (ZPIThWordStatusError) getWordStatusError();
             valueUUIDError = flowUuid.get(this.getParamCodeByNumber(5));
             wordStatusError.changeParamValByNumber(valueUUIDError, numberParamFunc, changedValueFunc);
         } finally {
@@ -1832,7 +1832,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -1884,7 +1884,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         UUID valueUUIDName;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -1982,7 +1982,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -2040,7 +2040,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -2090,7 +2090,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -2103,7 +2103,7 @@ public class ThWordStatusMainFlow {
             hexTagNameFunc = (String) hexTagNameInputed;
             changedMainFlowFunc = (UUID) mainFlowUuidForChange;
             flowUuidsByDataWord = getFlowUuidsByTypeWordHexTagName(typeWordFunc, hexTagNameFunc, changedMainFlowFunc);
-            wordStatusError = (ThWordStatusError) getWordStatusError();
+            wordStatusError = (ZPIThWordStatusError) getWordStatusError();
             valueUUIDError = flowUuidsByDataWord.get(this.getParamCodeByNumber(5));
             wordStatusError.changeParamValByNumber(valueUUIDError, numberParamFunc, changedValueFunc);
         } finally {
@@ -2131,7 +2131,7 @@ public class ThWordStatusMainFlow {
         
         UUID changedMainFlowFunc;
         ConcurrentSkipListMap<Integer, UUID> flowUuidsByDataWord;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer typeWordFunc;
         String hexTagNameFunc;
@@ -2171,7 +2171,7 @@ public class ThWordStatusMainFlow {
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusDataFs wordStatusDataFs;
         UUID valueUUIDDataFs;
         Integer numberParamFunc;
         Integer changedValueFunc;
@@ -2218,7 +2218,7 @@ public class ThWordStatusMainFlow {
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusName wordStatusName;
         UUID valueUUIDName;
         Integer numberParamFunc;
         String changedValueFunc;
@@ -2310,7 +2310,7 @@ public class ThWordStatusMainFlow {
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusDataCache wordStatusDataCache;
         UUID valueUUIDDataCache;
         Integer numberParamFunc;
         Integer changedValueFunc;
@@ -2364,7 +2364,7 @@ public class ThWordStatusMainFlow {
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusWorkers wordStatusWorkers;
         UUID valueUUIDWorkers;
         Integer numberParamFunc;
         Boolean changedValueFunc;
@@ -2410,7 +2410,7 @@ public class ThWordStatusMainFlow {
         UUID createdMainFlow;
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusError wordStatusError;
         UUID valueUUIDError;
         Integer numberParamFunc;
         Integer changedValueFunc;
@@ -2606,11 +2606,11 @@ public class ThWordStatusMainFlow {
             tagNameFunc = (String) tagNameInputed;
             tagNamelength = (Integer) tagNameFunc.length();
             if( mainFlowUuidFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " Main Flow UUID is null");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -2620,25 +2620,25 @@ public class ThWordStatusMainFlow {
             
             listTypeWordData = this.fileStoragesMap.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
             flowUuidsFunc = listTagName.get(tagNameFunc);
             if( flowUuidsFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameFunc: "
                         + tagNameFunc);
             }
@@ -2647,7 +2647,7 @@ public class ThWordStatusMainFlow {
             }
             flowParamsFunc = flowUuidsFunc.get(mainFlowUuidFunc);
             if( flowParamsFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for Main Flow UUID: "
                         + mainFlowUuidFunc.toString());
             }
@@ -2695,12 +2695,12 @@ public class ThWordStatusMainFlow {
             
             dataTypeWordTagNameSubStr = getTypeWordTagFileNameFlowUuids(typeWordFunc, strSubStringFunc, tagNameFunc);
             if( dataTypeWordTagNameSubStr == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " not have UUIDs in MainFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
             if( dataTypeWordTagNameSubStr.isEmpty() ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " not have UUIDs in MainFlow for key type " + ZPITdataWord.class.getCanonicalName() 
                         + " object data " + dataFunc.toString());
             }
@@ -2761,14 +2761,14 @@ public class ThWordStatusMainFlow {
             tagNamelength = (Integer) tagNameFunc.length();
             
             if( (strSubStringlength * 4) != tagNamelength ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " lengthHex: " + tagNameFunc.length()
                         + " strSubString: " + strSubStringFunc + " lengthStr: " + strSubStringFunc.length()
                         + " lengthHex == lengthStr * 4 ");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -2841,11 +2841,11 @@ public class ThWordStatusMainFlow {
             tagNameFunc = (String) tagNameInputed;
             tagNamelength = (Integer) tagNameFunc.length();
             if( mainFlowUuidFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " Main Flow UUID is null");
             }
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -2855,31 +2855,31 @@ public class ThWordStatusMainFlow {
             
             listTypeWordData = this.fileStoragesMap.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
             flowUuidsFunc = listTagName.get(tagNameFunc);
             if( flowUuidsFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameFunc: "
                         + tagNameFunc);
             }
             flowParamsFunc = flowUuidsFunc.get(mainFlowUuidFunc);
             if( flowParamsFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for Main Flow UUID: "
                         + mainFlowUuidFunc.toString());
             }
@@ -2973,11 +2973,11 @@ public class ThWordStatusMainFlow {
      * @param tagName
      * @param strSubString
      * @param keysPointsFlow ConcurrentSkipListMap<Integer, UUID>
-     *          <ThWordStatusDataFs.hashCode(), recordUUID>
-     *          <ThWordStatusName.hashCode(), recordUUID>
-     *          <ZPIThWordStatusActivity.hashCode(), recordUUID>
-          <ThWordStatusDataCache.hashCode(), recordUUID>
-     *          <ThWordStatusWorkers.hashCode(), recordUUID>
+     *          <ZPIThWordStatusDataFs.hashCode(), recordUUID>
+          <ZPIThWordStatusName.hashCode(), recordUUID>
+          <ZPIThWordStatusActivity.hashCode(), recordUUID>
+          <ZPIThWordStatusDataCache.hashCode(), recordUUID>
+          <ZPIThWordStatusWorkers.hashCode(), recordUUID>
      * @throws IllegalArgumentException when count params or name not valid
      */
     private void setParamsPointsFlow(
@@ -3031,12 +3031,12 @@ public class ThWordStatusMainFlow {
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
         
-        ThWordStatusDataFs wordStatusDataFs;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusName wordStatusName;
         ZPIThWordStatusActivity wordStatusActivity;
-        ThWordStatusDataCache wordStatusDataCache;
-        ThWordStatusWorkers wordStatusWorkers;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusError wordStatusError;
         
         UUID valueUUIDDataFs;
         UUID valueUUIDName;
@@ -3110,12 +3110,12 @@ public class ThWordStatusMainFlow {
         ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, UUID>> flowUuidsByDataWord;
         ConcurrentSkipListMap<Integer, UUID> createdFlowParams;
         
-        ThWordStatusDataFs wordStatusDataFs;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusName wordStatusName;
         ZPIThWordStatusActivity wordStatusActivity;
-        ThWordStatusDataCache wordStatusDataCache;
-        ThWordStatusWorkers wordStatusWorkers;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusError wordStatusError;
         
         UUID valueUUIDDataFs;
         UUID valueUUIDName;
@@ -3205,12 +3205,12 @@ public class ThWordStatusMainFlow {
                     ConcurrentSkipListMap<UUID, 
                     ConcurrentSkipListMap<Integer, 
                     UUID>>> listTagName;
-        ThWordStatusDataFs wordStatusDataFs;
-        ThWordStatusName wordStatusName;
+        ZPIThWordStatusDataFs wordStatusDataFs;
+        ZPIThWordStatusName wordStatusName;
         ZPIThWordStatusActivity wordStatusActivity;
-        ThWordStatusDataCache wordStatusDataCache;
-        ThWordStatusWorkers wordStatusWorkers;
-        ThWordStatusError wordStatusError;
+        ZPIThWordStatusDataCache wordStatusDataCache;
+        ZPIThWordStatusWorkers wordStatusWorkers;
+        ZPIThWordStatusError wordStatusError;
         
         UUID valueUUIDDataFs;
         UUID valueUUIDName;
@@ -3232,7 +3232,7 @@ public class ThWordStatusMainFlow {
             tagNamelength = tagNameFunc.length();
             
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -3242,19 +3242,19 @@ public class ThWordStatusMainFlow {
             
             listTypeWordData = this.fileStoragesMap.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
@@ -3325,17 +3325,17 @@ public class ThWordStatusMainFlow {
         try {
             checkedMainFlowContentFunc = (ConcurrentSkipListMap<Integer, UUID>) checkedMainFlowContentInputed;
             if( checkedMainFlowContentFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " need structure of parameters, argument for validate is null");
             }
             if( checkedMainFlowContentFunc.isEmpty() ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " parameters of data for set into cache is empty");
             }
                 int countParam = getParamCount();
                 int countForSet = checkedMainFlowContentFunc.size();
                 if( countForSet != countParam ){
-                    throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                             + " parameters of data for set into cache not valid, "
                             + " base count: " + countParam
                             + ", send for set count: " + countParam);
@@ -3346,7 +3346,7 @@ public class ThWordStatusMainFlow {
                     if ( !checkedMainFlowContentFunc.containsKey(paramCodeByNumber) ){
                         
                         paramNameByNumber = getParamNameByNumber(idx);
-                        throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameter "
                                 + " for name: " + paramNameByNumber
                                 + " in inputed data for set into StatusMain Flow not exist");
@@ -3360,13 +3360,13 @@ public class ThWordStatusMainFlow {
     }
     /**
      * <ul>
-     * <li>0 - ThWordStatusDataFs
-     * <li>1 - ThWordStatusName
-     * <li>2 - ZPIThWordStatusActivity
- <li>3 - ThWordStatusDataCache
-     * <li>4 - ThWordStatusWorkers
-     * <li>5 - ThWordStatusError
-     * </ul>
+     * <li>0 - ZPIThWordStatusDataFs
+ <li>1 - ZPIThWordStatusName
+ <li>2 - ZPIThWordStatusActivity
+ <li>3 - ZPIThWordStatusDataCache
+ <li>4 - ZPIThWordStatusWorkers
+ <li>5 - ZPIThWordStatusError
+ </ul>
      * @return 
      */
     private String[] getParamNames(){
@@ -3387,13 +3387,13 @@ public class ThWordStatusMainFlow {
     }
     /**
      * <ul>
-     * <li>0 - ThWordStatusDataFs
-     * <li>1 - ThWordStatusName
-     * <li>2 - ZPIThWordStatusActivity
- <li>3 - ThWordStatusDataCache
-     * <li>4 - ThWordStatusWorkers
-     * <li>5 - ThWordStatusError
-     * </ul>
+     * <li>0 - ZPIThWordStatusDataFs
+ <li>1 - ZPIThWordStatusName
+ <li>2 - ZPIThWordStatusActivity
+ <li>3 - ZPIThWordStatusDataCache
+ <li>4 - ZPIThWordStatusWorkers
+ <li>5 - ZPIThWordStatusError
+ </ul>
      * Return code of parameter by his number, calculeted from some fileds
      * @param numParam
      * @return hashCode for Parameter by his number
@@ -3406,13 +3406,13 @@ public class ThWordStatusMainFlow {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + " 0 (zero) > , need for return " + numParam + "count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusError.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusError.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -3452,13 +3452,13 @@ public class ThWordStatusMainFlow {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + " 0 (zero) > , need for return " + numParam + "count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                                 + " parameters of flow statusMainFlow in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 

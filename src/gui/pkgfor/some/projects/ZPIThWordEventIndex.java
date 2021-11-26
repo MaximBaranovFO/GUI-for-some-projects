@@ -70,7 +70,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class ZPIThWordEventIndex {
     private final Long timeCreation;
     private final UUID objectLabel;
-    private ThWordStatusMainFlow wordStatusMainFlow;
+    private ZPIThWordStatusMainFlow wordStatusMainFlow;
     private ZPIThWordState wordState;
     private ConcurrentSkipListMap<UUID, String> idxMainFlowHexTagName;
     private ConcurrentSkipListMap<UUID, String> idxMainFlowSubString;

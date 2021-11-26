@@ -591,12 +591,12 @@ public class ZPIThWordCacheSk {
             typeWordFunc = (Integer) typeWordInputed;
             tagNameFunc = (String) hexTagNameInputed;
             if( typeWordFunc == null || tagNameFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " Main Flow UUID is null");
             }
             tagNamelength = (Integer) tagNameFunc.length();
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -606,25 +606,25 @@ public class ZPIThWordCacheSk {
             
             listTypeWordData = this.cachedData.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
             flowRecivedValueFunc = listTagName.get(tagNameFunc);
             if(flowRecivedValueFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for hexTagName: "
                         + tagNameFunc);
             }
@@ -1030,12 +1030,12 @@ public class ZPIThWordCacheSk {
             typeWordFunc = (Integer) typeWordInputed;
             tagNameFunc = (String) hexTagNameInputed;
             if( typeWordFunc == null || tagNameFunc == null ){
-                throw new NullPointerException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " Main Flow UUID is null");
             }
             tagNamelength = (Integer) tagNameFunc.length();
             if( tagNamelength < 4 ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal length of inputed in index string, hexTagName: "
                         + tagNameFunc + " length: " + tagNameFunc.length()
                         + " < 4 ");
@@ -1045,25 +1045,25 @@ public class ZPIThWordCacheSk {
             
             listTypeWordData = this.cachedData.get(typeWordFunc);
             if( listTypeWordData == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for typeWord: "
                         + typeWordFunc);
             }
             listTagNameLetter = listTypeWordData.get(tagNameLetter);
             if( listTagNameLetter == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for tagNameLetter: "
                         + tagNameLetter);
             }
             listTagName = listTagNameLetter.get(calculatedSubString);
             if( listTagName == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for subStringLength: "
                         + calculatedSubString);
             }
             flowRecivedValueFunc = listTagName.get(tagNameFunc);
             if(flowRecivedValueFunc == null ){
-                throw new IllegalArgumentException(ThWordStatusMainFlow.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusMainFlow.class.getCanonicalName() 
                         + " illegal key value for hexTagName: "
                         + tagNameFunc);
             }

@@ -50,7 +50,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 
  * @author wladimirowichbiaran
  */
-public class ThWordStatusDataCache {
+public class ZPIThWordStatusDataCache {
     private final Long timeCreation;
     private final UUID objectLabel;
     /**
@@ -60,7 +60,7 @@ public class ThWordStatusDataCache {
      */
     private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>> poolStatusDataCache;
     
-    public ThWordStatusDataCache(){
+    public ZPIThWordStatusDataCache(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusDataCache = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, Integer>>();
@@ -78,7 +78,7 @@ public class ThWordStatusDataCache {
             inputedVal = (UUID) keyPointFlowDataCache;
             getStatusDataCacheFormPool = this.poolStatusDataCache.get(inputedVal);
             if( getStatusDataCacheFormPool == null ){
-                throw new IllegalStateException(ThWordStatusDataCache.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusDataCache.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -160,7 +160,7 @@ public class ThWordStatusDataCache {
             keyPointFlowDataCacheFunc = (UUID) keyPointFlowDataFsInputed;
             returnedParamValue = (Integer) paramNumber;
             if( isStatusDataCacheNotExist(keyPointFlowDataCacheFunc) ){
-                throw new IllegalStateException(ThWordStatusDataFs.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusDataFs.class.getCanonicalName()
                         + " not exist values for UUID "
                         + keyPointFlowDataCacheFunc.toString()
                 );
@@ -413,13 +413,13 @@ public class ThWordStatusDataCache {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -467,13 +467,13 @@ public class ThWordStatusDataCache {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                                 + " parameters of flow statusDataCache in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -506,7 +506,7 @@ public class ThWordStatusDataCache {
         try {
             keyPointFlowDataCacheFunc = (UUID) keyPointFlowDataCache;
             if( keyPointFlowDataCacheFunc == null ){
-                throw new NullPointerException(ThWordStatusDataCache.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                         + " need point flow uuid, argument for validate is null");
             }
             if( !isStatusDataCacheNotExist(keyPointFlowDataCacheFunc) ){
@@ -516,7 +516,7 @@ public class ThWordStatusDataCache {
                 paramCount = (Integer) getParamCount();
                 if( sizeRec != paramCount ){
                     
-                    throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                             + " parameters of flow statusDataCache in Word is not valid, "
                             + "count records " + sizeRec + " not equal " + paramCount);
                 }
@@ -527,7 +527,7 @@ public class ThWordStatusDataCache {
                     if( !statusDataCacheForKeyPointFlow.containsKey(paramCodeByNumber) ){
                         
                         paramNameByNumber = getParamNameByNumber(idxParam);
-                        throw new IllegalArgumentException(ThWordStatusDataCache.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThWordStatusDataCache.class.getCanonicalName() 
                             + " parameter "
                             + " for name: " + paramNameByNumber
                             + " in inputed data for set into flow statusDataCache not exist");

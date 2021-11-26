@@ -55,9 +55,9 @@ public class ZPIThWordBusReadedFlow {
                     ConcurrentSkipListMap<Integer, 
                         ConcurrentSkipListMap<String, ConcurrentSkipListMap<Long, UUID>>>>> uuidReadedFlowMap;
 
-    private ThWordStatusMainFlow mainWordFlow;
+    private ZPIThWordStatusMainFlow mainWordFlow;
     
-    public ZPIThWordBusReadedFlow(ThWordStatusMainFlow storageWordStatisticOuter) {
+    public ZPIThWordBusReadedFlow(ZPIThWordStatusMainFlow storageWordStatisticOuter) {
         this.mainWordFlow = storageWordStatisticOuter;
         this.uuidReadedFlowMap = createNewListStoragesMapEmpty();
 

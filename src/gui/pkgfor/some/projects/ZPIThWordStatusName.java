@@ -39,12 +39,12 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 
  * @author wladimirowichbiaran
  */
-public class ThWordStatusName {
+public class ZPIThWordStatusName {
     private final Long timeCreation;
     private final UUID objectLabel;
     private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, String>> poolStatusName;
     
-    public ThWordStatusName(){
+    public ZPIThWordStatusName(){
         this.timeCreation = System.nanoTime();
         this.objectLabel = UUID.randomUUID();
         this.poolStatusName = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<Integer, String>>();
@@ -62,7 +62,7 @@ public class ThWordStatusName {
             inputedVal = (UUID) keyPointFlowName;
             getStatusNameFormPool = (ConcurrentSkipListMap<Integer, String>) this.poolStatusName.get(inputedVal);
             if( getStatusNameFormPool == null ){
-                throw new IllegalStateException(ThWordStatusName.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusName.class.getCanonicalName()
                 + " not exist record in list for "
                 + inputedVal.toString() + " key point flow");
             }
@@ -145,7 +145,7 @@ public class ThWordStatusName {
             keyPointFlowNameFunc = (UUID) keyPointFlowDataFsInputed;
             returnedParamValue = (Integer) paramNumber;
             if( isStatusNameNotExist(keyPointFlowNameFunc) ){
-                throw new IllegalStateException(ThWordStatusDataFs.class.getCanonicalName()
+                throw new IllegalStateException(ZPIThWordStatusDataFs.class.getCanonicalName()
                         + " not exist values for UUID "
                         + keyPointFlowNameFunc.toString()
                 );
@@ -182,7 +182,7 @@ public class ThWordStatusName {
      * Create, set all values to Boolean.FALSE
      * @return ConcurrentSkipListMap<Integer, String>
      *                          <ParamCode, Value>
-     * @see ThWordStatusName#getParamCodeByNumber(int) 
+     * @see ZPIThWordStatusName#getParamCodeByNumber(int) 
      */
     private ConcurrentSkipListMap<Integer, String> setInitParamName(){
         ConcurrentSkipListMap<Integer, String> returnedHashMap;
@@ -284,13 +284,13 @@ public class ThWordStatusName {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -330,13 +330,13 @@ public class ThWordStatusName {
         try {
             paramNames = getParamNames();
             if( numParam < 0 ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + " negative index sended, 0 (zero) > " + numParam + ", count parameters: " 
                                 + paramNames.length);
             }
             if( numParam > (paramNames.length - 1) ){
-                throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                                 + " parameters of flow statusName in StorageWord is not valid, "
                                 + "count parameters: " 
                                 + paramNames.length 
@@ -368,7 +368,7 @@ public class ThWordStatusName {
         try {
             keyPointFlowNameFunc = (UUID) keyPointFlowName;
             if( keyPointFlowNameFunc == null ){
-                throw new NullPointerException(ThWordStatusName.class.getCanonicalName() 
+                throw new NullPointerException(ZPIThWordStatusName.class.getCanonicalName() 
                         + " need point flow uuid, argument for validate is null");
             }
             if( !isStatusNameNotExist(keyPointFlowNameFunc) ){
@@ -378,7 +378,7 @@ public class ThWordStatusName {
                 paramCount = (Integer) getParamCount();
                 if( sizeRec != paramCount ){
                     
-                    throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                    throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                             + " parameters of flow statusName in Word is not valid, "
                             + "count records " + sizeRec + " not equal " + paramCount);
                 }
@@ -389,7 +389,7 @@ public class ThWordStatusName {
                     if( !statusNameForKeyPointFlow.containsKey(paramCodeByNumber) ){
                         
                         paramNameByNumber = getParamNameByNumber(idxParam);
-                        throw new IllegalArgumentException(ThWordStatusName.class.getCanonicalName() 
+                        throw new IllegalArgumentException(ZPIThWordStatusName.class.getCanonicalName() 
                             + " parameter "
                             + " for name: " + paramNameByNumber
                             + " in inputed data for set into flow statusName not exist");

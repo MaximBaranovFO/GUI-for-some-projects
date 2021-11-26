@@ -56,31 +56,31 @@ public class ZPIAdihHelper {
             namesForReturn = new String[] {
                 "UserHome",
                 "ClassPathApplicationDirectory",
-                new String(AppFileNamesConstants.DIR_IDX).concat("SubDirIndex"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST).concat("indexDirList"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_TMP).concat("indexTempData"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL).concat("indexJournal"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST).concat("indexFileList"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE).concat("indexFileType"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH).concat("indexFileHash"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST).concat("indexFileExist"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD).concat("indexWord"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD).concat("indexStorageWord"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST).concat("indexLongWordList"),
-                new String(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA).concat("indexLongWordData"),
+                new String(ZPIAppFileNamesConstants.DIR_IDX).concat("SubDirIndex"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST).concat("indexDirList"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_TMP).concat("indexTempData"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL).concat("indexJournal"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST).concat("indexFileList"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE).concat("indexFileType"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH).concat("indexFileHash"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST).concat("indexFileExist"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD).concat("indexWord"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD).concat("indexStorageWord"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST).concat("indexLongWordList"),
+                new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA).concat("indexLongWordData"),
             };
             return namesForReturn;
         } finally {
-            AdihUtilization.utilizeStringValues(namesForReturn);
+            ZPIAdihUtilization.utilizeStringValues(namesForReturn);
             namesForReturn = null;
         }
     }
     /**
-     * return from {@link AdilHelper#getParamNames() AdilHelper.getParamNames()}
+     * return from {@link ZPIAdilHelper#getParamNames() ZPIAdilHelper.getParamNames()}
      * @return 
      */
     protected static String[] getProcessNames(){
-        return AdilHelper.getParamNames();
+        return ZPIAdilHelper.getParamNames();
     }
     /**
      * <ul>
@@ -127,7 +127,7 @@ public class ZPIAdihHelper {
             };
             return namesForReturn;
         } finally {
-            AdihUtilization.utilizeStringValues(namesForReturn);
+            ZPIAdihUtilization.utilizeStringValues(namesForReturn);
             namesForReturn = null;
         }
     }
@@ -150,7 +150,7 @@ public class ZPIAdihHelper {
             };
             return namesForReturn;
         } finally {
-            AdihUtilization.utilizeStringValues(namesForReturn);
+            ZPIAdihUtilization.utilizeStringValues(namesForReturn);
             namesForReturn = null;
         }
     }
@@ -161,10 +161,10 @@ public class ZPIAdihHelper {
     protected static String getSubDirIndex(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.DIR_IDX);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.DIR_IDX);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -175,10 +175,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixDirList(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -189,10 +189,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixTempData(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_TMP);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_TMP);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -203,10 +203,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixJournal(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -217,10 +217,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixFileList(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -231,10 +231,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixFileType(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -245,10 +245,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixFileHash(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -259,10 +259,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixFileExist(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -273,10 +273,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixWord(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -287,10 +287,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixWordStorage(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -301,10 +301,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixWordLong(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -315,10 +315,10 @@ public class ZPIAdihHelper {
     protected static String getPrefixWordLongNames(){
         String forReturnPrefix = new String();
         try {
-            forReturnPrefix = new String(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA);
+            forReturnPrefix = new String(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA);
             return forReturnPrefix;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{forReturnPrefix});
             forReturnPrefix = null;
         }
     }
@@ -376,14 +376,14 @@ public class ZPIAdihHelper {
      * @param workerInputed
      * @return 
      */
-    protected static UUID getUuidWorkerFromName(AdihTemplateThread workerInputed){
+    protected static UUID getUuidWorkerFromName(ZPIAdihTemplateThread workerInputed){
         if( workerInputed == null ){
             return null;
         }
         try {
             return UUID.fromString(workerInputed.getName());
         } catch (IllegalArgumentException exIll){
-            System.err.println(AdihHelper.class.getCanonicalName() 
+            System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                     + " can`t detect worker name for object "
                     + workerInputed.toString() + ", reason " 
                     + exIll.getMessage());
@@ -395,7 +395,7 @@ public class ZPIAdihHelper {
                 workerInputed.setName(returnedValue.toString());
                 return returnedValue;
             } catch(SecurityException exSec) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                     + " can`t set worker name for object "
                     + workerInputed.toString() + ", reason " 
                     + exSec.getMessage());

@@ -60,31 +60,31 @@ public class ZPIAdihFileOperations {
                 Files.createDirectories(inputedDirName);
                 return Boolean.TRUE;
             } catch (FileAlreadyExistsException exAlreadyExist) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Directory create not complete path is " 
                         + inputedDirName.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exAlreadyExist.getMessage());
                 exAlreadyExist.printStackTrace();
             } catch (SecurityException exSecurity) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Directory create not complete path is " 
                         + inputedDirName.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecurity.getMessage());
                 exSecurity.printStackTrace();
             } catch (UnsupportedOperationException exUnSupp) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Directory create not complete path is " 
                         + inputedDirName.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exUnSupp.getMessage());
                 exUnSupp.printStackTrace();
             } catch (IOException exIoExist) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Directory create not complete path is " 
                         + inputedDirName.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exIoExist.getMessage());
                 exIoExist.printStackTrace();
             } 
@@ -103,10 +103,10 @@ public class ZPIAdihFileOperations {
             try {
                 isExist = Files.exists(innerWorkPath, LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory exist check not complete path is " 
                         + innerWorkPath.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -117,10 +117,10 @@ public class ZPIAdihFileOperations {
             try {
                 isDirectory = Files.isDirectory(innerWorkPath, LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory exist check not complete path is " 
                         + innerWorkPath.toString() + " "
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -145,10 +145,10 @@ public class ZPIAdihFileOperations {
             try {
                 isExist = Files.exists(innerWorkPath, LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory exist check not complete path is " 
                         + innerWorkPath.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -159,10 +159,10 @@ public class ZPIAdihFileOperations {
             try {
                 isDirectory = Files.isDirectory(innerWorkPath, LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory exist check not complite path is " 
                         + innerWorkPath.toString() + " "
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -188,10 +188,10 @@ public class ZPIAdihFileOperations {
             try {
                 isReadable = Files.isReadable(innerWorkPath);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory readable check not complete path is " 
                         + innerWorkPath.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -202,10 +202,10 @@ public class ZPIAdihFileOperations {
             try {
                 isWritable = Files.isWritable(innerWorkPath);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory readable check not complete path is " 
                         + innerWorkPath.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -216,10 +216,10 @@ public class ZPIAdihFileOperations {
             try {
                 isSymbolicLink = Files.isSymbolicLink(innerWorkPath);
             } catch(SecurityException exSecury) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] File or Directory readable check not complete path is " 
                         + innerWorkPath.toString() 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSecury.getMessage()
                 );
                 exSecury.printStackTrace();
@@ -243,12 +243,12 @@ public class ZPIAdihFileOperations {
         try {
             toReturn = getApplicationPath();
             if( toReturn == null ){
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "getApplicationPath returned null");
                 System.exit(0);
             }
-            Boolean isDirectory = AdihFileOperations.pathIsDirectory(toReturn);
-            Boolean isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            Boolean isDirectory = ZPIAdihFileOperations.pathIsDirectory(toReturn);
+            Boolean isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( isDirectory ){
                 if( isReadWriteNotLink ) {
                     return toReturn;
@@ -268,12 +268,12 @@ public class ZPIAdihFileOperations {
         try {
             toReturn = getUserHomePath();
             if( toReturn == null ){
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "getUserHomeCheckedPath returned null");
                 System.exit(0);
             }
-            Boolean isDirectory = AdihFileOperations.pathIsDirectory(toReturn);
-            Boolean isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            Boolean isDirectory = ZPIAdihFileOperations.pathIsDirectory(toReturn);
+            Boolean isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( isDirectory ){
                 if( isReadWriteNotLink ) {
                     return toReturn;
@@ -297,14 +297,14 @@ public class ZPIAdihFileOperations {
         try {
             systemPropertyPath = getSystemPropertyClassPath();
             toReturn = getNormAbsRealPath(systemPropertyPath);
-            isDirectory = AdihFileOperations.pathIsDirectory(toReturn);
-            isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            isDirectory = ZPIAdihFileOperations.pathIsDirectory(toReturn);
+            isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( isDirectory ){
                 if( isReadWriteNotLink ) {
                     return toReturn;
                 }
             }
-            System.err.println(AdihFileOperations.class.getCanonicalName() 
+            System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "getForLogDirectory returned " 
                     + toReturn.toString()
                     + " isDirectory " + String.valueOf(isDirectory)
@@ -312,14 +312,14 @@ public class ZPIAdihFileOperations {
             );
             systemPropertyPath = getSystemPropertyUserHome();
             toReturn = getNormAbsRealPath(systemPropertyPath);
-            isDirectory = AdihFileOperations.pathIsDirectory(toReturn);
-            isReadWriteNotLink = AdihFileOperations.pathIsReadWriteNotLink(toReturn);
+            isDirectory = ZPIAdihFileOperations.pathIsDirectory(toReturn);
+            isReadWriteNotLink = ZPIAdihFileOperations.pathIsReadWriteNotLink(toReturn);
             if( isDirectory ){
                 if( isReadWriteNotLink ) {
                     return toReturn;
                 }
             }
-            System.err.println(AdihFileOperations.class.getCanonicalName() 
+            System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "getForLogDirectory returned " 
                     + toReturn.toString()
                     + " isDirectory " + String.valueOf(isDirectory)
@@ -348,10 +348,10 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFs = Paths.get(processedStrPath);
             } catch(InvalidPathException exInvPath) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory build not complete path is " 
                         + processedStrPath
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exInvPath.getMessage()
                 );
                 exInvPath.printStackTrace();
@@ -361,19 +361,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsAbsolute = parentForFsNormal.toAbsolutePath();
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + processedStrPath
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOError errIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + processedStrPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + errIo.getMessage()
                 );
                 errIo.printStackTrace();
@@ -382,19 +382,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsReal = parentForFsAbsolute.toRealPath(LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + processedStrPath
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOException exIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + processedStrPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exIo.getMessage()
                 );
                 exIo.printStackTrace();
@@ -406,7 +406,7 @@ public class ZPIAdihFileOperations {
             parentForFsNormal = null;
             parentForFsAbsolute = null;
             parentForFsReal = null;
-            AdihUtilization.utilizeStringValues(new String[]{processedStrPath});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{processedStrPath});
         }
     }
     /**
@@ -424,10 +424,10 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFs = Paths.get(appPath);
             } catch(InvalidPathException exInvPath) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory build not complete path is " 
                         + appPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exInvPath.getMessage()
                 );
                 exInvPath.printStackTrace();
@@ -437,19 +437,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsAbsolute = parentForFsNormal.toAbsolutePath();
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + appPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOError errIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + appPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + errIo.getMessage()
                 );
                 errIo.printStackTrace();
@@ -458,19 +458,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsReal = parentForFsAbsolute.toRealPath(LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + appPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOException exIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + appPath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exIo.getMessage()
                 );
                 exIo.printStackTrace();
@@ -482,7 +482,7 @@ public class ZPIAdihFileOperations {
             parentForFsNormal = null;
             parentForFsAbsolute = null;
             parentForFsReal = null;
-            AdihUtilization.utilizeStringValues(new String[]{appPath});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{appPath});
         }
     }
     /**
@@ -500,10 +500,10 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFs = Paths.get(userHomePath);
             } catch(InvalidPathException exInvPath) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory build not complete path is " 
                         + userHomePath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exInvPath.getMessage()
                 );
                 exInvPath.printStackTrace();
@@ -513,19 +513,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsAbsolute = parentForFsNormal.toAbsolutePath();
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + userHomePath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOError errIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + userHomePath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + errIo.getMessage()
                 );
                 errIo.printStackTrace();
@@ -534,19 +534,19 @@ public class ZPIAdihFileOperations {
             try {
                 parentForFsReal = parentForFsAbsolute.toRealPath(LinkOption.NOFOLLOW_LINKS);
             } catch(SecurityException exSec) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + userHomePath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exSec.getMessage()
                 );
                 exSec.printStackTrace();
                 return null;
             } catch(IOException exIo) {
-                System.err.println(AdihFileOperations.class.getCanonicalName() 
+                System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                         + "[ERROR] Application Directory absolute path build not complete path is " 
                         + userHomePath 
-                        + AdilConstants.EXCEPTION_MSG 
+                        + ZPIAdilConstants.EXCEPTION_MSG 
                         + exIo.getMessage()
                 );
                 exIo.printStackTrace();
@@ -558,7 +558,7 @@ public class ZPIAdihFileOperations {
             parentForFsNormal = null;
             parentForFsAbsolute = null;
             parentForFsReal = null;
-            AdihUtilization.utilizeStringValues(new String[]{userHomePath});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{userHomePath});
         }
     }
     /**
@@ -571,7 +571,7 @@ public class ZPIAdihFileOperations {
             property = System.getProperty("java.class.path");
             return property;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{property});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{property});
         }
     }
     /**
@@ -584,7 +584,7 @@ public class ZPIAdihFileOperations {
             property = System.getProperty("user.home");
             return property;
         } finally {
-            AdihUtilization.utilizeStringValues(new String[]{property});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{property});
         }
     }
     /**
@@ -608,7 +608,7 @@ public class ZPIAdihFileOperations {
             storageFile = (Path) storageFileOuter;
             fsForOpen = (URI) fsForOpenOuter;
 
-            pathIsFile = AdihFileOperations.pathIsFile(storageFile);
+            pathIsFile = ZPIAdihFileOperations.pathIsFile(storageFile);
             if( pathIsFile ){
                 try {
                     //fileSystemOpened = FileSystems.getFileSystem(fsForOpen);
@@ -617,37 +617,37 @@ public class ZPIAdihFileOperations {
                             return fileSystemOpened;
                         }
                 } catch(FileSystemAlreadyExistsException exAlExist){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason " 
                             + exAlExist.getMessage());
                     exAlExist.printStackTrace();
                 } catch(FileSystemNotFoundException exFsNotExist){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason " 
                             + exFsNotExist.getMessage());
                     exFsNotExist.printStackTrace();
                 } catch(ProviderNotFoundException exProvNotFound){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exProvNotFound.getMessage());
                     exProvNotFound.printStackTrace();
                 } catch(IllegalArgumentException exIllArg){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exIllArg.getMessage());
                     exIllArg.printStackTrace();
                 } catch(SecurityException exSec){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exSec.getMessage());
                     exSec.printStackTrace();
                 } catch (IOException exIo) {
-                        System.err.println(AdihFileOperations.class.getCanonicalName() 
+                        System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                                 + " error for open storage for index in file "
                                 + storageFile.toString() + ", reason "
                                 + exIo.getMessage());
@@ -663,37 +663,37 @@ public class ZPIAdihFileOperations {
                         return fileSystemOpened;
                     }
                 } catch(FileSystemAlreadyExistsException exAlExist){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exAlExist.getMessage());
                     exAlExist.printStackTrace();
                 } catch(FileSystemNotFoundException exFsNotExist){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exFsNotExist.getMessage());
                     exFsNotExist.printStackTrace();
                 } catch(ProviderNotFoundException exProvNotFound){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exProvNotFound.getMessage());
                     exProvNotFound.printStackTrace();
                 } catch(IllegalArgumentException exIllArg){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exIllArg.getMessage());
                     exIllArg.printStackTrace();
                 } catch(SecurityException exSec){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exSec.getMessage());
                     exSec.printStackTrace();
                 } catch (IOException exIo) {
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for open storage for index in file "
                             + storageFile.toString() + ", reason "
                             + exIo.getMessage());
@@ -722,25 +722,25 @@ public class ZPIAdihFileOperations {
                     openedStorage.close();
                     return Boolean.TRUE;
                 } catch(ClosedFileSystemException exClose){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for close storage for index in file "
                             + openedStorageToString + ", reason "
                             + exClose.getMessage());
                     exClose.printStackTrace();
                 } catch(UnsupportedOperationException exUnSupEx){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for close storage for index in file "
                             + openedStorageToString + ", reason "
                             + exUnSupEx.getMessage());
                     exUnSupEx.printStackTrace();
                 }  catch(SecurityException exSec){
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for close storage for index in file "
                             + openedStorageToString + ", reason "
                             + exSec.getMessage());
                     exSec.printStackTrace();
                 } catch (IOException exIo) {
-                    System.err.println(AdihFileOperations.class.getCanonicalName() 
+                    System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for close storage for index in file "
                             + openedStorageToString + ", reason "
                             + exIo.getMessage());
@@ -750,7 +750,7 @@ public class ZPIAdihFileOperations {
             return Boolean.FALSE;
         } finally {
             isOpened = null;
-            AdihUtilization.utilizeStringValues(new String[]{openedStorageToString});
+            ZPIAdihUtilization.utilizeStringValues(new String[]{openedStorageToString});
             openedStorageToString = null;
 }
     }
@@ -792,7 +792,7 @@ public class ZPIAdihFileOperations {
                     try{
                         compareResult = itemMask.compareTo(getMaxCompared);
                     } catch (ClassCastException exClassCast) {
-                        System.err.println(AdihFileOperations.class.getCanonicalName() 
+                        System.err.println(ZPIAdihFileOperations.class.getCanonicalName() 
                             + " error for compare, searched in index directory, file names "
                             + ", reason "
                             + exClassCast.getMessage());
@@ -810,7 +810,7 @@ public class ZPIAdihFileOperations {
             return null;
         } finally {
             indexFolder = null;
-            AdihUtilization.utilizeLinkedTransferQueue(filesByMaskFromDir);
+            ZPIAdihUtilization.utilizeLinkedTransferQueue(filesByMaskFromDir);
             filesByMaskFromDir = null;
             getMaxCompared = null;
             itemMask = null;
@@ -833,7 +833,7 @@ public class ZPIAdihFileOperations {
                     toReturn.put(entry);
                 }
             } catch (PatternSyntaxException exPatternSyntax) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                             + " error for search files by prefix "
                             + maskForReturn + " index in directory "
                             + dirForRead.toString() + ", reason "
@@ -841,7 +841,7 @@ public class ZPIAdihFileOperations {
                 exPatternSyntax.printStackTrace();
                 return null;
             } catch (NotDirectoryException  exNotDir) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                             + " error for search files by prefix "
                             + maskForReturn + " index in directory "
                             + dirForRead.toString() + ", reason "
@@ -849,7 +849,7 @@ public class ZPIAdihFileOperations {
                 exNotDir.printStackTrace();
                 return null;
             } catch (DirectoryIteratorException exDirIter) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                             + " error for search files by prefix "
                             + maskForReturn + " index in directory "
                             + dirForRead.toString() + ", reason "
@@ -857,7 +857,7 @@ public class ZPIAdihFileOperations {
                 exDirIter.printStackTrace();
                 return null;
             } catch (SecurityException  exSec) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                             + " error for search files by prefix "
                             + maskForReturn + " index in directory "
                             + dirForRead.toString() + ", reason "
@@ -865,7 +865,7 @@ public class ZPIAdihFileOperations {
                 exSec.printStackTrace();
                 return null;
             } catch (IOException exIo) {
-                System.err.println(AdihHelper.class.getCanonicalName() 
+                System.err.println(ZPIAdihHelper.class.getCanonicalName() 
                             + " error for search files by prefix "
                             + maskForReturn + " index in directory "
                             + dirForRead.toString() + ", reason "

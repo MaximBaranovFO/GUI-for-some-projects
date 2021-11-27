@@ -30,19 +30,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class ZPINcThMifTakeDirList extends Thread {
     private String typeObject;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> fromPipeDirWalker;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> toPackDirList;
-    private NcThExStatus jobStatus;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> fromPipeDirWalker;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> toPackDirList;
+    private ZPINcThExStatus jobStatus;
 
     public ZPINcThMifTakeDirList(
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> fromPipeDirWalkerOuter,
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> toPackDirListOuter,
-            NcThExStatus outerJobStatus) {
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> fromPipeDirWalkerOuter,
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> toPackDirListOuter,
+            ZPINcThExStatus outerJobStatus) {
         this.fromPipeDirWalker = fromPipeDirWalkerOuter;
         this.toPackDirList = toPackDirListOuter;
         this.typeObject = "[MIFTAKEDIRLIST]" + this.toString();
         this.jobStatus = outerJobStatus;
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
     
     
@@ -61,7 +61,7 @@ public class ZPINcThMifTakeDirList extends Thread {
                         if(this.toPackDirList.size() != 0){
                             emptyCount = 0;
                         }
-                        ConcurrentSkipListMap<UUID, NcDataListAttr> take;
+                        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> take;
                         take = null;
                         int emptyCountWaiter = 0;
                         do{
@@ -81,9 +81,9 @@ public class ZPINcThMifTakeDirList extends Thread {
                                 + "-toPackDirList-"
                                 + this.toPackDirList.size());*/
                     } catch (IllegalArgumentException ex) {
-                        NcAppHelper.logException(NcThMifTakeDirList.class.getCanonicalName(), ex);
+                        ZPINcAppHelper.logException(ZPINcThMifTakeDirList.class.getCanonicalName(), ex);
                     } catch (NullPointerException ex) {
-                        NcAppHelper.logException(NcThMifTakeDirList.class.getCanonicalName(), ex);
+                        ZPINcAppHelper.logException(ZPINcThMifTakeDirList.class.getCanonicalName(), ex);
                     } 
                 } while ( this.toPackDirList.size() != 0 );
                 emptyCount++;
@@ -93,7 +93,7 @@ public class ZPINcThMifTakeDirList extends Thread {
         }while ( (this.jobStatus.getRunnerStatus() == Thread.State.RUNNABLE) 
                     || (this.jobStatus.getRunnerStatus() == Thread.State.TIMED_WAITING) );
         } catch (InterruptedException ex) {
-            NcAppHelper.logException(NcThMifTakeDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifTakeDirList.class.getCanonicalName(), ex);
         }
         System.out.println("[TACKER][FINISH][EXIT]");
     }

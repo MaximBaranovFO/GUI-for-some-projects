@@ -30,29 +30,29 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ZPINcThMifPackDirList extends Thread {
     private String typeObject;
     private long sleepTimeDownRecordSpeed;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirListInner;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> readyPack;
-    private NcThExStatus jobStatus;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirListInner;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> readyPack;
+    private ZPINcThExStatus jobStatus;
     
     public ZPINcThMifPackDirList(
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirListOuter,
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> listPackOuter,
-            NcThExStatus outerJobStatus
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirListOuter,
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> listPackOuter,
+            ZPINcThExStatus outerJobStatus
             ) {
         this.pipeDirListInner = pipeDirListOuter;
         this.readyPack = listPackOuter;
         this.sleepTimeDownRecordSpeed = 100L;
         this.typeObject = "[MIFPACKDIRLIST]" + this.toString();
         this.jobStatus = outerJobStatus;
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
     
     @Override
     public void run() {
         try {
             
-            ConcurrentSkipListMap<UUID, NcDataListAttr> dataPack =
-                                    new ConcurrentSkipListMap<UUID, NcDataListAttr>();
+            ConcurrentSkipListMap<UUID, ZPINcDataListAttr> dataPack =
+                                    new ConcurrentSkipListMap<UUID, ZPINcDataListAttr>();
             do{
                 int dataWaitCount = 0;
             do{
@@ -60,7 +60,7 @@ public class ZPINcThMifPackDirList extends Thread {
                     
                     do{
 
-                        ConcurrentSkipListMap<UUID, NcDataListAttr> take;
+                        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> take;
                         take = null;
                         int emptyCountWaiter = 0;
                         do{
@@ -77,14 +77,14 @@ public class ZPINcThMifPackDirList extends Thread {
 
 
                         dataWaitCount = 0;
-                        for (Map.Entry<UUID, NcDataListAttr> entry : take.entrySet()) {
+                        for (Map.Entry<UUID, ZPINcDataListAttr> entry : take.entrySet()) {
                             UUID key = entry.getKey();
-                            NcDataListAttr value = entry.getValue();
+                            ZPINcDataListAttr value = entry.getValue();
                             int nowSize = 1;
                             int currentPackSize = dataPack.size();
                             if( currentPackSize == 100 ){
                                 this.readyPack.put(dataPack);
-                                dataPack = new ConcurrentSkipListMap<UUID, NcDataListAttr>();
+                                dataPack = new ConcurrentSkipListMap<UUID, ZPINcDataListAttr>();
                                 currentPackSize = dataPack.size();
                                 continue;
                             }
@@ -98,7 +98,7 @@ public class ZPINcThMifPackDirList extends Thread {
                         + "-pipeDirList-" + this.pipeDirListInner.size());*/
                     }while( this.pipeDirListInner.size() != 0 );
                 } catch (IllegalArgumentException ex) {
-                        NcAppHelper.logException(NcThMifPackDirList.class.getCanonicalName(), ex);
+                        ZPINcAppHelper.logException(ZPINcThMifPackDirList.class.getCanonicalName(), ex);
                 }
                 dataWaitCount++;
             }while( dataWaitCount < 50);
@@ -109,7 +109,7 @@ public class ZPINcThMifPackDirList extends Thread {
             
         
         } catch (Exception ex) {
-            NcAppHelper.logException(NcThMifPackDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifPackDirList.class.getCanonicalName(), ex);
         }
         System.out.println("[PACKER][FINISH][EXIT]");
     }

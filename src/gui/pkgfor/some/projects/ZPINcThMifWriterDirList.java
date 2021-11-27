@@ -48,32 +48,32 @@ import java.util.stream.Stream;
 public class ZPINcThMifWriterDirList extends Thread {
     private String typeObject;
     private long sleepTimeDownRecordSpeed;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> listPackInner;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> toPackDirList;
-    private NcThExStatus outerJobStatus;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> listPackInner;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> toPackDirList;
+    private ZPINcThExStatus outerJobStatus;
 
     public ZPINcThMifWriterDirList(
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> listPackOuter,
-            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> toPackDirListOuter,
-            NcThExStatus outerJobStatus) {
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> listPackOuter,
+            ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> toPackDirListOuter,
+            ZPINcThExStatus outerJobStatus) {
         this.sleepTimeDownRecordSpeed = 100L;
         this.listPackInner = listPackOuter;
         this.toPackDirList = toPackDirListOuter;
         this.typeObject = "[MIFWRITERDIRLIST]" + this.toString();
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
     
     
     @Override
     public void run() {
         
-        Path pathIndexFile = NcFsIdxStorageInit.buildPathToFileOfIdxStorage();
-        Map<String, String> fsProperties = NcFsIdxStorageInit.getFsPropExist();
+        Path pathIndexFile = ZPINcFsIdxStorageInit.buildPathToFileOfIdxStorage();
+        Map<String, String> fsProperties = ZPINcFsIdxStorageInit.getFsPropExist();
         System.out.println("\n\n\n file storage path: " + pathIndexFile.toString());
-        Boolean existFSfile = NcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile);
-        System.out.println("NcFsIdxOperationFiles.existAndHasAccessRWNotLink(): " + existFSfile.toString());
+        Boolean existFSfile = ZPINcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile);
+        System.out.println("ZPINcFsIdxOperationFiles.existAndHasAccessRWNotLink(): " + existFSfile.toString());
         if( !existFSfile ){
-            fsProperties = NcFsIdxStorageInit.getFsPropCreate();
+            fsProperties = ZPINcFsIdxStorageInit.getFsPropCreate();
         }
         /*for (Map.Entry<String, String> entry : fsProperties.entrySet()) {
             System.out.println("Key: " + entry.getKey() + " Val: " + entry.getValue());
@@ -85,7 +85,7 @@ public class ZPINcThMifWriterDirList extends Thread {
         try(FileSystem fsZipIndexStorage = 
             FileSystems.newFileSystem(uriZipIndexStorage, fsProperties)){
             
-            NcParamFs dataStorage = NcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
+            ZPINcParamFs dataStorage = ZPINcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
             do{
             int dataWaitCount = 0;
             
@@ -100,7 +100,7 @@ public class ZPINcThMifWriterDirList extends Thread {
                 try{
                     Boolean boolMustBegin = Boolean.FALSE;
                     do {  
-                        ConcurrentSkipListMap<UUID, NcDataListAttr> nowPack = new ConcurrentSkipListMap<>();
+                        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> nowPack = new ConcurrentSkipListMap<>();
                         Path dirDirList = dataStorage.getDirDirList();
                         Path pathForViewCount = fsZipIndexStorage.getPath(dirDirList.toString()).normalize();
                         Path getNew = pathForViewCount;
@@ -110,10 +110,10 @@ public class ZPINcThMifWriterDirList extends Thread {
                         do{
                             
                             if(countFiles > 0){
-                                strIndex = NcStrFileDir.PRE_DIR_LIST.getStr() + Long.toString(countFiles * 100L + 100L);
+                                strIndex = ZPINcStrFileDir.PRE_DIR_LIST.getStr() + Long.toString(countFiles * 100L + 100L);
                             }
                             else{
-                                strIndex = NcStrFileDir.PRE_DIR_LIST.getStr() + Long.toString(100L);
+                                strIndex = ZPINcStrFileDir.PRE_DIR_LIST.getStr() + Long.toString(100L);
                             }
                             getNew = fsZipIndexStorage.getPath(dirDirList.toString(), strIndex).normalize();
                             existFile = Files.exists(getNew, LinkOption.NOFOLLOW_LINKS);
@@ -140,7 +140,7 @@ public class ZPINcThMifWriterDirList extends Thread {
                             + " in packet records, ready path for write is "
                             + getNew.toString());*/
                         } catch (InterruptedException ex) {
-                            NcAppHelper.logException(NcThMifWriterDirList.class.getCanonicalName(), ex);
+                            ZPINcAppHelper.logException(ZPINcThMifWriterDirList.class.getCanonicalName(), ex);
                         }
                             if(nowPack.size() == 100){
                                 dataWaitCount = 0;
@@ -155,8 +155,8 @@ public class ZPINcThMifWriterDirList extends Thread {
                                     //System.out.println(getNew.toString() + " -|-|- " + nowPack.size() + " elements writed");
                                 }
                                 catch(Exception ex){
-                                    NcAppHelper.logException(
-                                            NcThMifWriterDirList.class.getCanonicalName(), ex);
+                                    ZPINcAppHelper.logException(
+                                            ZPINcThMifWriterDirList.class.getCanonicalName(), ex);
                                 }
                             }
                             nowPack = new ConcurrentSkipListMap<>();
@@ -174,7 +174,7 @@ public class ZPINcThMifWriterDirList extends Thread {
                             
                     } while ( boolMustBegin );
                 } catch (IllegalArgumentException ex){
-                    NcAppHelper.logException(NcThMifWriterDirList.class.getCanonicalName(), ex);    
+                    ZPINcAppHelper.logException(ZPINcThMifWriterDirList.class.getCanonicalName(), ex);    
                 }
                 dataWaitCount++;
             } while ( dataWaitCount < 50 );
@@ -184,20 +184,20 @@ public class ZPINcThMifWriterDirList extends Thread {
                     || (outerJobStatus.getPackerStatus() == Thread.State.TIMED_WAITING) );
         } catch (IOException ex) {
             ex.printStackTrace();
-            NcAppHelper.logException(NcThMifWriterDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifWriterDirList.class.getCanonicalName(), ex);
             String strMsg = "Imposible to create file for index Storage, see log";
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
                 + strMsg
             );
             ifException = Boolean.TRUE;
         } catch (Exception ex){
             ex.printStackTrace();
-            NcAppHelper.logException(NcThMifWriterDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThMifWriterDirList.class.getCanonicalName(), ex);
             String strMsg = "Imposible for exec operation in the index Storage, see log"
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
                 + strMsg
             );
             ifException = Boolean.TRUE;
@@ -208,7 +208,7 @@ public class ZPINcThMifWriterDirList extends Thread {
         System.out.println("[WRITER][FINISH][EXIT]");
     }
     
-    protected static int writeDirListData(ConcurrentSkipListMap<UUID, NcDataListAttr> dataToFile, Path dirDirList){
+    protected static int writeDirListData(ConcurrentSkipListMap<UUID, ZPINcDataListAttr> dataToFile, Path dirDirList){
         if( dataToFile == null ){
             return -1;
         }
@@ -219,8 +219,8 @@ public class ZPINcThMifWriterDirList extends Thread {
             oos.writeObject(dataToFile);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcThMifWriterDirList.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcThMifWriterDirList.class.getCanonicalName(), ex);
             return -1;
         } 
         return dataToFile.size();

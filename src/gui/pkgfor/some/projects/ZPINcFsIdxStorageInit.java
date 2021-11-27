@@ -35,12 +35,12 @@ import java.util.logging.Logger;
  */
 public class ZPINcFsIdxStorageInit {
     
-    protected static ThreadLocal<NcParamFs> getStorage(NcSwGUIComponentStatus lComp){
-        ThreadLocal<NcParamFs> toReturn = openStorage();
-        NcParamFs fileStorageParam = toReturn.get();
+    protected static ThreadLocal<ZPINcParamFs> getStorage(ZPINcSwGUIComponentStatus lComp){
+        ThreadLocal<ZPINcParamFs> toReturn = openStorage();
+        ZPINcParamFs fileStorageParam = toReturn.get();
         
         ArrayList<String> arrStr = new ArrayList<String>();
-        arrStr.add("NcParamFs:");
+        arrStr.add("ZPINcParamFs:");
         arrStr.add(fileStorageParam.toString());
         
         arrStr.add("Storage:");
@@ -48,7 +48,7 @@ public class ZPINcFsIdxStorageInit {
         arrStr.add("isOpen: " + fileStorageParam.getIdxFs().isOpen());
         //arrStr.add("getDirDirList: " + fileStorageParam.getDirDirList().toString());
         
-        //NcParamFs dataStorage = initStorageStructure(fileStorage);
+        //ZPINcParamFs dataStorage = initStorageStructure(fileStorage);
         //toReturn.set(dataStorage);
         
         
@@ -65,34 +65,34 @@ public class ZPINcFsIdxStorageInit {
 
             }
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxStorageInit.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
         }*/
         
         ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
         return toReturn;
     }
     
-    private static ThreadLocal<NcParamFs> openStorage(){
+    private static ThreadLocal<ZPINcParamFs> openStorage(){
         Path pathIndexFile = buildPathToFileOfIdxStorage();
         Map<String, String> fsProperties = getFsPropExist();
-        ThreadLocal<NcParamFs> toReturn = new ThreadLocal<>();
-        if( !NcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile) ){
+        ThreadLocal<ZPINcParamFs> toReturn = new ThreadLocal<>();
+        if( !ZPINcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile) ){
             fsProperties = getFsPropCreate();
         }
         URI uriZipIndexStorage = URI.create("jar:" + pathIndexFile.toUri());
         try(FileSystem fsZipIndexStorage = 
             FileSystems.newFileSystem(uriZipIndexStorage, fsProperties)){
             
-            NcParamFs dataStorage = initStorageStructure(fsZipIndexStorage);
+            ZPINcParamFs dataStorage = initStorageStructure(fsZipIndexStorage);
             
             toReturn.set(dataStorage);
             return toReturn;
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxStorageInit.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
         }
         String strMsg = "Imposible to create file for index Storage, see log";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR_CRITICAL.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
@@ -100,63 +100,63 @@ public class ZPINcFsIdxStorageInit {
     
     
 
-    protected static NcParamFs initStorageStructure(FileSystem inFS){
+    protected static ZPINcParamFs initStorageStructure(FileSystem inFS){
         
-        Path dirDirList = inFS.getPath(NcStrFileDir.DIR_DIR_LIST.getStr());
+        Path dirDirList = inFS.getPath(ZPINcStrFileDir.DIR_DIR_LIST.getStr());
         
-        NcFsIdxOperationDirs.create(dirDirList);
+        ZPINcFsIdxOperationDirs.create(dirDirList);
         
-        Path dirFileExist = inFS.getPath(NcStrFileDir.DIR_FILE_EXIST.getStr());
-        NcFsIdxOperationDirs.create(dirFileExist);
+        Path dirFileExist = inFS.getPath(ZPINcStrFileDir.DIR_FILE_EXIST.getStr());
+        ZPINcFsIdxOperationDirs.create(dirFileExist);
         
-        Path dirFileHash = inFS.getPath(NcStrFileDir.DIR_FILE_HASH.getStr());
-        NcFsIdxOperationDirs.create(dirFileHash);
+        Path dirFileHash = inFS.getPath(ZPINcStrFileDir.DIR_FILE_HASH.getStr());
+        ZPINcFsIdxOperationDirs.create(dirFileHash);
         
-        Path dirFileList = inFS.getPath(NcStrFileDir.DIR_FILE_LIST.getStr());
-        NcFsIdxOperationDirs.create(dirFileList);
+        Path dirFileList = inFS.getPath(ZPINcStrFileDir.DIR_FILE_LIST.getStr());
+        ZPINcFsIdxOperationDirs.create(dirFileList);
         
-        Path dirFileType = inFS.getPath(NcStrFileDir.DIR_FILE_TYPE.getStr());
-        NcFsIdxOperationDirs.create(dirFileType);
+        Path dirFileType = inFS.getPath(ZPINcStrFileDir.DIR_FILE_TYPE.getStr());
+        ZPINcFsIdxOperationDirs.create(dirFileType);
         
-        Path dirJournal = inFS.getPath(NcStrFileDir.DIR_JOURNAL.getStr());
-        NcFsIdxOperationDirs.create(dirJournal);
+        Path dirJournal = inFS.getPath(ZPINcStrFileDir.DIR_JOURNAL.getStr());
+        ZPINcFsIdxOperationDirs.create(dirJournal);
         
-        Path dirLongWordList = inFS.getPath(NcStrFileDir.DIR_LONG_WORD_LIST.getStr());
-        NcFsIdxOperationDirs.create(dirLongWordList);
+        Path dirLongWordList = inFS.getPath(ZPINcStrFileDir.DIR_LONG_WORD_LIST.getStr());
+        ZPINcFsIdxOperationDirs.create(dirLongWordList);
         
-        Path dirLongWordData = inFS.getPath(NcStrFileDir.DIR_LONG_WORD_DATA.getStr());
-        NcFsIdxOperationDirs.create(dirLongWordData);
+        Path dirLongWordData = inFS.getPath(ZPINcStrFileDir.DIR_LONG_WORD_DATA.getStr());
+        ZPINcFsIdxOperationDirs.create(dirLongWordData);
         
-        Path dirStorageWord = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr());
-        NcFsIdxOperationDirs.create(dirStorageWord);
+        Path dirStorageWord = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr());
+        ZPINcFsIdxOperationDirs.create(dirStorageWord);
         
-        Path dirStorageWordAbc = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
+        Path dirStorageWordAbc = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr(),
                 ZPINcTypeOfWord.NCLVLABC.getName());
-        NcFsIdxOperationDirs.create(dirStorageWordAbc);
+        ZPINcFsIdxOperationDirs.create(dirStorageWordAbc);
         
-        Path dirStorageWordNum = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
+        Path dirStorageWordNum = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr(),
                 ZPINcTypeOfWord.NCLVLNUM.getName());
-        NcFsIdxOperationDirs.create(dirStorageWordNum);
+        ZPINcFsIdxOperationDirs.create(dirStorageWordNum);
         
-        Path dirStorageWordRabc = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
+        Path dirStorageWordRabc = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr(),
                 ZPINcTypeOfWord.NCLVLRABC.getName());
-        NcFsIdxOperationDirs.create(dirStorageWordRabc);
+        ZPINcFsIdxOperationDirs.create(dirStorageWordRabc);
         
-        Path dirStorageWordSpace = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
+        Path dirStorageWordSpace = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr(),
                 ZPINcTypeOfWord.NCLVLSPACE.getName());
-        NcFsIdxOperationDirs.create(dirStorageWordSpace);
+        ZPINcFsIdxOperationDirs.create(dirStorageWordSpace);
         
-        Path dirStorageWordSym = inFS.getPath(NcStrFileDir.DIR_STORAGE_WORD.getStr(),
+        Path dirStorageWordSym = inFS.getPath(ZPINcStrFileDir.DIR_STORAGE_WORD.getStr(),
                 ZPINcTypeOfWord.NCLVLSYM.getName());
-        NcFsIdxOperationDirs.create(dirStorageWordSym);
+        ZPINcFsIdxOperationDirs.create(dirStorageWordSym);
         
-        Path dirTmp = inFS.getPath(NcStrFileDir.DIR_TMP.getStr());
-        NcFsIdxOperationDirs.create(dirTmp);
+        Path dirTmp = inFS.getPath(ZPINcStrFileDir.DIR_TMP.getStr());
+        ZPINcFsIdxOperationDirs.create(dirTmp);
         
-        Path dirWord = inFS.getPath(NcStrFileDir.DIR_WORD.getStr());
-        NcFsIdxOperationDirs.create(dirWord);
+        Path dirWord = inFS.getPath(ZPINcStrFileDir.DIR_WORD.getStr());
+        ZPINcFsIdxOperationDirs.create(dirWord);
         
-        NcParamFs forReturn = new NcParamFs(inFS, 
+        ZPINcParamFs forReturn = new ZPINcParamFs(inFS, 
             dirDirList, 
             dirFileExist, 
             dirFileHash, 
@@ -191,7 +191,7 @@ public class ZPINcFsIdxStorageInit {
     }
 
     protected static Path buildPathToFileOfIdxStorage(){
-        String fileStorageName = NcStrFileDir.FILE_INDEX_CONTAINS.getStr();
+        String fileStorageName = ZPINcStrFileDir.FILE_INDEX_CONTAINS.getStr();
         Path workPath = getWorkDirByRWAccess();
         Path workFilePath = Paths.get(workPath.toString(), fileStorageName);
         workFilePath = workFilePath.normalize().toAbsolutePath();
@@ -199,28 +199,28 @@ public class ZPINcFsIdxStorageInit {
     }
     private static Path getWorkDirByRWAccess() throws RuntimeException{
         try {
-            Path userHomePath = NcFsDefaults.getUserHomePath();
-            if( NcFsIdxOperationDirs.existAndHasAccessRWNotLink(userHomePath) ){
+            Path userHomePath = ZPINcFsDefaults.getUserHomePath();
+            if( ZPINcFsIdxOperationDirs.existAndHasAccessRWNotLink(userHomePath) ){
                 return userHomePath;
             }
         } catch (IOException ex) {
-            NcAppHelper.logException(
-                    NcFsIdxStorageInit.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
         }
         try {
-            Path appPath = NcFsDefaults.getAppPath();
-            if( NcFsIdxOperationDirs.existAndHasAccessRWNotLink(appPath) ){
+            Path appPath = ZPINcFsDefaults.getAppPath();
+            if( ZPINcFsIdxOperationDirs.existAndHasAccessRWNotLink(appPath) ){
                 return appPath;
             }
         } catch (IOException ex) {
-            NcAppHelper.logException(
-                    NcFsIdxStorageInit.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
         }
         String strMsg = "User home and application directories is wrong, "
                 + "for application work need read, write access"
                 + "in not sybolink links dirictories";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR_CRITICAL.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);

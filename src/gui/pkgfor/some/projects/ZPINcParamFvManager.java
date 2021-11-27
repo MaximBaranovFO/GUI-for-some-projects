@@ -32,7 +32,7 @@ public class ZPINcParamFvManager {
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcManageCfg#NcManageCfg() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.NcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.ZPINcParamFv) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#checkInIndexFolderContent() }
      * <li>
@@ -43,7 +43,7 @@ public class ZPINcParamFvManager {
      * @param inWorkCfg
      * @return 
      */
-    protected static boolean isNcParamFvDataEmpty(NcParamFv inWorkCfg){
+    protected static boolean isZPINcParamFvDataEmpty(ZPINcParamFv inWorkCfg){
         return (inWorkCfg.indexPath.length() == 0
         && inWorkCfg.keywordsOutOfSearch.length() == 0
         && inWorkCfg.keywordsInSearch.length() == 0
@@ -59,18 +59,18 @@ public class ZPINcParamFvManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvManager#ncParamFvDataOutPut(ru.newcontrol.ncfv.NcParamFv) }
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvManager#checkToWrite(ru.newcontrol.ncfv.NcParamFv) }
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvManager#checkFromRead(ru.newcontrol.ncfv.NcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvManager#ncParamFvDataOutPut(ru.newcontrol.ncfv.ZPINcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvManager#checkToWrite(ru.newcontrol.ncfv.ZPINcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvManager#checkFromRead(ru.newcontrol.ncfv.ZPINcParamFv) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.NcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.ZPINcParamFv) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.Ncfv#main(java.lang.String[]) }
      * </ul>
      * @param inWorkCfg
      * @return 
      */
-    protected static boolean isNcParamFvDataHashTrue(NcParamFv inWorkCfg){
+    protected static boolean isZPINcParamFvDataHashTrue(ZPINcParamFv inWorkCfg){
         int calcHash = (""
             + inWorkCfg.indexPath
             + inWorkCfg.keywordsOutOfSearch
@@ -86,15 +86,15 @@ public class ZPINcParamFvManager {
         boolean boolCompareResult = inWorkCfg.recordHash == calcHash;
         
         if( !boolCompareResult ){
-            String strOut = NcStrLogMsgField.INFO.getStr()
-                + NcStrServiceMsg.HASH_CALC.getStr()
+            String strOut = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrServiceMsg.HASH_CALC.getStr()
                 + calcHash
-                + NcStrServiceMsg.TAB.getStr()
-                + NcStrServiceMsg.HASH_RECORD.getStr()
+                + ZPINcStrServiceMsg.TAB.getStr()
+                + ZPINcStrServiceMsg.HASH_RECORD.getStr()
                 + inWorkCfg.recordHash
-                + NcStrServiceMsg.TAB.getStr()
-                + NcStrServiceMsg.RESULT.getStr() + boolCompareResult;
-            NcAppHelper.outMessage(strOut);
+                + ZPINcStrServiceMsg.TAB.getStr()
+                + ZPINcStrServiceMsg.RESULT.getStr() + boolCompareResult;
+            ZPINcAppHelper.outMessage(strOut);
         }
         
         
@@ -109,12 +109,12 @@ public class ZPINcParamFvManager {
      * @param fileCfg
      * @return 
      */
-    protected static NcParamFv setFileHashes(NcParamFv inWorkCfg, File fileCfg){
-        String strHexMD5 = NcAppHelper.toHex(NcFileHash.MD5.checksum(fileCfg));
-        String strHexSHA1 = NcAppHelper.toHex(NcFileHash.SHA1.checksum(fileCfg));
-        String strHexSHA256 = NcAppHelper.toHex(NcFileHash.SHA256.checksum(fileCfg));
-        String strHexSHA512 = NcAppHelper.toHex(NcFileHash.SHA512.checksum(fileCfg));
-        NcParamFv forOutParam = new NcParamFv(
+    protected static ZPINcParamFv setFileHashes(ZPINcParamFv inWorkCfg, File fileCfg){
+        String strHexMD5 = ZPINcAppHelper.toHex(ZPINcFileHash.MD5.checksum(fileCfg));
+        String strHexSHA1 = ZPINcAppHelper.toHex(ZPINcFileHash.SHA1.checksum(fileCfg));
+        String strHexSHA256 = ZPINcAppHelper.toHex(ZPINcFileHash.SHA256.checksum(fileCfg));
+        String strHexSHA512 = ZPINcAppHelper.toHex(ZPINcFileHash.SHA512.checksum(fileCfg));
+        ZPINcParamFv forOutParam = new ZPINcParamFv(
             inWorkCfg.indexPath,
             inWorkCfg.keywordsOutOfSearch,
             inWorkCfg.keywordsInSearch,
@@ -133,100 +133,100 @@ public class ZPINcParamFvManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.NcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvWriter#writeDataInWorkCfg(ru.newcontrol.ncfv.ZPINcParamFv) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.Ncfv#main(java.lang.String[]) }
      * </ul>
      * @param inWorkCfg 
      */
-    protected static void ncParamFvDataOutPut(NcParamFv inWorkCfg){
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrServiceMsg.HASH_RECORD_IS.getStr()
-            + isNcParamFvDataHashTrue(inWorkCfg));
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.INDEX_PATH.getStr()
+    protected static void ncParamFvDataOutPut(ZPINcParamFv inWorkCfg){
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrServiceMsg.HASH_RECORD_IS.getStr()
+            + isZPINcParamFvDataHashTrue(inWorkCfg));
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.INDEX_PATH.getStr()
             + inWorkCfg.indexPath);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.KEYWORD_OUT_SEARCH.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.KEYWORD_OUT_SEARCH.getStr()
             + inWorkCfg.keywordsOutOfSearch);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.KEYWORD_IN_SEARCH.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.KEYWORD_IN_SEARCH.getStr()
             + inWorkCfg.keywordsInSearch);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.DIR_OUT_INDEX.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.DIR_OUT_INDEX.getStr()
             + inWorkCfg.dirOutOfIndex);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.DIR_IN_INDEX.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.DIR_IN_INDEX.getStr()
             + inWorkCfg.dirInIndex);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.DISK_USER_ALIAS_SIZE.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.DISK_USER_ALIAS_SIZE.getStr()
             + inWorkCfg.diskUserAlias.size());
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.STR_HEX_MD5.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.STR_HEX_MD5.getStr()
             + inWorkCfg.strHexMD5);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.STR_HEX_SHA1.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.STR_HEX_SHA1.getStr()
             + inWorkCfg.strHexSHA1);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.STR_HEX_SHA256.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.STR_HEX_SHA256.getStr()
             + inWorkCfg.strHexSHA256);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.STR_HEX_SHA512.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.STR_HEX_SHA512.getStr()
             + inWorkCfg.strHexSHA512);
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.TM_INDEX_SUBDIRS.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.TM_INDEX_SUBDIRS.getStr()
             + inWorkCfg.tmIndexSubDirs.size());
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.NCPARAMFV.getStr()
-            + NcStrVarDescription.RECORD_TIME.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.NCPARAMFV.getStr()
+            + ZPINcStrVarDescription.RECORD_TIME.getStr()
             + inWorkCfg.recordTime);
     }
     /**
      * Not used
      * @param inWorkCfg 
      */
-    private static void checkToWrite(NcParamFv inWorkCfg){
-        boolean isHash = isNcParamFvDataHashTrue(inWorkCfg);
-        String strLvl = NcStrLogMsgField.INFO.getStr();
+    private static void checkToWrite(ZPINcParamFv inWorkCfg){
+        boolean isHash = isZPINcParamFvDataHashTrue(inWorkCfg);
+        String strLvl = ZPINcStrLogMsgField.INFO.getStr();
         if( !isHash ){
-            strLvl = NcStrLogMsgField.ERROR.getStr();
+            strLvl = ZPINcStrLogMsgField.ERROR.getStr();
         }
-        NcAppHelper.outMessage(strLvl
-        + NcStrLogMsgField.CHECK_RESULT.getStr()
-        + NcStrServiceMsg.WORK_CFG_HASH.getStr()
-        + NcStrServiceMsg.FOR_WRITE.getStr()
+        ZPINcAppHelper.outMessage(strLvl
+        + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+        + ZPINcStrServiceMsg.WORK_CFG_HASH.getStr()
+        + ZPINcStrServiceMsg.FOR_WRITE.getStr()
         + isHash);
         
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamFvReader#readDataFromWorkCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamFvReader#readDataFromWorkCfg() }
      * </ul>
      * @param inWorkCfg 
      */
-    protected static void checkFromRead(NcParamFv inWorkCfg){
-        boolean isHash = isNcParamFvDataHashTrue(inWorkCfg);
-        String strLvl = NcStrLogMsgField.INFO.getStr();
+    protected static void checkFromRead(ZPINcParamFv inWorkCfg){
+        boolean isHash = isZPINcParamFvDataHashTrue(inWorkCfg);
+        String strLvl = ZPINcStrLogMsgField.INFO.getStr();
         if( !isHash ){
-            strLvl = NcStrLogMsgField.ERROR.getStr();
+            strLvl = ZPINcStrLogMsgField.ERROR.getStr();
         }
-        NcAppHelper.outMessage(strLvl
-        + NcStrLogMsgField.CHECK_RESULT.getStr()
-        + NcStrServiceMsg.WORK_CFG_HASH.getStr()
-        + NcStrServiceMsg.FROM_READ.getStr()
+        ZPINcAppHelper.outMessage(strLvl
+        + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+        + ZPINcStrServiceMsg.WORK_CFG_HASH.getStr()
+        + ZPINcStrServiceMsg.FROM_READ.getStr()
         + isHash);
     }
 }

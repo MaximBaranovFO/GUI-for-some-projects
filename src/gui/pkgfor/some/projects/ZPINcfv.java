@@ -102,17 +102,17 @@ public class ZPINcfv {
         thIndexRule.setAdilRule(loggerRule);
         ZPIAdilState loggerState = new ZPIAdilState(loggerRule);
         loggerState.setTrueLogWithTrace();
-        loggerRule.setAdilState(loggerState);
+        loggerRule.setZPIAdilState(loggerState);
         ZPIAdilWorkerWrite loggerWorker = new ZPIAdilWorkerWrite(loggerRule);
         loggerRule.setAdilWorkWrite(loggerWorker);
         
         ZPIAdimRule ruleAdim = new ZPIAdimRule();
-        ruleAdim.setAdilRule(loggerRule);
+        ruleAdim.setZPIAdilRule(loggerRule);
         
         ZPIAdibProcessCommand processCommandAdim = new ZPIAdibProcessCommand();
-        ruleAdim.setAdibProcessCommand(processCommandAdim);
+        ruleAdim.setZPIAdibProcessCommand(processCommandAdim);
         ZPIAdifControlFlag controlFlag = new ZPIAdifControlFlag(15, ruleAdim);
-        ruleAdim.setAdifControlFlag(controlFlag);
+        ruleAdim.setZPIAdifControlFlag(controlFlag);
         
         processCommandAdim.commandPut(0, 1, 0);
         
@@ -194,7 +194,7 @@ public class ZPINcfv {
         ZPIAdilRule loggerRule = new ZPIAdilRule(thIndexRule);
         thIndexRule.setAdilRule(loggerRule);
         ZPIAdilState loggerState = new ZPIAdilState(loggerRule);
-        loggerRule.setAdilState(loggerState);
+        loggerRule.setZPIAdilState(loggerState);
         ZPIAdilWorkerWrite loggerWorker = new ZPIAdilWorkerWrite(loggerRule);
         loggerRule.setAdilWorkWrite(loggerWorker);
         
@@ -204,7 +204,7 @@ public class ZPINcfv {
         ZPIThIndexDirList thIndexDirList = new ZPIThIndexDirList(thIndexRule);
         ZPIThIndexWord thIndexWord = new ZPIThIndexWord(thIndexRule);
         ZPIThIndexFileList thIndexFileList = new ZPIThIndexFileList(thIndexRule);
-        ThIndexStorageWord thIndexStorageWord = new ThIndexStorageWord(thIndexRule);
+        ZPIThIndexStorageWord thIndexStorageWord = new ZPIThIndexStorageWord(thIndexRule);
         
         ZPIThIndexStatistic thIndexStatistic = new ZPIThIndexStatistic(thIndexRule);
         thIndexRule.setIndexStatistic(thIndexStatistic);
@@ -506,7 +506,7 @@ public class ZPINcfv {
                         }
                         ZPINcParamFvManager.ncParamFvDataOutPut(appWorkCfg);
                         ZPINcAppHelper.outMessageToConsole("Start make index for: " + strPath + " ... wait for end of process");
-                        ZPINcIndexPreProcessFiles ncIdxPreReturn = new NcIndexPreProcessFiles();
+                        ZPINcIndexPreProcessFiles ncIdxPreReturn = new ZPINcIndexPreProcessFiles();
                         long count = ncIdxPreReturn.makeIndexRecursive(new File(strPath));
                         ZPINcAppHelper.outMessageToConsole("For directory: " + strPath + " create " + count + " records in index");
                     }

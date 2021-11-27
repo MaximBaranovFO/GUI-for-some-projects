@@ -213,7 +213,7 @@ public class ZPIThIndexRule {
         }
         return this.loggerRule;
     }
-    protected void setZPIAdilRule(final ZPIAdilRule loggerZPIAdilRuleOuter){
+    protected void setAdilRule(final ZPIAdilRule loggerZPIAdilRuleOuter){
         this.loggerRule = loggerZPIAdilRuleOuter;
         setTrueZPIAdilRule();
     }

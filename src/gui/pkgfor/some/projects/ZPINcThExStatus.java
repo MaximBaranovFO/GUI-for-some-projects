@@ -35,21 +35,21 @@ public class ZPINcThExStatus {
     private boolean fairQueue;
     private int lengthQueue;
     private Path dirForScan;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirWalker;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> fromPipeDirWalker;
-    //private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, NcDataListAttr>> packPipeDirWalker;
-    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> packDirList;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirWalker;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> fromPipeDirWalker;
+    //private ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> packPipeDirWalker;
+    private ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> packDirList;
     private Map<String,String> threadStatus;
     
-    private NcThMifRunDirList runDirList;
-    private NcThMifTakeDirList takeDirList;
-    private NcThMifPackDirList packerDirList;
+    private ZPINcThMifRunDirList runDirList;
+    private ZPINcThMifTakeDirList takeDirList;
+    private ZPINcThMifPackDirList packerDirList;
     
     
 
     public ZPINcThExStatus(Path inputDirForScan) throws IOException {
         this.typeObject = "[THREADSTATUS]" + this.toString();
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
         this.lockFromPipeDirWalker = new ReentrantLock(Boolean.TRUE);
         this.lockPackPipeDirWalker = new ReentrantLock(Boolean.TRUE);
         this.fairQueue = Boolean.TRUE;
@@ -59,20 +59,20 @@ public class ZPINcThExStatus {
         //pipeDirWalker = new ThreadLocal<>();
         //fromPipeDirWalker = new ThreadLocal<>();
         
-        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> tArr;
-        tArr = new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>>(this.lengthQueue, this.fairQueue);
+        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> tArr;
+        tArr = new ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>>(this.lengthQueue, this.fairQueue);
         
         this.pipeDirWalker = tArr;
         
-        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> fromPipeList;
+        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> fromPipeList;
         fromPipeList = new ArrayBlockingQueue<>(this.lengthQueue, this.fairQueue);
         this.fromPipeDirWalker = fromPipeList;
         
-        //ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, NcDataListAttr>> forPackPipeList;
-        //forPackPipeList = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, NcDataListAttr>>();
+        //ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> forPackPipeList;
+        //forPackPipeList = new ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>>();
         //this.packPipeDirWalker = forPackPipeList;
         
-        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pArr;
+        ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pArr;
         pArr = new ArrayBlockingQueue<>(this.lengthQueue, this.fairQueue);
         this.packDirList = pArr;
         
@@ -80,34 +80,34 @@ public class ZPINcThExStatus {
             this.dirForScan = inputDirForScan;
         }
         else{
-            this.dirForScan = NcFsDefaults.getHomeOrAppOrRootStorage();
+            this.dirForScan = ZPINcFsDefaults.getHomeOrAppOrRootStorage();
         }
         checkScanPath();
         verifyScanPath();
         
     }
-    protected NcThMifExecPool initJobParam(){
+    protected ZPINcThMifExecPool initJobParam(){
         String typeThread = "[EXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(typeThread, this.getClass());
-        return new NcThMifExecPool();
+        ZPINcAppHelper.outCreateObjectMessage(typeThread, this.getClass());
+        return new ZPINcThMifExecPool();
     }
     private void checkScanPath() throws IOException{
         Path inputedPath = dirForScan;
         if ( inputedPath == null ){
-            String strAddMsg = NcStrLogMsgField.MSG_ERROR.getStr()
+            String strAddMsg = ZPINcStrLogMsgField.MSG_ERROR.getStr()
                     + " wrong path for scan "
-                    + NcStrLogMsgField.VALUE.getStr()
+                    + ZPINcStrLogMsgField.VALUE.getStr()
                     + inputedPath.toString();
-            NcAppHelper.outMessage(strAddMsg);
+            ZPINcAppHelper.outMessage(strAddMsg);
             throw new IOException(strAddMsg);
         }
     }
     private void verifyScanPath() throws IOException{
         Path pathToStart = Paths.get(dirForScan.toString());
         try{
-            pathToStart = NcFsIdxOperationDirs.checkScanPath(pathToStart);
+            pathToStart = ZPINcFsIdxOperationDirs.checkScanPath(pathToStart);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcThExStatus.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThExStatus.class.getCanonicalName(), ex);
             throw new IOException(ex);
         }
     }
@@ -116,11 +116,11 @@ public class ZPINcThExStatus {
     }
     
     
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getPipeDirList(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getPipeDirList(){
         return this.pipeDirWalker;
     }
     
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getFromPipeDirWalker(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getFromPipeDirWalker(){
         return this.fromPipeDirWalker;
     }
     
@@ -128,13 +128,13 @@ public class ZPINcThExStatus {
         return this.lockFromPipeDirWalker;
     }
     
-    /*protected ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, NcDataListAttr>> getPackPipeDirWalker(){
+    /*protected ConcurrentSkipListMap<UUID, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getPackPipeDirWalker(){
         return this.packPipeDirWalker;
     }*/
     protected ReentrantLock getLockPackPipeDirWalker(){
         return this.lockPackPipeDirWalker;
     }
-    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getPackDirList(){
+    protected ArrayBlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getPackDirList(){
         return this.packDirList;
     }
     
@@ -145,7 +145,7 @@ public class ZPINcThExStatus {
         }
         return staterunDirList;
     }
-    protected void setRunner(NcThMifRunDirList outerRunDirList){
+    protected void setRunner(ZPINcThMifRunDirList outerRunDirList){
         this.runDirList =  outerRunDirList;
     }
     
@@ -159,7 +159,7 @@ public class ZPINcThExStatus {
         return statetakeDirList;
         
     }
-    protected void setTacker(NcThMifTakeDirList outerTakeDirList){
+    protected void setTacker(ZPINcThMifTakeDirList outerTakeDirList){
         this.takeDirList =  outerTakeDirList;
     }
     
@@ -171,7 +171,7 @@ public class ZPINcThExStatus {
 
         return statepackerDirList;
     }
-    protected void setPacker(NcThMifPackDirList outerPackerDirList){
+    protected void setPacker(ZPINcThMifPackDirList outerPackerDirList){
         this.packerDirList =  outerPackerDirList;
     }
 }

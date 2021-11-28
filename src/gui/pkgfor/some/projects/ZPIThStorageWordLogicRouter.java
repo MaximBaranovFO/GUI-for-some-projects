@@ -38,17 +38,17 @@ public class ZPIThStorageWordLogicRouter {
     protected void doRouterForIndexStorageWord(final ZPIThStorageWordRule outerRuleStorageWord){
         final ZPIThStorageWordRule funcRuleStorageWord = (ZPIThStorageWordRule) outerRuleStorageWord;
         
-        AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
-        AdilState adilState = adilRule.getAdilState();
+        ZPIAdilRule adilRule = outerRuleStorageWord.getIndexRule().getZPIAdilRule();
+        ZPIAdilState adilState = adilRule.getZPIAdilState();
         Integer numberProcessIndexSystem = 7;
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
                 + ZPIThStorageWordLogicRouter.class.getCanonicalName()
-                + AdilConstants.METHOD
+                + ZPIAdilConstants.METHOD
                 + "doRouterForIndexStorageWord()";
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
         
         ZPIThIndexRule indexRule = funcRuleStorageWord.getIndexRule();
         ZPIThIndexStatistic indexStatistic = indexRule.getIndexStatistic();
@@ -92,18 +92,18 @@ public class ZPIThStorageWordLogicRouter {
                                 + removedSubString);*/
                         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "busNumber"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(busNumber)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "keyHexTagName"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + keyHexTagName
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "removedSubString"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + removedSubString
                         );
                         adilRule.runAdilWorkWrite();
@@ -200,7 +200,7 @@ public class ZPIThStorageWordLogicRouter {
         System.out.println("++++++++++++++++++++++++++++++stop " + ZPIThStorageWordLogicRouter.class.getCanonicalName());
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
     }
     /**
      * 
@@ -677,10 +677,10 @@ public class ZPIThStorageWordLogicRouter {
             
             
             storageWordFileNameSrc = new String()
-                    .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                    .concat(fileDataListPrefix.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                    .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                    .concat(fileDataListPrefix.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                     .concat(String.valueOf(countFsCountRecordsSrc))
-                    .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                    .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                     .concat(String.valueOf(countFsVolumeNumberSrc));
             /**
              * @todo isOnFileSystem exist data
@@ -690,10 +690,10 @@ public class ZPIThStorageWordLogicRouter {
             String namesFsFileNameSrc = getNamesFsFileNameSrc.toString();
             
             String storageWordFileNameDestMoveTo = new String()
-                    .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                    .concat(fileDataListPrefix.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                    .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                    .concat(fileDataListPrefix.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                     .concat(String.valueOf(countFsCountRecordsDestMoveTo))
-                    .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                    .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                     .concat(String.valueOf(countFsVolumeNumberDestMoveTo));
             Path getNamesFsFileNameDestMoveTo = Paths.get(buildTypeWordStoreSubDirictoriesFunc, storageWordFileNameDestMoveTo);
             namesFsFileNameDestMoveTo = getNamesFsFileNameDestMoveTo.toString();
@@ -724,8 +724,8 @@ public class ZPIThStorageWordLogicRouter {
             Integer countTmpCurrentInCache = 0;
             Integer countTmpCurrentInCacheReaded = 0;
             
-            Integer countTmpAddNeedToFileSystemLimit = AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT - countFsCountRecordsDestMoveTo;
-            Integer countTmpIndexSystemLimitOnStorage = AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT;
+            Integer countTmpAddNeedToFileSystemLimit = ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT - countFsCountRecordsDestMoveTo;
+            Integer countTmpIndexSystemLimitOnStorage = ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT;
             
             keyFlowStatusDataCache = UUID.randomUUID();
             keysPointsFlow.put("ThStorageWordStatusDataCache".hashCode(), keyFlowStatusDataCache);

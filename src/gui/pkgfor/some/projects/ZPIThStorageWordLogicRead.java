@@ -41,19 +41,19 @@ public class ZPIThStorageWordLogicRead {
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
         ZPIThStorageWordRule funcRuleStorageWord;
-        AppFileStorageIndex currentIndexStorages;
+        ZPIAppFileStorageIndex currentIndexStorages;
         try{
-            AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = outerRuleStorageWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 8;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThStorageWordLogicRead.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "doReadFromIndexStorageWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             
             long counIterations = 0;
             /**
@@ -68,25 +68,25 @@ public class ZPIThStorageWordLogicRead {
             //indexStatistic.updateDataStorages();
             
             currentIndexStorages = funcRuleStorageWord.getIndexRule().getIndexState().currentIndexStorages();
-            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
+            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
             Map<String, String> byPrefixGetMap;
             byPrefixGetMap = currentIndexStorages.byPrefixGetMap( 
-                    AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
+                    ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
             for( Map.Entry<String, String> itemByPrefixGetMap : byPrefixGetMap.entrySet() ){
                 adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.STATE
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.STATE
+                    + ZPIAdilConstants.VARNAME
                     + "byPrefixGetUri.toString()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + byPrefixGetUri.toString()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getKey()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getKey()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getValue()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getValue()
                 );
             }
@@ -355,14 +355,14 @@ public class ZPIThStorageWordLogicRead {
                                                             mainFlowLabel);
                                                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                                                     msgToLog
-                                                        + AdilConstants.STATE
-                                                        + AdilConstants.VARNAME
+                                                        + ZPIAdilConstants.STATE
+                                                        + ZPIAdilConstants.VARNAME
                                                         + "forReadFileName.toUri().toString()"
-                                                        + AdilConstants.VARVAL
+                                                        + ZPIAdilConstants.VARVAL
                                                         + forReadFileName.toUri().toString()
-                                                        + AdilConstants.VARNAME
+                                                        + ZPIAdilConstants.VARNAME
                                                         + "readedFormData.size()"
-                                                        + AdilConstants.VARVAL
+                                                        + ZPIAdilConstants.VARVAL
                                                         + String.valueOf(readedFormData.size())
                                                     );
                                                     ConcurrentHashMap<String, String> remove = busVal.getValue().remove(mainFlowLabel);
@@ -415,11 +415,11 @@ public class ZPIThStorageWordLogicRead {
                     ex.printStackTrace();
                     }
                     try{
-                    Path mvOldDir = fsForReadData.getPath(AppFileNamesConstants.DIR_INDEX_OLD_DATA);
+                    Path mvOldDir = fsForReadData.getPath(ZPIAppFileNamesConstants.DIR_INDEX_OLD_DATA);
                     if( Files.notExists(mvOldDir) ){
                     Files.createDirectories(mvOldDir);
                     }
-                    Path forNewMove = fsForReadData.getPath(AppFileNamesConstants.DIR_INDEX_OLD_DATA
+                    Path forNewMove = fsForReadData.getPath(ZPIAppFileNamesConstants.DIR_INDEX_OLD_DATA
                     ,writerPath + "-"
                     + AppFileOperationsSimple.getNowTimeStringWithMS()
                     + "-"
@@ -483,7 +483,7 @@ public class ZPIThStorageWordLogicRead {
         }
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         
         } finally {
             

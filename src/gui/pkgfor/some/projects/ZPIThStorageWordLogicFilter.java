@@ -28,17 +28,17 @@ import java.util.concurrent.LinkedTransferQueue;
  */
 public class ZPIThStorageWordLogicFilter {
     protected static void doFilterForIndexStorageWord(final ZPIThStorageWordRule outerRuleStorageWord){
-        AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
-        AdilState adilState = adilRule.getAdilState();
+        ZPIAdilRule adilRule = outerRuleStorageWord.getIndexRule().getZPIAdilRule();
+        ZPIAdilState adilState = adilRule.getZPIAdilState();
         Integer numberProcessIndexSystem = 6;
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
                 + ZPIThStorageWordLogicFilter.class.getCanonicalName()
-                + AdilConstants.METHOD
+                + ZPIAdilConstants.METHOD
                 + "doFilterForIndexStorageWord()";
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
         //bus from FileListBusToNext throw NullPointerException
         ZPIThIndexRule indexRule = outerRuleStorageWord.getIndexRule();
         ZPIThIndexState indexState = indexRule.getIndexState();
@@ -61,7 +61,7 @@ public class ZPIThStorageWordLogicFilter {
 
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
 
     }
     /**

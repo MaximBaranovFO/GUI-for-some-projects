@@ -43,7 +43,7 @@ public class ZPIThStorageWordHelperFileSystem {
         Path toReturnSubDirictoriesName;
         try {
             toReturnSubDirictoriesName = Paths.get(
-                    AppFileNamesConstants.DIR_IDX_ROOT, 
+                    ZPIAppFileNamesConstants.DIR_IDX_ROOT, 
                     String.valueOf(inputCodePoinType), 
                     partHexTagName, String.valueOf(lengSubString));
             return toReturnSubDirictoriesName.toString();

@@ -43,19 +43,19 @@ public class ZPIThStorageWordLogicWrite {
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
         ZPIThStorageWordRule funcRuleStorageWord;
-        AppFileStorageIndex currentIndexStorages;
+        ZPIAppFileStorageIndex currentIndexStorages;
         try{
-            AdilRule adilRule = outerRuleStorageWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = outerRuleStorageWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 9;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThStorageWordLogicWrite.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "doWriteToIndexStorageWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             long counIterations = 0;
             /**
              * @todo
@@ -68,24 +68,24 @@ public class ZPIThStorageWordLogicWrite {
             //indexStatistic = indexRule.getIndexStatistic();
             //indexStatistic.updateDataStorages();
             currentIndexStorages = funcRuleStorageWord.getIndexRule().getIndexState().currentIndexStorages();
-            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
+            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
             Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(
-                    AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD); 
+                    ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD); 
             for( Map.Entry<String, String> itemByPrefixGetMap : byPrefixGetMap.entrySet() ){
                 adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.STATE
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.STATE
+                    + ZPIAdilConstants.VARNAME
                     + "byPrefixGetUri.toString()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + byPrefixGetUri.toString()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getKey()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getKey()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getValue()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getValue()
                 );
             }
@@ -348,10 +348,10 @@ public class ZPIThStorageWordLogicWrite {
                                         //currentFileName - 1517772480
                                         //String currentFileName = statusNameForKeyPointFlow.get(1517772480);
                                         String currentFileName = new String()
-                                            .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                                            .concat(prefixFileName.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                                            .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                                            .concat(prefixFileName.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                                             .concat(String.valueOf(sizeDataSrc))
-                                            .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                                            .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                                             .concat(String.valueOf(volNum));
                                         //newFileName - 521024487
                                         //String newFileName = statusNameForKeyPointFlow.get(521024487);
@@ -377,15 +377,15 @@ public class ZPIThStorageWordLogicWrite {
                                             continue;
                                         }
                                         Boolean isDataToVol = Boolean.FALSE;
-                                        if( pollTypeWordTagFileNameData.size() > AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ){
+                                        if( pollTypeWordTagFileNameData.size() > ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ){
                                             isDataToVol = Boolean.TRUE;
                                         }
                                         sizeDataDest = pollTypeWordTagFileNameData.size();
                                         String newFileName = new String()
-                                            .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                                            .concat(prefixFileName.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                                            .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                                            .concat(prefixFileName.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                                             .concat(String.valueOf(sizeDataDest))
-                                            .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                                            .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                                             .concat(String.valueOf(volNum));
                                         /**
                                          * if size > limit pack data, write, and write new vol
@@ -419,14 +419,14 @@ public class ZPIThStorageWordLogicWrite {
                                                         + " writed size " + pollTypeWordTagFileNameData.size());*/
                                                 adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                                                     msgToLog
-                                                    + AdilConstants.STATE
-                                                    + AdilConstants.VARNAME
+                                                    + ZPIAdilConstants.STATE
+                                                    + ZPIAdilConstants.VARNAME
                                                     + "nowWritedFile.toUri().toString()"
-                                                    + AdilConstants.VARVAL
+                                                    + ZPIAdilConstants.VARVAL
                                                     + nowWritedFile.toUri().toString()
-                                                    + AdilConstants.VARNAME
+                                                    + ZPIAdilConstants.VARNAME
                                                     + "pollTypeWordTagFileNameData.size()"
-                                                    + AdilConstants.VARVAL
+                                                    + ZPIAdilConstants.VARVAL
                                                     + pollTypeWordTagFileNameData.size()
                                                 );
                                                 statusWorkersForKeyPointFlow.put(1640531930, Boolean.TRUE);
@@ -502,20 +502,20 @@ public class ZPIThStorageWordLogicWrite {
                                                         packetForWriteData.put(keyItem, valItem);
                                                     
                                                         sizeDataDest = packetForWriteData.size();
-                                                        if( ( sizeDataDest == AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ) || ( pollTypeWordTagFileNameData.isEmpty() ) ){
+                                                        if( ( sizeDataDest == ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT ) || ( pollTypeWordTagFileNameData.isEmpty() ) ){
                                                             currentFileName = new String()
-                                                                .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                                                                .concat(prefixFileName.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                                                                .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                                                                .concat(prefixFileName.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                                                                 .concat(String.valueOf(0))
-                                                                .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                                                                .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                                                                 .concat(String.valueOf(volNum));
                                                             //newFileName - 521024487
                                                             //String newFileName = statusNameForKeyPointFlow.get(521024487);
                                                             newFileName = new String()
-                                                                .concat(AppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
-                                                                .concat(prefixFileName.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                                                                .concat(ZPIAppFileNamesConstants.SZFS_STORAGE_WORD_FILE_PREFIX)
+                                                                .concat(prefixFileName.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                                                                 .concat(String.valueOf(sizeDataDest))
-                                                                .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                                                                .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                                                                 .concat(String.valueOf(volNum));
 
                                                             Path nowWritedFile = fsForWriteData.getPath(storageDirectoryName, currentFileName);
@@ -672,7 +672,7 @@ public class ZPIThStorageWordLogicWrite {
         }
         adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         
         } finally {
             
@@ -834,7 +834,7 @@ public class ZPIThStorageWordLogicWrite {
                                     new ConcurrentSkipListMap<UUID, TdataWord>();
                             writerData.putAll(jobForWrite.getWriterData());
                             writerPath = indexStatistic.createNewNameForWriteWithAllAddRecords(
-                                    AppFileNamesConstants.FILE_INDEX_PREFIX_WORD, 
+                                    ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD, 
                                     writerPath, 
                                     writerData);
                             
@@ -849,7 +849,7 @@ public class ZPIThStorageWordLogicWrite {
                                         + nowWritedFile.toUri().toString() 
                                         + " writed size " + writerData.size());
                                 indexStatistic.addToListSizeRemoveListProcess(
-                                            AppFileNamesConstants.FILE_INDEX_PREFIX_WORD, 
+                                            ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD, 
                                             nowWritedFile);
                             } catch(Exception ex){
                                 ex.printStackTrace();

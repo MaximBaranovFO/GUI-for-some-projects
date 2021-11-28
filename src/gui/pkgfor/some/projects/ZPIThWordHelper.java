@@ -40,7 +40,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPIThWordHelper {
-    private static String storagePrefix = AppFileNamesConstants.SZFS_WORD_FILE_PREFIX;
+    private static String storagePrefix = ZPIAppFileNamesConstants.SZFS_WORD_FILE_PREFIX;
     /**
      * create strinc for directory by typeWord
      * buildName for word Store in format:
@@ -71,7 +71,7 @@ public class ZPIThWordHelper {
         Path toReturnSubDirictoriesName;
         try {
             toReturnSubDirictoriesName = Paths.get(
-                    AppFileNamesConstants.DIR_IDX_ROOT, 
+                    ZPIAppFileNamesConstants.DIR_IDX_ROOT, 
                     String.valueOf(inputCodePointType), 
                     partHexTagName, String.valueOf(lengSubString));
             return toReturnSubDirictoriesName.toString();
@@ -101,9 +101,9 @@ public class ZPIThWordHelper {
             volumeNumberFunc = (Integer) volumeNumberInputed;
             buildedFileName = new String()
                 .concat(getStoragePrefix())
-                .concat(namePrefixFunc.concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
+                .concat(namePrefixFunc.concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR))
                 .concat(String.valueOf(recordsCountFunc))
-                .concat(AppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
+                .concat(ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR)
                 .concat(String.valueOf(volumeNumberFunc));
             return buildedFileName;
         } finally {

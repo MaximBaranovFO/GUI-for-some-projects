@@ -32,13 +32,13 @@ import java.util.TreeMap;
  *
  * @author Администратор
  */
-public class ZPIZPINcPreRunFileViewer {
+public class ZPINcPreRunFileViewer {
     
     
     /**
      * Not used
      */
-    protected ZPIZPINcPreRunFileViewer() {
+    protected ZPINcPreRunFileViewer() {
         
     }
 
@@ -74,10 +74,10 @@ public class ZPIZPINcPreRunFileViewer {
         boolean boolSHA512 = false;
         
         if( fileCfg.exists() && ( !ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ) ){
-                boolMD5 = readedWorkCfg.strHexMD5.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.MD5.checksum(fileCfg)));
-                boolSHA1 = readedWorkCfg.strHexSHA1.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA1.checksum(fileCfg)));
-                boolSHA256 = readedWorkCfg.strHexSHA256.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA256.checksum(fileCfg)));
-                boolSHA512 = readedWorkCfg.strHexSHA512.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA512.checksum(fileCfg)));
+                boolMD5 = readedWorkCfg.strHexMD5.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.MD5.checksum(fileCfg)));
+                boolSHA1 = readedWorkCfg.strHexSHA1.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.SHA1.checksum(fileCfg)));
+                boolSHA256 = readedWorkCfg.strHexSHA256.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.SHA256.checksum(fileCfg)));
+                boolSHA512 = readedWorkCfg.strHexSHA512.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.SHA512.checksum(fileCfg)));
         }
         if( (!boolMD5) && (!boolSHA1) && (!boolSHA256) && (!boolSHA512) ){
             readedWorkCfg = getUpdatedAppCfg();
@@ -88,7 +88,7 @@ public class ZPIZPINcPreRunFileViewer {
                 ZPINcAppHelper.appExitWithMessage("Can't get for current work config, error");
             }
         }
-        ZPINcLogLogicCfg.ZPINcPreRunFileViewerGetCurrentWorkCfg();
+        ZPINcLogLogicCfg.NcPreRunFileViewerGetCurrentWorkCfg();
         
         return readedWorkCfg;
     }
@@ -248,7 +248,7 @@ public class ZPIZPINcPreRunFileViewer {
                 "",
                 ZPINcIdxFileManager.getIndexSubDirectories(strPotWorkDir)
         );
-        ZPINcLogLogicCfg.ZPINcPreRunFileViewerValidateAndApplyCfg();
+        ZPINcLogLogicCfg.NcPreRunFileViewerValidateAndApplyCfg();
         return outFuncWorkCfg;
     }
 

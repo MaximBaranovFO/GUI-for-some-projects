@@ -25,7 +25,7 @@ public class ZPIAppLoggerCreationHtmlLog extends Thread{
     }
     @Override
     public void run(){
-        AppObjectsInfo.dumpAllStackToHtmlProcess();
+        ZPIAppObjectsInfo.dumpAllStackToHtmlProcess();
         //AppObjectsInfo.dumpAllStackToHtmlProcessForManyRun();
     }
 }

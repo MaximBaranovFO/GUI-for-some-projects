@@ -44,7 +44,7 @@ public class ZPIAppLoggerFromHTMLRunnable implements Runnable {
         this.jobIsDone = Boolean.FALSE;
         this.listForLogStrings = listForLogStrs;
         this.logFile = readedLogFile;
-        String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+        String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
         System.out.println("*** *** *** *** *** create log reader *** *** *** *** ***" + threadInfoToString);
     }
     

@@ -32,18 +32,18 @@ public class ZPINcParamFvWriter {
      * @param paramInFuncToWriteCfg
      * @return
      */
-    protected static boolean writeDataInWorkCfg(NcParamFv paramInFuncToWriteCfg){
-        String strDataInAppDir = NcIdxFileManager.getWorkCfgPath();
+    protected static boolean writeDataInWorkCfg(ZPINcParamFv paramInFuncToWriteCfg){
+        String strDataInAppDir = ZPINcIdxFileManager.getWorkCfgPath();
         if( strDataInAppDir.length() < 1 ){
             return false;
         }
-        if( NcParamFvManager.isNcParamFvDataEmpty(paramInFuncToWriteCfg)
+        if( ZPINcParamFvManager.isNcParamFvDataEmpty(paramInFuncToWriteCfg)
                 || paramInFuncToWriteCfg == null ){
             return false;
         }
-        boolean isHash = NcParamFvManager.isNcParamFvDataHashTrue(paramInFuncToWriteCfg);
+        boolean isHash = ZPINcParamFvManager.isNcParamFvDataHashTrue(paramInFuncToWriteCfg);
         if( !isHash ){
-            NcParamFvManager.ncParamFvDataOutPut(paramInFuncToWriteCfg);
+            ZPINcParamFvManager.ncParamFvDataOutPut(paramInFuncToWriteCfg);
             return false;
         }
         try(ObjectOutputStream oos = 
@@ -53,8 +53,8 @@ public class ZPINcParamFvWriter {
             oos.writeObject(paramInFuncToWriteCfg);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcPreRunFileViewer.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcPreRunFileViewer.class.getCanonicalName(), ex);
             return false;
         } 
         return true;

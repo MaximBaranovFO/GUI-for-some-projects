@@ -31,43 +31,43 @@ public class ZPINcParamFvReader {
      * <li>{@link ru.newcontrol.ncfv.NcEtcKeyWordListManager#getKeyWordInSearchFromFile() }
      * <li>{@link ru.newcontrol.ncfv.NcEtcKeyWordListManager#getKeyWordOutSearchFromFile() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getIndexWorkSubDirFilesList() }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getTmpIdsFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getIndexWorkSubDirFilesList() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getTmpIdsFile() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#checkInIndexFolderContent() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getCurrentWorkCfg() }
      * </ul>
      * Read data from serializable 
-     * {@link ru.newcontrol.ncfv.NcParamFv}
+     * {@link ru.newcontrol.ncfv.ZPINcParamFv}
      * saved on the disk in *.dat file
      * and return
      * @return empty object if it not read or not set before
      */
-    protected static NcParamFv readDataFromWorkCfg(){
-        NcParamFv readedDiskInfo;
-        String strDataInAppDir = NcIdxFileManager.getWorkCfgPath();
+    protected static ZPINcParamFv readDataFromWorkCfg(){
+        ZPINcParamFv readedDiskInfo;
+        String strDataInAppDir = ZPINcIdxFileManager.getWorkCfgPath();
         if( strDataInAppDir.length() < 1 ){
-            NcLogLogicCfg.NcParamFvReaderReadDataGenerate();
-            return new NcParamFv();
+            ZPINcLogLogicCfg.NcParamFvReaderReadDataGenerate();
+            return new ZPINcParamFv();
         }
         File fileJornalDisk = new File(strDataInAppDir);
-        if( !NcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
-            NcLogLogicCfg.NcParamFvReaderReadDataGenerate();
-            return new NcParamFv();
+        if( !ZPINcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
+            ZPINcLogLogicCfg.NcParamFvReaderReadDataGenerate();
+            return new ZPINcParamFv();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strDataInAppDir)))
         {
-            readedDiskInfo = (NcParamFv)ois.readObject();
-            NcParamFvManager.checkFromRead(readedDiskInfo);
+            readedDiskInfo = (ZPINcParamFv)ois.readObject();
+            ZPINcParamFvManager.checkFromRead(readedDiskInfo);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcPreRunFileViewer.class.getCanonicalName(), ex);
-            NcLogLogicCfg.NcParamFvReaderReadDataGenerate();
-            return new NcParamFv();
+            ZPINcAppHelper.logException(
+                    ZPINcPreRunFileViewer.class.getCanonicalName(), ex);
+            ZPINcLogLogicCfg.NcParamFvReaderReadDataGenerate();
+            return new ZPINcParamFv();
         }
-        NcLogLogicCfg.NcParamFvReaderReadDataRead();
+        ZPINcLogLogicCfg.NcParamFvReaderReadDataRead();
         return readedDiskInfo;
     }
 

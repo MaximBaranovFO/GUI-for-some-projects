@@ -22,8 +22,8 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerBusJob {
-    private ArrayBlockingQueue<AppLoggerStateReader> listJobForReaderRunnable;
-    private ArrayBlockingQueue<AppLoggerStateWriter> listJobForWriterRunnable;
+    private ArrayBlockingQueue<ZPIAppLoggerStateReader> listJobForReaderRunnable;
+    private ArrayBlockingQueue<ZPIAppLoggerStateWriter> listJobForWriterRunnable;
     
     private int countOfJobForReaderQueueCapacityChange;
     private int countOfJobForWriterQueueCapacityChange;
@@ -31,8 +31,8 @@ public class ZPIAppLoggerBusJob {
     //@todo job for status done deleter need create
     
     public ZPIAppLoggerBusJob() {
-        this.listJobForReaderRunnable = new ArrayBlockingQueue<AppLoggerStateReader>(AppConstants.LOG_HTML_JOB_QUEUE_SIZE);
-        this.listJobForWriterRunnable = new ArrayBlockingQueue<AppLoggerStateWriter>(AppConstants.LOG_HTML_JOB_QUEUE_SIZE);
+        this.listJobForReaderRunnable = new ArrayBlockingQueue<ZPIAppLoggerStateReader>(ZPIAppConstants.LOG_HTML_JOB_QUEUE_SIZE);
+        this.listJobForWriterRunnable = new ArrayBlockingQueue<ZPIAppLoggerStateWriter>(ZPIAppConstants.LOG_HTML_JOB_QUEUE_SIZE);
         
         this.countOfJobForReaderQueueCapacityChange = 0;
         this.countOfJobForWriterQueueCapacityChange = 0;
@@ -40,22 +40,22 @@ public class ZPIAppLoggerBusJob {
     /**
      * 
      */
-    protected AppLoggerStateWriter getInitedForWriter(){
-        AppLoggerStateWriter poll = this.listJobForWriterRunnable.poll();
+    protected ZPIAppLoggerStateWriter getInitedForWriter(){
+        ZPIAppLoggerStateWriter poll = this.listJobForWriterRunnable.poll();
         if( poll != null ){
             return poll;
         }
-        return new AppLoggerStateWriter("HaventJobForRun-AppLoggerBusJob.getInitedForWriter");
+        return new ZPIAppLoggerStateWriter("HaventJobForRun-AppLoggerBusJob.getInitedForWriter");
     }
     /**
      * 
      */
-    protected AppLoggerStateReader getInitedForReader(){
-        AppLoggerStateReader poll = this.listJobForReaderRunnable.poll();
+    protected ZPIAppLoggerStateReader getInitedForReader(){
+        ZPIAppLoggerStateReader poll = this.listJobForReaderRunnable.poll();
         if( poll != null ){
             return poll;
         }
-        return new AppLoggerStateReader("HaventJobForRun-AppLoggerBusJob.getInitedForReader");
+        return new ZPIAppLoggerStateReader("HaventJobForRun-AppLoggerBusJob.getInitedForReader");
     }
     /**
      * Job For Reader Runnables Part
@@ -68,7 +68,7 @@ public class ZPIAppLoggerBusJob {
     protected Boolean isJobForReaderEmpty(){
         return this.listJobForReaderRunnable.isEmpty();
     }
-    protected void addStateJobForReaderRunnableBus(AppLoggerStateReader forPut){
+    protected void addStateJobForReaderRunnableBus(ZPIAppLoggerStateReader forPut){
         extendSizeForStateJobForReaderQueue();
         this.listJobForReaderRunnable.add(forPut);
     }
@@ -86,9 +86,9 @@ public class ZPIAppLoggerBusJob {
                 + getCountOfStateJobForReaderQueueCapacityChange()
             );
             int nowSize = this.listJobForReaderRunnable.size() + this.listJobForReaderRunnable.remainingCapacity();
-            ArrayBlockingQueue<AppLoggerStateReader> extendedQueue = new ArrayBlockingQueue<AppLoggerStateReader>(nowSize * 10);
+            ArrayBlockingQueue<ZPIAppLoggerStateReader> extendedQueue = new ArrayBlockingQueue<ZPIAppLoggerStateReader>(nowSize * 10);
             do{ 
-                AppLoggerStateReader poll = this.listJobForReaderRunnable.poll();
+                ZPIAppLoggerStateReader poll = this.listJobForReaderRunnable.poll();
                 if( poll != null ){
                     extendedQueue.add(poll);
                 }
@@ -115,7 +115,7 @@ public class ZPIAppLoggerBusJob {
     protected Boolean isJobForWriterEmpty(){
         return this.listJobForWriterRunnable.isEmpty();
     }
-    protected void addStateJobForWriterRunnableBus(AppLoggerStateWriter forPut){
+    protected void addStateJobForWriterRunnableBus(ZPIAppLoggerStateWriter forPut){
         extendSizeForStateJobForWriterQueue();
         this.listJobForWriterRunnable.add(forPut);
     }
@@ -133,9 +133,9 @@ public class ZPIAppLoggerBusJob {
                 + getCountOfStateJobForWriterQueueCapacityChange()
             );
             int nowSize = this.listJobForWriterRunnable.size() + this.listJobForWriterRunnable.remainingCapacity();
-            ArrayBlockingQueue<AppLoggerStateWriter> extendedQueue = new ArrayBlockingQueue<AppLoggerStateWriter>(nowSize * 10);
+            ArrayBlockingQueue<ZPIAppLoggerStateWriter> extendedQueue = new ArrayBlockingQueue<ZPIAppLoggerStateWriter>(nowSize * 10);
             do{ 
-                AppLoggerStateWriter poll = this.listJobForWriterRunnable.poll();
+                ZPIAppLoggerStateWriter poll = this.listJobForWriterRunnable.poll();
                 if( poll != null ){
                     extendedQueue.add(poll);
                 }

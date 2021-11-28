@@ -43,7 +43,7 @@ public class ZPINcParamFvManager {
      * @param inWorkCfg
      * @return 
      */
-    protected static boolean isZPINcParamFvDataEmpty(ZPINcParamFv inWorkCfg){
+    protected static boolean isNcParamFvDataEmpty(ZPINcParamFv inWorkCfg){
         return (inWorkCfg.indexPath.length() == 0
         && inWorkCfg.keywordsOutOfSearch.length() == 0
         && inWorkCfg.keywordsInSearch.length() == 0
@@ -70,7 +70,7 @@ public class ZPINcParamFvManager {
      * @param inWorkCfg
      * @return 
      */
-    protected static boolean isZPINcParamFvDataHashTrue(ZPINcParamFv inWorkCfg){
+    protected static boolean isNcParamFvDataHashTrue(ZPINcParamFv inWorkCfg){
         int calcHash = (""
             + inWorkCfg.indexPath
             + inWorkCfg.keywordsOutOfSearch
@@ -143,7 +143,7 @@ public class ZPINcParamFvManager {
         ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
             + ZPINcStrVarDescription.NCPARAMFV.getStr()
             + ZPINcStrServiceMsg.HASH_RECORD_IS.getStr()
-            + isZPINcParamFvDataHashTrue(inWorkCfg));
+            + isNcParamFvDataHashTrue(inWorkCfg));
         ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
             + ZPINcStrVarDescription.NCPARAMFV.getStr()
             + ZPINcStrVarDescription.INDEX_PATH.getStr()
@@ -198,7 +198,7 @@ public class ZPINcParamFvManager {
      * @param inWorkCfg 
      */
     private static void checkToWrite(ZPINcParamFv inWorkCfg){
-        boolean isHash = isZPINcParamFvDataHashTrue(inWorkCfg);
+        boolean isHash = isNcParamFvDataHashTrue(inWorkCfg);
         String strLvl = ZPINcStrLogMsgField.INFO.getStr();
         if( !isHash ){
             strLvl = ZPINcStrLogMsgField.ERROR.getStr();
@@ -218,7 +218,7 @@ public class ZPINcParamFvManager {
      * @param inWorkCfg 
      */
     protected static void checkFromRead(ZPINcParamFv inWorkCfg){
-        boolean isHash = isZPINcParamFvDataHashTrue(inWorkCfg);
+        boolean isHash = isNcParamFvDataHashTrue(inWorkCfg);
         String strLvl = ZPINcStrLogMsgField.INFO.getStr();
         if( !isHash ){
             strLvl = ZPINcStrLogMsgField.ERROR.getStr();

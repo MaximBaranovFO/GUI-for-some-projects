@@ -37,17 +37,17 @@ public class ZPIThWordLogicRouter {
         ZPIThStorageWordState storageWordState;
         ZPIThStorageWordBusOutput busOutputForWordRouter;
         try {
-            AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = outerRuleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 10;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordLogicRouter.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "doRouterForIndexWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             wordRuleFunc = (ZPIThWordRule) outerRuleWord;
             indexRuleFunc = wordRuleFunc.getIndexRule();
             indexState = indexRuleFunc.getIndexState();
@@ -61,7 +61,7 @@ public class ZPIThWordLogicRouter {
             
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             wordRuleFunc = null;
             indexRuleFunc = null;
@@ -109,17 +109,17 @@ public class ZPIThWordLogicRouter {
         ZPITdataWord pollDataItem;
         UUID itemKey;
         try {
-            AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = outerRuleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 10;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordLogicRouter.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "generateMainFlowForDataFromBusOutput()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             typeWordOfBusOutputFunc = (Integer) typeWordOfBusOutputInputed;
             busOutputByTypeWordFunc = (LinkedTransferQueue<ZPITdataWord>) busOutputByTypeWordInputed;
             hexTagName = new String();
@@ -136,22 +136,22 @@ public class ZPIThWordLogicRouter {
                             + "----- <   <   <   ---   tagname " + hexTagName + " string " + subString);*/
                     adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "typeWordOfBusOutputFunc"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(typeWordOfBusOutputFunc)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "itemKey"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + itemKey
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "hexTagName"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + hexTagName
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "subString"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + subString
                         );
                     eventLogic.insertIntoCacheData(typeWordOfBusOutputFunc, hexTagName, subString, pollDataItem);
@@ -159,7 +159,7 @@ public class ZPIThWordLogicRouter {
             } while( !busOutputByTypeWordFunc.isEmpty() );
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             eventLogic = null;
             labelTypeData = null;

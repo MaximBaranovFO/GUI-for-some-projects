@@ -212,9 +212,9 @@ public class ZPIThWordStatusDataCache {
                 returnedHashMap.put(paramCodeByNumber, 0);
             }
             paramCodeByNumber = getParamCodeByNumber(2);
-            returnedHashMap.put(paramCodeByNumber, AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT);
+            returnedHashMap.put(paramCodeByNumber, ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT);
             paramCodeByNumber = getParamCodeByNumber(3);
-            returnedHashMap.put(paramCodeByNumber, AppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT);
+            returnedHashMap.put(paramCodeByNumber, ZPIAppConstants.STORAGE_WORD_RECORDS_COUNT_LIMIT);
             return returnedHashMap;
         } finally {
             idx = null;

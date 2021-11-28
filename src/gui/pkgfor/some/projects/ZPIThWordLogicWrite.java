@@ -35,23 +35,23 @@ public class ZPIThWordLogicWrite {
         ZPIThIndexRule indexRule;
         ZPIThIndexStatistic indexStatistic;
         ZPIThWordRule funcRuleWord;
-        AppFileStorageIndex currentIndexStorages;
+        ZPIAppFileStorageIndex currentIndexStorages;
         UUID pollNextUuid;
         URI byPrefixGetUri;
         Map<String, String> byPrefixGetMap;
         ZPIThWordEventLogic eventLogic;
         try {
-            AdilRule adilRule = outerRuleWord.getIndexRule().getAdilRule();
-            AdilState adilState = adilRule.getAdilState();
+            ZPIAdilRule adilRule = outerRuleWord.getIndexRule().getZPIAdilRule();
+            ZPIAdilState adilState = adilRule.getZPIAdilState();
             Integer numberProcessIndexSystem = 12;
-            String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                    + AdilConstants.CANONICALNAME
+            String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                    + ZPIAdilConstants.CANONICALNAME
                     + ZPIThWordLogicWrite.class.getCanonicalName()
-                    + AdilConstants.METHOD
+                    + ZPIAdilConstants.METHOD
                     + "doWriteToIndexWord()";
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.START);
+                    + ZPIAdilConstants.START);
             funcRuleWord = (ZPIThWordRule) outerRuleWord;
             
             indexRule = funcRuleWord.getIndexRule();
@@ -59,25 +59,25 @@ public class ZPIThWordLogicWrite {
             //indexStatistic.updateDataStorages();
             currentIndexStorages = funcRuleWord.getIndexRule().getIndexState().currentIndexStorages();
             
-            byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
+            byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
             
             byPrefixGetMap = currentIndexStorages.byPrefixGetMap( 
-                    AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
+                    ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
             for( Map.Entry<String, String> itemByPrefixGetMap : byPrefixGetMap.entrySet() ){
                 adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                     msgToLog
-                    + AdilConstants.STATE
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.STATE
+                    + ZPIAdilConstants.VARNAME
                     + "byPrefixGetUri.toString()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + byPrefixGetUri.toString()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getKey()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getKey()
-                    + AdilConstants.VARNAME
+                    + ZPIAdilConstants.VARNAME
                     + "itemByPrefixGetMap.getValue()"
-                    + AdilConstants.VARVAL
+                    + ZPIAdilConstants.VARVAL
                     + itemByPrefixGetMap.getValue()
                 );
             }
@@ -137,7 +137,7 @@ public class ZPIThWordLogicWrite {
             }
             adilState.putLogLineByProcessNumberMsg(numberProcessIndexSystem, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         } finally {
             pollNextUuid = null;
             indexRule = null;

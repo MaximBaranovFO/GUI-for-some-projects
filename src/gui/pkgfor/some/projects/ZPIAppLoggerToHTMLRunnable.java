@@ -44,7 +44,7 @@ public class ZPIAppLoggerToHTMLRunnable implements Runnable {
         this.jobIsDone = Boolean.FALSE;
         this.listForLogStrings = listForLogStrs;
         this.logFile = outerLogFile;
-        String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+        String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
         System.out.println("create logger StrArrOutToHtml " + threadInfoToString);
     }
     
@@ -56,7 +56,7 @@ public class ZPIAppLoggerToHTMLRunnable implements Runnable {
             poll = this.listForLogStrings.poll();
             forRecord.add(poll);
         }while( !this.listForLogStrings.isEmpty() );*/
-        ArrayList<String> forRecord = AppObjectsBusHelper.cleanBusArrayBlockingToArrayString(this.listForLogStrings);
+        ArrayList<String> forRecord = ZPIAppObjectsBusHelper.cleanBusArrayBlockingToArrayString(this.listForLogStrings);
         
         this.jobIsDone = Boolean.FALSE;
         try {

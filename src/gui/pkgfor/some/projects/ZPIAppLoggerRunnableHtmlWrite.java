@@ -28,9 +28,9 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class ZPIAppLoggerRunnableHtmlWrite implements Runnable {
     
-    private AppLoggerRule managerForThis;
+    private ZPIAppLoggerRule managerForThis;
     public ZPIAppLoggerRunnableHtmlWrite(
-            AppLoggerRule outerManagerForThis
+            ZPIAppLoggerRule outerManagerForThis
     ) {
         super();
         this.managerForThis = outerManagerForThis;
@@ -40,10 +40,10 @@ public class ZPIAppLoggerRunnableHtmlWrite implements Runnable {
     
     @Override
     public void run() {
-        AppLoggerStateWriter currentJob = this.managerForThis.currentWriterJob();
+        ZPIAppLoggerStateWriter currentJob = this.managerForThis.currentWriterJob();
         if( !currentJob.isToHTMLJobDone() ){
             ArrayList<String> forRecord = 
-                    AppObjectsBusHelper.cleanBusArrayBlockingToArrayString(
+                    ZPIAppObjectsBusHelper.cleanBusArrayBlockingToArrayString(
                             currentJob.getPartLinesForWrite());
             
             System.out.println("report writerRunnable size for " 

@@ -27,26 +27,26 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class ZPIAppLoggerRunnableRead implements Runnable {
     
-    private AppLoggerController busManager;
+    private ZPIAppLoggerController busManager;
     
-    public ZPIAppLoggerRunnableRead(AppLoggerController outerManagerForThis){
+    public ZPIAppLoggerRunnableRead(ZPIAppLoggerController outerManagerForThis){
         super();
         
         this.busManager = outerManagerForThis;
         this.busManager.currentReaderJob().setTrueFromHTMLNewRunner();
         //this.managerForThis..setTrueFromHTMLNewRunner();
-        String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+        String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
         String outCreate = "*** ||| *** ||| *** create log reader *** ||| *** ||| ***" + threadInfoToString;
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outCreate, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_CREATE);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outCreate, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_CREATE);
         
     }
     
     @Override
     public void run() {
         try{
-            AppLoggerController managerForThis = this.busManager;
+            ZPIAppLoggerController managerForThis = this.busManager;
             if( managerForThis != null ){
-                AppLoggerStateReader currentJob = managerForThis.currentReaderJob();
+                ZPIAppLoggerStateReader currentJob = managerForThis.currentReaderJob();
                 if( !currentJob.isBlankObject() ){
                     if( !currentJob.isFromHTMLJobDone() ){
                         Path fileForReadInThisJob = currentJob.getFromHTMLLogFileName();
@@ -55,29 +55,29 @@ public class ZPIAppLoggerRunnableRead implements Runnable {
                                         + fileForReadInThisJob.toString() 
                                         + " _|_|_|_|_|_"
                                         + " start for read file";
-                        NcAppHelper.outToConsoleIfDevAndParamTrue(outRunJob, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_RUN_JOB);
-                        ArrayBlockingQueue<String> readedLines = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+                        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outRunJob, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_RUN_JOB);
+                        ArrayBlockingQueue<String> readedLines = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
                         //readedLines.add(fileForReadInThisJob.toString());
                         String ancorString = currentJob.getAncorString();
                         if( ancorString.length() > 17 ){
                             readedLines.add(ancorString);
                         }
                         //try {
-                            readedLines.addAll(AppFileOperationsSimple.readFromFile(fileForReadInThisJob));
+                            readedLines.addAll(ZPIAppFileOperationsSimple.readFromFile(fileForReadInThisJob));
                             //readedLines.addAll(Files.readAllLines(fileForReadInThisJob, Charset.forName("UTF-8")));
                             if( readedLines != null){
                                 String outJobReadEnd = "_|_|_|_|_|_ AppLoggerRunnableHtmlRead.run() fromHTMLLogFileName " 
                                         + fileForReadInThisJob.toString() 
                                         + " _|_|_|_|_|_"
                                         + " readedLines.size() " + readedLines.size();
-                                NcAppHelper.outToConsoleIfDevAndParamTrue(outJobReadEnd, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_JOB_END_READ);
+                                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outJobReadEnd, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_JOB_END_READ);
                                 managerForThis.setStringBusForLogRead(currentJob.getID(), readedLines);
                             } else {
                                 String outJobReadNull = "_|_|NULL|_|_ AppLoggerRunnableHtmlRead.run() fromHTMLLogFileName " 
                                         + fileForReadInThisJob.toString() 
                                         + " _|_|NULL|_|_"
                                         + " readedLines.size() is null";
-                                NcAppHelper.outToConsoleIfDevAndParamTrue(outJobReadNull, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_JOB_READ_NULL);
+                                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outJobReadNull, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_RUNNABLE_JOB_READ_NULL);
                                 managerForThis.setStringBusForLogRead(currentJob.getID(), new ArrayBlockingQueue<String>(1));
                             }
 

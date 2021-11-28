@@ -25,8 +25,8 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 1.   AppLoggerList class - make objects lists, data process and control Bus:
  * 1.1. First list implements of Runnables for reader Logger, writer Logger
  * 1.2. Second list new instance of Threads object for secondary etc use for objects provided by first list
- * 1.3. AppLoggerState class - init and save state for runnables objects factory
- * 1.4. AppLoggerRule class - provide for methids of init, change state, controls, and managment for data Bus
+ * 1.3. ZPIAppLoggerState class - init and save state for runnables objects factory
+ * 1.4. ZPIAppLoggerRule class - provide for methids of init, change state, controls, and managment for data Bus
  * 
  * 
  * 
@@ -43,10 +43,10 @@ public class ZPIAppLoggerList {
     private Integer countJobForReader;
     private Integer countDoneJobForReader;
     
-    private AppLoggerBus loggerBus;
-    private AppLoggerRule managerForOrder;
-    private AppLoggerBusJob loggerJobBus;
-    private AppLoggerState currentJob;
+    private ZPIAppLoggerBus loggerBus;
+    private ZPIAppLoggerRule managerForOrder;
+    private ZPIAppLoggerBusJob loggerJobBus;
+    private ZPIAppLoggerState currentJob;
     
     private ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut;
     private ArrayBlockingQueue<String> listForRunnableLogStrs;
@@ -68,8 +68,8 @@ public class ZPIAppLoggerList {
         setFalseNeedForSaveJs();
         setFalseNeedForSaveIndexHtml();
         
-        this.loggerBus = new AppLoggerBus();
-        this.loggerJobBus = new AppLoggerBusJob();
+        this.loggerBus = new ZPIAppLoggerBus();
+        this.loggerJobBus = new ZPIAppLoggerBusJob();
         
         System.out.println("+|0000001|+|AppLoggerList||||||||+++++++++++|||||||||+++++++++++new AppLoggerList(); ");
         this.commandsOutPut = loggerBus.getCommandsOutPut();
@@ -79,18 +79,18 @@ public class ZPIAppLoggerList {
         
         //this.readedArrayForLines = loggerBus.
         this.listLogStorageFiles = this.loggerBus.getLogHtmlStorageList();
-        this.fileForWrite = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
+        this.fileForWrite = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
         
-        this.managerForOrder = new AppLoggerRule(this.loggerBus, this.loggerJobBus);
+        this.managerForOrder = new ZPIAppLoggerRule(this.loggerBus, this.loggerJobBus);
         //this.currentJob = this.managerForOrder.getCurrentJob();
     }
-    protected AppLoggerBus getLoggerBus(){
+    protected ZPIAppLoggerBus getLoggerBus(){
         return this.loggerBus;
     }
     protected void doWriteToLogHtmlCurrentFile(){
         if( isNeedForSaveIndexHtml() ){
             if( this.managerForOrder.isAllReadedJobBegin() ){
-                System.out.println("----------------------------------------AppLoggerBusJob.getCountJobForReader() " 
+                System.out.println("----------------------------------------ZPIAppLoggerBusJob.getCountJobForReader() " 
                         + this.loggerJobBus.getCountJobForReader()
                 );
                 System.out.println("+|+|+|+ countJobForReader "
@@ -98,7 +98,7 @@ public class ZPIAppLoggerList {
                         + " countDoneJobForReader "
                         + this.countDoneJobForReader
                 );
-                System.out.println("+|+|+|+AppLoggerBus.countOfArrayBusForHtmlRead() "
+                System.out.println("+|+|+|+ZPIAppLoggerBus.countOfArrayBusForHtmlRead() "
                         + this.loggerBus.countOfArrayBusForHtmlRead()
                 );
                 setNewIndexFileForLogHtml();
@@ -113,25 +113,25 @@ public class ZPIAppLoggerList {
         else if( !isNewLoggerList() ){
             this.fileForWrite = this.loggerBus.getNewFileForLogHtml();
         } else {
-            this.fileForWrite = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
+            this.fileForWrite = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
         }
         setFalseNewLoggerList();
         makeWriteJob();
     }
     protected void makeWriteJob(){
-        //this.managerForOrder.setStringBusForLogWrite(AppObjectsBusHelper.cleanBusForRunnables(this.listForRunnableLogStrs));
+        //this.managerForOrder.setStringBusForLogWrite(ZPIAppObjectsBusHelper.cleanBusForRunnables(this.listForRunnableLogStrs));
         System.out.println("-------|||||||||-----------|||||||||------------AppLoggerList.makeWrite for " 
                 + this.managerForOrder.getStringBusForLogWrite().size());
         System.out.println("-------|||||||||-----------|||||||||------------AppLoggerList.makeWrite to " 
                 + this.fileForWrite.toString());
 
         String nowTimeStringWithMS = 
-                    AppFileOperationsSimple.getNowTimeStringWithMS();
+                    ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String nameJobThreadGroup = "WriterGroup-" + nowTimeStringWithMS;
         
         String nameJobThread = "writerToHtml-" + nowTimeStringWithMS;
-        AppLoggerStateWriter writerNewJob = this.managerForOrder.initWriterNewJob(
-                AppObjectsBusHelper.cleanBusForRunnables(this.listForRunnableLogStrs),
+        ZPIAppLoggerStateWriter writerNewJob = this.managerForOrder.initWriterNewJob(
+                ZPIAppObjectsBusHelper.cleanBusForRunnables(this.listForRunnableLogStrs),
                 nameJobThreadGroup,
                 nameJobThread,
                 this.fileForWrite
@@ -140,7 +140,7 @@ public class ZPIAppLoggerList {
         
         waitForPrevJobDoneForWriter();
         
-        AppLoggerStateWriter currentWriterJob = this.managerForOrder.currentWriterJob();
+        ZPIAppLoggerStateWriter currentWriterJob = this.managerForOrder.currentWriterJob();
         
         ThreadGroup newJobThreadGroup = new ThreadGroup(currentWriterJob.getThreadGroupName());
         Thread writeToHtmlByThread = new Thread(newJobThreadGroup, 
@@ -174,7 +174,7 @@ public class ZPIAppLoggerList {
     }
     protected void waitForPrevJobDoneForWriter(){
         
-        AppLoggerStateWriter currentWriterJob = this.managerForOrder.currentWriterJob();
+        ZPIAppLoggerStateWriter currentWriterJob = this.managerForOrder.currentWriterJob();
         System.out.println("-------|||||||||-----------|||||||||------------make write prev isjobdone " 
                 + currentWriterJob.isToHTMLJobDone());
         //if( !this.currentJob.isToHTMLNewRunner() ){
@@ -194,7 +194,7 @@ public class ZPIAppLoggerList {
     }
     protected void waitForPrevJobDoneForReader(){
         //if( !this.currentJob.isFromHTMLNewRunner() ){
-        AppLoggerStateReader currentReaderJob = this.managerForOrder.currentReaderJob();
+        ZPIAppLoggerStateReader currentReaderJob = this.managerForOrder.currentReaderJob();
         if( !currentReaderJob.isBlankObject() ){
             try{
                 while( !currentReaderJob.isFromHTMLJobDone() ){
@@ -210,15 +210,15 @@ public class ZPIAppLoggerList {
         }
     }
     protected void setNewCssFileForLogHtml(){
-        this.fileForWrite = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX);
+        this.fileForWrite = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX);
         //this.currentJob.setToHTMLFileName(this.fileForWrite);
     }
     protected void setNewJsFileForLogHtml(){
-        this.fileForWrite = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
+        this.fileForWrite = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
         //this.currentJob.setToHTMLFileName(this.fileForWrite);
     }
     protected void setNewIndexFileForLogHtml(){
-        this.fileForWrite = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_INDEX_PREFIX);
+        this.fileForWrite = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX);
         //this.currentJob.setToHTMLFileName(this.fileForWrite);
     }
     protected void doReadFromLogHtmlListOfTables(){
@@ -230,11 +230,11 @@ public class ZPIAppLoggerList {
             //setNextReadedFileFromLogHtml(elementOfTables);
             
             String nowTimeStringWithMS = 
-                    AppFileOperationsSimple.getNowTimeStringWithMS();
+                    ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
             String nameJobThreadGroup = "ReaderGroup-" + nowTimeStringWithMS;
 
             String nameJobThread = "readerFromHtml-" + nowTimeStringWithMS;
-            AppLoggerStateReader readerNewJob = this.managerForOrder.initReaderNewJob(
+            ZPIAppLoggerStateReader readerNewJob = this.managerForOrder.initReaderNewJob(
                 nameJobThreadGroup,
                 nameJobThread,
                 elementOfTables
@@ -248,7 +248,7 @@ public class ZPIAppLoggerList {
             System.out.println(
                     "this.managerForOrder.isAllReadedJobBegin() "
                     + this.managerForOrder.isAllReadedJobBegin()
-                    + " AppLoggerBusJob.getCountJobForReader() "
+                    + " ZPIAppLoggerBusJob.getCountJobForReader() "
                     + this.loggerJobBus.getCountJobForReader()
                     + " AppLoggerList.doReadFromLogHtmlListOfTables() for read file " 
                     + elementOfTables.toString());
@@ -270,12 +270,12 @@ public class ZPIAppLoggerList {
                         + fileForRead.toString() + "</a></p>";
     }
     protected void readListOfTables(){
-        AppLoggerStateReader currentReaderJob = this.managerForOrder.currentReaderJob();
+        ZPIAppLoggerStateReader currentReaderJob = this.managerForOrder.currentReaderJob();
         if( !currentReaderJob.isBlankObject() ){
             System.out.println(
                         " +|+|+|+|+|+   AppLoggerList.readListOfTables() this.managerForOrder.isAllReadedJobBegin() "
                         + this.managerForOrder.isAllReadedJobBegin()
-                        + " AppLoggerBusJob.getCountJobForReader() "
+                        + " ZPIAppLoggerBusJob.getCountJobForReader() "
                         + this.loggerJobBus.getCountJobForReader()
                         + " currentReaderJob.getFromHTMLLogFileName() "
                         + currentReaderJob.getFromHTMLLogFileName());

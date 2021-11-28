@@ -26,7 +26,7 @@ public class ZPIAppObjectsBusHelper {
     protected static ArrayList<String> cleanBusArrayBlockingToArrayString(ArrayBlockingQueue<String> listForLogStrs){
         String outSizeInputed = "--------size bus in AppObjectsBusHelper.cleanBusArrayBlockingToArrayString " 
                 + listForLogStrs.size();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outSizeInputed, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_BUS_HELPER_VIEW_SIZE_DATA_FOR_CLEAN_OUT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outSizeInputed, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_BUS_HELPER_VIEW_SIZE_DATA_FOR_CLEAN_OUT);
         ArrayList<String> forRecord = new ArrayList<String>();
         String poll;
         do{
@@ -36,7 +36,7 @@ public class ZPIAppObjectsBusHelper {
             }
         }while( !listForLogStrs.isEmpty() );
         String outSizeOutputed = "--------size AppObjectsBusHelper.cleanBusArrayBlockingToArrayString array for write " + forRecord.size();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outSizeOutputed, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_BUS_HELPER_VIEW_SIZE_DATA_FOR_CLEAN_OUTPUT);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outSizeOutputed, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_BUS_HELPER_VIEW_SIZE_DATA_FOR_CLEAN_OUTPUT);
         return forRecord;
     }
     protected static ArrayBlockingQueue<String> cleanBusForRunnables(ArrayBlockingQueue<String> listForLogStrs){
@@ -54,7 +54,7 @@ public class ZPIAppObjectsBusHelper {
     }
     protected static ArrayBlockingQueue<String> cleanBusFromArray(ArrayList<String> listForLogStrs){
         ArrayBlockingQueue<String> forRecord = new ArrayBlockingQueue<String>(listForLogStrs.size() 
-                + AppConstants.LOG_HTML_CLEAN_FROM_BUS_ABOVE_QUEUE_SIZE);
+                + ZPIAppConstants.LOG_HTML_CLEAN_FROM_BUS_ABOVE_QUEUE_SIZE);
         for(String elToReturn : listForLogStrs){
             forRecord.add(new String(elToReturn));
         }

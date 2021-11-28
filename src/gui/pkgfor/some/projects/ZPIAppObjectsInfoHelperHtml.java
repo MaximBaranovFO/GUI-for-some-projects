@@ -157,7 +157,7 @@ public class ZPIAppObjectsInfoHelperHtml {
                     }
                 }
             }
-        return AppObjectsBusHelper.cleanBusFromArray(listStringsForLogInRunnable);
+        return ZPIAppObjectsBusHelper.cleanBusFromArray(listStringsForLogInRunnable);
     }
     protected static ArrayBlockingQueue<String> commandOutPutToHtmlBus(ArrayList<String> listCommandOutPut){
         ArrayList<String> listStringsForLogInRunnable = new ArrayList<String>();
@@ -245,7 +245,7 @@ public class ZPIAppObjectsInfoHelperHtml {
                     }
                 }
             }
-        return AppObjectsBusHelper.cleanBusFromArray(listStringsForLogInRunnable);
+        return ZPIAppObjectsBusHelper.cleanBusFromArray(listStringsForLogInRunnable);
     }
     /**
      * @deprecated 
@@ -395,13 +395,13 @@ public class ZPIAppObjectsInfoHelperHtml {
             Path fileJsMenuPrefix,
             Path fileCssPrefix,
             ArrayList<Path> filesByMaskFromDir,
-            ConcurrentSkipListMap<UUID, AppLoggerStateReader> stateReaderListJobDone
+            ConcurrentSkipListMap<UUID, ZPIAppLoggerStateReader> stateReaderListJobDone
     ){
         ArrayList<String> linesForSave = new ArrayList<String>();
         
-        linesForSave.addAll(AppObjectsInfoHelperHtml.beforeMenuItemsLines(fileJsMenuPrefix, fileCssPrefix));
+        linesForSave.addAll(ZPIAppObjectsInfoHelperHtml.beforeMenuItemsLines(fileJsMenuPrefix, fileCssPrefix));
         linesForSave.addAll(
-                AppObjectsInfoHelperHtml.buildMenuItems(
+                ZPIAppObjectsInfoHelperHtml.buildMenuItems(
                 readedLinesFromJobs,
                 readedStringFormFile, 
                 filesByMaskFromDir, 
@@ -410,7 +410,7 @@ public class ZPIAppObjectsInfoHelperHtml {
         
         
         
-        //linesForSave.addAll(AppObjectsInfoHelperHtml.addReadedLinesFromFilesSortByArrayFromDir(readedStringFormFile, filesByMaskFromDir));
+        //linesForSave.addAll(ZPIAppObjectsInfoHelperHtml.addReadedLinesFromFilesSortByArrayFromDir(readedStringFormFile, filesByMaskFromDir));
         // @todo add statistic info in this page block
         linesForSave.add("        </div>");
         linesForSave.add("        <div id=\"footer-content\" class=\"footer-page\">");
@@ -419,7 +419,7 @@ public class ZPIAppObjectsInfoHelperHtml {
         linesForSave.add("    </body>");
         linesForSave.add("</html>");
         
-        return AppObjectsBusHelper.cleanBusFromArray(linesForSave);
+        return ZPIAppObjectsBusHelper.cleanBusFromArray(linesForSave);
     }
     
     protected static ArrayList<String> beforeMenuItemsLines(
@@ -486,13 +486,13 @@ public class ZPIAppObjectsInfoHelperHtml {
         linesForSave.add("        <div id=\"menu-content\" class=\"content-menu-items\">");
         linesForSave.add("        <ul id=\"menu\">");
         
-        linesForSave.addAll(AppObjectsInfoHelperHtml.createMenuItems(filesByMaskFromDir));
+        linesForSave.addAll(ZPIAppObjectsInfoHelperHtml.createMenuItems(filesByMaskFromDir));
         
         linesForSave.add("        </ul>");
         linesForSave.add("        </div>");
         linesForSave.add("        <div id=\"page-content\" class=\"content-imported-page\">");
         
-        linesForSave.addAll(AppObjectsInfoHelperHtml.addReadedLinesFromFilesSortByArrayFromDir(readedStringFormFile, filesByMaskFromDir));
+        linesForSave.addAll(ZPIAppObjectsInfoHelperHtml.addReadedLinesFromFilesSortByArrayFromDir(readedStringFormFile, filesByMaskFromDir));
         
         linesForSave.add("        </div>");
         linesForSave.add("        <div id=\"footer-content\" class=\"footer-page\">");
@@ -501,7 +501,7 @@ public class ZPIAppObjectsInfoHelperHtml {
         linesForSave.add("    </body>");
         linesForSave.add("</html>");
         
-        return AppObjectsBusHelper.cleanBusFromArray(linesForSave);
+        return ZPIAppObjectsBusHelper.cleanBusFromArray(linesForSave);
     }
     /**
      * @deprecated 
@@ -572,7 +572,7 @@ public class ZPIAppObjectsInfoHelperHtml {
         listForRunnableLogStrs.add("        </div>");
         listForRunnableLogStrs.add("        <div id=\"menu-content\" class=\"content-menu-items\">");
         listForRunnableLogStrs.add("        <ul id=\"menu\">");
-        AppObjectsInfoHelperHtml.getMenuItems(listForRunnableLogStrs, filesByMaskFromDir);
+        ZPIAppObjectsInfoHelperHtml.getMenuItems(listForRunnableLogStrs, filesByMaskFromDir);
         /*listForRunnableLogStrs.add("            <li><a href=\"#\" onclick=\"openMenu(this);return false\">menu 1</a>");
         listForRunnableLogStrs.add("                <ul>");
         listForRunnableLogStrs.add("                  <li><a href=\"#\">sub menu 1</a></li>");
@@ -626,14 +626,14 @@ public class ZPIAppObjectsInfoHelperHtml {
             ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>> readedLinesFromReaderJobs,
             ArrayBlockingQueue<ArrayBlockingQueue<String>> readedStringFormFile,
             ArrayList<Path> filesByMaskFromDir,
-            ConcurrentSkipListMap<UUID, AppLoggerStateReader> readerStateListJobDone
+            ConcurrentSkipListMap<UUID, ZPIAppLoggerStateReader> readerStateListJobDone
     ){
         TreeMap<Integer, UUID> sortItemList = new TreeMap<Integer, UUID>();
         ArrayList<String> listForReturn = new ArrayList<String>();
         
-        for( Map.Entry<UUID, AppLoggerStateReader> doneJobList : readerStateListJobDone.entrySet() ){
+        for( Map.Entry<UUID, ZPIAppLoggerStateReader> doneJobList : readerStateListJobDone.entrySet() ){
             ArrayBlockingQueue<String> fromOneJobLines = readedLinesFromReaderJobs.get(doneJobList.getKey());
-            Integer parceSortNumber = AppObjectsInfoHelperHtml.parceAndReturnSortNumber(fromOneJobLines);
+            Integer parceSortNumber = ZPIAppObjectsInfoHelperHtml.parceAndReturnSortNumber(fromOneJobLines);
             //@todo if return not founde integer not add UUID into list
             if( (parceSortNumber > -3163) && (parceSortNumber > -1) ){
                 sortItemList.put(parceSortNumber, doneJobList.getKey());

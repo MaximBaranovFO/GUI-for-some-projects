@@ -45,10 +45,10 @@ public class ZPIAppLoggerToTextRunnable implements Runnable {
     public ZPIAppLoggerToTextRunnable(ArrayBlockingQueue<String> messagesQueueOuter) {
         super();
         messagesQueueForLogging = messagesQueueOuter;
-        //linesCount = AppConstants.LOG_LINES_COUNT;
-        newLogFile = AppFileOperationsSimple.getNewLogFile();
-        String threadInfoToString = "Create logger" + NcAppHelper.getThreadInfoToString(Thread.currentThread());
-        NcAppHelper.outToConsoleIfDevAndParamTrue(threadInfoToString, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_CREATE_TEXT_LOGGER);
+        //linesCount = ZPIAppConstants.LOG_LINES_COUNT;
+        newLogFile = ZPIAppFileOperationsSimple.getNewLogFile();
+        String threadInfoToString = "Create logger" + ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(threadInfoToString, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_CREATE_TEXT_LOGGER);
     }
     
     @Override
@@ -72,8 +72,8 @@ public class ZPIAppLoggerToTextRunnable implements Runnable {
             }
             //recode for poll from queue, compare with log limit and write, or poll from queue count for log limit, write, got new name and write
             //lines.addAll(strForLog);
-            if( (lines.size() + 1) > AppConstants.LOG_LINES_COUNT ){
-                newLogFile = AppFileOperationsSimple.getNewLogFile();
+            if( (lines.size() + 1) > ZPIAppConstants.LOG_LINES_COUNT ){
+                newLogFile = ZPIAppFileOperationsSimple.getNewLogFile();
                 lines.clear();
             }
             
@@ -87,7 +87,7 @@ public class ZPIAppLoggerToTextRunnable implements Runnable {
                 }
             }while( !messagesQueueForLogging.isEmpty() );
             
-            if( (lines.size() + strForLog.size()) < (AppConstants.LOG_LINES_COUNT + 1) ){
+            if( (lines.size() + strForLog.size()) < (ZPIAppConstants.LOG_LINES_COUNT + 1) ){
                 lines.addAll(strForLog);
                 try {
                     Files.write(newLogFile, lines, Charset.forName("UTF-8"));
@@ -99,12 +99,12 @@ public class ZPIAppLoggerToTextRunnable implements Runnable {
             } else {
                do{
                    
-                    if( lines.size() < AppConstants.LOG_LINES_COUNT 
+                    if( lines.size() < ZPIAppConstants.LOG_LINES_COUNT 
                         && !strForLog.isEmpty() ){
                         lines.add(strForLog.remove(0));
                         
                     } else {
-                        newLogFile = AppFileOperationsSimple.getNewLogFile();
+                        newLogFile = ZPIAppFileOperationsSimple.getNewLogFile();
                         try {
                             Files.write(newLogFile, lines, Charset.forName("UTF-8"));
                         } catch (IOException ex) {
@@ -116,7 +116,7 @@ public class ZPIAppLoggerToTextRunnable implements Runnable {
                     }
                     if( !lines.isEmpty()
                         && strForLog.isEmpty() ){
-                        newLogFile = AppFileOperationsSimple.getNewLogFile();
+                        newLogFile = ZPIAppFileOperationsSimple.getNewLogFile();
                         try {
                             Files.write(newLogFile, lines, Charset.forName("UTF-8"));
                         } catch (IOException ex) {

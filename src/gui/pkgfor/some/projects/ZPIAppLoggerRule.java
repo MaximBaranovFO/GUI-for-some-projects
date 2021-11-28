@@ -28,26 +28,26 @@ public class ZPIAppLoggerRule {
     //private ArrayBlockingQueue<String> linesFromLogHtmlRead;
     private ArrayBlockingQueue<ArrayBlockingQueue<String>> readedArrayForLines;
     
-    private AppLoggerRunnableHtmlWrite writerToHtmlRunnable;
-    private AppLoggerRunnableHtmlRead readerFromHtmlRunnable;
+    private ZPIAppLoggerRunnableHtmlWrite writerToHtmlRunnable;
+    private ZPIAppLoggerRunnableHtmlRead readerFromHtmlRunnable;
     
     private Boolean isCreatedRunnableWriter;
     private Boolean isCreatedRunnableReader;
     
-    private AppLoggerBus logBus;
-    private AppLoggerBusJob logJobBus;
+    private ZPIAppLoggerBus logBus;
+    private ZPIAppLoggerBusJob logJobBus;
     // for compatable new and old versions uncomment
-    private AppLoggerStateWriter stateJobForWriteRunner;
+    private ZPIAppLoggerStateWriter stateJobForWriteRunner;
     private Boolean isJobForWriter;
     
-    private AppLoggerStateReader stateJobForReaderRunner;
+    private ZPIAppLoggerStateReader stateJobForReaderRunner;
     private Boolean isJobForReader;
     private Boolean isReadedJobComplete;
     private Boolean isReadedJobBegin;
     
     private ConcurrentSkipListMap<String, Path> currentLogHTMLStorage;
 
-    public ZPIAppLoggerRule(AppLoggerBus outerLoggerBus, AppLoggerBusJob outerLoggerJobBus) {
+    public ZPIAppLoggerRule(ZPIAppLoggerBus outerLoggerBus, ZPIAppLoggerBusJob outerLoggerJobBus) {
         this.logBus = outerLoggerBus;
         this.logJobBus = outerLoggerJobBus;
         this.logBus.getCommandsOutPut();
@@ -118,7 +118,7 @@ public class ZPIAppLoggerRule {
     }
     
     
-    protected AppLoggerStateWriter currentWriterJob(){
+    protected ZPIAppLoggerStateWriter currentWriterJob(){
         if( !this.logJobBus.isJobForWriterEmpty() ){
             
             this.stateJobForWriteRunner = this.logJobBus.getInitedForWriter();
@@ -131,9 +131,9 @@ public class ZPIAppLoggerRule {
             }
         }
         setFalseJobForWriter();
-        return new AppLoggerStateWriter("HaventJobForRun-AppLoggerRule.getCurrentJob");
+        return new ZPIAppLoggerStateWriter("HaventJobForRun-AppLoggerRule.getCurrentJob");
     }
-    protected AppLoggerStateReader currentReaderJob(){
+    protected ZPIAppLoggerStateReader currentReaderJob(){
         System.out.println("                           AppLoggerRule.currentReaderJob()  jobBus.getCountJobForReader  " 
                 + this.logJobBus.getCountJobForReader()
                 + "     jobBus.isJobForReaderEmpty()      "
@@ -159,15 +159,15 @@ public class ZPIAppLoggerRule {
             }
         }*/
         setFalseJobForReader();
-        return new AppLoggerStateReader("HaventJobForRun-AppLoggerRule.getCurrentJob");
+        return new ZPIAppLoggerStateReader("HaventJobForRun-AppLoggerRule.getCurrentJob");
     }
     
-    protected AppLoggerStateReader initReaderNewJob(
+    protected ZPIAppLoggerStateReader initReaderNewJob(
             String newJobThreadGroupName,
             String writeToHtmlByThreadName,
             Path fileNameForRead
     ){
-        AppLoggerStateReader createNewReaderJob = AppLoggerRuleHelper.createNewReaderJob();
+        ZPIAppLoggerStateReader createNewReaderJob = ZPIAppLoggerRuleHelper.createNewReaderJob();
         createNewReaderJob.setTrueInitStartRead();
         createNewReaderJob.setThreadGroupName(newJobThreadGroupName);
         createNewReaderJob.setThreadName(writeToHtmlByThreadName);
@@ -175,13 +175,13 @@ public class ZPIAppLoggerRule {
         createNewReaderJob.setTrueInitEndRead();
         return createNewReaderJob;
     }
-    protected AppLoggerStateWriter initWriterNewJob(
+    protected ZPIAppLoggerStateWriter initWriterNewJob(
             ArrayBlockingQueue<String> partLinesForWrite,
             String newJobThreadGroupName,
             String writeToHtmlByThreadName,
             Path fileNameForWrite
     ){
-        AppLoggerStateWriter createNewWriterJob = AppLoggerRuleHelper.createNewWriterJob();
+        ZPIAppLoggerStateWriter createNewWriterJob = ZPIAppLoggerRuleHelper.createNewWriterJob();
         createNewWriterJob.setTrueInitStartWrite();
         createNewWriterJob.setPartLinesForWrite(partLinesForWrite);
         createNewWriterJob.setThreadGroupName(newJobThreadGroupName);
@@ -219,9 +219,9 @@ public class ZPIAppLoggerRule {
         return this.isCreatedRunnableWriter;
     }
     
-    protected AppLoggerRunnableHtmlWrite getRunnableWriter(){
+    protected ZPIAppLoggerRunnableHtmlWrite getRunnableWriter(){
         if ( !isCreatedRunnableWriter() ){
-            this.writerToHtmlRunnable = new AppLoggerRunnableHtmlWrite(this);
+            this.writerToHtmlRunnable = new ZPIAppLoggerRunnableHtmlWrite(this);
             setTrueCreatedRunnableWriter();
         }
         return this.writerToHtmlRunnable;
@@ -237,9 +237,9 @@ public class ZPIAppLoggerRule {
         return this.isCreatedRunnableReader;
     }
     
-    protected AppLoggerRunnableHtmlRead getRunnableReader(){
+    protected ZPIAppLoggerRunnableHtmlRead getRunnableReader(){
         if ( !isCreatedRunnableReader() ){
-            this.readerFromHtmlRunnable = new AppLoggerRunnableHtmlRead(this);
+            this.readerFromHtmlRunnable = new ZPIAppLoggerRunnableHtmlRead(this);
             setTrueCreatedRunnableReader();
         }
         return this.readerFromHtmlRunnable;

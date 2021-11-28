@@ -28,19 +28,19 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class ZPIAppLoggerRunnableHtmlRead implements Runnable {
     
-    private AppLoggerRule managerForThis;
-    public ZPIAppLoggerRunnableHtmlRead(AppLoggerRule outerManagerForThis){
+    private ZPIAppLoggerRule managerForThis;
+    public ZPIAppLoggerRunnableHtmlRead(ZPIAppLoggerRule outerManagerForThis){
         super();
     this.managerForThis = outerManagerForThis;
     //this.managerForThis..setTrueFromHTMLNewRunner();
-        String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+        String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
         System.out.println("*** ||| *** ||| *** create log reader *** ||| *** ||| ***" + threadInfoToString);
     }
     
     @Override
     public void run() {
         
-        AppLoggerStateReader currentJob = this.managerForThis.currentReaderJob();
+        ZPIAppLoggerStateReader currentJob = this.managerForThis.currentReaderJob();
         if( !currentJob.isBlankObject() ){
             if( !currentJob.isFromHTMLJobDone() ){
                 Path fileForReadInThisJob = currentJob.getFromHTMLLogFileName();
@@ -49,7 +49,7 @@ public class ZPIAppLoggerRunnableHtmlRead implements Runnable {
                                 + fileForReadInThisJob.toString() 
                                 + " _|_|_|_|_|_"
                                 + " start for read file");
-                ArrayBlockingQueue<String> readedLines = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+                ArrayBlockingQueue<String> readedLines = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
                 String ancorString = currentJob.getAncorString();
                 if( ancorString.length() > 17 ){
                     readedLines.add(ancorString);

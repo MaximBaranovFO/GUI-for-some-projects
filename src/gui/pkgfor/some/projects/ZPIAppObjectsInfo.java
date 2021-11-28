@@ -42,86 +42,86 @@ import java.util.logging.Logger;
 public class ZPIAppObjectsInfo {
     protected static void dumpAllStackToHtml(){
         ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
-        AppLoggerCreationHtmlLog t = new AppLoggerCreationHtmlLog( threadGroup, UUID.randomUUID().toString() );
+        ZPIAppLoggerCreationHtmlLog t = new ZPIAppLoggerCreationHtmlLog( threadGroup, UUID.randomUUID().toString() );
         t.start();
     }
     /**
-     * For many run need reader code integrated to AppLoggerBusControls class
-     * ru.newcontrol.ncfv.AppFileOperationsSimple.getNewLogHtmlTableFile line 398 generate exception about file exist
+     * For many run need reader code integrated to ZPIAppLoggerBusControls class
+     * ru.newcontrol.ncfv.ZPIAppFileOperationsSimple.getNewLogHtmlTableFile line 398 generate exception about file exist
      * need current storage for log use in ThreadLocal variables, while this is field of class curent storage can not 
      * remove in finally block
      * 
      * @todo next realisations need
      */
     protected static void dumpAllStackToHtmlProcessForManyRun(){
-        ThreadLocal<AppLoggerBusControls> jobCtrlThLoc = new ThreadLocal<AppLoggerBusControls>();
+        ThreadLocal<ZPIAppLoggerBusControls> jobCtrlThLoc = new ThreadLocal<ZPIAppLoggerBusControls>();
         
-        jobCtrlThLoc.set(new AppLoggerBusControls());
+        jobCtrlThLoc.set(new ZPIAppLoggerBusControls());
         try{
-            ArrayBlockingQueue<String> systemEnvironmentCommandsOut = AppObjectsInfoHelperClasses.getSystemEnvironmentCommandsOut();
+            ArrayBlockingQueue<String> systemEnvironmentCommandsOut = ZPIAppObjectsInfoHelperClasses.getSystemEnvironmentCommandsOut();
             jobCtrlThLoc.get().createJobWriteTableFile(systemEnvironmentCommandsOut);
 
             for( Map.Entry<Thread, StackTraceElement[]> elStTr : Thread.getAllStackTraces().entrySet() ){
                 Class<? extends Thread> aClass = elStTr.getKey().getClass();
-                ArrayBlockingQueue<String> threadNameCommandsOut = AppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
+                ArrayBlockingQueue<String> threadNameCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
                 jobCtrlThLoc.get().createJobWriteTableFile(threadNameCommandsOut);
 
                 for( StackTraceElement elStack : elStTr.getValue() ){
-                    ArrayBlockingQueue<String> stackTraceCommandsOut = AppObjectsInfoHelperClasses.getThreadStackTraceCommandsOut(elStack);
+                    ArrayBlockingQueue<String> stackTraceCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadStackTraceCommandsOut(elStack);
                     jobCtrlThLoc.get().createJobWriteTableFile(stackTraceCommandsOut);
                     Class<? extends StackTraceElement> stackClass = elStack.getClass();
 
-                    ArrayBlockingQueue<String> classStackCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(stackClass);
+                    ArrayBlockingQueue<String> classStackCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(stackClass);
                     jobCtrlThLoc.get().createJobWriteTableFile(classStackCommandsOut);
 
                     ArrayBlockingQueue<String> classStackGetDeclaredMethodsCommandsOut = 
-                    AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(stackClass.getClass());
+                    ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(stackClass.getClass());
                     jobCtrlThLoc.get().createJobWriteTableFile(classStackGetDeclaredMethodsCommandsOut);
 
                     ArrayBlockingQueue<String> classStackGetDeclaredFieldsCommandsOut = 
-                    AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(stackClass.getClass());
+                    ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(stackClass.getClass());
                     jobCtrlThLoc.get().createJobWriteTableFile(classStackGetDeclaredFieldsCommandsOut);
 
                     ArrayBlockingQueue<String> classGetDeclaredAnnotationCommandsOut = 
-                    AppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass.getClass());
+                    ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass.getClass());
                     jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredAnnotationCommandsOut);
 
                     ArrayBlockingQueue<String> classGetDeclaredConstructorsCommandsOut = 
-                    AppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass.getClass());
+                    ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass.getClass());
                     jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredConstructorsCommandsOut);
 
                 }
 
                 //tableCreateJobs(logForHtmlCurrentLogSubDir, threadNameCommandsOut);
-                ArrayBlockingQueue<String> classCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
+                ArrayBlockingQueue<String> classCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
                 jobCtrlThLoc.get().createJobWriteTableFile(classCommandsOut);
                 //tableCreateJobs(logForHtmlCurrentLogSubDir, classCommandsOut);
                 ArrayBlockingQueue<String> classGetDeclaredMethodsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
                 jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredMethodsCommandsOut);
                 //tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredMethodsCommandsOut);
                 ArrayBlockingQueue<String> classGetDeclaredFieldsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
                 jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredFieldsCommandsOut);
                 //tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredFieldsCommandsOut);
 
                 ArrayBlockingQueue<String> classGetDeclaredAnnotationCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass);
                 jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredAnnotationCommandsOut);
 
                 ArrayBlockingQueue<String> classGetDeclaredConstructorsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass);
                 jobCtrlThLoc.get().createJobWriteTableFile(classGetDeclaredConstructorsCommandsOut);
             }
 
-            ArrayBlockingQueue<String> linesForSaveJsMenu = AppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
+            ArrayBlockingQueue<String> linesForSaveJsMenu = ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
             Path jsFile = jobCtrlThLoc.get().getJsFile();
             jobCtrlThLoc.get().createJobWriteAnyFile(jsFile, linesForSaveJsMenu);
-            ArrayBlockingQueue<String> linesForSaveCss = AppObjectsInfoHelperHtml.getLinesForSaveCss();
+            ArrayBlockingQueue<String> linesForSaveCss = ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss();
             Path cssFile = jobCtrlThLoc.get().getCssFile();
             jobCtrlThLoc.get().createJobWriteAnyFile(cssFile, linesForSaveCss);
 
-            AppLoggerController notFinishedWriterJob = jobCtrlThLoc.get().getNotFinishedWriterJob();
+            ZPIAppLoggerController notFinishedWriterJob = jobCtrlThLoc.get().getNotFinishedWriterJob();
             do{
                 String outForJobsReaderParam = 
                         "notFinishedWriterJob.getIdJob().toString() "
@@ -141,7 +141,7 @@ public class ZPIAppObjectsInfo {
                         + " notFinishedWriterJob.currentWriterJob().isBlankObject() "
                         + notFinishedWriterJob.currentWriterJob().isBlankObject()
                 ;
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outForJobsReaderParam, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_VIEW_THREADS_PARAM);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outForJobsReaderParam, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_VIEW_THREADS_PARAM);
                 runWriterJob(jobCtrlThLoc.get());
                 notFinishedWriterJob = jobCtrlThLoc.get().getNotFinishedWriterJob();
             }while( !notFinishedWriterJob.notExistJob() );
@@ -160,73 +160,73 @@ public class ZPIAppObjectsInfo {
     
     protected static void dumpAllStackToHtmlProcess(){
         
-        AppLoggerBusControls jobControl = new AppLoggerBusControls();
+        ZPIAppLoggerBusControls jobControl = new ZPIAppLoggerBusControls();
         
         
-        ArrayBlockingQueue<String> systemEnvironmentCommandsOut = AppObjectsInfoHelperClasses.getSystemEnvironmentCommandsOut();
+        ArrayBlockingQueue<String> systemEnvironmentCommandsOut = ZPIAppObjectsInfoHelperClasses.getSystemEnvironmentCommandsOut();
         jobControl.createJobWriteTableFile(systemEnvironmentCommandsOut);
             
         for( Map.Entry<Thread, StackTraceElement[]> elStTr : Thread.getAllStackTraces().entrySet() ){
             Class<? extends Thread> aClass = elStTr.getKey().getClass();
-            ArrayBlockingQueue<String> threadNameCommandsOut = AppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
+            ArrayBlockingQueue<String> threadNameCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
             jobControl.createJobWriteTableFile(threadNameCommandsOut);
             
             for( StackTraceElement elStack : elStTr.getValue() ){
-                ArrayBlockingQueue<String> stackTraceCommandsOut = AppObjectsInfoHelperClasses.getThreadStackTraceCommandsOut(elStack);
+                ArrayBlockingQueue<String> stackTraceCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadStackTraceCommandsOut(elStack);
                 jobControl.createJobWriteTableFile(stackTraceCommandsOut);
                 Class<? extends StackTraceElement> stackClass = elStack.getClass();
                 
-                ArrayBlockingQueue<String> classStackCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(stackClass);
+                ArrayBlockingQueue<String> classStackCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(stackClass);
                 jobControl.createJobWriteTableFile(classStackCommandsOut);
                 
                 ArrayBlockingQueue<String> classStackGetDeclaredMethodsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(stackClass.getClass());
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(stackClass.getClass());
                 jobControl.createJobWriteTableFile(classStackGetDeclaredMethodsCommandsOut);
                 
                 ArrayBlockingQueue<String> classStackGetDeclaredFieldsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(stackClass.getClass());
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(stackClass.getClass());
                 jobControl.createJobWriteTableFile(classStackGetDeclaredFieldsCommandsOut);
                 
                 ArrayBlockingQueue<String> classGetDeclaredAnnotationCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass.getClass());
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass.getClass());
                 jobControl.createJobWriteTableFile(classGetDeclaredAnnotationCommandsOut);
 
                 ArrayBlockingQueue<String> classGetDeclaredConstructorsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass.getClass());
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass.getClass());
                 jobControl.createJobWriteTableFile(classGetDeclaredConstructorsCommandsOut);
                 
             }
             
             //tableCreateJobs(logForHtmlCurrentLogSubDir, threadNameCommandsOut);
-            ArrayBlockingQueue<String> classCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
+            ArrayBlockingQueue<String> classCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
             jobControl.createJobWriteTableFile(classCommandsOut);
             //tableCreateJobs(logForHtmlCurrentLogSubDir, classCommandsOut);
             ArrayBlockingQueue<String> classGetDeclaredMethodsCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
             jobControl.createJobWriteTableFile(classGetDeclaredMethodsCommandsOut);
             //tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredMethodsCommandsOut);
             ArrayBlockingQueue<String> classGetDeclaredFieldsCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
             jobControl.createJobWriteTableFile(classGetDeclaredFieldsCommandsOut);
             //tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredFieldsCommandsOut);
             
             ArrayBlockingQueue<String> classGetDeclaredAnnotationCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredAnnotationsCommandsOut(aClass);
             jobControl.createJobWriteTableFile(classGetDeclaredAnnotationCommandsOut);
             
             ArrayBlockingQueue<String> classGetDeclaredConstructorsCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredConstructorsCommandsOut(aClass);
             jobControl.createJobWriteTableFile(classGetDeclaredConstructorsCommandsOut);
         }
         
-        ArrayBlockingQueue<String> linesForSaveJsMenu = AppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
+        ArrayBlockingQueue<String> linesForSaveJsMenu = ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
         Path jsFile = jobControl.getJsFile();
         jobControl.createJobWriteAnyFile(jsFile, linesForSaveJsMenu);
-        ArrayBlockingQueue<String> linesForSaveCss = AppObjectsInfoHelperHtml.getLinesForSaveCss();
+        ArrayBlockingQueue<String> linesForSaveCss = ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss();
         Path cssFile = jobControl.getCssFile();
         jobControl.createJobWriteAnyFile(cssFile, linesForSaveCss);
         
-        AppLoggerController notFinishedWriterJob = jobControl.getNotFinishedWriterJob();
+        ZPIAppLoggerController notFinishedWriterJob = jobControl.getNotFinishedWriterJob();
         do{
             String outForJobsReaderParam = 
                     "notFinishedWriterJob.getIdJob().toString() "
@@ -246,7 +246,7 @@ public class ZPIAppObjectsInfo {
                     + " notFinishedWriterJob.currentWriterJob().isBlankObject() "
                     + notFinishedWriterJob.currentWriterJob().isBlankObject()
             ;
-            NcAppHelper.outToConsoleIfDevAndParamTrue(outForJobsReaderParam, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_VIEW_THREADS_PARAM);
+            ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outForJobsReaderParam, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_VIEW_THREADS_PARAM);
             runWriterJob(jobControl);
             notFinishedWriterJob = jobControl.getNotFinishedWriterJob();
         }while( !notFinishedWriterJob.notExistJob() );
@@ -255,15 +255,15 @@ public class ZPIAppObjectsInfo {
         summaryReportJobs(jobControl.getCurrentLogSubDir(), jsFile.getFileName(), cssFile.getFileName(), indexFile);
     }
     
-    protected static void runWriterJob(AppLoggerBusControls jobControl){
-        AppLoggerController notFinishedWriterJob = jobControl.getNotFinishedWriterJob();
+    protected static void runWriterJob(ZPIAppLoggerBusControls jobControl){
+        ZPIAppLoggerController notFinishedWriterJob = jobControl.getNotFinishedWriterJob();
         if( !notFinishedWriterJob.notExistJob() ){
-            AppLoggerStateWriter currentWriterJob = notFinishedWriterJob.currentWriterJob();
+            ZPIAppLoggerStateWriter currentWriterJob = notFinishedWriterJob.currentWriterJob();
             if( !currentWriterJob.isBlankObject() ){
                 /*ReentrantLock forRunWriterJoblck = new ReentrantLock();
                 forRunWriterJoblck.lock();
                 try{*/
-                    AppLoggerRunnableWrite writerRunnable = new AppLoggerRunnableWrite(notFinishedWriterJob);
+                    ZPIAppLoggerRunnableWrite writerRunnable = new ZPIAppLoggerRunnableWrite(notFinishedWriterJob);
                     ThreadGroup newJobThreadGroup = new ThreadGroup(currentWriterJob.getThreadGroupName());
                     Thread writeToHtmlByThread = new Thread(newJobThreadGroup, 
                             writerRunnable, 
@@ -280,45 +280,45 @@ public class ZPIAppObjectsInfo {
     
     protected static void dumpAllStackToHtmlOld(){
         String instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         Path logForHtmlCurrentLogSubDir = 
-                    AppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
+                    ZPIAppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
         
         //for get for css, js and more info about dirs
         ConcurrentSkipListMap<String, Path> listLogStorageFiles = 
-                AppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
-        listLogStorageFiles.put(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
+                ZPIAppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
+        listLogStorageFiles.put(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
         
         
         for( Map.Entry<Thread, StackTraceElement[]> elStTr : Thread.getAllStackTraces().entrySet() ){
             Class<? extends Thread> aClass = elStTr.getKey().getClass();
-            ArrayBlockingQueue<String> threadNameCommandsOut = AppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
+            ArrayBlockingQueue<String> threadNameCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadNameCommandsOut(elStTr.getKey());
             tableCreateJobs(logForHtmlCurrentLogSubDir, threadNameCommandsOut);
-            ArrayBlockingQueue<String> classCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
+            ArrayBlockingQueue<String> classCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
             tableCreateJobs(logForHtmlCurrentLogSubDir, classCommandsOut);
             ArrayBlockingQueue<String> classGetDeclaredMethodsCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
             tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredMethodsCommandsOut);
             ArrayBlockingQueue<String> classGetDeclaredFieldsCommandsOut = 
-            AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
+            ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
             tableCreateJobs(logForHtmlCurrentLogSubDir, classGetDeclaredFieldsCommandsOut);
             for( StackTraceElement elementThreads : elStTr.getValue() ){
                 elementThreads.getFileName();
             }
         }
         waitForWriterJobsDone();
-        Path fileJsMenuPrefix = listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
-        ArrayBlockingQueue<String> linesForSaveJsMenu = AppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
+        Path fileJsMenuPrefix = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
+        ArrayBlockingQueue<String> linesForSaveJsMenu = ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
         anyFileCreateJobs(fileJsMenuPrefix, linesForSaveJsMenu);
         waitForWriterJobsDone();
         
-        Path fileCssPrefix = listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX);
-        ArrayBlockingQueue<String> linesForSaveCss = AppObjectsInfoHelperHtml.getLinesForSaveCss();
+        Path fileCssPrefix = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX);
+        ArrayBlockingQueue<String> linesForSaveCss = ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss();
         anyFileCreateJobs(fileCssPrefix, linesForSaveCss);
         waitForWriterJobsDone();
         
         
-        Path fileIndexOfReport = listLogStorageFiles.get(AppFileNamesConstants.LOG_INDEX_PREFIX);
+        Path fileIndexOfReport = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX);
         summaryReportJobs(logForHtmlCurrentLogSubDir, fileJsMenuPrefix.getFileName(), fileCssPrefix.getFileName(), fileIndexOfReport);
         
     }
@@ -337,64 +337,64 @@ public class ZPIAppObjectsInfo {
         Class<? extends Thread> aClass = readedThread.getClass();
         
         String instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         Path logForHtmlCurrentLogSubDir = 
-                    AppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
+                    ZPIAppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
         
         //for get for css, js and more info about dirs
         ConcurrentSkipListMap<String, Path> listLogStorageFiles = 
-                AppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
-        listLogStorageFiles.put(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
+                ZPIAppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
+        listLogStorageFiles.put(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
         
-        ArrayBlockingQueue<String> threadNameCommandsOut = AppObjectsInfoHelperClasses.getThreadNameCommandsOut(readedThread);
+        ArrayBlockingQueue<String> threadNameCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadNameCommandsOut(readedThread);
         tableClassJob(logForHtmlCurrentLogSubDir, threadNameCommandsOut);
         waitForWriterJobsDone();
         
-        /*ArrayBlockingQueue<String> classCommandsOut = AppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
+        /*ArrayBlockingQueue<String> classCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassCommandsOut(aClass);
         tableCreateJobs(logForHtmlCurrentLogSubDir, classCommandsOut);
         waitForWriterJobsDone();*/
         
         /*ArrayBlockingQueue<String> classGetDeclaredMethodsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethodsCommandsOut(aClass);
         tableClassJob(logForHtmlCurrentLogSubDir, classGetDeclaredMethodsCommandsOut);
         waitForWriterJobsDone();
         
         ArrayBlockingQueue<String> classGetDeclaredFieldsCommandsOut = 
-                AppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
+                ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(aClass);
         tableClassJob(logForHtmlCurrentLogSubDir, classGetDeclaredFieldsCommandsOut);
         waitForWriterJobsDone();*/
         
-        /*Path fileJsMenuPrefix = listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
-        ArrayBlockingQueue<String> linesForSaveJsMenu = AppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
+        /*Path fileJsMenuPrefix = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
+        ArrayBlockingQueue<String> linesForSaveJsMenu = ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
         anyFileCreateJobs(fileJsMenuPrefix, linesForSaveJsMenu);
         waitForWriterJobsDone();
         
-        Path fileCssPrefix = listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX);
-        ArrayBlockingQueue<String> linesForSaveCss = AppObjectsInfoHelperHtml.getLinesForSaveCss();
+        Path fileCssPrefix = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX);
+        ArrayBlockingQueue<String> linesForSaveCss = ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss();
         anyFileCreateJobs(fileCssPrefix, linesForSaveCss);
         waitForWriterJobsDone();
         
         
-        Path fileIndexOfReport = listLogStorageFiles.get(AppFileNamesConstants.LOG_INDEX_PREFIX);
+        Path fileIndexOfReport = listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX);
         summaryReportJobs(logForHtmlCurrentLogSubDir, fileJsMenuPrefix.getFileName(), fileCssPrefix.getFileName(), fileIndexOfReport);*/
         
     }
     protected static void summaryReportJobs(Path currentLogSubDir, Path jsFile, Path cssFile, Path indexOfReport){
         
-        ArrayList<Path> filesByMaskFromDir = AppFileOperationsSimple.getFilesByMaskFromDir(
+        ArrayList<Path> filesByMaskFromDir = ZPIAppFileOperationsSimple.getFilesByMaskFromDir(
             currentLogSubDir,
-            "{" + AppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
+            "{" + ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
         
-        ArrayBlockingQueue<ArrayBlockingQueue<String>> fromReadFile = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        ArrayBlockingQueue<ArrayBlockingQueue<String>> fromReadFile = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
         ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>> readerList = new ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>>();
-        ConcurrentSkipListMap<UUID, AppLoggerStateReader> stateReaderList = new ConcurrentSkipListMap<UUID, AppLoggerStateReader>();
+        ConcurrentSkipListMap<UUID, ZPIAppLoggerStateReader> stateReaderList = new ConcurrentSkipListMap<UUID, ZPIAppLoggerStateReader>();
         for(Path tableElement : filesByMaskFromDir){
-            AppLoggerStateReader initReaderNewJobLite = AppLoggerInfoToReport.initReaderNewJobLite(tableElement);
-            initReaderNewJobLite.setAncorString(AppLoggerList.getAncorStructure(tableElement));
-            AppLoggerController appLoggerControllerForRead = new AppLoggerController(readerList, initReaderNewJobLite);
+            ZPIAppLoggerStateReader initReaderNewJobLite = ZPIAppLoggerInfoToReport.initReaderNewJobLite(tableElement);
+            initReaderNewJobLite.setAncorString(ZPIAppLoggerList.getAncorStructure(tableElement));
+            ZPIAppLoggerController appLoggerControllerForRead = new ZPIAppLoggerController(readerList, initReaderNewJobLite);
             stateReaderList.put(initReaderNewJobLite.getID(), initReaderNewJobLite);
             
-            AppLoggerRunnableRead readerRunnable = new AppLoggerRunnableRead(appLoggerControllerForRead);
+            ZPIAppLoggerRunnableRead readerRunnable = new ZPIAppLoggerRunnableRead(appLoggerControllerForRead);
             
             ThreadGroup newJobThreadGroupReader = new ThreadGroup(initReaderNewJobLite.getThreadGroupName());
             Thread readerThread = new Thread(newJobThreadGroupReader, 
@@ -414,9 +414,9 @@ public class ZPIAppObjectsInfo {
                     + "-----------Lines in readed Array " 
                     + readedElement.getValue().size();
             
-            NcAppHelper.outToConsoleIfDevAndParamTrue(strForOutToConsole, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_LOGGER_READ_FROM_FILE_SIZE);
+            ZPINcAppHelper.outToConsoleIfDevAndParamTrue(strForOutToConsole, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_LOGGER_READ_FROM_FILE_SIZE);
         }
-        ArrayBlockingQueue<String> createLinesForIndex = AppObjectsInfoHelperHtml.buildLinesForIndex(
+        ArrayBlockingQueue<String> createLinesForIndex = ZPIAppObjectsInfoHelperHtml.buildLinesForIndex(
                 readerList,
                 fromReadFile, 
                 jsFile, 
@@ -431,15 +431,15 @@ public class ZPIAppObjectsInfo {
     protected static void waitForReadJobsDone(){
         Boolean readerInStack = Boolean.FALSE;
         String outStart = "-----------                          ----------------------Start wait Reader time " 
-                + AppFileOperationsSimple.getNowTimeStringWithMS();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outStart, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_START);
+                + ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outStart, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_START);
         do{
             readerInStack = Boolean.FALSE;
             for( Map.Entry<Thread, StackTraceElement[]> elStTr : Thread.getAllStackTraces().entrySet() ){
                 String outAllStack = "Thread.id " + elStTr.getKey().getId() 
                         + " Thread.name " + elStTr.getKey().getName() 
                         + " Thread.state " + elStTr.getKey().getState();
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outAllStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_ALL_STACK);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outAllStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_ALL_STACK);
                 if( elStTr.getKey().getName().contains("runReader")){
                     elStTr.getKey().getState();
                     readerInStack = Boolean.TRUE;
@@ -455,7 +455,7 @@ public class ZPIAppObjectsInfo {
                             + elementThreads.getLineNumber()
                             + "] isNative [" + String.valueOf(elementThreads.isNativeMethod())
                             + "] )";
-                    NcAppHelper.outToConsoleIfDevAndParamTrue(outAllPrintStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_ALL_PRINT_TRACE);
+                    ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outAllPrintStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_ALL_PRINT_TRACE);
                 }
             }
             for( StackTraceElement elementThreads : Thread.currentThread().getStackTrace() ){
@@ -469,18 +469,18 @@ public class ZPIAppObjectsInfo {
                             + elementThreads.getLineNumber()
                             + "] isNative [" + String.valueOf(elementThreads.isNativeMethod()) 
                             + "] )";
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outAllCurrentStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_CURRENT_STACK);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outAllCurrentStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_CURRENT_STACK);
             }
         } while (readerInStack);
         String outStop = "-----------                          ----------------------Stop wait Reader time " 
-                + AppFileOperationsSimple.getNowTimeStringWithMS();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outStop, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_STOP);
+                + ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outStop, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_READER_WAITER_STOP);
     }
     protected static void tableClassJob(
             Path logForHtmlCurrentLogSubDir,
             ArrayBlockingQueue<String> outputForWrite
     ){
-        new AppLoggerController(logForHtmlCurrentLogSubDir, outputForWrite);
+        new ZPIAppLoggerController(logForHtmlCurrentLogSubDir, outputForWrite);
     }
     
     protected static void anyFileCreateJobs(
@@ -488,10 +488,10 @@ public class ZPIAppObjectsInfo {
             ArrayBlockingQueue<String> outputForWrite
     ){
         Path pathTable = anyFile;
-        AppLoggerStateWriter initWriterNewJob = AppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
-        AppLoggerController appLoggerController = new AppLoggerController(initWriterNewJob);
+        ZPIAppLoggerStateWriter initWriterNewJob = ZPIAppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
+        ZPIAppLoggerController appLoggerController = new ZPIAppLoggerController(initWriterNewJob);
         
-        AppLoggerRunnableWrite writerRunnable = new AppLoggerRunnableWrite(appLoggerController);
+        ZPIAppLoggerRunnableWrite writerRunnable = new ZPIAppLoggerRunnableWrite(appLoggerController);
         ThreadGroup newJobThreadGroup = new ThreadGroup(initWriterNewJob.getThreadGroupName());
         Thread writeToHtmlByThread = new Thread(newJobThreadGroup, 
                 writerRunnable, 
@@ -503,11 +503,11 @@ public class ZPIAppObjectsInfo {
             Path logForHtmlCurrentLogSubDir,
             ArrayBlockingQueue<String> outputForWrite
     ){
-        Path pathTable = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
-        AppLoggerStateWriter initWriterNewJob = AppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
-        AppLoggerController appLoggerController = new AppLoggerController(initWriterNewJob);
+        Path pathTable = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        ZPIAppLoggerStateWriter initWriterNewJob = ZPIAppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
+        ZPIAppLoggerController appLoggerController = new ZPIAppLoggerController(initWriterNewJob);
         
-        AppLoggerRunnableWrite writerRunnable = new AppLoggerRunnableWrite(appLoggerController);
+        ZPIAppLoggerRunnableWrite writerRunnable = new ZPIAppLoggerRunnableWrite(appLoggerController);
         ThreadGroup newJobThreadGroup = new ThreadGroup(initWriterNewJob.getThreadGroupName());
         Thread writeToHtmlByThread = new Thread(newJobThreadGroup, 
                 writerRunnable, 
@@ -517,20 +517,20 @@ public class ZPIAppObjectsInfo {
     protected static void waitForWriterJobsDone(){
         Boolean writerInStack = Boolean.FALSE;
         String outStart = "-----------                          ----------------------Start wait Writer time " 
-                + AppFileOperationsSimple.getNowTimeStringWithMS();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outStart, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_START);
+                + ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outStart, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_START);
         do{
             writerInStack = Boolean.FALSE;
             for( Map.Entry<Thread, StackTraceElement[]> elStTr : Thread.getAllStackTraces().entrySet() ){
                 String outAllStackThreadParam = "Thread.id " + elStTr.getKey().getId() 
                         + " Thread.name " + elStTr.getKey().getName() 
                         + " Thread.state " + elStTr.getKey().getState();
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outAllStackThreadParam, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_ALL_STACK);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outAllStackThreadParam, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_ALL_STACK);
                 if( elStTr.getKey().getName().contains("runWriter")){
                     elStTr.getKey().getState();
                     String outFoundInStack = "-----------                          ----------------------found Writer at time " 
-                            + AppFileOperationsSimple.getNowTimeStringWithMS();
-                    NcAppHelper.outToConsoleIfDevAndParamTrue(outFoundInStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_FOUNDED_IN_STACK);
+                            + ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+                    ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outFoundInStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_FOUNDED_IN_STACK);
                     try {
                         Thread.currentThread().sleep(50);
                     } catch (InterruptedException ex) {
@@ -549,7 +549,7 @@ public class ZPIAppObjectsInfo {
                             + elementThreads.getLineNumber()
                             + "] isNative [" + String.valueOf(elementThreads.isNativeMethod())
                             + "] )";
-                    NcAppHelper.outToConsoleIfDevAndParamTrue(outPrintTraceStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_ALL_PRINT_TRACE);
+                    ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outPrintTraceStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_ALL_PRINT_TRACE);
                 }
             }
             for( StackTraceElement elementThreads : Thread.currentThread().getStackTrace() ){
@@ -563,47 +563,47 @@ public class ZPIAppObjectsInfo {
                             + elementThreads.getLineNumber()
                             + "] isNative [" + String.valueOf(elementThreads.isNativeMethod())
                             + "] )";
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outCurrentStack, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_CURRENT_STACK);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outCurrentStack, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_CURRENT_STACK);
             }
         } while (writerInStack);
         String outStop = "-----------                          ----------------------Stop wait Writer time " 
-                + AppFileOperationsSimple.getNowTimeStringWithMS();
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outStop, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_STOP);
+                + ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outStop, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_WAITER_STOP);
     }
     protected static void getThreadDebugInfoToHtmlVpre(Thread readedThread){
         //@todo check sizes in add content for bus
         //@todo into currentjob methods pull data in new busses
-        AppLoggerList loggerHtml = new AppLoggerList();
-        System.out.println("+|0000000|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++new AppLoggerList(); ");
-        AppObjectsInfoHelperClasses.getThreadName(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
+        ZPIAppLoggerList loggerHtml = new ZPIAppLoggerList();
+        System.out.println("+|0000000|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++new ZPIAppLoggerList(); ");
+        ZPIAppObjectsInfoHelperClasses.getThreadName(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
         
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
-        System.out.println("+|0000001|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++AppObjectsInfoHelperClasses.getThreadName(); ");
-        AppObjectsInfoHelperClasses.getThreadClass(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
+        System.out.println("+|0000001|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++ZPIAppObjectsInfoHelperClasses.getThreadName(); ");
+        ZPIAppObjectsInfoHelperClasses.getThreadClass(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
         
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
-        System.out.println("+|0000002|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++AppObjectsInfoHelperClasses.getThreadClass(); ");
-        AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
+        System.out.println("+|0000002|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++ZPIAppObjectsInfoHelperClasses.getThreadClass(); ");
+        ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(readedThread, loggerHtml.getLoggerBus().getCommandsOutPut());
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(loggerHtml.getLoggerBus().getCommandsOutPut(),loggerHtml.getLoggerBus().getListForRunnableLogStrs());
         
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
         
         //@todo all near job need do with reader jobs algoritms for relese templates in next iterations of dev
         
-        System.out.println("+|0000003|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(); ");
-        loggerHtml.getLoggerBus().addAllStringsToRunnableBus(AppObjectsInfoHelperHtml.getLinesForSaveJsMenu());
+        System.out.println("+|0000003|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(); ");
+        loggerHtml.getLoggerBus().addAllStringsToRunnableBus(ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu());
         loggerHtml.setTrueNeedForSaveJs();
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
         System.out.println("+|0000004|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++loggerHtml.setTrueNeedForSaveJs(); ");
         loggerHtml.setFalseNeedForSaveJs();
         
-        loggerHtml.getLoggerBus().addAllStringsToRunnableBus(AppObjectsInfoHelperHtml.getLinesForSaveCss());
+        loggerHtml.getLoggerBus().addAllStringsToRunnableBus(ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss());
         loggerHtml.setTrueNeedForSaveCss();
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
@@ -617,17 +617,17 @@ public class ZPIAppObjectsInfo {
             System.out.println("+|" + fileForRead.toString());
         }
         //@todo fix it
-        Path fileJsMenuPrefix = loggerHtml.getLoggerBus().getLogFilesListElement(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX).getFileName();
-        Path fileCssPrefix = loggerHtml.getLoggerBus().getLogFilesListElement(AppFileNamesConstants.LOG_HTML_CSS_PREFIX).getFileName();
+        Path fileJsMenuPrefix = loggerHtml.getLoggerBus().getLogFilesListElement(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX).getFileName();
+        Path fileCssPrefix = loggerHtml.getLoggerBus().getLogFilesListElement(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX).getFileName();
         
-        AppObjectsInfoHelperHtml.getLinesForTopSaveIndex(loggerHtml.getLoggerBus().getListForRunnableLogStrs(), fileJsMenuPrefix, fileCssPrefix, filesByMaskFromDir);
+        ZPIAppObjectsInfoHelperHtml.getLinesForTopSaveIndex(loggerHtml.getLoggerBus().getListForRunnableLogStrs(), fileJsMenuPrefix, fileCssPrefix, filesByMaskFromDir);
         
-        System.out.println("+|0000006|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++AppObjectsInfoHelperHtml.getLinesForTopSaveIndex(); ");
+        System.out.println("+|0000006|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++ZPIAppObjectsInfoHelperHtml.getLinesForTopSaveIndex(); ");
         loggerHtml.doReadFromLogHtmlListOfTables();
         System.out.println("+|0000007|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++loggerHtml.doReadFromLogHtmlListOfTables(); ");
         //loggerHtml.addReadedTablesIntoList();
-        AppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(loggerHtml.getLoggerBus().getListForRunnableLogStrs());
-        System.out.println("+|0000008|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++AppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(); ");
+        ZPIAppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(loggerHtml.getLoggerBus().getListForRunnableLogStrs());
+        System.out.println("+|0000008|+|AppObjectsInfo||||||||+++++++++++|||||||||+++++++++++ZPIAppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(); ");
         loggerHtml.setTrueNeedForSaveIndexHtml();
         loggerHtml.doWriteToLogHtmlCurrentFile();
         loggerHtml.waitForPrevJobDoneForWriter();
@@ -648,25 +648,25 @@ public class ZPIAppObjectsInfo {
     protected static void getThreadDebugInfoToHtmlOld(Thread readedThread){
         
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         Path logForHtmlCurrentLogSubDir = 
-                AppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(nowTimeStringWithMS);
+                ZPIAppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(nowTimeStringWithMS);
         ConcurrentSkipListMap<String, Path> newLogFileInLogHTML = 
-                AppFileOperationsSimple.getNewLogFileInLogHTML(logForHtmlCurrentLogSubDir);
-        newLogFileInLogHTML.put(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
+                ZPIAppFileOperationsSimple.getNewLogFileInLogHTML(logForHtmlCurrentLogSubDir);
+        newLogFileInLogHTML.put(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
         
         
-        Integer messagesQueueSize = AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE;
+        Integer messagesQueueSize = ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE;
         ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(messagesQueueSize);
-        AppObjectsInfoHelperClasses.getInitBusInfo(commandsOutPut);
+        ZPIAppObjectsInfoHelperClasses.getInitBusInfo(commandsOutPut);
         
         ArrayBlockingQueue<String> listForRunnableLogStrs = new ArrayBlockingQueue<String>(messagesQueueSize);
         
         TreeMap<Integer, String> listForLogStrs = new TreeMap<Integer, String>();
         
-        Path newLogHtmlTableFile = newLogFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
+        Path newLogHtmlTableFile = newLogFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX);
         
-        AppLoggerToHTMLRunnable loggerToHtml = new AppLoggerToHTMLRunnable(
+        ZPIAppLoggerToHTMLRunnable loggerToHtml = new ZPIAppLoggerToHTMLRunnable(
                 listForRunnableLogStrs,
                 newLogHtmlTableFile
         );
@@ -678,29 +678,29 @@ public class ZPIAppObjectsInfo {
         int indexLinesToFile = 0;
         
         //rel
-        AppObjectsInfoHelperClasses.getThreadName(readedThread, commandsOutPut);
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
+        ZPIAppObjectsInfoHelperClasses.getThreadName(readedThread, commandsOutPut);
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
         
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         
-        newLogHtmlTableFile = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        newLogHtmlTableFile = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
         //rel
-        AppObjectsInfoHelperClasses.getThreadClass(readedThread, commandsOutPut);
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
+        ZPIAppObjectsInfoHelperClasses.getThreadClass(readedThread, commandsOutPut);
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         
-        newLogHtmlTableFile = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        newLogHtmlTableFile = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
         //rel
-        AppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(readedThread, commandsOutPut);
-        AppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
+        ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredMethods(readedThread, commandsOutPut);
+        ZPIAppObjectsInfoHelperHtml.commandOutPutBusToHtml(commandsOutPut,listForRunnableLogStrs);
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         
         indexLinesToFile++;
         listForLogStrs.put(indexLinesToFile,
                 "[NAME]" + readedThread.getName()
                 + "[CLASS]" + readedThread.getClass().getCanonicalName()
-                + "[isInstanceOf(AppThWorkDirListRun.class)]" 
-                + readedThread.getClass().isInstance(AppThWorkDirListRun.class));
+                + "[isInstanceOf(ZPIAppThWorkDirListRun.class)]" 
+                + readedThread.getClass().isInstance(ZPIAppThWorkDirListRun.class));
         
         indexLinesToFile++;
         listForLogStrs.put(indexLinesToFile,"* * * [Thread.getContextClassLoader()] * * *");
@@ -766,14 +766,14 @@ public class ZPIAppObjectsInfo {
                 + "[CLASS][toGenericString]" + readedThread.getClass().toGenericString()
                 + "[CLASS][toString]" + readedThread.getClass().toString()
                         
-                + "[CLASS][getClass().isAssignableFrom(AppThWorkDirListRun.class)]"
-                + readedThread.getClass().isAssignableFrom(AppThWorkDirListRun.class)
-                + "[CLASS][getClass().isInstance(AppThWorkDirListRun.class)]"
+                + "[CLASS][getClass().isAssignableFrom(ZPIAppThWorkDirListRun.class)]"
+                + readedThread.getClass().isAssignableFrom(ZPIAppThWorkDirListRun.class)
+                + "[CLASS][getClass().isInstance(ZPIAppThWorkDirListRun.class)]"
                         
-                + readedThread.getClass().isInstance(AppThWorkDirListRun.class));
+                + readedThread.getClass().isInstance(ZPIAppThWorkDirListRun.class));
         indexLinesToFile++;
-        newLogHtmlTableFile = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
-        AppObjectsInfoHelperHtml.getStringListForSaveTable(listForRunnableLogStrs, listForLogStrs, "readedThread.getStackTrace()");
+        newLogHtmlTableFile = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        ZPIAppObjectsInfoHelperHtml.getStringListForSaveTable(listForRunnableLogStrs, listForLogStrs, "readedThread.getStackTrace()");
         System.out.println("for first record " + listForRunnableLogStrs.size() + "file name" + newLogHtmlTableFile.toString());
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         listForLogStrs.clear();        
@@ -988,9 +988,9 @@ public class ZPIAppObjectsInfo {
         
         listForRunnableLogStrs.clear();
         // end for first block lines into recording list
-        newLogHtmlTableFile = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        newLogHtmlTableFile = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
         
-        AppObjectsInfoHelperHtml.getStringListForSaveTable(listForRunnableLogStrs, listForLogStrs, "readedThread.getClass().getTypeParameters()");
+        ZPIAppObjectsInfoHelperHtml.getStringListForSaveTable(listForRunnableLogStrs, listForLogStrs, "readedThread.getClass().getTypeParameters()");
         listForLogStrs.clear();
         listForLogStrs = new TreeMap<Integer, String>();
         System.out.println("for second record " + listForRunnableLogStrs.size() + newLogHtmlTableFile.toString());
@@ -998,11 +998,11 @@ public class ZPIAppObjectsInfo {
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         // end for write first block lines into file
         
-        newLogHtmlTableFile = newLogFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
+        newLogHtmlTableFile = newLogFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
         listForRunnableLogStrs.clear();
         
         
-        ArrayBlockingQueue<String> linesForSaveJsMenu = AppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
+        ArrayBlockingQueue<String> linesForSaveJsMenu = ZPIAppObjectsInfoHelperHtml.getLinesForSaveJsMenu();
         String pollFirstForSaveJsMenu = "";
             do{
                 pollFirstForSaveJsMenu = linesForSaveJsMenu.poll();
@@ -1013,10 +1013,10 @@ public class ZPIAppObjectsInfo {
         
         writeLinesToFileByRunnable(listForRunnableLogStrs, loggerToHtml, newLogHtmlTableFile);
         //********* ************* ************ ************** ************** ***************
-        newLogHtmlTableFile = newLogFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX);
+        newLogHtmlTableFile = newLogFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX);
         listForRunnableLogStrs.clear();
         //rel
-        ArrayBlockingQueue<String> linesForSaveCss = AppObjectsInfoHelperHtml.getLinesForSaveCss();
+        ArrayBlockingQueue<String> linesForSaveCss = ZPIAppObjectsInfoHelperHtml.getLinesForSaveCss();
         String pollFirstForSaveCss = "";
         do{
             pollFirstForSaveCss = linesForSaveCss.poll();
@@ -1034,7 +1034,7 @@ public class ZPIAppObjectsInfo {
         generateIndexFile(generatedLinesForIndexFile, newLogFileInLogHTML);
         // make index file
         if( generatedLinesForIndexFile.size() > 0 ){
-            newLogHtmlTableFile = newLogFileInLogHTML.get(AppFileNamesConstants.LOG_INDEX_PREFIX);
+            newLogHtmlTableFile = newLogFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX);
 
             listForRunnableLogStrs.clear();
 
@@ -1053,12 +1053,12 @@ public class ZPIAppObjectsInfo {
         
     }
     protected static void writeLinesToFileByRunnable(ArrayBlockingQueue<String> listStrForLog,
-            AppLoggerToHTMLRunnable writerToHtmlRunnable,
+            ZPIAppLoggerToHTMLRunnable writerToHtmlRunnable,
             Path fileForWrite){
         
         if (listStrForLog.size() > 0){
             String nowTimeStringWithMS = 
-                    AppFileOperationsSimple.getNowTimeStringWithMS();
+                    ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
             ThreadGroup newJobThreadGroup = new ThreadGroup("TmpGroup-" + nowTimeStringWithMS);
             
             if( !writerToHtmlRunnable.isNewRunner() ){
@@ -1107,12 +1107,12 @@ public class ZPIAppObjectsInfo {
     }
     
     protected static void readLinesFromFileByRunnable(ArrayBlockingQueue<String> listStrFromFile,
-            AppLoggerFromHTMLRunnable readerFromHtmlFile,
+            ZPIAppLoggerFromHTMLRunnable readerFromHtmlFile,
             Path fileForWrite){
         
         if (listStrFromFile.size() == 0){
             String nowTimeStringWithMS = 
-                    AppFileOperationsSimple.getNowTimeStringWithMS();
+                    ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
             //@todo check stack trace to see for runned threads by his names and classes
             ThreadGroup newJobThreadGroup = new ThreadGroup("TmpGroupReadFile-" + nowTimeStringWithMS);
             if( !readerFromHtmlFile.isNewRunner() ){
@@ -1163,24 +1163,24 @@ public class ZPIAppObjectsInfo {
             ArrayBlockingQueue<String> returnedLinesForIndexFile,
             ConcurrentSkipListMap<String, Path> listOfFileInLogHTML){
         
-        Path dirForRead = listOfFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
+        Path dirForRead = listOfFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
         
         //@todo in the loggerList (or Rule... xz) need flag for stop run reader if not set filesByMaskFromDir
         
-        ArrayList<Path> filesByMaskFromDir = AppFileOperationsSimple.getFilesByMaskFromDir(
+        ArrayList<Path> filesByMaskFromDir = ZPIAppFileOperationsSimple.getFilesByMaskFromDir(
                 dirForRead,
-                "{" + AppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
+                "{" + ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
         Integer messagesQueueSize = 10000;
         ArrayBlockingQueue<String> readedLinesFromLogHTML = new ArrayBlockingQueue<String>(messagesQueueSize);
 
         if( filesByMaskFromDir.size() > 0 ){
             Path forFirstRead = filesByMaskFromDir.get(0);
-            AppLoggerFromHTMLRunnable readerFromHtmlFile = new AppLoggerFromHTMLRunnable(
+            ZPIAppLoggerFromHTMLRunnable readerFromHtmlFile = new ZPIAppLoggerFromHTMLRunnable(
                     readedLinesFromLogHTML,
                     forFirstRead);
-            Path fileJsMenuPrefix = listOfFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX).getFileName();
-            Path fileCssPrefix = listOfFileInLogHTML.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX).getFileName();
-            AppObjectsInfoHelperHtml.getLinesForTopSaveIndex(returnedLinesForIndexFile, fileJsMenuPrefix, fileCssPrefix, filesByMaskFromDir);        
+            Path fileJsMenuPrefix = listOfFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX).getFileName();
+            Path fileCssPrefix = listOfFileInLogHTML.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX).getFileName();
+            ZPIAppObjectsInfoHelperHtml.getLinesForTopSaveIndex(returnedLinesForIndexFile, fileJsMenuPrefix, fileCssPrefix, filesByMaskFromDir);        
             for( Path fileForRead : filesByMaskFromDir ){
                 String strForAncor = "<p><a name=\"" + fileForRead.getFileName().toString().split("\\.")[0] + "\">"
                         + fileForRead.toString() + "</a></p>";
@@ -1192,7 +1192,7 @@ public class ZPIAppObjectsInfo {
                 readedLinesFromLogHTML.clear();
             }
             //indexOfLines++;
-            AppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(returnedLinesForIndexFile);
+            ZPIAppObjectsInfoHelperHtml.getLinesForBottomSaveIndex(returnedLinesForIndexFile);
         }
     }
 }

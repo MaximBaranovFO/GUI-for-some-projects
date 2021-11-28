@@ -41,18 +41,18 @@ public class ZPIAppLoggerBus {
     private String instanceStartTimeWithMS;
 
     public ZPIAppLoggerBus() {
-        this.commandsOutPut = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
-        this.listForRunnableLogStrs = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
-        this.readedLinesFromLogHTML = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
-        //this.readedLinesFromTablesWork = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        this.commandsOutPut = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        this.listForRunnableLogStrs = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        this.readedLinesFromLogHTML = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        //this.readedLinesFromTablesWork = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
         
-        this.readedArrayForLines = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        this.readedArrayForLines = new ArrayBlockingQueue<ArrayBlockingQueue<String>>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
         
         setFalseForLogHtmlListTableFiles();
         setFalseForLogHtmlStorage();
         
         this.instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         this.listLogStorageFiles = getLogHtmlStorageList();
     }
     
@@ -60,7 +60,7 @@ public class ZPIAppLoggerBus {
         return this.readedArrayForLines;
     }
     protected void addToArrayBusForHtmlRead(ArrayBlockingQueue<String> readedFormHtmlLines){
-        ArrayBlockingQueue<String> fromReadFile = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+        ArrayBlockingQueue<String> fromReadFile = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
         String pollFirstForSaveJsMenu = "";
         do{
             pollFirstForSaveJsMenu = readedFormHtmlLines.poll();
@@ -85,10 +85,10 @@ public class ZPIAppLoggerBus {
     }
     protected ArrayBlockingQueue<Path> getLogHtmlListTableFiles(){
         if( !isSetForLogHtmlListTableFiles() ){
-            Path dirForRead = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
-            ArrayList<Path> filesByMaskFromDir = AppFileOperationsSimple.getFilesByMaskFromDir(
+            Path dirForRead = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
+            ArrayList<Path> filesByMaskFromDir = ZPIAppFileOperationsSimple.getFilesByMaskFromDir(
                 dirForRead,
-                "{" + AppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
+                "{" + ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX + "}*");
             this.readedFilesListInLogHtmlByTableMask = new ArrayBlockingQueue<Path>(filesByMaskFromDir.size());
             for( Path fileForRead : filesByMaskFromDir ){
                 this.readedFilesListInLogHtmlByTableMask.add(fileForRead);
@@ -117,10 +117,10 @@ public class ZPIAppLoggerBus {
     protected ConcurrentSkipListMap<String, Path> getLogHtmlStorageList(){
         if( !isSetForLogHtmlStorage() ){
             Path logForHtmlCurrentLogSubDir = 
-                    AppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(this.instanceStartTimeWithMS);
+                    ZPIAppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(this.instanceStartTimeWithMS);
             this.listLogStorageFiles = 
-                    AppFileOperationsSimple.getNewLogFileInLogHTML(logForHtmlCurrentLogSubDir);
-            this.listLogStorageFiles.put(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
+                    ZPIAppFileOperationsSimple.getNewLogFileInLogHTML(logForHtmlCurrentLogSubDir);
+            this.listLogStorageFiles.put(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
             
             setTrueForLogHtmlStorage();
         }
@@ -185,10 +185,10 @@ public class ZPIAppLoggerBus {
         this.listLogStorageFiles.put(keyForPath, ementForPut);
     }
     protected Path getCurrentLogHtmlStorageSubDir(){
-        return this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
+        return this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
     }
     protected Path getNewFileForLogHtml(){
-        return AppFileOperationsSimple.getNewLogHtmlTableFile(getCurrentLogHtmlStorageSubDir());
+        return ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(getCurrentLogHtmlStorageSubDir());
     }
     protected void addToCommandsResultBus(ArrayBlockingQueue<String> forPut){
         this.commandsOutPut.add(forPut);

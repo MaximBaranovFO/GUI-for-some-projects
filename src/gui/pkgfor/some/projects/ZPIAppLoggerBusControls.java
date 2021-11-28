@@ -35,31 +35,31 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ZPIAppLoggerBusControls {
     private Integer sortItems;
-    private ConcurrentSkipListMap<UUID, AppLoggerController> writerList;
-    private ConcurrentSkipListMap<UUID, AppLoggerController> readerList;
+    private ConcurrentSkipListMap<UUID, ZPIAppLoggerController> writerList;
+    private ConcurrentSkipListMap<UUID, ZPIAppLoggerController> readerList;
     private ConcurrentSkipListMap<String, Path> listLogStorageFiles;
-    private AppLoggerBusData dataBus;
+    private ZPIAppLoggerBusData dataBus;
     private UUID lastKey;
     ZPIAppLoggerBusControls(){
         createNewHtmlLogStorage();
         this.sortItems = 0;
-        this.dataBus = new AppLoggerBusData();
-        this.writerList = new ConcurrentSkipListMap<UUID, AppLoggerController>();
-        this.readerList = new ConcurrentSkipListMap<UUID, AppLoggerController>();
+        this.dataBus = new ZPIAppLoggerBusData();
+        this.writerList = new ConcurrentSkipListMap<UUID, ZPIAppLoggerController>();
+        this.readerList = new ConcurrentSkipListMap<UUID, ZPIAppLoggerController>();
     }
-    protected AppLoggerController getByKey(String keyForGet){
-        AppLoggerController getFromWriter = this.writerList.get(keyForGet);
+    protected ZPIAppLoggerController getByKey(String keyForGet){
+        ZPIAppLoggerController getFromWriter = this.writerList.get(keyForGet);
         
         if( getFromWriter != null ){
             return getFromWriter;
         }
-        AppLoggerController getFromReader = this.readerList.get(keyForGet);
+        ZPIAppLoggerController getFromReader = this.readerList.get(keyForGet);
         if( getFromReader != null ){
             return getFromReader;
         }
-        return new AppLoggerController();
+        return new ZPIAppLoggerController();
     }
-    protected UUID addAndGetKey(AppLoggerController elementForAdd){
+    protected UUID addAndGetKey(ZPIAppLoggerController elementForAdd){
         UUID id = elementForAdd.getIdJob();
         if( elementForAdd.isReaderJob() ){
             this.readerList.put(id, elementForAdd);
@@ -81,13 +81,13 @@ public class ZPIAppLoggerBusControls {
         forCreateJobWriteTableFilelck.lock();
         try{
             this.sortItems++;
-            Path pathTable = AppFileOperationsSimple.getNewLogHtmlTableFile(
-                    this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR)
+            Path pathTable = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(
+                    this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR)
             );
-            AppLoggerStateWriter initWriterNewJob = AppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
+            ZPIAppLoggerStateWriter initWriterNewJob = ZPIAppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
             UUID writeTableId = initWriterNewJob.getID();
             initWriterNewJob.addSortItemNumber(this.sortItems);
-            AppLoggerController appLoggerControllerWriteTable = new AppLoggerController(initWriterNewJob);
+            ZPIAppLoggerController appLoggerControllerWriteTable = new ZPIAppLoggerController(initWriterNewJob);
             this.writerList.put(writeTableId, appLoggerControllerWriteTable);
             return writeTableId;
         } finally {
@@ -104,8 +104,8 @@ public class ZPIAppLoggerBusControls {
         forCreateJobWritelck.lock();
         try{
             Path pathTable = anyFile;
-            AppLoggerStateWriter initWriterNewJob = AppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
-            AppLoggerController appLoggerControllerForWrite = new AppLoggerController(initWriterNewJob);
+            ZPIAppLoggerStateWriter initWriterNewJob = ZPIAppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
+            ZPIAppLoggerController appLoggerControllerForWrite = new ZPIAppLoggerController(initWriterNewJob);
             UUID writeId = initWriterNewJob.getID();
             this.writerList.put(writeId, appLoggerControllerForWrite);
             return writeId;
@@ -119,32 +119,32 @@ public class ZPIAppLoggerBusControls {
         ReentrantLock forCreateJobReadlck = new ReentrantLock();
         forCreateJobReadlck.lock();
         try{
-            AppLoggerStateReader initReaderNewJobLite = AppLoggerInfoToReport.initReaderNewJobLite(tableElement);
+            ZPIAppLoggerStateReader initReaderNewJobLite = ZPIAppLoggerInfoToReport.initReaderNewJobLite(tableElement);
             UUID readId = initReaderNewJobLite.getID();
-            initReaderNewJobLite.setAncorString(AppLoggerList.getAncorStructure(tableElement));
+            initReaderNewJobLite.setAncorString(ZPIAppLoggerList.getAncorStructure(tableElement));
             //@todo add to bus data for reader structure
-            AppLoggerController appLoggerControllerForRead = new AppLoggerController(this.dataBus.getReaderBus(), initReaderNewJobLite);
+            ZPIAppLoggerController appLoggerControllerForRead = new ZPIAppLoggerController(this.dataBus.getReaderBus(), initReaderNewJobLite);
             this.readerList.put(readId, appLoggerControllerForRead);
             return readId;
         } finally {
             forCreateJobReadlck.unlock();
         }
     }
-    protected AppLoggerController getNotFinishedWriterJob(){
+    protected ZPIAppLoggerController getNotFinishedWriterJob(){
         ReentrantLock forNotFinishedWriterlck = new ReentrantLock();
         forNotFinishedWriterlck.lock();
         try{
-            for( Map.Entry<UUID, AppLoggerController> entrySet : this.writerList.entrySet() ){
+            for( Map.Entry<UUID, ZPIAppLoggerController> entrySet : this.writerList.entrySet() ){
                 if( !entrySet.getValue().currentWriterJob().isToHTMLJobDone() ){
                     return entrySet.getValue();
                 }
             }
-            return new AppLoggerController();
+            return new ZPIAppLoggerController();
         } finally {
             forNotFinishedWriterlck.unlock();
         }    
     }
-    protected AppLoggerBusData getDataBus(){
+    protected ZPIAppLoggerBusData getDataBus(){
         return this.dataBus;
     }
     protected ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>> getReadedDataBus(){
@@ -155,30 +155,30 @@ public class ZPIAppLoggerBusControls {
     }
     protected ConcurrentSkipListMap<String, Path> createNewHtmlLogStorage(){
         String instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         Path logForHtmlCurrentLogSubDir = 
-                    AppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
+                    ZPIAppFileOperationsSimple.getLogForHtmlCurrentLogSubDir(instanceStartTimeWithMS);
         this.listLogStorageFiles = 
-                AppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
-        this.listLogStorageFiles.put(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
+                ZPIAppFileOperationsSimple.getNewHtmlLogStorageFileSystem(logForHtmlCurrentLogSubDir);
+        this.listLogStorageFiles.put(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR, logForHtmlCurrentLogSubDir);
         return this.listLogStorageFiles;
     }
     protected ConcurrentSkipListMap<String, Path> getHtmlLogStorage(){
         return this.listLogStorageFiles;
     }
     protected Path getJsFile(){
-        Path fileJsMenuPrefix = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
+        Path fileJsMenuPrefix = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX);
         return fileJsMenuPrefix;
     }
     protected Path getCssFile(){
-        Path fileCssPrefix = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_CSS_PREFIX);
+        Path fileCssPrefix = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX);
         return fileCssPrefix;
     }
     protected Path getIndexFile(){
-        Path fileIndexPrefix = this.listLogStorageFiles.get(AppFileNamesConstants.LOG_INDEX_PREFIX);
+        Path fileIndexPrefix = this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX);
         return fileIndexPrefix;
     }
     protected Path getCurrentLogSubDir(){
-        return this.listLogStorageFiles.get(AppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
+        return this.listLogStorageFiles.get(ZPIAppFileNamesConstants.LOG_HTML_KEY_FOR_CURRENT_SUB_DIR);
     }
 }

@@ -32,13 +32,13 @@ import java.util.TreeMap;
  *
  * @author Администратор
  */
-public class ZPINcPreRunFileViewer {
+public class ZPIZPINcPreRunFileViewer {
     
     
     /**
      * Not used
      */
-    protected ZPINcPreRunFileViewer() {
+    protected ZPIZPINcPreRunFileViewer() {
         
     }
 
@@ -54,72 +54,72 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getIndexWorkSubDirFilesList() }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getTmpIdsFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getIndexWorkSubDirFilesList() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getTmpIdsFile() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcManageCfg#NcManageCfg() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#outToConsoleIdxDirs() }
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#checkInIndexFolderContent() }
      * </ul>
-     * @return {@link ru.newcontrol.ncfv.NcParamFv}
+     * @return {@link ru.newcontrol.ncfv.ZPINcParamFv}
      */
-    protected static NcParamFv getCurrentWorkCfg(){
-        File fileCfg = NcIdxFileManager.getOrCreateCfgFile();
-        NcParamFv readedWorkCfg = NcParamFvReader.readDataFromWorkCfg();
+    protected static ZPINcParamFv getCurrentWorkCfg(){
+        File fileCfg = ZPINcIdxFileManager.getOrCreateCfgFile();
+        ZPINcParamFv readedWorkCfg = ZPINcParamFvReader.readDataFromWorkCfg();
         
         boolean boolMD5 = false;
         boolean boolSHA1 = false;
         boolean boolSHA256 = false;
         boolean boolSHA512 = false;
         
-        if( fileCfg.exists() && ( !NcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ) ){
-                boolMD5 = readedWorkCfg.strHexMD5.equalsIgnoreCase(NcAppHelper.toHex(NcFileHash.MD5.checksum(fileCfg)));
-                boolSHA1 = readedWorkCfg.strHexSHA1.equalsIgnoreCase(NcAppHelper.toHex(NcFileHash.SHA1.checksum(fileCfg)));
-                boolSHA256 = readedWorkCfg.strHexSHA256.equalsIgnoreCase(NcAppHelper.toHex(NcFileHash.SHA256.checksum(fileCfg)));
-                boolSHA512 = readedWorkCfg.strHexSHA512.equalsIgnoreCase(NcAppHelper.toHex(NcFileHash.SHA512.checksum(fileCfg)));
+        if( fileCfg.exists() && ( !ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ) ){
+                boolMD5 = readedWorkCfg.strHexMD5.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.MD5.checksum(fileCfg)));
+                boolSHA1 = readedWorkCfg.strHexSHA1.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA1.checksum(fileCfg)));
+                boolSHA256 = readedWorkCfg.strHexSHA256.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA256.checksum(fileCfg)));
+                boolSHA512 = readedWorkCfg.strHexSHA512.equalsIgnoreCase(ZPINcAppHelper.toHex(NcFileHash.SHA512.checksum(fileCfg)));
         }
         if( (!boolMD5) && (!boolSHA1) && (!boolSHA256) && (!boolSHA512) ){
             readedWorkCfg = getUpdatedAppCfg();
         }
-        if( NcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
+        if( ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ){
             readedWorkCfg = getUpdatedAppCfg();
-            if( NcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
-                NcAppHelper.appExitWithMessage("Can't get for current work config, error");
+            if( ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ){
+                ZPINcAppHelper.appExitWithMessage("Can't get for current work config, error");
             }
         }
-        NcLogLogicCfg.NcPreRunFileViewerGetCurrentWorkCfg();
+        ZPINcLogLogicCfg.ZPINcPreRunFileViewerGetCurrentWorkCfg();
         
         return readedWorkCfg;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getCurrentWorkCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getCurrentWorkCfg() }
      * </ul>
-     * @return {@link ru.newcontrol.ncfv.NcParamFv}
+     * @return {@link ru.newcontrol.ncfv.ZPINcParamFv}
      */
-    private static NcParamFv getUpdatedAppCfg(){
-        File fileCfg = NcIdxFileManager.getOrCreateCfgFile();
+    private static ZPINcParamFv getUpdatedAppCfg(){
+        File fileCfg = ZPINcIdxFileManager.getOrCreateCfgFile();
         ArrayList<String> arrStrCfg = getReadedLinesFromEtcCfg();
-        NcParamFv paramReadedCfg = parseEtcCfg(arrStrCfg);
+        ZPINcParamFv paramReadedCfg = parseEtcCfg(arrStrCfg);
         
         
         
-        NcParamFv paramFromValideCfg = validateAndApplyCfg(paramReadedCfg);
+        ZPINcParamFv paramFromValideCfg = validateAndApplyCfg(paramReadedCfg);
         
         
         
         ArrayList<String> arrStrToUpdateCfg = getLinesParametersForUpdateCfg(paramFromValideCfg);
         int countLines = updateEtcCfg(arrStrToUpdateCfg);
-        NcParamFv paramToWriteCfg = null;
+        ZPINcParamFv paramToWriteCfg = null;
         if( fileCfg.exists() ){
-            paramToWriteCfg = NcParamFvManager.setFileHashes(paramFromValideCfg, fileCfg);
+            paramToWriteCfg = ZPINcParamFvManager.setFileHashes(paramFromValideCfg, fileCfg);
         }
-        boolean isWrited = NcParamFvWriter.writeDataInWorkCfg(paramToWriteCfg);
+        boolean isWrited = ZPINcParamFvWriter.writeDataInWorkCfg(paramToWriteCfg);
         if( !isWrited ){
-            NcAppHelper.appExitWithMessage("Can't write work configuration parameters");
-            return new NcParamFv();
+            ZPINcAppHelper.appExitWithMessage("Can't write work configuration parameters");
+            return new ZPINcParamFv();
         }
         
         
@@ -130,32 +130,32 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#validateAndApplyCfg(ru.newcontrol.ncfv.NcParamFv) }
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getDefaultParametersForCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#validateAndApplyCfg(ru.newcontrol.ncfv.ZPINcParamFv) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getDefaultParametersForCfg() }
      * </ul>
-     * @return {@link ru.newcontrol.ncfv.NcParamFv}
+     * @return {@link ru.newcontrol.ncfv.ZPINcParamFv}
      */
-    private static NcParamFv getDefaultCfgValues(){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+    private static ZPINcParamFv getDefaultCfgValues(){
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         TreeMap<Integer, String> diskUserAlias = new TreeMap<Integer, String>();
-        for( Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet() ){
+        for( Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet() ){
             diskUserAlias.put((int) itemDisk.getValue().diskID, itemDisk.getValue().humanAlias);
         }
-        String strIndex = NcStrFileDir.DIR_IDX.getStr();
+        String strIndex = ZPINcStrFileDir.DIR_IDX.getStr();
 
-        String homePath = NcIdxFileManager.getUserHomeDirStrPath();
-        String appDir = NcIdxFileManager.getAppWorkDirStrPath();
-        strIndex = NcIdxFileManager.strPathCombiner(homePath, strIndex);
-        String kwdOut = NcIdxFileManager.strPathCombiner(appDir,
-            NcStrFileDir.FILE_SRCH_KEY_OUT.getStr());
-        String kwdIn = NcIdxFileManager.strPathCombiner(appDir,
-            NcStrFileDir.FILE_SRCH_KEY_IN.getStr());
-        String dirOut = NcIdxFileManager.strPathCombiner(appDir,
-            NcStrFileDir.FILE_SRCH_DIR_OUT.getStr());
-        String dirIn = NcIdxFileManager.strPathCombiner(appDir,
-            NcStrFileDir.FILE_SRCH_DIR_IN.getStr());
+        String homePath = ZPINcIdxFileManager.getUserHomeDirStrPath();
+        String appDir = ZPINcIdxFileManager.getAppWorkDirStrPath();
+        strIndex = ZPINcIdxFileManager.strPathCombiner(homePath, strIndex);
+        String kwdOut = ZPINcIdxFileManager.strPathCombiner(appDir,
+            ZPINcStrFileDir.FILE_SRCH_KEY_OUT.getStr());
+        String kwdIn = ZPINcIdxFileManager.strPathCombiner(appDir,
+            ZPINcStrFileDir.FILE_SRCH_KEY_IN.getStr());
+        String dirOut = ZPINcIdxFileManager.strPathCombiner(appDir,
+            ZPINcStrFileDir.FILE_SRCH_DIR_OUT.getStr());
+        String dirIn = ZPINcIdxFileManager.strPathCombiner(appDir,
+            ZPINcStrFileDir.FILE_SRCH_DIR_IN.getStr());
         
-        NcParamFv defaultCfgForReturn = new NcParamFv(
+        ZPINcParamFv defaultCfgForReturn = new ZPINcParamFv(
         strIndex,
         kwdOut,
         kwdIn,
@@ -175,67 +175,67 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getUpdatedAppCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getUpdatedAppCfg() }
      * </ul>
      * Method for validate parameters from readed configuration file, if setted
      * parameters has wrong format, than used default value and configuration
      * file will be rewrited with work config
      * @param inFuncReadedCfg returned by method {@link #parseEtcCfg parseEtcCfg()};
      * @return Parameters to write into updated Cfg file
-     * {@link ru.newcontrol.ncfv.NcParamFv}
+     * {@link ru.newcontrol.ncfv.ZPINcParamFv}
      */
-    private static NcParamFv validateAndApplyCfg(NcParamFv inFuncReadedCfg){
+    private static ZPINcParamFv validateAndApplyCfg(ZPINcParamFv inFuncReadedCfg){
         
-        boolean aliasChanged = NcParamJournalDisk.updateUserAliasInJournalDisk(inFuncReadedCfg.diskUserAlias);
+        boolean aliasChanged = ZPINcParamJournalDisk.updateUserAliasInJournalDisk(inFuncReadedCfg.diskUserAlias);
         
-        NcParamFv defaultWorkCfg = getDefaultCfgValues();
-        NcParamFv outFuncWorkCfg;
-        
-        
-        String strPotWorkDir = NcPathFromUserChecker.strInputAppWorkDirFromUser(inFuncReadedCfg.indexPath, defaultWorkCfg.indexPath);
-        String strPotFileKeyOutSearch = NcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.keywordsOutOfSearch, defaultWorkCfg.keywordsOutOfSearch);
-        String strPotFileKeyInSearch = NcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.keywordsInSearch, defaultWorkCfg.keywordsInSearch);
-        String strPotFileDirOutIndex = NcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.dirOutOfIndex, defaultWorkCfg.dirOutOfIndex);
-        String strPotFileDirInIndex = NcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.dirInIndex, defaultWorkCfg.dirInIndex);
+        ZPINcParamFv defaultWorkCfg = getDefaultCfgValues();
+        ZPINcParamFv outFuncWorkCfg;
         
         
-        boolean resultCheckWorkDir = NcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(strPotWorkDir);
+        String strPotWorkDir = ZPINcPathFromUserChecker.strInputAppWorkDirFromUser(inFuncReadedCfg.indexPath, defaultWorkCfg.indexPath);
+        String strPotFileKeyOutSearch = ZPINcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.keywordsOutOfSearch, defaultWorkCfg.keywordsOutOfSearch);
+        String strPotFileKeyInSearch = ZPINcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.keywordsInSearch, defaultWorkCfg.keywordsInSearch);
+        String strPotFileDirOutIndex = ZPINcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.dirOutOfIndex, defaultWorkCfg.dirOutOfIndex);
+        String strPotFileDirInIndex = ZPINcPathFromUserChecker.strInputAppWorkFileFromUser(inFuncReadedCfg.dirInIndex, defaultWorkCfg.dirInIndex);
+        
+        
+        boolean resultCheckWorkDir = ZPINcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(strPotWorkDir);
         boolean resultCheckWorkDirDefault = false;
         if( !resultCheckWorkDir ){
-            NcParamCfgToDiskReleaser.getIdxDirStructure(strPotWorkDir);
-            strPotWorkDir = NcPathFromUserChecker.strInputAppWorkDirDefault(defaultWorkCfg.indexPath);
-            resultCheckWorkDirDefault = NcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(strPotWorkDir);
+            ZPINcParamCfgToDiskReleaser.getIdxDirStructure(strPotWorkDir);
+            strPotWorkDir = ZPINcPathFromUserChecker.strInputAppWorkDirDefault(defaultWorkCfg.indexPath);
+            resultCheckWorkDirDefault = ZPINcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(strPotWorkDir);
         }
-        boolean resultCheckFileKeyOutSearch = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyOutSearch);
+        boolean resultCheckFileKeyOutSearch = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyOutSearch);
         boolean resultCheckFileKeyOutSearchDefault = false;
         if( !resultCheckFileKeyOutSearch ){
-            NcParamCfgToDiskReleaser.getWorkFileParams(strPotFileKeyOutSearch);
-            strPotFileKeyOutSearch = NcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.keywordsOutOfSearch);
-            resultCheckFileKeyOutSearchDefault = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyOutSearch);
+            ZPINcParamCfgToDiskReleaser.getWorkFileParams(strPotFileKeyOutSearch);
+            strPotFileKeyOutSearch = ZPINcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.keywordsOutOfSearch);
+            resultCheckFileKeyOutSearchDefault = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyOutSearch);
         }
-        boolean resultCheckFileKeyInSearch = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyInSearch);
+        boolean resultCheckFileKeyInSearch = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyInSearch);
         boolean resultCheckFileKeyInSearchDefault = false;
         if( !resultCheckFileKeyInSearch ){
-            NcParamCfgToDiskReleaser.getWorkFileParams(strPotFileKeyInSearch);
-            strPotFileKeyInSearch = NcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.keywordsInSearch);
-            resultCheckFileKeyInSearchDefault = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyInSearch);
+            ZPINcParamCfgToDiskReleaser.getWorkFileParams(strPotFileKeyInSearch);
+            strPotFileKeyInSearch = ZPINcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.keywordsInSearch);
+            resultCheckFileKeyInSearchDefault = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileKeyInSearch);
         }
-        boolean resultCheckFileDirOutIndex = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirOutIndex);
+        boolean resultCheckFileDirOutIndex = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirOutIndex);
         boolean resultCheckFileDirOutIndexDefault = false;
         if( !resultCheckFileDirOutIndex ){
-            NcParamCfgToDiskReleaser.getWorkFileParams(strPotFileDirOutIndex);
-            strPotFileDirOutIndex = NcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.dirOutOfIndex);
-            resultCheckFileDirOutIndexDefault = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirOutIndex);
+            ZPINcParamCfgToDiskReleaser.getWorkFileParams(strPotFileDirOutIndex);
+            strPotFileDirOutIndex = ZPINcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.dirOutOfIndex);
+            resultCheckFileDirOutIndexDefault = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirOutIndex);
         }
-        boolean resultCheckFileDirInIndex = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirInIndex);
+        boolean resultCheckFileDirInIndex = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirInIndex);
         boolean resultCheckFileDirInIndexDefault = false;
         if( !resultCheckFileDirInIndex ){
-            NcParamCfgToDiskReleaser.getWorkFileParams(strPotFileDirInIndex);
-            strPotFileDirInIndex = NcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.dirInIndex);
+            ZPINcParamCfgToDiskReleaser.getWorkFileParams(strPotFileDirInIndex);
+            strPotFileDirInIndex = ZPINcPathFromUserChecker.strInputAppWorkFileDefault(defaultWorkCfg.dirInIndex);
             
-            resultCheckFileDirInIndexDefault = NcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirInIndex);
+            resultCheckFileDirInIndexDefault = ZPINcParamCfgToDiskReleaser.checkOrCreateFiles(strPotFileDirInIndex);
         }
-        outFuncWorkCfg = new NcParamFv(
+        outFuncWorkCfg = new ZPINcParamFv(
                 strPotWorkDir,
                 strPotFileKeyOutSearch,
                 strPotFileKeyInSearch,
@@ -246,9 +246,9 @@ public class ZPINcPreRunFileViewer {
                 "",
                 "",
                 "",
-                NcIdxFileManager.getIndexSubDirectories(strPotWorkDir)
+                ZPINcIdxFileManager.getIndexSubDirectories(strPotWorkDir)
         );
-        NcLogLogicCfg.NcPreRunFileViewerValidateAndApplyCfg();
+        ZPINcLogLogicCfg.ZPINcPreRunFileViewerValidateAndApplyCfg();
         return outFuncWorkCfg;
     }
 
@@ -256,15 +256,15 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#checkInDirFileReadable(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#checkInDirFileReadable(java.io.File) }
      * </ul>
      * @param forCheck
      */
     private static void checkInDirFileReadable(File fileForCheck){
         if( fileForCheck.isFile() ){
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.FILE_FOR_CHECK.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.FILE_FOR_CHECK.getStr()
                 + fileForCheck.getName());
         }
         if( fileForCheck.isDirectory() ){
@@ -279,60 +279,60 @@ public class ZPINcPreRunFileViewer {
      * Not used
      * @return
      */
-    private static TreeMap<Long, NcDiskInfo> initDiskInfo(){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
-        for( Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet() ){
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.DISK_ID.getStr()
+    private static TreeMap<Long, ZPINcDiskInfo> initDiskInfo(){
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        for( Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet() ){
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.DISK_ID.getStr()
                 + Long.toString(itemDisk.getValue().diskID));
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.HUMAN_ALIAS.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.HUMAN_ALIAS.getStr()
                 + itemDisk.getValue().humanAlias);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.PROGRAM_ALIAS.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.PROGRAM_ALIAS.getStr()
                 + itemDisk.getValue().programAlias);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.STR_FILE_STORE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.STR_FILE_STORE.getStr()
                 + itemDisk.getValue().strFileStore);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.DISK_LETTER.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.DISK_LETTER.getStr()
                 + itemDisk.getValue().diskLetter);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.LONG_SERIAL_NUMBER.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.LONG_SERIAL_NUMBER.getStr()
                 + Long.toString(itemDisk.getValue().longSerialNumber));
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.STR_HEX_SERIAL_NUMBER.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.STR_HEX_SERIAL_NUMBER.getStr()
                 + itemDisk.getValue().strHexSerialNumber);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.DISK_FS_TYPE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.DISK_FS_TYPE.getStr()
                 + itemDisk.getValue().diskFStype);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.IS_READ_ONLY.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.IS_READ_ONLY.getStr()
                 + itemDisk.getValue().isReadonly);
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.AVAIL_SPACE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.AVAIL_SPACE.getStr()
                 + Long.toString(itemDisk.getValue().availSpace));
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.TOTAL_SPACE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.TOTAL_SPACE.getStr()
                 + Long.toString(itemDisk.getValue().totalSpace));
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.UN_ALLOCATED_SPACE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.UN_ALLOCATED_SPACE.getStr()
                 + Long.toString(itemDisk.getValue().unAllocatedSpace));
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.INFO.getStr()
-                + NcStrVarDescription.USED_SPACE.getStr()
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrVarDescription.USED_SPACE.getStr()
                 + Long.toString(itemDisk.getValue().usedSpace));
         }
         return sysDisk;
@@ -341,14 +341,14 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getUpdatedAppCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getUpdatedAppCfg() }
      * </ul>
      * @param arrStrReadedCfg
-     * @return {@link ru.newcontrol.ncfv.NcParamFv }
+     * @return {@link ru.newcontrol.ncfv.ZPINcParamFv }
      */
-    private static NcParamFv parseEtcCfg(ArrayList<String> arrStrReadedCfg){
-        NcParamFv defaultWorkCfg = getDefaultCfgValues();
-        NcParamFv paramReadedCfg;
+    private static ZPINcParamFv parseEtcCfg(ArrayList<String> arrStrReadedCfg){
+        ZPINcParamFv defaultWorkCfg = getDefaultCfgValues();
+        ZPINcParamFv paramReadedCfg;
         String indexPathTmp = defaultWorkCfg.indexPath;
         String keywordsOutOfSearchTmp = defaultWorkCfg.keywordsOutOfSearch;
         String keywordsInSearchTmp = defaultWorkCfg.keywordsInSearch;
@@ -396,7 +396,7 @@ public class ZPINcPreRunFileViewer {
                 }
             }
         }
-        paramReadedCfg = new NcParamFv(
+        paramReadedCfg = new ZPINcParamFv(
             indexPathTmp,
             keywordsOutOfSearchTmp,
             keywordsInSearchTmp,
@@ -417,14 +417,14 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#createNewCfg() }
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getUpdatedAppCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#createNewCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getUpdatedAppCfg() }
      * </ul>
      * @return {@link java.util.ArrayList }
      */
     private static ArrayList<String> getReadedLinesFromEtcCfg(){
-        File fileCfg = NcIdxFileManager.getOrCreateCfgFile();
-        return readCfg(NcIdxFileManager.getStrCanPathFromFile(fileCfg));
+        File fileCfg = ZPINcIdxFileManager.getOrCreateCfgFile();
+        return readCfg(ZPINcIdxFileManager.getStrCanPathFromFile(fileCfg));
     }
     
     protected static ArrayList<String> getEtcCfgLinesFromDisk(){
@@ -434,8 +434,8 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#createCfg(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#updateEtcCfg(java.util.ArrayList) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#createCfg(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#updateEtcCfg(java.util.ArrayList) }
      * </ul>
      * @return {@link java.util.ArrayList }
      */
@@ -482,20 +482,20 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#createCfg(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#createCfg(java.lang.String) }
      * </ul>
      * @return {@link java.util.ArrayList }
      */
     private static ArrayList<String> getDefaultParametersForCfg(){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         ArrayList<String> strTextRemark = new ArrayList<String>();
-        NcParamFv defaultValues = getDefaultCfgValues();
+        ZPINcParamFv defaultValues = getDefaultCfgValues();
         strTextRemark.add("indexpath=" + defaultValues.indexPath);
         strTextRemark.add("file_name_keywords_out_of_search=" + defaultValues.keywordsOutOfSearch);
         strTextRemark.add("file_name_keywords_in_search=" + defaultValues.keywordsInSearch);
         strTextRemark.add("file_name_dir_out_of_index=" + defaultValues.dirOutOfIndex);
         strTextRemark.add("file_name_dir_in_index=" + defaultValues.dirInIndex);
-        for( Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet() ){
+        for( Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet() ){
             strTextRemark.add("##################################################");
             strTextRemark.add("#_|_" + "disk_id_" + itemDisk.getValue().diskID + "=" + itemDisk.getValue().diskID);
             strTextRemark.add("#_|_" + "file_store_" + itemDisk.getValue().diskID + "=" + itemDisk.getValue().strFileStore);
@@ -515,7 +515,7 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getOrCreateCfgFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getOrCreateCfgFile() }
      * </ul>
      * @param ncStrCfgPath
      */
@@ -537,26 +537,26 @@ public class ZPINcPreRunFileViewer {
         }
         catch(IOException ex){
             String strForExit =
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
-                + NcStrServiceMsg.NOT_WRITE_INTO_FILE.getStr()
-                + NcStrVarDescription.STR_CFG_PATH.getStr()
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
+                + ZPINcStrServiceMsg.NOT_WRITE_INTO_FILE.getStr()
+                + ZPINcStrVarDescription.STR_CFG_PATH.getStr()
                 + strCfgPath;
-            NcAppHelper.outMessage(strForExit);
-            NcAppHelper.appExitWithMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
+            ZPINcAppHelper.outMessage(strForExit);
+            ZPINcAppHelper.appExitWithMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
                 + ex.getMessage());
         }
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getUpdatedAppCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getUpdatedAppCfg() }
      * </ul>
      * @param linesParametersForUpdateCfg
      * @return {@link java.util.ArrayList }
      */
     private static int updateEtcCfg(ArrayList<String> linesParametersForUpdateCfg){
-        String strCfgPath = NcIdxFileManager.getStrCanPathFromFile(NcIdxFileManager.getOrCreateCfgFile());
+        String strCfgPath = ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcIdxFileManager.getOrCreateCfgFile());
         ArrayList<String> strTextRemark = getRemTextForCfgFile();
         ArrayList<String> strParameters = linesParametersForUpdateCfg;
         int lines = 0;
@@ -577,13 +577,13 @@ public class ZPINcPreRunFileViewer {
         }
         catch(IOException ex){
             String strForExit =
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
-                + NcStrServiceMsg.NOT_WRITE_INTO_FILE.getStr()
-                + NcStrVarDescription.STR_CFG_PATH.getStr()
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
+                + ZPINcStrServiceMsg.NOT_WRITE_INTO_FILE.getStr()
+                + ZPINcStrVarDescription.STR_CFG_PATH.getStr()
                 + strCfgPath;
-            NcAppHelper.outMessage(strForExit);
-            NcAppHelper.appExitWithMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
+            ZPINcAppHelper.outMessage(strForExit);
+            ZPINcAppHelper.appExitWithMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
                 + ex.getMessage());
         }
         return lines;
@@ -592,13 +592,13 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getUpdatedAppCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getUpdatedAppCfg() }
      * </ul>
      * @param linesValues
      * @return {@link java.util.ArrayList }
      */
-    private static ArrayList<String> getLinesParametersForUpdateCfg(NcParamFv linesValues){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+    private static ArrayList<String> getLinesParametersForUpdateCfg(ZPINcParamFv linesValues){
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         ArrayList<String> strTextRemark = new ArrayList<String>();
         
         strTextRemark.add("indexpath=" + linesValues.indexPath);
@@ -606,7 +606,7 @@ public class ZPINcPreRunFileViewer {
         strTextRemark.add("file_name_keywords_in_search=" + linesValues.keywordsInSearch);
         strTextRemark.add("file_name_dir_out_of_index=" + linesValues.dirOutOfIndex);
         strTextRemark.add("file_name_dir_in_index=" + linesValues.dirInIndex);
-        for( Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet() ){
+        for( Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet() ){
             strTextRemark.add("##################################################");
             strTextRemark.add("#_|_" + "disk_id_" + itemDisk.getValue().diskID + "=" + itemDisk.getValue().diskID);
             strTextRemark.add("#_|_" + "file_store_" + itemDisk.getValue().diskID + "=" + itemDisk.getValue().strFileStore);
@@ -627,7 +627,7 @@ public class ZPINcPreRunFileViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getReadedLinesFromEtcCfg() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcPreRunFileViewer#getReadedLinesFromEtcCfg() }
      * </ul>
      * @param ncStrCfgPath
      * @return {@link java.util.ArrayList }
@@ -651,8 +651,8 @@ public class ZPINcPreRunFileViewer {
             }
         }
          catch(IOException ex){
-            NcAppHelper.logException(
-                NcPreRunFileViewer.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                ZPINcPreRunFileViewer.class.getCanonicalName(), ex);
         }   
         return strForReturn;
     }

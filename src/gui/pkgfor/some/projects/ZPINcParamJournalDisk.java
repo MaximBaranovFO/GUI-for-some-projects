@@ -37,9 +37,9 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcAppHelper#outPutToConsoleDiskInfo() }
-     * <li>{@link ru.newcontrol.ncfv.NcAppHelper#getNcSysProperties() }
-     * <li>{@link ru.newcontrol.ncfv.NcAppHelper#getNcDiskInfoForMaxFreeSpace() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcAppHelper#outPutToConsoleDiskInfo() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcAppHelper#getNcSysProperties() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcAppHelper#getZPINcDiskInfoForMaxFreeSpace() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#getDefaultCfgValues() }
      * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#initDiskInfo() }
@@ -48,10 +48,10 @@ public class ZPINcParamJournalDisk {
      * </ul>
      * @return
      */
-    protected static TreeMap<Long, NcDiskInfo> getFromJournalDiskOrCreateIt(){
-        TreeMap<Long, NcDiskInfo> readedFromFileDiskInfo;
+    protected static TreeMap<Long, ZPINcDiskInfo> getFromJournalDiskOrCreateIt(){
+        TreeMap<Long, ZPINcDiskInfo> readedFromFileDiskInfo;
         if( !fileJournalDiskExist() ){
-            TreeMap<Long, NcDiskInfo> sysDisk = NcDiskUtils.getDiskInfo();
+            TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcDiskUtils.getDiskInfo();
             int count = fileJournalDiskWrite(sysDisk);
             return sysDisk;
         }
@@ -67,12 +67,12 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#getFromJournalDiskOrCreateIt() }
      * </ul>
      * @param inFuncDiskInfo
      * @return
      */
-    private static boolean needToUpdateJournalDisk(TreeMap<Long, NcDiskInfo> inFuncDiskInfo){
+    private static boolean needToUpdateJournalDisk(TreeMap<Long, ZPINcDiskInfo> inFuncDiskInfo){
         FileSystem fs = FileSystems.getDefault();
         long tmpTotalSpace = 0;
         boolean totalSpaceDisk = false;
@@ -82,11 +82,11 @@ public class ZPINcParamJournalDisk {
             try {
                 tmpTotalSpace = itemFS.getTotalSpace();
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                    NcParamJournalDisk.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcParamJournalDisk.class.getCanonicalName(), ex);
             }
             fsName = itemFS.name();
-            for( Map.Entry<Long, NcDiskInfo> itemInFuncDisk : inFuncDiskInfo.entrySet() ){
+            for( Map.Entry<Long, ZPINcDiskInfo> itemInFuncDisk : inFuncDiskInfo.entrySet() ){
                 totalSpaceDisk = totalSpaceDisk || (tmpTotalSpace == itemInFuncDisk.getValue().totalSpace);
                 totalName = totalName || ( fsName.equalsIgnoreCase(itemInFuncDisk.getValue().strFileStoreName) );
             }
@@ -100,13 +100,13 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#getFromJournalDiskOrCreateIt() }
      * </ul>
      * @return
      */
     private static boolean updateRecordInJournalDisk(){
-        TreeMap<Long, NcDiskInfo> readedFromFileDiskInfo;
-        TreeMap<Long, NcDiskInfo> writeToFileDiskInfo;
+        TreeMap<Long, ZPINcDiskInfo> readedFromFileDiskInfo;
+        TreeMap<Long, ZPINcDiskInfo> writeToFileDiskInfo;
         readedFromFileDiskInfo = fileJournalDiskRead();
         writeToFileDiskInfo = appendRecordInJournalDisk(readedFromFileDiskInfo);
         if( readedFromFileDiskInfo.size() == writeToFileDiskInfo.size() ){
@@ -121,10 +121,10 @@ public class ZPINcParamJournalDisk {
      * @param addRecordToFileDiskInfo
      * @return
      */
-    private static boolean addRecordInJournalDisk(NcDiskInfo addRecordToFileDiskInfo){
-        TreeMap<Long, NcDiskInfo> readedFromFileDiskInfo;
-        TreeMap<Long, NcDiskInfo> writeToFileDiskInfo;
-        writeToFileDiskInfo = new TreeMap<Long, NcDiskInfo>();
+    private static boolean addRecordInJournalDisk(ZPINcDiskInfo addRecordToFileDiskInfo){
+        TreeMap<Long, ZPINcDiskInfo> readedFromFileDiskInfo;
+        TreeMap<Long, ZPINcDiskInfo> writeToFileDiskInfo;
+        writeToFileDiskInfo = new TreeMap<Long, ZPINcDiskInfo>();
         readedFromFileDiskInfo = fileJournalDiskRead();
         writeToFileDiskInfo.putAll(readedFromFileDiskInfo);
         writeToFileDiskInfo.put(readedFromFileDiskInfo.lastKey() + 1, addRecordToFileDiskInfo);
@@ -144,14 +144,14 @@ public class ZPINcParamJournalDisk {
      * @return
      */
     protected static boolean updateUserAliasInJournalDisk(TreeMap<Integer, String> diskUserAlias){
-        TreeMap<Long, NcDiskInfo> readedFromFileDiskInfo;
-        TreeMap<Long, NcDiskInfo> writeToFileDiskInfo;
+        TreeMap<Long, ZPINcDiskInfo> readedFromFileDiskInfo;
+        TreeMap<Long, ZPINcDiskInfo> writeToFileDiskInfo;
         readedFromFileDiskInfo = fileJournalDiskRead();
-        writeToFileDiskInfo = new TreeMap<Long, NcDiskInfo>();
+        writeToFileDiskInfo = new TreeMap<Long, ZPINcDiskInfo>();
         writeToFileDiskInfo.putAll(readedFromFileDiskInfo);
         boolean boolAliasChanged = false;
         for( Map.Entry<Integer, String> itemAlias : diskUserAlias.entrySet() ){
-            NcDiskInfo toChangeDiskInfo = writeToFileDiskInfo.get((long) itemAlias.getKey());
+            ZPINcDiskInfo toChangeDiskInfo = writeToFileDiskInfo.get((long) itemAlias.getKey());
             if( toChangeDiskInfo != null ){
                 toChangeDiskInfo.humanAlias = itemAlias.getValue();
                 writeToFileDiskInfo.put((long) itemAlias.getKey(), toChangeDiskInfo);
@@ -171,23 +171,23 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#updateRecordInJournalDisk() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#updateRecordInJournalDisk() }
      * </ul>
      * @param inFuncDiskInfo
      * @return
      */
-    private static TreeMap<Long, NcDiskInfo> appendRecordInJournalDisk(TreeMap<Long, NcDiskInfo> inFuncDiskInfo){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcDiskUtils.getDiskInfo();
-        TreeMap<Long, NcDiskInfo> listToWriteDiskInfo = new TreeMap<Long, NcDiskInfo>();
-        TreeMap<Long, NcDiskInfo> forAppend = new TreeMap<Long, NcDiskInfo>();
+    private static TreeMap<Long, ZPINcDiskInfo> appendRecordInJournalDisk(TreeMap<Long, ZPINcDiskInfo> inFuncDiskInfo){
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcDiskUtils.getDiskInfo();
+        TreeMap<Long, ZPINcDiskInfo> listToWriteDiskInfo = new TreeMap<Long, ZPINcDiskInfo>();
+        TreeMap<Long, ZPINcDiskInfo> forAppend = new TreeMap<Long, ZPINcDiskInfo>();
         boolean checkOne = false;
         boolean checkTwo = false;
         boolean checkTree = false;
         boolean needCheckTree = false;
         boolean checkFour = false;
         listToWriteDiskInfo.putAll(inFuncDiskInfo);
-        for( Map.Entry<Long, NcDiskInfo> itemInFuncDisk : inFuncDiskInfo.entrySet() ){
-            for( Map.Entry<Long, NcDiskInfo> itemSysDisk : sysDisk.entrySet() ){
+        for( Map.Entry<Long, ZPINcDiskInfo> itemInFuncDisk : inFuncDiskInfo.entrySet() ){
+            for( Map.Entry<Long, ZPINcDiskInfo> itemSysDisk : sysDisk.entrySet() ){
                 if( itemSysDisk.getValue().strFileStoreName.equalsIgnoreCase(itemInFuncDisk.getValue().strFileStoreName) ){
                     checkOne = true;
                 }
@@ -224,14 +224,14 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#getFromJournalDiskOrCreateIt() }
      * </ul>
      * @return
      */
     private static boolean fileJournalDiskExist(){
-        String strDataInAppDir = NcIdxFileManager.getJournalDiskPath();
+        String strDataInAppDir = ZPINcIdxFileManager.getJournalDiskPath();
         File fileJornalDisk = new File(strDataInAppDir);
-        if( !NcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
+        if( !ZPINcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
             return false;
         }
         return true;
@@ -240,19 +240,19 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#updateRecordInJournalDisk() }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#addRecordInJournalDisk(ru.newcontrol.ncfv.NcDiskInfo) }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#updateUserAliasInJournalDisk(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#getFromJournalDiskOrCreateIt() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#updateRecordInJournalDisk() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#addRecordInJournalDisk(ru.newcontrol.ncfv.ZPINcDiskInfo) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#updateUserAliasInJournalDisk(java.util.TreeMap) }
      * </ul>
      * @param inFuncSysDisk
      * @return
      */
-    private static int fileJournalDiskWrite(TreeMap<Long, NcDiskInfo> inFuncSysDisk){
-        String strDataInAppDir = NcIdxFileManager.getJournalDiskPath();
+    private static int fileJournalDiskWrite(TreeMap<Long, ZPINcDiskInfo> inFuncSysDisk){
+        String strDataInAppDir = ZPINcIdxFileManager.getJournalDiskPath();
         
-        if( !NcDiskUtils.isDiskInfoRecordsHashTure(inFuncSysDisk) ){
-            NcAppHelper.appExitWithMessage("Can't write disk info to journal, error in records hash");
+        if( !ZPINcDiskUtils.isDiskInfoRecordsHashTure(inFuncSysDisk) ){
+            ZPINcAppHelper.appExitWithMessage("Can't write disk info to journal, error in records hash");
             return -1;
         }
         try(ObjectOutputStream oos = 
@@ -262,8 +262,8 @@ public class ZPINcParamJournalDisk {
             oos.writeObject(inFuncSysDisk);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcParamJournalDisk.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcParamJournalDisk.class.getCanonicalName(), ex);
             return -1;
         } 
         return inFuncSysDisk.size();
@@ -272,31 +272,31 @@ public class ZPINcParamJournalDisk {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#updateRecordInJournalDisk() }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#addRecordInJournalDisk(ru.newcontrol.ncfv.NcDiskInfo) }
-     * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#updateUserAliasInJournalDisk(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#getFromJournalDiskOrCreateIt() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#updateRecordInJournalDisk() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#addRecordInJournalDisk(ru.newcontrol.ncfv.ZPINcDiskInfo) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamJournalDisk#updateUserAliasInJournalDisk(java.util.TreeMap) }
      * </ul>
      * @return
      */
-    private static TreeMap<Long, NcDiskInfo> fileJournalDiskRead(){
-        TreeMap<Long, NcDiskInfo> readedDiskInfo;
-        String strDataInAppDir = NcIdxFileManager.getJournalDiskPath();
+    private static TreeMap<Long, ZPINcDiskInfo> fileJournalDiskRead(){
+        TreeMap<Long, ZPINcDiskInfo> readedDiskInfo;
+        String strDataInAppDir = ZPINcIdxFileManager.getJournalDiskPath();
         File fileJornalDisk = new File(strDataInAppDir);
-        if( !NcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
-            return new TreeMap<Long, NcDiskInfo>();
+        if( !ZPINcIdxFileManager.fileExistRWAccessChecker(fileJornalDisk) ){
+            return new TreeMap<Long, ZPINcDiskInfo>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strDataInAppDir)))
         {
-            readedDiskInfo = (TreeMap<Long, NcDiskInfo>)ois.readObject();
-            if( !NcDiskUtils.isDiskInfoRecordsHashTure(readedDiskInfo) ){
-                NcAppHelper.appExitWithMessage("Can't read disk info from journal, error in records hash");
+            readedDiskInfo = (TreeMap<Long, ZPINcDiskInfo>)ois.readObject();
+            if( !ZPINcDiskUtils.isDiskInfoRecordsHashTure(readedDiskInfo) ){
+                ZPINcAppHelper.appExitWithMessage("Can't read disk info from journal, error in records hash");
             }
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcParamJournalDisk.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDiskInfo>();
+            ZPINcAppHelper.logException(
+                    ZPINcParamJournalDisk.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDiskInfo>();
         } 
         return readedDiskInfo;
     }

@@ -27,9 +27,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerRunnableWrite implements Runnable {
-    private AppLoggerController busManager;
+    private ZPIAppLoggerController busManager;
     public ZPIAppLoggerRunnableWrite(
-            AppLoggerController outerManagerForThis
+            ZPIAppLoggerController outerManagerForThis
     ) {
         super();
         
@@ -38,7 +38,7 @@ public class ZPIAppLoggerRunnableWrite implements Runnable {
         
         
         String outCreate = "*** ||| *** ||| *** create log writer *** ||| *** ||| ***";
-        NcAppHelper.outToConsoleIfDevAndParamTrue(outCreate, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_CREATE);
+        ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outCreate, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_CREATE);
     }
     
     @Override
@@ -46,11 +46,11 @@ public class ZPIAppLoggerRunnableWrite implements Runnable {
         ReentrantLock forRunnerWriterJoblck = new ReentrantLock();
         forRunnerWriterJoblck.lock();
         try{
-            AppLoggerController managerForThis = busManager;
+            ZPIAppLoggerController managerForThis = busManager;
             String outGetNewJob = "managerForThis.getIdJob().toString() " 
                     + managerForThis.getIdJob().toString();
             
-            NcAppHelper.outToConsoleIfDevAndParamTrue(outGetNewJob, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_GET_NEW_JOB);
+            ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outGetNewJob, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_GET_NEW_JOB);
             
             if( managerForThis != null ){
                 String outGetNotNullNewJob = "managerForThis.getIdJob().toString() "
@@ -69,23 +69,23 @@ public class ZPIAppLoggerRunnableWrite implements Runnable {
                     + managerForThis.currentWriterJob().isToHTMLJobDone()
                     + " managerForThis.currentWriterJob().isBlankObject() "
                     + managerForThis.currentWriterJob().isBlankObject();
-                NcAppHelper.outToConsoleIfDevAndParamTrue(outGetNotNullNewJob, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_VIEW_NEW_JOB_PARAM);
+                ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outGetNotNullNewJob, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_VIEW_NEW_JOB_PARAM);
                 
-                AppLoggerStateWriter currentJob = managerForThis.currentWriterJob();
+                ZPIAppLoggerStateWriter currentJob = managerForThis.currentWriterJob();
                 if( !currentJob.isToHTMLJobDone() ){
                     ArrayList<String> forRecord = 
-                            AppObjectsBusHelper.cleanBusArrayBlockingToArrayString(
+                            ZPIAppObjectsBusHelper.cleanBusArrayBlockingToArrayString(
                                     currentJob.getPartLinesForWrite());
 
                     String outViewSizeNewJob = "report writerRunnable size for " 
                             + forRecord.size()
                             + " write to "
                             + currentJob.getToHTMLLogFileName().toString();
-                    NcAppHelper.outToConsoleIfDevAndParamTrue(outViewSizeNewJob, AppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_VIEW_SIZE_JOB_PARAM);
+                    ZPINcAppHelper.outToConsoleIfDevAndParamTrue(outViewSizeNewJob, ZPIAppConstants.LOG_LEVEL_IS_DEV_TO_CONS_HTML_JOB_WRITER_RUNNABLE_VIEW_SIZE_JOB_PARAM);
 
                     //try {
                         if( currentJob.isToHtmlFileNameSet() ){
-                            AppFileOperationsSimple.writeToFile(currentJob.getToHTMLLogFileName(), forRecord);
+                            ZPIAppFileOperationsSimple.writeToFile(currentJob.getToHTMLLogFileName(), forRecord);
                             //Files.write(currentJob.getToHTMLLogFileName(), forRecord, Charset.forName("UTF-8"));
                             currentJob.setFalseToHTMLLogFileNameChanged();
                         }

@@ -24,13 +24,13 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerInfoToReport {
-    protected static AppLoggerStateReader initReaderNewJobLite(
+    protected static ZPIAppLoggerStateReader initReaderNewJobLite(
             Path fileNameForWrite
     ){
         String instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         
-        AppLoggerStateReader createNewReaderJob = AppLoggerRuleHelper.createNewReaderJob();
+        ZPIAppLoggerStateReader createNewReaderJob = ZPIAppLoggerRuleHelper.createNewReaderJob();
         createNewReaderJob.setTrueInitStartRead();
         createNewReaderJob.setThreadGroupName("grReader-" + instanceStartTimeWithMS + "-" + UUID.randomUUID().toString());
         createNewReaderJob.setThreadName("runReader-" + instanceStartTimeWithMS + "-" + UUID.randomUUID().toString());

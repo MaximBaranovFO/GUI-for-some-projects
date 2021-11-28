@@ -24,13 +24,13 @@ import java.util.concurrent.ArrayBlockingQueue;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerInfoToTables {
-    protected static AppLoggerStateWriter initWriterNewJobLite(
+    protected static ZPIAppLoggerStateWriter initWriterNewJobLite(
             ArrayBlockingQueue<String> partLinesForWrite,
             Path fileNameForWrite
     ){
         String instanceStartTimeWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
-        AppLoggerStateWriter createNewWriterJob = AppLoggerRuleHelper.createNewWriterJob();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ZPIAppLoggerStateWriter createNewWriterJob = ZPIAppLoggerRuleHelper.createNewWriterJob();
         createNewWriterJob.setTrueInitStartWrite();
         createNewWriterJob.setPartLinesForWrite(partLinesForWrite);
         createNewWriterJob.setThreadGroupName("grWriter-" + instanceStartTimeWithMS + "-" + UUID.randomUUID().toString());
@@ -39,13 +39,13 @@ public class ZPIAppLoggerInfoToTables {
         createNewWriterJob.setTrueInitEndWrite();
         return createNewWriterJob;
     }
-    protected static AppLoggerStateWriter initWriterNewJob(
+    protected static ZPIAppLoggerStateWriter initWriterNewJob(
             ArrayBlockingQueue<String> partLinesForWrite,
             String newJobThreadGroupName,
             String writeToHtmlByThreadName,
             Path fileNameForWrite
     ){
-        AppLoggerStateWriter createNewWriterJob = AppLoggerRuleHelper.createNewWriterJob();
+        ZPIAppLoggerStateWriter createNewWriterJob = ZPIAppLoggerRuleHelper.createNewWriterJob();
         createNewWriterJob.setTrueInitStartWrite();
         createNewWriterJob.setPartLinesForWrite(partLinesForWrite);
         createNewWriterJob.setThreadGroupName(newJobThreadGroupName);

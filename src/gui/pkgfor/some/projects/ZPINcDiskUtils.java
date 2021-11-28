@@ -29,6 +29,7 @@ import java.util.TreeMap;
 import javax.xml.bind.DatatypeConverter;
 
 
+
 /**
  *
  * @author Администратор
@@ -36,7 +37,7 @@ import javax.xml.bind.DatatypeConverter;
 public class ZPINcDiskUtils {
     private static final long Kb = 1024;
     private static final long Mb = 1024 * 1024;
-    private static TreeMap<Long, NcDiskInfo> ncDiskInfo = getDiskInfo();
+    private static TreeMap<Long, ZPINcDiskInfo> ncDiskInfo = getDiskInfo();
     
     /**
      *
@@ -72,7 +73,7 @@ public class ZPINcDiskUtils {
             }
         }
         catch(IOException ex) {
-            NcAppHelper.logException(NcDiskUtils.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcDiskUtils.class.getCanonicalName(), ex);
         }
         return result.trim();
     }
@@ -80,7 +81,7 @@ public class ZPINcDiskUtils {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcDiskUtils#NcDiskUtils() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDiskUtils#ZPINcDiskUtils() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#getFromJournalDiskOrCreateIt() }
      * <li>{@link ru.newcontrol.ncfv.NcParamJournalDisk#appendRecordInJournalDisk(java.util.TreeMap) }
@@ -88,14 +89,14 @@ public class ZPINcDiskUtils {
      * Get now information about disks in the system
      * @return 
      */
-    protected static TreeMap<Long, NcDiskInfo> getDiskInfo(){
-        TreeMap<Long, NcDiskInfo> toRetDI = new TreeMap<Long, NcDiskInfo>();
+    protected static TreeMap<Long, ZPINcDiskInfo> getDiskInfo(){
+        TreeMap<Long, ZPINcDiskInfo> toRetDI = new TreeMap<Long, ZPINcDiskInfo>();
         long diskID = 0;
         try {
             FileSystem fs = FileSystems.getDefault();
             
             for (FileStore store : fs.getFileStores()) {
-                if(NcAppHelper.isWindows()){
+                if(ZPINcAppHelper.isWindows()){
                     
                     char cLet = getDiskLetterFromFileStore(store);
                     long dSN = 0;
@@ -104,7 +105,7 @@ public class ZPINcDiskUtils {
                     }
                     
                     String strHexDsn = Long.toHexString(dSN);
-                    NcDiskInfo cDI = new NcDiskInfo(
+                    ZPINcDiskInfo cDI = new ZPINcDiskInfo(
                             diskID, 
                             dSN,
                             strHexDsn,
@@ -122,7 +123,7 @@ public class ZPINcDiskUtils {
                     toRetDI.put(diskID, cDI);
                 }
                 else{
-                    NcDiskInfo cDI = new NcDiskInfo(
+                    ZPINcDiskInfo cDI = new ZPINcDiskInfo(
                             diskID, 
                             0,
                             "",
@@ -143,13 +144,13 @@ public class ZPINcDiskUtils {
                     diskID++;
             }
         } catch (IOException ex) {
-                NcAppHelper.logException(NcDiskUtils.class.getCanonicalName(), ex);
-                return new TreeMap<Long, NcDiskInfo>();
+                ZPINcAppHelper.logException(ZPINcDiskUtils.class.getCanonicalName(), ex);
+                return new TreeMap<Long, ZPINcDiskInfo>();
         }
-        boolean isDiskHashTrue = NcDiskUtils.isDiskInfoRecordsHashTure(toRetDI);
+        boolean isDiskHashTrue = ZPINcDiskUtils.isDiskInfoRecordsHashTure(toRetDI);
         if( !isDiskHashTrue ){
-            NcAppHelper.appExitWithMessage("Can't get and create disk info, error in records hash");
-            return new TreeMap<Long, NcDiskInfo>();
+            ZPINcAppHelper.appExitWithMessage("Can't get and create disk info, error in records hash");
+            return new TreeMap<Long, ZPINcDiskInfo>();
         }
         return toRetDI;
     }
@@ -157,7 +158,7 @@ public class ZPINcDiskUtils {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcDiskUtils#getDiskInfo() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDiskUtils#getDiskInfo() }
      * </ul>
      * @param store
      * @return
@@ -166,7 +167,7 @@ public class ZPINcDiskUtils {
         String forProcess = store.toString().toUpperCase();
         
         char cLet = '#';
-        if(NcAppHelper.isWindows()){
+        if(ZPINcAppHelper.isWindows()){
             if( forProcess.indexOf(':') > -1 ){
                 String  strDiskLetter = forProcess.substring(forProcess.indexOf(":") - 1, forProcess.indexOf(":"));
                 
@@ -186,7 +187,7 @@ public class ZPINcDiskUtils {
     private static char getDiskLetterFromPath(String strPath){
         String forProcess = strPath.toUpperCase().toString();
         char cLet = '#';
-        if(NcAppHelper.isWindows()){
+        if(ZPINcAppHelper.isWindows()){
             if(forProcess.indexOf(':') == 1){
                 if( forProcess.matches("[A-Z]") ){
                     cLet = forProcess.charAt(0);
@@ -198,7 +199,7 @@ public class ZPINcDiskUtils {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcDiskUtils#getDiskInfo() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDiskUtils#getDiskInfo() }
      * </ul>
      * @param indSN
      * @return 
@@ -209,13 +210,13 @@ public class ZPINcDiskUtils {
             outsn = Long.parseLong(indSN);
         }
         catch(NumberFormatException ex){
-            NcAppHelper.logException(NcDiskUtils.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcDiskUtils.class.getCanonicalName(), ex);
             try{
                 outsn = DatatypeConverter.parseLong(indSN);
             }
             catch(NumberFormatException extwo){
-                NcAppHelper.logException(
-                        NcDiskUtils.class.getCanonicalName(), extwo);
+                ZPINcAppHelper.logException(
+                        ZPINcDiskUtils.class.getCanonicalName(), extwo);
                 return 0;
             }
         }
@@ -227,13 +228,13 @@ public class ZPINcDiskUtils {
      * for additional option in detect may be used totalSpace
      * @param ncFile
      * @return
-     * diskID provided by class {@link ru.newcontrol.ncfv.NcDiskInfo#diskID NcDiskInfo}
+     * diskID provided by class {@link ru.newcontrol.ncfv.ZPINcDiskInfo#diskID ZPINcDiskInfo}
      */
     private static long getDiskIDbyLetterTotalSpace(File ncFile){
-        String strForDisk = NcIdxFileManager.getStrCanPathFromFile(ncFile).toUpperCase().substring(0);
+        String strForDisk = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile).toUpperCase().substring(0);
         char ncDiskLetterFromPath = strForDisk.charAt(0);
         long ncNowStrorageIndex = -1;
-        for(Map.Entry<Long, NcDiskInfo> ncOneOfDisk : ncDiskInfo.entrySet()){
+        for(Map.Entry<Long, ZPINcDiskInfo> ncOneOfDisk : ncDiskInfo.entrySet()){
             if ((ncOneOfDisk.getValue().diskLetter == ncDiskLetterFromPath)
                     && (ncFile.exists())
                     && (ncOneOfDisk.getValue().totalSpace == ncFile.getTotalSpace())){
@@ -260,7 +261,7 @@ public class ZPINcDiskUtils {
     protected static String getProgramAlias(long diskID){
         return "DiskAliasNumber-" + diskID + "-" + System.nanoTime();
     }
-    protected static boolean isNcDiskInfoHashTrue(NcDiskInfo inFuncData){
+    protected static boolean isZPINcDiskInfoHashTrue(ZPINcDiskInfo inFuncData){
         return inFuncData.reordHash == (""
             + inFuncData.diskID
             + inFuncData.longSerialNumber
@@ -278,18 +279,18 @@ public class ZPINcDiskUtils {
             + inFuncData.isReadonly
             + inFuncData.recordCreationTime).hashCode();
     }
-    protected static boolean isDiskInfoRecordsHashTure(TreeMap<Long, NcDiskInfo> inFuncData){
+    protected static boolean isDiskInfoRecordsHashTure(TreeMap<Long, ZPINcDiskInfo> inFuncData){
         boolean isRecordHash = true;
-        for(Map.Entry<Long, NcDiskInfo> itemDisk : inFuncData.entrySet() ){
-            boolean boolRecHashTrue = isNcDiskInfoHashTrue(itemDisk.getValue());
+        for(Map.Entry<Long, ZPINcDiskInfo> itemDisk : inFuncData.entrySet() ){
+            boolean boolRecHashTrue = isZPINcDiskInfoHashTrue(itemDisk.getValue());
             if( !boolRecHashTrue ){
-                printToConsoleNcDiskInfo(itemDisk.getValue());
+                printToConsoleZPINcDiskInfo(itemDisk.getValue());
                 isRecordHash = false;
             }
         }
         return isRecordHash;
     }
-    protected static void printToConsoleNcDiskInfo(NcDiskInfo inFuncData){
+    protected static void printToConsoleZPINcDiskInfo(ZPINcDiskInfo inFuncData){
         
         int calcHash = (""
             + inFuncData.diskID
@@ -307,7 +308,7 @@ public class ZPINcDiskUtils {
             + inFuncData.unAllocatedSpace
             + inFuncData.isReadonly
             + inFuncData.recordCreationTime).hashCode();
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
         + "ID:\t" + inFuncData.diskID
         + "\nCalculated hash of record: " + calcHash
         + "\nIn record hash: " + inFuncData.reordHash

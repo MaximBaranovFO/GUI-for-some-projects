@@ -20,11 +20,11 @@ package gui.pkgfor.some.projects;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerRuleHelper {
-    protected static AppLoggerStateReader createNewReaderJob(){
-        return new AppLoggerStateReader();
+    protected static ZPIAppLoggerStateReader createNewReaderJob(){
+        return new ZPIAppLoggerStateReader();
     }
-    protected static AppLoggerStateWriter createNewWriterJob(){
-        return new AppLoggerStateWriter();
+    protected static ZPIAppLoggerStateWriter createNewWriterJob(){
+        return new ZPIAppLoggerStateWriter();
     }
     /**
      * check for logger job bus writer or reader, when all job is done, then run new job (say start for ready thread)

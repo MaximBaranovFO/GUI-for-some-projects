@@ -32,29 +32,29 @@ public class ZPIAppFileStorageIndex {
     private ConcurrentSkipListMap<String, Map<String, String>> storagesMap;
     private ArrayList<String> listOfPrefix;
     public ZPIAppFileStorageIndex() {
-        this.storagesMap = AppFileStorageIndex.getStoragesMap();
-        this.listOfPrefix = AppFileStorageIndex.getListOfPrefix();
+        this.storagesMap = ZPIAppFileStorageIndex.getStoragesMap();
+        this.listOfPrefix = ZPIAppFileStorageIndex.getListOfPrefix();
     }
     protected URI byPrefixGetUri(String prefixOfStorage){
-        URI uriFromMapByPrefix = AppFileStorageIndex.getUriFromMapByPrefix(this.storagesMap, prefixOfStorage);
+        URI uriFromMapByPrefix = ZPIAppFileStorageIndex.getUriFromMapByPrefix(this.storagesMap, prefixOfStorage);
         return uriFromMapByPrefix;
     }
     protected Map<String, String> byPrefixGetMap(String prefixOfStorage){
-        Map<String, String> paramMapByPrefix = AppFileStorageIndex.getParamMapByPrefix(this.storagesMap, prefixOfStorage);
+        Map<String, String> paramMapByPrefix = ZPIAppFileStorageIndex.getParamMapByPrefix(this.storagesMap, prefixOfStorage);
         return paramMapByPrefix;
     }
     protected void updateMapForStorages(){
-        this.storagesMap = AppFileStorageIndex.getStoragesMap();
-        this.listOfPrefix = AppFileStorageIndex.getListOfPrefix();
+        this.storagesMap = ZPIAppFileStorageIndex.getStoragesMap();
+        this.listOfPrefix = ZPIAppFileStorageIndex.getListOfPrefix();
     }
     protected ArrayList<String> listOfPrefixes(){
         return this.listOfPrefix;
     }
     
     protected static Path getIndexFolder(){
-        Path appRWEDCheckedPath = AppFileOperationsSimple.getUserHomeRWEDCheckedPath();
-        Path orCreateAnySubDir = AppFileOperationsSimple.getOrCreateAnySubDir(appRWEDCheckedPath, 
-                AppFileNamesConstants.DIR_IDX);
+        Path appRWEDCheckedPath = ZPIAppFileOperationsSimple.getUserHomeRWEDCheckedPath();
+        Path orCreateAnySubDir = ZPIAppFileOperationsSimple.getOrCreateAnySubDir(appRWEDCheckedPath, 
+                ZPIAppFileNamesConstants.DIR_IDX);
         return orCreateAnySubDir;
     }
     /**
@@ -63,26 +63,26 @@ public class ZPIAppFileStorageIndex {
      * @return 
      */
     protected static Map<String, String> buildForStorageByPrefix(String fsPrefixConstant){
-        Path indexFolder = AppFileStorageIndex.getIndexFolder();
+        Path indexFolder = ZPIAppFileStorageIndex.getIndexFolder();
         String prefixWithTime = fsPrefixConstant 
-                + AppFileOperationsSimple.getNowTimeStringWithMS() 
-                + AppFileNamesConstants.FILE_INDEX_EXT;
+                + ZPIAppFileOperationsSimple.getNowTimeStringWithMS() 
+                + ZPIAppFileNamesConstants.FILE_INDEX_EXT;
         Path getStoragePath = Paths.get(indexFolder.toString(), prefixWithTime);
-        Map<String, String> fsPropExistOrCreate = AppFileStorageIndex.getFsPropExist();
-        if( !AppFileOperationsSimple.existAndHasAccessRWNotLink(getStoragePath) ){
-            fsPropExistOrCreate = AppFileStorageIndex.getFsPropCreate();
+        Map<String, String> fsPropExistOrCreate = ZPIAppFileStorageIndex.getFsPropExist();
+        if( !ZPIAppFileOperationsSimple.existAndHasAccessRWNotLink(getStoragePath) ){
+            fsPropExistOrCreate = ZPIAppFileStorageIndex.getFsPropCreate();
         }
         URI uriZipIndexStorage = URI.create("jar:" + getStoragePath.toUri());
-        fsPropExistOrCreate.put(AppFileNamesConstants.FILE_INDEX_KEY_MAP_URI, uriZipIndexStorage.toString());
+        fsPropExistOrCreate.put(ZPIAppFileNamesConstants.FILE_INDEX_KEY_MAP_URI, uriZipIndexStorage.toString());
         return fsPropExistOrCreate;
     }
     protected static Map<String, String> getForStorageByPrefix(Path outerStoragePath){
-        Map<String, String> fsPropExistOrCreate = AppFileStorageIndex.getFsPropExist();
-        if( !AppFileOperationsSimple.existAndHasAccessRWNotLink(outerStoragePath) ){
-            fsPropExistOrCreate = AppFileStorageIndex.getFsPropCreate();
+        Map<String, String> fsPropExistOrCreate = ZPIAppFileStorageIndex.getFsPropExist();
+        if( !ZPIAppFileOperationsSimple.existAndHasAccessRWNotLink(outerStoragePath) ){
+            fsPropExistOrCreate = ZPIAppFileStorageIndex.getFsPropCreate();
         }
         URI uriZipIndexStorage = URI.create("jar:" + outerStoragePath.toUri());
-        fsPropExistOrCreate.put(AppFileNamesConstants.FILE_INDEX_KEY_MAP_URI, uriZipIndexStorage.toString());
+        fsPropExistOrCreate.put(ZPIAppFileNamesConstants.FILE_INDEX_KEY_MAP_URI, uriZipIndexStorage.toString());
         return fsPropExistOrCreate;
     }
     protected static Map<String, String> getFsPropCreate(){
@@ -100,13 +100,13 @@ public class ZPIAppFileStorageIndex {
     }
     protected static ConcurrentSkipListMap<String, Map<String, String>> getStoragesMap(){
         ConcurrentSkipListMap<String, Map<String, String>> toReturnStorages = new ConcurrentSkipListMap<String, Map<String, String>>();
-        ArrayList<String> listOfPrefix = AppFileStorageIndex.getListOfPrefix();
+        ArrayList<String> listOfPrefix = ZPIAppFileStorageIndex.getListOfPrefix();
         for( String itemPrefix : listOfPrefix){
             Boolean haveException = Boolean.FALSE;
             Path fromIndexDirLastStorage;
             try{
-                fromIndexDirLastStorage = AppFileStorageIndex.getFromIndexDirLastStorage(itemPrefix);
-                Map<String, String> forStorageByPrefix = AppFileStorageIndex.getForStorageByPrefix(fromIndexDirLastStorage);
+                fromIndexDirLastStorage = ZPIAppFileStorageIndex.getFromIndexDirLastStorage(itemPrefix);
+                Map<String, String> forStorageByPrefix = ZPIAppFileStorageIndex.getForStorageByPrefix(fromIndexDirLastStorage);
                 toReturnStorages.put(itemPrefix, forStorageByPrefix);
             } catch (IOException ex) {
                 System.err.print(ex.getMessage());
@@ -114,7 +114,7 @@ public class ZPIAppFileStorageIndex {
                 haveException = Boolean.TRUE;
             }
             if( haveException ){
-                Map<String, String> buildForStorageByPrefix = AppFileStorageIndex.buildForStorageByPrefix(itemPrefix);
+                Map<String, String> buildForStorageByPrefix = ZPIAppFileStorageIndex.buildForStorageByPrefix(itemPrefix);
                 toReturnStorages.put(itemPrefix, buildForStorageByPrefix);
                 System.out.println("For prefix " + itemPrefix
                         + " create " + buildForStorageByPrefix.size());
@@ -125,7 +125,7 @@ public class ZPIAppFileStorageIndex {
     protected static URI getUriFromMapByPrefix(ConcurrentSkipListMap<String, Map<String, String>> storagesMap,
             String fsPrefixConstant){
         Map<String, String> getMapWithURI = storagesMap.get(fsPrefixConstant);
-        String strForUri = getMapWithURI.get(AppFileNamesConstants.FILE_INDEX_KEY_MAP_URI);
+        String strForUri = getMapWithURI.get(ZPIAppFileNamesConstants.FILE_INDEX_KEY_MAP_URI);
         URI uriZipIndexStorage = URI.create(strForUri);
         return uriZipIndexStorage;
     }
@@ -134,7 +134,7 @@ public class ZPIAppFileStorageIndex {
         Map<String, String> getMapWithURI = storagesMap.get(fsPrefixConstant);
         Map<String, String> forReturnMap = new HashMap<>();
         for(Map.Entry<String, String> items : getMapWithURI.entrySet()){
-            if( !items.getKey().toLowerCase().contains(AppFileNamesConstants.FILE_INDEX_KEY_MAP_URI.toLowerCase()) ){
+            if( !items.getKey().toLowerCase().contains(ZPIAppFileNamesConstants.FILE_INDEX_KEY_MAP_URI.toLowerCase()) ){
                 forReturnMap.put(new String(items.getKey()), new String(items.getValue()));
             }
         }
@@ -147,11 +147,11 @@ public class ZPIAppFileStorageIndex {
      * @throws IOException 
      */
     protected static Path getFromIndexDirLastStorage(String prefixForFound) throws IOException{
-        Path indexFolder = AppFileStorageIndex.getIndexFolder();
-        ArrayList<Path> filesByMaskFromDir = AppFileOperationsSimple.getFilesByMaskFromDir(indexFolder, 
+        Path indexFolder = ZPIAppFileStorageIndex.getIndexFolder();
+        ArrayList<Path> filesByMaskFromDir = ZPIAppFileOperationsSimple.getFilesByMaskFromDir(indexFolder, 
                 "{" + prefixForFound + "}*");
         if( filesByMaskFromDir.isEmpty() ){
-            throw new IOException(AppFileStorageIndex.class.getCanonicalName() 
+            throw new IOException(ZPIAppFileStorageIndex.class.getCanonicalName() 
                     + " not found storages for prefix " 
                     + prefixForFound);
         }
@@ -165,18 +165,18 @@ public class ZPIAppFileStorageIndex {
     }
     protected static ArrayList<String> getListOfPrefix(){
         ArrayList<String> listForReturn = new ArrayList<String>();
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_TMP);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_TMP);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST);
         //type and depth in dirictories structure
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST);
-        listForReturn.add(AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_WORD);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST);
+        listForReturn.add(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA);
         return listForReturn;
     }
     /**

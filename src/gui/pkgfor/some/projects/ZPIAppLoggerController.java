@@ -27,8 +27,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author wladimirowichbiaran
  */
 public class ZPIAppLoggerController {
-    private AppLoggerStateWriter currentWriterJob;
-    private AppLoggerStateReader currentReaderJob;
+    private ZPIAppLoggerStateWriter currentWriterJob;
+    private ZPIAppLoggerStateReader currentReaderJob;
     private Boolean readerJob;
     private Boolean notExistJob;
     private ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>> readedArrayForLines;
@@ -39,37 +39,37 @@ public class ZPIAppLoggerController {
     }
     
     public ZPIAppLoggerController(ConcurrentSkipListMap<UUID, ArrayBlockingQueue<String>> outerReadBus,
-            AppLoggerStateReader newJob) {
+            ZPIAppLoggerStateReader newJob) {
         this.notExistJob = Boolean.FALSE;
         this.readerJob = Boolean.TRUE;
         this.readedArrayForLines = outerReadBus;
         this.currentReaderJob = newJob;
-        this.currentWriterJob = new AppLoggerStateWriter("blankWriter-" + UUID.randomUUID().toString());
+        this.currentWriterJob = new ZPIAppLoggerStateWriter("blankWriter-" + UUID.randomUUID().toString());
         
     }
-    public ZPIAppLoggerController(AppLoggerStateWriter newJob) {
+    public ZPIAppLoggerController(ZPIAppLoggerStateWriter newJob) {
         this.notExistJob = Boolean.FALSE;
         this.readerJob = Boolean.FALSE;
         this.currentWriterJob = newJob;
-        this.currentReaderJob = new AppLoggerStateReader("blankReader-" + UUID.randomUUID().toString());
+        this.currentReaderJob = new ZPIAppLoggerStateReader("blankReader-" + UUID.randomUUID().toString());
     }
     public ZPIAppLoggerController(Path logForHtmlCurrentLogSubDir,
             ArrayBlockingQueue<String> outputForWrite) {
         this.notExistJob = Boolean.FALSE;
         this.readerJob = Boolean.FALSE;
-        Path pathTable = AppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
-        this.currentWriterJob = AppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
+        Path pathTable = ZPIAppFileOperationsSimple.getNewLogHtmlTableFile(logForHtmlCurrentLogSubDir);
+        this.currentWriterJob = ZPIAppLoggerInfoToTables.initWriterNewJobLite(outputForWrite, pathTable);
         ThreadGroup newJobThreadGroup = new ThreadGroup(currentWriterJob.getThreadGroupName());
         
         Thread writeToHtmlByThread = new Thread(newJobThreadGroup, 
-                new AppLoggerRunnableWrite(this), 
+                new ZPIAppLoggerRunnableWrite(this), 
                 currentWriterJob.getThreadName());
         writeToHtmlByThread.start();
     }
-    protected AppLoggerStateWriter currentWriterJob(){
+    protected ZPIAppLoggerStateWriter currentWriterJob(){
         return this.currentWriterJob;
     }
-    protected AppLoggerStateReader currentReaderJob(){
+    protected ZPIAppLoggerStateReader currentReaderJob(){
         return this.currentReaderJob;
     }
     protected void setStringBusForLogRead(UUID idResult, ArrayBlockingQueue<String> readedFormHtmlLines){

@@ -31,13 +31,13 @@ import javax.swing.table.TableModel;
 
 public class ZPINcSIMASearchResultTableModel implements TableModel {
     private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-    private TreeMap<Long, NcDcIdxDirListToFileAttr> ncDirectoryListReader;
+    private TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDirectoryListReader;
 
     /**
      * Not used
      */
     private ZPINcSIMASearchResultTableModel() {
-        ncDirectoryListReader = NcSrchGetResult.makeSearchByKeyFromFile();
+        ncDirectoryListReader = ZPINcSrchGetResult.makeSearchByKeyFromFile();
     }
     
     /**
@@ -47,9 +47,9 @@ public class ZPINcSIMASearchResultTableModel implements TableModel {
      * </ul>
      */
     protected ZPINcSIMASearchResultTableModel(String strSearchInput) {
-        ncDirectoryListReader = NcSrchGetResult.makeSearchByKeyFromInput(strSearchInput);
+        ncDirectoryListReader = ZPINcSrchGetResult.makeSearchByKeyFromInput(strSearchInput);
     }
-    protected ZPINcSIMASearchResultTableModel(TreeMap<Long, NcDcIdxDirListToFileAttr> ncInFuncData) {
+    protected ZPINcSIMASearchResultTableModel(TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncInFuncData) {
         ncDirectoryListReader = ncInFuncData;
     }
     /**
@@ -61,8 +61,8 @@ public class ZPINcSIMASearchResultTableModel implements TableModel {
      * @param strKeyWordOutSearch
      */
     protected ZPINcSIMASearchResultTableModel(ArrayList<String> strKeyWordInSearch,ArrayList<String>  strKeyWordOutSearch) {
-        NcSearchInIndex ncSearchInIndex = new NcSearchInIndex();
-        ncDirectoryListReader = NcSrchGetResult.makeSearchByKeyFromFile();
+        ZPINcSearchInIndex ncSearchInIndex = new ZPINcSearchInIndex();
+        ncDirectoryListReader = ZPINcSrchGetResult.makeSearchByKeyFromFile();
     }
     
     /**
@@ -153,11 +153,11 @@ public class ZPINcSIMASearchResultTableModel implements TableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         boolean returnNulls = true;
-        NcDcIdxDirListToFileAttr rowForOutPut = null;
+        ZPINcDcIdxDirListToFileAttr rowForOutPut = null;
         //rowForOutPut = ncDirectoryListReader.entrySet().;
         long rowCounter = 0;
         
-        for(Map.Entry<Long, NcDcIdxDirListToFileAttr> itemClean : ncDirectoryListReader.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxDirListToFileAttr> itemClean : ncDirectoryListReader.entrySet()){
             if(rowIndex == rowCounter){
                 rowForOutPut = itemClean.getValue();
             }
@@ -175,7 +175,7 @@ public class ZPINcSIMASearchResultTableModel implements TableModel {
             case 3:
                 return rowForOutPut.diskLetter;
             case 4:
-                if( NcAppHelper.isWindows() ){
+                if( ZPINcAppHelper.isWindows() ){
                     return rowForOutPut.diskLetter + ":\\" + rowForOutPut.path;
                 }
                 else{
@@ -183,7 +183,7 @@ public class ZPINcSIMASearchResultTableModel implements TableModel {
                 }
                 
             case 5:
-                if( NcAppHelper.isWindows() ){
+                if( ZPINcAppHelper.isWindows() ){
                     return (rowForOutPut.diskLetter + ":\\" + rowForOutPut.path).hashCode();
                 }
                 else{

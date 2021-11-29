@@ -32,10 +32,10 @@ public class ZPINcSrchGetResult {
      * @param strInputedKeyWord 
      */
     protected static void outToConsoleSearchByKeyFromInput(String strInputedKeyWord){
-        TreeMap<Long, NcDcIdxDirListToFileAttr> searchedData;
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> searchedData;
         searchedData = makeSearchByKeyFromInput(strInputedKeyWord);
-        for( Map.Entry<Long, NcDcIdxDirListToFileAttr> itemReaded : searchedData.entrySet() ){
-            NcAppHelper.outMessageToConsole(itemReaded.getValue().path);
+        for( Map.Entry<Long, ZPINcDcIdxDirListToFileAttr> itemReaded : searchedData.entrySet() ){
+            ZPINcAppHelper.outMessageToConsole(itemReaded.getValue().path);
         }
     }
     /**
@@ -48,16 +48,16 @@ public class ZPINcSrchGetResult {
      * @param strForSearch
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxDirListToFileAttr> makeSearchByKeyFromInput(String strForSearch){
-        TreeMap<Long, NcDcIdxWordToFile> strHexForInVar = new TreeMap<Long, NcDcIdxWordToFile>();
-        TreeMap<Long, NcDcIdxWordToFile> strDistInResult = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileAttr> makeSearchByKeyFromInput(String strForSearch){
+        TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar = new TreeMap<Long, ZPINcDcIdxWordToFile>();
+        TreeMap<Long, ZPINcDcIdxWordToFile> strDistInResult = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         
-        strHexForInVar.putAll(NcSrchKeyWordInput.getDirListRecordByKeyWord(strForSearch));
-        strDistInResult = NcSrchFileDataCompare.getDistictIDs(strHexForInVar);
+        strHexForInVar.putAll(ZPINcSrchKeyWordInput.getDirListRecordByKeyWord(strForSearch));
+        strDistInResult = ZPINcSrchFileDataCompare.getDistictIDs(strHexForInVar);
 
-        TreeMap<Long, NcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, NcDcIdxDirListToFileAttr>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
         
-        readedData.putAll(NcIdxDirListManager.getByListIDs(strDistInResult));
+        readedData.putAll(ZPINcIdxDirListManager.getByListIDs(strDistInResult));
         
         return readedData;
     }
@@ -68,10 +68,10 @@ public class ZPINcSrchGetResult {
      * </ul>
      */
     protected static void outToConsoleSearchByKeyFromFile(){
-        TreeMap<Long, NcDcIdxDirListToFileAttr> searchedData;
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> searchedData;
         searchedData = makeSearchByKeyFromFile();
-        for( Map.Entry<Long, NcDcIdxDirListToFileAttr> itemReaded : searchedData.entrySet() ){
-            NcAppHelper.outMessageToConsole(itemReaded.getValue().path);
+        for( Map.Entry<Long, ZPINcDcIdxDirListToFileAttr> itemReaded : searchedData.entrySet() ){
+            ZPINcAppHelper.outMessageToConsole(itemReaded.getValue().path);
         }
     }
     /**
@@ -85,34 +85,34 @@ public class ZPINcSrchGetResult {
      * Get KeyWordIn(Out)Search from file and output serch results
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxDirListToFileAttr> makeSearchByKeyFromFile(){
-        TreeMap<Long, NcDcIdxWordToFile> strHexForInVar = new TreeMap<Long, NcDcIdxWordToFile>();
-        TreeMap<Long, NcDcIdxWordToFile> strHexForOutVar = new TreeMap<Long, NcDcIdxWordToFile>();
-        TreeMap<Long, NcDcIdxWordToFile> strDistInResult = new TreeMap<Long, NcDcIdxWordToFile>();
-        TreeMap<Long, NcDcIdxWordToFile> strDistOutResult = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileAttr> makeSearchByKeyFromFile(){
+        TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar = new TreeMap<Long, ZPINcDcIdxWordToFile>();
+        TreeMap<Long, ZPINcDcIdxWordToFile> strHexForOutVar = new TreeMap<Long, ZPINcDcIdxWordToFile>();
+        TreeMap<Long, ZPINcDcIdxWordToFile> strDistInResult = new TreeMap<Long, ZPINcDcIdxWordToFile>();
+        TreeMap<Long, ZPINcDcIdxWordToFile> strDistOutResult = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         
-        ArrayList<String> arrKeyWordInSearch = NcEtcKeyWordListManager.getKeyWordInSearchFromFile();
+        ArrayList<String> arrKeyWordInSearch = ZPINcEtcKeyWordListManager.getKeyWordInSearchFromFile();
         for( String strItemIn : arrKeyWordInSearch ){
-            strHexForInVar.putAll(NcSrchKeyWordInput.getDirListRecordByKeyWord(strItemIn));
+            strHexForInVar.putAll(ZPINcSrchKeyWordInput.getDirListRecordByKeyWord(strItemIn));
         }
         
-        strDistInResult = NcSrchFileDataCompare.getDistictIDs(strHexForInVar);
+        strDistInResult = ZPINcSrchFileDataCompare.getDistictIDs(strHexForInVar);
         
-        ArrayList<String> arrKeyWordOutSearch = NcEtcKeyWordListManager.getKeyWordOutSearchFromFile();
+        ArrayList<String> arrKeyWordOutSearch = ZPINcEtcKeyWordListManager.getKeyWordOutSearchFromFile();
         for( String strItemOut : arrKeyWordOutSearch ){
-            strHexForOutVar.putAll(NcSrchKeyWordInput.getDirListRecordByKeyWord(strItemOut));
+            strHexForOutVar.putAll(ZPINcSrchKeyWordInput.getDirListRecordByKeyWord(strItemOut));
         }
         
-        strDistOutResult = NcSrchFileDataCompare.getDistictIDs(strHexForOutVar);
+        strDistOutResult = ZPINcSrchFileDataCompare.getDistictIDs(strHexForOutVar);
         
         
         
-        TreeMap<Long, NcDcIdxWordToFile> CleanResult = NcSrchFileDataCompare.getIdInWithoutOfOutSearchResult(strDistInResult, strDistOutResult);
+        TreeMap<Long, ZPINcDcIdxWordToFile> CleanResult = ZPINcSrchFileDataCompare.getIdInWithoutOfOutSearchResult(strDistInResult, strDistOutResult);
         
         
-        TreeMap<Long, NcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, NcDcIdxDirListToFileAttr>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
         
-        readedData.putAll(NcIdxDirListManager.getByListIDs(CleanResult));
+        readedData.putAll(ZPINcIdxDirListManager.getByListIDs(CleanResult));
         
         return readedData;
     }
@@ -120,9 +120,9 @@ public class ZPINcSrchGetResult {
      * Not used
      * @param strHexForInVar 
      */
-    private static void outToConsoleSearchedIDs(TreeMap<Long, NcDcIdxWordToFile> strHexForInVar){
-        for( Map.Entry<Long, NcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
-            NcAppHelper.outMessageToConsole("id: " + itemID.getValue().dirListID);
+    private static void outToConsoleSearchedIDs(TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar){
+        for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
+            ZPINcAppHelper.outMessageToConsole("id: " + itemID.getValue().dirListID);
         }
         
     }
@@ -131,11 +131,11 @@ public class ZPINcSrchGetResult {
      * @param strHexForInVar
      * @param strHexForOutVar 
      */
-    private static void outSearchResult(TreeMap<Long, NcDcIdxWordToFile> strHexForInVar, TreeMap<Long, NcDcIdxWordToFile> strHexForOutVar){
-        TreeMap<Long, NcDcIdxWordToFile> CleanResult = NcSrchFileDataCompare.getIdInWithoutOfOutSearchResult(strHexForInVar, strHexForOutVar);
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.INFO.getStr()
-            + NcStrVarDescription.CLEAN_RESULT.getStr()
-            + NcStrServiceMsg.COUNT_OF_SEARCHED_RECORDS.getStr() + CleanResult.size());
+    private static void outSearchResult(TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar, TreeMap<Long, ZPINcDcIdxWordToFile> strHexForOutVar){
+        TreeMap<Long, ZPINcDcIdxWordToFile> CleanResult = ZPINcSrchFileDataCompare.getIdInWithoutOfOutSearchResult(strHexForInVar, strHexForOutVar);
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrVarDescription.CLEAN_RESULT.getStr()
+            + ZPINcStrServiceMsg.COUNT_OF_SEARCHED_RECORDS.getStr() + CleanResult.size());
     }
 }

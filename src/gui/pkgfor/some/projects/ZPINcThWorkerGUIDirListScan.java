@@ -37,27 +37,27 @@ import javax.swing.SwingWorker;
  * @author wladimirowichbiaran
  */
 public class ZPINcThWorkerGUIDirListScan {
-    protected static void scanDirToIdxDirList(NcSwGUIComponentStatus lComp, Path pathDirToScan) throws Exception{
-        if( !NcFsIdxOperationDirs.existAndHasAccessR(pathDirToScan) ){
+    protected static void scanDirToIdxDirList(ZPINcSwGUIComponentStatus lComp, Path pathDirToScan) throws Exception{
+        if( !ZPINcFsIdxOperationDirs.existAndHasAccessR(pathDirToScan) ){
             throw new Exception("Directory not have access for read" + pathDirToScan.toString());
         }
         Path pathDevDirToScan = Paths.get("/usr/home/wladimirowichbiaran/work");
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
         JButton buttonSearch = (JButton) lComp.getComponentByPath(componentPath);
         buttonSearch.setEnabled(false);
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
         JProgressBar progressBar = (JProgressBar) lComp.getComponentByPath(componentPath);
         progressBar.setIndeterminate(true);
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
         JPanel panelLineEnd = (JPanel) lComp.getComponentByPath(componentPath);
         panelLineEnd.repaint();
         
         ArrayList<String> arrStr = new ArrayList<String>();
-        BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirList = new ArrayBlockingQueue(1000, true);
+        BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirList = new ArrayBlockingQueue(1000, true);
         
-        NcFsIdxFileVisitor fileVisitor = new NcFsIdxFileVisitor(pipeDirList);
+        ZPINcFsIdxFileVisitor fileVisitor = new ZPINcFsIdxFileVisitor(pipeDirList);
         
         Path prePathToStart = pathDevDirToScan;
         
@@ -65,7 +65,7 @@ public class ZPINcThWorkerGUIDirListScan {
         try {
             prePathToStart = prePathToStart.toRealPath(LinkOption.NOFOLLOW_LINKS);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxStorage.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorage.class.getCanonicalName(), ex);
         }
         arrStr.add("pathToStart:" + prePathToStart.toString());
         final Path pathToStart = prePathToStart;
@@ -75,26 +75,26 @@ public class ZPINcThWorkerGUIDirListScan {
         + fileVisitor.getCountVisitFile());
         UUID randomUUID = UUID.randomUUID();
         
-        ConcurrentSkipListMap<UUID, NcDataListAttr> makeForRecord = 
-                new ConcurrentSkipListMap<UUID, NcDataListAttr>();
+        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> makeForRecord = 
+                new ConcurrentSkipListMap<UUID, ZPINcDataListAttr>();
                 
-        ConcurrentSkipListMap<UUID, NcDataListAttr> listForRecord = 
-                new ConcurrentSkipListMap<UUID, NcDataListAttr>();
+        ConcurrentSkipListMap<UUID, ZPINcDataListAttr> listForRecord = 
+                new ConcurrentSkipListMap<UUID, ZPINcDataListAttr>();
         
-        ArrayList<ConcurrentSkipListMap<UUID, NcDataListAttr>> listOfListForRecord =
-                new ArrayList<ConcurrentSkipListMap<UUID, NcDataListAttr>>();
+        ArrayList<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> listOfListForRecord =
+                new ArrayList<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>>();
         ArrayList<Integer> listOfSizeIterarion = new ArrayList<Integer>();
         ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
         arrStr.clear();
-        SwingWorker<Void, ConcurrentSkipListMap<UUID, NcDataListAttr>> underGroundWorker = 
-                new SwingWorker<Void, ConcurrentSkipListMap<UUID, NcDataListAttr>> () {
+        SwingWorker<Void, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> underGroundWorker = 
+                new SwingWorker<Void, ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> () {
                     
             @Override
             protected Void doInBackground() {
                 try {
                     Files.walkFileTree(pathToStart, fileVisitor);
                 } catch (IOException ex) {
-                    NcAppHelper.logException(ZPINcThWorkerGUIDirListScan.class.getCanonicalName(), ex);
+                    ZPINcAppHelper.logException(ZPINcThWorkerGUIDirListScan.class.getCanonicalName(), ex);
                 }
                 int emptyCount = 0;
                 int size = 0;
@@ -119,21 +119,21 @@ public class ZPINcThWorkerGUIDirListScan {
                         emptyCount++;
                     } while ( emptyCount < 5 );
                 } catch (InterruptedException ex) {
-                    NcAppHelper.logException(ZPINcThWorkerGUIDirListScan.class.getCanonicalName(), ex);
+                    ZPINcAppHelper.logException(ZPINcThWorkerGUIDirListScan.class.getCanonicalName(), ex);
                 }
                 return null;
             }
             
             @Override
-            protected void process(List<ConcurrentSkipListMap<UUID, NcDataListAttr>> chunks){
+            protected void process(List<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> chunks){
                 ArrayList<String> arrOutStr = null;
                 arrOutStr = new ArrayList<String>();
                 int numPart = 0;
-                for(ConcurrentSkipListMap<UUID, NcDataListAttr> item : chunks){
+                for(ConcurrentSkipListMap<UUID, ZPINcDataListAttr> item : chunks){
                     arrOutStr.add("Part" + numPart + " of " + chunks.size());
-                    for (Map.Entry<UUID, NcDataListAttr> entry : item.entrySet()) {
+                    for (Map.Entry<UUID, ZPINcDataListAttr> entry : item.entrySet()) {
                         UUID key = entry.getKey();
-                        NcDataListAttr value = entry.getValue();
+                        ZPINcDataListAttr value = entry.getValue();
                         arrOutStr.add("[key]" + key
                             + "[value]" + value.getShortDataToString());
                     }
@@ -145,7 +145,7 @@ public class ZPINcThWorkerGUIDirListScan {
                 }
                 if( makeForRecord.size() > 100 ){
                     int countKey = 0;
-                    for (Map.Entry<UUID, NcDataListAttr> itemForRecord : makeForRecord.entrySet()) {
+                    for (Map.Entry<UUID, ZPINcDataListAttr> itemForRecord : makeForRecord.entrySet()) {
                         if( countKey < 100){
                             UUID key = itemForRecord.getKey();
                             listForRecord.put(key, makeForRecord.get(key));
@@ -174,7 +174,7 @@ public class ZPINcThWorkerGUIDirListScan {
                 ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
                 progressBar.setIndeterminate(false);
                 buttonSearch.setEnabled(true);
-                String componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
                 JPanel panelCenter = (JPanel) lComp.getComponentByPath(componentPath);
                 panelCenter.repaint();
             }

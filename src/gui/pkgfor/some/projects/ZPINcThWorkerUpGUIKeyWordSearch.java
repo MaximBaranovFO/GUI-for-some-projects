@@ -35,48 +35,48 @@ import javax.swing.tree.TreeModel;
  * @author wladimirowichbiaran
  */
 public class ZPINcThWorkerUpGUIKeyWordSearch {
-    protected static void searchKeyWordGetResult(NcSwGUIComponentStatus lComp){
+    protected static void searchKeyWordGetResult(ZPINcSwGUIComponentStatus lComp){
         
         String strPathTable = 
-                NcSwGUIComponentRouter.pathMainFramePanelCenterTable();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelCenterTable();
         JTable tableShowSearchResult = (JTable) lComp.getComponentByPath(strPathTable);
         
         tableShowSearchResult.setEnabled(false);
         TableModel modelShowStack = tableShowSearchResult.getModel();
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStartTextFieldSearch();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStartTextFieldSearch();
         JTextField textField = (JTextField) lComp.getComponentByPath(componentPath);
         String strSrch = textField.getText();
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
         JButton buttonSearch = (JButton) lComp.getComponentByPath(componentPath);
         buttonSearch.setEnabled(false);
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
         JProgressBar progressBar = (JProgressBar) lComp.getComponentByPath(componentPath);
         progressBar.setIndeterminate(true);
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
         JPanel panelLineEnd = (JPanel) lComp.getComponentByPath(componentPath);
         panelLineEnd.repaint();
         
-        TreeMap<Long, NcDcIdxDirListToFileAttr> makeSearchResult = 
-                new TreeMap<Long, NcDcIdxDirListToFileAttr>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> makeSearchResult = 
+                new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
         
         
-        SwingWorker<Void, TreeMap<Long, NcDcIdxDirListToFileAttr>> underGroundWorker = 
-                new SwingWorker<Void, TreeMap<Long, NcDcIdxDirListToFileAttr>> () {
+        SwingWorker<Void, TreeMap<Long, ZPINcDcIdxDirListToFileAttr>> underGroundWorker = 
+                new SwingWorker<Void, TreeMap<Long, ZPINcDcIdxDirListToFileAttr>> () {
                     
             @Override
             protected Void doInBackground() {
-                TreeMap<Long, NcDcIdxDirListToFileAttr> makeSearchByKeyFromInput = 
-                        NcSrchGetResult.makeSearchByKeyFromInput(strSrch);
+                TreeMap<Long, ZPINcDcIdxDirListToFileAttr> makeSearchByKeyFromInput = 
+                        ZPINcSrchGetResult.makeSearchByKeyFromInput(strSrch);
                 publish(makeSearchByKeyFromInput);
                 return null;
             }
             
             @Override
-            protected void process(List<TreeMap<Long, NcDcIdxDirListToFileAttr>> chunks){
-                for(TreeMap<Long, NcDcIdxDirListToFileAttr> item : chunks){
+            protected void process(List<TreeMap<Long, ZPINcDcIdxDirListToFileAttr>> chunks){
+                for(TreeMap<Long, ZPINcDcIdxDirListToFileAttr> item : chunks){
                     makeSearchResult.putAll(item);
                 }
                 
@@ -86,11 +86,11 @@ public class ZPINcThWorkerUpGUIKeyWordSearch {
             @Override
             protected void done(){
                 progressBar.setIndeterminate(false);
-                TableModel locNewTableModel = new NcSIMASearchResultTableModel(makeSearchResult);
+                TableModel locNewTableModel = new ZPINcSIMASearchResultTableModel(makeSearchResult);
                 tableShowSearchResult.setModel(locNewTableModel);
                 tableShowSearchResult.setEnabled(true);
                 buttonSearch.setEnabled(true);
-                String componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
                 JPanel panelCenter = (JPanel) lComp.getComponentByPath(componentPath);
                 panelCenter.repaint();
                 

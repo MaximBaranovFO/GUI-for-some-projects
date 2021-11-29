@@ -34,9 +34,9 @@ public class ZPINcIdxDirListManager {
      * @param ncToAddInIndexFile
      * @return -1 if false append into Directory List, or ID of appened record
      */
-    protected static long putToDirectoryList(NcDcIdxDirListToFileAttr forRecordData){
-        NcIMinFS ncwd = new NcIMinFS();
-        NcIndexManageIDs ncThisManagmentIDs = ncwd.getNcIndexManageIDs();
+    protected static long putToDirectoryList(ZPINcDcIdxDirListToFileAttr forRecordData){
+        ZPINcIMinFS ncwd = new ZPINcIMinFS();
+        ZPINcIndexManageIDs ncThisManagmentIDs = ncwd.getZPINcIndexManageIDs();
         
         ZPINcTmpNowProcessInfo ncNewManageIDs = ncThisManagmentIDs.getIdsReadedData();
         
@@ -46,15 +46,15 @@ public class ZPINcIdxDirListManager {
             //Check Records contained in file, after this recording
             //Record in Directory List File
             //Read from Disk Latest Data        
-            TreeMap<Long, NcDcIdxDirListToFileAttr> ncDataToDirList = new TreeMap<Long, NcDcIdxDirListToFileAttr>();
-            TreeMap<Long, NcDcIdxDirListToFileAttr> ncDataReadedFromDirList = NcIdxDirListFileReader.ncReadFromDirListFile(nextID);
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDataToDirList = new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDataReadedFromDirList = ZPINcIdxDirListFileReader.ncReadFromDirListFile(nextID);
             //If Data not Readed, init Zero or stay with last ID     
             if(!ncDataReadedFromDirList.isEmpty()){
                 nextID++;
                 //After increment record ID, check for work file to new record, has limit of records and
                 //used new file or append data into early recorded file
                 String strWorkFileName = ncNewManageIDs.listname;
-                String strWorkFileNameForNextRecord = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirList())+"/dl",nextID);
+                String strWorkFileNameForNextRecord = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirList())+"/dl",nextID);
                 if(strWorkFileName.equalsIgnoreCase(strWorkFileNameForNextRecord)){
                     ncDataToDirList.putAll(ncDataReadedFromDirList);
                 }
@@ -62,10 +62,10 @@ public class ZPINcIdxDirListManager {
             forRecordData.dirListID = nextID;
             ncDataToDirList.put(nextID, forRecordData);
             //Write new data to file of directory list            
-            writedSize = NcIdxDirListFileWriter.ncWriteToDirListFile(ncDataToDirList, nextID);
+            writedSize = ZPINcIdxDirListFileWriter.ncWriteToDirListFile(ncDataToDirList, nextID);
             if(writedSize > 0){
                 ncNewManageIDs.listnameid = nextID;
-                ncNewManageIDs.listname = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirList())+"/dl",nextID);
+                ncNewManageIDs.listname = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirList())+"/dl",nextID);
                 ncThisManagmentIDs.setNewIdsData(ncNewManageIDs);
             }
         }
@@ -77,7 +77,7 @@ public class ZPINcIdxDirListManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirectoryListDataAttrWrong(NcDcIdxDirListToFileAttr inFuncData){
+    private static boolean isDirectoryListDataAttrWrong(ZPINcDcIdxDirListToFileAttr inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -92,7 +92,7 @@ public class ZPINcIdxDirListManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirectoryListDataAttrHasEmptyFiled(NcDcIdxDirListToFileAttr inFuncData){
+    private static boolean isDirectoryListDataAttrHasEmptyFiled(ZPINcDcIdxDirListToFileAttr inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -144,7 +144,7 @@ public class ZPINcIdxDirListManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirectoryListDataAttrEmpty(NcDcIdxDirListToFileAttr inFuncData){
+    private static boolean isDirectoryListDataAttrEmpty(ZPINcDcIdxDirListToFileAttr inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -197,13 +197,13 @@ public class ZPINcIdxDirListManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#isDirectoryListDataAttrWrong(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#isDirectoryListDataAttrEmpty(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#isDirectoryListDataAttrWrong(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#isDirectoryListDataAttrEmpty(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * </ul>
      * @param inFuncData
      * @return
      */
-    private static boolean isDirectoryListDataAttrHashTrue(NcDcIdxDirListToFileAttr inFuncData){
+    private static boolean isDirectoryListDataAttrHashTrue(ZPINcDcIdxDirListToFileAttr inFuncData){
         return inFuncData.recordHash == (
             ""
             + inFuncData.dirListID 
@@ -240,13 +240,13 @@ public class ZPINcIdxDirListManager {
      * @param inFuncData
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxDirListToFileAttr> getByListIDs(TreeMap<Long, NcDcIdxWordToFile> inFuncData){
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileAttr> getByListIDs(TreeMap<Long, ZPINcDcIdxWordToFile> inFuncData){
         TreeMap<Long, String> filesList = new TreeMap<Long, String>();
-        TreeMap<Long, NcDcIdxDirListToFileAttr> toReturn = new TreeMap<Long, NcDcIdxDirListToFileAttr>();
-        TreeMap<Long, NcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, NcDcIdxDirListToFileAttr>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> toReturn = new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> readedData = new TreeMap<Long, ZPINcDcIdxDirListToFileAttr>();
         long idx = 0;
-        for( Map.Entry<Long, NcDcIdxWordToFile> itemIDs : inFuncData.entrySet() ){
-            String strFileName = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirList())+"/dl", itemIDs.getValue().dirListID);
+        for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemIDs : inFuncData.entrySet() ){
+            String strFileName = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirList())+"/dl", itemIDs.getValue().dirListID);
             boolean inListName = false;
             for( Map.Entry<Long, String> itemName : filesList.entrySet() ){
                 inListName = itemName.getValue().equalsIgnoreCase(strFileName);
@@ -258,9 +258,9 @@ public class ZPINcIdxDirListManager {
         }
         long recIdx = 0;
         for( Map.Entry<Long, String> itemName : filesList.entrySet() ){
-            readedData.putAll(NcIdxDirListFileReader.ncReadFromDirListFileByName(itemName.getValue()));
-            for( Map.Entry<Long, NcDcIdxWordToFile> itemIDs : inFuncData.entrySet() ){
-                for( Map.Entry<Long, NcDcIdxDirListToFileAttr> itemReaded : readedData.entrySet() ){
+            readedData.putAll(ZPINcIdxDirListFileReader.ncReadFromDirListFileByName(itemName.getValue()));
+            for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemIDs : inFuncData.entrySet() ){
+                for( Map.Entry<Long, ZPINcDcIdxDirListToFileAttr> itemReaded : readedData.entrySet() ){
                     boolean isToRetId = itemIDs.getValue().dirListID == itemReaded.getValue().dirListID;
                     if( isToRetId ){
                         toReturn.put(recIdx, itemReaded.getValue());

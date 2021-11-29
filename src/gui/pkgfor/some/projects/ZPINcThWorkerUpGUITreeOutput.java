@@ -31,10 +31,10 @@ import javax.swing.tree.TreeModel;
  * @author wladimirowichbiaran
  */
 public class ZPINcThWorkerUpGUITreeOutput {
-    protected static void outputTreeAddChildren(NcSwGUIComponentStatus lComp,
+    protected static void outputTreeAddChildren(ZPINcSwGUIComponentStatus lComp,
             ArrayList<String> arrStr){
         String strPathTree = 
-                NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPaneTreeShowOutput();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPaneTreeShowOutput();
         JTree treeShowStack = (JTree) lComp.getComponentByPath(strPathTree);
         
         
@@ -44,7 +44,7 @@ public class ZPINcThWorkerUpGUITreeOutput {
         DefaultMutableTreeNode rootElement = 
                 (DefaultMutableTreeNode) modelShowStack.getRoot();
         
-        String strNowTime =  NcStrLogMsgField.TIME.getStr()
+        String strNowTime =  ZPINcStrLogMsgField.TIME.getStr()
                 + java.time.LocalDateTime.now().toString();
         DefaultMutableTreeNode timeChild =
                 new DefaultMutableTreeNode(strNowTime);
@@ -76,7 +76,7 @@ public class ZPINcThWorkerUpGUITreeOutput {
                 treeShowStack.setModel(treeForAdd);
                 treeShowStack.setEnabled(true);
                 
-                String componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPane();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPane();
                 JScrollPane scrollTreeStackPane = (JScrollPane) lComp.getComponentByPath(componentPath);
                 Dimension preferredSize = scrollTreeStackPane.getPreferredSize();
                 Dimension widePreffSize = new Dimension(250,
@@ -84,7 +84,7 @@ public class ZPINcThWorkerUpGUITreeOutput {
                 scrollTreeStackPane.setPreferredSize(widePreffSize);
                 scrollTreeStackPane.revalidate();
                 
-                componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEnd();
+                componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEnd();
                 JPanel panelLineEnd = (JPanel) lComp.getComponentByPath(componentPath);
                 panelLineEnd.repaint();
             }

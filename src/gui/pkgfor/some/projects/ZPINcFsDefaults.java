@@ -46,14 +46,14 @@ public class ZPINcFsDefaults {
     protected static Path getHomeOrAppOrRootStorage(){
         Path toReturn = null;
         try{
-            toReturn = NcFsDefaults.getUserHomePath();
+            toReturn = ZPINcFsDefaults.getUserHomePath();
             return toReturn;
         }catch(IOException ex){
-            NcAppHelper.logException(NcFsIdxStorageInit.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
             String strMsg = "Bad User Home Directory or link "
-                + NcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.ERROR.getStr()
+                + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.ERROR.getStr()
                 + strMsg
             );
         }
@@ -61,14 +61,14 @@ public class ZPINcFsDefaults {
         
         if( toReturn == null ){
             try{
-                toReturn = NcFsDefaults.getAppPath();
+                toReturn = ZPINcFsDefaults.getAppPath();
                 return toReturn;
             }catch(IOException ex){
-                NcAppHelper.logException(NcFsIdxStorageInit.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxStorageInit.class.getCanonicalName(), ex);
                 String strMsg = "Bad User Home Directory or link "
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
-                NcAppHelper.outMessage(
-                    NcStrLogMsgField.ERROR.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr() + ex.getMessage();
+                ZPINcAppHelper.outMessage(
+                    ZPINcStrLogMsgField.ERROR.getStr()
                     + strMsg
                 );
             }

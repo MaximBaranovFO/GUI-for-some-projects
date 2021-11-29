@@ -46,11 +46,11 @@ public class ZPINcFsIdxOperationFiles {
                 }
             }
         } catch (Exception ex) {
-            NcAppHelper.logException(NcFsIdxOperationFiles.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxOperationFiles.class.getCanonicalName(), ex);
         }
         return false;
     }
-    protected static void outToGUIFileAttributes(Path file, NcSwGUIComponentStatus lComp){
+    protected static void outToGUIFileAttributes(Path file, ZPINcSwGUIComponentStatus lComp){
         try{
             
             //Files.readAttributes(file, attributes, options);
@@ -79,7 +79,7 @@ public class ZPINcFsIdxOperationFiles {
                     //attribute = Files.getAttribute(file, supportedFileAttributeView, LinkOption.NOFOLLOW_LINKS);
                     attribute = Files.readAttributes(file, supportedFileAttributeView, LinkOption.NOFOLLOW_LINKS);
                 }catch(Exception ex){
-                    NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+                    ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
                 }
                 forReturn.putIfAbsent(supportedFileAttributeView, attribute);
             }
@@ -94,7 +94,7 @@ public class ZPINcFsIdxOperationFiles {
             }
             ZPINcThWorkerUpGUITreeOutput.outputTreeAddChildren(lComp, arrStr);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxFileVisitor.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxFileVisitor.class.getCanonicalName(), ex);
         }
     }
 }

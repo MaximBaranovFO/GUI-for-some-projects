@@ -21,8 +21,8 @@ package gui.pkgfor.some.projects;
  */
 public class ZPINcAppLoader {
     protected static void loadApp(){
-        NcLogLogicApp.NcAppLoaderLoadApp();
-        NcParamFv appWorkCfg = NcPreRunFileViewer.getCurrentWorkCfg();
+        ZPINcLogLogicApp.NcAppLoaderLoadApp();
+        ZPINcParamFv appWorkCfg = ZPINcPreRunFileViewer.getCurrentWorkCfg();
     }
     private static void checkLoad(){
         Thread t = Thread.currentThread();

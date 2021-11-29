@@ -32,7 +32,7 @@ public class ZPINcFsIdxOperationDirs {
                 toCreate = toCreate.toAbsolutePath();
                 Files.createDirectory(inFPath);
             } catch (IOException ex) {
-                NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
             }
         }
     }
@@ -41,12 +41,12 @@ public class ZPINcFsIdxOperationDirs {
             try {
                 return inFPath.toRealPath(LinkOption.NOFOLLOW_LINKS);
             } catch (IOException ex) {
-                NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
             }
         }
         String strMsg = "Imposible to build real path, see log";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR_CRITICAL.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
@@ -63,7 +63,7 @@ public class ZPINcFsIdxOperationDirs {
                 }
             }
         } catch (Exception ex) {
-            NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
         }
         return false;
     }
@@ -82,7 +82,7 @@ public class ZPINcFsIdxOperationDirs {
                 }
             }
         } catch (Exception ex) {
-            NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
         }
         return false;
     }
@@ -96,7 +96,7 @@ public class ZPINcFsIdxOperationDirs {
                 }
             }
         } catch (Exception ex) {
-            NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
         }
         return false;
     }
@@ -109,7 +109,7 @@ public class ZPINcFsIdxOperationDirs {
         try {
             prePathToStart = prePathToStart.toRealPath(LinkOption.NOFOLLOW_LINKS);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxStorage.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorage.class.getCanonicalName(), ex);
         }
         return prePathToStart;
     }
@@ -125,7 +125,7 @@ public class ZPINcFsIdxOperationDirs {
                 }
             }
         } catch (Exception ex) {
-            NcAppHelper.logException(NcFsIdxOperationDirs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxOperationDirs.class.getCanonicalName(), ex);
         }
         return false;
     }

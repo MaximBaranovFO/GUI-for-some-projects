@@ -48,15 +48,15 @@ public class ZPINcAppStackTrace {
         String name = inFuncThread.getName();
         int priority = inFuncThread.getPriority();
         String stateName = inFuncThread.getState().name();
-        strToOut = NcStrLogMsgField.THREAD.getStr()
-                + NcStrLogMsgField.ID.getStr()
+        strToOut = ZPINcStrLogMsgField.THREAD.getStr()
+                + ZPINcStrLogMsgField.ID.getStr()
                 + Long.toString(id)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + name
-                + NcStrLogMsgField.PRIORITY.getStr()
+                + ZPINcStrLogMsgField.PRIORITY.getStr()
                 + Integer.toString(priority)
-                + NcStrLogMsgField.STATE.getStr()
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.STATE.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + stateName;
         listStrToRet.add(strToOut);
         ThreadGroup threadGroup = inFuncThread.getThreadGroup();
@@ -74,25 +74,25 @@ public class ZPINcAppStackTrace {
         String strDaemon = daemon ? "true" : "false";
         boolean destroyed = inFuncThreadGroup.isDestroyed();
         String strDestroyed = destroyed ? "true" : "false";
-        strToOut = NcStrLogMsgField.THREAD_GROUP.getStr()
-                + NcStrLogMsgField.NAME.getStr()
+        strToOut = ZPINcStrLogMsgField.THREAD_GROUP.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + name
-                + NcStrLogMsgField.MAX.getStr()
-                + NcStrLogMsgField.PRIORITY.getStr()
+                + ZPINcStrLogMsgField.MAX.getStr()
+                + ZPINcStrLogMsgField.PRIORITY.getStr()
                 + Integer.toString(maxPriority)
-                + NcStrLogMsgField.ACTIVE.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + Integer.toString(activeCount)
-                + NcStrLogMsgField.ACTIVE.getStr()
-                + NcStrLogMsgField.GROUP.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()
+                + ZPINcStrLogMsgField.GROUP.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + Integer.toString(activeGroupCount)
-                + NcStrLogMsgField.IS.getStr()
-                + NcStrLogMsgField.DAEMON.getStr()
+                + ZPINcStrLogMsgField.IS.getStr()
+                + ZPINcStrLogMsgField.DAEMON.getStr()
                 + strDaemon
-                + NcStrLogMsgField.IS.getStr()
+                + ZPINcStrLogMsgField.IS.getStr()
                 + strDestroyed
-                + NcStrLogMsgField.DESTROYED.getStr();
+                + ZPINcStrLogMsgField.DESTROYED.getStr();
         
         listStrToRet.add(strToOut);
         
@@ -102,23 +102,23 @@ public class ZPINcAppStackTrace {
         ArrayList<String> listStrToRet = new ArrayList<String>();
         String strToOut = "";
         int idx = 0;
-        String strToOutPref = NcStrLogMsgField.STACK.getStr()
-            + NcStrLogMsgField.TRACE.getStr()
-            + NcStrLogMsgField.ELEMENT.getStr();
+        String strToOutPref = ZPINcStrLogMsgField.STACK.getStr()
+            + ZPINcStrLogMsgField.TRACE.getStr()
+            + ZPINcStrLogMsgField.ELEMENT.getStr();
         for (StackTraceElement stackItem : inFuncStackTrace) {
 
             Class<?> classItem = stackItem.getClass();
             strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
-                    + NcStrLogMsgField.CLASSNAME.getStr()
+                    + ZPINcStrLogMsgField.CLASSNAME.getStr()
                     + stackItem.getClassName();
             listStrToRet.add(strToOut);
             
             ArrayList<String> declMeth = getDeclaredMethodsInfo(classItem);
             for (String strMeth : declMeth) {
                 strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
                     + strMeth;
                 listStrToRet.add(strToOut);
@@ -127,7 +127,7 @@ public class ZPINcAppStackTrace {
             ArrayList<String> declField = getDeclaredFieldsInfo(classItem);
             for (String strField : declField) {
                 strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
                     + strField;
                 listStrToRet.add(strToOut);
@@ -144,10 +144,10 @@ public class ZPINcAppStackTrace {
         int methodIdx = 0;
         for (Method declaredMethod : declaredMethods) {
             String strName = declaredMethod.getName();
-            strToOut = NcStrLogMsgField.METHOD.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+            strToOut = ZPINcStrLogMsgField.METHOD.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + Integer.toString(methodIdx)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + strName;
             listStrToRet.add(strToOut);
             Parameter[] parameters = declaredMethod.getParameters();
@@ -155,12 +155,12 @@ public class ZPINcAppStackTrace {
             for (Parameter parameter : parameters) {
                 String paramName = parameter.getName();
                 String paramType = parameter.getType().getCanonicalName();
-                strToOut = NcStrLogMsgField.PARAMETER.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+                strToOut = ZPINcStrLogMsgField.PARAMETER.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + Integer.toString(paramIdx)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + paramName
-                + NcStrLogMsgField.TYPE.getStr()
+                + ZPINcStrLogMsgField.TYPE.getStr()
                 + paramType;
                 paramIdx++;
             }
@@ -174,27 +174,27 @@ public class ZPINcAppStackTrace {
         int fieldIdx = 0;
         Field[] declaredFields = classInFunc.getClass().getDeclaredFields();
         for (Field declaredField : declaredFields) {
-            strToOut = NcStrLogMsgField.FIELD.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+            strToOut = ZPINcStrLogMsgField.FIELD.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + fieldIdx;
             try {
                 boolean boolAccValFlag = declaredField.isAccessible();
                 declaredField.setAccessible(true);
                 strToOut = strToOut
-                    + NcStrLogMsgField.TYPE.getStr()
+                    + ZPINcStrLogMsgField.TYPE.getStr()
                     + declaredField.getType().getCanonicalName();
                 
                 strToOut = strToOut
-                    + NcStrLogMsgField.NAME.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr()
                     + declaredField.getName();
                 
                 strToOut = strToOut
-                    + NcStrLogMsgField.VALUE.getStr()
+                    + ZPINcStrLogMsgField.VALUE.getStr()
                     + declaredField.get(classInFunc.getClass()).toString();
                 declaredField.setAccessible(boolAccValFlag);
             } catch (Exception ex){
                 strToOut = strToOut
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                     + ex.getMessage();
             }
             listStrToRet.add(strToOut);

@@ -36,7 +36,7 @@ public class ZPINcEtcKeyWordListManager {
      * @return 
      */
     protected static ArrayList<String> getKeyWordInSearchFromFile(){
-        NcParamFv readedWorkCfg = NcParamFvReader.readDataFromWorkCfg();
+        ZPINcParamFv readedWorkCfg = ZPINcParamFvReader.readDataFromWorkCfg();
         ArrayList<String> strForReturn;
         strForReturn = new ArrayList<String>();
         try(BufferedReader br = new BufferedReader(new FileReader(
@@ -48,7 +48,7 @@ public class ZPINcEtcKeyWordListManager {
             }
         }
          catch(IOException ex){
-            NcAppHelper.logException(NcEtcKeyWordListManager.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcEtcKeyWordListManager.class.getCanonicalName(), ex);
         }   
         return strForReturn;
     }
@@ -62,7 +62,7 @@ public class ZPINcEtcKeyWordListManager {
      * @return 
      */
     protected static ArrayList<String> getKeyWordOutSearchFromFile(){
-        NcParamFv readedWorkCfg = NcParamFvReader.readDataFromWorkCfg();
+        ZPINcParamFv readedWorkCfg = ZPINcParamFvReader.readDataFromWorkCfg();
         ArrayList<String> strForReturn;
         strForReturn = new ArrayList<String>();
         try(BufferedReader br = new BufferedReader(new FileReader(
@@ -74,7 +74,7 @@ public class ZPINcEtcKeyWordListManager {
             }
         }
          catch(IOException ex){
-            NcAppHelper.logException(NcEtcKeyWordListManager.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcEtcKeyWordListManager.class.getCanonicalName(), ex);
         }   
         return strForReturn;
     }

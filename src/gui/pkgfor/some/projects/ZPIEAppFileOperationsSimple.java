@@ -62,19 +62,19 @@ public class ZPIEAppFileOperationsSimple {
     /**
      * Get Path from,
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.AppFileOperationsSimple#getUserHomePath() }
+     * <li>{@link ru.newcontrol.ncfv.ZPIAppFileOperationsSimple#getUserHomePath() }
      * </ul>
      * and check by
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.AppFileOperationsSimple#pathIsNotDirectory(java.nio.file.Path) }
-     * <li>{@link ru.newcontrol.ncfv.AppFileOperationsSimple#pathIsNotReadWriteLink(java.nio.file.Path) }
+     * <li>{@link ru.newcontrol.ncfv.ZPIAppFileOperationsSimple#pathIsNotDirectory(java.nio.file.Path) }
+     * <li>{@link ru.newcontrol.ncfv.ZPIAppFileOperationsSimple#pathIsNotReadWriteLink(java.nio.file.Path) }
      * </ul>
      * @return 
      */
     protected static Path getUserHomeRWEDCheckedPath(){
         Path toReturn = Paths.get(System.getProperty("user.home"));
         try {
-            toReturn = AppFileOperationsSimple.getUserHomePath();
+            toReturn = ZPIAppFileOperationsSimple.getUserHomePath();
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("[ERROR] App Path " + toReturn.toString() + ", is not have a real directory " + ex.getMessage());
@@ -101,7 +101,7 @@ public class ZPIEAppFileOperationsSimple {
     protected static Path getAppRWEDCheckedPath(){
         Path toReturn = Paths.get(System.getProperty("java.class.path"));
         try {
-            toReturn = AppFileOperationsSimple.getAppPath();
+            toReturn = ZPIAppFileOperationsSimple.getAppPath();
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("[ERROR] App Path " + toReturn.toString() + ", is not have a real directory " + ex.getMessage());
@@ -126,7 +126,7 @@ public class ZPIEAppFileOperationsSimple {
     }
     protected static Path getLogSubDir(){
         Path toReturn = Paths.get(getAppRWEDCheckedPath().toString(),
-        AppFileNamesConstants.LOG_SUB_DIR);
+        ZPIAppFileNamesConstants.LOG_SUB_DIR);
         if( Files.notExists(toReturn, LinkOption.NOFOLLOW_LINKS) ){
             try {
                 Files.createDirectories(toReturn);
@@ -147,7 +147,7 @@ public class ZPIEAppFileOperationsSimple {
     }
     protected static Path getLogForHtmlSubDir(){
         Path toReturn = Paths.get(getLogSubDir().toString(),
-        AppFileNamesConstants.LOG_HTML_SUB_DIR);
+        ZPIAppFileNamesConstants.LOG_HTML_SUB_DIR);
         if( Files.notExists(toReturn, LinkOption.NOFOLLOW_LINKS) ){
             try {
                 Files.createDirectories(toReturn);
@@ -218,50 +218,50 @@ public class ZPIEAppFileOperationsSimple {
     }
     protected static ConcurrentSkipListMap<String, Path> getNewHtmlLogStorageFileSystem(Path currentDirForLog){
         ConcurrentSkipListMap<String, Path> listFilesForHtmlLog = new ConcurrentSkipListMap<String, Path>();
-        Path logForHtmlCurrentLogAnySubDirCSS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, AppFileNamesConstants.LOG_HTML_CSS_SUB_DIR);
+        Path logForHtmlCurrentLogAnySubDirCSS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, ZPIAppFileNamesConstants.LOG_HTML_CSS_SUB_DIR);
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_CSS_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX, 
                 Paths.get(logForHtmlCurrentLogAnySubDirCSS.toString(),
-                AppFileNamesConstants.LOG_HTML_CSS_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_CSS_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_CSS_EXT)
         );
         
-        Path logForHtmlCurrentLogAnySubDirJS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, AppFileNamesConstants.LOG_HTML_JS_SUB_DIR);
+        Path logForHtmlCurrentLogAnySubDirJS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, ZPIAppFileNamesConstants.LOG_HTML_JS_SUB_DIR);
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX, 
                 Paths.get(logForHtmlCurrentLogAnySubDirJS.toString(),
-                AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_JS_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_JS_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_HEADER_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_HEADER_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_HEADER_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_HEADER_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_FOOTER_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_FOOTER_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_FOOTER_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_FOOTER_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_MENU_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_MENU_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_MENU_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_MENU_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_INDEX_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_INDEX_PREFIX
+                ZPIAppFileNamesConstants.LOG_INDEX_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
         for( Map.Entry<String, Path> elementOfList : listFilesForHtmlLog.entrySet() ){
@@ -304,57 +304,57 @@ public class ZPIEAppFileOperationsSimple {
     }
     protected static ConcurrentSkipListMap<String, Path> getNewLogFileInLogHTML(Path currentDirForLog){
         ConcurrentSkipListMap<String, Path> listFilesForHtmlLog = new ConcurrentSkipListMap<String, Path>();
-        Path logForHtmlCurrentLogAnySubDirCSS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, AppFileNamesConstants.LOG_HTML_CSS_SUB_DIR);
+        Path logForHtmlCurrentLogAnySubDirCSS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, ZPIAppFileNamesConstants.LOG_HTML_CSS_SUB_DIR);
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_CSS_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX, 
                 Paths.get(logForHtmlCurrentLogAnySubDirCSS.toString(),
-                AppFileNamesConstants.LOG_HTML_CSS_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_CSS_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_CSS_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_CSS_EXT)
         );
         
-        Path logForHtmlCurrentLogAnySubDirJS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, AppFileNamesConstants.LOG_HTML_JS_SUB_DIR);
+        Path logForHtmlCurrentLogAnySubDirJS = getLogForHtmlCurrentLogAnySubDir(currentDirForLog, ZPIAppFileNamesConstants.LOG_HTML_JS_SUB_DIR);
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX, 
                 Paths.get(logForHtmlCurrentLogAnySubDirJS.toString(),
-                AppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_JS_MENU_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_JS_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_JS_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_HEADER_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_HEADER_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_HEADER_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_HEADER_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_FOOTER_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_FOOTER_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_FOOTER_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_FOOTER_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_MENU_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_MENU_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_MENU_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_MENU_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_HTML_TABLE_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_TABLE_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
-        listFilesForHtmlLog.put(AppFileNamesConstants.LOG_INDEX_PREFIX, 
+        listFilesForHtmlLog.put(ZPIAppFileNamesConstants.LOG_INDEX_PREFIX, 
                 Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_INDEX_PREFIX
+                ZPIAppFileNamesConstants.LOG_INDEX_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT)
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT)
         );
         
         for( Map.Entry<String, Path> elementOfList : listFilesForHtmlLog.entrySet() ){
@@ -399,9 +399,9 @@ public class ZPIEAppFileOperationsSimple {
     protected static Path getNewLogHtmlTableFile(Path currentDirForLog){
         
         Path toReturn = Paths.get(currentDirForLog.toString(),
-                AppFileNamesConstants.LOG_HTML_TABLE_PREFIX
+                ZPIAppFileNamesConstants.LOG_HTML_TABLE_PREFIX
                 + getNowTimeStringWithMS()
-                + AppFileNamesConstants.LOG_HTML_EXT);
+                + ZPIAppFileNamesConstants.LOG_HTML_EXT);
         
         if( Files.exists(toReturn, LinkOption.NOFOLLOW_LINKS) ){
             try {
@@ -443,7 +443,7 @@ public class ZPIEAppFileOperationsSimple {
         Path toReturn = Paths.get(getLogSubDir().toString(), 
                 getNowTimeStringWithMS()
                 + "-" + UUID.randomUUID().toString()
-                + AppFileNamesConstants.LOG_EXT);
+                + ZPIAppFileNamesConstants.LOG_EXT);
         
         if( Files.exists(toReturn, LinkOption.NOFOLLOW_LINKS) ){
             try {
@@ -640,8 +640,8 @@ public class ZPIEAppFileOperationsSimple {
      * </ul>
      * and check by
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.AppFileOperationsSimple#pathIsNotDirectory(java.nio.file.Path) }
-     * <li>{@link ru.newcontrol.ncfv.AppFileOperationsSimple#pathIsNotReadWriteLink(java.nio.file.Path) }
+     * <li>{@link ru.newcontrol.ncfv.ZPIAppFileOperationsSimple#pathIsNotDirectory(java.nio.file.Path) }
+     * <li>{@link ru.newcontrol.ncfv.ZPIAppFileOperationsSimple#pathIsNotReadWriteLink(java.nio.file.Path) }
      * </ul> 
      * @param currentDir
      * @param anySubDirName
@@ -710,9 +710,9 @@ public class ZPIEAppFileOperationsSimple {
      */
     protected static String buildInStorageFileName(String tagFileName, ConcurrentSkipListMap<?, ?> forSizeDetect, Integer volNum){
         String nameForReturn = tagFileName 
-                + AppFileNamesConstants.FILE_DIR_PART_SEPARATOR 
+                + ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR 
                 + String.valueOf(forSizeDetect.size())
-                + AppFileNamesConstants.FILE_DIR_PART_SEPARATOR 
+                + ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR 
                 + String.valueOf(volNum);
         
         return nameForReturn;
@@ -730,7 +730,7 @@ public class ZPIEAppFileOperationsSimple {
     protected static Map<String, String> getFromNameTagSizeVol(Path  folderItem){
         Map<String, String> forReturn = new HashMap<String, String>();
         
-        char[] separatorName = AppFileNamesConstants.FILE_DIR_PART_SEPARATOR.toCharArray();
+        char[] separatorName = ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR.toCharArray();
         
         Path itemPathFormDir = folderItem.getFileName();
         String nameIndexPart = "";

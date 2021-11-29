@@ -42,7 +42,7 @@ public class ZPIAppObjectsInfoHelperClasses {
      */
     protected static void getInitBusInfo(ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         int recIndex = 0;
         ArrayBlockingQueue<String> initRecTime = new ArrayBlockingQueue<String>(1000);
         initRecTime.add(nowTimeStringWithMS);
@@ -50,15 +50,15 @@ public class ZPIAppObjectsInfoHelperClasses {
     }
     protected static ArrayBlockingQueue<String> getInitBusInfoCommandsOut(ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayList<String> initRecTime = new ArrayList<String>();
         initRecTime.add(nowTimeStringWithMS);
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(initRecTime);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(initRecTime);
     }
     
     protected static ArrayBlockingQueue<String> getSystemEnvironmentCommandsOut(){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
         
@@ -118,12 +118,12 @@ public class ZPIAppObjectsInfoHelperClasses {
         
         
         
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }    
     
     protected static ArrayBlockingQueue<String> getThreadStackTraceCommandsOut(StackTraceElement elOuterStack){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
         String elStackTraceToString = elOuterStack.toString();
@@ -144,12 +144,12 @@ public class ZPIAppObjectsInfoHelperClasses {
         strForOut.add(elStackTraceToString + ".isNativeMethod()");
         strForOut.add(String.valueOf(elOuterStack.isNativeMethod()));
         
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     
     protected static ArrayBlockingQueue<String> getThreadNameCommandsOut(Thread detectedThread){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
         strForOut.add("Thread.toString()");
@@ -177,12 +177,12 @@ public class ZPIAppObjectsInfoHelperClasses {
         strForOut.add(threadtoString + ".checkAccess()");
         detectedThread.checkAccess();
         strForOut.add("void");
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     
     protected static ArrayBlockingQueue<String> getThreadClassCommandsOut(Class<?> detectedThreadClass){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String threadtoString = detectedThreadClass.toString();
         ArrayList<String> strForOut = new ArrayList<String>();
         
@@ -270,13 +270,13 @@ public class ZPIAppObjectsInfoHelperClasses {
         strForOut.add(String.valueOf(detectedThreadClass.isPrimitive()));
         strForOut.add(threadtoString + ".isSynthetic()");
         strForOut.add(String.valueOf(detectedThreadClass.isSynthetic()));
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     protected static ArrayBlockingQueue<String>  getThreadClassGetDeclaredMethodsCommandsOut(
             Class<?> detectedThreadClass
     ){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String threadtoString = detectedThreadClass.toString();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
@@ -364,13 +364,13 @@ public class ZPIAppObjectsInfoHelperClasses {
         } else {
             strForOut.add("null");
         }
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     protected static ArrayBlockingQueue<String>  getThreadClassGetDeclaredFieldsCommandsOut(
             Class<?> detectedThreadClass
     ){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String threadtoString = detectedThreadClass.toString();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
@@ -420,13 +420,13 @@ public class ZPIAppObjectsInfoHelperClasses {
         } else {
             strForOut.add("null");
         }
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     protected static ArrayBlockingQueue<String>  getThreadClassGetDeclaredAnnotationsCommandsOut(
             Class<?> detectedThreadClass
     ){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String threadtoString = detectedThreadClass.toString();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
@@ -452,13 +452,13 @@ public class ZPIAppObjectsInfoHelperClasses {
         } else {
             strForOut.add("null");
         }
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     protected static ArrayBlockingQueue<String>  getThreadClassGetDeclaredConstructorsCommandsOut(
             Class<?> detectedThreadClass
     ){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         String threadtoString = detectedThreadClass.toString();
         ArrayList<String> strForOut = new ArrayList<String>();
         strForOut.add(nowTimeStringWithMS);
@@ -482,7 +482,7 @@ public class ZPIAppObjectsInfoHelperClasses {
         } else {
             strForOut.add("null");
         }
-        return AppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
+        return ZPIAppObjectsInfoHelperHtml.commandOutPutToHtmlBus(strForOut);
     }
     /**
      * @deprecated 
@@ -492,7 +492,7 @@ public class ZPIAppObjectsInfoHelperClasses {
     protected static void getThreadName(Thread detectedThread, 
             ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayBlockingQueue<String> strForOut = new ArrayBlockingQueue<String>(1000);
         strForOut.add(nowTimeStringWithMS);
         strForOut.add("Thread.toString()");
@@ -521,7 +521,7 @@ public class ZPIAppObjectsInfoHelperClasses {
     
     protected static void getThreadClass(Thread detectedThread, ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         ArrayBlockingQueue<String> strForOut = new ArrayBlockingQueue<String>(1000);
         strForOut.add(nowTimeStringWithMS);
         strForOut.add("Thread.getClass().getName()");
@@ -613,8 +613,8 @@ public class ZPIAppObjectsInfoHelperClasses {
             Thread detectedThread, 
             ArrayBlockingQueue<ArrayBlockingQueue<String>> commandsOutPut){
         String nowTimeStringWithMS = 
-                AppFileOperationsSimple.getNowTimeStringWithMS();
-        ArrayBlockingQueue<String> strForOut = new ArrayBlockingQueue<String>(AppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
+                ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
+        ArrayBlockingQueue<String> strForOut = new ArrayBlockingQueue<String>(ZPIAppConstants.LOG_HTML_MESSAGES_QUEUE_SIZE);
         strForOut.add(nowTimeStringWithMS);
         strForOut.add("Thread.getClass().getDeclaredMethods().length");
         Method resultGetDeclaredMethods[] = detectedThread.getClass().getDeclaredMethods();
@@ -698,48 +698,48 @@ public class ZPIAppObjectsInfoHelperClasses {
         int activeCountThreadGroup = threadGroup.activeCount();
         int activeGroupCount = threadGroup.activeGroupCount();
         Class<?> aClass = forStrBuild.getClass();
-        return NcStrLogMsgField.INFO.getStr()
-                    + NcStrLogMsgField.THREAD_GROUP_NAME.getStr()
+        return ZPINcStrLogMsgField.INFO.getStr()
+                    + ZPINcStrLogMsgField.THREAD_GROUP_NAME.getStr()
                     + nameThreadGroup
-                    + NcStrLogMsgField.ACTIVE.getStr()        
-                    + NcStrLogMsgField.COUNT.getStr()
+                    + ZPINcStrLogMsgField.ACTIVE.getStr()        
+                    + ZPINcStrLogMsgField.COUNT.getStr()
                     + String.valueOf(activeCountThreadGroup)
-                    + NcStrLogMsgField.ACTIVE.getStr()
-                    + NcStrLogMsgField.GROUP.getStr()
-                    + NcStrLogMsgField.COUNT.getStr()
+                    + ZPINcStrLogMsgField.ACTIVE.getStr()
+                    + ZPINcStrLogMsgField.GROUP.getStr()
+                    + ZPINcStrLogMsgField.COUNT.getStr()
                     + String.valueOf(activeGroupCount)
-                    + NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.ID.getStr()
+                    + ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.ID.getStr()
                     + String.valueOf(forStrBuild.getId())
-                    + NcStrLogMsgField.PRIORITY.getStr()        
+                    + ZPINcStrLogMsgField.PRIORITY.getStr()        
                     + String.valueOf(forStrBuild.getPriority())
-                    + NcStrLogMsgField.NAME.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr()
                     + forStrBuild.getName()
-                    + NcStrLogMsgField.CANONICALNAME.getStr()
+                    + ZPINcStrLogMsgField.CANONICALNAME.getStr()
                     + aClass.getCanonicalName()
-                    + NcStrLogMsgField.GENERICSTRING.getStr()
+                    + ZPINcStrLogMsgField.GENERICSTRING.getStr()
                     + aClass.toGenericString();
     }
     protected static String getClassInfoToString(Class<?> forStrBuild){
-        return NcStrLogMsgField.INFO.getStr()
-            + NcStrLogMsgField.CLASSNAME.getStr()
+        return ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrLogMsgField.CLASSNAME.getStr()
             + forStrBuild.getName()
-            + NcStrLogMsgField.TYPENAME.getStr()
+            + ZPINcStrLogMsgField.TYPENAME.getStr()
             + forStrBuild.getTypeName()
-            + NcStrLogMsgField.CANONICALNAME.getStr()
+            + ZPINcStrLogMsgField.CANONICALNAME.getStr()
             + forStrBuild.getCanonicalName()
-            + NcStrLogMsgField.GENERICSTRING.getStr()
+            + ZPINcStrLogMsgField.GENERICSTRING.getStr()
             + forStrBuild.toGenericString();
     }
     protected static void outCreateObjectMessage(String strMsg, Class<?> forStrBuild){
-        String classInfoToString = NcAppHelper.getClassInfoToString(forStrBuild);
-            NcAppHelper.outMessage( NcStrLogMsgField.INFO.getStr()
-                    + NcStrLogMsgField.CREATE.getStr()
+        String classInfoToString = ZPINcAppHelper.getClassInfoToString(forStrBuild);
+            ZPINcAppHelper.outMessage( ZPINcStrLogMsgField.INFO.getStr()
+                    + ZPINcStrLogMsgField.CREATE.getStr()
                     + strMsg
                     + classInfoToString);
     }
     protected static TreeMap<Long, String> getThreadStackTraceToString(Thread t){
-        String strTimeAndMsg = AppFileOperationsSimple.getNowTimeStringWithMS();
+        String strTimeAndMsg = ZPIAppFileOperationsSimple.getNowTimeStringWithMS();
         TreeMap<Long, String> strForLog = new TreeMap<Long, String>();
 
 
@@ -747,43 +747,43 @@ public class ZPIAppObjectsInfoHelperClasses {
         long idx = 0;
         strForLog.put(idx, strTimeAndMsg);
         idx++;
-        String strThread = NcStrLogMsgField.THREAD.getStr()
-        + NcStrLogMsgField.COUNT.getStr()
+        String strThread = ZPINcStrLogMsgField.THREAD.getStr()
+        + ZPINcStrLogMsgField.COUNT.getStr()
         + Thread.activeCount()
-        + NcStrLogMsgField.THREAD_GROUP_NAME.getStr()
+        + ZPINcStrLogMsgField.THREAD_GROUP_NAME.getStr()
         + t.getThreadGroup().getName()
-        + NcStrLogMsgField.ACTIVE.getStr()        
-        + NcStrLogMsgField.COUNT.getStr()
+        + ZPINcStrLogMsgField.ACTIVE.getStr()        
+        + ZPINcStrLogMsgField.COUNT.getStr()
         + t.getThreadGroup().activeCount()
-        + NcStrLogMsgField.ACTIVE.getStr()
-        + NcStrLogMsgField.GROUP.getStr()
-        + NcStrLogMsgField.COUNT.getStr()
+        + ZPINcStrLogMsgField.ACTIVE.getStr()
+        + ZPINcStrLogMsgField.GROUP.getStr()
+        + ZPINcStrLogMsgField.COUNT.getStr()
         + t.getThreadGroup().activeGroupCount();
         strForLog.put(idx, strThread);
         idx++;
-        String strLoader = NcStrLogMsgField.CLASSLOADER.getStr()
-            + NcStrLogMsgField.CANONICALNAME.getStr()
+        String strLoader = ZPINcStrLogMsgField.CLASSLOADER.getStr()
+            + ZPINcStrLogMsgField.CANONICALNAME.getStr()
             + t.getContextClassLoader().getClass().getCanonicalName();
         strForLog.put(idx, strLoader);
         idx++;
-        strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-            + NcStrLogMsgField.TOSTRING.getStr()
+        strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+            + ZPINcStrLogMsgField.TOSTRING.getStr()
             + t.toString());
         idx++;
-        strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-            + NcStrLogMsgField.NAME.getStr()
+        strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+            + ZPINcStrLogMsgField.NAME.getStr()
             + t.getName());
         idx++;
-        strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-            + NcStrLogMsgField.CANONICALNAME.getStr()
+        strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+            + ZPINcStrLogMsgField.CANONICALNAME.getStr()
             + t.getClass().getCanonicalName());
         idx++;
-        strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                + NcStrLogMsgField.ID.getStr() + t.getId());
+        strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                + ZPINcStrLogMsgField.ID.getStr() + t.getId());
         idx++;
-        strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-            + NcStrLogMsgField.STATE.getStr()
-            + NcStrLogMsgField.NAME.getStr() + t.getState().name());
+        strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+            + ZPINcStrLogMsgField.STATE.getStr()
+            + ZPINcStrLogMsgField.NAME.getStr() + t.getState().name());
         idx++;
         String strTrace = "";
         int stackIdx = 0;
@@ -794,20 +794,20 @@ public class ZPIAppObjectsInfoHelperClasses {
                 String strOutFile = "";
                 if( ZPINcfvRunVariables.isOutToLogFileIncludeFile() ){
 
-                    strOutFile = NcStrLogMsgField.FILENAME.getStr()
+                    strOutFile = ZPINcStrLogMsgField.FILENAME.getStr()
                         + itemT.getFileName();
                 }
                 String strOut = 
-                    NcStrLogMsgField.CLASSNAME.getStr()
+                    ZPINcStrLogMsgField.CLASSNAME.getStr()
                     + itemT.getClassName()
-                    + NcStrLogMsgField.METHODNAME.getStr()
+                    + ZPINcStrLogMsgField.METHODNAME.getStr()
                     + itemT.getMethodName()
-                    + NcStrLogMsgField.LINENUM.getStr()
+                    + ZPINcStrLogMsgField.LINENUM.getStr()
                     + itemT.getLineNumber()
                     + (itemT.isNativeMethod()
-                        ? NcStrLogMsgField.NATIVE.getStr() : "");
+                        ? ZPINcStrLogMsgField.NATIVE.getStr() : "");
 
-                strTrace = NcStrLogMsgField.ELEMENTNUM.getStr()
+                strTrace = ZPINcStrLogMsgField.ELEMENTNUM.getStr()
                         + stackIdx + strOutFile + strOut;
                 stackIdx++;
             }
@@ -843,15 +843,15 @@ public class ZPIAppObjectsInfoHelperClasses {
         String name = inFuncThread.getName();
         int priority = inFuncThread.getPriority();
         String stateName = inFuncThread.getState().name();
-        strToOut = NcStrLogMsgField.THREAD.getStr()
-                + NcStrLogMsgField.ID.getStr()
+        strToOut = ZPINcStrLogMsgField.THREAD.getStr()
+                + ZPINcStrLogMsgField.ID.getStr()
                 + Long.toString(id)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + name
-                + NcStrLogMsgField.PRIORITY.getStr()
+                + ZPINcStrLogMsgField.PRIORITY.getStr()
                 + Integer.toString(priority)
-                + NcStrLogMsgField.STATE.getStr()
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.STATE.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + stateName;
         listStrToRet.add(strToOut);
         ThreadGroup threadGroup = inFuncThread.getThreadGroup();
@@ -869,25 +869,25 @@ public class ZPIAppObjectsInfoHelperClasses {
         String strDaemon = daemon ? "true" : "false";
         boolean destroyed = inFuncThreadGroup.isDestroyed();
         String strDestroyed = destroyed ? "true" : "false";
-        strToOut = NcStrLogMsgField.THREAD_GROUP.getStr()
-                + NcStrLogMsgField.NAME.getStr()
+        strToOut = ZPINcStrLogMsgField.THREAD_GROUP.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + name
-                + NcStrLogMsgField.MAX.getStr()
-                + NcStrLogMsgField.PRIORITY.getStr()
+                + ZPINcStrLogMsgField.MAX.getStr()
+                + ZPINcStrLogMsgField.PRIORITY.getStr()
                 + Integer.toString(maxPriority)
-                + NcStrLogMsgField.ACTIVE.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + Integer.toString(activeCount)
-                + NcStrLogMsgField.ACTIVE.getStr()
-                + NcStrLogMsgField.GROUP.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()
+                + ZPINcStrLogMsgField.GROUP.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + Integer.toString(activeGroupCount)
-                + NcStrLogMsgField.IS.getStr()
-                + NcStrLogMsgField.DAEMON.getStr()
+                + ZPINcStrLogMsgField.IS.getStr()
+                + ZPINcStrLogMsgField.DAEMON.getStr()
                 + strDaemon
-                + NcStrLogMsgField.IS.getStr()
+                + ZPINcStrLogMsgField.IS.getStr()
                 + strDestroyed
-                + NcStrLogMsgField.DESTROYED.getStr();
+                + ZPINcStrLogMsgField.DESTROYED.getStr();
         
         listStrToRet.add(strToOut);
         
@@ -897,23 +897,23 @@ public class ZPIAppObjectsInfoHelperClasses {
         ArrayList<String> listStrToRet = new ArrayList<String>();
         String strToOut = "";
         int idx = 0;
-        String strToOutPref = NcStrLogMsgField.STACK.getStr()
-            + NcStrLogMsgField.TRACE.getStr()
-            + NcStrLogMsgField.ELEMENT.getStr();
+        String strToOutPref = ZPINcStrLogMsgField.STACK.getStr()
+            + ZPINcStrLogMsgField.TRACE.getStr()
+            + ZPINcStrLogMsgField.ELEMENT.getStr();
         for (StackTraceElement stackItem : inFuncStackTrace) {
 
             Class<?> classItem = stackItem.getClass();
             strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
-                    + NcStrLogMsgField.CLASSNAME.getStr()
+                    + ZPINcStrLogMsgField.CLASSNAME.getStr()
                     + stackItem.getClassName();
             listStrToRet.add(strToOut);
             
             ArrayList<String> declMeth = getDeclaredMethodsInfo(classItem);
             for (String strMeth : declMeth) {
                 strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
                     + strMeth;
                 listStrToRet.add(strToOut);
@@ -922,7 +922,7 @@ public class ZPIAppObjectsInfoHelperClasses {
             ArrayList<String> declField = getDeclaredFieldsInfo(classItem);
             for (String strField : declField) {
                 strToOut = strToOutPref
-                    + NcStrLogMsgField.NUM.getStr() 
+                    + ZPINcStrLogMsgField.NUM.getStr() 
                     + idx
                     + strField;
                 listStrToRet.add(strToOut);
@@ -940,10 +940,10 @@ public class ZPIAppObjectsInfoHelperClasses {
         int methodIdx = 0;
         for (Method declaredMethod : declaredMethods) {
             String strName = declaredMethod.getName();
-            strToOut = NcStrLogMsgField.METHOD.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+            strToOut = ZPINcStrLogMsgField.METHOD.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + Integer.toString(methodIdx)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + strName;
             listStrToRet.add(strToOut);
             Parameter[] parameters = declaredMethod.getParameters();
@@ -951,12 +951,12 @@ public class ZPIAppObjectsInfoHelperClasses {
             for (Parameter parameter : parameters) {
                 String paramName = parameter.getName();
                 String paramType = parameter.getType().getCanonicalName();
-                strToOut = NcStrLogMsgField.PARAMETER.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+                strToOut = ZPINcStrLogMsgField.PARAMETER.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + Integer.toString(paramIdx)
-                + NcStrLogMsgField.NAME.getStr()
+                + ZPINcStrLogMsgField.NAME.getStr()
                 + paramName
-                + NcStrLogMsgField.TYPE.getStr()
+                + ZPINcStrLogMsgField.TYPE.getStr()
                 + paramType;
                 paramIdx++;
             }
@@ -970,27 +970,27 @@ public class ZPIAppObjectsInfoHelperClasses {
         int fieldIdx = 0;
         Field[] declaredFields = classInFunc.getClass().getDeclaredFields();
         for (Field declaredField : declaredFields) {
-            strToOut = NcStrLogMsgField.FIELD.getStr()
-                + NcStrLogMsgField.NUM.getStr()
+            strToOut = ZPINcStrLogMsgField.FIELD.getStr()
+                + ZPINcStrLogMsgField.NUM.getStr()
                 + fieldIdx;
             try {
                 boolean boolAccValFlag = declaredField.isAccessible();
                 declaredField.setAccessible(true);
                 strToOut = strToOut
-                    + NcStrLogMsgField.TYPE.getStr()
+                    + ZPINcStrLogMsgField.TYPE.getStr()
                     + declaredField.getType().getCanonicalName();
                 
                 strToOut = strToOut
-                    + NcStrLogMsgField.NAME.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr()
                     + declaredField.getName();
                 
                 strToOut = strToOut
-                    + NcStrLogMsgField.VALUE.getStr()
+                    + ZPINcStrLogMsgField.VALUE.getStr()
                     + declaredField.get(classInFunc.getClass()).toString();
                 declaredField.setAccessible(boolAccValFlag);
             } catch (IllegalAccessException | IllegalArgumentException | SecurityException ex){
                 strToOut = strToOut
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                     + ex.getMessage();
             }
             listStrToRet.add(strToOut);

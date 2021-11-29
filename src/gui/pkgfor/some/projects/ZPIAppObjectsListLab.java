@@ -27,9 +27,9 @@ public class ZPIAppObjectsListLab {
     protected static void runnablesInThreadsTest(){
         ThreadGroup testTG = new ThreadGroup("TestForLogger");
             
-            AppThExtendsBaseThread appThExtendsBaseThread = new AppThExtendsBaseThread(3);
+            ZPIAppThExtendsBaseThread appThExtendsBaseThread = new ZPIAppThExtendsBaseThread(3);
             System.out.println(" * * * First create Thread from Runnable and start");
-            Thread forTest = new Thread(testTG,appThExtendsBaseThread,"testThread-" + AppFileOperationsSimple.getNowTimeStringWithMS());
+            Thread forTest = new Thread(testTG,appThExtendsBaseThread,"testThread-" + ZPIAppFileOperationsSimple.getNowTimeStringWithMS());
             System.out.println("[NAME]" + forTest.getName() 
                     + "[toString]" + forTest.toString()
                     + "[getId]" + String.valueOf(forTest.getId())
@@ -40,7 +40,7 @@ public class ZPIAppObjectsListLab {
                     + "[isAlive]" + String.valueOf(forTest.isAlive())
                     + "[isInterrupted]" + String.valueOf(forTest.isInterrupted())
             );
-            System.out.println("[NcAppHelper.getThreadInfoToString]" + NcAppHelper.getThreadInfoToString(forTest));
+            System.out.println("[NcAppHelper.getThreadInfoToString]" + ZPINcAppHelper.getThreadInfoToString(forTest));
             
             try{
                 forTest.join();
@@ -50,7 +50,7 @@ public class ZPIAppObjectsListLab {
             forTest.start();
             System.out.println(" * * * Second create Thread from Runnable and start");
             
-            forTest = new Thread(testTG,appThExtendsBaseThread,"testThread" + AppFileOperationsSimple.getNowTimeStringWithMS());
+            forTest = new Thread(testTG,appThExtendsBaseThread,"testThread" + ZPIAppFileOperationsSimple.getNowTimeStringWithMS());
             System.out.println("" + forTest.getName());
             forTest.start();
             try{
@@ -59,7 +59,7 @@ public class ZPIAppObjectsListLab {
                 ex.printStackTrace();
             }
             System.out.println(" * * * Thrid create Thread from Runnable and start");
-            forTest = new Thread(testTG,appThExtendsBaseThread,"testThread" + AppFileOperationsSimple.getNowTimeStringWithMS());
+            forTest = new Thread(testTG,appThExtendsBaseThread,"testThread" + ZPIAppFileOperationsSimple.getNowTimeStringWithMS());
             System.out.println("" + forTest.getName());
             forTest.start();
             try{

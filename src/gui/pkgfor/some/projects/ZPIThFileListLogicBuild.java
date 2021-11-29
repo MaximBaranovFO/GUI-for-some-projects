@@ -28,16 +28,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class ZPIThFileListLogicBuild {
     protected void doBuildToIndexFileList(final ZPIThFileListRule outerRuleFileList){
-        AdilRule adilRule = outerRuleFileList.getIndexRule().getAdilRule();
-        AdilState adilState = adilRule.getAdilState();
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
+        ZPIAdilRule adilRule = outerRuleFileList.getIndexRule().getZPIAdilRule();
+        ZPIAdilState adilState = adilRule.getZPIAdilState();
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
                 + ZPIThFileListLogicBuild.class.getCanonicalName()
-                + AdilConstants.METHOD
+                + ZPIAdilConstants.METHOD
                 + "doBuildToIndexFileList()";
         adilState.putLogLineByProcessNumberMsg(5, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
         ZPIThDirListBusReaded busJobForRead = outerRuleFileList.getIndexRule().getIndexState().getBusJobForRead();
         // bus for output data to next index system
         ZPIThFileListState fileListState = outerRuleFileList.getFileListState();
@@ -95,7 +95,7 @@ public class ZPIThFileListLogicBuild {
         }
         adilState.putLogLineByProcessNumberMsg(5, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
     }
     private static ConcurrentHashMap<Integer, Path> buildDataForSend(
             final Path readedPath, 

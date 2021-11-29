@@ -32,16 +32,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class ZPIThDirListLogicRead {
     protected void doIndexStorage(final ZPIThDirListRule outerRuleDirListReadWork){
-        AdilRule adilRule = outerRuleDirListReadWork.getIndexRule().getAdilRule();
-        AdilState adilState = adilRule.getAdilState();
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
+        ZPIAdilRule adilRule = outerRuleDirListReadWork.getIndexRule().getZPIAdilRule();
+        ZPIAdilState adilState = adilRule.getZPIAdilState();
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
                 + ZPIThDirListLogicRead.class.getCanonicalName()
-                + AdilConstants.METHOD
+                + ZPIAdilConstants.METHOD
                 + "doIndexStorage()";
         adilState.putLogLineByProcessNumberMsg(3, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
         /**
          * @todo need optimized that part of code, if have a jobForReadList, then
          * index storage exist, check for exist and open it
@@ -55,14 +55,14 @@ public class ZPIThDirListLogicRead {
  
             ZPIThIndexRule indexRule = outerRuleDirListReadWork.getIndexRule();
             ZPIThIndexState indexState = indexRule.getIndexState();
-            AppFileStorageIndex currentIndexStorages = indexState.currentIndexStorages();
+            ZPIAppFileStorageIndex currentIndexStorages = indexState.currentIndexStorages();
             //currentIndexStorages.updateMapForStorages();
             /**
              * currentIndexStorages.updateMapForStorages();// - for update Storages info
              */
             System.out.println(ZPIThDirListLogicRead.class.getCanonicalName() + " preOpen storage =====>");
-            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
-            Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+            URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+            Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
             try( FileSystem fsForReadData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){    
                 System.out.println(ZPIThDirListLogicRead.class.getCanonicalName() + " open storage " + fsForReadData.toString());
                 int countJobs = 0;
@@ -91,22 +91,22 @@ public class ZPIThDirListLogicRead {
                         
                         adilState.putLogLineByProcessNumberMsg(3, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "countJobs"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(countJobs)
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "jobForRead.getReadedPath()"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + jobForRead.getReadedPath().toString()
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "jobForRead.getReadedDataSize()"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(jobForRead.getReadedDataSize())
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.VARNAME
                             + "jobForRead.isReaderJobDone().toString()"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(jobForRead.isReaderJobDone())
                         );
                         countJobs++;
@@ -115,10 +115,10 @@ public class ZPIThDirListLogicRead {
                 }
                 adilState.putLogLineByProcessNumberMsg(3, 
                             msgToLog
-                            + AdilConstants.STATE
-                            + AdilConstants.VARNAME
+                            + ZPIAdilConstants.STATE
+                            + ZPIAdilConstants.VARNAME
                             + "countJobs"
-                            + AdilConstants.VARVAL
+                            + ZPIAdilConstants.VARVAL
                             + String.valueOf(countJobs));
                 
             } catch(FileSystemNotFoundException ex){
@@ -140,7 +140,7 @@ public class ZPIThDirListLogicRead {
         }
         adilState.putLogLineByProcessNumberMsg(3, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
     }
     
 }

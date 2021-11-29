@@ -34,24 +34,24 @@ public class ZPIThDirListLogicManager {
     
     
     protected void doIndexStorage(final ZPIThDirListRule ruleDirList){
-        AdilRule adilRule = ruleDirList.getIndexRule().getAdilRule();
-        AdilState adilState = adilRule.getAdilState();
-        String msgToLog = AdilConstants.INFO_LOGIC_POSITION
-                + AdilConstants.CANONICALNAME
+        ZPIAdilRule adilRule = ruleDirList.getIndexRule().getZPIAdilRule();
+        ZPIAdilState adilState = adilRule.getZPIAdilState();
+        String msgToLog = ZPIAdilConstants.INFO_LOGIC_POSITION
+                + ZPIAdilConstants.CANONICALNAME
                 + ZPIThDirListLogicManager.class.getCanonicalName()
-                + AdilConstants.METHOD
+                + ZPIAdilConstants.METHOD
                 + "doIndexStorage()";
         adilState.putLogLineByProcessNumberMsg(2, 
                 msgToLog
-                + AdilConstants.START);
+                + ZPIAdilConstants.START);
         /**
          * log process example
          * adilState.putLogLineByProcessNumberMsg(0, 
          *              msgToLog
-         *              + AdilConstants.STATE
-         *              + AdilConstants.VARNAME
+         *              + ZPIAdilConstants.STATE
+         *              + ZPIAdilConstants.VARNAME
          *              + "storageForJobElement"
-         *              + AdilConstants.VARVAL
+         *              + ZPIAdilConstants.VARVAL
          *              + storageForJobElement.toUri().toString());
          */
         ZPIThDirListBusReaded busReadedJob = ruleDirList.getDirListState().getBusJobForRead();
@@ -66,12 +66,12 @@ public class ZPIThDirListLogicManager {
         
         ZPIThIndexRule indexRule = ruleDirList.getIndexRule();
         ZPIThIndexState indexState = indexRule.getIndexState();
-        AppFileStorageIndex currentIndexStorages = indexState.currentIndexStorages();
+        ZPIAppFileStorageIndex currentIndexStorages = indexState.currentIndexStorages();
         /**
          * currentIndexStorages.updateMapForStorages();// - for update Storages info
          */
-        URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
-        Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+        URI byPrefixGetUri = currentIndexStorages.byPrefixGetUri(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
+        Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(ZPIAppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST);
         try( FileSystem fsForReadData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){
             //NcParamFs dataStorage = NcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
    
@@ -79,9 +79,9 @@ public class ZPIThDirListLogicManager {
             
             System.out.println("Storage is " + fsForReadData.toString());
             
-            Path lookPath = fsForReadData.getPath(AppFileNamesConstants.DIR_IDX_ROOT);
+            Path lookPath = fsForReadData.getPath(ZPIAppFileNamesConstants.DIR_IDX_ROOT);
             int count = 0;
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(lookPath,"{" + AppFileNamesConstants.SZFS_DIR_LIST_FILE_PREFIX + "}*")) {
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(lookPath,"{" + ZPIAppFileNamesConstants.SZFS_DIR_LIST_FILE_PREFIX + "}*")) {
                 for (Path storageForJobElement : stream) {
                     pathIsNotReadWriteLink(storageForJobElement);
                     pathIsNotFile(storageForJobElement);
@@ -95,14 +95,14 @@ public class ZPIThDirListLogicManager {
                     //System.out.println("Directory is " + entry.toString());
                     adilState.putLogLineByProcessNumberMsg(2, 
                         msgToLog
-                        + AdilConstants.STATE
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.STATE
+                        + ZPIAdilConstants.VARNAME
                         + "count"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + String.valueOf(count)
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.VARNAME
                         + "storageForJobElement"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + storageForJobElement.toUri().toString());
                     //ThWordLogicFilter.processFilterInputedString(entry.toString());
                     count++;
@@ -113,10 +113,10 @@ public class ZPIThDirListLogicManager {
                 //System.out.println("Count of files " + count);
                 adilState.putLogLineByProcessNumberMsg(2, 
                         msgToLog
-                        + AdilConstants.STATE
-                        + AdilConstants.VARNAME
+                        + ZPIAdilConstants.STATE
+                        + ZPIAdilConstants.VARNAME
                         + "count"
-                        + AdilConstants.VARVAL
+                        + ZPIAdilConstants.VARVAL
                         + String.valueOf(count));
             if( count == 0 ){
                 System.out.println("Directory is Empty " + lookPath.toString());
@@ -140,7 +140,7 @@ public class ZPIThDirListLogicManager {
         }
         adilState.putLogLineByProcessNumberMsg(2, 
                 msgToLog
-                + AdilConstants.FINISH);
+                + ZPIAdilConstants.FINISH);
         adilRule.runAdilWorkWrite();
     }
     private static void pathIsNotReadWriteLink(Path innerWorkPath) throws IOException{

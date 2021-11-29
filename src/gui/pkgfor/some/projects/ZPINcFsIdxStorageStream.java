@@ -32,15 +32,15 @@ import java.util.TreeMap;
 public class ZPINcFsIdxStorageStream {
     protected static void putData(TreeMap<Long, ?> dataToRecord) throws Exception{
         if( dataToRecord == null ){
-            String strEx = NcStrExceptionMsg.DATA_FOR_RECORD_IS_NULL.getStr();
+            String strEx = ZPINcStrExceptionMsg.DATA_FOR_RECORD_IS_NULL.getStr();
             throw new Exception(strEx);
         }
         if( dataToRecord.isEmpty() ){
-            String strEx = NcStrExceptionMsg.DATA_FOR_RECORD_IS_NULL.getStr();
+            String strEx = ZPINcStrExceptionMsg.DATA_FOR_RECORD_IS_NULL.getStr();
             throw new Exception(strEx);
         }
         if( !checkUniformity(dataToRecord) ){
-            String strEx = NcStrExceptionMsg.DATA_FOR_RECORD_NOT_HOMOGENEOUS.getStr();
+            String strEx = ZPINcStrExceptionMsg.DATA_FOR_RECORD_NOT_HOMOGENEOUS.getStr();
             throw new Exception(strEx);
         }
         if( dataToRecord.size() == 100 ){
@@ -56,19 +56,19 @@ public class ZPINcFsIdxStorageStream {
     }
     private static void routeStorageType(TreeMap<Long, ?> dataToRecord){
         Class<?> aClass = dataToRecord.firstEntry().getValue().getClass();
-        if( aClass.isInstance(NcDcIdxDirListToFileAttr.class) ){
+        if( aClass.isInstance(ZPINcDcIdxDirListToFileAttr.class) ){
             
-        } else if( aClass.isInstance(NcDcIdxDirListToFileExist.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxDirListToFileExist.class) ) {
             
-        } else if( aClass.isInstance(NcDcIdxDirListToFileHash.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxDirListToFileHash.class) ) {
             
-        } else if( aClass.isInstance(NcDcIdxDirListToFileType.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxDirListToFileType.class) ) {
             
-        } else if( aClass.isInstance(NcDcIdxLongWordListToFile.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxLongWordListToFile.class) ) {
             
-        } else if( aClass.isInstance(NcDcIdxStorageWordToFile.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxStorageWordToFile.class) ) {
             
-        } else if( aClass.isInstance(NcDcIdxWordToFile.class) ) {
+        } else if( aClass.isInstance(ZPINcDcIdxWordToFile.class) ) {
             
         } else {
             throw new IllegalArgumentException("Data type is wrong and not compatable type of class");
@@ -95,8 +95,8 @@ public class ZPINcFsIdxStorageStream {
             oos.writeObject(dataToRecord);
         }
         catch(IOException ex){
-            NcAppHelper.logException(
-                    NcFsIdxStorageStream.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcFsIdxStorageStream.class.getCanonicalName(), ex);
             throw ex;
         } 
         return dataToRecord.size();
@@ -114,8 +114,8 @@ public class ZPINcFsIdxStorageStream {
             ncDataFromDirList = (TreeMap<Long, ?>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcFsIdxStorageStream.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcFsIdxStorageStream.class.getCanonicalName(), ex);
             return new TreeMap<>();
         } 
         return ncDataFromDirList;

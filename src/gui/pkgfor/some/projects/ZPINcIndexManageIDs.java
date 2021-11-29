@@ -30,7 +30,7 @@ import java.util.TreeMap;
  * @author Администратор
  */
 public class ZPINcIndexManageIDs {
-    private NcManageCfg ncThisMcCfg;
+    private ZPINcManageCfg ncThisMcCfg;
     /** Work directory object*/
     private File workDir;
     /** Data about count of IDs in Indexes readed from saved on Disk tempFile*/
@@ -51,11 +51,11 @@ public class ZPINcIndexManageIDs {
     /** Data about count of IDs in Indexes calculate from Files in work Dirictories*/
     private ZPINcTmpNowProcessInfo idsInDirData;
     /** Data readed from maximus Directory List File */
-    private TreeMap<Long, NcDcIdxDirListToFileAttr> lastRecDataDFL;
+    private TreeMap<Long, ZPINcDcIdxDirListToFileAttr> lastRecDataDFL;
     /** Data readed from maximus Directory List Hashes File */
-    private ArrayList<NcDcIdxDirListToFileHash> lastRecDataDFHL;
+    private ArrayList<ZPINcDcIdxDirListToFileHash> lastRecDataDFHL;
     /** Data readed from maximus Directory List Long Word File */
-    private ArrayList<NcDcIdxLongWordListToFile> lastRecDataDLWL;
+    private ArrayList<ZPINcDcIdxLongWordListToFile> lastRecDataDLWL;
 
     /**
      * Used in
@@ -64,7 +64,7 @@ public class ZPINcIndexManageIDs {
      * </ul>
      * @param ncThisMcCfg
      */
-    protected ZPINcIndexManageIDs(NcManageCfg ncThisMcCfg) {
+    protected ZPINcIndexManageIDs(ZPINcManageCfg ncThisMcCfg) {
        this.ncThisMcCfg = ncThisMcCfg;
        createDirListFile();
     }
@@ -82,7 +82,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#NcIndexManageIDs(ru.newcontrol.ncfv.NcManageCfg) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#ZPINcIndexManageIDs(ru.newcontrol.ncfv.ZPINcManageCfg) }
      * </ul>
      * Create Directory List File
      * Generate and manage File names, check existing files
@@ -114,7 +114,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#getFileDataToSwing(java.io.File) }
      * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#getResultMakeIndex(java.io.File) }
@@ -129,7 +129,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * </ul>
      * @param fIdsToWrite
      * @return
@@ -144,8 +144,8 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#createDirListFile() }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#setNewIdsData(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#createDirListFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#setNewIdsData(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
      * </ul>
      * @param fIdsToWrite
      * @return 
@@ -153,13 +153,13 @@ public class ZPINcIndexManageIDs {
     private int writeTmpIDs(ZPINcTmpNowProcessInfo fIdsToWrite){
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
-                new FileOutputStream(NcIdxFileManager.getTmpIdsFile())))
+                new FileOutputStream(ZPINcIdxFileManager.getTmpIdsFile())))
         {
             oos.writeObject(fIdsToWrite);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
             return -1;
         }
         return 1;
@@ -167,21 +167,21 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#createDirListFile() }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#getIdsReadedData() }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#getTmpIDsData(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#createDirListFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#getIdsReadedData() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#getTmpIDsData(java.io.File) }
      * </ul>
      * @return 
      */
     private static ZPINcTmpNowProcessInfo readTmpIds(){
         ZPINcTmpNowProcessInfo idsReadData;
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(NcIdxFileManager.getTmpIdsFile())))
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ZPINcIdxFileManager.getTmpIdsFile())))
         {
             idsReadData = (ZPINcTmpNowProcessInfo)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
             return new ZPINcTmpNowProcessInfo();
         }
         return idsReadData;
@@ -280,8 +280,8 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#isTmpIDsDataWrong(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#isTmpIDsDataEmpty(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#isTmpIDsDataWrong(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#isTmpIDsDataEmpty(ru.newcontrol.ncfv.NcTmpNowProcessInfo) }
      * </ul>
      * @param inFuncData
      * @return
@@ -302,7 +302,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#createDirListFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#createDirListFile() }
      * </ul>
      * Method check afte record parameters: readyForRecord, count in readyForRecordData,
      * count records in current Directory List File, and if count readyForRecord has
@@ -312,32 +312,32 @@ public class ZPINcIndexManageIDs {
      * @return 
      */
     private ZPINcTmpNowProcessInfo checkDataForAllDirListFiles(){
-        TreeMap<Integer, File> indexWorkSubDirFilesList = NcIdxFileManager.getIndexWorkSubDirFilesList();
+        TreeMap<Integer, File> indexWorkSubDirFilesList = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
         File ncmfsDFL = indexWorkSubDirFilesList.get("/fl".hashCode());
-        if( NcIdxFileManager.isErrorForFileOperation(ncmfsDFL) ){
-            NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
+        if( ZPINcIdxFileManager.isErrorForFileOperation(ncmfsDFL) ){
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
             + "/fl directory check error"
-            + NcIdxFileManager.getStrCanPathFromFile(ncmfsDFL));
+            + ZPINcIdxFileManager.getStrCanPathFromFile(ncmfsDFL));
             return new ZPINcTmpNowProcessInfo();
         }
         File ncmfsDFHL = indexWorkSubDirFilesList.get("/fx".hashCode());
-        if( NcIdxFileManager.isErrorForFileOperation(ncmfsDFHL) ){
-            NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
+        if( ZPINcIdxFileManager.isErrorForFileOperation(ncmfsDFHL) ){
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
             + "/fx directory check error"
-            + NcIdxFileManager.getStrCanPathFromFile(ncmfsDFHL));
+            + ZPINcIdxFileManager.getStrCanPathFromFile(ncmfsDFHL));
             return new ZPINcTmpNowProcessInfo();
         }
         File ncmfsDLWL = indexWorkSubDirFilesList.get("/lw".hashCode());
-        if( NcIdxFileManager.isErrorForFileOperation(ncmfsDLWL) ){
-            NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
+        if( ZPINcIdxFileManager.isErrorForFileOperation(ncmfsDLWL) ){
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
             + "/lw directory check error"
-            + NcIdxFileManager.getStrCanPathFromFile(ncmfsDLWL));
+            + ZPINcIdxFileManager.getStrCanPathFromFile(ncmfsDLWL));
             return new ZPINcTmpNowProcessInfo();
         }
         
-        TreeMap<Integer, File> listDFL = NcIdxFileManager.getFileListFromSubDir(ncmfsDFL);
-        TreeMap<Integer, File> listDFHL = NcIdxFileManager.getFileListFromSubDir(ncmfsDFHL);
-        TreeMap<Integer, File> listDLWL = NcIdxFileManager.getFileListFromSubDir(ncmfsDLWL);
+        TreeMap<Integer, File> listDFL = ZPINcIdxFileManager.getFileListFromSubDir(ncmfsDFL);
+        TreeMap<Integer, File> listDFHL = ZPINcIdxFileManager.getFileListFromSubDir(ncmfsDFHL);
+        TreeMap<Integer, File> listDLWL = ZPINcIdxFileManager.getFileListFromSubDir(ncmfsDLWL);
         
         
 
@@ -378,7 +378,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#checkDataForAllDirListFiles() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#checkDataForAllDirListFiles() }
      * </ul>
      * @param filesList
      * @return 
@@ -389,8 +389,8 @@ public class ZPINcIndexManageIDs {
             return retLastName;
         }
         for(Map.Entry<Integer, File> itemName : filesList.entrySet()){
-            if ( NcIdxFileManager.getStrCanPathFromFile(itemName.getValue()).compareToIgnoreCase(retLastName) > 0){
-                retLastName = NcIdxFileManager.getStrCanPathFromFile(itemName.getValue());
+            if ( ZPINcIdxFileManager.getStrCanPathFromFile(itemName.getValue()).compareToIgnoreCase(retLastName) > 0){
+                retLastName = ZPINcIdxFileManager.getStrCanPathFromFile(itemName.getValue());
             }
         }
         return retLastName;
@@ -398,7 +398,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#checkDataForAllDirListFiles() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#checkDataForAllDirListFiles() }
      * </ul>
      * @param strFIds
      * @return 
@@ -408,11 +408,11 @@ public class ZPINcIndexManageIDs {
         if(fileExistRWAccessChecker(fileFIds)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileFIds)))
             {
-                lastRecDataDFL = (TreeMap<Long, NcDcIdxDirListToFileAttr>)ois.readObject();
+                lastRecDataDFL = (TreeMap<Long, ZPINcDcIdxDirListToFileAttr>)ois.readObject();
             }
             catch(Exception ex){
-                NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
                 return -1;
             }
         }
@@ -424,7 +424,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#checkDataForAllDirListFiles() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#checkDataForAllDirListFiles() }
      * </ul>
      * @param strFIds
      * @return 
@@ -434,11 +434,11 @@ public class ZPINcIndexManageIDs {
         if(fileExistRWAccessChecker(fileFIds)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileFIds)))
             {
-                lastRecDataDFHL = (ArrayList<NcDcIdxDirListToFileHash>)ois.readObject();
+                lastRecDataDFHL = (ArrayList<ZPINcDcIdxDirListToFileHash>)ois.readObject();
             }
             catch(Exception ex){
-                NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
                 return -1;
             }
         }
@@ -450,7 +450,7 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#checkDataForAllDirListFiles() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#checkDataForAllDirListFiles() }
      * </ul>
      * @param strFIds
      * @return 
@@ -460,11 +460,11 @@ public class ZPINcIndexManageIDs {
         if(fileExistRWAccessChecker(fileFIds)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileFIds)))
             {
-                lastRecDataDLWL = (ArrayList<NcDcIdxLongWordListToFile>)ois.readObject();
+                lastRecDataDLWL = (ArrayList<ZPINcDcIdxLongWordListToFile>)ois.readObject();
             }
             catch(Exception ex){
-                NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
                 return -1;
             }
         }
@@ -476,9 +476,9 @@ public class ZPINcIndexManageIDs {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#readFromDFLIds(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#readFromDFHLIds(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexManageIDs#readFromDLWLIds(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#readFromDFLIds(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#readFromDFHLIds(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexManageIDs#readFromDLWLIds(java.lang.String) }
      * </ul>
      * @param strFIds
      * @return 
@@ -492,8 +492,8 @@ public class ZPINcIndexManageIDs {
                 return true;
             }
         }catch(NullPointerException ex){
-            NcAppHelper.logException(
-                    NcIndexManageIDs.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIndexManageIDs.class.getCanonicalName(), ex);
             return false;
         }
         return false;

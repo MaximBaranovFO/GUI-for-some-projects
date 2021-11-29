@@ -25,8 +25,8 @@ import java.util.TreeMap;
  * @author Администратор
  */
 public class ZPINcIMinFS {
-    private NcManageCfg ncmcCfg;
-    private NcIndexManageIDs ncmIDs;
+    private ZPINcManageCfg ncmcCfg;
+    private ZPINcIndexManageIDs ncmIDs;
 
     /** Work directory object*/
     private File workDir;
@@ -37,7 +37,7 @@ public class ZPINcIMinFS {
     /** Current File name for write data of Directory List */
     public final String recDirListFileName;
     /** Data to record in Directory list files */
-    private ArrayList<NcDcIdxDirListToFileAttr> readyForRecordData;
+    private ArrayList<ZPINcDcIdxDirListToFileAttr> readyForRecordData;
     static final long K = 1024;
     static final long M = 1048576;
     static final long G = 1073741824;
@@ -45,7 +45,7 @@ public class ZPINcIMinFS {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#NcSearchInIndex() }
      * </ul>
@@ -53,10 +53,10 @@ public class ZPINcIMinFS {
     protected ZPINcIMinFS() {
        this.limitCountRecordInFiles = 100;
 
-       ncmcCfg = new NcManageCfg();
+       ncmcCfg = new ZPINcManageCfg();
        workDir = ncmcCfg.ncfvdi;
        
-       ncmIDs = new NcIndexManageIDs(ncmcCfg);
+       ncmIDs = new ZPINcIndexManageIDs(ncmcCfg);
 
        long tmpLong = 0;
        String posfixName = "";
@@ -83,20 +83,20 @@ public class ZPINcIMinFS {
      * </ul>
      * @return
      */
-    protected TreeMap<Long, NcDiskInfo> getDiskInfo(){
+    protected TreeMap<Long, ZPINcDiskInfo> getDiskInfo(){
         return ncmcCfg.arrDiskInfo;
     }
     
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#NcSearchInIndex() }
      * </ul>
      * @return
      */
-    protected NcIndexManageIDs getNcIndexManageIDs(){
+    protected ZPINcIndexManageIDs getZPINcIndexManageIDs(){
         return ncmIDs;
     }
     
@@ -104,7 +104,7 @@ public class ZPINcIMinFS {
      * Not used
      * @return
      */
-    private NcManageCfg getNcManageCfg(){
+    private ZPINcManageCfg getZPINcManageCfg(){
         return ncmcCfg;
     }
 
@@ -142,7 +142,7 @@ public class ZPINcIMinFS {
      * @param fReadyForRecordData
      * @return 
      */
-    private int setReadyForRecordData(ArrayList<NcDcIdxDirListToFileAttr> fReadyForRecordData){
+    private int setReadyForRecordData(ArrayList<ZPINcDcIdxDirListToFileAttr> fReadyForRecordData){
         fReadyForRecordData.trimToSize();
         readyForRecordData = fReadyForRecordData;
         readyForRecord = fReadyForRecordData.size();

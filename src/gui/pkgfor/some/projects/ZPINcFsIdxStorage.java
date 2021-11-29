@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  * @author wladimirowichbiaran
  */
 public class ZPINcFsIdxStorage {
-    protected static void putDataToIndex(NcSwGUIComponentStatus lComp, Path dirForScan){
+    protected static void putDataToIndex(ZPINcSwGUIComponentStatus lComp, Path dirForScan){
         FileSystem aDefault = FileSystems.getDefault();
         Iterable<FileStore> fileStores = aDefault.getFileStores();
         
@@ -74,7 +74,7 @@ public class ZPINcFsIdxStorage {
             arrStr.add(strPathToStart);
             
         } catch (IOException ex) {
-            NcAppHelper.logException(NcFsIdxStorage.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcFsIdxStorage.class.getCanonicalName(), ex);
         }
         
         
@@ -108,9 +108,9 @@ public class ZPINcFsIdxStorage {
         ZPINcThWorkerUpGUITreeWork.workTreeAddChildren(lComp, arrStr);
     }
     
-    protected static void getDataFromIndex(NcSwGUIComponentStatus lComp){
-        ThreadLocal<NcParamFs> openFsIdx = 
-                NcFsIdxStorageInit.getStorage(lComp);
+    protected static void getDataFromIndex(ZPINcSwGUIComponentStatus lComp){
+        ThreadLocal<ZPINcParamFs> openFsIdx = 
+                ZPINcFsIdxStorageInit.getStorage(lComp);
         
     }
     protected static void getIndexStorage(){

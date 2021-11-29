@@ -40,7 +40,7 @@ public class ZPINcAppHelper {
      *
      */
     protected static void outPutToConsoleDiskInfo(){
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         if( !sysDisk.isEmpty() ){
             outMessageToConsole("If your need to write alias parameter into Configuration file");
             outMessageToConsole("write it in this example format:");
@@ -60,7 +60,7 @@ public class ZPINcAppHelper {
             "FromWorker"};
             String strFirst = "";
             int i = 0;
-            for(Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet()){
+            for(Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet()){
                 if(i == 0){
                     strFirst = strForDisk[(int) Math.round(Math.random()*12)]
                     + strForDisk[(int) Math.round(Math.random()*12)]
@@ -106,7 +106,7 @@ public class ZPINcAppHelper {
      * @param pathErr
      */
     protected static void appExitWithMessageFSAccess(String pathErr){
-        outMessage(NcStrLogMsgField.ERROR_CRITICAL.getStr()
+        outMessage(ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
             + "For run application in the path: " + pathErr
             + "\n application must have permission on read, write on the file system"
             + "\n for use functions of this application your must have run it in the"
@@ -117,7 +117,7 @@ public class ZPINcAppHelper {
         System.exit(0);
     }
     protected static void appExitWithMessage(String strErrMessage){
-        NcAppHelper.outMessage(NcStrLogMsgField.ERROR_CRITICAL.getStr() + strErrMessage);
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR_CRITICAL.getStr() + strErrMessage);
         System.exit(0);
     }
 
@@ -152,7 +152,7 @@ public class ZPINcAppHelper {
         outMessageToConsole("");
         for(File itemFile : fileRoots){
             try {
-                outMessageToConsole("getAbsolutePath: " + NcIdxFileManager.getStrCanPathFromFile(itemFile));
+                outMessageToConsole("getAbsolutePath: " + ZPINcIdxFileManager.getStrCanPathFromFile(itemFile));
                 outMessageToConsole("getCanonicalPath: " + itemFile.getCanonicalPath());
                 outMessageToConsole("toString: " + itemFile.toString());
             
@@ -161,7 +161,7 @@ public class ZPINcAppHelper {
                 outMessageToConsole("getUsableSpace: " + itemFile.getUsableSpace());
                 outMessageToConsole("getTotalSpace: " + itemFile.getTotalSpace());
             } catch (IOException ex) {
-                Logger.getLogger(NcPreRunFileViewer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ZPINcPreRunFileViewer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
@@ -182,7 +182,7 @@ public class ZPINcAppHelper {
                 outMessageToConsole("getUsableSpace: " + store.getUsableSpace());
                 outMessageToConsole("getUnallocatedSpace: " + store.getUnallocatedSpace());
             } catch (IOException ex) {
-                Logger.getLogger(NcPreRunFileViewer.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ZPINcPreRunFileViewer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         outMessageToConsole("");
@@ -198,23 +198,23 @@ public class ZPINcAppHelper {
         outMessageToConsole("");
         outMessageToConsole("NcDiskUtils.getDiskInfo");
         outMessageToConsole("");
-        TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
-        for( Map.Entry<Long, NcDiskInfo> itemDisk : sysDisk.entrySet() ){
-            NcAppHelper.outMessageToConsole("");
-            NcAppHelper.outMessageToConsole("diskID: \t" + Long.toString(itemDisk.getValue().diskID));
-            NcAppHelper.outMessageToConsole("humanAlias: \t" + itemDisk.getValue().humanAlias);
-            NcAppHelper.outMessageToConsole("programAlias: \t" + itemDisk.getValue().programAlias);
-            NcAppHelper.outMessageToConsole("strFileStore: \t" + itemDisk.getValue().strFileStore);
-            NcAppHelper.outMessageToConsole("strFileStoreName: \t" + itemDisk.getValue().strFileStoreName);
-            NcAppHelper.outMessageToConsole("DiskLetter: \t" + itemDisk.getValue().diskLetter);
-            NcAppHelper.outMessageToConsole("longSerialNumber: \t" + Long.toString(itemDisk.getValue().longSerialNumber));
-            NcAppHelper.outMessageToConsole("strHexSerialNumber: \t" + itemDisk.getValue().strHexSerialNumber);
-            NcAppHelper.outMessageToConsole("DiskFStype: \t" + itemDisk.getValue().diskFStype);
-            NcAppHelper.outMessageToConsole("isReadonly: \t" + itemDisk.getValue().isReadonly);
-            NcAppHelper.outMessageToConsole("availSpace: \t" + Long.toString(itemDisk.getValue().availSpace));
-            NcAppHelper.outMessageToConsole("totalSpace: \t" + Long.toString(itemDisk.getValue().totalSpace));
-            NcAppHelper.outMessageToConsole("unAllocatedSpace: \t" + Long.toString(itemDisk.getValue().unAllocatedSpace));
-            NcAppHelper.outMessageToConsole("usedSpace: \t" + Long.toString(itemDisk.getValue().usedSpace));
+        TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        for( Map.Entry<Long, ZPINcDiskInfo> itemDisk : sysDisk.entrySet() ){
+            ZPINcAppHelper.outMessageToConsole("");
+            ZPINcAppHelper.outMessageToConsole("diskID: \t" + Long.toString(itemDisk.getValue().diskID));
+            ZPINcAppHelper.outMessageToConsole("humanAlias: \t" + itemDisk.getValue().humanAlias);
+            ZPINcAppHelper.outMessageToConsole("programAlias: \t" + itemDisk.getValue().programAlias);
+            ZPINcAppHelper.outMessageToConsole("strFileStore: \t" + itemDisk.getValue().strFileStore);
+            ZPINcAppHelper.outMessageToConsole("strFileStoreName: \t" + itemDisk.getValue().strFileStoreName);
+            ZPINcAppHelper.outMessageToConsole("DiskLetter: \t" + itemDisk.getValue().diskLetter);
+            ZPINcAppHelper.outMessageToConsole("longSerialNumber: \t" + Long.toString(itemDisk.getValue().longSerialNumber));
+            ZPINcAppHelper.outMessageToConsole("strHexSerialNumber: \t" + itemDisk.getValue().strHexSerialNumber);
+            ZPINcAppHelper.outMessageToConsole("DiskFStype: \t" + itemDisk.getValue().diskFStype);
+            ZPINcAppHelper.outMessageToConsole("isReadonly: \t" + itemDisk.getValue().isReadonly);
+            ZPINcAppHelper.outMessageToConsole("availSpace: \t" + Long.toString(itemDisk.getValue().availSpace));
+            ZPINcAppHelper.outMessageToConsole("totalSpace: \t" + Long.toString(itemDisk.getValue().totalSpace));
+            ZPINcAppHelper.outMessageToConsole("unAllocatedSpace: \t" + Long.toString(itemDisk.getValue().unAllocatedSpace));
+            ZPINcAppHelper.outMessageToConsole("usedSpace: \t" + Long.toString(itemDisk.getValue().usedSpace));
         }
         
     }
@@ -254,21 +254,21 @@ public class ZPINcAppHelper {
         }
     }
     protected static void logException(String strClassName, Exception ex){
-        NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
-                + NcStrLogMsgField.CLASSNAME.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
+                + ZPINcStrLogMsgField.CLASSNAME.getStr()
                 + strClassName
-                + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                 + ex.getMessage());
     }
     protected static String exceptionToString(Class<?> exceptionClass,
             Class<?> srcClass,
             String descrStr){
         String strForReturn = "";
-        strForReturn = AppMsgEnFiledForLog.EX_CLASS
+        strForReturn = ZPIAppMsgEnFiledForLog.EX_CLASS
                 + exceptionClass.getCanonicalName()
-                + AppMsgEnFiledForLog.EX_SRC_CLASS
+                + ZPIAppMsgEnFiledForLog.EX_SRC_CLASS
                 + srcClass.getCanonicalName()
-                + AppMsgEnFiledForLog.EX_DESCR
+                + ZPIAppMsgEnFiledForLog.EX_DESCR
                 + descrStr;
         return strForReturn;
     }
@@ -287,10 +287,10 @@ public class ZPINcAppHelper {
     protected static void outMessageToAppLogFile(String strMessage){
         if( ZPINcfvRunVariables.isOutToLogFile() ){
             
-            String strNowTime =  NcStrLogMsgField.TIME.getStr()
+            String strNowTime =  ZPINcStrLogMsgField.TIME.getStr()
                 + java.time.LocalDateTime.now().toString();
             String strTimeAndMsg = strNowTime
-                    + NcStrLogMsgField.MSG.getStr() + strMessage;
+                    + ZPINcStrLogMsgField.MSG.getStr() + strMessage;
             String strTrace = "";
             if( ZPINcfvRunVariables.isOutToLogFileWithTrace() ){
                 TreeMap<Long, String> strForLog = new TreeMap<Long, String>();
@@ -300,43 +300,43 @@ public class ZPINcAppHelper {
                 long idx = 0;
                 strForLog.put(idx, strTimeAndMsg);
                 idx++;
-                String strThread = NcStrLogMsgField.THREAD.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                String strThread = ZPINcStrLogMsgField.THREAD.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + Thread.activeCount()
-                + NcStrLogMsgField.THREAD_GROUP_NAME.getStr()
+                + ZPINcStrLogMsgField.THREAD_GROUP_NAME.getStr()
                 + t.getThreadGroup().getName()
-                + NcStrLogMsgField.ACTIVE.getStr()        
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()        
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + t.getThreadGroup().activeCount()
-                + NcStrLogMsgField.ACTIVE.getStr()
-                + NcStrLogMsgField.GROUP.getStr()
-                + NcStrLogMsgField.COUNT.getStr()
+                + ZPINcStrLogMsgField.ACTIVE.getStr()
+                + ZPINcStrLogMsgField.GROUP.getStr()
+                + ZPINcStrLogMsgField.COUNT.getStr()
                 + t.getThreadGroup().activeGroupCount();
                 strForLog.put(idx, strThread);
                 idx++;
-                String strLoader = NcStrLogMsgField.CLASSLOADER.getStr()
-                    + NcStrLogMsgField.CANONICALNAME.getStr()
+                String strLoader = ZPINcStrLogMsgField.CLASSLOADER.getStr()
+                    + ZPINcStrLogMsgField.CANONICALNAME.getStr()
                     + t.getContextClassLoader().getClass().getCanonicalName();
                 strForLog.put(idx, strLoader);
                 idx++;
-                strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.TOSTRING.getStr()
+                strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.TOSTRING.getStr()
                     + t.toString());
                 idx++;
-                strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.NAME.getStr()
+                strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr()
                     + t.getName());
                 idx++;
-                strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.CANONICALNAME.getStr()
+                strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.CANONICALNAME.getStr()
                     + t.getClass().getCanonicalName());
                 idx++;
-                strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                        + NcStrLogMsgField.ID.getStr() + t.getId());
+                strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                        + ZPINcStrLogMsgField.ID.getStr() + t.getId());
                 idx++;
-                strForLog.put(idx, NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.STATE.getStr()
-                    + NcStrLogMsgField.NAME.getStr() + t.getState().name());
+                strForLog.put(idx, ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.STATE.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr() + t.getState().name());
                 idx++;
                 int stackIdx = 0;
                 for(StackTraceElement itemT : nowT ){
@@ -346,20 +346,20 @@ public class ZPINcAppHelper {
                         String strOutFile = "";
                         if( ZPINcfvRunVariables.isOutToLogFileIncludeFile() ){
                             
-                            strOutFile = NcStrLogMsgField.FILENAME.getStr()
+                            strOutFile = ZPINcStrLogMsgField.FILENAME.getStr()
                                 + itemT.getFileName();
                         }
                         String strOut = 
-                            NcStrLogMsgField.CLASSNAME.getStr()
+                            ZPINcStrLogMsgField.CLASSNAME.getStr()
                             + itemT.getClassName()
-                            + NcStrLogMsgField.METHODNAME.getStr()
+                            + ZPINcStrLogMsgField.METHODNAME.getStr()
                             + itemT.getMethodName()
-                            + NcStrLogMsgField.LINENUM.getStr()
+                            + ZPINcStrLogMsgField.LINENUM.getStr()
                             + itemT.getLineNumber()
                             + (itemT.isNativeMethod()
-                                ? NcStrLogMsgField.NATIVE.getStr() : "");
+                                ? ZPINcStrLogMsgField.NATIVE.getStr() : "");
                         
-                        strTrace = NcStrLogMsgField.ELEMENTNUM.getStr()
+                        strTrace = ZPINcStrLogMsgField.ELEMENTNUM.getStr()
                                 + stackIdx + strOutFile + strOut;
                         stackIdx++;
                     }
@@ -371,24 +371,24 @@ public class ZPINcAppHelper {
                     idx++;
                 }
                 
-                NcLogFileManager.putToLog(strForLog);
+                ZPINcLogFileManager.putToLog(strForLog);
             }
             else{
-                NcLogFileManager.putToLogStr(strTimeAndMsg);
+                ZPINcLogFileManager.putToLogStr(strTimeAndMsg);
             }
         }
     }
     
 /**
  * Find disk with maximum avalable space and not ReadOnly for make index work directory
- * @return index of record in class NcDiskInfo
+ * @return index of record in class ZPINcDiskInfo
  */    
-    protected static NcDiskInfo getNcDiskInfoForMaxFreeSpace(){
-        NcDiskInfo ncDisk = null;
+    protected static ZPINcDiskInfo getZPINcDiskInfoForMaxFreeSpace(){
+        ZPINcDiskInfo ncDisk = null;
             long tmpFreeSpace = 0;
-            TreeMap<Long, NcDiskInfo> sysDisk = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+            TreeMap<Long, ZPINcDiskInfo> sysDisk = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
             if( !sysDisk.isEmpty() ){
-                for ( Map.Entry<Long, NcDiskInfo> nccd : sysDisk.entrySet() ){
+                for ( Map.Entry<Long, ZPINcDiskInfo> nccd : sysDisk.entrySet() ){
                     if( !nccd.getValue().isReadonly ){
                         if(tmpFreeSpace < nccd.getValue().availSpace){
                             tmpFreeSpace = nccd.getValue().availSpace;
@@ -440,8 +440,8 @@ public class ZPINcAppHelper {
     }
     protected static void strArrToConsoleOutPut(String[] strArrForOutPut){
         for(int i = 0; i < strArrForOutPut.length ; i++){
-                NcAppHelper.outMessage(
-                    NcStrLogMsgField.INFO.getStr()
+                ZPINcAppHelper.outMessage(
+                    ZPINcStrLogMsgField.INFO.getStr()
                     + i + "\t" + strArrForOutPut[i]);
         }
     }
@@ -451,43 +451,43 @@ public class ZPINcAppHelper {
         int activeCountThreadGroup = threadGroup.activeCount();
         int activeGroupCount = threadGroup.activeGroupCount();
         Class<?> aClass = forStrBuild.getClass();
-        return NcStrLogMsgField.INFO.getStr()
-                    + NcStrLogMsgField.THREAD_GROUP_NAME.getStr()
+        return ZPINcStrLogMsgField.INFO.getStr()
+                    + ZPINcStrLogMsgField.THREAD_GROUP_NAME.getStr()
                     + nameThreadGroup
-                    + NcStrLogMsgField.ACTIVE.getStr()        
-                    + NcStrLogMsgField.COUNT.getStr()
+                    + ZPINcStrLogMsgField.ACTIVE.getStr()        
+                    + ZPINcStrLogMsgField.COUNT.getStr()
                     + String.valueOf(activeCountThreadGroup)
-                    + NcStrLogMsgField.ACTIVE.getStr()
-                    + NcStrLogMsgField.GROUP.getStr()
-                    + NcStrLogMsgField.COUNT.getStr()
+                    + ZPINcStrLogMsgField.ACTIVE.getStr()
+                    + ZPINcStrLogMsgField.GROUP.getStr()
+                    + ZPINcStrLogMsgField.COUNT.getStr()
                     + String.valueOf(activeGroupCount)
-                    + NcStrLogMsgField.THREAD.getStr()
-                    + NcStrLogMsgField.ID.getStr()
+                    + ZPINcStrLogMsgField.THREAD.getStr()
+                    + ZPINcStrLogMsgField.ID.getStr()
                     + String.valueOf(forStrBuild.getId())
-                    + NcStrLogMsgField.PRIORITY.getStr()        
+                    + ZPINcStrLogMsgField.PRIORITY.getStr()        
                     + String.valueOf(forStrBuild.getPriority())
-                    + NcStrLogMsgField.NAME.getStr()
+                    + ZPINcStrLogMsgField.NAME.getStr()
                     + forStrBuild.getName()
-                    + NcStrLogMsgField.CANONICALNAME.getStr()
+                    + ZPINcStrLogMsgField.CANONICALNAME.getStr()
                     + aClass.getCanonicalName()
-                    + NcStrLogMsgField.GENERICSTRING.getStr()
+                    + ZPINcStrLogMsgField.GENERICSTRING.getStr()
                     + aClass.toGenericString();
     }
     protected static String getClassInfoToString(Class<?> forStrBuild){
-        return NcStrLogMsgField.INFO.getStr()
-            + NcStrLogMsgField.CLASSNAME.getStr()
+        return ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrLogMsgField.CLASSNAME.getStr()
             + forStrBuild.getName()
-            + NcStrLogMsgField.TYPENAME.getStr()
+            + ZPINcStrLogMsgField.TYPENAME.getStr()
             + forStrBuild.getTypeName()
-            + NcStrLogMsgField.CANONICALNAME.getStr()
+            + ZPINcStrLogMsgField.CANONICALNAME.getStr()
             + forStrBuild.getCanonicalName()
-            + NcStrLogMsgField.GENERICSTRING.getStr()
+            + ZPINcStrLogMsgField.GENERICSTRING.getStr()
             + forStrBuild.toGenericString();
     }
     protected static void outCreateObjectMessage(String strMsg, Class<?> forStrBuild){
-        String classInfoToString = NcAppHelper.getClassInfoToString(forStrBuild);
-            NcAppHelper.outMessage( NcStrLogMsgField.INFO.getStr()
-                    + NcStrLogMsgField.CREATE.getStr()
+        String classInfoToString = ZPINcAppHelper.getClassInfoToString(forStrBuild);
+            ZPINcAppHelper.outMessage( ZPINcStrLogMsgField.INFO.getStr()
+                    + ZPINcStrLogMsgField.CREATE.getStr()
                     + strMsg
                     + classInfoToString);
     }
@@ -497,7 +497,7 @@ public class ZPINcAppHelper {
      * @param appConstantsParam 
      */
     protected static void outToConsoleIfDevAndParamTrue(String msgForOut, Boolean appConstantsParam){
-        if( (AppConstants.LOG_LEVEL_CURRENT > AppConstants.LOG_LEVEL_DEBUG) && appConstantsParam ){
+        if( (ZPIAppConstants.LOG_LEVEL_CURRENT > ZPIAppConstants.LOG_LEVEL_DEBUG) && appConstantsParam ){
                 System.out.println(msgForOut);
             }
     }

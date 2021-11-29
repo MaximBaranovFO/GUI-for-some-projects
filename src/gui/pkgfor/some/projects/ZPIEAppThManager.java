@@ -29,16 +29,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class ZPIEAppThManager {
     private ConcurrentSkipListMap<String,Runnable> currentWorkerList;
     private ArrayBlockingQueue<String> messagesQueueForLogging;
-    private AppObjectsList outerObectsForApp;
+    private ZPIAppObjectsList outerObectsForApp;
     private ZPIThIndexRule thIndexRule;
 
-    public ZPIEAppThManager(AppObjectsList objectsForApp) {
+    public ZPIEAppThManager(ZPIAppObjectsList objectsForApp) {
         this.outerObectsForApp = objectsForApp;
         this.currentWorkerList = objectsForApp.getWorkerList();
         this.messagesQueueForLogging = objectsForApp.getLoggingQueue();
         
     }
-    protected AppObjectsList getListOfObjects(){
+    protected ZPIAppObjectsList getListOfObjects(){
         return this.outerObectsForApp;
     }
     protected void setIndexRule(final ZPIThIndexRule outerThIndexRule){

@@ -27,12 +27,12 @@ public class ZPIEAppObjectsList {
     private ConcurrentSkipListMap<String, Runnable> currentWorkerList;
     private ArrayBlockingQueue<String> messagesQueueForLogging;
     
-    private final Integer messagesQueueSize = AppConstants.LOG_LINES_COUNT;
+    private final Integer messagesQueueSize = ZPIAppConstants.LOG_LINES_COUNT;
 
     public ZPIEAppObjectsList() {
         this.currentWorkerList = new ConcurrentSkipListMap<>();
         this.messagesQueueForLogging = new ArrayBlockingQueue<String>(messagesQueueSize);
-        currentWorkerList.put(AppMsgEnPrefixes.TH_NAME_LOG, new AppLoggerToTextRunnable(messagesQueueForLogging));
+        currentWorkerList.put(ZPIAppMsgEnPrefixes.TH_NAME_LOG, new ZPIAppLoggerToTextRunnable(messagesQueueForLogging));
     }
     protected ConcurrentSkipListMap<String, Runnable> getWorkerList(){
         return currentWorkerList;
@@ -41,40 +41,40 @@ public class ZPIEAppObjectsList {
         return messagesQueueForLogging;
     }
     protected Runnable getLogger(){
-        Runnable getForReturn = currentWorkerList.get(AppMsgEnPrefixes.TH_NAME_LOG);
+        Runnable getForReturn = currentWorkerList.get(ZPIAppMsgEnPrefixes.TH_NAME_LOG);
         
         if( getForReturn == null ){
-            currentWorkerList.put(AppMsgEnPrefixes.TH_NAME_LOG, new AppLoggerToTextRunnable(messagesQueueForLogging));
-            getForReturn = currentWorkerList.get(AppMsgEnPrefixes.TH_NAME_LOG);
+            currentWorkerList.put(ZPIAppMsgEnPrefixes.TH_NAME_LOG, new ZPIAppLoggerToTextRunnable(messagesQueueForLogging));
+            getForReturn = currentWorkerList.get(ZPIAppMsgEnPrefixes.TH_NAME_LOG);
         }
         return getForReturn;
     }
     protected String getPrefixInfo(){
-        String prefixStr = AppMsgEnFiledForLog.FIELD_START
-                + AppFileOperationsSimple.getNowTimeStringWithMS()
-                + AppMsgEnFiledForLog.FIELD_STOP
-                + AppMsgEnFiledForLog.INFO;
+        String prefixStr = ZPIAppMsgEnFiledForLog.FIELD_START
+                + ZPIEAppFileOperationsSimple.getNowTimeStringWithMS()
+                + ZPIAppMsgEnFiledForLog.FIELD_STOP
+                + ZPIAppMsgEnFiledForLog.INFO;
         return prefixStr;
     }
     protected String getPrefixState(){
-        String prefixStr = AppMsgEnFiledForLog.FIELD_START
-                + AppFileOperationsSimple.getNowTimeStringWithMS()
-                + AppMsgEnFiledForLog.FIELD_STOP
-                + AppMsgEnFiledForLog.STATE;
+        String prefixStr = ZPIAppMsgEnFiledForLog.FIELD_START
+                + ZPIEAppFileOperationsSimple.getNowTimeStringWithMS()
+                + ZPIAppMsgEnFiledForLog.FIELD_STOP
+                + ZPIAppMsgEnFiledForLog.STATE;
         return prefixStr;
     }
     protected String getPrefixWarning(){
-        String prefixStr = AppMsgEnFiledForLog.FIELD_START
-                + AppFileOperationsSimple.getNowTimeStringWithMS()
-                + AppMsgEnFiledForLog.FIELD_STOP
-                + AppMsgEnFiledForLog.WARINING;
+        String prefixStr = ZPIAppMsgEnFiledForLog.FIELD_START
+                + ZPIEAppFileOperationsSimple.getNowTimeStringWithMS()
+                + ZPIAppMsgEnFiledForLog.FIELD_STOP
+                + ZPIAppMsgEnFiledForLog.WARINING;
         return prefixStr;
     }
     protected String getPrefixError(){
-        String prefixStr = AppMsgEnFiledForLog.FIELD_START
-                + AppFileOperationsSimple.getNowTimeStringWithMS()
-                + AppMsgEnFiledForLog.FIELD_STOP
-                + AppMsgEnFiledForLog.ERROR;
+        String prefixStr = ZPIAppMsgEnFiledForLog.FIELD_START
+                + ZPIEAppFileOperationsSimple.getNowTimeStringWithMS()
+                + ZPIAppMsgEnFiledForLog.FIELD_STOP
+                + ZPIAppMsgEnFiledForLog.ERROR;
         return prefixStr;
     }
     
@@ -85,8 +85,8 @@ public class ZPIEAppObjectsList {
             this.messagesQueueForLogging.add(prefixStr);
         }
         if( !this.messagesQueueForLogging.isEmpty()){
-            if( this.messagesQueueForLogging.size() > (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
-                - (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
+            if( this.messagesQueueForLogging.size() > (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
+                - (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
                 this.doLogger();
             }
         }
@@ -98,8 +98,8 @@ public class ZPIEAppObjectsList {
             this.messagesQueueForLogging.add(prefixStr);
         }
         if( !this.messagesQueueForLogging.isEmpty()){
-            if( messagesQueueForLogging.size() > (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
-                - (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
+            if( messagesQueueForLogging.size() > (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
+                - (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
                 this.doLogger();
             }
         }
@@ -111,8 +111,8 @@ public class ZPIEAppObjectsList {
             this.messagesQueueForLogging.add(prefixStr);
         }
         if( !this.messagesQueueForLogging.isEmpty()){
-            if( this.messagesQueueForLogging.size() > (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
-                - (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
+            if( this.messagesQueueForLogging.size() > (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
+                - (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
                 this.doLogger();
             }
         }
@@ -124,8 +124,8 @@ public class ZPIEAppObjectsList {
             this.messagesQueueForLogging.add(prefixStr);
         }
         if( !this.messagesQueueForLogging.isEmpty()){
-            if( this.messagesQueueForLogging.size() > (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
-                - (AppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
+            if( this.messagesQueueForLogging.size() > (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT 
+                - (ZPIAppConstants.LIMIT_MESSAGES_FOR_LOG_IN_QUEUE_COUNT % 10)) ){
                 this.doLogger();
             }
         }
@@ -158,11 +158,11 @@ public class ZPIEAppObjectsList {
             currentWorkerList.put(nameForWorker, workerForAdd);
             foundedThread = currentWorkerList.get(nameForWorker);
         }
-        if( AppConstants.LOG_LEVEL_CURRENT > AppConstants.LOG_LEVEL_SILENT ){
+        if( ZPIAppConstants.LOG_LEVEL_CURRENT > ZPIAppConstants.LOG_LEVEL_SILENT ){
             putLogMessageState("[ADDOBJECTTOLIST]" + nameForWorker);
-            if( AppConstants.LOG_LEVEL_CURRENT > AppConstants.LOG_LEVEL_USE ){
+            if( ZPIAppConstants.LOG_LEVEL_CURRENT > ZPIAppConstants.LOG_LEVEL_USE ){
                 if( foundedThread != null ){
-                    String classInfoToString = AppObjectsInfoHelperClasses.getClassInfoToString(foundedThread.getClass());
+                    String classInfoToString = ZPIAppObjectsInfoHelperClasses.getClassInfoToString(foundedThread.getClass());
                     putLogMessageState("[CLASS]" + classInfoToString);
                 }
             }

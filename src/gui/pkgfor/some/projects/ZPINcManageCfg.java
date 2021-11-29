@@ -129,13 +129,13 @@ public class ZPINcManageCfg {
      */
     protected ZPINcManageCfg() {
         
-        NcParamFv readedWorkCfg = NcParamFvReader.readDataFromWorkCfg();
-        if( NcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
-            readedWorkCfg = NcPreRunFileViewer.getCurrentWorkCfg();
+        ZPINcParamFv readedWorkCfg = ZPINcParamFvReader.readDataFromWorkCfg();
+        if( ZPINcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
+            readedWorkCfg = ZPINcPreRunFileViewer.getCurrentWorkCfg();
         }
         indexPath = readedWorkCfg.indexPath;
         ncfvdi = new File(readedWorkCfg.indexPath);
-        arrDiskInfo = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        arrDiskInfo = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         isCfgLoadAndReady = mcLoadCfgFormDiskOrCreate();
         
     }
@@ -153,7 +153,7 @@ public class ZPINcManageCfg {
      * <li>{@link ru.newcontrol.ncfv.NcManageCfg#mcReadDiskConfiguration() }
      * </ul>
      */
-    protected TreeMap<Long, NcDiskInfo> arrDiskInfo;
+    protected TreeMap<Long, ZPINcDiskInfo> arrDiskInfo;
     /**
      * Used in
      * <ul>
@@ -164,7 +164,7 @@ public class ZPINcManageCfg {
      * Search index work folder
      */    
     private void mcSearchOrSetWorkDir() throws IOException{
-        NcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(indexPath);
+        ZPINcParamCfgToDiskReleaser.checkOrCreateIdxDirStructure(indexPath);
         /*if(intIterationCreateDir < 5){
             intIterationCreateDir++;
         }
@@ -172,10 +172,10 @@ public class ZPINcManageCfg {
             throw new IOException("Create work folders out of legal 5 counts");
         }
         if( arrDiskInfo == null ){
-            arrDiskInfo = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+            arrDiskInfo = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         }
         if( arrDiskInfo != null ){
-            for ( Map.Entry<Long, NcDiskInfo> nccd : arrDiskInfo.entrySet() ){
+            for ( Map.Entry<Long, ZPINcDiskInfo> nccd : arrDiskInfo.entrySet() ){
                 File ncfdir = new File(nccd.getValue().diskLetter + ":" + indexPath);
                 if( ncfdir.exists() ){
                     ncfvdi = ncfdir;
@@ -192,12 +192,12 @@ public class ZPINcManageCfg {
     /**
      * Not used
      * Find disk with maximus avalable space for make index work directory
-     * @return index of record in class NcDiskInfo
+     * @return index of record in class ZPINcDiskInfo
      */    
     private long mcGetMaxFreeSpace(){
         long tmpFreeSpace = 0;
         if( arrDiskInfo != null){
-            for ( Map.Entry<Long, NcDiskInfo> nccd: arrDiskInfo.entrySet() ){
+            for ( Map.Entry<Long, ZPINcDiskInfo> nccd: arrDiskInfo.entrySet() ){
                 if( !nccd.getValue().isReadonly ){
                     if(tmpFreeSpace < nccd.getValue().availSpace){
                         tmpFreeSpace = nccd.getValue().availSpace;
@@ -217,13 +217,13 @@ public class ZPINcManageCfg {
      * @param ncdiskToCreate
      * @return creted directory object type of class File
      */    
-    private File mcCreateWorkDir(NcDiskInfo ncdiskToCreate) throws IOException{
+    private File mcCreateWorkDir(ZPINcDiskInfo ncdiskToCreate) throws IOException{
         File createdDir = new File(ncdiskToCreate.diskLetter + ":" + indexPath);
         if( createdDir.mkdir() ){
             return createdDir;
         }
-        String strMsg = NcStrServiceMsg.ERROR_NOT_CREATE.getStr() + NcIdxFileManager.getStrCanPathFromFile(createdDir);
-        NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
+        String strMsg = ZPINcStrServiceMsg.ERROR_NOT_CREATE.getStr() + ZPINcIdxFileManager.getStrCanPathFromFile(createdDir);
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg);
         throw new IOException(strMsg);
     }
@@ -238,13 +238,13 @@ public class ZPINcManageCfg {
             mcFoundCfgOnDisk();
             mcSearchOrSetWorkDir();
         }
-        String strPathWorkDir = NcIdxFileManager.getStrCanPathFromFile(ncfvdi);
+        String strPathWorkDir = ZPINcIdxFileManager.getStrCanPathFromFile(ncfvdi);
         for(String strSubDir : workSubDir){
             File fileWorkSubDir = new File(strPathWorkDir+strSubDir);
             if( !fileWorkSubDir.exists() ){
                 if( !fileWorkSubDir.mkdir() ){
-                    String strMsg = NcStrServiceMsg.ERROR_NOT_CREATE.getStr() + NcIdxFileManager.getStrCanPathFromFile(fileWorkSubDir);
-                    NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
+                    String strMsg = ZPINcStrServiceMsg.ERROR_NOT_CREATE.getStr() + ZPINcIdxFileManager.getStrCanPathFromFile(fileWorkSubDir);
+                    ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
                     + strMsg);
                     throw new IOException(strMsg);
                 }
@@ -271,8 +271,8 @@ public class ZPINcManageCfg {
             oos.writeObject(arrDiskInfo);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                NcManageCfg.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                ZPINcManageCfg.class.getCanonicalName(), ex);
             return -1;
         } 
         return arrDiskInfo.size();
@@ -290,14 +290,14 @@ public class ZPINcManageCfg {
             try {
                 mcSearchOrSetWorkDir();
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                    NcManageCfg.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcManageCfg.class.getCanonicalName(), ex);
             }
         }
         if(ncfvdi == null){
-            return NcIdxFileManager.getStrCanPathFromFile(NcIdxFileManager.getErrorForFileOperation());
+            return ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcIdxFileManager.getErrorForFileOperation());
         }
-        return NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(ncfvdi), workSubDir[1]);
+        return ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(ncfvdi), workSubDir[1]);
     }
     /**
      * Used in
@@ -350,7 +350,7 @@ public class ZPINcManageCfg {
      * @deprecated 
      */
     private void mcUpdateCfgOnDisk(){
-        arrDiskInfo = NcParamJournalDisk.getFromJournalDiskOrCreateIt();
+        arrDiskInfo = ZPINcParamJournalDisk.getFromJournalDiskOrCreateIt();
         mcWriteDiskConfiguration();
     }
     /**
@@ -363,11 +363,11 @@ public class ZPINcManageCfg {
         String strCfgPath = mcGetWorkCfgDirName() + workFileNames[0];
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            arrDiskInfo = (TreeMap<Long, NcDiskInfo>)ois.readObject();
+            arrDiskInfo = (TreeMap<Long, ZPINcDiskInfo>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                NcManageCfg.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                ZPINcManageCfg.class.getCanonicalName(), ex);
             return -1;
         } 
         return arrDiskInfo.size();
@@ -380,7 +380,7 @@ public class ZPINcManageCfg {
      */
     private static boolean mcCheckRWEfSubDir(String subDir){
         if( isCfgLoadAndReady ){
-                String potentialWorkPath = NcIdxFileManager.getStrCanPathFromFile(ncfvdi);
+                String potentialWorkPath = ZPINcIdxFileManager.getStrCanPathFromFile(ncfvdi);
                 boolean ifInArray = false;
                 for( String strDir : workSubDir ){
                     if( subDir.equalsIgnoreCase(strDir) ){
@@ -442,7 +442,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     protected static File getDirList(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/fl");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/fl");
     }
  /** fh - contained files of Directory lists hashes information it is provided by*/
  /** class NcDirListToFilesHashes*/
@@ -452,7 +452,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     private static File getDirListHash(){
-       return NcIdxFileManager.getIndexWorkSubDirFileByName("/fh");
+       return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/fh");
     }
  /** 
   * fx - for index contained hash of path, and relesad metodth of quick serch 
@@ -470,7 +470,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     protected static File getDirListExist(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/fx");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/fx");
     }    
  /** w - contained files of information about word to be searched it is provided by*/
  /** class NcSubStringsToFilesForIndex*/
@@ -488,7 +488,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     protected static File getDirWords(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/w");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/w");
     }
  /** sw - Storage of word, contains information about word, his heximal codes, and*/
  /** hashes of this string, provided by class NcLongWord*/
@@ -498,7 +498,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     private static File getDirStorageWords(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/sw");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/sw");
     } 
  /** lw - contained files of File lists for long word and his ids information it*/
  /** is provided by class NcLongWord*/
@@ -517,7 +517,7 @@ public class ZPINcManageCfg {
      * @return 
      */
     protected static File getDirLongWordList(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/lw");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/lw");
     }     
  /** ln - contained files of information about word to be searched, his name is ids*/
  /** this ids and word for it contained in directory lw in files*/
@@ -531,7 +531,7 @@ public class ZPINcManageCfg {
      * @return 
      */    
     protected static File getDirLongWord(){
-        return NcIdxFileManager.getIndexWorkSubDirFileByName("/ln");
+        return ZPINcIdxFileManager.getIndexWorkSubDirFileByName("/ln");
     }
     /**
      * Not used
@@ -555,8 +555,8 @@ public class ZPINcManageCfg {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamCfgToDiskReleaser#checkOrCreateIdxDirStructure(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcParamCfgToDiskReleaser#getIdxDirStructure(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamCfgToDiskReleaser#checkOrCreateIdxDirStructure(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamCfgToDiskReleaser#getIdxDirStructure(java.lang.String) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#outToConsoleIdxDirs() }
      * </ul>

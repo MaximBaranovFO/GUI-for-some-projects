@@ -41,11 +41,11 @@ public class ZPINcIdxSubStringVariant {
     protected ZPINcIdxSubStringVariant(String strInLowerCase, String strInUpperCase) {
         this.strInLowerCase = strInLowerCase;
         this.strInLowerCaseHash = this.strInLowerCase.hashCode();
-        this.hexForLowerCase = NcPathToArrListStr.toStrUTFinHEX(this.strInLowerCase);
+        this.hexForLowerCase = ZPINcPathToArrListStr.toStrUTFinHEX(this.strInLowerCase);
         this.hexForLowerCaseHash = this.hexForLowerCase.hashCode();
         this.strInUpperCase = strInUpperCase;
         this.strInUpperCaseHash = this.strInUpperCase.hashCode();
-        this.hexForUpperCase = NcPathToArrListStr.toStrUTFinHEX(this.strInUpperCase);
+        this.hexForUpperCase = ZPINcPathToArrListStr.toStrUTFinHEX(this.strInUpperCase);
         this.hexForUpperCaseHash = this.hexForUpperCase.hashCode();
     }
     

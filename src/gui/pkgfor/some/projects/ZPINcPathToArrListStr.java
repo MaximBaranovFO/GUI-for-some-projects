@@ -138,11 +138,11 @@ public enum ZPINcPathToArrListStr {
      * @param fileID
      * @return 
      */    
-    protected static TreeMap<Long, NcDcIdxSubStringToOperationUse> getStructureToRecord(
+    protected static TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> getStructureToRecord(
             ArrayList<String> strArr,
             String strPath,
             long fileID){
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> codeStr = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> codeStr = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
         int i = 0;
         int[] inResultIndexOf = new int[i + 1];
         int[] inPrevResultIndexOf = new int[0];
@@ -194,7 +194,7 @@ public enum ZPINcPathToArrListStr {
             //codeStr = codeStr + subStrfArr + "{" + CurrentSearchedIndex + ":" + subStrfArr.length() + "}";
             codeStr.put(
                 (long) i,
-                new NcDcIdxSubStringToOperationUse(
+                new ZPINcDcIdxSubStringToOperationUse(
                     (long) i,
                     fileID,
                     subStrfArr,
@@ -392,7 +392,7 @@ public enum ZPINcPathToArrListStr {
     protected static String getExtention(File ncFile){
         String outExt = "";
         if(ncFile.isFile()){
-            String inStrPath = NcIdxFileManager.getStrCanPathFromFile(ncFile);
+            String inStrPath = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile);
             String[] Ext = inStrPath.split("\\.");
             if( Ext.length != 1 ){   
                 for(String strExt : Ext){

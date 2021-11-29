@@ -35,9 +35,9 @@ public class ZPINcIdxWordManager {
      * @param StructureWord
      * @return 
      */    
-    protected static long putWord(TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureWord){
+    protected static long putWord(TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureWord){
         long countWritedIDs = 0;
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureWord.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureWord.entrySet()){
             String hexWord = item.getValue().hexSubString;
             //detect last recorded ID for word
             //get file name for now record
@@ -47,19 +47,19 @@ public class ZPINcIdxWordManager {
             //recID = getLastIDForWord(strCfgPath);
             String oldName = "";
             String forRecName = "";
-            TreeMap<Long, NcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, NcDcIdxWordToFile>();
+            TreeMap<Long, ZPINcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
             boolean isEqualNames = false;
             do{
-                inDiskWordRecord = NcIdxWordFileReader.ncReadFromWord(hexWord,recID);
-                oldName = NcIdxFileManager.getFileNameToRecord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
+                inDiskWordRecord = ZPINcIdxWordFileReader.ncReadFromWord(hexWord,recID);
+                oldName = ZPINcIdxFileManager.getFileNameToRecord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
                 if(inDiskWordRecord.isEmpty()){
                     break;
                 }
                 recID = inDiskWordRecord.lastEntry().getValue().recordID;
                 recID++;
-                forRecName = NcIdxFileManager.getFileNameToRecord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
+                forRecName = ZPINcIdxFileManager.getFileNameToRecord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
                 isEqualNames = ! oldName.equalsIgnoreCase(forRecName);
                 if(isEqualNames){
                     inDiskWordRecord.clear();
@@ -67,15 +67,15 @@ public class ZPINcIdxWordManager {
             }
             while(isEqualNames);
 
-            NcDcIdxWordToFile forRec = 
-                        new NcDcIdxWordToFile(
+            ZPINcDcIdxWordToFile forRec = 
+                        new ZPINcDcIdxWordToFile(
                                 recID,
                                 item.getValue().toFileId,
                                 item.getValue().strSubString,
                                 item.getValue().positionSubString,
                                 item.getValue().lengthSubString);
             inDiskWordRecord.put(recID, forRec);
-            countWritedIDs = countWritedIDs + NcIdxWordFileWriter.ncWriteForWord(inDiskWordRecord, hexWord, recID);
+            countWritedIDs = countWritedIDs + ZPINcIdxWordFileWriter.ncWriteForWord(inDiskWordRecord, hexWord, recID);
         }
         
         return countWritedIDs;
@@ -88,30 +88,30 @@ public class ZPINcIdxWordManager {
      * @param StructureWord
      * @return 
      */    
-    protected static TreeMap<Long, NcDcIdxWordToFile> getWord(TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureWord){
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getWord(TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureWord){
         long countWritedIDs = 0;
-        TreeMap<Long, NcDcIdxWordToFile> retInDiskWordRecord = new TreeMap<Long, NcDcIdxWordToFile>();
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureWord.entrySet()){
+        TreeMap<Long, ZPINcDcIdxWordToFile> retInDiskWordRecord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureWord.entrySet()){
             String hexWord = item.getValue().hexSubString;
             long recID = 0;
             String oldName = "";
             String forRecName = "";
-            TreeMap<Long, NcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, NcDcIdxWordToFile>();
+            TreeMap<Long, ZPINcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
             boolean isEqualNames = false;
             do{
                 inDiskWordRecord.clear();
-                inDiskWordRecord = NcIdxWordFileReader.ncReadFromWord(hexWord,recID);
-                oldName = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
+                inDiskWordRecord = ZPINcIdxWordFileReader.ncReadFromWord(hexWord,recID);
+                oldName = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
                 if(inDiskWordRecord.isEmpty()){
                     break;
                 }
                 retInDiskWordRecord.putAll(inDiskWordRecord);
                 recID = inDiskWordRecord.lastEntry().getValue().recordID;
                 recID++;
-                forRecName = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
+                forRecName = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + hexWord,recID);
                 isEqualNames = ! oldName.equalsIgnoreCase(forRecName);
                 if(isEqualNames){
-                    if( !NcIdxFileManager.fileExistRWAccessChecker(new File(forRecName))){
+                    if( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(forRecName))){
                         break;
                     }
                 }
@@ -126,7 +126,7 @@ public class ZPINcIdxWordManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isWordWrong(NcDcIdxWordToFile inFuncData){
+    private static boolean isWordWrong(ZPINcDcIdxWordToFile inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -141,7 +141,7 @@ public class ZPINcIdxWordManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isWordHasEmptyFiled(NcDcIdxWordToFile inFuncData){
+    private static boolean isWordHasEmptyFiled(ZPINcDcIdxWordToFile inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -164,7 +164,7 @@ public class ZPINcIdxWordManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isWordDataEmpty(NcDcIdxWordToFile inFuncData){
+    private static boolean isWordDataEmpty(ZPINcDcIdxWordToFile inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -187,14 +187,14 @@ public class ZPINcIdxWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#isWordWrong(ru.newcontrol.ncfv.NcDcIdxWordToFile) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#isWordWrong(ru.newcontrol.ncfv.ZPINcDcIdxWordToFile) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#isWordDataEmpty(ru.newcontrol.ncfv.NcDcIdxWordToFile) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#isWordDataEmpty(ru.newcontrol.ncfv.ZPINcDcIdxWordToFile) }
      * </ul>
      * @param inFuncData
      * @return
      */
-    protected static boolean isWordDataHashTrue(NcDcIdxWordToFile inFuncData){
+    protected static boolean isWordDataHashTrue(ZPINcDcIdxWordToFile inFuncData){
         return inFuncData.recordHash == (
                 ""
                 + inFuncData.recordID
@@ -210,8 +210,8 @@ public class ZPINcIdxWordManager {
      * @param inFuncListKeyWords
      * @return 
      */
-    private static TreeMap<Long, NcDcIdxWordToFile> getSearchedWordData(TreeMap<Long, String> inFuncListKeyWords){
-        return new TreeMap<Long, NcDcIdxWordToFile>();
+    private static TreeMap<Long, ZPINcDcIdxWordToFile> getSearchedWordData(TreeMap<Long, String> inFuncListKeyWords){
+        return new TreeMap<Long, ZPINcDcIdxWordToFile>();
     }
     /**
      * Used in
@@ -224,9 +224,9 @@ public class ZPINcIdxWordManager {
      * @return 
      */
     private static TreeMap<Long, File> getWordExistFile(String wordInHex){
-        TreeMap<Integer, File> listDirs = NcIdxFileManager.getIndexWorkSubDirFilesList();
+        TreeMap<Integer, File> listDirs = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
         File filePathDir = listDirs.get("/w".hashCode());
-        boolean boolCheck = NcIdxFileManager.dirExistRWAccessChecker(filePathDir);
+        boolean boolCheck = ZPINcIdxFileManager.dirExistRWAccessChecker(filePathDir);
         if( !boolCheck ){
             if( !filePathDir.mkdirs() ){
                 return new TreeMap<Long, File>();
@@ -236,9 +236,9 @@ public class ZPINcIdxWordManager {
         File fileWithRecords;
         TreeMap<Long, File> listFiles = new TreeMap<Long, File>();
         do{
-            String fileName = NcIdxFileManager.getFileNameToRecord("/w-" + wordInHex, recordID);
+            String fileName = ZPINcIdxFileManager.getFileNameToRecord("/w-" + wordInHex, recordID);
             
-            String strPathFile = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(filePathDir), fileName);
+            String strPathFile = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(filePathDir), fileName);
             
             fileWithRecords = new File(strPathFile);
             if( fileWithRecords.exists() ){
@@ -257,8 +257,8 @@ public class ZPINcIdxWordManager {
      * @param wordInHex
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxWordToFile> getAllDataForWord(String wordInHex){
-        TreeMap<Long, NcDcIdxWordToFile> toReturnData = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getAllDataForWord(String wordInHex){
+        TreeMap<Long, ZPINcDcIdxWordToFile> toReturnData = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         TreeMap<Long, File> existFileList = new TreeMap<Long, File>();
         
         existFileList = getWordExistFile(wordInHex);
@@ -267,7 +267,7 @@ public class ZPINcIdxWordManager {
             return toReturnData;
         }
         for( Map.Entry<Long, File> itemFile : existFileList.entrySet() ){
-            toReturnData.putAll(NcIdxWordFileReader.ncReadFromWordFile(itemFile.getValue()));
+            toReturnData.putAll(ZPINcIdxWordFileReader.ncReadFromWordFile(itemFile.getValue()));
         }
         return toReturnData;
     }

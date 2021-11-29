@@ -35,19 +35,19 @@ public class ZPINcIdxDirListFileWriter {
      * @param recID
      * @return 
      */    
-    protected static int ncWriteToDirListFile(TreeMap<Long, NcDcIdxDirListToFileAttr> ncDataToDirListFile, long recID){
+    protected static int ncWriteToDirListFile(TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDataToDirListFile, long recID){
         if( ncDataToDirListFile == null ){
             return -1;
         }
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
-                new FileOutputStream(NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirList())+"/dl",recID))))
+                new FileOutputStream(ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirList())+"/dl",recID))))
         {
             oos.writeObject(ncDataToDirListFile);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxDirListFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxDirListFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return ncDataToDirListFile.size();
@@ -63,8 +63,8 @@ public class ZPINcIdxDirListFileWriter {
      * @param dirListID
      * @return
      */
-    protected static int ncWriteToDirListExist(TreeMap<Long, NcDcIdxDirListToFileExist> ncDataToDirListFile, long dirListID){
-        String strCfgPath = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirListExist()) + "/e", dirListID);
+    protected static int ncWriteToDirListExist(TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncDataToDirListFile, long dirListID){
+        String strCfgPath = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirListExist()) + "/e", dirListID);
         if( ncDataToDirListFile == null ){
             return -1;
         }
@@ -75,8 +75,8 @@ public class ZPINcIdxDirListFileWriter {
             oos.writeObject(ncDataToDirListFile);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxDirListFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxDirListFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return ncDataToDirListFile.size();

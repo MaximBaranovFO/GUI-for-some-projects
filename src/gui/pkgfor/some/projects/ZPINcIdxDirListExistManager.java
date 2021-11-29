@@ -34,11 +34,11 @@ public class ZPINcIdxDirListExistManager {
      * @param dirListID
      * @return
      */
-    protected static long putToDirListExistStart(NcDcIdxDirListToFileExist toWriteData, long dirListID){
-        TreeMap<Long, NcDcIdxDirListToFileExist> ncReadFromFileData;
-        TreeMap<Long, NcDcIdxDirListToFileExist> ncWriteToFileData;
+    protected static long putToDirListExistStart(ZPINcDcIdxDirListToFileExist toWriteData, long dirListID){
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncReadFromFileData;
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncWriteToFileData;
         ncWriteToFileData = new  TreeMap<>();
-        ncReadFromFileData = NcIdxDirListFileReader.ncReadFromDirListExist(dirListID);
+        ncReadFromFileData = ZPINcIdxDirListFileReader.ncReadFromDirListExist(dirListID);
 
         if( ncReadFromFileData.isEmpty() ){
             ncWriteToFileData.put(dirListID, toWriteData);
@@ -47,7 +47,7 @@ public class ZPINcIdxDirListExistManager {
             ncWriteToFileData.putAll(ncReadFromFileData);
             ncWriteToFileData.put(dirListID, toWriteData);
         }
-        NcIdxDirListFileWriter.ncWriteToDirListExist(ncWriteToFileData, dirListID);
+        ZPINcIdxDirListFileWriter.ncWriteToDirListExist(ncWriteToFileData, dirListID);
         return ncWriteToFileData.size();
     }
 
@@ -60,25 +60,25 @@ public class ZPINcIdxDirListExistManager {
      * @param dirListID
      * @return
      */
-    protected static long putToDirListExistStop(NcDcIdxDirListToFileExist toWriteData, long dirListID){
-        TreeMap<Long, NcDcIdxDirListToFileExist> ncReadFromFileData;
-        TreeMap<Long, NcDcIdxDirListToFileExist> ncWriteToFileData;
+    protected static long putToDirListExistStop(ZPINcDcIdxDirListToFileExist toWriteData, long dirListID){
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncReadFromFileData;
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncWriteToFileData;
         ncWriteToFileData = new  TreeMap<>();
-        ncReadFromFileData = NcIdxDirListFileReader.ncReadFromDirListExist(dirListID);
+        ncReadFromFileData = ZPINcIdxDirListFileReader.ncReadFromDirListExist(dirListID);
 
         if( ncReadFromFileData.isEmpty() ){
             return -1;
         }
         else{
             ncWriteToFileData.put(dirListID, toWriteData);
-            for(Map.Entry<Long, NcDcIdxDirListToFileExist> itemIDSearch : ncReadFromFileData.entrySet()){
+            for(Map.Entry<Long, ZPINcDcIdxDirListToFileExist> itemIDSearch : ncReadFromFileData.entrySet()){
                 if( itemIDSearch.getValue().dirListID == dirListID ){
                     ncReadFromFileData.put(itemIDSearch.getKey(), toWriteData);
                 }
             }
             ncWriteToFileData.putAll(ncReadFromFileData);
         }
-        NcIdxDirListFileWriter.ncWriteToDirListExist(ncWriteToFileData, dirListID);
+        ZPINcIdxDirListFileWriter.ncWriteToDirListExist(ncWriteToFileData, dirListID);
         return ncWriteToFileData.size();
     }
 
@@ -87,7 +87,7 @@ public class ZPINcIdxDirListExistManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirListExistDataWrong(NcDcIdxDirListToFileExist inFuncData){
+    private static boolean isDirListExistDataWrong(ZPINcDcIdxDirListToFileExist inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -101,7 +101,7 @@ public class ZPINcIdxDirListExistManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirListExistDataHasEmptyFiled(NcDcIdxDirListToFileExist inFuncData){
+    private static boolean isDirListExistDataHasEmptyFiled(ZPINcDcIdxDirListToFileExist inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -123,7 +123,7 @@ public class ZPINcIdxDirListExistManager {
      * @param inFuncData
      * @return
      */
-    private static boolean isDirListExistDataDataEmpty(NcDcIdxDirListToFileExist inFuncData){
+    private static boolean isDirListExistDataDataEmpty(ZPINcDcIdxDirListToFileExist inFuncData){
         if( inFuncData == null ){
             return true;
         }
@@ -145,13 +145,13 @@ public class ZPINcIdxDirListExistManager {
     /**
      * Used in 
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#isDirListExistDataWrong(ru.newcontrol.ncfv.NcDcIdxDirListToFileExist) }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#isDirListExistDataDataEmpty(ru.newcontrol.ncfv.NcDcIdxDirListToFileExist) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#isDirListExistDataWrong(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#isDirListExistDataDataEmpty(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist) }
      * </ul>
      * @param inFuncData
      * @return
      */
-    private static boolean isDirListExistDataDataHashTrue(NcDcIdxDirListToFileExist inFuncData){
+    private static boolean isDirListExistDataDataHashTrue(ZPINcDcIdxDirListToFileExist inFuncData){
         return inFuncData.recordHash == (
                 ""
                 + inFuncData.dirListID

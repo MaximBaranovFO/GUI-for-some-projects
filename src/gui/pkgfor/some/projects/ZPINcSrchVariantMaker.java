@@ -33,8 +33,8 @@ public class ZPINcSrchVariantMaker {
      * @param strInFunc
      * @return
      */
-    protected static TreeMap<Long, NcIdxSubStringVariant> getUpperLowerCaseVariant(ArrayList<String> strInFunc){
-        TreeMap<Long, NcIdxSubStringVariant> strToRet = new TreeMap<Long, NcIdxSubStringVariant>();
+    protected static TreeMap<Long, ZPINcIdxSubStringVariant> getUpperLowerCaseVariant(ArrayList<String> strInFunc){
+        TreeMap<Long, ZPINcIdxSubStringVariant> strToRet = new TreeMap<Long, ZPINcIdxSubStringVariant>();
         if( strInFunc.isEmpty() ){
             return strToRet;
         }
@@ -42,7 +42,7 @@ public class ZPINcSrchVariantMaker {
         for(String itemStr : strInFunc ){
             String toLowerResultStr = itemStr.toLowerCase().toString();
             String toUpperResultStr = itemStr.toUpperCase().toString();
-            NcIdxSubStringVariant toAddToReturn = new NcIdxSubStringVariant(toLowerResultStr, toUpperResultStr);
+            ZPINcIdxSubStringVariant toAddToReturn = new ZPINcIdxSubStringVariant(toLowerResultStr, toUpperResultStr);
             strToRet.put(idx, toAddToReturn);
             idx++;
         }
@@ -55,10 +55,10 @@ public class ZPINcSrchVariantMaker {
      * </ul>
      * @param toSearchABC
      */
-    protected static ArrayList<String> getUpLowerCaseCombineKeyWord(TreeMap<Long, NcIdxSubStringVariant> toSearchABC){
+    protected static ArrayList<String> getUpLowerCaseCombineKeyWord(TreeMap<Long, ZPINcIdxSubStringVariant> toSearchABC){
         ArrayList<String> strWordsVar = new ArrayList<String>();
         
-        for(Map.Entry<Long, NcIdxSubStringVariant> itemKeyWord : toSearchABC.entrySet()){
+        for(Map.Entry<Long, ZPINcIdxSubStringVariant> itemKeyWord : toSearchABC.entrySet()){
             String strLower = itemKeyWord.getValue().hexForLowerCase;
             String strUpper = itemKeyWord.getValue().hexForUpperCase;
             String toChange = "";

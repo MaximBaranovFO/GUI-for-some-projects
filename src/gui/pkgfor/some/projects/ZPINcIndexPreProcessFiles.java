@@ -58,7 +58,7 @@ public class ZPINcIndexPreProcessFiles {
      * </ul>
      * @param ncFile
      */
-    protected ZPINcIndexPreProcessFiles(File ncFile) {
+    protected ZPIZPINcIndexPreProcessFiles(File ncFile) {
         currentFile = ncFile;
     }
     
@@ -67,7 +67,7 @@ public class ZPINcIndexPreProcessFiles {
      * @param ncFile
      * @param fNcRecursive
      */
-    private ZPINcIndexPreProcessFiles(File ncFile, boolean fNcRecursive) {
+    private ZPIZPINcIndexPreProcessFiles(File ncFile, boolean fNcRecursive) {
         currentFile = ncFile;
         ncRecursive = fNcRecursive;
     }
@@ -115,8 +115,8 @@ public class ZPINcIndexPreProcessFiles {
      * <li>{@link ru.newcontrol.ncfv.NcIndexMaker#getFilterStringsArray(java.io.File) }
      * <li>{@link ru.newcontrol.ncfv.NcIndexMaker#getMakeIndexForFile(java.io.File) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#getAttrCurPath(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#getAttrCurPath(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
      * </ul>
      * This method to release functional of inteface button "Make Index" in
      * developmend code version
@@ -126,37 +126,37 @@ public class ZPINcIndexPreProcessFiles {
      */    
     protected String[] getFileDataToSwing(File ncFile) throws IOException{
         
-        String strAbsolutlePath = NcIdxFileManager.getStrCanPathFromFile(ncFile);
+        String strAbsolutlePath = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile);
         
         char strDisk = (char) strAbsolutlePath.charAt(0);
         String strPath = strAbsolutlePath.substring(2);
         
-        String strABC = NcPathToArrListStr.NCLVLABC.retStr(strPath);
-        String strRABC = NcPathToArrListStr.NCLVLRABC.retStr(strPath);
-        String strSNUM = NcPathToArrListStr.NCLVLNUM.retStr(strPath);
-        String strSYM = NcPathToArrListStr.NCLVLSYM.retStr(strPath);
-        String strSPACE = NcPathToArrListStr.NCLVLSPACE.retStr(strPath);
+        String strABC = ZPINcPathToArrListStr.NCLVLABC.retStr(strPath);
+        String strRABC = ZPINcPathToArrListStr.NCLVLRABC.retStr(strPath);
+        String strSNUM = ZPINcPathToArrListStr.NCLVLNUM.retStr(strPath);
+        String strSYM = ZPINcPathToArrListStr.NCLVLSYM.retStr(strPath);
+        String strSPACE = ZPINcPathToArrListStr.NCLVLSPACE.retStr(strPath);
         
-        String cStrABC = NcPathToArrListStr.getResultStr(NcPathToArrListStr.NCLVLABC.retArrListStr(strPath),strPath);
-        String cStrRABC = NcPathToArrListStr.getResultStr(NcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),strPath);
-        String cStrNUM = NcPathToArrListStr.getResultStr(NcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),strPath);
-        String cStrSYM = NcPathToArrListStr.getResultStr(NcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),strPath);
-        String cStrSPACE = NcPathToArrListStr.getResultStr(NcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),strPath);
+        String cStrABC = ZPINcPathToArrListStr.getResultStr(ZPINcPathToArrListStr.NCLVLABC.retArrListStr(strPath),strPath);
+        String cStrRABC = ZPINcPathToArrListStr.getResultStr(ZPINcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),strPath);
+        String cStrNUM = ZPINcPathToArrListStr.getResultStr(ZPINcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),strPath);
+        String cStrSYM = ZPINcPathToArrListStr.getResultStr(ZPINcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),strPath);
+        String cStrSPACE = ZPINcPathToArrListStr.getResultStr(ZPINcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),strPath);
         
         String cp = ncFile.getCanonicalPath();
         String ap = ncFile.getAbsolutePath();
         
-        String strABCh = NcPathToArrListStr.toStrUTFinHEX(strABC);
-        String strRABCh = NcPathToArrListStr.toStrUTFinHEX(strRABC);
-        String strSNUMh = NcPathToArrListStr.toStrUTFinHEX(strSNUM);
-        String strSYMh = NcPathToArrListStr.toStrUTFinHEX(strSYM);
-        String strSPACEh = NcPathToArrListStr.toStrUTFinHEX(strSPACE);
+        String strABCh = ZPINcPathToArrListStr.toStrUTFinHEX(strABC);
+        String strRABCh = ZPINcPathToArrListStr.toStrUTFinHEX(strRABC);
+        String strSNUMh = ZPINcPathToArrListStr.toStrUTFinHEX(strSNUM);
+        String strSYMh = ZPINcPathToArrListStr.toStrUTFinHEX(strSYM);
+        String strSPACEh = ZPINcPathToArrListStr.toStrUTFinHEX(strSPACE);
         
 
         
-        NcIMinFS ncwd = new NcIMinFS();
+        ZPINcIMinFS ncwd = new ZPINcIMinFS();
         String isIdx = ncwd.getIndexLastModifiedForDirectoryOrFile(ncFile) > 0 ? "In index" : "Not Indexed";
-        NcIndexManageIDs ncThisManageIDs = ncwd.getNcIndexManageIDs();
+        ZPINcIndexManageIDs ncThisManageIDs = ncwd.getZPINcIndexManageIDs();
         
         ZPINcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
         
@@ -165,9 +165,9 @@ public class ZPINcIndexPreProcessFiles {
             "getLoadLastIDsStatus: " + ncThisManageIDs.getLoadLastIDsStatus(),
             "Current Directory List File Name: " + ncIDsDAta.listname,
             "Last Recorded ID: " + ncIDsDAta.listnameid,
-            "toUrl: " + NcIdxFileManager.getStrCanPathFromFile(ncFile),
+            "toUrl: " + ZPINcIdxFileManager.getStrCanPathFromFile(ncFile),
             //"Char: " + String.valueOf('A'),
-            "Ext:" + NcPathToArrListStr.getExtention(ncFile),
+            "Ext:" + ZPINcPathToArrListStr.getExtention(ncFile),
             "SRC(aP): " + ap,
             "SRC[HEX]: " + Integer.toHexString(ap.hashCode()),
             "NAME: " + ncFile.getName(),
@@ -177,23 +177,23 @@ public class ZPINcIndexPreProcessFiles {
             "CP[HEX]:" + Integer.toHexString(cp.hashCode()),
             "ABC: " + strABC,
             "ABC[HEX]: " + strABCh,
-            "check: " + NcPathToArrListStr.checkStrUtfHex(strABCh , strABC),
+            "check: " + ZPINcPathToArrListStr.checkStrUtfHex(strABCh , strABC),
             "ABC[search]: " + cStrABC,
             "RABC: " + strRABC,
             "RABC[HEX]: " + strRABCh,
-            "check: " + NcPathToArrListStr.checkStrUtfHex(strRABCh , strRABC),
+            "check: " + ZPINcPathToArrListStr.checkStrUtfHex(strRABCh , strRABC),
             "RABC[search]: " + cStrRABC,
             "NUM: " + strSNUM,
             "NUM[HEX]: " + strSNUMh,
-            "check: " + NcPathToArrListStr.checkStrUtfHex(strSNUMh , strSNUM),
+            "check: " + ZPINcPathToArrListStr.checkStrUtfHex(strSNUMh , strSNUM),
             "NUM[search]: " + cStrNUM,
             "SYM: " + strSYM,
             "SYM[HEX]: " + strSYMh,
-            "check: " + NcPathToArrListStr.checkStrUtfHex(strSYMh , strSYM),
+            "check: " + ZPINcPathToArrListStr.checkStrUtfHex(strSYMh , strSYM),
             "SYM[search]: " + cStrSYM,
             "SPACE: " + ":" + strSPACE + ":L=" + strSPACE.length(),
             "SPACE[HEX]: " + strSPACEh,
-            "check: " + NcPathToArrListStr.checkStrUtfHex(strSPACEh , strSPACE),
+            "check: " + ZPINcPathToArrListStr.checkStrUtfHex(strSPACEh , strSPACE),
             "SPACE[search]: " + cStrSPACE
         };
         
@@ -210,15 +210,15 @@ public class ZPINcIndexPreProcessFiles {
      * @throws IOException
      */
     protected String[] getResultMakeIndex(File ncFile) throws IOException{
-        NcIMinFS ncwd = new NcIMinFS();
+        ZPINcIMinFS ncwd = new ZPINcIMinFS();
         
-        NcIndexManageIDs ncThisManageIDs = ncwd.getNcIndexManageIDs();
+        ZPINcIndexManageIDs ncThisManageIDs = ncwd.getZPINcIndexManageIDs();
         
-        TreeMap<Long, NcDiskInfo> ncDiskInfo = ncwd.getDiskInfo();
+        TreeMap<Long, ZPINcDiskInfo> ncDiskInfo = ncwd.getDiskInfo();
 //        ncDiskInfo.size();
 //        ncDiskInfo.iterator().hasNext();
         
-        String strAbsolutlePath = NcIdxFileManager.getStrCanPathFromFile(ncFile);
+        String strAbsolutlePath = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile);
         String strPath = strAbsolutlePath.substring(2);
         
 
@@ -229,12 +229,12 @@ public class ZPINcIndexPreProcessFiles {
         if(nextID == -1){
             nextID = 0;
         }
-        NcDcIdxDirListToFileAttr forRecordData = getDataToDL(ncDiskInfo,
+        ZPINcDcIdxDirListToFileAttr forRecordData = getDataToDL(ncDiskInfo,
                 ncFile,
                 nextID);
         
         long writedID = -1;
-        writedID = NcIdxDirListManager.putToDirectoryList(forRecordData);
+        writedID = ZPINcIdxDirListManager.putToDirectoryList(forRecordData);
         
         String strTmpAppend = "wrong";
         if(writedID > 0){
@@ -242,42 +242,42 @@ public class ZPINcIndexPreProcessFiles {
 
         }
         
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureABC = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLABC.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureABC = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLABC.retArrListStr(strPath),
                 strPath,
                 writedID);
         //Input for put in Storage Word code here
-        NcIdxStorageWordManager.putInStorageWord("NCLVLABC", StructureABC);
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureRABC = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),
+        ZPINcIdxStorageWordManager.putInStorageWord("NCLVLABC", StructureABC);
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureRABC = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),
                 strPath,
                 writedID);
         //Input for put in Storage Word code here
-        NcIdxStorageWordManager.putInStorageWord("NCLVLRABC", StructureRABC);
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureNUM = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),
+        ZPINcIdxStorageWordManager.putInStorageWord("NCLVLRABC", StructureRABC);
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureNUM = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),
                 strPath,
                 writedID);
         //Input for put in Storage Word code here
-        NcIdxStorageWordManager.putInStorageWord("NCLVLNUM", StructureNUM);
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureSYM = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),
+        ZPINcIdxStorageWordManager.putInStorageWord("NCLVLNUM", StructureNUM);
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureSYM = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),
                 strPath,
                 writedID);
         //Input for put in Storage Word code here
-        NcIdxStorageWordManager.putInStorageWord("NCLVLSYM", StructureSYM);
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureSPACE = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),
+        ZPINcIdxStorageWordManager.putInStorageWord("NCLVLSYM", StructureSYM);
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureSPACE = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),
                 strPath,
                 writedID);
 
 
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureWord = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureWord = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
         //For Word Length > 25
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureLongWord = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureLongWord = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
         long lwIdx = 0;
         long wIdx = 0;
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureABC.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureABC.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -288,7 +288,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureRABC.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureRABC.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -299,7 +299,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureNUM.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureNUM.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -310,7 +310,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureSYM.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureSYM.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -321,7 +321,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureSPACE.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureSPACE.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -332,8 +332,8 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
 
-        long countWritedWordIDs = NcIdxWordManager.putWord(StructureWord);
-        long countWritedLongWordIDs = NcIdxLongWordListManager.putLongWord(StructureLongWord);
+        long countWritedWordIDs = ZPINcIdxWordManager.putWord(StructureWord);
+        long countWritedLongWordIDs = ZPINcIdxLongWordListManager.putLongWord(StructureLongWord);
         
 /**
  * 
@@ -356,8 +356,8 @@ public class ZPINcIndexPreProcessFiles {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#getResultMakeIndex(java.io.File) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexForFile(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#getResultMakeIndex(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexForFile(java.io.File) }
      * </ul>
      * i - id record
      * ds - Disk serial number hex string
@@ -381,8 +381,8 @@ public class ZPINcIndexPreProcessFiles {
      * @param ncFile
      * @return 
      */    
-    protected NcDcIdxDirListToFileAttr getDataToDL(TreeMap<Long, NcDiskInfo> ncDiskInfo, File ncFile, long DirListIdx){
-        String strForDisk = NcIdxFileManager.getStrCanPathFromFile(ncFile).toUpperCase().substring(0);
+    protected ZPINcDcIdxDirListToFileAttr getDataToDL(TreeMap<Long, ZPINcDiskInfo> ncDiskInfo, File ncFile, long DirListIdx){
+        String strForDisk = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile).toUpperCase().substring(0);
         char ncDiskLetterFromPath = strForDisk.charAt(0);
         int ncDiskIndexes = 0;
         int ncNowStrorageIndex = -1;
@@ -391,7 +391,7 @@ public class ZPINcIndexPreProcessFiles {
         String strDiskSerialNumber = "N/A";
         long diskTotalSpace = -1;
         String diskProgramAlias = "";
-        for( Map.Entry<Long, NcDiskInfo> ncOneOfDisk : ncDiskInfo.entrySet() ){
+        for( Map.Entry<Long, ZPINcDiskInfo> ncOneOfDisk : ncDiskInfo.entrySet() ){
 /**
  * @todo develop code for *NIX systems where path not have (?:) drive letter
  */            
@@ -409,7 +409,7 @@ public class ZPINcIndexPreProcessFiles {
         }
         
         
-        NcDcIdxDirListToFileAttr fileToDirListData = new NcDcIdxDirListToFileAttr(
+        ZPINcDcIdxDirListToFileAttr fileToDirListData = new ZPINcDcIdxDirListToFileAttr(
             DirListIdx,
             diskID,
             longDiskSerialNumber,
@@ -417,7 +417,7 @@ public class ZPINcIndexPreProcessFiles {
             diskProgramAlias,    
             strDiskSerialNumber,
             ncDiskLetterFromPath,
-            NcIdxFileManager.getStrCanPathFromFile(ncFile).substring(2),
+            ZPINcIdxFileManager.getStrCanPathFromFile(ncFile).substring(2),
             ncFile.length(),
             ncFile.canRead(),
             ncFile.canWrite(),
@@ -450,8 +450,8 @@ public class ZPINcIndexPreProcessFiles {
                 if (type == null)
                     type = "<not recognized>";
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                        NcIndexPreProcessFiles.class.getName(), ex);
+                ZPINcAppHelper.logException(
+                        ZPINcIndexPreProcessFiles.class.getName(), ex);
                 type = "<not recognized>";
             }
         }
@@ -478,8 +478,8 @@ public class ZPINcIndexPreProcessFiles {
     /**
      * Used in 
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexRecursive(java.io.File) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexRecursive(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
      * </ul>
      * @param ncFile
      * @return 
@@ -490,8 +490,8 @@ public class ZPINcIndexPreProcessFiles {
             try {
                 appendToDirListIDs.add(makeIndexForFile(ncFile));
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                        NcIndexPreProcessFiles.class.getName(), ex);
+                ZPINcAppHelper.logException(
+                        ZPINcIndexPreProcessFiles.class.getName(), ex);
             }
             return 1;
         }
@@ -499,8 +499,8 @@ public class ZPINcIndexPreProcessFiles {
             try {
                 appendToDirListIDs.add(makeIndexForFile(ncFile));
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                        NcIndexPreProcessFiles.class.getName(), ex);
+                ZPINcAppHelper.logException(
+                        ZPINcIndexPreProcessFiles.class.getName(), ex);
             }
             for(File itemFile : ncFile.listFiles()){
                 makeIndexForFolder(itemFile);
@@ -512,29 +512,29 @@ public class ZPINcIndexPreProcessFiles {
     /**
      * Used in 
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexForFolder(java.io.File) }
      * </ul>
      * @param ncFile
      * @return
      * @throws IOException
      */
     private long makeIndexForFile(File ncFile) throws IOException{
-        NcDcIdxDirListToFileExist existDirList;
+        ZPINcDcIdxDirListToFileExist existDirList;
         boolean writedToExistList = false;
-        NcIMinFS ncwd = new NcIMinFS();
+        ZPINcIMinFS ncwd = new ZPINcIMinFS();
         
-        NcIndexManageIDs ncThisManageIDs = ncwd.getNcIndexManageIDs();
+        ZPINcIndexManageIDs ncThisManageIDs = ncwd.getZPINcIndexManageIDs();
         
         long startTime = System.nanoTime();
         
         ZPINcTmpNowProcessInfo ncIDsDAta = ncThisManageIDs.getIdsReadedData();
         
-        TreeMap<Long, NcDiskInfo> ncDiskInfo = ncwd.getDiskInfo();
-        String strAbsolutlePath = NcIdxFileManager.getStrCanPathFromFile(ncFile);
+        TreeMap<Long, ZPINcDiskInfo> ncDiskInfo = ncwd.getDiskInfo();
+        String strAbsolutlePath = ZPINcIdxFileManager.getStrCanPathFromFile(ncFile);
         
         String strPath = strAbsolutlePath;
         
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             strPath = strAbsolutlePath.substring(2);
         }
         
@@ -543,7 +543,7 @@ public class ZPINcIndexPreProcessFiles {
         if(nextID == -1){
             nextID = 0;
         }
-        NcDcIdxDirListToFileAttr forRecordData = getDataToDL(ncDiskInfo,
+        ZPINcDcIdxDirListToFileAttr forRecordData = getDataToDL(ncDiskInfo,
                 ncFile,
                 nextID);
         
@@ -553,9 +553,9 @@ public class ZPINcIndexPreProcessFiles {
 
         long writedID = -1;
         
-        writedID = NcIdxDirListManager.putToDirectoryList(forRecordData);
+        writedID = ZPINcIdxDirListManager.putToDirectoryList(forRecordData);
         
-        existDirList = new NcDcIdxDirListToFileExist(
+        existDirList = new ZPINcDcIdxDirListToFileExist(
                     writedID,
                     forRecordData.diskID,
                     forRecordData.path,
@@ -567,55 +567,55 @@ public class ZPINcIndexPreProcessFiles {
         if(writedID > 0){
             strTmpAppend = "writed";
 
-            long writeResult = NcIdxDirListExistManager.putToDirListExistStart(existDirList, writedID);
+            long writeResult = ZPINcIdxDirListExistManager.putToDirListExistStart(existDirList, writedID);
             if(writeResult > -1){
                 writedToExistList = true;
             }
         }
         
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureABC = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLABC.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureABC = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLABC.retArrListStr(strPath),
                 strPath,
                 writedID);
         if( !StructureABC.isEmpty() ){
-            NcIdxStorageWordManager.putInStorageWord("NCLVLABC", StructureABC);
+            ZPINcIdxStorageWordManager.putInStorageWord("NCLVLABC", StructureABC);
         }
         
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureRABC = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureRABC = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLRABC.retArrListStr(strPath),
                 strPath,
                 writedID);
         if( !StructureRABC.isEmpty() ){
-            NcIdxStorageWordManager.putInStorageWord("NCLVLRABC", StructureRABC);  
+            ZPINcIdxStorageWordManager.putInStorageWord("NCLVLRABC", StructureRABC);  
         }
               
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureNUM = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureNUM = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLNUM.retArrListStr(strPath),
                 strPath,
                 writedID);
         if( !StructureNUM.isEmpty() ){
-            NcIdxStorageWordManager.putInStorageWord("NCLVLNUM", StructureNUM);  
+            ZPINcIdxStorageWordManager.putInStorageWord("NCLVLNUM", StructureNUM);  
         }
                       
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureSYM = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureSYM = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLSYM.retArrListStr(strPath),
                 strPath,
                 writedID);
         if( !StructureSYM.isEmpty() ){
-            NcIdxStorageWordManager.putInStorageWord("NCLVLSYM", StructureSYM);  
+            ZPINcIdxStorageWordManager.putInStorageWord("NCLVLSYM", StructureSYM);  
         }
                               
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureSPACE = NcPathToArrListStr.getStructureToRecord(
-                NcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureSPACE = ZPINcPathToArrListStr.getStructureToRecord(
+                ZPINcPathToArrListStr.NCLVLSPACE.retArrListStr(strPath),
                 strPath,
                 writedID);
 
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureWord = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureWord = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
         //For Word Length > 25
-        TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureLongWord = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+        TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureLongWord = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
         long lwIdx = 0;
         long wIdx = 0;
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureABC.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureABC.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -626,7 +626,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureRABC.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureRABC.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -637,7 +637,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureNUM.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureNUM.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -648,7 +648,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureSYM.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureSYM.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -659,7 +659,7 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureSPACE.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureSPACE.entrySet()){
             if (item.getValue().strSubString.length() > 25){
                 StructureLongWord.put(lwIdx, item.getValue());
                 lwIdx++;
@@ -670,15 +670,15 @@ public class ZPINcIndexPreProcessFiles {
             }
         }
         if( !StructureWord.isEmpty() ){
-            long countWritedWordIDs = NcIdxWordManager.putWord(StructureWord);
+            long countWritedWordIDs = ZPINcIdxWordManager.putWord(StructureWord);
         }
         if( !StructureLongWord.isEmpty() ){
-            long countWritedLongWordIDs = NcIdxLongWordListManager.putLongWord(StructureLongWord);
+            long countWritedLongWordIDs = ZPINcIdxLongWordListManager.putLongWord(StructureLongWord);
         }
         long stopTime = System.nanoTime();
         if(writedToExistList){
             existDirList.nanoTimeEndAddToIndex = stopTime;
-            NcIdxDirListExistManager.putToDirListExistStop(existDirList, writedID);
+            ZPINcIdxDirListExistManager.putToDirListExistStop(existDirList, writedID);
         }
         return writedID;
     }

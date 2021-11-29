@@ -29,7 +29,7 @@ public class ZPINcIdxDirListFileReader {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListManager#putToDirectoryList(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr) }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#getWordSearchResult(java.util.ArrayList, java.util.ArrayList) }
      * </ul>
@@ -37,19 +37,19 @@ public class ZPINcIdxDirListFileReader {
      * @param dirListID
      * @return 
      */ 
-    protected static TreeMap<Long, NcDcIdxDirListToFileAttr> ncReadFromDirListFile(long dirListID){
-        TreeMap<Long, NcDcIdxDirListToFileAttr> ncDataFromDirList;
-        String strCfgPath = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirList())+"/dl", dirListID);
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncReadFromDirListFile(long dirListID){
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDataFromDirList;
+        String strCfgPath = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirList())+"/dl", dirListID);
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
             return new TreeMap<>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromDirList = (TreeMap<Long, NcDcIdxDirListToFileAttr>)ois.readObject();
+            ncDataFromDirList = (TreeMap<Long, ZPINcDcIdxDirListToFileAttr>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxDirListFileReader.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxDirListFileReader.class.getCanonicalName(), ex);
             return new TreeMap<>();
         } 
         return ncDataFromDirList;
@@ -58,25 +58,25 @@ public class ZPINcIdxDirListFileReader {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#putToDirListExistStart(ru.newcontrol.ncfv.NcDcIdxDirListToFileExist, long) }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#putToDirListExistStop(ru.newcontrol.ncfv.NcDcIdxDirListToFileExist, long) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#putToDirListExistStart(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist, long) }
+     * <li>{@link ru.newcontrol.ncfv.NcIdxDirListExistManager#putToDirListExistStop(ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist, long) }
      * </ul>
      * @param dirListID
      * @return
      */
-    protected static TreeMap<Long, NcDcIdxDirListToFileExist> ncReadFromDirListExist(long dirListID){
-        TreeMap<Long, NcDcIdxDirListToFileExist> ncDataFromDirList;
-        String strCfgPath = NcIdxFileManager.getFileNameToRecord(NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirListExist()) + "/e", dirListID);
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncReadFromDirListExist(long dirListID){
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> ncDataFromDirList;
+        String strCfgPath = ZPINcIdxFileManager.getFileNameToRecord(ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirListExist()) + "/e", dirListID);
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
             return new TreeMap<>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromDirList = (TreeMap<Long, NcDcIdxDirListToFileExist>)ois.readObject();
+            ncDataFromDirList = (TreeMap<Long, ZPINcDcIdxDirListToFileExist>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxDirListFileReader.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxDirListFileReader.class.getCanonicalName(), ex);
             return new TreeMap<>();
         } 
         return ncDataFromDirList;
@@ -89,18 +89,18 @@ public class ZPINcIdxDirListFileReader {
      * @param strCfgPath
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxDirListToFileAttr> ncReadFromDirListFileByName(String strCfgPath){
-        TreeMap<Long, NcDcIdxDirListToFileAttr> ncDataFromDirList;
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+    protected static TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncReadFromDirListFileByName(String strCfgPath){
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> ncDataFromDirList;
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
             return new TreeMap<>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromDirList = (TreeMap<Long, NcDcIdxDirListToFileAttr>)ois.readObject();
+            ncDataFromDirList = (TreeMap<Long, ZPINcDcIdxDirListToFileAttr>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxDirListFileReader.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxDirListFileReader.class.getCanonicalName(), ex);
             return new TreeMap<>();
         } 
         return ncDataFromDirList;

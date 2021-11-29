@@ -37,22 +37,22 @@ public class ZPINcSrchKeyWordInput {
      * @param inFuncKeyWord
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxWordToFile> getDirListRecordByKeyWord(String inFuncKeyWord){
-        TreeMap<Long, NcDcIdxWordToFile> idsDataForKeyWord = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getDirListRecordByKeyWord(String inFuncKeyWord){
+        TreeMap<Long, ZPINcDcIdxWordToFile> idsDataForKeyWord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         
-        ArrayList<String> strABC = NcPathToArrListStr.NCLVLABC.retArrListStr(inFuncKeyWord);
+        ArrayList<String> strABC = ZPINcPathToArrListStr.NCLVLABC.retArrListStr(inFuncKeyWord);
         idsDataForKeyWord.putAll(getIdDataForSplittedKeyWord(strABC));
         
-        ArrayList<String> strRABC = NcPathToArrListStr.NCLVLRABC.retArrListStr(inFuncKeyWord);
+        ArrayList<String> strRABC = ZPINcPathToArrListStr.NCLVLRABC.retArrListStr(inFuncKeyWord);
         idsDataForKeyWord.putAll(getIdDataForSplittedKeyWord(strRABC));
 
-        ArrayList<String> strNUM = NcPathToArrListStr.NCLVLNUM.retArrListStr(inFuncKeyWord);
+        ArrayList<String> strNUM = ZPINcPathToArrListStr.NCLVLNUM.retArrListStr(inFuncKeyWord);
         idsDataForKeyWord.putAll(getIdDataForSplittedKeyWord(strNUM));
         
-        ArrayList<String> strSYM = NcPathToArrListStr.NCLVLSYM.retArrListStr(inFuncKeyWord);
+        ArrayList<String> strSYM = ZPINcPathToArrListStr.NCLVLSYM.retArrListStr(inFuncKeyWord);
         idsDataForKeyWord.putAll(getIdDataForSplittedKeyWord(strSYM));
         
-        //ArrayList<String> strSPACE = NcPathToArrListStr.NCLVLSPACE.retArrListStr(inFuncKeyWord);
+        //ArrayList<String> strSPACE = ZPINcPathToArrListStr.NCLVLSPACE.retArrListStr(inFuncKeyWord);
         return idsDataForKeyWord;
     }
     /**
@@ -66,17 +66,17 @@ public class ZPINcSrchKeyWordInput {
      * @param inFuncListWord
      * @return 
      */
-    private static TreeMap<Long, NcDcIdxWordToFile> getIdDataForSplittedKeyWord(ArrayList<String> inFuncListWord){
+    private static TreeMap<Long, ZPINcDcIdxWordToFile> getIdDataForSplittedKeyWord(ArrayList<String> inFuncListWord){
         
         ArrayList<String> strHexKeyWord = new ArrayList<String>();
         ArrayList<String> strWordForVar = new ArrayList<String>();
         ArrayList<String> strLongWord = new ArrayList<String>();
         ArrayList<String> strUpperLowerVar = new ArrayList<String>();
         
-        TreeMap<Long, NcDcIdxWordToFile> idsDataForReturn = new TreeMap<Long, NcDcIdxWordToFile>();
+        TreeMap<Long, ZPINcDcIdxWordToFile> idsDataForReturn = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         
         for( String strItem : inFuncListWord ){
-            if( NcIdxLongWordManager.isLongWord(strItem) ){
+            if( ZPINcIdxLongWordManager.isLongWord(strItem) ){
                 strLongWord.add(strItem);
             }
             else{
@@ -88,7 +88,7 @@ public class ZPINcSrchKeyWordInput {
                     strWordForVar.add(strItem);
                 }
                 else{
-                    strHexKeyWord.add(NcPathToArrListStr.toStrUTFinHEX(strItem));
+                    strHexKeyWord.add(ZPINcPathToArrListStr.toStrUTFinHEX(strItem));
                 }
             }
         }
@@ -96,16 +96,16 @@ public class ZPINcSrchKeyWordInput {
          * @TODO search for LongWord Structure
          */
         if( !strLongWord.isEmpty() ){
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
-                + NcStrServiceMsg.FUNCTIONAL_NOT_RELEASED.getStr()
-                + NcStrServiceMsg.NOT_IN_SEARCH_COUNT
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
+                + ZPINcStrServiceMsg.FUNCTIONAL_NOT_RELEASED.getStr()
+                + ZPINcStrServiceMsg.NOT_IN_SEARCH_COUNT
                 + strLongWord.size());
         }
         
-        TreeMap<Long, NcIdxSubStringVariant> strSearchWordVarList = NcSrchVariantMaker.getUpperLowerCaseVariant(strWordForVar);
+        TreeMap<Long, ZPINcIdxSubStringVariant> strSearchWordVarList = ZPINcSrchVariantMaker.getUpperLowerCaseVariant(strWordForVar);
         
-        strUpperLowerVar = NcSrchVariantMaker.getUpLowerCaseCombineKeyWord(strSearchWordVarList);
+        strUpperLowerVar = ZPINcSrchVariantMaker.getUpLowerCaseCombineKeyWord(strSearchWordVarList);
         
         for(String itemHexVar : strUpperLowerVar){
             strHexKeyWord.add(itemHexVar);
@@ -113,7 +113,7 @@ public class ZPINcSrchKeyWordInput {
         
         for( String strHexItemRABC : strHexKeyWord ){
             
-            idsDataForReturn.putAll(NcIdxWordManager.getAllDataForWord(strHexItemRABC));
+            idsDataForReturn.putAll(ZPINcIdxWordManager.getAllDataForWord(strHexItemRABC));
         }
         
         return idsDataForReturn;

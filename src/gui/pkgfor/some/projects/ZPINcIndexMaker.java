@@ -39,15 +39,15 @@ public class ZPINcIndexMaker {
      * @return
      */
     private String[] getFilterStringsArray(File fncFile){
-        NcIndexPreProcessFiles ncIdxPreReturn = new NcIndexPreProcessFiles(fncFile);
+        ZPINcIndexPreProcessFiles ncIdxPreReturn = new ZPINcIndexPreProcessFiles(fncFile);
 
         String[] toRet = new String[0];
 
         try {
             toRet = ncIdxPreReturn.getFileDataToSwing(fncFile);
         } catch (IOException ex) {
-            NcAppHelper.logException(
-                    NcIndexMaker.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIndexMaker.class.getCanonicalName(), ex);
         }
         return toRet;
     }
@@ -58,15 +58,15 @@ public class ZPINcIndexMaker {
      * @return
      */
     private String[] getMakeIndexForFile(File fncFile){
-        NcIndexPreProcessFiles ncIdxPreReturn = new NcIndexPreProcessFiles(fncFile);
+        ZPINcIndexPreProcessFiles ncIdxPreReturn = new ZPINcIndexPreProcessFiles(fncFile);
 
         String[] toRet = new String[0];
 
         try {
             toRet = ncIdxPreReturn.getResultMakeIndex(fncFile);
         } catch (IOException ex) {
-            NcAppHelper.logException(
-                    NcIndexMaker.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIndexMaker.class.getCanonicalName(), ex);
         }
         return toRet;
     }

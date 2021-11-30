@@ -176,5 +176,11 @@ public class GUIForSomeProjects extends JFrame
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
             }
         });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ZPINcfv zpiNcfv = new ZPINcfv();
+                zpiNcfv.ncfvMain();
+            }
+        });
     }
 }

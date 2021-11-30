@@ -46,8 +46,12 @@ public class ZPINcfv {
      * @param args the command line arguments
      *  "-console"
      */
+    ZPINcfv() {
+        String strMainCreated = "created";
+        ncfvMain();
+    }
     
-    public static void NcfvMain(String[] args) {
+    public static void ncfvMain(String[] args) {
         
         ZPIAppEtcSecurityHelper.createNewSecurity();
         ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
@@ -642,6 +646,13 @@ public class ZPINcfv {
                 + ZPINcStrLogMsgText.APP_GUI_START.getStr();
             ZPINcAppHelper.outMessage(strLogMsg);
         }
+    }
+
+    
+
+    void ncfvMain() {
+        String[] args = {"-getenv", "-pv", ""};
+        ncfvMain(args);
     }
     
 }

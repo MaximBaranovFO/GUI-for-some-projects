@@ -39,7 +39,7 @@ public class ZPINcThMifExecPool extends ThreadPoolExecutor {
                 TimeUnit.MILLISECONDS,
                 ARRAY_WORK_QUEUE);
         this.typeObject = "[MIFEXECPOOL]" + this.toString();
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
     public ZPINcThMifExecPool(int corePoolSize,
                               int maximumPoolSize,
@@ -52,7 +52,7 @@ public class ZPINcThMifExecPool extends ThreadPoolExecutor {
                 unit,
                 workQueue);
         this.typeObject = "[MIFEXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeObject, this.getClass());
     }
     
     

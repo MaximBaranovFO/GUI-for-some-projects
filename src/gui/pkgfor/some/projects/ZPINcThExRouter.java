@@ -36,24 +36,24 @@ public class ZPINcThExRouter <V>
     private int LENGTH_QUEUE;
     private BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirList;
     private int ncGetQueueSize;
-    private NcThExRouter router;
+    private ZPINcThExRouter router;
     private NcThExDirTreeWalk dirWalker;
     private NcThExListAttrScanDir dirListScanner;
     private NcThExListPack resultPacker;*/
-    private ThreadLocal<NcThExecPool> executorPool = new ThreadLocal<NcThExecPool>();
+    private ThreadLocal<ZPINcThExecPool> executorPool = new ThreadLocal<ZPINcThExecPool>();
     private ThreadLocal<Boolean> isDone = new ThreadLocal<Boolean>();
     private ThreadLocal<Boolean> needFinish = new ThreadLocal<Boolean>();
     private ThreadLocal<Long> needSleepInTime = new ThreadLocal<Long>();
-    private ThreadLocal<NcThExInfo> timeToSleep = new ThreadLocal<NcThExInfo>();
-    private ThreadLocal<NcThExInfo> threadParams = new ThreadLocal<NcThExInfo>();
-    /*public NcThExRouter() {
+    private ThreadLocal<ZPINcThExInfo> timeToSleep = new ThreadLocal<ZPINcThExInfo>();
+    private ThreadLocal<ZPINcThExInfo> threadParams = new ThreadLocal<ZPINcThExInfo>();
+    /*public ZPINcThExRouter() {
         
         this.isDone.set(Boolean.FALSE);
         this.needFinish.set(Boolean.FALSE);
     }*/
     
     
-    /*public NcThExRouter(NcThExecPool executorPool) throws Exception {
+    /*public ZPINcThExRouter(ZPINcThExecPool executorPool) throws Exception {
         this.isDone.set(Boolean.FALSE);
         this.needFinish.set(Boolean.FALSE);
         this.FAIR_QUEUE = Boolean.TRUE;
@@ -62,7 +62,7 @@ public class ZPINcThExRouter <V>
         try{
             Thread.currentThread().checkAccess();
             this.typeThread = "[ROUTER]";
-            NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+            ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
             //this.ncGetCallableQueue = executorPool.ncGetCallableQueue();
             //this.ncGetFutureQueue = executorPool.ncGetFutureQueue();
             //this.ncGetQueueSize = executorPool.ncGetQueueSize();
@@ -71,16 +71,16 @@ public class ZPINcThExRouter <V>
             this.dirListScanner = null;
             this.resultPacker = null;
         } catch (Exception ex) {
-            NcAppHelper.logException(NcThExRouter.class.getCanonicalName(), ex);
-            String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-            String classInfoToString = NcAppHelper.getClassInfoToString(NcThExRouter.class);
-            throw new Exception(NcStrLogMsgField.ERROR.getStr()
+            ZPINcAppHelper.logException(ZPINcThExRouter.class.getCanonicalName(), ex);
+            String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+            String classInfoToString = ZPINcAppHelper.getClassInfoToString(ZPINcThExRouter.class);
+            throw new Exception(ZPINcStrLogMsgField.ERROR.getStr()
                 + threadInfoToString + classInfoToString
-                + NcStrLogMsgField.MSG_INFO.getStr()
+                + ZPINcStrLogMsgField.MSG_INFO.getStr()
                 + " create router for make index ", ex);
         }
     }*/
-    protected void setThreadParams(NcThExInfo inParam){
+    protected void setThreadParams(ZPINcThExInfo inParam){
         if( inParam != null ){
             this.threadParams.set(inParam);
         }
@@ -91,40 +91,40 @@ public class ZPINcThExRouter <V>
             this.threadParams.get().setDirForScan(inputDirForScan);
         }
     }
-    protected void setExecPool(NcThExecPool inputPool){
+    protected void setExecPool(ZPINcThExecPool inputPool){
         System.out.println("setExecPool");
-        String classInfoToString = NcAppHelper.getClassInfoToString(inputPool.getClass());
-        NcAppHelper.outMessage(typeThread + "[ATTEMPTTOADD]"
+        String classInfoToString = ZPINcAppHelper.getClassInfoToString(inputPool.getClass());
+        ZPINcAppHelper.outMessage(typeThread + "[ATTEMPTTOADD]"
             + classInfoToString + " toString "
             + inputPool.toString());
         executorPool.set(inputPool);
     }
     private boolean isSetExecPool() throws IllegalThreadStateException {
         if( executorPool.get() == null ){
-            NcAppHelper.outMessage(typeThread
+            ZPINcAppHelper.outMessage(typeThread
                 + " executorPool is null");
             return false;
         }
-        if( NcThExecPool.class.isInstance(executorPool.get()) ){
-            NcAppHelper.outMessage(typeThread
+        if( ZPINcThExecPool.class.isInstance(executorPool.get()) ){
+            ZPINcAppHelper.outMessage(typeThread
                 + " executorPool is set "
                 + executorPool.get().getClass().getCanonicalName());
             return true;
         }
-        NcThExecPool getInstance = executorPool.get();
-        NcAppHelper.outMessage(typeThread
+        ZPINcThExecPool getInstance = executorPool.get();
+        ZPINcAppHelper.outMessage(typeThread
                 + " executorPool is set "
                 + getInstance.getClass().getCanonicalName());
         return false;
     }
     protected void finishHimByInterrupted() throws InterruptedException{
         throw new InterruptedException("Interrupted by "
-                + NcThExRouter.class.getCanonicalName()
+                + ZPINcThExRouter.class.getCanonicalName()
                 + ".finishHimByInterrupted() in [THREAD]"
                 + Thread.currentThread().getName());
     }
     private void initThread(){
-        this.timeToSleep.set(new NcThExInfo());
+        this.timeToSleep.set(new ZPINcThExInfo());
         setNeedSleep(0L);
         this.executorPool.set(null);
         this.isDone.set(Boolean.FALSE);
@@ -140,11 +140,11 @@ public class ZPINcThExRouter <V>
     
     @Override
     public ConcurrentSkipListMap<UUID, String> call() throws Exception {
-        System.out.println("NcThExRouter.call");
+        System.out.println("ZPINcThExRouter.call");
         
-        System.out.println("NcThExRouter in NcThExInfo.new");
+        System.out.println("ZPINcThExRouter in ZPINcThExInfo.new");
         Path dirForScan = null;
-        System.out.println("NcThExRouter.call: before while: Set dir for scan: null");
+        System.out.println("ZPINcThExRouter.call: before while: Set dir for scan: null");
         int getterIterationCount = 0;
         while( dirForScan != null ){
             dirForScan = this.threadParams.get().getDirForScan();
@@ -153,20 +153,20 @@ public class ZPINcThExRouter <V>
             }
             getterIterationCount++;
         }
-        System.out.println("NcThExRouter.call: after while: Set dir for scan: " + dirForScan.toString());
-        String strInCallThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-        NcAppHelper.outMessage(typeThread + "start, first operator for " + strInCallThreadInfo);
+        System.out.println("ZPINcThExRouter.call: after while: Set dir for scan: " + dirForScan.toString());
+        String strInCallThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+        ZPINcAppHelper.outMessage(typeThread + "start, first operator for " + strInCallThreadInfo);
         initThread();
-        NcAppHelper.outMessage(typeThread + "init Thread param");
+        ZPINcAppHelper.outMessage(typeThread + "init Thread param");
         isSetExecPool();
         int countInteration = 0;
         
         try{
-            NcAppHelper.outMessage(typeThread
+            ZPINcAppHelper.outMessage(typeThread
                 + " start thread code countInteration = " + countInteration);
             while( !needFinish.get() ){
-                strInCallThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-                NcAppHelper.outMessage(strInCallThreadInfo + " " 
+                strInCallThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+                ZPINcAppHelper.outMessage(strInCallThreadInfo + " " 
                 + typeThread
                 + " in cicle countInteration = " + countInteration
                 //+ " executorPool " + executorPool.get().getClass().getCanonicalName()
@@ -179,31 +179,31 @@ public class ZPINcThExRouter <V>
                     needFinish.set(Boolean.TRUE);
                 }
             }
-            NcAppHelper.outMessage(typeThread
+            ZPINcAppHelper.outMessage(typeThread
                 + " finish thread code countInteration = " + countInteration);
         } catch (Exception ex) {
             isDone.set(Boolean.TRUE);
-            NcAppHelper.logException(NcThExRouter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThExRouter.class.getCanonicalName(), ex);
 
-            String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+            String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
             throw new IOException(
                 strThreadInfo
-                + NcStrLogMsgField.MSG_INFO.getStr()
+                + ZPINcStrLogMsgField.MSG_INFO.getStr()
                 + "Thread interrupted, reason "
-                + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                 + ex.getMessage());
         }
         isDone.set(Boolean.TRUE);
         return new ConcurrentSkipListMap<UUID, String>();
     }
     protected void setScanDir(Path scanDir){
-        System.out.println("NcThExRouter.setScanDir(" + scanDir.toString() + ")");
+        System.out.println("ZPINcThExRouter.setScanDir(" + scanDir.toString() + ")");
         if( scanDir != null ){
             this.threadParams.get().setDirForScan(scanDir);
         }
     }
     protected void setNeedSleep(long sleepTime){
-        NcThExInfo getData = timeToSleep.get();
+        ZPINcThExInfo getData = timeToSleep.get();
         getData.setSleepTime(sleepTime);
         timeToSleep.set(getData);
         /*if( sleepTime > 0 ){
@@ -214,36 +214,36 @@ public class ZPINcThExRouter <V>
         }*/
     }
     private long getNeedSleepTime(){
-        NcThExInfo getData = timeToSleep.get();
+        ZPINcThExInfo getData = timeToSleep.get();
         return getData.getSleepTime();
     }
     private void needSleep() throws Exception{
         //long sleepTime = needSleepInTime.get();
-        NcThExInfo getData = timeToSleep.get();
+        ZPINcThExInfo getData = timeToSleep.get();
         long sleepTime = getData.getSleepTime();
         if( sleepTime > 0 ){
             try {
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-                NcAppHelper.outMessage(
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+                ZPINcAppHelper.outMessage(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_WARNING.getStr()
+                    + ZPINcStrLogMsgField.MSG_WARNING.getStr()
                     + "Go to sleep time, "
                     + sleepTime + " ms");
                 Thread.sleep(sleepTime);
-                NcAppHelper.outMessage(
+                ZPINcAppHelper.outMessage(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_WARNING.getStr()
+                    + ZPINcStrLogMsgField.MSG_WARNING.getStr()
                     + "Wake up, after sleep time, "
                     + sleepTime + " ms");
             } catch (InterruptedException ex) {
-                NcAppHelper.logException(NcThExRouter.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(ZPINcThExRouter.class.getCanonicalName(), ex);
                 
-                String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+                String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
                 throw new Exception(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_INFO.getStr()
+                    + ZPINcStrLogMsgField.MSG_INFO.getStr()
                     + "Thread interrupted, reason "
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                     + ex.getMessage());
             }
         }
@@ -255,7 +255,7 @@ public class ZPINcThExRouter <V>
         try {
             this.dirWalker = new NcThExDirTreeWalk(pathForScan, this.pipeDirList);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcThExRouter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThExRouter.class.getCanonicalName(), ex);
             return false;
         }
         return true;
@@ -273,7 +273,7 @@ public class ZPINcThExRouter <V>
         //try {
             this.dirListScanner = new NcThExListAttrScanDir(createdWalker);
         //} catch (IOException ex) {
-            //NcAppHelper.logException(NcThExRouter.class.getCanonicalName(), ex);
+            //ZPINcAppHelper.logException(ZPINcThExRouter.class.getCanonicalName(), ex);
             //return false;
         //}
         return true;

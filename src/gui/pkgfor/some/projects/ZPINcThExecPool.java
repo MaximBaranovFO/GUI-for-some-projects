@@ -48,10 +48,10 @@ public class ZPINcThExecPool implements ExecutorService {
     private final ConcurrentSkipListMap<UUID, Callable> callableQueue;
     private final ConcurrentSkipListMap<UUID, Future> futureQueue;
     
-    public ZPINcThExecPool(NcThExStatus jobParam) {
+    public ZPINcThExecPool(ZPINcThExStatus jobParam) {
         Thread.currentThread().checkAccess();
         this.typeThread = "[EXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.callableQueue = new ConcurrentSkipListMap<UUID, Callable>();
         this.futureQueue = new ConcurrentSkipListMap<UUID, Future>();
         this.workQueue = new ArrayBlockingQueue<>(this.QUEUE_LENGTH);
@@ -70,7 +70,7 @@ public class ZPINcThExecPool implements ExecutorService {
     public ZPINcThExecPool() {
         Thread.currentThread().checkAccess();
         this.typeThread = "[EXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.callableQueue = new ConcurrentSkipListMap<UUID, Callable>();
         this.futureQueue = new ConcurrentSkipListMap<UUID, Future>();
         this.workQueue = new ArrayBlockingQueue<>(this.QUEUE_LENGTH);
@@ -90,18 +90,18 @@ public class ZPINcThExecPool implements ExecutorService {
     public ZPINcThExecPool(Path forReadList) throws IOException {
         Thread.currentThread().checkAccess();
         this.typeThread = "[EXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         
         this.dirForScanToList = null;
         Path pathToStart = Paths.get(forReadList.toString());
         try{
-            pathToStart = NcFsIdxOperationDirs.checkScanPath(pathToStart);
+            pathToStart = ZPINcFsIdxOperationDirs.checkScanPath(pathToStart);
         } catch (IOException ex) {
-            String strAddMsg = NcStrLogMsgField.MSG_ERROR.getStr()
+            String strAddMsg = ZPINcStrLogMsgField.MSG_ERROR.getStr()
                     + " wrong path for scan "
                     + forReadList.toString();
-            NcAppHelper.outMessage(strAddMsg);
-            NcAppHelper.logException(NcThExecPool.class.getCanonicalName(), ex);
+            ZPINcAppHelper.outMessage(strAddMsg);
+            ZPINcAppHelper.logException(ZPINcThExecPool.class.getCanonicalName(), ex);
             throw new IOException(strAddMsg, ex);
         }
         this.dirForScanToList = pathToStart;
@@ -123,7 +123,7 @@ public class ZPINcThExecPool implements ExecutorService {
     public ZPINcThExecPool(int countThreadPool) {
         Thread.currentThread().checkAccess();
         this.typeThread = "[EXECPOOL]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.callableQueue = new ConcurrentSkipListMap<UUID, Callable>();
         this.futureQueue = new ConcurrentSkipListMap<UUID, Future>();
         this.workQueue = new ArrayBlockingQueue<>(this.QUEUE_LENGTH);
@@ -144,51 +144,51 @@ public class ZPINcThExecPool implements ExecutorService {
     protected void autoExecRouter() throws Exception{
         
         
-        NcThExRouter thRouter = new NcThExRouter();
-        System.out.println("NcThExecPool.autoExecRouter NcThExRouter");
+        ZPINcThExRouter thRouter = new ZPINcThExRouter();
+        System.out.println("ZPINcThExecPool.autoExecRouter ZPINcThExRouter");
         
         
         thRouter.setExecPool(this);
-        thRouter.setThreadParams(new NcThExInfo());
+        thRouter.setThreadParams(new ZPINcThExInfo());
         thRouter.setDirForScan(this.dirForScanToList);
-        System.out.println("NcThExecPool in NcThExRouter.setScanDir");
+        System.out.println("ZPINcThExecPool in ZPINcThExRouter.setScanDir");
         
-        System.out.println("NcThExecPool.submit");
+        System.out.println("ZPINcThExecPool.submit");
         Future submitRouter = this.submit(thRouter);
         
         
         int countWait = 0;
 
         while( !submitRouter.isDone() ){
-            System.out.println("NcThExecPool.while");
+            System.out.println("ZPINcThExecPool.while");
             if( submitRouter.isCancelled() ){
-                 NcAppHelper.outMessage("[BUTTONTHREAD] is canceled in main thread " + countWait);
+                 ZPINcAppHelper.outMessage("[BUTTONTHREAD] is canceled in main thread " + countWait);
             }
-            NcAppHelper.outMessage("[BUTTONTHREAD] not for done " + countWait);
+            ZPINcAppHelper.outMessage("[BUTTONTHREAD] not for done " + countWait);
             countWait++;
             if( countWait == 30 ){
-                NcAppHelper.outMessage("[BUTTONTHREAD] call for thread.setNeedSleep(30) " + countWait);
+                ZPINcAppHelper.outMessage("[BUTTONTHREAD] call for thread.setNeedSleep(30) " + countWait);
                 thRouter.setNeedSleep(30L);
             }
             if( countWait == 70 ){
-                NcAppHelper.outMessage("[BUTTONTHREAD] call for thread.setNeedSleep(0) " + countWait);
+                ZPINcAppHelper.outMessage("[BUTTONTHREAD] call for thread.setNeedSleep(0) " + countWait);
                 thRouter.setNeedSleep(0L);
             }
             if( countWait > 100 ){
-                NcAppHelper.outMessage("[BUTTONTHREAD] call for thread.finishHim " + countWait);
+                ZPINcAppHelper.outMessage("[BUTTONTHREAD] call for thread.finishHim " + countWait);
                 thRouter.finishHim();
             }
             if( countWait > 130 ){
-                NcAppHelper.outMessage("[BUTTONTHREAD] call for thread.finishHimByInterrupted " + countWait);
+                ZPINcAppHelper.outMessage("[BUTTONTHREAD] call for thread.finishHimByInterrupted " + countWait);
 
                 try {
                     thRouter.finishHimByInterrupted();
                 } catch (InterruptedException ex) {
-                    NcAppHelper.logException(NcThExecPool.class.getCanonicalName(), ex);
-                    String classInfoToString = NcAppHelper.getClassInfoToString(NcThExecPool.class);
-                    throw new Exception( NcStrLogMsgField.ERROR.getStr()
+                    ZPINcAppHelper.logException(ZPINcThExecPool.class.getCanonicalName(), ex);
+                    String classInfoToString = ZPINcAppHelper.getClassInfoToString(ZPINcThExecPool.class);
+                    throw new Exception( ZPINcStrLogMsgField.ERROR.getStr()
                             + classInfoToString
-                            + NcStrLogMsgField.MSG_INFO.getStr()
+                            + ZPINcStrLogMsgField.MSG_INFO.getStr()
                             + " part of start make index is Interrupted ", ex);
                             }
             }
@@ -244,21 +244,21 @@ public class ZPINcThExecPool implements ExecutorService {
 
     @Override
     public <T> Future<T> submit(Callable<T> task) {
-        //String threadInfoToString = NcAppHelper.getThreadInfoToString(Thread.currentThread());
-        //String classInfoToString = NcAppHelper.getClassInfoToString(NcThExecPool.class);
+        //String threadInfoToString = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
+        //String classInfoToString = ZPINcAppHelper.getClassInfoToString(ZPINcThExecPool.class);
         //Future<T> ncSubmit = null;
         //try{
             //Thread currentThread = Thread.currentThread();
             //currentThread.checkAccess();
             Class<? extends Callable> aClass = task.getClass();
-            String strClassInfo = NcAppHelper.getClassInfoToString(aClass);
-            //String strThreadInfo = NcAppHelper.getThreadInfoToString(currentThread);
-            NcAppHelper.outMessage(
+            String strClassInfo = ZPINcAppHelper.getClassInfoToString(aClass);
+            //String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(currentThread);
+            ZPINcAppHelper.outMessage(
                 //strThreadInfo
                 //+ 
                         strClassInfo
-                + NcStrLogMsgField.MSG_INFO.getStr()
-                + NcStrLogMsgField.START.getStr());
+                + ZPINcStrLogMsgField.MSG_INFO.getStr()
+                + ZPINcStrLogMsgField.START.getStr());
 
                 //ncSubmit = execSuper.submit(task);
                 //if( ncSubmit == null ){
@@ -267,11 +267,11 @@ public class ZPINcThExecPool implements ExecutorService {
             //this.callableQueue.put(UUID.randomUUID(), task);
             //this.futureQueue.put(UUID.randomUUID(), ncSubmit);
         /*} catch(Exception ex){
-            String strMsg = NcStrLogMsgField.ERROR.getStr()
+            String strMsg = ZPINcStrLogMsgField.ERROR.getStr()
                 + threadInfoToString + classInfoToString
-                + NcStrLogMsgField.MSG_INFO.getStr()
+                + ZPINcStrLogMsgField.MSG_INFO.getStr()
                 + " in submit exception ";
-            NcAppHelper.logException(strMsg, ex);
+            ZPINcAppHelper.logException(strMsg, ex);
         }*/
         return execSuper.submit(task);
     }

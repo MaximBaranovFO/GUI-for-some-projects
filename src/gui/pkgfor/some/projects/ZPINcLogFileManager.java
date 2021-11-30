@@ -40,12 +40,12 @@ public class ZPINcLogFileManager {
      * @return 
      */
     protected static File getLogFile(){
-        String strAppDataSubDir = NcIdxFileManager.getOrCreateAppDataSubDir();
+        String strAppDataSubDir = ZPINcIdxFileManager.getOrCreateAppDataSubDir();
         String strLogFilePath = 
-                NcIdxFileManager.strPathCombiner(strAppDataSubDir,
-                NcStrFileDir.FILE_APP_LOG.getStr());
+                ZPINcIdxFileManager.strPathCombiner(strAppDataSubDir,
+                ZPINcStrFileDir.FILE_APP_LOG.getStr());
         File fileLog = new File(strLogFilePath);
-        if( !NcIdxFileManager.fileExistRWAccessChecker(fileLog) ){
+        if( !ZPINcIdxFileManager.fileExistRWAccessChecker(fileLog) ){
             createLogFile(strLogFilePath);
         }
         return fileLog;
@@ -60,9 +60,9 @@ public class ZPINcLogFileManager {
     private static void createLogFile(String ncStrCfgPath){
         //@todo recode java.time.LocalDateTime.now().toString(); for 1.7 new Date(System.nanotime())
         String strTime = java.time.LocalDateTime.now().toString();
-        String text = NcStrLogMsgField.TIME.getStr() + strTime;
-        String strMsg = text + NcStrLogMsgField.MSG_INFO.getStr()
-            + NcStrLogMsgText.LOG_CREATE.getStr();
+        String text = ZPINcStrLogMsgField.TIME.getStr() + strTime;
+        String strMsg = text + ZPINcStrLogMsgField.MSG_INFO.getStr()
+            + ZPINcStrLogMsgText.LOG_CREATE.getStr();
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(ncStrCfgPath)))
         {
             bw.write(strMsg);
@@ -71,14 +71,14 @@ public class ZPINcLogFileManager {
         catch(IOException ex){
             String strExitMsg = "Can not create log file in:\n"
                     + ncStrCfgPath + "\n";
-            NcAppHelper.appExitWithMessage(strExitMsg + ex.getMessage());
+            ZPINcAppHelper.appExitWithMessage(strExitMsg + ex.getMessage());
         }
         ZPINcfvRunVariables.setCanRecord();
     }
     /**
      * Used in 
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcAppHelper#outMessageToAppLogFile(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcAppHelper#outMessageToAppLogFile(java.lang.String) }
      * </ul>
      * @param strToLog 
      */
@@ -91,9 +91,9 @@ public class ZPINcLogFileManager {
 
             if( ZPINcfvRunVariables.isOutToLogNewRecordAppend() ){
                 String strTime = java.time.LocalDateTime.now().toString();
-                String text = NcStrLogMsgField.TIME.getStr() + strTime;
-                String strMsg = text + NcStrLogMsgField.MSG_INFO.getStr()
-                    + NcStrLogMsgText.LOG_RECORD_APPEND.getStr();
+                String text = ZPINcStrLogMsgField.TIME.getStr() + strTime;
+                String strMsg = text + ZPINcStrLogMsgField.MSG_INFO.getStr()
+                    + ZPINcStrLogMsgText.LOG_RECORD_APPEND.getStr();
                 strCurrentLog.put((long) idx, strMsg);
                 idx++;
             }
@@ -105,7 +105,7 @@ public class ZPINcLogFileManager {
     /**
      * Used in 
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcAppHelper#outMessageToAppLogFile(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcAppHelper#outMessageToAppLogFile(java.lang.String) }
      * </ul>
      * @param toLogStr 
      */
@@ -117,9 +117,9 @@ public class ZPINcLogFileManager {
 
             if( ZPINcfvRunVariables.isOutToLogNewRecordAppend() ){
                 String strTime = java.time.LocalDateTime.now().toString();
-                String text = NcStrLogMsgField.TIME.getStr() + strTime;
-                String strMsg = text + NcStrLogMsgField.MSG_INFO.getStr()
-                    + NcStrLogMsgText.LOG_RECORD_APPEND.getStr();
+                String text = ZPINcStrLogMsgField.TIME.getStr() + strTime;
+                String strMsg = text + ZPINcStrLogMsgField.MSG_INFO.getStr()
+                    + ZPINcStrLogMsgText.LOG_RECORD_APPEND.getStr();
                 strCurrentLog.put((long) idx, strMsg);
                 idx++;
             }
@@ -154,8 +154,8 @@ public class ZPINcLogFileManager {
             }
         }
          catch(IOException ex){
-            NcAppHelper.logException(
-                NcLogFileManager.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                ZPINcLogFileManager.class.getCanonicalName(), ex);
         }
         return strForReturn;
     }
@@ -205,8 +205,8 @@ public class ZPINcLogFileManager {
             }
             catch(IOException ex){
                 String strMsg = "Can not create log file in:\n"
-                        + NcIdxFileManager.getStrCanPathFromFile(fileLog) + "\n";
-                NcAppHelper.appExitWithMessage(strMsg + ex.getMessage());
+                        + ZPINcIdxFileManager.getStrCanPathFromFile(fileLog) + "\n";
+                ZPINcAppHelper.appExitWithMessage(strMsg + ex.getMessage());
             }
         }
     }

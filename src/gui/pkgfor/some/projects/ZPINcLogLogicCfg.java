@@ -28,10 +28,10 @@ public class ZPINcLogLogicCfg {
      */
     protected static void NcParamFvReaderReadDataRead(){
         if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_CFG_WORK_READ_FROM_FILE.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_CFG_WORK_READ_FROM_FILE.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
@@ -42,10 +42,10 @@ public class ZPINcLogLogicCfg {
      */
     protected static void NcParamFvReaderReadDataGenerate(){
         if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_CFG_WORK_GENERATE_ZERO.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_CFG_WORK_GENERATE_ZERO.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
@@ -56,10 +56,10 @@ public class ZPINcLogLogicCfg {
      */
     protected static void NcPreRunFileViewerGetCurrentWorkCfg(){
         if( ZPINcfvRunVariables.isLALRNcPreRunFileViewerGetCurrentWorkCfg() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_CFG_WORK_GET_CURRENT.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_CFG_WORK_GET_CURRENT.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
@@ -70,10 +70,10 @@ public class ZPINcLogLogicCfg {
      */
     protected static void NcPreRunFileViewerValidateAndApplyCfg(){
         if( ZPINcfvRunVariables.isLALRNcPreRunFileViewerValidateAndApplyCfg() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_CFG_WORK_VALIDATE_APPLY.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_CFG_WORK_VALIDATE_APPLY.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }    
 }

@@ -28,19 +28,19 @@ public class ZPINcLogLogicApp {
      */
     protected static void NcAppLoaderLoadApp(){
         if( ZPINcfvRunVariables.isLALRNcParamFvReaderReadDataFromWorkCfg() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogMsgText.APP_LOADER_START.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogMsgText.APP_LOADER_START.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     protected static void NcIdxFileManagerFileExistRWAccessChecker(String strFile){
         if( ZPINcfvRunVariables.isLALRNcIdxFileManagerFileExistRWAccessChecker() ){
-            String strLogMsg = NcStrLogMsgField.ERROR.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogMsgText.NOT_EXIST_OR_READ_WRITE_PERMISSIONS_FOR_FILE.getStr()
+            String strLogMsg = ZPINcStrLogMsgField.ERROR.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogMsgText.NOT_EXIST_OR_READ_WRITE_PERMISSIONS_FOR_FILE.getStr()
                 + strFile;
-            NcAppHelper.outMessage(strLogMsg);
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

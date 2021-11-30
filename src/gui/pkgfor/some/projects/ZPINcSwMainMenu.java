@@ -26,14 +26,14 @@ public class ZPINcSwMainMenu {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * @param lComp
      * @return 
      */
-    protected static JMenuBar getMainMenu(NcSwGUIComponentStatus lComp){
+    protected static JMenuBar getMainMenu(ZPINcSwGUIComponentStatus lComp){
         JMenuBar menuMain = new JMenuBar();
-        NcLogLogicGUI.NcSwMainMenuGetMainMenu();
+        ZPINcLogLogicGUI.NcSwMainMenuGetMainMenu();
         menuMain.add(getMenuFile());
         menuMain.add(getMenuDevelop(lComp));
         menuMain.add(getMenuService(lComp));
@@ -43,56 +43,56 @@ public class ZPINcSwMainMenu {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return 
      */
     private static JMenu getMenuFile(){
         JMenu menuFile = new JMenu("File");
-        menuFile.add(NcSwMenuItems.getSubDirChecker());
+        menuFile.add(ZPINcSwMenuItems.getSubDirChecker());
         
-        menuFile.add(NcSwMenuItems.getAppExit());
+        menuFile.add(ZPINcSwMenuItems.getAppExit());
         return menuFile;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @return 
      */
-    private static JMenu getMenuDevelop(NcSwGUIComponentStatus lComp){
+    private static JMenu getMenuDevelop(ZPINcSwGUIComponentStatus lComp){
         JMenu menuDevelop = new JMenu("Development");
-        menuDevelop.add(NcSwMenuItems.getDirListViewer(lComp));
-        menuDevelop.add(NcSwMenuItems.getStorageWordViewer(lComp));
-        menuDevelop.add(NcSwMenuItems.getLogFileReader(lComp));
-        menuDevelop.add(NcSwMenuItems.getEnvironmentViewer(lComp));
-        menuDevelop.add(NcSwMenuItems.getPropertiesViewer(lComp));
+        menuDevelop.add(ZPINcSwMenuItems.getDirListViewer(lComp));
+        menuDevelop.add(ZPINcSwMenuItems.getStorageWordViewer(lComp));
+        menuDevelop.add(ZPINcSwMenuItems.getLogFileReader(lComp));
+        menuDevelop.add(ZPINcSwMenuItems.getEnvironmentViewer(lComp));
+        menuDevelop.add(ZPINcSwMenuItems.getPropertiesViewer(lComp));
         return menuDevelop;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return 
      */
     private static JMenu getMenuHelp(){
         JMenu menuHelp = new JMenu("Help");
-        menuHelp.add(NcSwMenuItems.getAbout());
+        menuHelp.add(ZPINcSwMenuItems.getAbout());
         return menuHelp;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMainMenu(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return 
      */
-    private static JMenu getMenuService(NcSwGUIComponentStatus lComp){
+    private static JMenu getMenuService(ZPINcSwGUIComponentStatus lComp){
         JMenu menuService = new JMenu("Service");
-        menuService.add(NcSwMenuItems.getEtcEditor(lComp));
+        menuService.add(ZPINcSwMenuItems.getEtcEditor(lComp));
         return menuService;
     }
     

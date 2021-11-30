@@ -37,13 +37,13 @@ public class ZPINcIdxNioDirListManager {
     protected static CopyOnWriteArrayList<Path> getFilesFromDirListStorage() {
         CopyOnWriteArrayList<Path> toReturn= new CopyOnWriteArrayList<Path>();
         
-        Path pathIndexFile = NcFsIdxStorageInit.buildPathToFileOfIdxStorage();
-        Map<String, String> fsProperties = NcFsIdxStorageInit.getFsPropExist();
+        Path pathIndexFile = ZPINcFsIdxStorageInit.buildPathToFileOfIdxStorage();
+        Map<String, String> fsProperties = ZPINcFsIdxStorageInit.getFsPropExist();
         System.out.println("\n\n\n file storage path: " + pathIndexFile.toString());
-        Boolean existFSfile = NcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile);
-        System.out.println("NcFsIdxOperationFiles.existAndHasAccessRWNotLink(): " + existFSfile.toString());
+        Boolean existFSfile = ZPINcFsIdxOperationFiles.existAndHasAccessRWNotLink(pathIndexFile);
+        System.out.println("ZPINcFsIdxOperationFiles.existAndHasAccessRWNotLink(): " + existFSfile.toString());
         if( !existFSfile ){
-            fsProperties = NcFsIdxStorageInit.getFsPropCreate();
+            fsProperties = ZPINcFsIdxStorageInit.getFsPropCreate();
         }
         for (Map.Entry<String, String> entry : fsProperties.entrySet()) {
             System.out.println("Key: " + entry.getKey() + " Val: " + entry.getValue());
@@ -52,7 +52,7 @@ public class ZPINcIdxNioDirListManager {
         try(FileSystem fsZipIndexStorage = 
             FileSystems.newFileSystem(uriZipIndexStorage, fsProperties)){
             
-            NcParamFs dataStorage = NcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
+            ZPINcParamFs dataStorage = ZPINcFsIdxStorageInit.initStorageStructure(fsZipIndexStorage);
             try{
                 
             SimpleFileVisitor<Path> visitorPath = new SimpleFileVisitor<Path>(){

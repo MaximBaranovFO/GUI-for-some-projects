@@ -38,22 +38,22 @@ public class ZPINcSwPanelLineEnd {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * @return
      */
-    protected static JPanel getPanel(NcSwGUIComponentStatus lComp){
+    protected static JPanel getPanel(ZPINcSwGUIComponentStatus lComp){
         JPanel lineEndPanel = getPanelTreeShowStack(lComp);
         return lineEndPanel;
     }
     
-    private static JPanel getPanelTreeShowStack(NcSwGUIComponentStatus lComp){
-        JTree treeStack = NcSwGUITreeShowStack.getTreeShowStack(lComp);
+    private static JPanel getPanelTreeShowStack(ZPINcSwGUIComponentStatus lComp){
+        JTree treeStack = ZPINcSwGUITreeShowStack.getTreeShowStack(lComp);
         
         JScrollPane scrollTreeStackPane = new JScrollPane(treeStack);
         JPanel panelTreeStackPane = new JPanel();
         panelTreeStackPane.add(scrollTreeStackPane);
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPane();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPane();
         //***lComp.putComponents(componentPath, scrollTreeStackPane);
         lComp.putComponents(componentPath, scrollTreeStackPane);
         
@@ -76,20 +76,20 @@ public class ZPINcSwPanelLineEnd {
         //***tabbedPane.addTab("Stack", scrollTreeStackPane);
         tabbedPane.addTab("Stack", panelTreeStackPane);
         
-        JTree treeWork = NcSwGUITreeShowWork.showWork(lComp);
+        JTree treeWork = ZPINcSwGUITreeShowWork.showWork(lComp);
         JScrollPane scrollTreeWorkPane = new JScrollPane(treeWork);
         JPanel panelTreeWorkPane = new JPanel();
         panelTreeWorkPane.add(scrollTreeWorkPane);
         tabbedPane.addTab("Work", panelTreeWorkPane);
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneWorkScrollPane();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneWorkScrollPane();
         lComp.putComponents(componentPath, scrollTreeWorkPane);
         
-        JTree treeOutput = NcSwGUITreeShowOutput.showOutput(lComp);
+        JTree treeOutput = ZPINcSwGUITreeShowOutput.showOutput(lComp);
         JScrollPane scrollTreeOutputPane = new JScrollPane(treeOutput);
         JPanel panelTreeOutputPane = new JPanel();
         panelTreeOutputPane.add(scrollTreeOutputPane);
         tabbedPane.addTab("Output", panelTreeOutputPane);
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPane();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneOutputScrollPane();
         lComp.putComponents(componentPath, scrollTreeOutputPane);
         
         
@@ -101,7 +101,7 @@ public class ZPINcSwPanelLineEnd {
         Dimension widePreffSize = new Dimension(230,
                 ((int) preferredSize.getHeight()) - 30);
         scrollTreeStackPane.setPreferredSize(widePreffSize);
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEnd();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEnd();
         lComp.putComponents(componentPath, panel);
         
         
@@ -109,7 +109,7 @@ public class ZPINcSwPanelLineEnd {
         return panel;
     }
     
-    private static JPanel getSearchKeyWordManagePanel(NcSwGUIComponentStatus lComp){
+    private static JPanel getSearchKeyWordManagePanel(ZPINcSwGUIComponentStatus lComp){
         String[] forTextToolTip = {
             "For search with keyword, input it and press \"+\" Button",
             "For search with out keyword, input it and press \"+\" Button",
@@ -123,7 +123,7 @@ public class ZPINcSwPanelLineEnd {
         Dimension textFiledForSearchDimension = new Dimension(100, 20);        
         
         JPanel eastPanel = new JPanel();
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEnd();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEnd();
         lComp.putComponents(componentPath, eastPanel);
         Border eastBorder = BorderFactory.createTitledBorder("EAST panel");
         eastPanel.setBorder(eastBorder);
@@ -132,18 +132,18 @@ public class ZPINcSwPanelLineEnd {
         eastPanel.setAlignmentX(JComponent.TOP_ALIGNMENT);
         eastPanel.setAlignmentY(JComponent.CENTER_ALIGNMENT);
         
-        JButton ncHowToInSearch = NcSwGUIComponent.createButton(
+        JButton ncHowToInSearch = ZPINcSwGUIComponent.createButton(
                 forComponentText[0],null,forTextToolTip[2]);
         
         eastPanel.add(ncHowToInSearch);
         
-        JPanel textInSearchPanel = NcSwGUIComponent.getTextFieldForSearchPanel(
+        JPanel textInSearchPanel = ZPINcSwGUIComponent.getTextFieldForSearchPanel(
                 textFiledForSearchDimension, forTextToolTip[0]);
         eastPanel.add(textInSearchPanel);
         
         eastPanel.add(getAndOrButtonPanel());
         
-        JList wiSearch = NcSwGUIComponent.createJListWordInSearch();
+        JList wiSearch = ZPINcSwGUIComponent.createJListWordInSearch();
         JScrollPane wiScroll = new JScrollPane(wiSearch);
         wiScroll.setPreferredSize(new Dimension(100, 100));
         
@@ -155,16 +155,16 @@ public class ZPINcSwPanelLineEnd {
         JSeparator ncSeparator = new JSeparator(JSeparator.HORIZONTAL);
         eastPanel.add(ncSeparator);
         
-        eastPanel.add(NcSwGUIComponent.createButton(
+        eastPanel.add(ZPINcSwGUIComponent.createButton(
                 forComponentText[0],null,forTextToolTip[3]));
         
-        JPanel textOutSearchPanel = NcSwGUIComponent.getTextFieldForSearchPanel(
+        JPanel textOutSearchPanel = ZPINcSwGUIComponent.getTextFieldForSearchPanel(
                 textFiledForSearchDimension, forTextToolTip[1]);
         eastPanel.add(textOutSearchPanel);
         
         eastPanel.add(getAndOrButtonPanel());
         
-        JList wniSearch = NcSwGUIComponent.createJListWordNotInSearch();
+        JList wniSearch = ZPINcSwGUIComponent.createJListWordNotInSearch();
         JScrollPane wniScroll = new JScrollPane(wniSearch);
         wniScroll.setPreferredSize(new Dimension(100, 100));
         
@@ -178,49 +178,49 @@ public class ZPINcSwPanelLineEnd {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
     private static JPanel getAndOrButtonPanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.add(NcSwGUIComponent.createButton("&&",null,""));
-        buttonPanel.add(NcSwGUIComponent.createButton("||",null,""));
+        buttonPanel.add(ZPINcSwGUIComponent.createButton("&&",null,""));
+        buttonPanel.add(ZPINcSwGUIComponent.createButton("||",null,""));
         return buttonPanel;
     }    
 
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
     private static JPanel getAddDelButtonPanel(){
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.add(NcSwGUIComponent.createButton("+",null,""));
-        buttonPanel.add(NcSwGUIComponent.createButton("-",null,""));
+        buttonPanel.add(ZPINcSwGUIComponent.createButton("+",null,""));
+        buttonPanel.add(ZPINcSwGUIComponent.createButton("-",null,""));
         return buttonPanel;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      * @return
      */
     private static void toLALRgetPanel(){
-        if( ZPINcfvRunVariables.isLALRNcSwPanelLineEndgetPanel() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_LINEEND.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_CENTER.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+        if( ZPIZPINcfvRunVariables.isLALRZPINcSwPanelLineEndgetPanel() ){
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_LINEEND.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_CENTER.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

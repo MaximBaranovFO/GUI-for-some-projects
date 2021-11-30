@@ -30,31 +30,31 @@ public class ZPINcIdxLongWordListFileReader {
      * Directory List Word Long
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordListManager#getOrCreateLongWordID(ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordListManager#getOrCreateLongWordID(ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#getForSearchLongWordID(ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#getForSearchLongWordID(ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
      * </ul>
      * @param dataForRead
      * @param rID
      * @return 
      */      
-    protected static TreeMap<Long, NcDcIdxLongWordListToFile> ncReadFileContainedId(NcDcIdxLongWordListToFile dataForRead, long rID){
-        TreeMap<Long, NcDcIdxLongWordListToFile> ncDataFromDirList;
-        String strCfgPath = NcIdxFileManager.getFileNameToRecord(
-                NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWordList()) + "/wl-"
+    protected static TreeMap<Long, ZPINcDcIdxLongWordListToFile> ncReadFileContainedId(ZPINcDcIdxLongWordListToFile dataForRead, long rID){
+        TreeMap<Long, ZPINcDcIdxLongWordListToFile> ncDataFromDirList;
+        String strCfgPath = ZPINcIdxFileManager.getFileNameToRecord(
+                ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWordList()) + "/wl-"
                 + dataForRead.name.substring(0, 4),rID);
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
-            return new TreeMap<Long, NcDcIdxLongWordListToFile>();
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+            return new TreeMap<Long, ZPINcDcIdxLongWordListToFile>();
         }
         //mcGetWorkCfgDirName() + workFileNames[0];
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromDirList = (TreeMap<Long, NcDcIdxLongWordListToFile>)ois.readObject();
+            ncDataFromDirList = (TreeMap<Long, ZPINcDcIdxLongWordListToFile>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxLongWordListFileReader.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDcIdxLongWordListToFile>();
+            ZPINcAppHelper.logException(
+                    ZPINcIdxLongWordListFileReader.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDcIdxLongWordListToFile>();
         } 
         return ncDataFromDirList;
     }

@@ -28,14 +28,14 @@ public class ZPINcIdxLongWordFileWriter {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#putLongWordInFile(java.util.TreeMap, ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#putLongWordInFile(java.util.TreeMap, ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
      * </ul>
      * @param ncWordToRec
      * @param recHexWord
      * @param recID
      * @return 
      */    
-    protected static long ncWriteForLongWord(TreeMap<Long, NcDcIdxWordToFile> ncWordToRec, String recHexWord, long recID){
+    protected static long ncWriteForLongWord(TreeMap<Long, ZPINcDcIdxWordToFile> ncWordToRec, String recHexWord, long recID){
         if( ncWordToRec == null ){
             return -1;
         }
@@ -46,8 +46,8 @@ public class ZPINcIdxLongWordFileWriter {
             oos.writeObject(ncWordToRec);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxLongWordFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxLongWordFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return ncWordToRec.size();

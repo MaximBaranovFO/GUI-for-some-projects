@@ -22,7 +22,7 @@ package gui.pkgfor.some.projects;
  * 
  * @author wladimirowichbiaran
  */
-public class ZPINcThProcGUICallback implements NcThProcGUICallbackInterface {
+public class ZPINcThProcGUICallback implements ZPINcThProcGUICallbackInterface {
     
     /**
      * Used in

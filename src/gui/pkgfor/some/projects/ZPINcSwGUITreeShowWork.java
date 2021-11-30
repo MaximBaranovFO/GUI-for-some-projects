@@ -24,12 +24,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class ZPINcSwGUITreeShowWork {
 
-    protected static JTree showWork(NcSwGUIComponentStatus lComp) {
+    protected static JTree showWork(ZPINcSwGUIComponentStatus lComp) {
         DefaultMutableTreeNode treeTop = 
                 new DefaultMutableTreeNode("Work contained:");
         JTree treeNodes = new JTree(treeTop);
         String pathComponent = 
-                NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneWorkScrollPaneTreeShowWork();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneWorkScrollPaneTreeShowWork();
         lComp.putComponents(pathComponent, treeNodes);
         return treeNodes;
     }

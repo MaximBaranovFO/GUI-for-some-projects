@@ -42,7 +42,7 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelPageEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelPageEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
@@ -54,7 +54,7 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param textSize
      * @param strToolTip
@@ -74,11 +74,11 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineStart#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineStart#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
-    protected static ArrayList<JButton> getRootButtons(NcSwGUIComponentStatus lComp){
+    protected static ArrayList<JButton> getRootButtons(ZPINcSwGUIComponentStatus lComp){
         ArrayList<JButton> toReturn = new ArrayList<JButton>();
         
         FileSystemView fileSystemView;
@@ -92,15 +92,15 @@ public class ZPINcSwGUIComponent {
             Icon itemIcon = fileSystemView.getSystemIcon(itemDisk);
             String strSysTypeDescription = fileSystemView.getSystemTypeDescription(itemDisk);
             if( "".equals(strSysTypeDescription) || (strSysTypeDescription == null) ){
-                if( !NcAppHelper.isWindows() ){
+                if( !ZPINcAppHelper.isWindows() ){
                     strSysTypeDescription = "Root";
                 }
             }
-            String itemDisplayName = NcIdxFileManager.getStrCanPathFromFile(itemDisk) + " - " +
+            String itemDisplayName = ZPINcIdxFileManager.getStrCanPathFromFile(itemDisk) + " - " +
                     strSysTypeDescription;
             
-            if( NcIdxFileManager.getStrCanPathFromFile(itemDisk).length() > 2 ){
-                itemDisplayName = NcIdxFileManager.getStrCanPathFromFile(itemDisk).substring(0, 2) + " - " +
+            if( ZPINcIdxFileManager.getStrCanPathFromFile(itemDisk).length() > 2 ){
+                itemDisplayName = ZPINcIdxFileManager.getStrCanPathFromFile(itemDisk).substring(0, 2) + " - " +
                     strSysTypeDescription;
             }
             long ncDriveFreeGb = itemDisk.getFreeSpace()/ncForGB;
@@ -127,9 +127,9 @@ public class ZPINcSwGUIComponent {
                 public void  actionPerformed(ActionEvent e){
                         try {
                             ZPINcThScanListAttr.fsScanListAttr(ncButton, lComp, itemDisk.toPath());
-                            //NcThWorkerGUIDirListScan.scanDirToIdxDirList(lComp, itemDisk.toPath());
+                            //ZPINcThWorkerGUIDirListScan.scanDirToIdxDirList(lComp, itemDisk.toPath());
                         } catch (Exception ex) {
-                            NcAppHelper.logException(NcSwGUIComponent.class.getCanonicalName(), ex);
+                            ZPINcAppHelper.logException(ZPINcSwGUIComponent.class.getCanonicalName(), ex);
                         }
                     }
                 }
@@ -146,13 +146,13 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwGUIComponent#getRootButtons() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwGUIComponent#getRootButtons() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getAndOrButtonPanel() }
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getAddDelButtonPanel() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getAndOrButtonPanel() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getAddDelButtonPanel() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param ncName
      * @param ncIcon
@@ -171,14 +171,14 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
     protected static JList createJListWordInSearch(){
         DefaultListModel listWordInSearch = new DefaultListModel();
         ArrayList<String> arrKeyIn = 
-                NcEtcKeyWordListManager.getKeyWordInSearchFromFile();
+                ZPINcEtcKeyWordListManager.getKeyWordInSearchFromFile();
         if( arrKeyIn.size() == 0 ){
             listWordInSearch.addElement("* None *");
         }
@@ -197,7 +197,7 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelLineEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return
      */
@@ -205,7 +205,7 @@ public class ZPINcSwGUIComponent {
         DefaultListModel listWordNotInSearch = new DefaultListModel();
         
         ArrayList<String> arrKeyOut = 
-                NcEtcKeyWordListManager.getKeyWordOutSearchFromFile();
+                ZPINcEtcKeyWordListManager.getKeyWordOutSearchFromFile();
         if( arrKeyOut.size() == 0 ){
             listWordNotInSearch.addElement("* None *");
         }
@@ -231,7 +231,7 @@ public class ZPINcSwGUIComponent {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwStatusPanel#addProgressBar(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwStatusPanel#addProgressBar(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return 
      */

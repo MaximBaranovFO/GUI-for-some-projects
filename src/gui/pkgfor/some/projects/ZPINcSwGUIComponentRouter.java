@@ -25,37 +25,37 @@ public class ZPINcSwGUIComponentRouter {
      * @return 
      */
     protected static String pathMainFrame(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanel(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelLineStart(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SLINESTART.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SLINESTART.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelLineEnd(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SLINEEND.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SLINEEND.getStr();
     }
     /**
      * 
@@ -63,7 +63,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPane(){
         return pathMainFramePanelLineEnd()
-            + NcStrGUIComponent.SJTABBEDPANE.getStr();
+            + ZPINcStrGUIComponent.SJTABBEDPANE.getStr();
     }
     /**
      * 
@@ -71,7 +71,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneStack(){
         return pathMainFramePanelLineEndTabbedPane()
-            + NcStrGUIComponent.SSTACK.getStr();
+            + ZPINcStrGUIComponent.SSTACK.getStr();
     }
     /**
      * 
@@ -79,7 +79,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneWork(){
         return pathMainFramePanelLineEndTabbedPane()
-            + NcStrGUIComponent.SWORK.getStr();
+            + ZPINcStrGUIComponent.SWORK.getStr();
     }
     /**
      * 
@@ -87,7 +87,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneOutput(){
         return pathMainFramePanelLineEndTabbedPane()
-            + NcStrGUIComponent.SOUTPUT.getStr();
+            + ZPINcStrGUIComponent.SOUTPUT.getStr();
     }
     /**
      * 
@@ -95,7 +95,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneStackScrollPane(){
         return pathMainFramePanelLineEndTabbedPaneStack()
-                + NcStrGUIComponent.SJSCROLLPANE.getStr();
+                + ZPINcStrGUIComponent.SJSCROLLPANE.getStr();
     }
     /**
      * 
@@ -103,7 +103,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneWorkScrollPane(){
         return pathMainFramePanelLineEndTabbedPaneWork()
-                + NcStrGUIComponent.SJSCROLLPANE.getStr();
+                + ZPINcStrGUIComponent.SJSCROLLPANE.getStr();
     }
     /**
      * 
@@ -111,7 +111,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneOutputScrollPane(){
         return pathMainFramePanelLineEndTabbedPaneOutput()
-                + NcStrGUIComponent.SJSCROLLPANE.getStr();
+                + ZPINcStrGUIComponent.SJSCROLLPANE.getStr();
     }
     /**
      * 
@@ -119,7 +119,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneStackScrollPaneTreeShowStack(){
         return pathMainFramePanelLineEndTabbedPaneStackScrollPane()
-                + NcStrGUIComponent.SJTREE.getStr();
+                + ZPINcStrGUIComponent.SJTREE.getStr();
     }
     /**
      * 
@@ -127,7 +127,7 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneWorkScrollPaneTreeShowWork(){
         return pathMainFramePanelLineEndTabbedPaneWorkScrollPane()
-                + NcStrGUIComponent.SJTREE.getStr();
+                + ZPINcStrGUIComponent.SJTREE.getStr();
     }
     /**
      * 
@@ -135,74 +135,74 @@ public class ZPINcSwGUIComponentRouter {
      */
     protected static String pathMainFramePanelLineEndTabbedPaneOutputScrollPaneTreeShowOutput(){
         return pathMainFramePanelLineEndTabbedPaneOutputScrollPane()
-                + NcStrGUIComponent.SJTREE.getStr();
+                + ZPINcStrGUIComponent.SJTREE.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageStart(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SPAGESTART.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SPAGESTART.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageStartTextFieldSearch(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SPAGESTART.getStr()
-                + NcStrGUIComponent.STEXTFIELD.getStr()
-                + NcStrGUIComponent.SSEARCH.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SPAGESTART.getStr()
+                + ZPINcStrGUIComponent.STEXTFIELD.getStr()
+                + ZPINcStrGUIComponent.SSEARCH.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageStartButtonSearch(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SPAGESTART.getStr()
-                + NcStrGUIComponent.SJBUTTON.getStr()
-                + NcStrGUIComponent.SSEARCH.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SPAGESTART.getStr()
+                + ZPINcStrGUIComponent.SJBUTTON.getStr()
+                + ZPINcStrGUIComponent.SSEARCH.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageEnd(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SPAGEEND.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SPAGEEND.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageEndButtonGetStack(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SPAGEEND.getStr()
-                + NcStrGUIComponent.SJBUTTON.getStr()
-                + NcStrGUIComponent.SSTACK.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SPAGEEND.getStr()
+                + ZPINcStrGUIComponent.SJBUTTON.getStr()
+                + ZPINcStrGUIComponent.SSTACK.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelPageEndProgressBar(){
-        String componentPath = NcStrGUIComponent.SMAIN.getStr()
-            + NcStrGUIComponent.SJFRAME.getStr()
-            + NcStrGUIComponent.SJPANEL.getStr()
-            + NcStrGUIComponent.SPAGEEND.getStr()
-            + NcStrGUIComponent.SJPROGRESSBAR.getStr();
+        String componentPath = ZPINcStrGUIComponent.SMAIN.getStr()
+            + ZPINcStrGUIComponent.SJFRAME.getStr()
+            + ZPINcStrGUIComponent.SJPANEL.getStr()
+            + ZPINcStrGUIComponent.SPAGEEND.getStr()
+            + ZPINcStrGUIComponent.SJPROGRESSBAR.getStr();
         return componentPath;
     }
     /**
@@ -210,11 +210,11 @@ public class ZPINcSwGUIComponentRouter {
      * @return 
      */
     protected static String pathMainFramePanelPageEndButton(){
-        String componentPath = NcStrGUIComponent.SMAIN.getStr()
-            + NcStrGUIComponent.SJFRAME.getStr()
-            + NcStrGUIComponent.SJPANEL.getStr()
-            + NcStrGUIComponent.SPAGEEND.getStr()
-            + NcStrGUIComponent.SJBUTTON.getStr();
+        String componentPath = ZPINcStrGUIComponent.SMAIN.getStr()
+            + ZPINcStrGUIComponent.SJFRAME.getStr()
+            + ZPINcStrGUIComponent.SJPANEL.getStr()
+            + ZPINcStrGUIComponent.SPAGEEND.getStr()
+            + ZPINcStrGUIComponent.SJBUTTON.getStr();
         return componentPath;
     }
     /**
@@ -222,20 +222,20 @@ public class ZPINcSwGUIComponentRouter {
      * @return 
      */
     protected static String pathMainFramePanelCenter(){
-        return NcStrGUIComponent.SMAIN.getStr()
-                + NcStrGUIComponent.SJFRAME.getStr()
-                + NcStrGUIComponent.SJPANEL.getStr()
-                + NcStrGUIComponent.SCENTER.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+                + ZPINcStrGUIComponent.SJFRAME.getStr()
+                + ZPINcStrGUIComponent.SJPANEL.getStr()
+                + ZPINcStrGUIComponent.SCENTER.getStr();
     }
     /**
      * 
      * @return 
      */
     protected static String pathMainFramePanelCenterTable(){
-        return NcStrGUIComponent.SMAIN.getStr()
-            + NcStrGUIComponent.SJFRAME.getStr()
-            + NcStrGUIComponent.SJPANEL.getStr()
-            + NcStrGUIComponent.SCENTER.getStr()
-            + NcStrGUIComponent.SJTABLE.getStr();
+        return ZPINcStrGUIComponent.SMAIN.getStr()
+            + ZPINcStrGUIComponent.SJFRAME.getStr()
+            + ZPINcStrGUIComponent.SJPANEL.getStr()
+            + ZPINcStrGUIComponent.SCENTER.getStr()
+            + ZPINcStrGUIComponent.SJTABLE.getStr();
     }
 }

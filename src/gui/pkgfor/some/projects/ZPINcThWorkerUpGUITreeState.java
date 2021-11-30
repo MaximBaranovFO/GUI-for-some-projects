@@ -32,9 +32,9 @@ import javax.swing.tree.TreeModel;
  * @author wladimirowichbiaran
  */
 public class ZPINcThWorkerUpGUITreeState {
-    protected static void stateTreeAddChildren(NcSwGUIComponentStatus lComp){
+    protected static void stateTreeAddChildren(ZPINcSwGUIComponentStatus lComp){
         String strPathTree = 
-                NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPaneTreeShowStack();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPaneTreeShowStack();
         JTree treeShowStack = (JTree) lComp.getComponentByPath(strPathTree);
         
         
@@ -44,7 +44,7 @@ public class ZPINcThWorkerUpGUITreeState {
         DefaultMutableTreeNode rootElement = 
                 (DefaultMutableTreeNode) modelShowStack.getRoot();
         
-        String strNowTime =  NcStrLogMsgField.TIME.getStr()
+        String strNowTime =  ZPINcStrLogMsgField.TIME.getStr()
                 + java.time.LocalDateTime.now().toString();
         DefaultMutableTreeNode timeChild =
                 new DefaultMutableTreeNode(strNowTime);
@@ -55,7 +55,7 @@ public class ZPINcThWorkerUpGUITreeState {
             @Override
             protected Void doInBackground() {
                 
-                ArrayList<String> arrStr = NcAppStackTrace.getAllStack();
+                ArrayList<String> arrStr = ZPINcAppStackTrace.getAllStack();
                 
                 for (String string : arrStr) {
                     publish(string);
@@ -81,7 +81,7 @@ public class ZPINcThWorkerUpGUITreeState {
                 treeShowStack.setModel(treeForAdd);
                 treeShowStack.setEnabled(true);
                 
-                String componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPane();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPane();
                 JScrollPane scrollTreeStackPane = (JScrollPane) lComp.getComponentByPath(componentPath);
                 Dimension preferredSize = scrollTreeStackPane.getPreferredSize();
                 Dimension widePreffSize = new Dimension(250,
@@ -89,7 +89,7 @@ public class ZPINcThWorkerUpGUITreeState {
                 scrollTreeStackPane.setPreferredSize(widePreffSize);
                 scrollTreeStackPane.revalidate();
                 
-                componentPath = NcSwGUIComponentRouter.pathMainFramePanelLineEnd();
+                componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelLineEnd();
                 JPanel panelLineEnd = (JPanel) lComp.getComponentByPath(componentPath);
                 panelLineEnd.repaint();
             }

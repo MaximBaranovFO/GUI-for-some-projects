@@ -33,29 +33,29 @@ public class ZPINcSwPanelPageEnd {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * @return
      */
-    protected static JPanel getPanel(NcSwGUIComponentStatus lComp){
+    protected static JPanel getPanel(ZPINcSwGUIComponentStatus lComp){
         JPanel southPanel = new JPanel();
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageEnd();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageEnd();
         lComp.putComponents(componentPath, southPanel);
         Border southBorder = BorderFactory.createTitledBorder("SOUTH panel");
         southPanel.setBorder(southBorder);
         
         southPanel.add(
-            NcSwStatusPanel.addProgressBar(lComp)
+            ZPINcSwStatusPanel.addProgressBar(lComp)
         );
-        JButton buttonGetStack = NcSwGUIComponent.createButton("Show", null, "Show now StackTrace");
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageEndButtonGetStack();
+        JButton buttonGetStack = ZPINcSwGUIComponent.createButton("Show", null, "Show now StackTrace");
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndButtonGetStack();
         lComp.putComponents(componentPath, buttonGetStack);
         
         buttonGetStack.addActionListener(new ActionListener(){
             public void  actionPerformed(ActionEvent e){
-                NcSwStatusPanel.indicationStartProgressBar(lComp);
+                ZPINcSwStatusPanel.indicationStartProgressBar(lComp);
                 ZPINcThWorkerUpGUITreeState.stateTreeAddChildren(lComp);
-                NcSwStatusPanel.indicationStopProgressBar(lComp);
+                ZPINcSwStatusPanel.indicationStopProgressBar(lComp);
             }
         });
         southPanel.add(buttonGetStack);
@@ -65,19 +65,19 @@ public class ZPINcSwPanelPageEnd {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelPageEnd#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelPageEnd#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      */
     private static void toLALRgetPanel(){
         if( ZPINcfvRunVariables.isLALRNcSwPanelPageEndgetPanel() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_PAGEEND.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_PANEL_LINESTART.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_PAGEEND.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_PANEL_LINESTART.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

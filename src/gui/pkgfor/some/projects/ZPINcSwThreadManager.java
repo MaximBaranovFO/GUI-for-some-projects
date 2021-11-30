@@ -28,21 +28,21 @@ public class ZPINcSwThreadManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @param strSrch 
      */
-    protected static void setToViewSearchedResult(NcSwGUIComponentStatus lComp, String strSrch){
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+    protected static void setToViewSearchedResult(ZPINcSwGUIComponentStatus lComp, String strSrch){
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
         JPanel centerPanel =
             (JPanel) lComp.getComponentByPath(componentPath);
         
         
-        //NcThProcGUICallbackInterface proxyInstGuiCb = getProxyInstanceGUICallback();
-        TableModel locNewTableModel = new NcSIMASearchResultTableModel(strSrch);
+        //ZPINcThProcGUICallbackInterface proxyInstGuiCb = getProxyInstanceGUICallback();
+        TableModel locNewTableModel = new ZPINcSIMASearchResultTableModel(strSrch);
         
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenterTable();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenterTable();
         JTable guiTable = (JTable) lComp.getComponentByPath(componentPath);
         
         guiTable.setModel(locNewTableModel);
@@ -52,15 +52,15 @@ public class ZPINcSwThreadManager {
      * Not used
      * @return 
      */
-    private static NcThProcGUICallbackInterface getProxyInstanceGUICallback(){
+    private static ZPINcThProcGUICallbackInterface getProxyInstanceGUICallback(){
         
-        NcThProcGUICallback cbLoc = new NcThProcGUICallback();
-        NcThProcInvocationHandler ncInvHandler = 
-            new NcThProcInvocationHandler(cbLoc);
-        NcThProcGUICallbackInterface proxyInstGui = (NcThProcGUICallbackInterface)
+        ZPINcThProcGUICallback cbLoc = new ZPINcThProcGUICallback();
+        ZPINcThProcInvocationHandler ncInvHandler = 
+            new ZPINcThProcInvocationHandler(cbLoc);
+        ZPINcThProcGUICallbackInterface proxyInstGui = (ZPINcThProcGUICallbackInterface)
         Proxy.newProxyInstance(
-        NcThProcGUICallbackInterface.class.getClassLoader(),
-        new Class[]{NcThProcGUICallbackInterface.class},
+        ZPINcThProcGUICallbackInterface.class.getClassLoader(),
+        new Class[]{ZPINcThProcGUICallbackInterface.class},
         ncInvHandler);
         return proxyInstGui;
     }

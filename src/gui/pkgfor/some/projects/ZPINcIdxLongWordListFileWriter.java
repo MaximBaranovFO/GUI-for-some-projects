@@ -29,28 +29,28 @@ public class ZPINcIdxLongWordListFileWriter {
      * Directory List Word Long
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordListManager#getOrCreateLongWordID(ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordListManager#getOrCreateLongWordID(ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
      * </ul>
      * @param ncDataToDirListFile
      * @param dataForWrite
      * @param recID
      * @return 
      */    
-    protected static int ncWriteData(TreeMap<Long, NcDcIdxLongWordListToFile> ncDataToDirListFile, NcDcIdxLongWordListToFile dataForWrite, long recID){
+    protected static int ncWriteData(TreeMap<Long, ZPINcDcIdxLongWordListToFile> ncDataToDirListFile, ZPINcDcIdxLongWordListToFile dataForWrite, long recID){
         if( ncDataToDirListFile == null ){
             return -1;
         }
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
-                new FileOutputStream(NcIdxFileManager.getFileNameToRecord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWordList()) + "/wl-"
+                new FileOutputStream(ZPINcIdxFileManager.getFileNameToRecord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWordList()) + "/wl-"
                         + dataForWrite.name.substring(0, 4),recID))))
         {
             oos.writeObject(ncDataToDirListFile);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxLongWordListFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxLongWordListFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return ncDataToDirListFile.size();

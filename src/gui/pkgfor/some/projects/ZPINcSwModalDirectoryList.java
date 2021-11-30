@@ -37,7 +37,7 @@ public class ZPINcSwModalDirectoryList {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMenuItems#getDirListViewer(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMenuItems#getDirListViewer(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @return 
@@ -135,7 +135,7 @@ public class ZPINcSwModalDirectoryList {
     }
     
     private static String[][] getDataFromDirListFile(int lengthCol){
-        CopyOnWriteArrayList<Path> filesFromDirListStorage = NcIdxNioDirListManager.getFilesFromDirListStorage();
+        CopyOnWriteArrayList<Path> filesFromDirListStorage = ZPINcIdxNioDirListManager.getFilesFromDirListStorage();
         
         Object[] toArray = filesFromDirListStorage.toArray();
         String[][] toRetStr = new String[toArray.length][lengthCol];
@@ -155,16 +155,16 @@ public class ZPINcSwModalDirectoryList {
     private static JTable getStorageWordArrStr(){
         String[] columnName = {"Key", "Word", "Hex", "Count", "ID"};
         
-        TreeMap<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecords = 
-                NcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLABC");
-        TreeMap<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecords1 = 
-                NcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLNUM");
-        TreeMap<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecords2 = 
-                NcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLRABC");
-        TreeMap<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecords3 = 
-                NcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLSPACE");
-        TreeMap<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecords4 = 
-                NcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLSYM");
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecords = 
+                ZPINcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLABC");
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecords1 = 
+                ZPINcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLNUM");
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecords2 = 
+                ZPINcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLRABC");
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecords3 = 
+                ZPINcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLSPACE");
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecords4 = 
+                ZPINcIdxStorageWordManager.getFromStorageWordAllRecords("NCLVLSYM");
         
         int toRetSize = fromStorageWordAllRecords.size();
         toRetSize = toRetSize + fromStorageWordAllRecords.size();
@@ -176,7 +176,7 @@ public class ZPINcSwModalDirectoryList {
         String[][] toRetStr = new String[toRetSize][5];
         
         int idx = 0;
-        for (Map.Entry<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
+        for (Map.Entry<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
                 fromStorageWordAllRecords.entrySet()) {
             toRetStr[idx][0] = fromStorageWordAllRecord.getKey().toString();
             toRetStr[idx][1] = fromStorageWordAllRecord.getValue().word;
@@ -187,7 +187,7 @@ public class ZPINcSwModalDirectoryList {
         }
         
         idx = 0;
-        for (Map.Entry<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
+        for (Map.Entry<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
                 fromStorageWordAllRecords1.entrySet()) {
             toRetStr[idx][0] = fromStorageWordAllRecord.getKey().toString();
             toRetStr[idx][1] = fromStorageWordAllRecord.getValue().word;
@@ -198,7 +198,7 @@ public class ZPINcSwModalDirectoryList {
         }
         
         idx = 0;
-        for (Map.Entry<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
+        for (Map.Entry<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
                 fromStorageWordAllRecords2.entrySet()) {
             toRetStr[idx][0] = fromStorageWordAllRecord.getKey().toString();
             toRetStr[idx][1] = fromStorageWordAllRecord.getValue().word;
@@ -209,7 +209,7 @@ public class ZPINcSwModalDirectoryList {
         }
         
         idx = 0;
-        for (Map.Entry<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
+        for (Map.Entry<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
                 fromStorageWordAllRecords3.entrySet()) {
             toRetStr[idx][0] = fromStorageWordAllRecord.getKey().toString();
             toRetStr[idx][1] = fromStorageWordAllRecord.getValue().word;
@@ -220,7 +220,7 @@ public class ZPINcSwModalDirectoryList {
         }
         
         idx = 0;
-        for (Map.Entry<Long, NcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
+        for (Map.Entry<Long, ZPINcDcIdxStorageWordToFile> fromStorageWordAllRecord : 
                 fromStorageWordAllRecords4.entrySet()) {
             toRetStr[idx][0] = fromStorageWordAllRecord.getKey().toString();
             toRetStr[idx][1] = fromStorageWordAllRecord.getValue().word;

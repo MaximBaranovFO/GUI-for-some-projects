@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class ZPINcThExInfo {
     private ThreadLocal<Long> sleepTime;
     private ThreadLocal<Path> dirForScan;
-    private ThreadLocal<BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>>> pipeDirWalker;
+    private ThreadLocal<BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>>> pipeDirWalker;
     private boolean fairQueue;
     private int lengthQueue;
 
@@ -46,18 +46,18 @@ public class ZPINcThExInfo {
         }
     }
     
-    protected ConcurrentSkipListMap<UUID, NcDataListAttr> takeFromPipe() throws InterruptedException{
+    protected ConcurrentSkipListMap<UUID, ZPINcDataListAttr> takeFromPipe() throws InterruptedException{
         try {
             return pipeDirWalker.get().take();
         } catch (InterruptedException ex) {
-            NcAppHelper.logException(NcThExInfo.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThExInfo.class.getCanonicalName(), ex);
 
-            String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+            String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
             throw new  InterruptedException(
                 strThreadInfo
-                + NcStrLogMsgField.MSG_INFO.getStr()
+                + ZPINcStrLogMsgField.MSG_INFO.getStr()
                 + "Thread interrupted, reason "
-                + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                 + ex.getMessage());
         }
     }
@@ -66,15 +66,15 @@ public class ZPINcThExInfo {
         return pipeDirWalker.get().size();
     }
     
-    protected void setPipeDirWalker(BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> inPipe){
+    protected void setPipeDirWalker(BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> inPipe){
         pipeDirWalker.set(inPipe);
     }
     
-    protected void putToPipeDirWalker(ConcurrentSkipListMap<UUID, NcDataListAttr> puInPipe){
+    protected void putToPipeDirWalker(ConcurrentSkipListMap<UUID, ZPINcDataListAttr> puInPipe){
         pipeDirWalker.get().add(puInPipe);
     }
     
-    protected BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getPipeDirWalker(){
+    protected BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getPipeDirWalker(){
         return pipeDirWalker.get();
     }
     

@@ -29,28 +29,28 @@ public class ZPINcIdxLongWordFileReader {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#putLongWordInFile(java.util.TreeMap, ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#getLongWordFromFile(java.util.TreeMap, ru.newcontrol.ncfv.NcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#putLongWordInFile(java.util.TreeMap, ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#getLongWordFromFile(java.util.TreeMap, ru.newcontrol.ncfv.ZPINcDcIdxLongWordListToFile) }
      * </ul>
      * @param readedWord
      * @param rID
      * @return 
      */    
-    protected static TreeMap<Long, NcDcIdxWordToFile> ncReadFromLongWordFile(String readedWord, long rID){
-        TreeMap<Long, NcDcIdxWordToFile> ncDataFromWordFile;
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> ncReadFromLongWordFile(String readedWord, long rID){
+        TreeMap<Long, ZPINcDcIdxWordToFile> ncDataFromWordFile;
         String strCfgPath =  readedWord;
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
-            return new TreeMap<Long, NcDcIdxWordToFile>();
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+            return new TreeMap<Long, ZPINcDcIdxWordToFile>();
         };
         
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromWordFile = (TreeMap<Long, NcDcIdxWordToFile>)ois.readObject();
+            ncDataFromWordFile = (TreeMap<Long, ZPINcDcIdxWordToFile>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxLongWordFileReader.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDcIdxWordToFile>();
+            ZPINcAppHelper.logException(
+                    ZPINcIdxLongWordFileReader.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDcIdxWordToFile>();
         } 
         return ncDataFromWordFile;
     }

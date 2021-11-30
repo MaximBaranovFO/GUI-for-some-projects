@@ -30,13 +30,13 @@ public class ZPINcIdxStorageWordFileWriter {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param inFuncWrite
      * @param updatedRecords
      * @return
      */
-    protected static int ncUpdateData(File inFuncWrite, TreeMap<Long, NcDcIdxStorageWordToFile> updatedRecords){
+    protected static int ncUpdateData(File inFuncWrite, TreeMap<Long, ZPINcDcIdxStorageWordToFile> updatedRecords){
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
                 new FileOutputStream(inFuncWrite)))
@@ -44,8 +44,8 @@ public class ZPINcIdxStorageWordFileWriter {
             oos.writeObject(updatedRecords);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxStorageWordFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxStorageWordFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return updatedRecords.size();

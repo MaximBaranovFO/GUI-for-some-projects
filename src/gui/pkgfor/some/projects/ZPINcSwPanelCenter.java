@@ -33,22 +33,22 @@ public class ZPINcSwPanelCenter {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * @return
      */
-    protected static JPanel getPanel(NcSwGUIComponentStatus lComp){
+    protected static JPanel getPanel(ZPINcSwGUIComponentStatus lComp){
         JPanel centerPanel = new JPanel();
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenter();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenter();
         lComp.putComponents(componentPath, centerPanel);
         Border centerBorder = BorderFactory.createTitledBorder("CENTER panel");
         centerPanel.setBorder(centerBorder);
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        TableModel ncTableModel = new NcSIMASearchResultTableModel(new ArrayList<String>(), new ArrayList<String>());
+        TableModel ncTableModel = new ZPINcSIMASearchResultTableModel(new ArrayList<String>(), new ArrayList<String>());
         
         JTable ncTable = new JTable(ncTableModel);
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelCenterTable();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelCenterTable();
         lComp.putComponents(componentPath, ncTable);
         
         
@@ -60,7 +60,7 @@ public class ZPINcSwPanelCenter {
         ncScrollTable.revalidate();
         
         
-        NcLogLogicGUI.NcSwPanelCenterGetPanel();
+        ZPINcLogLogicGUI.NcSwPanelCenterGetPanel();
         return centerPanel;
     }
     

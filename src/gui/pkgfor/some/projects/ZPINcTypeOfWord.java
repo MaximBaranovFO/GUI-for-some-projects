@@ -81,10 +81,10 @@ public enum ZPINcTypeOfWord {
      */
     protected TreeMap<Long, File> getStorageWordExistFileName(String wordInHex, String word){
         
-        TreeMap<Integer, File> listDirs = NcIdxFileManager.getIndexWorkSubDirFilesList();
-        String strPathSubDir = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
+        TreeMap<Integer, File> listDirs = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
+        String strPathSubDir = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
         File filePathSubDir = new File(strPathSubDir);
-        boolean boolCheck = NcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
+        boolean boolCheck = ZPINcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
         if( !boolCheck ){
             if( !filePathSubDir.mkdirs() ){
                 return new TreeMap<Long, File>();
@@ -94,8 +94,8 @@ public enum ZPINcTypeOfWord {
         File fileWithRecords;
         TreeMap<Long, File> listFiles = new TreeMap<Long, File>();
         do{
-            String fileName = NcIdxFileManager.getFileNameToRecord("/d-" + word.length() + "-" + wordInHex.substring(0, 4), recordID);
-            String strPathFile = NcIdxFileManager.strPathCombiner(strPathSubDir, fileName);
+            String fileName = ZPINcIdxFileManager.getFileNameToRecord("/d-" + word.length() + "-" + wordInHex.substring(0, 4), recordID);
+            String strPathFile = ZPINcIdxFileManager.strPathCombiner(strPathSubDir, fileName);
             fileWithRecords = new File(strPathFile);
             if( fileWithRecords.exists() ){
                 listFiles.put(recordID, fileWithRecords);
@@ -107,10 +107,10 @@ public enum ZPINcTypeOfWord {
     }
     protected TreeMap<Long, File> getStorageWordAllExistFileName(){
         
-        TreeMap<Integer, File> listDirs = NcIdxFileManager.getIndexWorkSubDirFilesList();
-        String strPathSubDir = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
+        TreeMap<Integer, File> listDirs = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
+        String strPathSubDir = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
         File filePathSubDir = new File(strPathSubDir);
-        boolean boolCheck = NcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
+        boolean boolCheck = ZPINcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
         if( !boolCheck ){
             if( !filePathSubDir.mkdirs() ){
                 return new TreeMap<Long, File>();
@@ -140,17 +140,17 @@ public enum ZPINcTypeOfWord {
      * @return 
      */
     protected String getStorageWordByIdFileName(String wordInHex, String word, long recordId){
-        TreeMap<Integer, File> listDirs = NcIdxFileManager.getIndexWorkSubDirFilesList();
-        String strPathSubDir = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
+        TreeMap<Integer, File> listDirs = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
+        String strPathSubDir = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(listDirs.get("/sw".hashCode())), getName());
         File filePathSubDir = new File(strPathSubDir);
-        boolean boolCheck = NcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
+        boolean boolCheck = ZPINcIdxFileManager.dirExistRWAccessChecker(filePathSubDir);
         if( !boolCheck ){
             if( !filePathSubDir.mkdirs() ){
                 return "";
             }
         }
-        String fileName = NcIdxFileManager.getFileNameToRecord("/d-" + word.length() + "-" + wordInHex.substring(0, 4), recordId);
-        String strPathFile = NcIdxFileManager.strPathCombiner(strPathSubDir, fileName);
+        String fileName = ZPINcIdxFileManager.getFileNameToRecord("/d-" + word.length() + "-" + wordInHex.substring(0, 4), recordId);
+        String strPathFile = ZPINcIdxFileManager.strPathCombiner(strPathSubDir, fileName);
         return strPathFile;
     }
 

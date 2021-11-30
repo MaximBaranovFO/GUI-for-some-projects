@@ -24,12 +24,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author wladimirowichbiaran
  */
 public class ZPINcSwGUITreeShowStack {
-    protected static JTree getTreeShowStack(NcSwGUIComponentStatus lComp){
+    protected static JTree getTreeShowStack(ZPINcSwGUIComponentStatus lComp){
         DefaultMutableTreeNode treeTop = 
                 new DefaultMutableTreeNode("Stack contained:");
         JTree treeNodes = new JTree(treeTop);
         String pathComponent = 
-                NcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPaneTreeShowStack();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelLineEndTabbedPaneStackScrollPaneTreeShowStack();
         lComp.putComponents(pathComponent, treeNodes);
         return treeNodes;
     }

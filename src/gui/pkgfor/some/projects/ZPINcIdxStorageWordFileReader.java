@@ -30,26 +30,26 @@ public class ZPINcIdxStorageWordFileReader {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param inFuncFile
      * @return
      */
-    protected static TreeMap<Long, NcDcIdxStorageWordToFile> ncReadFileContainedId(File inFuncFile){
-        TreeMap<Long, NcDcIdxStorageWordToFile> ncReadedData;
+    protected static TreeMap<Long, ZPINcDcIdxStorageWordToFile> ncReadFileContainedId(File inFuncFile){
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> ncReadedData;
         
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(inFuncFile)){
-            return new TreeMap<Long, NcDcIdxStorageWordToFile>();
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(inFuncFile)){
+            return new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
         };
         //mcGetWorkCfgDirName() + workFileNames[0];
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(inFuncFile)))
         {
-            ncReadedData = (TreeMap<Long, NcDcIdxStorageWordToFile>)ois.readObject();
+            ncReadedData = (TreeMap<Long, ZPINcDcIdxStorageWordToFile>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxStorageWordFileReader.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDcIdxStorageWordToFile>();
+            ZPINcAppHelper.logException(
+                    ZPINcIdxStorageWordFileReader.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
         } 
         return ncReadedData;
     }

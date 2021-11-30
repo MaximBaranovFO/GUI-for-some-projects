@@ -45,10 +45,10 @@ public class ZPINcSwingIndexManagerApp {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.Ncfv#main(java.lang.String[]) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcfv#main(java.lang.String[]) }
      * </ul>
      */
-    protected static void NcRunSIMA(){
+    protected static void ZPINcRunSIMA(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -68,14 +68,14 @@ public class ZPINcSwingIndexManagerApp {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#NcRunSIMA() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#ZPINcRunSIMA() }
      * </ul>
      */
     private static void createGui(){
-        NcSwGUIComponentStatus listComponents = new NcSwGUIComponentStatus();
+        ZPINcSwGUIComponentStatus listComponents = new ZPINcSwGUIComponentStatus();
         
-        JFrame frame = new JFrame(NcStrGUILabel.TITLE_APP.getStr());
-        String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+        JFrame frame = new JFrame(ZPINcStrGUILabel.TITLE_APP.getStr());
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
         listComponents.putComponents(componentPath, frame);  
             
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,23 +83,23 @@ public class ZPINcSwingIndexManagerApp {
         toLALRcreateGui();
         
         JPanel mainPanel = new JPanel();
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanel();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanel();
         listComponents.putComponents(componentPath, mainPanel);
         
         mainPanel.setLayout(new BorderLayout());
         
-        frame.setJMenuBar(NcSwMainMenu.getMainMenu(listComponents));
+        frame.setJMenuBar(ZPINcSwMainMenu.getMainMenu(listComponents));
         toLALRcreateGuiPanel();
         
-        mainPanel.add(NcSwPanelPageEnd.getPanel(listComponents), BorderLayout.PAGE_END);
-        mainPanel.add(NcSwPanelCenter.getPanel(listComponents), BorderLayout.CENTER);
-        mainPanel.add(NcSwPanelPageStart.getPanel(listComponents), BorderLayout.PAGE_START);
+        mainPanel.add(ZPINcSwPanelPageEnd.getPanel(listComponents), BorderLayout.PAGE_END);
+        mainPanel.add(ZPINcSwPanelCenter.getPanel(listComponents), BorderLayout.CENTER);
+        mainPanel.add(ZPINcSwPanelPageStart.getPanel(listComponents), BorderLayout.PAGE_START);
         
-        mainPanel.add(NcSwPanelLineStart.getPanel(listComponents), BorderLayout.LINE_START);
+        mainPanel.add(ZPINcSwPanelLineStart.getPanel(listComponents), BorderLayout.LINE_START);
         
         
         
-        JPanel panelLineEnd = NcSwPanelLineEnd.getPanel(listComponents);
+        JPanel panelLineEnd = ZPINcSwPanelLineEnd.getPanel(listComponents);
         
         mainPanel.add(panelLineEnd, BorderLayout.LINE_END);
 
@@ -117,55 +117,55 @@ public class ZPINcSwingIndexManagerApp {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      */
     private static void toLALRcreateGui(){
         if( ZPINcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogMsgText.APP_GUI_START.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogMsgText.GUI_CREATE_JPANEL_FOR_MAIN_FRAME.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogMsgText.APP_GUI_START.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogMsgText.GUI_CREATE_JPANEL_FOR_MAIN_FRAME.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      */
     private static void toLALRcreateGuiPanel(){
         if( ZPINcfvRunVariables.isLALRNcSwIdxMngAppCreateGui() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogMsgText.GUI_CREATE_JPANEL_FOR_MAIN_FRAME.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_CENTER.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogMsgText.GUI_CREATE_JPANEL_FOR_MAIN_FRAME.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_CENTER.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      */
     private static void toLALRendOfCreateGUI(){
         if( ZPINcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_SET_VISIBLE_GUI.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_GUI_WAIT_FOR_USER_INPUT.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_SET_VISIBLE_GUI.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_GUI_WAIT_FOR_USER_INPUT.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

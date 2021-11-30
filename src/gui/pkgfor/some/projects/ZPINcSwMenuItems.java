@@ -29,19 +29,19 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * For Development
      * @return 
      */
-    protected static JMenuItem getLogFileReader(NcSwGUIComponentStatus lComp){
+    protected static JMenuItem getLogFileReader(ZPINcSwGUIComponentStatus lComp){
         
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.LOG_VIEW.getStr());
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.LOG_VIEW.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 JDialog modalLogViewer =
-                    NcSwModalLogViewer.getDialogLogViewer(lComp);
+                    ZPINcSwModalLogViewer.getDialogLogViewer(lComp);
                 modalLogViewer.pack();
                 modalLogViewer.setVisible(true);
             }
@@ -51,20 +51,20 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * For Development
      * @return 
      */
-    protected static JMenuItem getEnvironmentViewer(NcSwGUIComponentStatus lComp){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.ENV_VIEW.getStr());
+    protected static JMenuItem getEnvironmentViewer(ZPINcSwGUIComponentStatus lComp){
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.ENV_VIEW.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
                 JFrame mainFrame =
                     (JFrame) lComp.getComponentByPath(componentPath);
-                NcSwModalDevHelper.showModalEnvironment(mainFrame);
+                ZPINcSwModalDevHelper.showModalEnvironment(mainFrame);
             }
         });
         return toRetMi;
@@ -73,20 +73,20 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * For Development
      * @return 
      */
-    protected static JMenuItem getPropertiesViewer(NcSwGUIComponentStatus lComp){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.PROPERTIES_VIEW.getStr());
+    protected static JMenuItem getPropertiesViewer(ZPINcSwGUIComponentStatus lComp){
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.PROPERTIES_VIEW.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
                 JFrame mainFrame =
                     (JFrame) lComp.getComponentByPath(componentPath);
-                NcSwModalDevHelper.showModalProperties(mainFrame);
+                ZPINcSwModalDevHelper.showModalProperties(mainFrame);
             }
         });
         return toRetMi;
@@ -94,21 +94,21 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuService() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuService() }
      * </ul>
      * For Settings
      * @return 
      */
-    protected static JMenuItem getEtcEditor(NcSwGUIComponentStatus lComp){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.SETTINGS.getStr());
+    protected static JMenuItem getEtcEditor(ZPINcSwGUIComponentStatus lComp){
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.SETTINGS.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
                 JFrame mainFrame =
                     (JFrame) lComp.getComponentByPath(componentPath);
-                //NcSwModalDevHelper.showModalProperties(mainFrame);
-                NcSwModalSettingsHelper.showModalProperties(mainFrame);
+                //ZPINcSwModalDevHelper.showModalProperties(mainFrame);
+                ZPINcSwModalSettingsHelper.showModalProperties(mainFrame);
             }
         });
         return toRetMi;
@@ -116,24 +116,24 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuFile() }
      * </ul>
      * For File
      * @return 
      */
     protected static JMenuItem getSubDirChecker(){
-        return new JMenuItem(NcStrGUILabel.CHECK_SUBDIR.getStr());
+        return new JMenuItem(ZPINcStrGUILabel.CHECK_SUBDIR.getStr());
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuFile() }
      * </ul>
      * For File
      * @return 
      */
     protected static JMenuItem getAppExit(){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.APP_EXIT.getStr());
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.APP_EXIT.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -148,7 +148,7 @@ public class ZPINcSwMenuItems {
      * @return 
      */
     private static JMenuItem getDirInEditor(){
-        return new JMenuItem(NcStrGUILabel.DIR_IN_INDEX.getStr());
+        return new JMenuItem(ZPINcStrGUILabel.DIR_IN_INDEX.getStr());
     }
     /**
      * Not used
@@ -156,36 +156,36 @@ public class ZPINcSwMenuItems {
      * @return 
      */
     private static JMenuItem getDirOutEditor(){
-        return new JMenuItem(NcStrGUILabel.DIR_OUT_INDEX.getStr());
+        return new JMenuItem(ZPINcStrGUILabel.DIR_OUT_INDEX.getStr());
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuHelp() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuHelp() }
      * </ul>
      * For Help
      * @return 
      */
     protected static JMenuItem getAbout(){
-        return new JMenuItem(NcStrGUILabel.ABOUT.getStr());
+        return new JMenuItem(ZPINcStrGUILabel.ABOUT.getStr());
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @return 
      */
-    protected static JMenuItem getStorageWordViewer(NcSwGUIComponentStatus lComp){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.STORAGEWORD.getStr());
+    protected static JMenuItem getStorageWordViewer(ZPINcSwGUIComponentStatus lComp){
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.STORAGEWORD.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
                 JFrame mainFrame =
                     (JFrame) lComp.getComponentByPath(componentPath);
-                NcSwModalStorageWord.showModalStorageWord(mainFrame);
+                ZPINcSwModalStorageWord.showModalStorageWord(mainFrame);
             }
         });
         return toRetMi;
@@ -193,20 +193,20 @@ public class ZPINcSwMenuItems {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMainMenu#getMenuDevelop(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @return 
      */
-    protected static JMenuItem getDirListViewer(NcSwGUIComponentStatus lComp){
-        JMenuItem toRetMi = new JMenuItem(NcStrGUILabel.DIRECTORYLIST.getStr());
+    protected static JMenuItem getDirListViewer(ZPINcSwGUIComponentStatus lComp){
+        JMenuItem toRetMi = new JMenuItem(ZPINcStrGUILabel.DIRECTORYLIST.getStr());
         toRetMi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+                String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
                 JFrame mainFrame =
                     (JFrame) lComp.getComponentByPath(componentPath);
-                NcSwModalDirectoryList.showModalDirectoryList(mainFrame);
+                ZPINcSwModalDirectoryList.showModalDirectoryList(mainFrame);
             }
         });
         return toRetMi;

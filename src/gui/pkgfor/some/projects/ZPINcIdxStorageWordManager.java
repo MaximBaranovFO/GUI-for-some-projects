@@ -29,35 +29,35 @@ public class ZPINcIdxStorageWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#getResultMakeIndex(java.io.File) }
-     * <li>{@link ru.newcontrol.ncfv.NcIndexPreProcessFiles#makeIndexForFile(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#getResultMakeIndex(java.io.File) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIndexPreProcessFiles#makeIndexForFile(java.io.File) }
      * </ul>
      * @param typeWords
      * @param WordToStorage
      */
-    protected static void putInStorageWord(String typeWords, TreeMap<Long, NcDcIdxSubStringToOperationUse> WordToStorage){
+    protected static void putInStorageWord(String typeWords, TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> WordToStorage){
         
         TreeMap<Long, File> listFilesInStorage = new TreeMap<Long, File>();
-        TreeMap<Long, NcDcIdxStorageWordToFile> readedData = new TreeMap<Long, NcDcIdxStorageWordToFile>();
-        TreeMap<Long, NcDcIdxStorageWordToFile> foundedData = new TreeMap<Long, NcDcIdxStorageWordToFile>();
-        TreeMap<Long, NcDcIdxStorageWordToFile> readedDataFormLastFile = new TreeMap<Long, NcDcIdxStorageWordToFile>();
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> readedData = new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> foundedData = new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> readedDataFormLastFile = new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
         boolean foundAndUpdated = false;
         boolean appendNewRecord = false;
         long lastRecordId = -1;
         File lastRecordFile = new File("notInitFile");
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> itemWord : WordToStorage.entrySet() ){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> itemWord : WordToStorage.entrySet() ){
             String wordInHex = itemWord.getValue().hexSubString;
             String word = itemWord.getValue().strSubString;
             listFilesInStorage = getStorageWordExistFiles(typeWords, wordInHex, word);
             if( !listFilesInStorage.isEmpty() ){
                 for(Map.Entry<Long, File> itemFile : listFilesInStorage.entrySet() ){
-                    readedData.putAll(NcIdxStorageWordFileReader.ncReadFileContainedId(itemFile.getValue()));
+                    readedData.putAll(ZPINcIdxStorageWordFileReader.ncReadFileContainedId(itemFile.getValue()));
                     foundedData.clear();
                     foundedData.putAll(searchRecordInStorageWord(readedData, wordInHex, word));
                     if( !foundedData.isEmpty() ){
                         foundedData.firstEntry().getValue().wordCount = foundedData.firstEntry().getValue().wordCount + 1;
                         readedData.put(foundedData.firstEntry().getKey(), foundedData.firstEntry().getValue());
-                        int countOfWrited = NcIdxStorageWordFileWriter.ncUpdateData(itemFile.getValue(), readedData);
+                        int countOfWrited = ZPINcIdxStorageWordFileWriter.ncUpdateData(itemFile.getValue(), readedData);
                         foundAndUpdated = countOfWrited == readedData.size();
                     }
                     if( !readedData.isEmpty() ){
@@ -71,11 +71,11 @@ public class ZPINcIdxStorageWordManager {
                 if( !foundAndUpdated ){
                     long forNewRecordId = lastRecordId + 1;
                     String strFileNameForRecord = getStorageWordByIdFile(typeWords, wordInHex, word, forNewRecordId);
-                    if( NcIdxFileManager.getStrCanPathFromFile(lastRecordFile).equalsIgnoreCase(strFileNameForRecord) ){
+                    if( ZPINcIdxFileManager.getStrCanPathFromFile(lastRecordFile).equalsIgnoreCase(strFileNameForRecord) ){
                         long nextWordId = readedDataFormLastFile.lastEntry().getValue().wordId++;
-                        NcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
+                        ZPINcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
                         readedDataFormLastFile.put(forNewRecordId, toRecordData);
-                        int countOfWrited = NcIdxStorageWordFileWriter.ncUpdateData(lastRecordFile, readedDataFormLastFile);
+                        int countOfWrited = ZPINcIdxStorageWordFileWriter.ncUpdateData(lastRecordFile, readedDataFormLastFile);
                         appendNewRecord = countOfWrited == readedDataFormLastFile.size();
                     }
                     else{
@@ -83,12 +83,12 @@ public class ZPINcIdxStorageWordManager {
                         if( !readedDataFormLastFile.isEmpty() ){
                             nextWordId = readedDataFormLastFile.lastEntry().getValue().wordId++;
                         }
-                        NcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
+                        ZPINcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
                         forNewRecordId = 0;
                         readedData.clear();
                         readedData.put(forNewRecordId, toRecordData);
                         File forRecord = new File(strFileNameForRecord);
-                        int countOfWrited = NcIdxStorageWordFileWriter.ncUpdateData(forRecord, readedData);
+                        int countOfWrited = ZPINcIdxStorageWordFileWriter.ncUpdateData(forRecord, readedData);
                         appendNewRecord = countOfWrited == readedDataFormLastFile.size();
                     }
                 }
@@ -101,23 +101,23 @@ public class ZPINcIdxStorageWordManager {
                     lastRecordFile = new File(strFileNameForRecord);
                     readedDataFormLastFile.clear();
                     long nextWordId = 0;
-                    NcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
+                    ZPINcDcIdxStorageWordToFile toRecordData = convertFormOperationToFileData(itemWord.getValue(), nextWordId);
                     readedDataFormLastFile.put(forNewRecordId, toRecordData);
-                    int countOfWrited = NcIdxStorageWordFileWriter.ncUpdateData(lastRecordFile, readedDataFormLastFile);
+                    int countOfWrited = ZPINcIdxStorageWordFileWriter.ncUpdateData(lastRecordFile, readedDataFormLastFile);
                     appendNewRecord = countOfWrited == readedDataFormLastFile.size();
                 }    
             }
             listFilesInStorage.clear();
         }        
     }
-    protected static TreeMap<Long, NcDcIdxStorageWordToFile> getFromStorageWordAllRecords(String typeWords){
+    protected static TreeMap<Long, ZPINcDcIdxStorageWordToFile> getFromStorageWordAllRecords(String typeWords){
         TreeMap<Long, File> listFilesInStorage = new TreeMap<Long, File>();
-        TreeMap<Long, NcDcIdxStorageWordToFile> readedData = new TreeMap<Long, NcDcIdxStorageWordToFile>();
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> readedData = new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
         
         listFilesInStorage = getStorageWordAllExistFiles(typeWords);
         if( !listFilesInStorage.isEmpty() ){
             for(Map.Entry<Long, File> itemFile : listFilesInStorage.entrySet() ){
-                readedData.putAll(NcIdxStorageWordFileReader.ncReadFileContainedId(itemFile.getValue()));
+                readedData.putAll(ZPINcIdxStorageWordFileReader.ncReadFileContainedId(itemFile.getValue()));
             }
         }
         listFilesInStorage.clear();
@@ -127,16 +127,16 @@ public class ZPINcIdxStorageWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param inFuncReadedData
      * @param wordInHex
      * @param word
      * @return
      */
-    private static TreeMap<Long, NcDcIdxStorageWordToFile> searchRecordInStorageWord(TreeMap<Long, NcDcIdxStorageWordToFile> inFuncReadedData, String wordInHex, String word){
-        TreeMap<Long, NcDcIdxStorageWordToFile> toReturnFoundedData = new TreeMap<Long, NcDcIdxStorageWordToFile>();
-        for(Map.Entry<Long, NcDcIdxStorageWordToFile> itemReadedData : inFuncReadedData.entrySet() ){
+    private static TreeMap<Long, ZPINcDcIdxStorageWordToFile> searchRecordInStorageWord(TreeMap<Long, ZPINcDcIdxStorageWordToFile> inFuncReadedData, String wordInHex, String word){
+        TreeMap<Long, ZPINcDcIdxStorageWordToFile> toReturnFoundedData = new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
+        for(Map.Entry<Long, ZPINcDcIdxStorageWordToFile> itemReadedData : inFuncReadedData.entrySet() ){
                 boolean compareWordResult = word.hashCode() == itemReadedData.getValue().wordHash;
                 boolean compareWordInHexResult = wordInHex.hashCode() == itemReadedData.getValue().wordInHexHash;
                 if( compareWordResult && compareWordInHexResult ){
@@ -144,13 +144,13 @@ public class ZPINcIdxStorageWordManager {
                     return toReturnFoundedData;
                 }
             }
-        return new TreeMap<Long, NcDcIdxStorageWordToFile>();
+        return new TreeMap<Long, ZPINcDcIdxStorageWordToFile>();
     }
 
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param typeWords
      * @param inFuncWordInHex
@@ -191,7 +191,7 @@ public class ZPINcIdxStorageWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param typeWords
      * @param inFuncWordInHex
@@ -218,16 +218,16 @@ public class ZPINcIdxStorageWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#putInStorageWord(java.lang.String, java.util.TreeMap) }
      * </ul>
      * @param inFuncData
      * @param inFuncNextWordId
      * @return
      */
-    private static NcDcIdxStorageWordToFile convertFormOperationToFileData(NcDcIdxSubStringToOperationUse inFuncData, long inFuncNextWordId){
-        NcDcIdxStorageWordToFile toReturn = new NcDcIdxStorageWordToFile(
+    private static ZPINcDcIdxStorageWordToFile convertFormOperationToFileData(ZPINcDcIdxSubStringToOperationUse inFuncData, long inFuncNextWordId){
+        ZPINcDcIdxStorageWordToFile toReturn = new ZPINcDcIdxStorageWordToFile(
                 inFuncNextWordId,
-                NcIdxLongWordManager.isLongWord(inFuncData.strSubString),
+                ZPINcIdxLongWordManager.isLongWord(inFuncData.strSubString),
                 inFuncData.hexSubString,
                 inFuncData.strSubString,
                 1

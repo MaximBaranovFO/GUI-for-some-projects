@@ -34,38 +34,38 @@ public class ZPINcSwPanelPageStart {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwingIndexManagerApp#createGui() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#createGui() }
      * </ul>
      * @return
      */
-    protected static JPanel getPanel(NcSwGUIComponentStatus lComp){
+    protected static JPanel getPanel(ZPINcSwGUIComponentStatus lComp){
         JPanel northPanel = new JPanel();
-        String componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStart();
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStart();
         lComp.putComponents(componentPath, northPanel);
         Border northBorder = BorderFactory.createTitledBorder(
-                NcStrGUILabel.PARAMETERS_FOR_SEARCH.getStr());
+                ZPINcStrGUILabel.PARAMETERS_FOR_SEARCH.getStr());
         northPanel.setBorder(northBorder);
         northPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         
         JTextField addNorthWordSearch = new JTextField();
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStartTextFieldSearch();
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStartTextFieldSearch();
         lComp.putComponents(componentPath, addNorthWordSearch);
         
         addNorthWordSearch.setPreferredSize(new Dimension(300, 20));
         
         northPanel.add(addNorthWordSearch);
-        JButton btnSearch = NcSwGUIComponent.createButton("Search",null,"");
-        componentPath = NcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
+        JButton btnSearch = ZPINcSwGUIComponent.createButton("Search",null,"");
+        componentPath = ZPINcSwGUIComponentRouter.pathMainFramePanelPageStartButtonSearch();
         lComp.putComponents(componentPath, btnSearch);
         
         btnSearch.addActionListener(new ActionListener(){
             public void  actionPerformed(ActionEvent e){
-                //NcSwStatusPanel.indicationStartProgressBar(lComp);
+                //ZPINcSwStatusPanel.indicationStartProgressBar(lComp);
                 String strSearch = addNorthWordSearch.getText();
-                //NcSwThreadManager.setToViewSearchedResult(lComp, strSearch);
+                //ZPINcSwThreadManager.setToViewSearchedResult(lComp, strSearch);
                 ZPINcThWorkerUpGUIKeyWordSearch.searchKeyWordGetResult(lComp);
                 
-                //NcSwStatusPanel.indicationStopProgressBar(lComp);
+                //ZPINcSwStatusPanel.indicationStopProgressBar(lComp);
             }
         });
         
@@ -76,19 +76,19 @@ public class ZPINcSwPanelPageStart {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwPanelPageStart#getPanel(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * LogAppLogicRecord (LALR) - toLALR(class MethodName)
      * make record in log file
      */
     private static void toLALRgetPanel(){
         if( ZPINcfvRunVariables.isLALRNcSwPanelPageStartgetPanel() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_PAGESTART.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_PAGEEND.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_PAGESTART.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_PAGEEND.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

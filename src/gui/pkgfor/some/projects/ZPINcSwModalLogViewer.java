@@ -41,16 +41,16 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwMenuItems#getLogFileReader(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwMenuItems#getLogFileReader(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param lComp
      * @return 
      */
-    protected static JDialog getDialogLogViewer(NcSwGUIComponentStatus lComp){
-        String componentPath = NcSwGUIComponentRouter.pathMainFrame();
+    protected static JDialog getDialogLogViewer(ZPINcSwGUIComponentStatus lComp){
+        String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
         JFrame mainFrame = (JFrame) lComp.getComponentByPath(componentPath);
         
-        NcSwGUIComponentStatus compIndex = new NcSwGUIComponentStatus();
+        ZPINcSwGUIComponentStatus compIndex = new ZPINcSwGUIComponentStatus();
         compIndex.putComponents("JFrame-mainFrame", mainFrame);
         JDialog modalWindow = new JDialog(mainFrame, modalTitle, true);
         compIndex.putComponents("JDialog-modalWindow", modalWindow);
@@ -71,12 +71,12 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param compLocalIndex
      * @return 
      */
-    private static JPanel getPanelCenter(NcSwGUIComponentStatus compLocalIndex){
+    private static JPanel getPanelCenter(ZPINcSwGUIComponentStatus compLocalIndex){
         JPanel modalPanelInFunc = new JPanel();
         compLocalIndex.putComponents("JPanel-PanelCenter", modalPanelInFunc);
         JScrollPane treeScroll = getScrolledTree(compLocalIndex);
@@ -86,13 +86,13 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getPanelCenter(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getButtonUpdate(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getPanelCenter(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getButtonUpdate(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param compLocalIndex
      * @return 
      */
-    private static JScrollPane getScrolledTree(NcSwGUIComponentStatus compLocalIndex){
+    private static JScrollPane getScrolledTree(ZPINcSwGUIComponentStatus compLocalIndex){
         DefaultMutableTreeNode treeTop = 
                 new DefaultMutableTreeNode("Log file contained:");
         JTree treeNodes = getTreeNodes(treeTop);
@@ -104,26 +104,26 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getScrolledTree(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getScrolledTree(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param forTreeTop
      * @return 
      */
     private static JTree getTreeNodes(DefaultMutableTreeNode forTreeTop){
         TreeMap<Long, String> strLogReaded = new TreeMap<Long, String>();
-        File logFile = NcLogFileManager.getLogFile();
+        File logFile = ZPINcLogFileManager.getLogFile();
         String strLogFile = logFile.getName();
         try {
             strLogFile = logFile.getCanonicalPath();
         } catch (IOException ex) {
             
-            String strMsgText = NcStrLogMsgField.CLASSNAME.getStr()
-                + NcSwModalLogViewer.class.getName()
-                + NcStrLogMsgField.MSG.getStr()
+            String strMsgText = ZPINcStrLogMsgField.CLASSNAME.getStr()
+                + ZPINcSwModalLogViewer.class.getName()
+                + ZPINcStrLogMsgField.MSG.getStr()
                 + ex.getMessage();
-            NcAppHelper.outMessage(strMsgText);
+            ZPINcAppHelper.outMessage(strMsgText);
         }
-        strLogReaded.putAll(NcLogFileManager.readFromLog());
+        strLogReaded.putAll(ZPINcLogFileManager.readFromLog());
         DefaultMutableTreeNode strReadedTime = null;
         DefaultMutableTreeNode strReadedState = null;
         DefaultMutableTreeNode strReadedElement = null;
@@ -136,8 +136,8 @@ public class ZPINcSwModalLogViewer {
         
 
         for( Map.Entry<Long, String> strItem : strLogReaded.entrySet() ){
-            if( strItem.getValue().contains(NcStrLogMsgField.TIME.getStr()) ){
-                String strForOut = NcLogColorizer.getHtmlStr(strItem.getValue());
+            if( strItem.getValue().contains(ZPINcStrLogMsgField.TIME.getStr()) ){
+                String strForOut = ZPINcLogColorizer.getHtmlStr(strItem.getValue());
                 strReadedTime = getNN(strForOut);
                 if( strReadedParent == null ){
                             forTreeTop.add(strReadedElement);
@@ -146,7 +146,7 @@ public class ZPINcSwModalLogViewer {
                 strReadedParent.add(strReadedTime);
                 continue;
             }
-            if( strItem.getValue().contains(NcStrLogMsgField.STATE.getStr()) ){
+            if( strItem.getValue().contains(ZPINcStrLogMsgField.STATE.getStr()) ){
                 strReadedState = getNN(strItem.getValue());
                 if( strReadedTime == null ){
                         if( strReadedParent == null ){
@@ -159,7 +159,7 @@ public class ZPINcSwModalLogViewer {
                 strReadedTime.add(strReadedState);
                 continue;
             }
-            if( strItem.getValue().contains(NcStrLogMsgField.ELEMENTNUM.getStr()) ){
+            if( strItem.getValue().contains(ZPINcStrLogMsgField.ELEMENTNUM.getStr()) ){
                 strReadedElement = getNN(strItem.getValue());
                 if( strReadedState == null ){
                     if( strReadedTime == null ){
@@ -190,7 +190,7 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getTreeNodes(javax.swing.tree.DefaultMutableTreeNode) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getTreeNodes(javax.swing.tree.DefaultMutableTreeNode) }
      * </ul>
      * @param strNodeName
      * @return 
@@ -202,12 +202,12 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param compLocalIndex
      * @return 
      */
-    private static JPanel getPanelPageStart(NcSwGUIComponentStatus compLocalIndex){
+    private static JPanel getPanelPageStart(ZPINcSwGUIComponentStatus compLocalIndex){
         JPanel modalPanelInFunc = new JPanel();
         JTextField textSearch = new JTextField();
         textSearch.setColumns(25);
@@ -221,7 +221,7 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getDialogLogViewer(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param modalWindowInFunc
      * @return 
@@ -235,7 +235,7 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getPanelPageEnd(javax.swing.JDialog) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getPanelPageEnd(javax.swing.JDialog) }
      * </ul>
      * @param modalWindowForButton
      * @return 
@@ -252,7 +252,7 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getPanelPageStart(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getPanelPageStart(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @return 
      */
@@ -268,12 +268,12 @@ public class ZPINcSwModalLogViewer {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSwModalLogViewer#getPanelPageStart(ru.newcontrol.ncfv.NcSwGUIComponentStatus) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSwModalLogViewer#getPanelPageStart(ru.newcontrol.ncfv.ZPINcSwGUIComponentStatus) }
      * </ul>
      * @param compLocalIndex
      * @return 
      */
-    private static JButton getButtonUpdate(NcSwGUIComponentStatus compLocalIndex){
+    private static JButton getButtonUpdate(ZPINcSwGUIComponentStatus compLocalIndex){
         JButton buttonSearch = new JButton("Update");
         buttonSearch.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){

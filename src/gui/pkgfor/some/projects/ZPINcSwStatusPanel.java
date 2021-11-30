@@ -27,10 +27,10 @@ public class ZPINcSwStatusPanel {
      * @param lComp
      * @return 
      */
-    protected static JProgressBar addProgressBar(NcSwGUIComponentStatus lComp){
+    protected static JProgressBar addProgressBar(ZPINcSwGUIComponentStatus lComp){
         String componentPath = 
-                NcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
-        JProgressBar progressBar = NcSwGUIComponent.getProgressBar();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
+        JProgressBar progressBar = ZPINcSwGUIComponent.getProgressBar();
         lComp.putComponents(componentPath,
             progressBar);
         return progressBar;
@@ -39,9 +39,9 @@ public class ZPINcSwStatusPanel {
      * 
      * @param lComp 
      */
-    protected static void indicationStartProgressBar(NcSwGUIComponentStatus lComp){
+    protected static void indicationStartProgressBar(ZPINcSwGUIComponentStatus lComp){
         String componentPath = 
-                NcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
         JProgressBar progressBar = (JProgressBar) lComp.getComponentByPath(componentPath);
         progressBar.setIndeterminate(true);
     }
@@ -49,9 +49,9 @@ public class ZPINcSwStatusPanel {
      * 
      * @param lComp 
      */
-    protected static void indicationStopProgressBar(NcSwGUIComponentStatus lComp){
+    protected static void indicationStopProgressBar(ZPINcSwGUIComponentStatus lComp){
         String componentPath = 
-                NcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
+                ZPINcSwGUIComponentRouter.pathMainFramePanelPageEndProgressBar();
         JProgressBar progressBar = 
                 (JProgressBar) lComp.getComponentByPath(componentPath);
         progressBar.setIndeterminate(false);

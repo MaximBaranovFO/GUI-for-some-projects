@@ -30,101 +30,101 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * @author wladimirowichbiaran
  */
 public class ZPINcThExDirTreeWalk<V> 
-        implements Callable<BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>>> {
+        implements Callable<BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>>> {
     private static String typeThread;
     private boolean FAIR_QUEUE;
     private boolean boolDone;
     private int LENGTH_QUEUE;
     private Path pathToStart;
-    private NcFsIdxFileVisitor fileVisitor;
-    private BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeDirList;
+    private ZPINcFsIdxFileVisitor fileVisitor;
+    private BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeDirList;
     
     public ZPINcThExDirTreeWalk(Path forReadList) throws IOException {
         Thread.currentThread().checkAccess();
         this.typeThread = "[TREEWALKER]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.boolDone = Boolean.FALSE;
         this.FAIR_QUEUE = Boolean.TRUE;
         this.LENGTH_QUEUE = 1000;
         Path pathToStart = Paths.get(forReadList.toString());
         try{
-            pathToStart = NcFsIdxOperationDirs.checkScanPath(pathToStart);
+            pathToStart = ZPINcFsIdxOperationDirs.checkScanPath(pathToStart);
         } catch (IOException ex) {
-            String strAddMsg = NcStrLogMsgField.MSG_ERROR.getStr()
+            String strAddMsg = ZPINcStrLogMsgField.MSG_ERROR.getStr()
                     + " wrong path for scan "
                     + forReadList.toString();
-            NcAppHelper.outMessage(strAddMsg);
-            NcAppHelper.logException(NcThExDirTreeWalk.class.getCanonicalName(), ex);
+            ZPINcAppHelper.outMessage(strAddMsg);
+            ZPINcAppHelper.logException(ZPINcThExDirTreeWalk.class.getCanonicalName(), ex);
             throw new IOException(strAddMsg, ex);
         }
         this.pipeDirList = new ArrayBlockingQueue(this.LENGTH_QUEUE, this.FAIR_QUEUE);
-        this.fileVisitor = new NcFsIdxFileVisitor(this.pipeDirList);
+        this.fileVisitor = new ZPINcFsIdxFileVisitor(this.pipeDirList);
         this.pathToStart = pathToStart;
     }
     
     public ZPINcThExDirTreeWalk(Path forReadList, int lengthQueue) throws IOException {
         Thread.currentThread().checkAccess();
         this.typeThread = "[TREEWALKER]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.LENGTH_QUEUE = lengthQueue;
         Path pathToStart = Paths.get(forReadList.toString());
         try{
-            pathToStart = NcFsIdxOperationDirs.checkScanPath(pathToStart);
+            pathToStart = ZPINcFsIdxOperationDirs.checkScanPath(pathToStart);
         } catch (IOException ex) {
-            String strAddMsg = NcStrLogMsgField.MSG_ERROR.getStr()
+            String strAddMsg = ZPINcStrLogMsgField.MSG_ERROR.getStr()
                     + " wrong path for scan "
                     + forReadList.toString();
-            NcAppHelper.outMessage(strAddMsg);
-            NcAppHelper.logException(NcThExDirTreeWalk.class.getCanonicalName(), ex);
+            ZPINcAppHelper.outMessage(strAddMsg);
+            ZPINcAppHelper.logException(ZPINcThExDirTreeWalk.class.getCanonicalName(), ex);
             throw new IOException(strAddMsg, ex);
         }
         this.pipeDirList = new ArrayBlockingQueue(this.LENGTH_QUEUE, this.FAIR_QUEUE);
-        this.fileVisitor = new NcFsIdxFileVisitor(this.pipeDirList);
+        this.fileVisitor = new ZPINcFsIdxFileVisitor(this.pipeDirList);
         this.pathToStart = pathToStart;
     }
     
     public ZPINcThExDirTreeWalk(Path forReadList,
-            BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> pipeFromOut) throws IOException {
+            BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> pipeFromOut) throws IOException {
         Thread.currentThread().checkAccess();
         this.typeThread = "[TREEWALKER]";
-        NcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
+        ZPINcAppHelper.outCreateObjectMessage(this.typeThread, this.getClass());
         this.LENGTH_QUEUE = 1000;
         Path pathToStart = Paths.get(forReadList.toString());
         try{
-            pathToStart = NcFsIdxOperationDirs.checkScanPath(pathToStart);
+            pathToStart = ZPINcFsIdxOperationDirs.checkScanPath(pathToStart);
         } catch (IOException ex) {
-            String strAddMsg = NcStrLogMsgField.MSG_ERROR.getStr()
+            String strAddMsg = ZPINcStrLogMsgField.MSG_ERROR.getStr()
                     + " wrong path for scan "
                     + forReadList.toString();
-            NcAppHelper.outMessage(strAddMsg);
-            NcAppHelper.logException(NcThExDirTreeWalk.class.getCanonicalName(), ex);
+            ZPINcAppHelper.outMessage(strAddMsg);
+            ZPINcAppHelper.logException(ZPINcThExDirTreeWalk.class.getCanonicalName(), ex);
             throw new IOException(strAddMsg, ex);
         }
         this.pipeDirList = pipeFromOut;
-        this.fileVisitor = new NcFsIdxFileVisitor(this.pipeDirList);
+        this.fileVisitor = new ZPINcFsIdxFileVisitor(this.pipeDirList);
         this.pathToStart = pathToStart;
     }
     
     @Override
-    public BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> call() throws Exception {
+    public BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> call() throws Exception {
         try {
             Files.walkFileTree(this.pathToStart, this.fileVisitor);
         } catch (IOException ex) {
-            NcAppHelper.logException(NcThExDirTreeWalk.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(ZPINcThExDirTreeWalk.class.getCanonicalName(), ex);
             this.boolDone = Boolean.TRUE;
-            String strThreadInfo = NcAppHelper.getThreadInfoToString(Thread.currentThread());
+            String strThreadInfo = ZPINcAppHelper.getThreadInfoToString(Thread.currentThread());
             throw new Exception(
                     strThreadInfo
-                    + NcStrLogMsgField.MSG_INFO.getStr()
+                    + ZPINcStrLogMsgField.MSG_INFO.getStr()
                     + this.typeThread + " aborted, reason "
-                    + NcStrLogMsgField.EXCEPTION_MSG.getStr()
+                    + ZPINcStrLogMsgField.EXCEPTION_MSG.getStr()
                     + ex.getMessage(), ex);
             
         }
         this.boolDone = Boolean.TRUE;
         return this.fileVisitor.getBuffDirList();
     }
-    protected BlockingQueue<ConcurrentSkipListMap<UUID, NcDataListAttr>> getQueue(){
+    protected BlockingQueue<ConcurrentSkipListMap<UUID, ZPINcDataListAttr>> getQueue(){
         return this.fileVisitor.getBuffDirList();
     }
     

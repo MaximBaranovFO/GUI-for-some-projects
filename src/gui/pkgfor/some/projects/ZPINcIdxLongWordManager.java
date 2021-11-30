@@ -29,34 +29,34 @@ public class ZPINcIdxLongWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordListManager#putLongWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordListManager#putLongWord(java.util.TreeMap) }
      * </ul>
      * @param StructureLongWord
      * @param dataFuncForWrite
      * @return 
      */    
-    protected static long putLongWordInFile(TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureLongWord, NcDcIdxLongWordListToFile dataFuncForWrite){
+    protected static long putLongWordInFile(TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureLongWord, ZPINcDcIdxLongWordListToFile dataFuncForWrite){
         long countWritedIDs = 0;
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
             String hexWord = item.getValue().hexSubString;
             long recID = 0;
             String oldName = "";
             String forRecName = "";
-            TreeMap<Long, NcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, NcDcIdxWordToFile>();
+            TreeMap<Long, ZPINcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
             boolean isEqualNames = false;
             do{
-                oldName = NcIdxFileManager.getFileNameToRecordLongWord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWord()) + "/n-"
+                oldName = ZPINcIdxFileManager.getFileNameToRecordLongWord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWord()) + "/n-"
                         + dataFuncForWrite.name.substring(0, 4), dataFuncForWrite.nameID, recID);
-                inDiskWordRecord = NcIdxLongWordFileReader.ncReadFromLongWordFile(oldName,recID);
+                inDiskWordRecord = ZPINcIdxLongWordFileReader.ncReadFromLongWordFile(oldName,recID);
                 
                 if(inDiskWordRecord.isEmpty()){
                     break;
                 }
                 recID = inDiskWordRecord.lastEntry().getValue().recordID;
                 recID++;
-                forRecName = NcIdxFileManager.getFileNameToRecordLongWord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWord()) + "/n-"
+                forRecName = ZPINcIdxFileManager.getFileNameToRecordLongWord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWord()) + "/n-"
                         + dataFuncForWrite.name.substring(0, 4), dataFuncForWrite.nameID, recID);
                 isEqualNames = ! oldName.equalsIgnoreCase(forRecName);
                 if(isEqualNames){
@@ -65,18 +65,18 @@ public class ZPINcIdxLongWordManager {
             }
             while(isEqualNames);
 
-            NcDcIdxWordToFile forRec = 
-                new NcDcIdxWordToFile(
+            ZPINcDcIdxWordToFile forRec = 
+                new ZPINcDcIdxWordToFile(
                     recID,
                     item.getValue().toFileId,
                     item.getValue().strSubString,
                     item.getValue().positionSubString,
                     item.getValue().lengthSubString);
             inDiskWordRecord.put(recID, forRec);
-            forRecName = NcIdxFileManager.getFileNameToRecordLongWord(
-                NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWord()) + "/n-"
+            forRecName = ZPINcIdxFileManager.getFileNameToRecordLongWord(
+                ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWord()) + "/n-"
                 + dataFuncForWrite.name.substring(0, 4), dataFuncForWrite.nameID, recID);
-            countWritedIDs = countWritedIDs + NcIdxLongWordFileWriter.ncWriteForLongWord(
+            countWritedIDs = countWritedIDs + ZPINcIdxLongWordFileWriter.ncWriteForLongWord(
                 inDiskWordRecord, forRecName, recID);
         }
         
@@ -85,20 +85,20 @@ public class ZPINcIdxLongWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#getIDsForKeyWord(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSearchInIndex#getIDsForKeyWord(java.lang.String) }
      * </ul>
      * @param StructureLongWord
      * @return 
      */    
-    protected static TreeMap<Long, NcDcIdxWordToFile> getLongWord(TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureLongWord){
-        TreeMap<Long, NcDcIdxWordToFile> retReadedData = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getLongWord(TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureLongWord){
+        TreeMap<Long, ZPINcDcIdxWordToFile> retReadedData = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         long countWritedIDs = 0;
         String nameLongWordList = "";
-        NcDcIdxLongWordListToFile dataForRead;
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
+        ZPINcDcIdxLongWordListToFile dataForRead;
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
             long recLongWordListID = 0;
             String hexWord = item.getValue().hexSubString;
-            dataForRead = new NcDcIdxLongWordListToFile(
+            dataForRead = new ZPINcDcIdxLongWordListToFile(
                     recLongWordListID,
                     hexWord, 
                     item.getValue().strSubString);
@@ -114,7 +114,7 @@ public class ZPINcIdxLongWordManager {
             }
             
             recLongWordListID = dataForRead.nameID;
-            TreeMap<Long, NcDcIdxSubStringToOperationUse> subStructureLongWord = new TreeMap<Long, NcDcIdxSubStringToOperationUse>();
+            TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> subStructureLongWord = new TreeMap<Long, ZPINcDcIdxSubStringToOperationUse>();
             subStructureLongWord.put(recLongWordListID,item.getValue());
             retReadedData.putAll(getLongWordFromFile(subStructureLongWord,dataForRead));
         }
@@ -123,18 +123,18 @@ public class ZPINcIdxLongWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#getLongWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#getLongWord(java.util.TreeMap) }
      * </ul>
      * @param dataForRead
      * @return 
      */    
-    private static NcDcIdxLongWordListToFile getForSearchLongWordID(NcDcIdxLongWordListToFile dataForRead){
+    private static ZPINcDcIdxLongWordListToFile getForSearchLongWordID(ZPINcDcIdxLongWordListToFile dataForRead){
 
         String nameLongWordList = "";
         String nameNextLongWordList = "";
         long recID = dataForRead.nameID;
-        nameLongWordList = NcIdxFileManager.getFileNameToRecord(
-                NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWordList()) + "/wl-"
+        nameLongWordList = ZPINcIdxFileManager.getFileNameToRecord(
+                ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWordList()) + "/wl-"
                 + dataForRead.name.substring(0, 4),recID);
         boolean isNamesEquals = false;
         boolean isNameEquals = false;
@@ -142,11 +142,11 @@ public class ZPINcIdxLongWordManager {
         boolean isSubStrEquals = false;
         boolean isSubStrHashEquals = false;
         
-        TreeMap<Long, NcDcIdxLongWordListToFile> readFromDiskData = new TreeMap<Long, NcDcIdxLongWordListToFile>();
+        TreeMap<Long, ZPINcDcIdxLongWordListToFile> readFromDiskData = new TreeMap<Long, ZPINcDcIdxLongWordListToFile>();
         do{
             readFromDiskData.clear();
-            readFromDiskData = NcIdxLongWordListFileReader.ncReadFileContainedId(dataForRead, recID);
-            for(Map.Entry<Long, NcDcIdxLongWordListToFile> item  : readFromDiskData.entrySet()){
+            readFromDiskData = ZPINcIdxLongWordListFileReader.ncReadFileContainedId(dataForRead, recID);
+            for(Map.Entry<Long, ZPINcDcIdxLongWordListToFile> item  : readFromDiskData.entrySet()){
                 isNameEquals = item.getValue().name.equalsIgnoreCase(dataForRead.name);
                 isNameHashEquals = item.getValue().nameHash == dataForRead.nameHash;
                 isSubStrEquals = item.getValue().word.equalsIgnoreCase(dataForRead.word);
@@ -160,57 +160,57 @@ public class ZPINcIdxLongWordManager {
             }
           
             recID = readFromDiskData.lastEntry().getValue().nameID + 1; 
-            nameNextLongWordList = NcIdxFileManager.getFileNameToRecord(
-                    NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWordList()) + "/wl-"
+            nameNextLongWordList = ZPINcIdxFileManager.getFileNameToRecord(
+                    ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWordList()) + "/wl-"
                     + dataForRead.name.substring(0, 4),recID);
             isNamesEquals = ! nameLongWordList.equalsIgnoreCase(nameNextLongWordList);
             if(isNamesEquals){
                 dataForRead.nameID = recID;
-                if( !NcIdxFileManager.fileExistRWAccessChecker(new File(nameNextLongWordList))){
+                if( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(nameNextLongWordList))){
                     break;
                 }
             }
         }
         while(isNamesEquals);
         
-        dataForRead = new NcDcIdxLongWordListToFile();
+        dataForRead = new ZPINcDcIdxLongWordListToFile();
         return dataForRead;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxLongWordManager#getLongWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxLongWordManager#getLongWord(java.util.TreeMap) }
      * </ul>
      * @param StructureLongWord
      * @param dataFuncForWrite
      * @return 
      */
-    private static TreeMap<Long, NcDcIdxWordToFile> getLongWordFromFile(TreeMap<Long, NcDcIdxSubStringToOperationUse> StructureLongWord, NcDcIdxLongWordListToFile dataFuncForWrite){
-        TreeMap<Long, NcDcIdxWordToFile> retReadedData = new TreeMap<Long, NcDcIdxWordToFile>();
+    private static TreeMap<Long, ZPINcDcIdxWordToFile> getLongWordFromFile(TreeMap<Long, ZPINcDcIdxSubStringToOperationUse> StructureLongWord, ZPINcDcIdxLongWordListToFile dataFuncForWrite){
+        TreeMap<Long, ZPINcDcIdxWordToFile> retReadedData = new TreeMap<Long, ZPINcDcIdxWordToFile>();
 
-        for(Map.Entry<Long, NcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
+        for(Map.Entry<Long, ZPINcDcIdxSubStringToOperationUse> item : StructureLongWord.entrySet()){
             long recID = 0;
             String oldName = "";
             String forRecName = "";
-            TreeMap<Long, NcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, NcDcIdxWordToFile>();
+            TreeMap<Long, ZPINcDcIdxWordToFile> inDiskWordRecord = new TreeMap<Long, ZPINcDcIdxWordToFile>();
             boolean isEqualNames = false;
             do{
-                oldName = NcIdxFileManager.getFileNameToRecordLongWord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWord()) + "/n-"
+                oldName = ZPINcIdxFileManager.getFileNameToRecordLongWord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWord()) + "/n-"
                         + dataFuncForWrite.name.substring(0, 4), dataFuncForWrite.nameID, recID);
-                inDiskWordRecord = NcIdxLongWordFileReader.ncReadFromLongWordFile(oldName,recID);
+                inDiskWordRecord = ZPINcIdxLongWordFileReader.ncReadFromLongWordFile(oldName,recID);
                 if(inDiskWordRecord.isEmpty()){
                     break;
                 }
                 retReadedData.putAll(inDiskWordRecord);
                 recID = inDiskWordRecord.lastEntry().getValue().recordID;
                 recID++;
-                forRecName = NcIdxFileManager.getFileNameToRecordLongWord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirLongWord()) + "/n-"
+                forRecName = ZPINcIdxFileManager.getFileNameToRecordLongWord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirLongWord()) + "/n-"
                         + dataFuncForWrite.name.substring(0, 4), dataFuncForWrite.nameID, recID);
                 isEqualNames = ! oldName.equalsIgnoreCase(forRecName);
                 if(isEqualNames){
-                    if( !NcIdxFileManager.fileExistRWAccessChecker(new File(forRecName))){
+                    if( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(forRecName))){
                         break;
                     }
                 }
@@ -223,9 +223,9 @@ public class ZPINcIdxLongWordManager {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxStorageWordManager#convertFormOperationToFileData(ru.newcontrol.ncfv.NcDcIdxSubStringToOperationUse, long) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxStorageWordManager#convertFormOperationToFileData(ru.newcontrol.ncfv.ZPINcDcIdxSubStringToOperationUse, long) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcSrchKeyWordInput#getIdDataForSplittedKeyWord(java.util.ArrayList) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSrchKeyWordInput#getIdDataForSplittedKeyWord(java.util.ArrayList) }
      * </ul>
      * @param inFuncWord
      * @return

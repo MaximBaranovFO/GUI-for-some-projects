@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -436,7 +436,11 @@ public class ZPINcAppHelper {
      * @return
      */
     protected static String toHex(byte[] bytes) {
-        return DatatypeConverter.printHexBinary(bytes);
+        //return DatatypeConverter.printHexBinary(bytes);
+       
+        //return org.apache.commons.codec.binary.Hex.decodeHex(bytes);
+        
+        return jakarta.xml.bind.DatatypeConverter.printHexBinary(bytes);
     }
     protected static void strArrToConsoleOutPut(String[] strArrForOutPut){
         for(int i = 0; i < strArrForOutPut.length ; i++){

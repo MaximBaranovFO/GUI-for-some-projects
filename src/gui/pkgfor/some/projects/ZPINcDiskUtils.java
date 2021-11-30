@@ -26,7 +26,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 
 
@@ -212,7 +212,8 @@ public class ZPINcDiskUtils {
         catch(NumberFormatException ex){
             ZPINcAppHelper.logException(ZPINcDiskUtils.class.getCanonicalName(), ex);
             try{
-                outsn = DatatypeConverter.parseLong(indSN);
+                //outsn = DatatypeConverter.parseLong(indSN);
+                outsn = jakarta.xml.bind.DatatypeConverter.parseLong(indSN);
             }
             catch(NumberFormatException extwo){
                 ZPINcAppHelper.logException(

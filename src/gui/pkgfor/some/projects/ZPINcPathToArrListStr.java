@@ -26,7 +26,7 @@ import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
-import javax.xml.bind.DatatypeConverter;
+//import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -359,7 +359,8 @@ public enum ZPINcPathToArrListStr {
      * @return 
      */    
     private static String toHex(byte[] bytes) {
-        return DatatypeConverter.printHexBinary(bytes);
+        //return DatatypeConverter.printHexBinary(bytes);
+        return jakarta.xml.bind.DatatypeConverter.printHexBinary(bytes);
     }
     /**
      * Used in

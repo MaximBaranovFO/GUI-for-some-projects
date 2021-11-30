@@ -29,52 +29,52 @@ public class ZPINcIdxWordFileReader {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#putWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxWordManager#putWord(java.util.TreeMap) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#getWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxWordManager#getWord(java.util.TreeMap) }
      * </ul>
      * @param readedWord
      * @param rID
      * @return 
      */    
-    protected static TreeMap<Long, NcDcIdxWordToFile> ncReadFromWord(String readedWord, long rID){
-        TreeMap<Long, NcDcIdxWordToFile> ncDataFromWordFile;
-        String strCfgPath =  NcIdxFileManager.getFileNameToRecord(
-                NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + readedWord, rID);
-        if ( !NcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
-            return new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> ncReadFromWord(String readedWord, long rID){
+        TreeMap<Long, ZPINcDcIdxWordToFile> ncDataFromWordFile;
+        String strCfgPath =  ZPINcIdxFileManager.getFileNameToRecord(
+                ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + readedWord, rID);
+        if ( !ZPINcIdxFileManager.fileExistRWAccessChecker(new File(strCfgPath))){
+            return new TreeMap<Long, ZPINcDcIdxWordToFile>();
         };
         //mcGetWorkCfgDirName() + workFileNames[0];
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(strCfgPath)))
         {
-            ncDataFromWordFile = (TreeMap<Long, NcDcIdxWordToFile>)ois.readObject();
+            ncDataFromWordFile = (TreeMap<Long, ZPINcDcIdxWordToFile>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxWordFileReader.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDcIdxWordToFile>();
+            ZPINcAppHelper.logException(
+                    ZPINcIdxWordFileReader.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDcIdxWordToFile>();
         } 
         return ncDataFromWordFile;
     }
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#getAllDataForWord(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxWordManager#getAllDataForWord(java.lang.String) }
      * </ul>
      * @param inFuncFile
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxWordToFile> ncReadFromWordFile(File inFuncFile){
-        TreeMap<Long, NcDcIdxWordToFile> ncDataFromWordFile;
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> ncReadFromWordFile(File inFuncFile){
+        TreeMap<Long, ZPINcDcIdxWordToFile> ncDataFromWordFile;
         
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(inFuncFile)))
         {
-            ncDataFromWordFile = (TreeMap<Long, NcDcIdxWordToFile>)ois.readObject();
+            ncDataFromWordFile = (TreeMap<Long, ZPINcDcIdxWordToFile>)ois.readObject();
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxWordFileReader.class.getCanonicalName(), ex);
-            return new TreeMap<Long, NcDcIdxWordToFile>();
+            ZPINcAppHelper.logException(
+                    ZPINcIdxWordFileReader.class.getCanonicalName(), ex);
+            return new TreeMap<Long, ZPINcDcIdxWordToFile>();
         } 
         return ncDataFromWordFile;
     }

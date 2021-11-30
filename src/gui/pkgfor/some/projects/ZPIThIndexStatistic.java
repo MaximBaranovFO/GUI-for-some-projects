@@ -105,7 +105,7 @@ public class ZPIThIndexStatistic {
         getListsOfFilesFromStorages();
     }
     protected void getListsOfFilesFromStorages(){
-        AppFileStorageIndex currentIndexStorages = this.ruleThIndex.getIndexState().currentIndexStorages();
+        ZPIAppFileStorageIndex currentIndexStorages = this.ruleThIndex.getIndexState().currentIndexStorages();
         currentIndexStorages.updateMapForStorages();
         ArrayList<String> listOfPrefixes = currentIndexStorages.listOfPrefixes();
         for(String itemStorages : listOfPrefixes){
@@ -113,7 +113,7 @@ public class ZPIThIndexStatistic {
             Map<String, String> byPrefixGetMap = currentIndexStorages.byPrefixGetMap(itemStorages);
                             
             try( FileSystem fsForReadData = FileSystems.newFileSystem(byPrefixGetUri, byPrefixGetMap) ){
-                Path rootForStorage = fsForReadData.getPath(AppFileNamesConstants.DIR_IDX_ROOT);
+                Path rootForStorage = fsForReadData.getPath(ZPIAppFileNamesConstants.DIR_IDX_ROOT);
                 this.storagesStatus.put(itemStorages, byPrefixGetUri);
                 ConcurrentSkipListMap<String, Integer> listForVol = new ConcurrentSkipListMap<String, Integer>();
                 this.listTagFileNameCountVol.put(itemStorages, listForVol);
@@ -121,7 +121,7 @@ public class ZPIThIndexStatistic {
                 this.listFilesInProcess.put(itemStorages, listForProcess);
                 ConcurrentSkipListMap<String, Integer> listForSize = new ConcurrentSkipListMap<String, Integer>();
                 this.listFileNameSize.put(itemStorages, listForSize);
-                ArrayList<Path> filesByMaskFromDir = AppFileOperationsSimple.getFilesByMaskFromDir(rootForStorage, "*");
+                ArrayList<Path> filesByMaskFromDir = ZPIAppFileOperationsSimple.getFilesByMaskFromDir(rootForStorage, "*");
                 processPathToList(filesByMaskFromDir, itemStorages);
             } catch(FileSystemAlreadyExistsException exExist){
                 System.err.println(ZPIThIndexStatistic.class.getCanonicalName() + " newFileSystem for URI "
@@ -158,7 +158,7 @@ public class ZPIThIndexStatistic {
      */
     protected void processPathToList(ArrayList<Path> filesFromDir, String itemStorage){
         ConcurrentSkipListMap<String, Integer> newRecord = new ConcurrentSkipListMap<String, Integer>();
-        char[] separatorName = AppFileNamesConstants.FILE_DIR_PART_SEPARATOR.toCharArray();
+        char[] separatorName = ZPIAppFileNamesConstants.FILE_DIR_PART_SEPARATOR.toCharArray();
         for(Path  folderItem : filesFromDir){
             Path itemPathFormDir = folderItem.getFileName();
             String nameIndexPart = "";
@@ -222,29 +222,29 @@ public class ZPIThIndexStatistic {
     protected Integer getLimitForStorage(String itemStorage){
         switch( itemStorage.hashCode() ){
             case 99400://AppFileNamesConstants.FILE_INDEX_PREFIX_DIR_LIST = "di-";       
-                return AppConstants.DIR_LIST_RECORDS_COUNT_LIMIT;
+                return ZPIAppConstants.DIR_LIST_RECORDS_COUNT_LIMIT;
             case 101415://AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_LIST = "fl-";     
-                return AppConstants.FILE_LIST_RECORDS_COUNT_LIMIT;
+                return ZPIAppConstants.FILE_LIST_RECORDS_COUNT_LIMIT;
             case 3641: //AppFileNamesConstants.FILE_INDEX_PREFIX_TMP = "t-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 3331: //AppFileNamesConstants.FILE_INDEX_PREFIX_JOURNAL = "j-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 101663: //AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_TYPE = "ft-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 101291: //AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_HASH = "fh-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 101787: //AppFileNamesConstants.FILE_INDEX_PREFIX_FILE_EXIST = "fx-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 3734: //AppFileNamesConstants.FILE_INDEX_PREFIX_WORD = "w-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 114249: //AppFileNamesConstants.FILE_INDEX_PREFIX_STORAGE_WORD = "sw-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 107522: //AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_LIST = "lw-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
             case 107243: //AppFileNamesConstants.FILE_INDEX_PREFIX_LONG_WORD_DATA = "ln-";
-                return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
+                return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT; 
         }
-        return AppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT;
+        return ZPIAppConstants.DEFAULT_STORAGE_RECORDS_COUNT_LIMIT;
     }
     /**
      * save not limited file name to list
@@ -318,7 +318,7 @@ public class ZPIThIndexStatistic {
                         getIncrementedVolumeNumberByTagName(itemStorage, 
                                 tagFileName);
                 buildInStorageFileName = 
-                        AppFileOperationsSimple.buildInStorageFileName(tagFileName, 
+                        ZPIAppFileOperationsSimple.buildInStorageFileName(tagFileName, 
                                 forSizeDetect, 
                                 incrementedVolumeNumberByTagName);
             } while( isExistInListSize(itemStorage, buildInStorageFileName) );
@@ -382,7 +382,7 @@ public class ZPIThIndexStatistic {
      */
     protected void addToListSizeRemoveListProcess(String itemStorage, Path lastWritedFileName){
         Path fileName = lastWritedFileName.getFileName();
-        Map<String, String> fromNameTagSizeVol = AppFileOperationsSimple.getFromNameTagSizeVol(fileName);
+        Map<String, String> fromNameTagSizeVol = ZPIAppFileOperationsSimple.getFromNameTagSizeVol(fileName);
         addToListFileNameSize(itemStorage, fileName.toString(), Integer.valueOf(fromNameTagSizeVol.get("sizePart")));
         this.listFilesInProcess.remove(fileName.toString());
     }

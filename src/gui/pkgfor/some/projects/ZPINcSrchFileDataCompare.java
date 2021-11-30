@@ -26,21 +26,21 @@ public class ZPINcSrchFileDataCompare {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#searchWordInIndex() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSearchInIndex#searchWordInIndex() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcSrchGetResult#makeSearchByKeyFromInput(java.lang.String) }
-     * <li>{@link ru.newcontrol.ncfv.NcSrchGetResult#makeSearchByKeyFromFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSrchGetResult#makeSearchByKeyFromInput(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSrchGetResult#makeSearchByKeyFromFile() }
      * </ul>
      * Find duplicate of records by dirListID
      * @param strHexForInVar
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxWordToFile> getDistictIDs(TreeMap<Long, NcDcIdxWordToFile> strHexForInVar){
-        TreeMap<Long, NcDcIdxWordToFile> inList = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getDistictIDs(TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar){
+        TreeMap<Long, ZPINcDcIdxWordToFile> inList = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         long newRecId = 0;
-        for( Map.Entry<Long, NcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
+        for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
             boolean isExistID = false;
-            for( Map.Entry<Long, NcDcIdxWordToFile> itemInListID : inList.entrySet() ){
+            for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemInListID : inList.entrySet() ){
                 isExistID = itemInListID.getValue().dirListID == itemID.getValue().dirListID;
             }
             if( !isExistID ){
@@ -54,22 +54,22 @@ public class ZPINcSrchFileDataCompare {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcSearchInIndex#searchWordInIndex() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSearchInIndex#searchWordInIndex() }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcSrchGetResult#makeSearchByKeyFromFile() }
-     * <li>{@link ru.newcontrol.ncfv.NcSrchGetResult#outSearchResult(java.util.TreeMap, java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSrchGetResult#makeSearchByKeyFromFile() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcSrchGetResult#outSearchResult(java.util.TreeMap, java.util.TreeMap) }
      * </ul>
      * Delete records with dirListId out of search from in search list 
      * @param strHexForInVar
      * @param strHexForOutVar
      * @return 
      */
-    protected static TreeMap<Long, NcDcIdxWordToFile> getIdInWithoutOfOutSearchResult(TreeMap<Long, NcDcIdxWordToFile> strHexForInVar, TreeMap<Long, NcDcIdxWordToFile> strHexForOutVar){
-        TreeMap<Long, NcDcIdxWordToFile> inList = new TreeMap<Long, NcDcIdxWordToFile>();
+    protected static TreeMap<Long, ZPINcDcIdxWordToFile> getIdInWithoutOfOutSearchResult(TreeMap<Long, ZPINcDcIdxWordToFile> strHexForInVar, TreeMap<Long, ZPINcDcIdxWordToFile> strHexForOutVar){
+        TreeMap<Long, ZPINcDcIdxWordToFile> inList = new TreeMap<Long, ZPINcDcIdxWordToFile>();
         long newRecId = 0;
-        for( Map.Entry<Long, NcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
+        for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemID : strHexForInVar.entrySet() ){
             boolean isExistID = false;
-            for( Map.Entry<Long, NcDcIdxWordToFile> itemInListForOutID : strHexForOutVar.entrySet() ){
+            for( Map.Entry<Long, ZPINcDcIdxWordToFile> itemInListForOutID : strHexForOutVar.entrySet() ){
                 isExistID = itemInListForOutID.getValue().dirListID == itemID.getValue().dirListID;
             }
             if( !isExistID ){

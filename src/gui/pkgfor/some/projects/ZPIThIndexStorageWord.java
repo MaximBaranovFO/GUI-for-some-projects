@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ru.newcontrol.ncfv;
+package gui.pkgfor.some.projects;
 
 import java.util.UUID;
 
@@ -22,49 +22,49 @@ import java.util.UUID;
  * @author wladimirowichbiaran
  */
 public class ZPIThIndexStorageWord extends Thread{
-    private ThIndexRule ruleThIndex;
+    private ZPIThIndexRule ruleZPIThIndex;
     
-    ZPIThIndexStorageWord(ThIndexRule outerRule){
+    ZPIThIndexStorageWord(ZPIThIndexRule outerRule){
         super(UUID.randomUUID().toString());
-        this.ruleThIndex = outerRule;
-        //Thread.currentThread().setName(UUID.randomUUID().toString());
+        this.ruleZPIThIndex = outerRule;
+        //ZPIThread.currentZPIThread().setName(UUID.randomUUID().toString());
     }
     
     @Override
     public void run(){
         System.out.println(ZPIThIndexStorageWord.class.getCanonicalName() 
                 + " do it +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        ThIndexState indexState = this.ruleThIndex.getIndexState();
+        ZPIThIndexState indexState = this.ruleZPIThIndex.getIndexState();
         //init Bus
-        ThStorageWordBusInput thStorageWordBusInput = new ThStorageWordBusInput();
-        ThStorageWordBusOutput thStorageWordBusOutput = new ThStorageWordBusOutput();
-        ThStorageWordBusOutput thStorageLongWordBusOutput = new ThStorageWordBusOutput();
-        ThStorageWordBusWriter thStorageLongWordBusWriter = new ThStorageWordBusWriter();
-        ThStorageWordBusReader thStorageLongWordBusReader = new ThStorageWordBusReader();
+        ZPIThStorageWordBusInput thStorageWordBusInput = new ZPIThStorageWordBusInput();
+        ZPIThStorageWordBusOutput thStorageWordBusOutput = new ZPIThStorageWordBusOutput();
+        ZPIThStorageWordBusOutput thStorageLongWordBusOutput = new ZPIThStorageWordBusOutput();
+        ZPIThStorageWordBusWriter thStorageLongWordBusWriter = new ZPIThStorageWordBusWriter();
+        ZPIThStorageWordBusReader thStorageLongWordBusReader = new ZPIThStorageWordBusReader();
         //init State
-        ThStorageWordState thStorageWordState = new ThStorageWordState();
+        ZPIThStorageWordState thStorageWordState = new ZPIThStorageWordState();
         thStorageWordState.setBusJobForStorageWordRouterJob(thStorageWordBusInput);
         thStorageWordState.setBusJobForWordWrite(thStorageWordBusOutput);
         thStorageWordState.setBusJobForLongWordWrite(thStorageLongWordBusOutput);
         thStorageWordState.setBusJobForStorageWordRouterJobToWriter(thStorageLongWordBusWriter);
         thStorageWordState.setBusJobForStorageWordRouterJobToReader(thStorageLongWordBusReader);
-        ThStorageWordStatusMainFlow thStorageWordStatusMainFlow = new ThStorageWordStatusMainFlow();
-        ThStorageWordBusReadedFlow thStorageWordFlowRead = new ThStorageWordBusReadedFlow(thStorageWordStatusMainFlow);
+        ZPIThStorageWordStatusMainFlow thStorageWordStatusMainFlow = new ZPIThStorageWordStatusMainFlow();
+        ZPIThStorageWordBusReadedFlow thStorageWordFlowRead = new ZPIThStorageWordBusReadedFlow(thStorageWordStatusMainFlow);
         //init Rule
-        ThStorageWordRule thStorageWordRule = new ThStorageWordRule(this.ruleThIndex);
+        ZPIThStorageWordRule thStorageWordRule = new ZPIThStorageWordRule(this.ruleZPIThIndex);
         //set StorageWord Rule in indexState
         indexState.setRuleStorageWord(thStorageWordRule);
         thStorageWordRule.setStorageWordState(thStorageWordState);
         thStorageWordRule.setStorageWordStatusMainFlow(thStorageWordStatusMainFlow);
         thStorageWordState.setStorageWordFlowReaded(thStorageWordFlowRead);
         //init Workers
-        ThStorageWordWorkFilter thStorageWordWorkFilter = new ThStorageWordWorkFilter(thStorageWordRule);
+        ZPIThStorageWordWorkFilter thStorageWordWorkFilter = new ZPIThStorageWordWorkFilter(thStorageWordRule);
         thStorageWordRule.setStorageWordWorkFilter(thStorageWordWorkFilter);
-        ThStorageWordWorkRouter thStorageWordWorkRouter = new ThStorageWordWorkRouter(thStorageWordRule);
+        ZPIThStorageWordWorkRouter thStorageWordWorkRouter = new ZPIThStorageWordWorkRouter(thStorageWordRule);
         thStorageWordRule.setStorageWordWorkRouter(thStorageWordWorkRouter);
-        ThStorageWordWorkWrite thStorageWordWorkWrite = new ThStorageWordWorkWrite(thStorageWordRule);
+        ZPIThStorageWordWorkWrite thStorageWordWorkWrite = new ZPIThStorageWordWorkWrite(thStorageWordRule);
         thStorageWordRule.setStorageWordWorkWrite(thStorageWordWorkWrite);
-        ThStorageWordWorkRead thStorageWordWorkRead = new ThStorageWordWorkRead(thStorageWordRule);
+        ZPIThStorageWordWorkRead thStorageWordWorkRead = new ZPIThStorageWordWorkRead(thStorageWordRule);
         thStorageWordRule.setStorageWordWorkRead(thStorageWordWorkRead);
         
         // run Workers

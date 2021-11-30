@@ -429,7 +429,7 @@ public class ZPINcfv {
             isRunInSwing = true;
             oneofAppRun = true;
             toLALRMain();
-            ZPINcSwingIndexManagerApp.NcRunSIMA();
+            ZPINcSwingIndexManagerApp.ZPINcRunSIMA();
         }
         if (args.length > 0){
             argsFirst = args[0].trim().toLowerCase();

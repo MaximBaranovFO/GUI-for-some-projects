@@ -28,7 +28,7 @@ public class ZPINcIdxWordFileWriter {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxWordManager#putWord(java.util.TreeMap) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxWordManager#putWord(java.util.TreeMap) }
      * </ul>
      * Write Index SubStrings into files
      * @param ncWordToRec
@@ -36,20 +36,20 @@ public class ZPINcIdxWordFileWriter {
      * @param recID
      * @return 
      */    
-    protected static long ncWriteForWord(TreeMap<Long, NcDcIdxWordToFile> ncWordToRec, String recHexWord, long recID){
+    protected static long ncWriteForWord(TreeMap<Long, ZPINcDcIdxWordToFile> ncWordToRec, String recHexWord, long recID){
         if( ncWordToRec == null ){
             return -1;
         }
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(
-                new FileOutputStream(NcIdxFileManager.getFileNameToRecord(
-                        NcIdxFileManager.getStrCanPathFromFile(NcManageCfg.getDirWords()) + "/w-" + recHexWord,recID))))
+                new FileOutputStream(ZPINcIdxFileManager.getFileNameToRecord(
+                        ZPINcIdxFileManager.getStrCanPathFromFile(ZPINcManageCfg.getDirWords()) + "/w-" + recHexWord,recID))))
         {
             oos.writeObject(ncWordToRec);
         }
         catch(Exception ex){
-            NcAppHelper.logException(
-                    NcIdxWordFileWriter.class.getCanonicalName(), ex);
+            ZPINcAppHelper.logException(
+                    ZPINcIdxWordFileWriter.class.getCanonicalName(), ex);
             return -1;
         } 
         return ncWordToRec.size();

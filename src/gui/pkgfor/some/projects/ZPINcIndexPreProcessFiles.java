@@ -58,7 +58,7 @@ public class ZPINcIndexPreProcessFiles {
      * </ul>
      * @param ncFile
      */
-    protected ZPIZPINcIndexPreProcessFiles(File ncFile) {
+    protected ZPINcIndexPreProcessFiles(File ncFile) {
         currentFile = ncFile;
     }
     
@@ -67,7 +67,7 @@ public class ZPINcIndexPreProcessFiles {
      * @param ncFile
      * @param fNcRecursive
      */
-    private ZPIZPINcIndexPreProcessFiles(File ncFile, boolean fNcRecursive) {
+    private ZPINcIndexPreProcessFiles(File ncFile, boolean fNcRecursive) {
         currentFile = ncFile;
         ncRecursive = fNcRecursive;
     }

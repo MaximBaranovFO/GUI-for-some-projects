@@ -214,7 +214,7 @@ public class ZPINcSwPanelLineEnd {
      * @return
      */
     private static void toLALRgetPanel(){
-        if( ZPIZPINcfvRunVariables.isLALRZPINcSwPanelLineEndgetPanel() ){
+        if( ZPINcfvRunVariables.isLALRNcSwPanelLineEndgetPanel() ){
             String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
                 + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
                 + ZPINcStrLogLogicVar.LA_JPANEL_LINEEND.getStr()

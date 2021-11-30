@@ -30,7 +30,7 @@ public class ZPINcLogColorizer {
      */
     protected static String getHtmlStr(String strInput){
         boolean isHTML = false;
-        if( strInput.contains(NcStrLogMsgField.ERROR.getStr()) ){
+        if( strInput.contains(ZPINcStrLogMsgField.ERROR.getStr()) ){
             strInput = "<b color=red>" + strInput + "</b>" ;
             isHTML = true;
         }

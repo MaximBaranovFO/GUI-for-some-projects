@@ -36,7 +36,7 @@ public class ZPINcSwModalSettingsHelper {
         String[] columnName = {"Property", "Value"};
         
         //Properties sProp = System.getProperties();
-        ArrayList<String> strPropName = NcPreRunFileViewer.getEtcCfgLinesFromDisk();
+        ArrayList<String> strPropName = ZPINcPreRunFileViewer.getEtcCfgLinesFromDisk();
         
         int toRetSize = strPropName.size();
         String[][] toRetStr = new String[toRetSize][2];

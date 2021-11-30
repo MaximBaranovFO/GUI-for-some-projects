@@ -16,6 +16,7 @@
 package gui.pkgfor.some.projects;
 
 import java.io.FilePermission;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ReflectPermission;
 import java.net.NetPermission;
 import java.net.SocketPermission;
@@ -23,10 +24,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Permissions;
 import java.security.AllPermission;
+import java.security.BasicPermission;
+import java.security.PermissionCollection;
 import java.security.Policy;
 import java.util.PropertyPermission;
 import javax.management.MBeanPermission;
-import sun.security.util.SecurityConstants;
+//import sun.security.util.SecurityConstants;
 import sun.reflect.ReflectionFactory;
 
 /**
@@ -83,6 +86,8 @@ public class ZPIAppEtcSecurityHelper {
         
         permissions.add(new NetPermission("*", "decline"));
         
+        /** 20211201 chandges temporary
+        
         permissions.add(new FilePermission(appPath.toString(), SecurityConstants.PROPERTY_RW_ACTION));
         permissions.add(new FilePermission(appPath.toString() + "/-", SecurityConstants.PROPERTY_RW_ACTION));
         permissions.add(new FilePermission("/-", SecurityConstants.FILE_READ_ACTION));
@@ -96,15 +101,20 @@ public class ZPIAppEtcSecurityHelper {
         permissions.add(new FilePermission(indexFolder.toString() + "/-", SecurityConstants.FILE_DELETE_ACTION));
         //permissions.add(new FilePermission(userHomePath.toString() + "/zipfstmp*", SecurityConstants.FILE_DELETE_ACTION));
         permissions.add(new ReflectPermission("suppressAccessChecks", "read"));
+        */
         
         /*for (String namesKey : System.getProperties().stringPropertyNames()) {
-            if( namesKey.isEmpty() ){
-                continue;
-            }
-            permissions.add(new PropertyPermission(namesKey, SecurityConstants.PROPERTY_RW_ACTION));
+        if( namesKey.isEmpty() ){
+        continue;
+        }
+        permissions.add(new PropertyPermission(namesKey, SecurityConstants.PROPERTY_RW_ACTION));
         }*/
         
-        permissions.add(new PropertyPermission("*", SecurityConstants.PROPERTY_RW_ACTION));
+        //permissions.add(new PropertyPermission("*", SecurityConstants.PROPERTY_RW_ACTION));
+        /** 20211201 chandges temporary*/
+        permissions.add(new RuntimePermission("*", "read"));
+        permissions.add(new RuntimePermission("*", "write"));
+        
         /*permissions.add(new PropertyPermission("line.separator", "read"));
         permissions.add(new PropertyPermission("java.class.path", "read"));*/
         

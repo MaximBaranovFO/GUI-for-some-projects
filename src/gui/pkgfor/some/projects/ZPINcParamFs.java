@@ -108,209 +108,209 @@ public class ZPINcParamFs {
     } 
     protected Path getDirDirList(){
         
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirDirList) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirDirList) ){
             return this.dirDirList;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirDirList.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirFileExist(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileExist) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileExist) ){
             return this.dirFileExist;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirFileExist.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirFileHash(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileHash) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileHash) ){
             return this.dirFileHash;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirFileHash.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirFileList(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileList) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileList) ){
             return this.dirFileList;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirFileList.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirFileType(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileType) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirFileType) ){
             return this.dirFileType;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirFileType.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirJournal(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirJournal) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirJournal) ){
             return this.dirJournal;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirJournal.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirLongWordList(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirLongWordList) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirLongWordList) ){
             return this.dirLongWordList;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirLongWordList.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirLongWordData(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirLongWordData) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirLongWordData) ){
             return this.dirLongWordData;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirLongWordData.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWord(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWord) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWord) ){
             return this.dirStorageWord;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWord.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWordAbc(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordAbc) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordAbc) ){
             return this.dirStorageWordAbc;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWordAbc.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWordNum(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordNum) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordNum) ){
             return this.dirStorageWordNum;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWordNum.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWordRabc(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordRabc) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordRabc) ){
             return this.dirStorageWordRabc;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWordRabc.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWordSpace(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordSpace) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordSpace) ){
             return this.dirStorageWordSpace;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWordSpace.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirStorageWordSym(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordSym) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirStorageWordSym) ){
             return this.dirStorageWordSym;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirStorageWordSym.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirTmp(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirTmp) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirTmp) ){
             return this.dirTmp;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirTmp.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);
     } 
     protected Path getDirWord(){
-        if( NcFsIdxOperationDirs.existAndHasAccessRW(this.dirWord) ){
+        if( ZPINcFsIdxOperationDirs.existAndHasAccessRW(this.dirWord) ){
             return this.dirWord;
         }
         String strMsg = "Imposible to return for Dir, see log, path "
             + this.dirWord.toString()
             + " not have read and write access or not exist";
-        NcAppHelper.outMessage(
-            NcStrLogMsgField.ERROR.getStr()
+        ZPINcAppHelper.outMessage(
+            ZPINcStrLogMsgField.ERROR.getStr()
             + strMsg
         );
         throw new RuntimeException(strMsg);

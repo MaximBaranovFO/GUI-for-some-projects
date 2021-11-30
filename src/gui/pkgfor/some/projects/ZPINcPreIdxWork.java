@@ -33,24 +33,24 @@ public class ZPINcPreIdxWork {
      * </ul>
      */
     protected static void outToConsoleIdxDirs(){
-        NcParamFv currentWorkCfg = NcPreRunFileViewer.getCurrentWorkCfg();
+        ZPINcParamFv currentWorkCfg = ZPINcPreRunFileViewer.getCurrentWorkCfg();
         TreeMap<Integer, File> listSubDirs = new TreeMap<Integer, File>();
         listSubDirs.putAll(currentWorkCfg.tmIndexSubDirs);
         listSubDirs.put("index".hashCode(), new File(currentWorkCfg.indexPath));
         for( Map.Entry<Integer, File> items : listSubDirs.entrySet() ){
-            NcAppHelper.outMessageToConsole(NcIdxFileManager.getStrCanPathFromFile(items.getValue()));
+            ZPINcAppHelper.outMessageToConsole(ZPINcIdxFileManager.getStrCanPathFromFile(items.getValue()));
         }
-        NcAppHelper.outMessage("Next way");
-        TreeMap<Integer, File> indexWorkSubDirFilesList = NcIdxFileManager.getIndexWorkSubDirFilesList();
+        ZPINcAppHelper.outMessage("Next way");
+        TreeMap<Integer, File> indexWorkSubDirFilesList = ZPINcIdxFileManager.getIndexWorkSubDirFilesList();
         for( Map.Entry<Integer, File> itemsNextWay : indexWorkSubDirFilesList.entrySet() ){
-            NcAppHelper.outMessageToConsole("key: " + itemsNextWay.getKey());
-            NcAppHelper.outMessageToConsole(NcIdxFileManager.getStrCanPathFromFile(itemsNextWay.getValue()));
+            ZPINcAppHelper.outMessageToConsole("key: " + itemsNextWay.getKey());
+            ZPINcAppHelper.outMessageToConsole(ZPINcIdxFileManager.getStrCanPathFromFile(itemsNextWay.getValue()));
         }
-        NcAppHelper.outMessageToConsole("By name");
-        String[] arrStrCode = NcManageCfg.getWorkSubDirList();
+        ZPINcAppHelper.outMessageToConsole("By name");
+        String[] arrStrCode = ZPINcManageCfg.getWorkSubDirList();
         for( String itemSubDir : arrStrCode ){
-            NcAppHelper.outMessageToConsole("key name: " + itemSubDir + "\tkey value: " + itemSubDir.hashCode() );
-            NcAppHelper.outMessageToConsole(NcIdxFileManager.getStrCanPathFromFile(indexWorkSubDirFilesList.get(itemSubDir.hashCode())));
+            ZPINcAppHelper.outMessageToConsole("key name: " + itemSubDir + "\tkey value: " + itemSubDir.hashCode() );
+            ZPINcAppHelper.outMessageToConsole(ZPINcIdxFileManager.getStrCanPathFromFile(indexWorkSubDirFilesList.get(itemSubDir.hashCode())));
         }
     }
     /**
@@ -59,9 +59,9 @@ public class ZPINcPreIdxWork {
      */
     private static void checkInIndexFolderContent(){
         
-        NcParamFv readedWorkCfg = NcParamFvReader.readDataFromWorkCfg();
-        if( NcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
-            readedWorkCfg = NcPreRunFileViewer.getCurrentWorkCfg();
+        ZPINcParamFv readedWorkCfg = ZPINcParamFvReader.readDataFromWorkCfg();
+        if( ZPINcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
+            readedWorkCfg = ZPINcPreRunFileViewer.getCurrentWorkCfg();
         }
         
         File fileWorkDir = new File(readedWorkCfg.indexPath);
@@ -92,29 +92,29 @@ public class ZPINcPreIdxWork {
      * </ul>
      * Compare for content of DirListAttr and DirListExist, by fileds:
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr#dirListID NcDcIdxDirListToFileAttr.dirListID} == {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileExist#dirListID NcDcIdxDirListToFileExist.dirListID}
-     * <li>{@link ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr#diskID NcDcIdxDirListToFileAttr.diskID} == {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileExist#diskID NcDcIdxDirListToFileExist.diskID}
-     * <li>{@link ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr#pathHash NcDcIdxDirListToFileAttr.pathHash} == {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileExist#pathHash NcDcIdxDirListToFileExist.pathHash}
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr#dirListID ZPINcDcIdxDirListToFileAttr.dirListID} == {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist#dirListID ZPINcDcIdxDirListToFileExist.dirListID}
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr#diskID ZPINcDcIdxDirListToFileAttr.diskID} == {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist#diskID ZPINcDcIdxDirListToFileExist.diskID}
+     * <li>{@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr#pathHash ZPINcDcIdxDirListToFileAttr.pathHash} == {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist#pathHash ZPINcDcIdxDirListToFileExist.pathHash}
      * </ul>
      * Output to console result of compare lists
      */
     protected static void getNotEqualsRecordDirListAttrVsExist(){
         long recordId = 0;
         
-        File recordsAttr = NcIdxFileManager.getFileForDirListAttrContainedRecordId(recordId);
-        File recordsExist = NcIdxFileManager.getFileForDirListExistContainedRecordId(recordId);
+        File recordsAttr = ZPINcIdxFileManager.getFileForDirListAttrContainedRecordId(recordId);
+        File recordsExist = ZPINcIdxFileManager.getFileForDirListExistContainedRecordId(recordId);
         int countError = 0;
         do{
-            NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsAttr));
-            NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsExist));
-            if( NcIdxFileManager.isErrorForFileOperation(recordsAttr) ){
+            ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsAttr));
+            ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsExist));
+            if( ZPINcIdxFileManager.isErrorForFileOperation(recordsAttr) ){
                 if( countError > 3 ){
                     break;
                 }
                 countError++;
                 continue;
             }
-            if( NcIdxFileManager.isErrorForFileOperation(recordsExist) ){
+            if( ZPINcIdxFileManager.isErrorForFileOperation(recordsExist) ){
                 if( countError > 3 ){
                     break;
                 }
@@ -122,26 +122,26 @@ public class ZPINcPreIdxWork {
                 continue;
             }
 
-            TreeMap<Long, NcDcIdxDirListToFileAttr> dataFromDirList = new TreeMap<>();
-            TreeMap<Long, NcDcIdxDirListToFileExist> dataFromDirListExist = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> dataFromDirList = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileExist> dataFromDirListExist = new TreeMap<>();
 
-            TreeMap<Long, NcDcIdxDirListToFileAttr> badDirIdDirListAttr = new TreeMap<>();
-            TreeMap<Long, NcDcIdxDirListToFileExist> badDirIdDirListExist = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> badDirIdDirListAttr = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileExist> badDirIdDirListExist = new TreeMap<>();
 
-            TreeMap<Long, NcDcIdxDirListToFileAttr> badDiskIdDirListAttr = new TreeMap<>();
-            TreeMap<Long, NcDcIdxDirListToFileExist> badDiskIdDirListExist = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> badDiskIdDirListAttr = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileExist> badDiskIdDirListExist = new TreeMap<>();
 
-            TreeMap<Long, NcDcIdxDirListToFileAttr> badPathHashDirListAttr = new TreeMap<>();
-            TreeMap<Long, NcDcIdxDirListToFileExist> badPathHashDirListExist = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileAttr> badPathHashDirListAttr = new TreeMap<>();
+            TreeMap<Long, ZPINcDcIdxDirListToFileExist> badPathHashDirListExist = new TreeMap<>();
 
 
-            dataFromDirList.putAll((Map<? extends Long, ? extends NcDcIdxDirListToFileAttr>) 
-                    NcIdxFileManager.getDataFromFile(recordsAttr));
-            dataFromDirListExist.putAll((Map<? extends Long, ? extends NcDcIdxDirListToFileExist>) 
-                    NcIdxFileManager.getDataFromFile(recordsExist));
+            dataFromDirList.putAll((Map<? extends Long, ? extends ZPINcDcIdxDirListToFileAttr>) 
+                    ZPINcIdxFileManager.getDataFromFile(recordsAttr));
+            dataFromDirListExist.putAll((Map<? extends Long, ? extends ZPINcDcIdxDirListToFileExist>) 
+                    ZPINcIdxFileManager.getDataFromFile(recordsExist));
             
-            NcAppHelper.outMessageToConsole("Start check for Attr count of records: " + dataFromDirList.size());
-            NcAppHelper.outMessageToConsole("Start check for Exist count of records: " + dataFromDirListExist.size());
+            ZPINcAppHelper.outMessageToConsole("Start check for Attr count of records: " + dataFromDirList.size());
+            ZPINcAppHelper.outMessageToConsole("Start check for Exist count of records: " + dataFromDirListExist.size());
             
             long DirListAttrId = dataFromDirList.firstEntry().getValue().dirListID;
             long DirListExistId = dataFromDirListExist.firstEntry().getValue().dirListID;
@@ -151,14 +151,14 @@ public class ZPINcPreIdxWork {
             long recordLastAttrId = dataFromDirList.lastKey();
             long recordLastExistId = dataFromDirListExist.lastKey();
 
-            NcDcIdxDirListToFileAttr dataFirstAttr = dataFromDirList.firstEntry().getValue();
-            NcDcIdxDirListToFileExist dataFirstExist = dataFromDirListExist.firstEntry().getValue();
+            ZPINcDcIdxDirListToFileAttr dataFirstAttr = dataFromDirList.firstEntry().getValue();
+            ZPINcDcIdxDirListToFileExist dataFirstExist = dataFromDirListExist.firstEntry().getValue();
 
-            NcDcIdxDirListToFileAttr dataLastAttr = dataFromDirList.lastEntry().getValue();
-            NcDcIdxDirListToFileExist dataLastExist = dataFromDirListExist.lastEntry().getValue();
+            ZPINcDcIdxDirListToFileAttr dataLastAttr = dataFromDirList.lastEntry().getValue();
+            ZPINcDcIdxDirListToFileExist dataLastExist = dataFromDirListExist.lastEntry().getValue();
 
-            NcDcIdxDirListToFileAttr dataAttr = dataFromDirList.firstEntry().getValue();
-            NcDcIdxDirListToFileExist dataExist = dataFromDirListExist.firstEntry().getValue();
+            ZPINcDcIdxDirListToFileAttr dataAttr = dataFromDirList.firstEntry().getValue();
+            ZPINcDcIdxDirListToFileExist dataExist = dataFromDirListExist.firstEntry().getValue();
             
             boolean isDiskIdEquals = false;
             boolean isDirListId = false;
@@ -170,8 +170,8 @@ public class ZPINcPreIdxWork {
             long prevExistId = 0;
             
             
-            Iterator<NcDcIdxDirListToFileAttr> iterAttr = dataFromDirList.values().iterator();
-            Iterator<NcDcIdxDirListToFileExist> iterExist = dataFromDirListExist.values().iterator();
+            Iterator<ZPINcDcIdxDirListToFileAttr> iterAttr = dataFromDirList.values().iterator();
+            Iterator<ZPINcDcIdxDirListToFileExist> iterExist = dataFromDirListExist.values().iterator();
             while( iterAttr.hasNext() ){
 
                 dataAttr = iterAttr.next();
@@ -214,32 +214,32 @@ public class ZPINcPreIdxWork {
                 }
 
                 
-                NcAppHelper.outMessageToConsole("Attr dirListID: " + dataAttr.dirListID + " Exist dirListID:" + dataExist.dirListID);
+                ZPINcAppHelper.outMessageToConsole("Attr dirListID: " + dataAttr.dirListID + " Exist dirListID:" + dataExist.dirListID);
             }
-            recordsAttr = NcIdxFileManager.getFileForDirListAttrContainedRecordId(recordLastAttrId + 1);
-            recordsExist = NcIdxFileManager.getFileForDirListExistContainedRecordId(recordLastExistId + 1);
+            recordsAttr = ZPINcIdxFileManager.getFileForDirListAttrContainedRecordId(recordLastAttrId + 1);
+            recordsExist = ZPINcIdxFileManager.getFileForDirListExistContainedRecordId(recordLastExistId + 1);
             
             if( !badDiskIdDirListAttr.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badDiskIdDirListAttr.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badDiskIdDirListAttr.size());
             }
             if( !badDirIdDirListAttr.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badDirIdDirListAttr.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badDirIdDirListAttr.size());
             }
             if( !badPathHashDirListAttr.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badPathHashDirListAttr.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsAttr) + "\n BadDiskID count of records " + badPathHashDirListAttr.size());
             }
             if( !badDiskIdDirListExist.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badDiskIdDirListExist.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badDiskIdDirListExist.size());
             }
             if( !badDirIdDirListExist.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badDirIdDirListExist.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badDirIdDirListExist.size());
             }    
             if( !badPathHashDirListExist.isEmpty() ){
-                NcAppHelper.outMessageToConsole("In file: " + NcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badPathHashDirListExist.size());
+                ZPINcAppHelper.outMessageToConsole("In file: " + ZPINcIdxFileManager.getStrCanPathFromFile(recordsExist) + "\n BadDiskID count of records " + badPathHashDirListExist.size());
             }    
         }
-        while(NcIdxFileManager.isErrorForFileOperation(recordsAttr) ||
-        NcIdxFileManager.isErrorForFileOperation(recordsExist));
+        while(ZPINcIdxFileManager.isErrorForFileOperation(recordsAttr) ||
+        ZPINcIdxFileManager.isErrorForFileOperation(recordsExist));
         
         
     }
@@ -253,23 +253,23 @@ public class ZPINcPreIdxWork {
      * @param inFuncFileFromDirListExist 
      */
     private static void getNotFinishedAppendToIndex(TreeMap<Long, File> inFuncFileFromDirList, TreeMap<Long, File> inFuncFileFromDirListExist){
-        TreeMap<Long, NcDcIdxDirListToFileAttr> dataFromDirList = new TreeMap<>();
-        TreeMap<Long, NcDcIdxDirListToFileExist> dataFromDirListExist = new TreeMap<>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileAttr> dataFromDirList = new TreeMap<>();
+        TreeMap<Long, ZPINcDcIdxDirListToFileExist> dataFromDirListExist = new TreeMap<>();
         for(Map.Entry<Long, File> itemFromDirList : inFuncFileFromDirList.entrySet() ){
-            dataFromDirList.putAll((Map<? extends Long, ? extends NcDcIdxDirListToFileAttr>) NcIdxFileManager.getDataFromFile(itemFromDirList.getValue()));
+            dataFromDirList.putAll((Map<? extends Long, ? extends ZPINcDcIdxDirListToFileAttr>) ZPINcIdxFileManager.getDataFromFile(itemFromDirList.getValue()));
         }
         for(Map.Entry<Long, File> itemFromDirListExist : inFuncFileFromDirListExist.entrySet() ){
-            dataFromDirListExist.putAll((Map<? extends Long, ? extends NcDcIdxDirListToFileExist>) NcIdxFileManager.getDataFromFile(itemFromDirListExist.getValue()));
+            dataFromDirListExist.putAll((Map<? extends Long, ? extends ZPINcDcIdxDirListToFileExist>) ZPINcIdxFileManager.getDataFromFile(itemFromDirListExist.getValue()));
         }
-        NcAppHelper.outMessageToConsole("DirList record count: " + dataFromDirList.size());
-        NcAppHelper.outMessageToConsole("Files count: " + inFuncFileFromDirList.size());
-        NcAppHelper.outMessageToConsole("DirList Exist record count: " + dataFromDirListExist.size());
-        NcAppHelper.outMessageToConsole("Files count: " + inFuncFileFromDirListExist.size());
+        ZPINcAppHelper.outMessageToConsole("DirList record count: " + dataFromDirList.size());
+        ZPINcAppHelper.outMessageToConsole("Files count: " + inFuncFileFromDirList.size());
+        ZPINcAppHelper.outMessageToConsole("DirList Exist record count: " + dataFromDirListExist.size());
+        ZPINcAppHelper.outMessageToConsole("Files count: " + inFuncFileFromDirListExist.size());
         
-        for(Map.Entry<Long, NcDcIdxDirListToFileExist> itemFromDirListExist : dataFromDirListExist.entrySet() ){
+        for(Map.Entry<Long, ZPINcDcIdxDirListToFileExist> itemFromDirListExist : dataFromDirListExist.entrySet() ){
             outToConsoleDirListExist(itemFromDirListExist.getValue());
             if( itemFromDirListExist.getValue().nanoTimeEndAddToIndex < 0 ){
-                for(Map.Entry<Long, NcDcIdxDirListToFileAttr> itemFromDirList : dataFromDirList.entrySet() ){
+                for(Map.Entry<Long, ZPINcDcIdxDirListToFileAttr> itemFromDirList : dataFromDirList.entrySet() ){
                     if( itemFromDirListExist.getValue().dirListID == itemFromDirList.getValue().dirListID ){
                         outToConsoleDirListAttr(itemFromDirList.getValue());
                     }
@@ -282,50 +282,50 @@ public class ZPINcPreIdxWork {
      * <ul>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#getNotFinishedAppendToIndex(java.util.TreeMap, java.util.TreeMap) }
      * </ul>
-     * Print to console data from {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr}
-     * @param inFuncData {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileAttr}
+     * Print to console data from {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr}
+     * @param inFuncData {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileAttr}
      */
-    protected static void outToConsoleDirListAttr(NcDcIdxDirListToFileAttr inFuncData){
-        NcAppHelper.outMessageToConsole("dirListID: " + inFuncData.dirListID);
-        NcAppHelper.outMessageToConsole("diskID: " + inFuncData.diskID);
-        NcAppHelper.outMessageToConsole("diskSnLong: " + inFuncData.diskSnLong);
-        NcAppHelper.outMessageToConsole("diskTotalSpace: " + inFuncData.diskTotalSpace);
-        NcAppHelper.outMessageToConsole("diskProgramAlias: " + inFuncData.diskProgramAlias);
-        NcAppHelper.outMessageToConsole("diskProgramAliasHash: " + inFuncData.diskProgramAliasHash);
-        NcAppHelper.outMessageToConsole("diskSnHex: " + inFuncData.diskSnHex);
-        NcAppHelper.outMessageToConsole("diskSnHexHash: " + inFuncData.diskSnHexHash);
-        NcAppHelper.outMessageToConsole("diskLetter: " + inFuncData.diskLetter);
-        NcAppHelper.outMessageToConsole("path: " + inFuncData.path);
-        NcAppHelper.outMessageToConsole("pathHash: " + inFuncData.pathHash);
-        NcAppHelper.outMessageToConsole("fileLength: " + inFuncData.fileLength);
-        NcAppHelper.outMessageToConsole("fileCanRead: " + inFuncData.fileCanRead);
-        NcAppHelper.outMessageToConsole("fileCanWrite: " + inFuncData.fileCanWrite);
-        NcAppHelper.outMessageToConsole("fileCanExecute: " + inFuncData.fileCanExecute);
-        NcAppHelper.outMessageToConsole("fileIsHidden: " + inFuncData.fileIsHidden);
-        NcAppHelper.outMessageToConsole("fileLastModified: " + inFuncData.fileLastModified);
-        NcAppHelper.outMessageToConsole("fileIsDirectory: " + inFuncData.fileIsDirectory);
-        NcAppHelper.outMessageToConsole("fileIsFile: " + inFuncData.fileIsFile);
-        NcAppHelper.outMessageToConsole("recordTime: " + inFuncData.recordTime);
-        NcAppHelper.outMessageToConsole("deletedRec: " + inFuncData.deletedRec);
-        NcAppHelper.outMessageToConsole("changedRecordID: " + inFuncData.changedRecordID);
+    protected static void outToConsoleDirListAttr(ZPINcDcIdxDirListToFileAttr inFuncData){
+        ZPINcAppHelper.outMessageToConsole("dirListID: " + inFuncData.dirListID);
+        ZPINcAppHelper.outMessageToConsole("diskID: " + inFuncData.diskID);
+        ZPINcAppHelper.outMessageToConsole("diskSnLong: " + inFuncData.diskSnLong);
+        ZPINcAppHelper.outMessageToConsole("diskTotalSpace: " + inFuncData.diskTotalSpace);
+        ZPINcAppHelper.outMessageToConsole("diskProgramAlias: " + inFuncData.diskProgramAlias);
+        ZPINcAppHelper.outMessageToConsole("diskProgramAliasHash: " + inFuncData.diskProgramAliasHash);
+        ZPINcAppHelper.outMessageToConsole("diskSnHex: " + inFuncData.diskSnHex);
+        ZPINcAppHelper.outMessageToConsole("diskSnHexHash: " + inFuncData.diskSnHexHash);
+        ZPINcAppHelper.outMessageToConsole("diskLetter: " + inFuncData.diskLetter);
+        ZPINcAppHelper.outMessageToConsole("path: " + inFuncData.path);
+        ZPINcAppHelper.outMessageToConsole("pathHash: " + inFuncData.pathHash);
+        ZPINcAppHelper.outMessageToConsole("fileLength: " + inFuncData.fileLength);
+        ZPINcAppHelper.outMessageToConsole("fileCanRead: " + inFuncData.fileCanRead);
+        ZPINcAppHelper.outMessageToConsole("fileCanWrite: " + inFuncData.fileCanWrite);
+        ZPINcAppHelper.outMessageToConsole("fileCanExecute: " + inFuncData.fileCanExecute);
+        ZPINcAppHelper.outMessageToConsole("fileIsHidden: " + inFuncData.fileIsHidden);
+        ZPINcAppHelper.outMessageToConsole("fileLastModified: " + inFuncData.fileLastModified);
+        ZPINcAppHelper.outMessageToConsole("fileIsDirectory: " + inFuncData.fileIsDirectory);
+        ZPINcAppHelper.outMessageToConsole("fileIsFile: " + inFuncData.fileIsFile);
+        ZPINcAppHelper.outMessageToConsole("recordTime: " + inFuncData.recordTime);
+        ZPINcAppHelper.outMessageToConsole("deletedRec: " + inFuncData.deletedRec);
+        ZPINcAppHelper.outMessageToConsole("changedRecordID: " + inFuncData.changedRecordID);
     }
     /**
      * Used in
      * <ul>
      * <li>{@link ru.newcontrol.ncfv.NcPreIdxWork#getNotFinishedAppendToIndex(java.util.TreeMap, java.util.TreeMap) }
      * </ul>
-     * Print to console data from {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileExist}
-     * @param inFuncData {@link ru.newcontrol.ncfv.NcDcIdxDirListToFileExist}
+     * Print to console data from {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist}
+     * @param inFuncData {@link ru.newcontrol.ncfv.ZPINcDcIdxDirListToFileExist}
      */
-    private static void outToConsoleDirListExist(NcDcIdxDirListToFileExist inFuncData){
+    private static void outToConsoleDirListExist(ZPINcDcIdxDirListToFileExist inFuncData){
         if( inFuncData.nanoTimeEndAddToIndex < 0 ){
-            NcAppHelper.outMessageToConsole("dirListID: " + inFuncData.dirListID);
-            NcAppHelper.outMessageToConsole("diskID: " + inFuncData.diskID);
-            NcAppHelper.outMessageToConsole("pathWithOutDiskLetter: " + inFuncData.pathWithOutDiskLetter);
-            NcAppHelper.outMessageToConsole("pathHash: " + inFuncData.pathHash);
-            NcAppHelper.outMessageToConsole("nanoTimeStartAddToIndex: " + inFuncData.nanoTimeStartAddToIndex);
-            NcAppHelper.outMessageToConsole("nanoTimeEndAddToIndex: " + inFuncData.nanoTimeEndAddToIndex);
-            NcAppHelper.outMessageToConsole("recordTime: " + inFuncData.recordTime);
+            ZPINcAppHelper.outMessageToConsole("dirListID: " + inFuncData.dirListID);
+            ZPINcAppHelper.outMessageToConsole("diskID: " + inFuncData.diskID);
+            ZPINcAppHelper.outMessageToConsole("pathWithOutDiskLetter: " + inFuncData.pathWithOutDiskLetter);
+            ZPINcAppHelper.outMessageToConsole("pathHash: " + inFuncData.pathHash);
+            ZPINcAppHelper.outMessageToConsole("nanoTimeStartAddToIndex: " + inFuncData.nanoTimeStartAddToIndex);
+            ZPINcAppHelper.outMessageToConsole("nanoTimeEndAddToIndex: " + inFuncData.nanoTimeEndAddToIndex);
+            ZPINcAppHelper.outMessageToConsole("recordTime: " + inFuncData.recordTime);
         }
         
     }
@@ -339,17 +339,17 @@ public class ZPINcPreIdxWork {
      * @return 
      */
     private static TreeMap<Long, File> getNotFullFiles(File inFuncSubDir){
-        TreeMap<Integer, File> itemsInSubDir = NcIdxFileManager.getFileListFromSubDir(inFuncSubDir);
+        TreeMap<Integer, File> itemsInSubDir = ZPINcIdxFileManager.getFileListFromSubDir(inFuncSubDir);
         TreeMap<Long, File> notFullItemsInSubDir = new TreeMap<Long, File>();
         for(Map.Entry<Integer, File> itemFile : itemsInSubDir.entrySet()){
             if( itemFile.getValue().isDirectory() ){
                 checkFilesOnReadable(itemFile.getValue());
             }
             else{
-                int recordsInFile = NcIdxFileManager.getCountRecordDataInFile(itemFile.getValue());
+                int recordsInFile = ZPINcIdxFileManager.getCountRecordDataInFile(itemFile.getValue());
                 if( recordsInFile < 0 ){
                     if ( itemFile.getValue().delete() ){
-                        NcAppHelper.outMessage(NcIdxFileManager.getStrCanPathFromFile(itemFile.getValue()) +
+                        ZPINcAppHelper.outMessage(ZPINcIdxFileManager.getStrCanPathFromFile(itemFile.getValue()) +
                         "_|_|_|_deleted");
                     }
                 }
@@ -372,15 +372,15 @@ public class ZPINcPreIdxWork {
      * @param inFuncSubDir 
      */
     private static void checkFilesOnReadable(File inFuncSubDir){
-        TreeMap<Integer, File> itemsInSubDir = NcIdxFileManager.getFileListFromSubDir(inFuncSubDir);
+        TreeMap<Integer, File> itemsInSubDir = ZPINcIdxFileManager.getFileListFromSubDir(inFuncSubDir);
         for(Map.Entry<Integer, File> itemFile : itemsInSubDir.entrySet()){
             if( itemFile.getValue().isDirectory() ){
                 checkFilesOnReadable(itemFile.getValue());
             }
             else{
-                if( !NcIdxFileManager.isDataInFileNotWrong(itemFile.getValue()) ){
+                if( !ZPINcIdxFileManager.isDataInFileNotWrong(itemFile.getValue()) ){
                     if ( itemFile.getValue().delete() ){
-                        NcAppHelper.outMessage(NcIdxFileManager.getStrCanPathFromFile(itemFile.getValue()) +
+                        ZPINcAppHelper.outMessage(ZPINcIdxFileManager.getStrCanPathFromFile(itemFile.getValue()) +
                         "_|_|_|_deleted");
                     }
                 }
@@ -402,21 +402,21 @@ public class ZPINcPreIdxWork {
             case "/j":
                     return Object.class;
             case "/fl":
-                    return NcDcIdxDirListToFileAttr.class;
+                    return ZPINcDcIdxDirListToFileAttr.class;
             case "/ft":
-                    return NcDcIdxDirListToFileType.class;
+                    return ZPINcDcIdxDirListToFileType.class;
             case "/fh":
-                    return NcDcIdxDirListToFileHash.class;
+                    return ZPINcDcIdxDirListToFileHash.class;
             case "/fx":
-                    return NcDcIdxDirListToFileExist.class;
+                    return ZPINcDcIdxDirListToFileExist.class;
             case "/w":
-                    return NcDcIdxWordToFile.class;
+                    return ZPINcDcIdxWordToFile.class;
             case "/sw":
-                    return NcDcIdxStorageWordToFile.class;
+                    return ZPINcDcIdxStorageWordToFile.class;
             case "/lw":
-                    return NcDcIdxLongWordListToFile.class;
+                    return ZPINcDcIdxLongWordListToFile.class;
             case "/ln":
-                    return NcDcIdxWordToFile.class;
+                    return ZPINcDcIdxWordToFile.class;
         }
         return Object.class;
     }
@@ -431,11 +431,11 @@ public class ZPINcPreIdxWork {
      */
     private static void outFilesFromSubDirToConsole(File inFuncSubDir){
         File[] inDirFiles = inFuncSubDir.listFiles();
-        NcAppHelper.outMessageToConsole("");
-        NcAppHelper.outMessageToConsole("Directory path: " + NcIdxFileManager.getStrCanPathFromFile(inFuncSubDir));
-        NcAppHelper.outMessageToConsole("Count files in directory: " + inDirFiles.length);
+        ZPINcAppHelper.outMessageToConsole("");
+        ZPINcAppHelper.outMessageToConsole("Directory path: " + ZPINcIdxFileManager.getStrCanPathFromFile(inFuncSubDir));
+        ZPINcAppHelper.outMessageToConsole("Count files in directory: " + inDirFiles.length);
         for( File itemFile : inDirFiles){
-            NcAppHelper.outMessageToConsole("" + itemFile.getName());
+            ZPINcAppHelper.outMessageToConsole("" + itemFile.getName());
         }
     }
     
@@ -446,26 +446,26 @@ public class ZPINcPreIdxWork {
      * </ul>
      */
     private static void checkTmpIDsData(){
-        File fileTmpIDs = NcIdxFileManager.getTmpIdsFile();
-        boolean fileGet = NcIdxFileManager.isErrorForFileOperation(fileTmpIDs);
+        File fileTmpIDs = ZPINcIdxFileManager.getTmpIdsFile();
+        boolean fileGet = ZPINcIdxFileManager.isErrorForFileOperation(fileTmpIDs);
         if( fileGet ){
-            NcAppHelper.outMessage(
-                NcStrLogMsgField.ERROR_CRITICAL.getStr()
-                + NcStrVarDescription.TMP_IDS_FILE.getStr()
-                + NcStrServiceMsg.NOT_EXIST_OR_WRONG.getStr());
+            ZPINcAppHelper.outMessage(
+                ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
+                + ZPINcStrVarDescription.TMP_IDS_FILE.getStr()
+                + ZPINcStrServiceMsg.NOT_EXIST_OR_WRONG.getStr());
         }
         if( !fileGet ){
-            ZPINcTmpNowProcessInfo readedTmpIDsData= NcIndexManageIDs.getTmpIDsData(fileTmpIDs);
-            boolean isTmpIdsDataWrong = NcIndexManageIDs.isTmpIDsDataWrong(readedTmpIDsData);
+            ZPINcTmpNowProcessInfo readedTmpIDsData = ZPINcIndexManageIDs.getTmpIDsData(fileTmpIDs);
+            boolean isTmpIdsDataWrong = ZPINcIndexManageIDs.isTmpIDsDataWrong(readedTmpIDsData);
             if( !isTmpIdsDataWrong ){
                 getTmpIdsDataToConsole(readedTmpIDsData);
             }
-            boolean isEmpty = NcIndexManageIDs.isTmpIDsDataEmpty(readedTmpIDsData);
+            boolean isEmpty = ZPINcIndexManageIDs.isTmpIDsDataEmpty(readedTmpIDsData);
             if( isEmpty ){
-                NcAppHelper.outMessage(
-                    NcStrLogMsgField.ERROR.getStr()
-                    + NcStrVarDescription.TMP_IDS_FILE.getStr()
-                    + NcStrServiceMsg.READED_DATA_IS_EMPTY.getStr());
+                ZPINcAppHelper.outMessage(
+                    ZPINcStrLogMsgField.ERROR.getStr()
+                    + ZPINcStrVarDescription.TMP_IDS_FILE.getStr()
+                    + ZPINcStrServiceMsg.READED_DATA_IS_EMPTY.getStr());
             }
         }
     }
@@ -478,11 +478,11 @@ public class ZPINcPreIdxWork {
      * @param readedTmpIDsData
      */
     private static void getTmpIdsDataToConsole(ZPINcTmpNowProcessInfo readedTmpIDsData){
-        NcAppHelper.outMessageToConsole("TmpIdsData: ");
-        NcAppHelper.outMessageToConsole("journalid: " + readedTmpIDsData.journalid + " \tjournalname: " + readedTmpIDsData.journalname);
-        NcAppHelper.outMessageToConsole("listnameid: " + readedTmpIDsData.listnameid + " \tlistnameid: " + readedTmpIDsData.listname);
-        NcAppHelper.outMessageToConsole("hashlistnnameid: " + readedTmpIDsData.hashlistnameid + " \thashlistname: " + readedTmpIDsData.hashlistname);
-        NcAppHelper.outMessageToConsole("longwordlistnameid: " + readedTmpIDsData.longwordlistnameid + " \tlongwordlistname: " + readedTmpIDsData.longwordlistname);
+        ZPINcAppHelper.outMessageToConsole("TmpIdsData: ");
+        ZPINcAppHelper.outMessageToConsole("journalid: " + readedTmpIDsData.journalid + " \tjournalname: " + readedTmpIDsData.journalname);
+        ZPINcAppHelper.outMessageToConsole("listnameid: " + readedTmpIDsData.listnameid + " \tlistnameid: " + readedTmpIDsData.listname);
+        ZPINcAppHelper.outMessageToConsole("hashlistnnameid: " + readedTmpIDsData.hashlistnameid + " \thashlistname: " + readedTmpIDsData.hashlistname);
+        ZPINcAppHelper.outMessageToConsole("longwordlistnameid: " + readedTmpIDsData.longwordlistnameid + " \tlongwordlistname: " + readedTmpIDsData.longwordlistname);
     }
 
     

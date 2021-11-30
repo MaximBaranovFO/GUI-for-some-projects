@@ -28,7 +28,7 @@ public class ZPINcParamCfgToDiskReleaser {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcManageCfg#mcSearchOrSetWorkDir() }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcManageCfg#mcSearchOrSetWorkDir() }
      * <li>
      * <li>{@link ru.newcontrol.ncfv.NcPreRunFileViewer#validateAndApplyCfg(ru.newcontrol.ncfv.NcParamFv) }
      * </ul>
@@ -39,11 +39,11 @@ public class ZPINcParamCfgToDiskReleaser {
         File fileWorkDir = new File(strIndexPath);
         boolean boolResultCreation = false;
         
-        boolResultCreation = NcIdxFileManager.dirExistRWAccessChecker(fileWorkDir);
+        boolResultCreation = ZPINcIdxFileManager.dirExistRWAccessChecker(fileWorkDir);
         if( !boolResultCreation ){
             boolResultCreation = fileWorkDir.mkdirs();
         }
-        String[] strSubDirs = NcManageCfg.getWorkSubDirList();
+        String[] strSubDirs = ZPINcManageCfg.getWorkSubDirList();
         for( String itemSubDir : strSubDirs ){
             boolResultCreation = boolResultCreation && createSubDir(fileWorkDir, itemSubDir);
         }
@@ -53,18 +53,18 @@ public class ZPINcParamCfgToDiskReleaser {
     /**
      * Used in
      * <ul>
-     * <li>{@link ru.newcontrol.ncfv.NcParamCfgToDiskReleaser#checkOrCreateIdxDirStructure(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcParamCfgToDiskReleaser#checkOrCreateIdxDirStructure(java.lang.String) }
      * <li>
-     * <li>{@link ru.newcontrol.ncfv.NcIdxFileManager#getIndexSubDirectories(java.lang.String) }
+     * <li>{@link ru.newcontrol.ncfv.ZPINcIdxFileManager#getIndexSubDirectories(java.lang.String) }
      * </ul>
      * @param existParentDir
      * @param subDirName
      * @return
      */
     protected static boolean createSubDir(File existParentDir, String subDirName){
-        String strPathName = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(existParentDir), subDirName);
+        String strPathName = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(existParentDir), subDirName);
         File fileForCreateDir = new File(strPathName);
-        boolean boolCheck = NcIdxFileManager.dirExistRWAccessChecker(fileForCreateDir);
+        boolean boolCheck = ZPINcIdxFileManager.dirExistRWAccessChecker(fileForCreateDir);
         if( !boolCheck ){
             return fileForCreateDir.mkdirs();
         }
@@ -85,9 +85,9 @@ public class ZPINcParamCfgToDiskReleaser {
         if( fileForCreateDir.isDirectory() ){
             return false;
         }
-        boolean boolCheck = NcIdxFileManager.fileExistRWAccessChecker(fileForCreateDir);
+        boolean boolCheck = ZPINcIdxFileManager.fileExistRWAccessChecker(fileForCreateDir);
         if( !boolCheck ){
-            if( !NcIdxFileManager.dirExistRWAccessChecker(fileForCreateDir.getParentFile()) ){
+            if( !ZPINcIdxFileManager.dirExistRWAccessChecker(fileForCreateDir.getParentFile()) ){
                 fileForCreateDir.getParentFile().mkdirs();
             }
             try {
@@ -95,8 +95,8 @@ public class ZPINcParamCfgToDiskReleaser {
                     return fileForCreateDir.createNewFile();
                 }
             } catch (IOException ex) {
-                NcAppHelper.logException(
-                    NcParamCfgToDiskReleaser.class.getCanonicalName(), ex);
+                ZPINcAppHelper.logException(
+                    ZPINcParamCfgToDiskReleaser.class.getCanonicalName(), ex);
                 return false;
             }
         }
@@ -113,19 +113,19 @@ public class ZPINcParamCfgToDiskReleaser {
     protected static void getWorkFileParams(String strFileName){
         File fileWork = new File(strFileName);
         
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrServiceMsg.PATH_WORK_FILE.getStr()
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcIdxFileManager.getStrCanPathFromFile(fileWork)
-            + NcStrServiceMsg.EXIST.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrServiceMsg.PATH_WORK_FILE.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcIdxFileManager.getStrCanPathFromFile(fileWork)
+            + ZPINcStrServiceMsg.EXIST.getStr()
             + fileWork.exists() 
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcStrServiceMsg.CANREAD.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcStrServiceMsg.CANREAD.getStr()
             + fileWork.canRead() 
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcStrServiceMsg.CANWRITE.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcStrServiceMsg.CANWRITE.getStr()
             + fileWork.canWrite() 
-            + NcStrServiceMsg.NEWLINE.getStr());
+            + ZPINcStrServiceMsg.NEWLINE.getStr());
         
     }    
 
@@ -139,38 +139,38 @@ public class ZPINcParamCfgToDiskReleaser {
     protected static void getIdxDirStructure(String strIndexPath){
         File fileWorkDir = new File(strIndexPath);
         
-        NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrServiceMsg.PATH_INDEX_DIRECTORY.getStr()
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcIdxFileManager.getStrCanPathFromFile(fileWorkDir)
-            + NcStrServiceMsg.EXIST.getStr()
+        ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrServiceMsg.PATH_INDEX_DIRECTORY.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcIdxFileManager.getStrCanPathFromFile(fileWorkDir)
+            + ZPINcStrServiceMsg.EXIST.getStr()
             + fileWorkDir.exists()
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcStrServiceMsg.CANREAD.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcStrServiceMsg.CANREAD.getStr()
             + fileWorkDir.canRead()
-            + NcStrServiceMsg.NEWLINE.getStr()
-            + NcStrServiceMsg.CANWRITE.getStr()
+            + ZPINcStrServiceMsg.NEWLINE.getStr()
+            + ZPINcStrServiceMsg.CANWRITE.getStr()
             + fileWorkDir.canWrite()
-            + NcStrServiceMsg.NEWLINE.getStr());
+            + ZPINcStrServiceMsg.NEWLINE.getStr());
         
         
-        String[] strSubDirs = NcManageCfg.getWorkSubDirList();
+        String[] strSubDirs = ZPINcManageCfg.getWorkSubDirList();
         for( String itemSubDir : strSubDirs ){
-            String strPathSubDir = NcIdxFileManager.strPathCombiner(NcIdxFileManager.getStrCanPathFromFile(fileWorkDir), itemSubDir);
+            String strPathSubDir = ZPINcIdxFileManager.strPathCombiner(ZPINcIdxFileManager.getStrCanPathFromFile(fileWorkDir), itemSubDir);
             File pathSubDir = new File(strPathSubDir);
-            NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-                + NcStrServiceMsg.PATH_SUBDIR.getStr()
-                + NcStrServiceMsg.NEWLINE.getStr()
-                + NcIdxFileManager.getStrCanPathFromFile(pathSubDir)
-                + NcStrServiceMsg.EXIST.getStr()
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrServiceMsg.PATH_SUBDIR.getStr()
+                + ZPINcStrServiceMsg.NEWLINE.getStr()
+                + ZPINcIdxFileManager.getStrCanPathFromFile(pathSubDir)
+                + ZPINcStrServiceMsg.EXIST.getStr()
                 + pathSubDir.exists()
-                + NcStrServiceMsg.NEWLINE.getStr()
-                + NcStrServiceMsg.CANREAD.getStr()
+                + ZPINcStrServiceMsg.NEWLINE.getStr()
+                + ZPINcStrServiceMsg.CANREAD.getStr()
                 + pathSubDir.canRead()
-                + NcStrServiceMsg.NEWLINE.getStr()
-                + NcStrServiceMsg.CANWRITE.getStr()
+                + ZPINcStrServiceMsg.NEWLINE.getStr()
+                + ZPINcStrServiceMsg.CANWRITE.getStr()
                 + pathSubDir.canWrite()
-                + NcStrServiceMsg.NEWLINE.getStr());
+                + ZPINcStrServiceMsg.NEWLINE.getStr());
         }
         
     }

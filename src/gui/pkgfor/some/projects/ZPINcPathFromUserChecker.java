@@ -46,12 +46,12 @@ public class ZPINcPathFromUserChecker {
         }
         String strOuput = strInputPathFormatFilter(strInput, strDefault);
         if( strPathWinNetworkStart(strOuput) ){
-            if( !NcAppHelper.isWindows() ){
+            if( !ZPINcAppHelper.isWindows() ){
                 return "/" + strOuput.substring(2);
             }
             return strOuput;
         }
-        if( NcAppHelper.isWindows() ){
+        if( ZPINcAppHelper.isWindows() ){
             if( strPathWinDiskLetterStart(strOuput) ){
                 return strOuput;
             }
@@ -65,7 +65,7 @@ public class ZPINcPathFromUserChecker {
                 return strInputAddPrefixMaxFreeSpaceRoot(strOuput);
             }
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStart(strOuput) ){
                 return strOuput;
             }
@@ -93,12 +93,12 @@ public class ZPINcPathFromUserChecker {
     protected static String strInputAppWorkDirDefault(String strDefault){
         String strOuput = strInputPathFormatFilterForDefault(strDefault);
         if( strPathWinNetworkStart(strOuput) ){
-            if( !NcAppHelper.isWindows() ){
+            if( !ZPINcAppHelper.isWindows() ){
                 return "/" + strOuput.substring(2);
             }
             return strOuput;
         }
-        if( NcAppHelper.isWindows() ){
+        if( ZPINcAppHelper.isWindows() ){
             if( strPathWinDiskLetterStart(strOuput) ){
                 return strOuput;
             }
@@ -112,7 +112,7 @@ public class ZPINcPathFromUserChecker {
                 return strInputAddPrefixMaxFreeSpaceRoot(strOuput);
             }
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStart(strOuput) ){
                 return strOuput;
             }
@@ -150,12 +150,12 @@ public class ZPINcPathFromUserChecker {
         }
         String strOuput = strInputPathFormatFilter(strInput, strDefault);
         if( strPathWinNetworkStart(strOuput) ){
-            if( !NcAppHelper.isWindows() ){
+            if( !ZPINcAppHelper.isWindows() ){
                 return strInputAddPrefixWorkAppDir(strOuput.substring(2));
             }
             return strOuput;
         }
-        if( NcAppHelper.isWindows() ){
+        if( ZPINcAppHelper.isWindows() ){
             if( strPathWinDiskLetterStart(strOuput) ){
                 return strOuput;
             }
@@ -169,7 +169,7 @@ public class ZPINcPathFromUserChecker {
                 return strInputAddPrefixWorkAppDir(strOuput);
             }
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStart(strOuput) ){
                 return strOuput;
             }
@@ -197,12 +197,12 @@ public class ZPINcPathFromUserChecker {
     protected static String strInputAppWorkFileDefault(String strDefault){
         String strOuput = strInputPathFormatFilterForDefault(strDefault);
         if( strPathWinNetworkStart(strOuput) ){
-            if( !NcAppHelper.isWindows() ){
+            if( !ZPINcAppHelper.isWindows() ){
                 return strInputAddPrefixWorkAppDir(strOuput.substring(2));
             }
             return strOuput;
         }
-        if( NcAppHelper.isWindows() ){
+        if( ZPINcAppHelper.isWindows() ){
             if( strPathWinDiskLetterStart(strOuput) ){
                 return strOuput;
             }
@@ -216,7 +216,7 @@ public class ZPINcPathFromUserChecker {
                 return strInputAddPrefixWorkAppDir(strOuput);
             }
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStart(strOuput) ){
                 return strOuput;
             }
@@ -246,13 +246,13 @@ public class ZPINcPathFromUserChecker {
      * @return 
      */
     private static String strInputAddPrefixWorkAppDir(String strInput){
-        String strWorkCfgPath = NcIdxFileManager.getWorkCfgPath();
-        String strAppPath = NcIdxFileManager.getAppWorkDirStrPath();
+        String strWorkCfgPath = ZPINcIdxFileManager.getWorkCfgPath();
+        String strAppPath = ZPINcIdxFileManager.getAppWorkDirStrPath();
         if( strAppPath.length() == 0 ){
             return strInput;
         }
-        strAppPath = NcIdxFileManager.strPathCombiner(strAppPath, "files");
-        return NcIdxFileManager.strPathCombiner(strAppPath, strInput);
+        strAppPath = ZPINcIdxFileManager.strPathCombiner(strAppPath, "files");
+        return ZPINcIdxFileManager.strPathCombiner(strAppPath, strInput);
     }
 
     /**
@@ -261,12 +261,12 @@ public class ZPINcPathFromUserChecker {
      * @return
      */
     private static String strInputAddPrefixWorkAppRoot(String strInput){
-        File strAppPath = NcIdxFileManager.getAppWorkDirFile();
+        File strAppPath = ZPINcIdxFileManager.getAppWorkDirFile();
         if( strAppPath == null ){
             return strInput;
         }
         String strAppRoot = strAppPath.toPath().getRoot().toString();
-        return NcIdxFileManager.strPathCombiner(strAppRoot, strInput);
+        return ZPINcIdxFileManager.strPathCombiner(strAppRoot, strInput);
     }
 
     /**
@@ -285,11 +285,11 @@ public class ZPINcPathFromUserChecker {
             if( itemFile.canRead() && itemFile.canWrite() ){
                 if( itemFile.getFreeSpace() > longFreeSpace ){
                     longFreeSpace = itemFile.getFreeSpace();
-                    strAppRoot = NcIdxFileManager.getStrCanPathFromFile(itemFile);
+                    strAppRoot = ZPINcIdxFileManager.getStrCanPathFromFile(itemFile);
                 }
             }
         }
-        return NcIdxFileManager.strPathCombiner(strAppRoot, strInput);
+        return ZPINcIdxFileManager.strPathCombiner(strAppRoot, strInput);
     }
     /**
      * Used in
@@ -307,48 +307,48 @@ public class ZPINcPathFromUserChecker {
     private static String strInputPathFormatFilter(String strInput, String strInputDefault){
         String strDefault = strInputPathFormatFilterForDefault(strInputDefault);
         if( strDefault.equalsIgnoreCase(strInput)){
-            NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-            + NcStrLogMsgField.CHECK_RESULT.getStr()
-            + NcStrServiceMsg.STRING_EQUAL.getStr()
-            + NcStrLogMsgField.TO_RETURN.getStr()
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_INPUT.getStr() + strInput);
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+            + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+            + ZPINcStrServiceMsg.STRING_EQUAL.getStr()
+            + ZPINcStrLogMsgField.TO_RETURN.getStr()
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_INPUT.getStr() + strInput);
             return strDefault;
         }
         if( !strPathValidContinue(strInput) ){
-            NcAppHelper.outMessage(NcStrLogMsgField.WARNING.getStr()
-            + NcStrLogMsgField.CHECK_RESULT.getStr()
-            + NcStrServiceMsg.PATH_CONTINUE_NOT_VALID.getStr()
-            + NcStrLogMsgField.TO_RETURN.getStr()
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault
-            + NcStrLogMsgField.DISCARDED.getStr()
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_INPUT.getStr() + strInput);
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.WARNING.getStr()
+            + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+            + ZPINcStrServiceMsg.PATH_CONTINUE_NOT_VALID.getStr()
+            + ZPINcStrLogMsgField.TO_RETURN.getStr()
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault
+            + ZPINcStrLogMsgField.DISCARDED.getStr()
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_INPUT.getStr() + strInput);
             return strDefault;
         }
         if( !strPathValidStart(strInput) ){
-            NcAppHelper.outMessage(NcStrLogMsgField.WARNING.getStr()
-            + NcStrLogMsgField.CHECK_RESULT.getStr()
-            + NcStrServiceMsg.PATH_START_NOT_VALID.getStr()
-            + NcStrLogMsgField.TO_RETURN.getStr()
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault
-            + NcStrLogMsgField.DISCARDED.getStr()
-            + NcStrLogMsgField.VARVAL.getStr()
-            + NcStrVarDescription.STR_INPUT.getStr() + strInput);
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.WARNING.getStr()
+            + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+            + ZPINcStrServiceMsg.PATH_START_NOT_VALID.getStr()
+            + ZPINcStrLogMsgField.TO_RETURN.getStr()
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault
+            + ZPINcStrLogMsgField.DISCARDED.getStr()
+            + ZPINcStrLogMsgField.VARVAL.getStr()
+            + ZPINcStrVarDescription.STR_INPUT.getStr() + strInput);
             return strDefault;
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStartForNotWindows(strInput) ){
-                NcAppHelper.outMessage(NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.CHECK_RESULT.getStr()
-                + NcStrServiceMsg.PATH_FOR_NOT_WINDOWS_SYSTEM.getStr()
-                + NcStrLogMsgField.TO_RETURN.getStr()
-                + NcStrLogMsgField.VARVAL.getStr()
-                + NcStrVarDescription.STR_INPUT.getStr() + strInput);
+                ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+                + ZPINcStrServiceMsg.PATH_FOR_NOT_WINDOWS_SYSTEM.getStr()
+                + ZPINcStrLogMsgField.TO_RETURN.getStr()
+                + ZPINcStrLogMsgField.VARVAL.getStr()
+                + ZPINcStrVarDescription.STR_INPUT.getStr() + strInput);
                 return strInput;
             }
         }
@@ -368,55 +368,55 @@ public class ZPINcPathFromUserChecker {
     private static String strInputPathFormatFilterForDefault(String strDefault){
 
         if( !strPathValidContinue(strDefault) ){
-            String strGenerateErrorVal = NcIdxFileManager.strPathCombiner(
-                NcIdxFileManager.getAppWorkDirStrPath(),
+            String strGenerateErrorVal = ZPINcIdxFileManager.strPathCombiner(
+                ZPINcIdxFileManager.getAppWorkDirStrPath(),
                 "/wrongDefaults/f_" + System.nanoTime() + ".error");
-            NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
-                + NcStrLogMsgField.CHECK_RESULT.getStr()
-                + NcStrServiceMsg.PATH_CONTINUE_NOT_VALID.getStr()
-                + NcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
-                + NcStrLogMsgField.TO_RETURN.getStr()
-                + NcStrLogMsgField.VARVAL.getStr()
-                + NcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
+                + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+                + ZPINcStrServiceMsg.PATH_CONTINUE_NOT_VALID.getStr()
+                + ZPINcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
+                + ZPINcStrLogMsgField.TO_RETURN.getStr()
+                + ZPINcStrLogMsgField.VARVAL.getStr()
+                + ZPINcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
                 + strGenerateErrorVal
-                + NcStrLogMsgField.DISCARDED.getStr()
-                + NcStrLogMsgField.VARVAL.getStr()
-                + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
+                + ZPINcStrLogMsgField.DISCARDED.getStr()
+                + ZPINcStrLogMsgField.VARVAL.getStr()
+                + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
             return strGenerateErrorVal;
         }
         if( !strPathValidStart(strDefault) ){
-            String strGenerateErrorVal = NcIdxFileManager.strPathCombiner(
-                NcIdxFileManager.getAppWorkDirStrPath(),
+            String strGenerateErrorVal = ZPINcIdxFileManager.strPathCombiner(
+                ZPINcIdxFileManager.getAppWorkDirStrPath(),
                 "/wrongDefaults/f_" + System.nanoTime() + ".error");
-            NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
-                + NcStrLogMsgField.CHECK_RESULT.getStr()
-                + NcStrServiceMsg.PATH_START_NOT_VALID.getStr()
-                + NcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
-                + NcStrLogMsgField.TO_RETURN.getStr()
-                + NcStrLogMsgField.VARVAL.getStr()
-                + NcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
+            ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
+                + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+                + ZPINcStrServiceMsg.PATH_START_NOT_VALID.getStr()
+                + ZPINcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
+                + ZPINcStrLogMsgField.TO_RETURN.getStr()
+                + ZPINcStrLogMsgField.VARVAL.getStr()
+                + ZPINcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
                 + strGenerateErrorVal
-                + NcStrLogMsgField.DISCARDED.getStr()
-                + NcStrLogMsgField.VARVAL.getStr()
-                + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
+                + ZPINcStrLogMsgField.DISCARDED.getStr()
+                + ZPINcStrLogMsgField.VARVAL.getStr()
+                + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
             return strGenerateErrorVal;
         }
-        if( !NcAppHelper.isWindows() ){
+        if( !ZPINcAppHelper.isWindows() ){
             if( strPathRootStartForNotWindows(strDefault) ){
-                String strGenerateErrorVal = NcIdxFileManager.strPathCombiner(
-                    NcIdxFileManager.getAppWorkDirStrPath(),
+                String strGenerateErrorVal = ZPINcIdxFileManager.strPathCombiner(
+                    ZPINcIdxFileManager.getAppWorkDirStrPath(),
                     "/wrongDefaults/f_" + System.nanoTime() + ".error");
-                NcAppHelper.outMessage(NcStrLogMsgField.ERROR.getStr()
-                    + NcStrLogMsgField.CHECK_RESULT.getStr()
-                    + NcStrServiceMsg.PATH_FOR_NOT_WINDOWS_SYSTEM.getStr()
-                    + NcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
-                    + NcStrLogMsgField.TO_RETURN.getStr()
-                    + NcStrLogMsgField.VARVAL.getStr()
-                    + NcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
+                ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
+                    + ZPINcStrLogMsgField.CHECK_RESULT.getStr()
+                    + ZPINcStrServiceMsg.PATH_FOR_NOT_WINDOWS_SYSTEM.getStr()
+                    + ZPINcStrLogMsgField.IN_SET_DEFAULT_ERROR_GENERATE_ERROR_VAL.getStr()
+                    + ZPINcStrLogMsgField.TO_RETURN.getStr()
+                    + ZPINcStrLogMsgField.VARVAL.getStr()
+                    + ZPINcStrVarDescription.STR_GENERATE_ERROR_VAL.getStr()
                     + strGenerateErrorVal
-                    + NcStrLogMsgField.DISCARDED.getStr()
-                    + NcStrLogMsgField.VARVAL.getStr()
-                    + NcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
+                    + ZPINcStrLogMsgField.DISCARDED.getStr()
+                    + ZPINcStrLogMsgField.VARVAL.getStr()
+                    + ZPINcStrVarDescription.STR_DEFAULT.getStr() + strDefault);
                 return strGenerateErrorVal;
             }
         }
@@ -436,7 +436,7 @@ public class ZPINcPathFromUserChecker {
      * in other string start, return false
      */
     private static boolean strPathRootStartForNotWindows(String inFuncStrPath){
-        if( NcAppHelper.isWindows() ){
+        if( ZPINcAppHelper.isWindows() ){
             return false;
         }
         if( inFuncStrPath.length() > 2 ){

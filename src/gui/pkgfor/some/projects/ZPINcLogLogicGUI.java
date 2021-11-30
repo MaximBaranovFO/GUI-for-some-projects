@@ -30,12 +30,12 @@ public class ZPINcLogLogicGUI {
      */
     protected static void NcSwMainMenuGetMainMenu(){
         if( ZPINcfvRunVariables.isLALRNcSwMainMenuMainMenu() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_JMENUBAR.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_JMENU.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_JMENUBAR.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_JMENU.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
     /**
@@ -48,12 +48,12 @@ public class ZPINcLogLogicGUI {
      */
     protected static void NcSwPanelCenterGetPanel(){
         if( ZPINcfvRunVariables.isLALRNcSwPanelCentergetPanel() ){
-            String strLogMsg = NcStrLogMsgField.INFO.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NOW.getStr()
-                + NcStrLogLogicVar.LA_JPANEL_CENTER.getStr()
-                + NcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
-                + NcStrLogLogicVar.LA_SET_VISIBLE_GUI.getStr();
-            NcAppHelper.outMessage(strLogMsg);
+            String strLogMsg = ZPINcStrLogMsgField.INFO.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NOW.getStr()
+                + ZPINcStrLogLogicVar.LA_JPANEL_CENTER.getStr()
+                + ZPINcStrLogMsgField.APP_LOGIC_NEXT_WAY_VAR.getStr()
+                + ZPINcStrLogLogicVar.LA_SET_VISIBLE_GUI.getStr();
+            ZPINcAppHelper.outMessage(strLogMsg);
         }
     }
 }

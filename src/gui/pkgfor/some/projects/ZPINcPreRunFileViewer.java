@@ -73,7 +73,7 @@ public class ZPINcPreRunFileViewer {
         boolean boolSHA256 = false;
         boolean boolSHA512 = false;
         
-        if( fileCfg.exists() && ( !ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ) ){
+        if( fileCfg.exists() && ( !ZPINcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ) ){
                 boolMD5 = readedWorkCfg.strHexMD5.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.MD5.checksum(fileCfg)));
                 boolSHA1 = readedWorkCfg.strHexSHA1.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.SHA1.checksum(fileCfg)));
                 boolSHA256 = readedWorkCfg.strHexSHA256.equalsIgnoreCase(ZPINcAppHelper.toHex(ZPINcFileHash.SHA256.checksum(fileCfg)));
@@ -82,9 +82,9 @@ public class ZPINcPreRunFileViewer {
         if( (!boolMD5) && (!boolSHA1) && (!boolSHA256) && (!boolSHA512) ){
             readedWorkCfg = getUpdatedAppCfg();
         }
-        if( ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ){
+        if( ZPINcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
             readedWorkCfg = getUpdatedAppCfg();
-            if( ZPINcParamFvManager.isZPINcParamFvDataEmpty(readedWorkCfg) ){
+            if( ZPINcParamFvManager.isNcParamFvDataEmpty(readedWorkCfg) ){
                 ZPINcAppHelper.appExitWithMessage("Can't get for current work config, error");
             }
         }

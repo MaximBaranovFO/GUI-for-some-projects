@@ -5,6 +5,7 @@
 //package concurrency;
 package gui.pkgfor.some.projects;
 
+import static gui.pkgfor.some.projects.ZPINcSwingIndexManagerApp.createGui;
 import java.util.List;
 import java.util.Random;
 import java.awt.event.ActionListener;
@@ -21,6 +22,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.BorderFactory;
 import javax.swing.SwingWorker;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 //import javax.swing.*;
 /**
  *
@@ -181,6 +184,21 @@ public class GUIForSomeProjects extends JFrame
             public void run() {
                 //ZPINcfv zpiNcfvPre = new ZPINcfv();
                 //zpiNcfvPre.ncfvMain();
+                
+                
+                try {
+                    // Significantly improves the look of the output in
+                    // terms of the file names returned by FileSystemView!
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    UIDefaults defaults = UIManager.getDefaults();
+                    //defaults.
+                } catch(Exception weTried) {
+                    weTried.getMessage();
+                    weTried.getStackTrace();
+                }
+                ZPINcSwingIndexManagerApp.createGui();
+                
+                
                 ZPIAppEtcSecurityHelper.createNewSecurity();
                 ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
                 ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);

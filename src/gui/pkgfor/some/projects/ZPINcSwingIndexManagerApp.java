@@ -71,7 +71,7 @@ public class ZPINcSwingIndexManagerApp {
      * <li>{@link ru.newcontrol.ncfv.ZPINcSwingIndexManagerApp#ZPINcRunSIMA() }
      * </ul>
      */
-    private static void createGui(){
+    protected static void createGui(){
         ZPINcSwGUIComponentStatus listComponents = new ZPINcSwGUIComponentStatus();
         
         JFrame frame = new JFrame(ZPINcStrGUILabel.TITLE_APP.getStr());

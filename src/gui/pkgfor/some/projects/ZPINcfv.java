@@ -99,7 +99,7 @@ public class ZPINcfv {
             }
         }
     }
-    private static void tempRunNewConcept(){
+    protected static void tempRunNewConcept(){
         ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
         
         ZPIAdilRule loggerRule = new ZPIAdilRule(thIndexRule);
@@ -651,7 +651,7 @@ public class ZPINcfv {
     
 
     void ncfvMain() {
-        String[] args = {"-getenv", "-pv", ""};
+        String[] args = {"-m", "C:\\", ""};
         ncfvMain(args);
     }
     

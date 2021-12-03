@@ -15,6 +15,8 @@
  */
 package gui.pkgfor.some.projects;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author Администратор
@@ -23,6 +25,10 @@ public class ListTableDO {
     private boolean select;
     private String name;
     private int age;
+    private JButton workerDo;
+    private JButton workerShowInfo;
+    private Boolean isDoSet = Boolean.FALSE;
+    private Boolean isShowInfoSet = Boolean.FALSE;
 
         // Add getter's and setter's
     protected void setName(String inputedStr){
@@ -34,8 +40,29 @@ public class ListTableDO {
     protected void setSelect(Boolean inputedSelect){
         select = inputedSelect;
     }
+    protected void setDo(JButton inputedButtonForDo){
+        isDoSet = Boolean.TRUE;
+        workerDo = inputedButtonForDo;
+    }
+    protected void setWorkerShowInfo(JButton inputedButtonShowInfo){
+        isShowInfoSet = Boolean.TRUE;
+        
+        workerShowInfo = inputedButtonShowInfo;
+    }
     protected Boolean isSelect(){
         if (select) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+    protected Boolean isDo(){
+        if (isDoSet) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+    protected Boolean isWorkerShowInfo(){
+        if (isShowInfoSet) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

@@ -46,7 +46,6 @@ public class ListTableDO {
     }
     protected void setWorkerShowInfo(JButton inputedButtonShowInfo){
         isShowInfoSet = Boolean.TRUE;
-        
         workerShowInfo = inputedButtonShowInfo;
     }
     protected Boolean isSelect(){
@@ -72,5 +71,8 @@ public class ListTableDO {
     }
     protected String getName(){
         return name;
+    }
+    protected JButton getDoWorker(){
+        return workerDo;
     }
 }

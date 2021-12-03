@@ -15,6 +15,7 @@
  */
 package gui.pkgfor.some.projects;
 
+import java.awt.Component;
 import java.util.List;
 import java.util.Random;
 import java.awt.event.ActionListener;
@@ -47,12 +48,14 @@ public class GuiGridBagOne extends JFrame implements Serializable{
         super("guiGridBagOne");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridBagLayout());
-        add(new JButton("Some txt"));
-        add(new JButton("Cancel"));
+        Component addSomeTxt = add(new JButton("Some txt"));
+        Component addCancel = add(new JButton("Cancel"));
+        Component addWokerDo = add(new JButton("Do worker"));
         GridBagConstraints textFieldConstraints = new GridBagConstraints();
         textFieldConstraints.fill = GridBagConstraints.HORIZONTAL;
         textFieldConstraints.gridwidth = GridBagConstraints.REMAINDER;
         textFieldConstraints.weightx = 1.0f;
+        
         add(new JTextField(10), textFieldConstraints);
         setSize(400, 200);
         setVisible(true);

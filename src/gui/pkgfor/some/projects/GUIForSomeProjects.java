@@ -180,6 +180,7 @@ public class GUIForSomeProjects extends JFrame
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
             }
         });
+        //ZPINcSwingIndexManagerApp.ZPINcRunSIMA();
         GUIManagerInterface.builderSoft();
         
     }

@@ -49,10 +49,9 @@ public class GuiTableModel extends AbstractTableModel {
         case 2: 
             return Integer.class;
         case 3:
-            //return Boolean.class;
             return JButton.class;
         case 4:
-            return Boolean.class;
+            return JButton.class;
         default:
             return String.class;
         }

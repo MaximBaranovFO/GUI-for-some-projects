@@ -44,6 +44,9 @@ public class GuiGridBagAndHelper {
         return this.numberOne;
         
     }
+    protected Object getWindowTwo(){
+        return this.numberTwo;
+    }
     protected void writeObjectToFs(){
         workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object001\\", numberOne);
         workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object002\\", numberTwo);

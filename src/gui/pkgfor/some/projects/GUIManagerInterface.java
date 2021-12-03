@@ -26,8 +26,8 @@ import javax.swing.UIManager;
  */
 public class GUIManagerInterface {
     protected static void builderSoft(){
-        ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
-        ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
+//        ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
+//        ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
         try {
         
         SwingUtilities.invokeLater(new Runnable() {
@@ -40,7 +40,7 @@ public class GUIManagerInterface {
                     exTrowBuilderSoft.printStackTrace();
                 } finally {
                     try {
-                        storeNew.utilizeAllLists();
+//                        storeNew.utilizeAllLists();
                     } catch(Throwable exTrowSecondBuilderSoftSecond) {
                         System.err.println(exTrowSecondBuilderSoftSecond.getMessage());
                         exTrowSecondBuilderSoftSecond.printStackTrace();

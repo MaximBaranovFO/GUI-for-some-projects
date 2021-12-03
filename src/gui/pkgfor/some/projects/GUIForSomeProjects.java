@@ -182,71 +182,7 @@ public class GUIForSomeProjects extends JFrame
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                //ZPINcfv zpiNcfvPre = new ZPINcfv();
-                //zpiNcfvPre.ncfvMain();
-                
-                
-                try {
-                    // Significantly improves the look of the output in
-                    // terms of the file names returned by FileSystemView!
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    UIDefaults defaults = UIManager.getDefaults();
-                    //defaults.
-                } catch(Exception weTried) {
-                    weTried.getMessage();
-                    weTried.getStackTrace();
-                }
-                ZPINcSwingIndexManagerApp.createGui();
-                
-                
-                ZPIAppEtcSecurityHelper.createNewSecurity();
-                ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
-                ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
-                try {
-                                System.out.println("*|*|* *|*|* *|*|* print created storages");
-            //storeNew.printAllList();
-            //storeNew.updateStorageList();
-            //System.out.println("*|*|* *|*|* *|*|* print updated list of storages");
-            FileSystem storeFileSystemByNumber = storeNew.getStoreFileSystemByNumber(3);
-            System.out.println("*|"
-                    + storeFileSystemByNumber.toString()
-                    + "*|* *| opened "
-                    + storeFileSystemByNumber.isOpen());
-            FileSystem storeFileSystemByNumber1 = storeNew.getStoreFileSystemByNumber(10);
-            System.out.println("*|"
-                    + storeFileSystemByNumber1.toString()
-                    + "*|* *| opened "
-                    + storeFileSystemByNumber1.isOpen());
-            FileSystem storeFileSystemByNumber2 = storeNew.getStoreFileSystemByNumber(11);
-            System.out.println("*|"
-                    + storeFileSystemByNumber2.toString()
-                    + "*|* *| opened "
-                    + storeFileSystemByNumber2.isOpen());
-            storeNew.printAllList();
-
-            storeNew.utilizeAllLists();
-            System.out.println("*|*|* *|*|* *|*|* print utilized list of storages");
-            storeNew.printAllList();
-            
-            ZPINcfv.tempRunNewConcept();
-            System.out.println("end run *** *** *** tempRunNewConcept()");
-                    ZPINcAppLoader.loadApp();
-                    ZPINcAppHelper.getNcSysProperties();
-                    ZPINcPreRunFileViewer.createNewCfg();
-                    ZPINcParamFv appWorkCfg = ZPINcPreRunFileViewer.getCurrentWorkCfg();
-                    ZPINcParamFv appEmpty = new ZPINcParamFv();
-                    ZPINcSwingIndexManagerApp.ZPINcRunSIMA();
-                } catch (Throwable exTrow) {
-                    System.err.println(exTrow.getMessage());
-                    exTrow.printStackTrace();
-                } finally {
-                    try {
-                        storeNew.utilizeAllLists();
-                    } catch(Throwable exTrowSecond) {
-                        System.err.println(exTrowSecond.getMessage());
-                        exTrowSecond.printStackTrace();
-                    }
-                }
+                GUIManagerInterface.interfaceBuilder();
             }
         });
     }

@@ -45,8 +45,8 @@ public class GuiGridBagAndHelper {
         
     }
     protected void writeObjectToFs(){
-        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object\\", numberOne);
-        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object\\", numberTwo);
+        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object001\\", numberOne);
+        workerForFsDo.checkOrCreateFileInSubWorkDirWithObject("C:\\_bmv\\id-jao\\asis_object002\\", numberTwo);
         
     }
     private void operationsInFsForAppExec(){

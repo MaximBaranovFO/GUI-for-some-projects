@@ -30,7 +30,7 @@ public class GUIManagerInterface {
 //        ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
         try {
         
-        SwingUtilities.invokeLater(new Runnable() {
+            SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GUIManagerInterface.interfaceBuilder();
             }

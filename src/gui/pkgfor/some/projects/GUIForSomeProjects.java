@@ -158,6 +158,28 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GUIForSomeProjects();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GuiGridBagAndHelper();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GuiTableTree guiTableTree = new GuiTableTree();
+                guiTableTree.openAndShow();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
+                threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
+            }
+        });
         GUIManagerInterface.builderSoft();
         
     }

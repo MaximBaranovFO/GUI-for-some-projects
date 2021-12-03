@@ -29,28 +29,7 @@ public class GUIManagerInterface {
         ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
         ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
         try {
-            SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new GUIForSomeProjects();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new GuiGridBagAndHelper();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                GuiTableTree guiTableTree = new GuiTableTree();
-                guiTableTree.openAndShow();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
-                threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
-            }
-        });
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GUIManagerInterface.interfaceBuilder();

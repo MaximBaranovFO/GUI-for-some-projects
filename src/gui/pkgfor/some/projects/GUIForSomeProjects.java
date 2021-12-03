@@ -5,7 +5,7 @@
 //package concurrency;
 package gui.pkgfor.some.projects;
 
-import static gui.pkgfor.some.projects.ZPINcSwingIndexManagerApp.createGui;
+//import static gui.pkgfor.some.projects.ZPINcSwingIndexManagerApp.createGui;
 import java.util.List;
 import java.util.Random;
 import java.awt.event.ActionListener;
@@ -158,32 +158,7 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new GUIForSomeProjects();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new GuiGridBagAndHelper();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                GuiTableTree guiTableTree = new GuiTableTree();
-                guiTableTree.openAndShow();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
-                threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
-            }
-        });
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                GUIManagerInterface.interfaceBuilder();
-            }
-        });
+        GUIManagerInterface.builderSoft();
+        
     }
 }

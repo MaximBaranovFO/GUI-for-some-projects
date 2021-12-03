@@ -16,6 +16,7 @@
 package gui.pkgfor.some.projects;
 
 import java.nio.file.FileSystem;
+import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 
@@ -24,6 +25,49 @@ import javax.swing.UIManager;
  * @author Администратор
  */
 public class GUIManagerInterface {
+    protected static void builderSoft(){
+        ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
+        ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
+        try {
+            SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GUIForSomeProjects();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new GuiGridBagAndHelper();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GuiTableTree guiTableTree = new GuiTableTree();
+                guiTableTree.openAndShow();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
+                threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
+            }
+        });
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GUIManagerInterface.interfaceBuilder();
+            }
+        });
+        } catch (Throwable exTrowBuilderSoft) {
+                    System.err.println(exTrowBuilderSoft.getMessage());
+                    exTrowBuilderSoft.printStackTrace();
+                } finally {
+                    try {
+                        storeNew.utilizeAllLists();
+                    } catch(Throwable exTrowSecondBuilderSoftSecond) {
+                        System.err.println(exTrowSecondBuilderSoftSecond.getMessage());
+                        exTrowSecondBuilderSoftSecond.printStackTrace();
+                    }
+                }
+    }
     protected static void interfaceBuilder(){
         int returnValueForThisFunction = 3163;
         

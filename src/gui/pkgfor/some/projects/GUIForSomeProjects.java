@@ -158,6 +158,9 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
+        frockedFieldWorkers.doCreationTaskHowMain();
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new GUIForSomeProjects();

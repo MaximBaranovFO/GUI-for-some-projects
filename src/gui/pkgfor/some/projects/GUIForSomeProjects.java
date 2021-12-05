@@ -14,6 +14,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.nio.file.FileSystem;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -160,6 +163,16 @@ public class GUIForSomeProjects extends JFrame
     public static void main(String[] args) {
         GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
         frockedFieldWorkers.doCreationTaskHowMain();
+        
+        try {
+            GUIinterfaceNamesB.MultithreadClient.mainFromPoolWorker();
+        } catch (ExecutionException ex) {
+            Logger.getLogger(GUIForSomeProjects.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUIForSomeProjects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        GUIinterfaceNamesB.SingleThreadClient.mainFromSingleThreadClient();
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

@@ -19,6 +19,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -39,13 +41,44 @@ import javax.swing.UIManager;
  */
 public interface GUIinterfaceNamesFA {
     public class OldGUIReconstruction implements ExecutorService {
+        private static int numberOfIteration;
+        private static void getSystemEnvironment(){
+            Map<String, String> env = System.getenv();
+        }
+        private static void getSystemProperty(){
+            Properties properties = System.getProperties();
+        }
         protected static void someGuiCreator(){
-            JFrame frame = new JFrame("some Gui addition");
+            
+            if(numberOfIteration < 1)
+                numberOfIteration = 0;
+            numberOfIteration++;
+            long currentTimeMillis = System.currentTimeMillis();
+            String valueOf = String.valueOf(currentTimeMillis);
+            GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
+            JFrame frame = new JFrame("some Gui addition ".concat(valueOf));
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), frame);
+            numberOfIteration++;
             JPanel mainPanel = new JPanel();
-            mainPanel.setLayout(new BorderLayout());
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), mainPanel);
+            numberOfIteration++;
+            BorderLayout borderLayout = new BorderLayout();
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), borderLayout);
+            mainPanel.setLayout(borderLayout);
+            numberOfIteration++;
             frame.getContentPane().add(mainPanel);
-            frame.setMinimumSize(new Dimension(320, 240));
-            frame.setPreferredSize(new Dimension(800, 600));
+            Dimension dimension = new Dimension(320, 240);
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), dimension);
+            frame.setMinimumSize(dimension);
+            Dimension dimension1 = new Dimension(800, 600);
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), dimension1);
+            numberOfIteration++;
+            
+            frame.setPreferredSize(dimension1);
+            numberOfIteration++;
             frame.repaint();
             frame.revalidate();
             frame.pack();

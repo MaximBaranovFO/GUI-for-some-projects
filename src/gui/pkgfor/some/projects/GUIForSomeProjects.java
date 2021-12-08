@@ -161,6 +161,8 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        GUIinterfaceNamesFA.OldGUIReconstruction.doWorkForSingleWithResult();
+        GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
         GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
         frockedFieldWorkers.doCreationTaskHowMain();
         
@@ -181,6 +183,12 @@ public class GUIForSomeProjects extends JFrame
         GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.mainDoWorkerByAuthorsFromNet();
         GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithForkPool();
         GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithFork();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
+            }
+        });
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

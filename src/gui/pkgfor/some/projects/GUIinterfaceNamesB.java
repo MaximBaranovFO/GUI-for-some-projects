@@ -74,7 +74,11 @@ public class ThreadPoolWu implements Executor {
         }
     }
 }
-    
+/**
+ * Doubled class with another name see Up
+ * ///***>>>!!!--->>>!!!<<<---!!!<<<***\\\
+ * Make changes here
+ */    
  public class ExecPoolFromNetWorks implements Executor {
     private final Queue<Runnable> workQueue = new ConcurrentLinkedQueue<>();
     private volatile boolean isRunning = true;

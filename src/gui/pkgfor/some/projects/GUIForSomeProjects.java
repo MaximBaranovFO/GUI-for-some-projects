@@ -174,6 +174,8 @@ public class GUIForSomeProjects extends JFrame
         
         GUIinterfaceNamesB.SingleThreadClient.mainFromSingleThreadClient();
         
+        //GUIInterfaceNamesC.MotivatedByNetWorkInformation.singleAboutAuthors();
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new GUIForSomeProjects();

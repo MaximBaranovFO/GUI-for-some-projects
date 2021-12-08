@@ -37,6 +37,7 @@ import static java.lang.String.format;
 public interface GUIinterfaceNamesB {
     
     /**
+     * https://habr.com/ru/post/326146/
  * @author Sergey Kuptsov
  * @since 02/03/2017
  */

@@ -18,6 +18,7 @@ package gui.pkgfor.some.projects;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -56,15 +57,16 @@ public interface GUIinterfaceNamesFA {
             long currentTimeMillis = System.currentTimeMillis();
             String valueOf = String.valueOf(currentTimeMillis);
             GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
-            JFrame frame = new JFrame("some Gui addition ".concat(valueOf));
+            String windowName = OldGUIReconstruction.getWindowName("some Gui addition ");
+            JFrame frame = new JFrame(windowName);
             guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), frame);
             numberOfIteration++;
             JPanel mainPanel = new JPanel();
-            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), mainPanel);
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#002^").concat(valueOf), mainPanel);
             numberOfIteration++;
             BorderLayout borderLayout = new BorderLayout();
             numberOfIteration++;
-            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), borderLayout);
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#003^").concat(valueOf), borderLayout);
             mainPanel.setLayout(borderLayout);
             numberOfIteration++;
             frame.getContentPane().add(mainPanel);
@@ -105,8 +107,21 @@ public interface GUIinterfaceNamesFA {
                 
             }
         });
+        
     }
-
+    protected static String getWindowName(String strSomeNamePre){
+        if(strSomeNamePre.length() < 1)
+            strSomeNamePre = "|".concat(strSomeNamePre).concat("|");
+        strSomeNamePre = "|".concat(strSomeNamePre).concat("|");
+        if(numberOfIteration < 1)
+                numberOfIteration = 0;
+        numberOfIteration++;
+        long currentTimeMillis = System.currentTimeMillis();
+        String nowFormatedDateTime = FsListOfWorker.getNowFormatedDateTime();
+        String concatStrSomeNamePre = strSomeNamePre.concat(nowFormatedDateTime).concat("|");
+        String valueOf = String.valueOf(currentTimeMillis);
+        return String.valueOf(numberOfIteration).concat(concatStrSomeNamePre.concat(valueOf));
+    }
     /**
      * Used in
      * <ul>

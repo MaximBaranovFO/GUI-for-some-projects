@@ -21,6 +21,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -94,7 +95,37 @@ public interface GUIinterfaceNamesD {
         return firstHalfArrayValueSumCounter.join() + secondHalfArrayValueSumCounter.join();
     }
 }
+public class ValueSumReconstruiredByDev extends RecursiveTask<Integer> {
 
+    private GuiTableTree arrayOfGui;
+
+    public ValueSumReconstruiredByDev(GuiTableTree array) {
+        this.arrayOfGui = array;
+    }
+
+    
+    @Override
+    protected Integer compute() {
+        /*if(arrayOfGui.length <= 2) {
+            System.out.printf("Task %s execute in thread %s%n", this, Thread.currentThread().getName());
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUIinterfaceNamesD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return Arrays.stream(arrayOfGui).sum();
+        }*/
+        /*ValueSumReconstruiredByDev firstHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(Arrays.copyOfRange(array, 0, array.length/2));
+        ValueSumReconstruiredByDev secondHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(Arrays.copyOfRange(array, array.length/2, array.length));*/
+        ValueSumReconstruiredByDev firstHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(arrayOfGui);
+        arrayOfGui.openAndShowWithArray();
+        ValueSumReconstruiredByDev secondHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(arrayOfGui);
+        arrayOfGui.openAndShowWithArray();
+        firstHalfArrayValueSumCounter.fork();
+        secondHalfArrayValueSumCounter.fork();
+        return firstHalfArrayValueSumCounter.join() + secondHalfArrayValueSumCounter.join();
+    }
+}
 public class MainDoWorkerByAuthorsFromNet {
 
     public static void mainDoWorkerByAuthorsFromNet() {
@@ -112,6 +143,21 @@ public class MainDoWorkerByAuthorsFromNet {
             array[i] = 3;
         }
         return array;
+    }
+    public static void doGUIForWorkerControl(){
+        
+        
+        System.out.println(new Date());
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                GuiTableTree guiTableTree = new GuiTableTree();
+                ValueSumReconstruiredByDev counterReconfiguredDev = new ValueSumReconstruiredByDev(guiTableTree);
+                System.out.println(forkJoinPool.invoke(counterReconfiguredDev));
+            }
+        });
+        
+        System.out.println(new Date());
     }
 }
 /**

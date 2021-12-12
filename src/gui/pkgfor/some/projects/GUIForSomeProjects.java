@@ -223,6 +223,7 @@ public class GUIForSomeProjects extends JFrame
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                //Simple code has thread name and not have JFrame
                 ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
                 //guiFromWindowAttrCurrent.correctTitleOfGUIWindow(threadSimpleCodeRunForEnd);

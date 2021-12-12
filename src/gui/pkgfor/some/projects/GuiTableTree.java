@@ -49,7 +49,7 @@ public class GuiTableTree {
     }
     protected static JFrame getWindowCreated(){
         if( isNotWindowCreatedExist ){
-            new GuiTableTree();
+            openAndShow();
         }
         return windowCreated;
     }
@@ -59,7 +59,7 @@ public class GuiTableTree {
         }
         return windowCreatedWithArray;
     }
-    protected void openAndShow(){
+    protected static void openAndShow(){
         Runnable r;
         r = new Runnable() {
             

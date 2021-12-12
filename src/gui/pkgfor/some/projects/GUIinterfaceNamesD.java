@@ -152,6 +152,7 @@ public class MainDoWorkerByAuthorsFromNet {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GuiTableTree guiTableTree = new GuiTableTree();
+                GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(guiTableTree.getWindowCreated());
                 ValueSumReconstruiredByDev counterReconfiguredDev = new ValueSumReconstruiredByDev(guiTableTree);
                 System.out.println(forkJoinPool.invoke(counterReconfiguredDev));
             }

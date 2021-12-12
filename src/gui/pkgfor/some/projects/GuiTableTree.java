@@ -31,10 +31,14 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 public class GuiTableTree {
-
+    private static JFrame windowCreated;
+    private static JFrame windowCreatedWithArray;
+    private static Boolean isNotWindowCreatedExist = Boolean.TRUE;
+    private static Boolean isNotWindowCreatedExistWithArray = Boolean.TRUE;
     public static void GuiTableTree() {
-        Runnable r = new Runnable() {
-
+        Runnable r;
+        r = new Runnable() {
+            
             @Override
             public void run() {
                 new GuiTableTree().createUI();
@@ -42,10 +46,23 @@ public class GuiTableTree {
         };
 
         EventQueue.invokeLater(r);
+    }
+    protected static JFrame getWindowCreated(){
+        if( isNotWindowCreatedExist ){
+            new GuiTableTree();
+        }
+        return windowCreated;
+    }
+    protected static JFrame getWindowCreatedWithArray(){
+        if( isNotWindowCreatedExistWithArray ){
+            int[] openAndShowWithArray = openAndShowWithArray();
+        }
+        return windowCreatedWithArray;
     }
     protected void openAndShow(){
-        Runnable r = new Runnable() {
-
+        Runnable r;
+        r = new Runnable() {
+            
             @Override
             public void run() {
                 new GuiTableTree().createUI();
@@ -54,7 +71,7 @@ public class GuiTableTree {
 
         EventQueue.invokeLater(r);
     }
-    protected int[] openAndShowWithArray(){
+    protected static int[] openAndShowWithArray(){
         int[] array = new int[3];
         array[0] = 1;
         array[1] = 2;
@@ -114,6 +131,8 @@ public class GuiTableTree {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        windowCreated = frame;
+        isNotWindowCreatedExist = Boolean.FALSE;
     }
     
 private void createUIWithNames() {
@@ -159,6 +178,8 @@ private void createUIWithNames() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        windowCreatedWithArray = frame;
+        isNotWindowCreatedExistWithArray = Boolean.FALSE;
     }
 }
 /*public class GuiTableTree {

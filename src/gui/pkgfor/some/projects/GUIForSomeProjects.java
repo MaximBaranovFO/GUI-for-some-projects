@@ -218,7 +218,7 @@ public class GUIForSomeProjects extends JFrame
             public void run() {
                 GuiTableTree guiTableTree = new GuiTableTree();
                 guiTableTree.openAndShow();
-                //guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiTableTree);
+                guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiTableTree.getWindowCreated());
             }
         });
         SwingUtilities.invokeLater(new Runnable() {

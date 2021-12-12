@@ -63,7 +63,7 @@ public interface GUIinterfaceNamesE {
         return this.idNowWindow.size();
     }
     protected Integer countInListOfWindowNames(){
-        return this.idNowWindow.size();
+        return this.idNowWindowCreatedNamesListOfString.size();
     }
     private static String getWindowCurrentName(JFrame windowForChange){
         String title = windowForChange.getTitle();

@@ -15,7 +15,9 @@
  */
 package gui.pkgfor.some.projects;
 
+import java.awt.GridBagConstraints;
 import java.nio.file.Path;
+import javax.swing.JFrame;
 
 /**
  *
@@ -33,7 +35,10 @@ public class GuiGridBagAndHelper {
         helperParams.runMainExec();
         
         numberTwo = helperForThisParams;
+        GridBagConstraints getNumberTwo = numberTwo.get();
+        
         numberOne = helperParams;
+        GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(numberOne);
         
         workerForFsDo = new FsWorkerDirFiles();
         operationsInFsForAppExec();
@@ -41,6 +46,10 @@ public class GuiGridBagAndHelper {
         writeObjectToFs();
     }
     protected Object getWindowOne(){
+        return this.numberOne;
+        
+    }
+    protected JFrame getWindowOneByExtended(){
         return this.numberOne;
         
     }

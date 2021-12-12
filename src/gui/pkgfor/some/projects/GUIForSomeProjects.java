@@ -34,6 +34,7 @@ import javax.swing.UIManager;
  */
 public class GUIForSomeProjects extends JFrame 
                   implements ActionListener  {
+    private static final GUIinterfaceNamesE.GuiFromWindowAttr guiFromWindowAttrCurrent = new GUIinterfaceNamesE.GuiFromWindowAttr();
     /**
      * Some editing and add code to app (Seaacta)
      * AFSO - A(Add) F(From) S(Siberia) O(Omsk)
@@ -203,24 +204,28 @@ public class GUIForSomeProjects extends JFrame
     protected static void runSwingUtilitesIterations(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GUIForSomeProjects();
+                GUIForSomeProjects guiForSomeProjects = new GUIForSomeProjects();
+                guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiForSomeProjects);
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new GuiGridBagAndHelper();
+                GuiGridBagAndHelper guiGridBagAndHelper = new GuiGridBagAndHelper();
+                guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiGridBagAndHelper.getWindowOneByExtended());
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GuiTableTree guiTableTree = new GuiTableTree();
                 guiTableTree.openAndShow();
+                //guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiTableTree);
             }
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 ZPIThSimpleCR threadSimpleCodeRunForEnd = new ZPIThSimpleCR();
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
+                //guiFromWindowAttrCurrent.correctTitleOfGUIWindow(threadSimpleCodeRunForEnd);
             }
         });
     }

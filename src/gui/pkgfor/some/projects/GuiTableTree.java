@@ -133,6 +133,7 @@ public class GuiTableTree {
         frame.setVisible(true);
         windowCreated = frame;
         isNotWindowCreatedExist = Boolean.FALSE;
+        GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(frame);
     }
     
 private void createUIWithNames() {
@@ -180,6 +181,7 @@ private void createUIWithNames() {
         frame.setVisible(true);
         windowCreatedWithArray = frame;
         isNotWindowCreatedExistWithArray = Boolean.FALSE;
+        GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(frame);
     }
 }
 /*public class GuiTableTree {

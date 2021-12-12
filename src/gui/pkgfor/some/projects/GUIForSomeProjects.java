@@ -161,8 +161,17 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        runPreIterations();
+        runSwingUtilitesIterations();
+        //ZPINcSwingIndexManagerApp.ZPINcRunSIMA();
+        GUIManagerInterface.builderSoft();
+        
+    }
+    protected static void runPreIterations(){
+        //Create GUI
         GUIinterfaceNamesFA.OldGUIReconstruction.doWorkForSingleWithResult();
         GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
+        //Add console workers
         GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
         frockedFieldWorkers.doCreationTaskHowMain();
         
@@ -183,13 +192,15 @@ public class GUIForSomeProjects extends JFrame
         GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.mainDoWorkerByAuthorsFromNet();
         GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithForkPool();
         GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithFork();
-        
+        //Create GUI
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
             }
         });
-        
+        GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.doGUIForWorkerControl();
+    }
+    protected static void runSwingUtilitesIterations(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new GUIForSomeProjects();
@@ -212,8 +223,5 @@ public class GUIForSomeProjects extends JFrame
                 threadSimpleCodeRunForEnd.runSimpleClassRunnableStudy();
             }
         });
-        //ZPINcSwingIndexManagerApp.ZPINcRunSIMA();
-        GUIManagerInterface.builderSoft();
-        
     }
 }

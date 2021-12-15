@@ -162,6 +162,7 @@ public class GUIForSomeProjects extends JFrame
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        GUIinterfaceNamesFC.someAdditionsForInterface.functForDoAdditions();
         runPreIterations();
         runSwingUtilitesIterations();
         //ZPINcSwingIndexManagerApp.ZPINcRunSIMA();

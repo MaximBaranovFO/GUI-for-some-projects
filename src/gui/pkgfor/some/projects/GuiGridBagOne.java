@@ -38,6 +38,27 @@ import javax.swing.SwingWorker;
 //import java.awt.*;
 //import java.swing.JFrame;
 //import java.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.io.InputStream;
+import java.io.IOException;
+
+import java.net.URL;
+
+import java.util.concurrent.ExecutionException;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 /**
  *
  * @author Администратор
@@ -60,6 +81,7 @@ public class GuiGridBagOne extends JFrame implements Serializable{
         setSize(400, 200);
         setVisible(true);
         windowClass = this;
+        GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(this);
     }
     public static void runMainExec(){
         SwingUtilities.invokeLater(new Runnable(){
@@ -76,4 +98,6 @@ public class GuiGridBagOne extends JFrame implements Serializable{
         helperParams.nextCell().span();
         windowClass.add(new JTextField(20));
     }
+    
+
 }

@@ -101,6 +101,7 @@ public class ValueSumReconstruiredByDev extends RecursiveTask<Integer> {
 
     public ValueSumReconstruiredByDev(GuiTableTree array) {
         this.arrayOfGui = array;
+        this.arrayOfGui.openAndShowWithArray();
     }
 
     
@@ -118,9 +119,9 @@ public class ValueSumReconstruiredByDev extends RecursiveTask<Integer> {
         /*ValueSumReconstruiredByDev firstHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(Arrays.copyOfRange(array, 0, array.length/2));
         ValueSumReconstruiredByDev secondHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(Arrays.copyOfRange(array, array.length/2, array.length));*/
         ValueSumReconstruiredByDev firstHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(arrayOfGui);
-        arrayOfGui.openAndShowWithArray();
+        //arrayOfGui.openAndShowWithArray();
         ValueSumReconstruiredByDev secondHalfArrayValueSumCounter = new ValueSumReconstruiredByDev(arrayOfGui);
-        arrayOfGui.openAndShowWithArray();
+        //arrayOfGui.openAndShowWithArray();
         firstHalfArrayValueSumCounter.fork();
         secondHalfArrayValueSumCounter.fork();
         return firstHalfArrayValueSumCounter.join() + secondHalfArrayValueSumCounter.join();
@@ -154,7 +155,9 @@ public class MainDoWorkerByAuthorsFromNet {
                 GuiTableTree guiTableTree = new GuiTableTree();
                 GUIinterfaceNamesE.GuiFromWindowAttr.correctTitleOfGUIWindow(guiTableTree.getWindowCreated());
                 ValueSumReconstruiredByDev counterReconfiguredDev = new ValueSumReconstruiredByDev(guiTableTree);
+                counterReconfiguredDev.fork();
                 System.out.println(forkJoinPool.invoke(counterReconfiguredDev));
+                counterReconfiguredDev.join();
             }
         });
         

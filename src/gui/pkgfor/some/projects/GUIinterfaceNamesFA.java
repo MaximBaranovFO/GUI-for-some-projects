@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -31,8 +32,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -49,6 +54,53 @@ public interface GUIinterfaceNamesFA {
         private static void getSystemProperty(){
             Properties properties = System.getProperties();
         }
+        private static JTable getEnvArrStr(){
+        String[] columnName = {"Property", "Value"};
+        
+        Map<String, String> sEnv = System.getenv();
+        int toRetSize = sEnv.size();
+        String[][] toRetStr = new String[toRetSize][2];
+        
+        int idx = 0;
+        for(Map.Entry<String, String> itemEnv : sEnv.entrySet()){
+            toRetStr[idx][0] = itemEnv.getKey();
+            toRetStr[idx][1] = itemEnv.getValue();
+            idx++;
+        }
+        
+        JTable toRetTable = new JTable(toRetStr, columnName);
+        return toRetTable;
+    }
+        private static JTable getPropArrStr(){
+        String[] columnName = {"Property", "Value"};
+        
+        Properties sProp = System.getProperties();
+        Set<String> strPropName = sProp.stringPropertyNames();
+        
+        int toRetSize = sProp.size();
+        String[][] toRetStr = new String[toRetSize][2];
+        
+        int idx = 0;
+        for( String itemPorperties : strPropName ){
+            toRetStr[idx][0] =  itemPorperties;
+            toRetStr[idx][1] = sProp.getProperty(itemPorperties);
+            idx++;
+        }
+        JTable toRetTable = new JTable(toRetStr, columnName);
+        return toRetTable;
+    }
+        private static JComponent getPropVarTable(){
+        JTable toViewTable = getPropArrStr();
+        JScrollPane toRetPane = new JScrollPane(toViewTable);
+        toViewTable.setFillsViewportHeight(true);
+        return toRetPane;
+    }
+        protected static void showModalProperties(JFrame mainGUI){
+        String strTitle = "System properties";
+        JComponent[] forShow = new JComponent[1];
+        forShow[0] = getPropVarTable();
+        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
+    }
         protected static void someGuiCreator(){
             
             if(numberOfIteration < 1)
@@ -86,6 +138,7 @@ public interface GUIinterfaceNamesFA {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+            showModalProperties(frame);
         }
         protected static void ZPINcRunSIMAchanged(){
             ZPINcRunSIMA();

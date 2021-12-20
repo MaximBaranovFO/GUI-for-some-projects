@@ -71,6 +71,19 @@ public interface GUIinterfaceNamesFA {
         JTable toRetTable = new JTable(toRetStr, columnName);
         return toRetTable;
     }
+        private static JComponent getEnvVarTable(){
+        JTable toViewTable = getEnvArrStr();
+        JScrollPane toRetPane = new JScrollPane(toViewTable);
+        toViewTable.setFillsViewportHeight(true);
+        return toRetPane;
+    }
+        protected static void showModalEnvironment(JFrame mainGUI){
+        String strTitle = "Environment variables";
+        JComponent[] forShow = new JComponent[1];
+        forShow[0] = getEnvVarTable();
+        
+        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
+    }
         private static JTable getPropArrStr(){
         String[] columnName = {"Property", "Value"};
         
@@ -103,15 +116,15 @@ public interface GUIinterfaceNamesFA {
     }
         protected static void someGuiCreator(){
             
-            if(numberOfIteration < 1)
+            /*if(numberOfIteration < 1)
                 numberOfIteration = 0;
             numberOfIteration++;
             long currentTimeMillis = System.currentTimeMillis();
             String valueOf = String.valueOf(currentTimeMillis);
-            GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
+            GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();*/
             String windowName = OldGUIReconstruction.getWindowName("some Gui addition ");
-            JFrame frame = new JFrame(windowName);
-            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), frame);
+            JFrame fAnotherThreadframe = GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(new JFrame(windowName));
+            /*guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), frame);
             numberOfIteration++;
             JPanel mainPanel = new JPanel();
             guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#002^").concat(valueOf), mainPanel);
@@ -137,8 +150,10 @@ public interface GUIinterfaceNamesFA {
             frame.revalidate();
             frame.pack();
             frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-            showModalProperties(frame);
+            frame.setVisible(true);*/
+            //GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(JFrame windowForRun);
+            //showModalProperties(frame);
+            ///showModalEnvironment(frame);
         }
         protected static void ZPINcRunSIMAchanged(){
             ZPINcRunSIMA();

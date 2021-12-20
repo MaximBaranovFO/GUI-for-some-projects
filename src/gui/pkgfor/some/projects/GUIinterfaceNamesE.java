@@ -15,8 +15,11 @@
  */
 package gui.pkgfor.some.projects;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.concurrent.ConcurrentSkipListMap;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -48,8 +51,41 @@ public interface GUIinterfaceNamesE {
         this.idNowWindow.put(windowForAdd.hashCode(), windowForAdd);
     }
     private static void addNewNameWindowToListOfString(JFrame windowForAdd){
-        if( windowForAdd == null )
+        
+        if( windowForAdd == null ) {
+            GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
+            JFrame someCreatedWindow = new JFrame(GUIinterfaceNamesFA.OldGUIReconstruction.getWindowName(String.valueOf(System.nanoTime())));
+            Integer numberOfIteration = 0;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(String.valueOf(System.currentTimeMillis())), someCreatedWindow);
+            numberOfIteration++;
+            JPanel mainPanel = new JPanel();
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#002^").concat(String.valueOf(System.currentTimeMillis())), mainPanel);
+            numberOfIteration++;
+            BorderLayout borderLayout = new BorderLayout();
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#003^").concat(String.valueOf(System.currentTimeMillis())), borderLayout);
+            mainPanel.setLayout(borderLayout);
+            numberOfIteration++;
+            someCreatedWindow.getContentPane().add(mainPanel);
+            Dimension dimension = new Dimension(320, 240);
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(String.valueOf(System.currentTimeMillis())), dimension);
+            someCreatedWindow.setMinimumSize(dimension);
+            Dimension dimension1 = new Dimension(800, 600);
+            numberOfIteration++;
+            guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(String.valueOf(System.currentTimeMillis())), dimension1);
+            numberOfIteration++;
             
+            someCreatedWindow.setPreferredSize(dimension1);
+            numberOfIteration++;
+            someCreatedWindow.repaint();
+            someCreatedWindow.revalidate();
+            someCreatedWindow.pack();
+            someCreatedWindow.setLocationRelativeTo(null);
+            someCreatedWindow.setVisible(true);
+            
+            windowForAdd = GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(someCreatedWindow);
+        }    
         int hashCode = windowForAdd.hashCode(); 
         String windowCurrentName = getWindowCurrentName(windowForAdd);
         windowForAdd.setTitle(windowCurrentName);

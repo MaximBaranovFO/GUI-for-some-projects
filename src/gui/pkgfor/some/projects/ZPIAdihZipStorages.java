@@ -170,6 +170,11 @@ public class ZPIAdihZipStorages {
             
             paramCodeByNumber = getParamCodeByNumber(1);
             toAddIntoList = ZPIAdihFileOperations.getAppCheckedPath();
+            String propertyClassPath = System.getProperty("java.class.path");
+            Path getPropertyClassPath = Paths.get(propertyClassPath);
+            Path parentPropertyClassPath = getPropertyClassPath.getParent();
+            if(toAddIntoList == null)
+                toAddIntoList = parentPropertyClassPath;
             this.zipStoreFileList.put(paramCodeByNumber, toAddIntoList);
             
             paramCodeByNumber = getParamCodeByNumber(2);

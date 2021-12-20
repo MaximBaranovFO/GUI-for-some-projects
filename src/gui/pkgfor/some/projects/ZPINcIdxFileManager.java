@@ -21,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -245,8 +247,37 @@ public class ZPINcIdxFileManager {
      * @return 
      */
     protected static String getOrCreateAppDataSubDir(){
-        String strAppPath = getAppWorkDirStrPath();
-        String strToReturnDataInAppDir = strPathCombiner(strAppPath, "/appdata");
+        final String strAppPath = String.valueOf(System.currentTimeMillis());
+    
+        final String strToReturnDataInAppDir = String.valueOf(System.currentTimeMillis());
+        
+        try{
+            final ExecutorService executorWorkerSun = Executors.newFixedThreadPool(2);
+                                    
+                                          
+                                          
+                                          Runnable consumerSunOne = () ->
+                                            {
+        
+                                                  strAppPath.concat(new String("C:\\_bmv\\").concat(strAppPath).concat(getAppWorkDirStrPath()));
+                                                  
+        
+                                            };
+                                          executorWorkerSun.execute(consumerSunOne);
+                                          Runnable consumerSunTwo = () ->
+                                            {
+        
+                                          strToReturnDataInAppDir.concat(strPathCombiner(new String("C:\\_bmv\\").concat(strAppPath), "\\appdata"));
+                                            };
+        
+                                          executorWorkerSun.execute(consumerSunTwo);
+                                          executorWorkerSun.shutdownNow();
+                                          
+        } catch (java.lang.StackOverflowError erRThere) {
+                                            
+                                            System.out.println(erRThere.getMessage());
+                                            erRThere.printStackTrace();
+                                            }                            
         File dirForAppData = new File(strToReturnDataInAppDir);
         if( !dirExistRWAccessChecker(dirForAppData) ){
             if( !dirForAppData.mkdirs() ){
@@ -279,7 +310,12 @@ public class ZPINcIdxFileManager {
         if( dirExistRWAccessChecker(dirToApp) ){
             return getStrCanPathFromFile(dirToApp);
         }
-        ZPINcAppHelper.appExitWithMessageFSAccess(getStrCanPathFromFile(dirToApp));
+        try {
+            ZPINcAppHelper.appExitWithMessageFSAccess(getStrCanPathFromFile(dirToApp));
+        } catch (java.lang.StackOverflowError exError) {
+            System.out.println(exError.getMessage());
+            exError.printStackTrace();
+        }
         return getStrCanPathFromFile(getErrorForFileOperation());
     }
     /**
@@ -821,7 +857,13 @@ public class ZPINcIdxFileManager {
     protected static String getStrCanPathFromFile(File inFuncFile){
         String strCanonicalPath = "";
         try {
-            strCanonicalPath = inFuncFile.getCanonicalPath();
+            try {
+                strCanonicalPath = inFuncFile.getCanonicalPath();
+            } catch (java.lang.StackOverflowError exDouble)
+            {
+                System.out.println(exDouble.getMessage());
+                exDouble.printStackTrace();
+            }
         } catch (IOException ex) {
             ZPINcAppHelper.outMessage(ZPINcStrLogMsgField.ERROR.getStr()
                 + ZPINcStrServiceMsg.ERROR_FILE_NOT_CANONICAL_PATH.getStr()

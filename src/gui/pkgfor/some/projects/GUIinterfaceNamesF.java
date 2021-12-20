@@ -57,7 +57,7 @@ public class WorkerForWithProviderConsumerPC
                                 {
                                    bq.put(ch);
                                    System.out.printf("%c produced by " +
-                                                     "producer.%n", ch);
+                                                     "producer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 }
                                 catch (InterruptedException ie)
                                 {
@@ -74,7 +74,7 @@ public class WorkerForWithProviderConsumerPC
                                 {
                                    ch = bq.take();
                                    System.out.printf("%c consumed by " +
-                                                     "consumer.%n", ch);
+                                                     "consumer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 }
                                 catch (InterruptedException ie)
                                 {
@@ -176,7 +176,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                                 showModalEnvironment(eVframe);
                                             };
                                           executorWorkerSun.execute(consumerSunTwo);
-                                          executor.shutdownNow();
+                                          executorWorkerSun.shutdownNow();
             }
                                       catch (Exception ie)
                                       {

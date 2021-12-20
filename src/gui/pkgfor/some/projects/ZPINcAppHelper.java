@@ -106,7 +106,8 @@ public class ZPINcAppHelper {
      * @param pathErr
      */
     protected static void appExitWithMessageFSAccess(String pathErr){
-        outMessage(ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
+        try {
+            outMessage(ZPINcStrLogMsgField.ERROR_CRITICAL.getStr()
             + "For run application in the path: " + pathErr
             + "\n application must have permission on read, write on the file system"
             + "\n for use functions of this application your must have run it in the"
@@ -114,6 +115,10 @@ public class ZPINcAppHelper {
             + "\n your file system, create some files in your file system, for more"
             + "\n information about use this application read manual or contact to"
             + "\n your system administrator");
+        } catch( java.lang.StackOverflowError exNewError) {
+            System.out.println(exNewError.getMessage());
+            exNewError.printStackTrace();
+        }
         System.exit(0);
     }
     protected static void appExitWithMessage(String strErrMessage){

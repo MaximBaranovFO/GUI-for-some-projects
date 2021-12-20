@@ -154,6 +154,9 @@ public class FsWorkerDirFiles {
                         String.valueOf(tfgnowFormatedDateTime.concat("_")
                                 .concat(String.valueOf(COUNT_USED_ITERATIONS))
                         ));
+                
+                if(intoDirVsFileName == null)
+                    intoDirVsFileName = subDirName;
                 FsWriteReadToSubDir tmpOperationsOnObjects = new FsWriteReadToSubDir();
                 tmpOperationsOnObjects.writeToSubDir(intoDirVsFileName, writeObjectIntoDir);
                 

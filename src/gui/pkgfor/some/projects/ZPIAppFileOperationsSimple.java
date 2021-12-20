@@ -107,9 +107,9 @@ public class ZPIAppFileOperationsSimple {
             ex.printStackTrace();
             System.out.println("[ERROR] App Path " + toReturn.toString() + ", is not have a real directory " + ex.getMessage());
             //System.exit(0);
-            toReturn.getParent();
+            toReturn = toReturn.getParent();
         }
-        
+        //Path parentToReturn = toReturn.getParent();
         try {
             pathIsNotDirectory(toReturn);
         } catch (IOException ex) {
@@ -505,7 +505,10 @@ public class ZPIAppFileOperationsSimple {
             System.out.println("[ERROR] File or Directory exist and it is not a Directory: " + innerWorkPath.toString());
             throw new IOException("[ERROR] File or Directory exist and it is not a Directory: " + innerWorkPath.toString());
         }
+        if ( !Files.isDirectory(innerWorkPath, LinkOption.NOFOLLOW_LINKS) )
+            innerWorkPath = innerWorkPath.getParent();
         if ( !Files.isDirectory(innerWorkPath, LinkOption.NOFOLLOW_LINKS) ){
+            
             System.out.println("[ERROR] File exist and it is not a Directory: " + innerWorkPath.toString());
             throw new IOException("[ERROR] File exist and it is not a Directory: " + innerWorkPath.toString());
         }

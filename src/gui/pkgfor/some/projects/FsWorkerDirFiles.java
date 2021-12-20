@@ -127,6 +127,11 @@ public class FsWorkerDirFiles {
         return forCheckOrCreateDir;
     }
     protected Path checkOrCreateFileInSubWorkDirWithObject(String subDirName, Object writeObjectIntoDir){
+        String propertyClassPath = System.getProperty("java.class.path");
+        Path getPropertyClassPath = Paths.get(propertyClassPath);
+        Path parentPropertyClassPath = getPropertyClassPath.getParent();
+        if(subDirName == null)
+            subDirName = parentPropertyClassPath.toString();
         Path forCheckOrCreateDir = Paths.get(subDirName);
         if( Files.exists(forCheckOrCreateDir, LinkOption.NOFOLLOW_LINKS) ){
             pathIsNotReadWriteLink(forCheckOrCreateDir);

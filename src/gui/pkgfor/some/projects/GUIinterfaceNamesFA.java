@@ -48,72 +48,7 @@ import javax.swing.UIManager;
 public interface GUIinterfaceNamesFA {
     public class OldGUIReconstruction implements ExecutorService {
         private static int numberOfIteration;
-        private static void getSystemEnvironment(){
-            Map<String, String> env = System.getenv();
-        }
-        private static void getSystemProperty(){
-            Properties properties = System.getProperties();
-        }
-        private static JTable getEnvArrStr(){
-        String[] columnName = {"Property", "Value"};
         
-        Map<String, String> sEnv = System.getenv();
-        int toRetSize = sEnv.size();
-        String[][] toRetStr = new String[toRetSize][2];
-        
-        int idx = 0;
-        for(Map.Entry<String, String> itemEnv : sEnv.entrySet()){
-            toRetStr[idx][0] = itemEnv.getKey();
-            toRetStr[idx][1] = itemEnv.getValue();
-            idx++;
-        }
-        
-        JTable toRetTable = new JTable(toRetStr, columnName);
-        return toRetTable;
-    }
-        private static JComponent getEnvVarTable(){
-        JTable toViewTable = getEnvArrStr();
-        JScrollPane toRetPane = new JScrollPane(toViewTable);
-        toViewTable.setFillsViewportHeight(true);
-        return toRetPane;
-    }
-        protected static void showModalEnvironment(JFrame mainGUI){
-        String strTitle = "Environment variables";
-        JComponent[] forShow = new JComponent[1];
-        forShow[0] = getEnvVarTable();
-        
-        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
-    }
-        private static JTable getPropArrStr(){
-        String[] columnName = {"Property", "Value"};
-        
-        Properties sProp = System.getProperties();
-        Set<String> strPropName = sProp.stringPropertyNames();
-        
-        int toRetSize = sProp.size();
-        String[][] toRetStr = new String[toRetSize][2];
-        
-        int idx = 0;
-        for( String itemPorperties : strPropName ){
-            toRetStr[idx][0] =  itemPorperties;
-            toRetStr[idx][1] = sProp.getProperty(itemPorperties);
-            idx++;
-        }
-        JTable toRetTable = new JTable(toRetStr, columnName);
-        return toRetTable;
-    }
-        private static JComponent getPropVarTable(){
-        JTable toViewTable = getPropArrStr();
-        JScrollPane toRetPane = new JScrollPane(toViewTable);
-        toViewTable.setFillsViewportHeight(true);
-        return toRetPane;
-    }
-        protected static void showModalProperties(JFrame mainGUI){
-        String strTitle = "System properties";
-        JComponent[] forShow = new JComponent[1];
-        forShow[0] = getPropVarTable();
-        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
-    }
         protected static void someGuiCreator(){
             
             /*if(numberOfIteration < 1)

@@ -105,7 +105,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                    bq.put(ch);
                                    Class<? extends JFrame> aClass = valueForThreadedWorkerRun.getClass();
                                    System.out.printf("%c produced by " +
-                                                     "producer.%n", ch);
+                                                     "producer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 }
                                 catch (InterruptedException ie)
                                 {
@@ -182,7 +182,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                       {
                                       }
                                          System.out.printf("%c consumed by " +
-                                                     "consumer.%n", ch);
+                                                     "consumer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 }
                                 catch (InterruptedException ie)
                                 {

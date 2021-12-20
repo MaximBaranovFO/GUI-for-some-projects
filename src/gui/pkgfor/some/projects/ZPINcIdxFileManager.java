@@ -252,26 +252,26 @@ public class ZPINcIdxFileManager {
         final String strToReturnDataInAppDir = String.valueOf(System.currentTimeMillis());
         
         try{
-            final ExecutorService executorWorkerSun = Executors.newFixedThreadPool(2);
+            final ExecutorService executorOldReconstructionWorkerSun = Executors.newFixedThreadPool(2);
                                     
                                           
                                           
-                                          Runnable consumerSunOne = () ->
+                                          Runnable consumerOldReconstructionSunOne = () ->
                                             {
         
                                                   strAppPath.concat(new String("C:\\_bmv\\").concat(strAppPath).concat(getAppWorkDirStrPath()));
                                                   
         
                                             };
-                                          executorWorkerSun.execute(consumerSunOne);
+                                          executorOldReconstructionWorkerSun.execute(consumerOldReconstructionSunOne);
                                           Runnable consumerSunTwo = () ->
                                             {
         
                                           strToReturnDataInAppDir.concat(strPathCombiner(new String("C:\\_bmv\\").concat(strAppPath), "\\appdata"));
                                             };
         
-                                          executorWorkerSun.execute(consumerSunTwo);
-                                          executorWorkerSun.shutdownNow();
+                                          executorOldReconstructionWorkerSun.execute(consumerSunTwo);
+                                          executorOldReconstructionWorkerSun.shutdownNow();
                                           
         } catch (java.lang.StackOverflowError erRThere) {
                                             

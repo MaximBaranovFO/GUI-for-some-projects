@@ -48,6 +48,8 @@ public interface GUIinterfaceNamesE {
         this.idNowWindow.put(windowForAdd.hashCode(), windowForAdd);
     }
     private static void addNewNameWindowToListOfString(JFrame windowForAdd){
+        if( windowForAdd == null )
+            
         int hashCode = windowForAdd.hashCode(); 
         String windowCurrentName = getWindowCurrentName(windowForAdd);
         windowForAdd.setTitle(windowCurrentName);

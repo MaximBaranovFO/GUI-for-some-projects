@@ -77,9 +77,13 @@ public class ZPIAppEtcSecurityHelper {
         //WebServicePermission
         
         Permissions permissions = new Permissions();
-        
-        Path appPath = ZPIAppFileOperationsSimple.getAppRWEDCheckedPath();
-        
+        Path appPath = Path.of(System.getenv("=C:"));
+        //try {
+        appPath = ZPIAppFileOperationsSimple.getAppRWEDCheckedPath();
+        //} catch(java.io.IOException exIOerror){
+        //    System.out.println(exIOerror.getMessage());
+        //    exIOerror.printStackTrace();
+        //}
         permissions.add(new MBeanPermission("*", "unregisterMBean"));
         
         permissions.add(new SocketPermission("localhost:0-65535", "listen"));

@@ -100,12 +100,14 @@ public class ZPIAppFileOperationsSimple {
     
     protected static Path getAppRWEDCheckedPath(){
         Path toReturn = Paths.get(System.getProperty("java.class.path"));
+        
         try {
             toReturn = ZPIAppFileOperationsSimple.getAppPath();
         } catch (IOException ex) {
             ex.printStackTrace();
             System.out.println("[ERROR] App Path " + toReturn.toString() + ", is not have a real directory " + ex.getMessage());
-            System.exit(0);
+            //System.exit(0);
+            toReturn.getParent();
         }
         
         try {

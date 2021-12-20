@@ -16,6 +16,11 @@
 package gui.pkgfor.some.projects;
 
 import java.nio.file.FileSystem;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -64,10 +69,63 @@ public class GUIManagerInterface {
                     weTried.getMessage();
                     weTried.getStackTrace();
                 }
+                
+                final BlockingQueue<Character> bq;
+      bq = new ArrayBlockingQueue<Character>(26);
+      final ExecutorService executor = Executors.newFixedThreadPool(2);
+      //final JFrame valueForThreadedWorkerRun;
+      //valueForThreadedWorkerRun = windowForRun;
+      Runnable producer = () ->
+                          {
+                             for (char ch = 'A'; ch <= 'Z'; ch++)
+                             {
+                                try
+                                {
+                                   bq.put(ch);
+                                   //Class<? extends JFrame> aClass = valueForThreadedWorkerRun.getClass();
+                                   System.out.printf("%c produced by " +
+                                                     "producer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
+                                
+                
                 ZPINcSwingIndexManagerApp.createGui();
                 
                 
                 ZPIAppEtcSecurityHelper.createNewSecurity();
+                
+                }
+                                catch (InterruptedException ie)
+                                {
+                                }
+                             }
+                          };
+                              executor.execute(producer);
+                              Runnable consumer = () ->
+                          {
+                             char ch = '\0';
+                             do
+                             {
+                                try
+                                {
+                                   ch = bq.take();
+                                    int eVnumberOfIteration = 0;
+                                   
+                                   if(eVnumberOfIteration < 1)
+                                        eVnumberOfIteration = 0;
+                                   eVnumberOfIteration++;
+                                   long eVcurrentTimeMillis = System.currentTimeMillis();
+                                    String eVvalueOf = String.valueOf(eVcurrentTimeMillis);
+                                    
+                                    }
+                                catch (InterruptedException ie)
+                                {
+                                }
+                             }
+                             while (ch != 'Z');
+                             executor.shutdownNow();
+                          };
+      executor.execute(consumer);
+                                    
+                
                 ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
                 ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
                 try {

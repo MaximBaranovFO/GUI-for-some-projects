@@ -91,6 +91,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
 {
    public static JFrame editedVersionMainRunProviderConsumer(JFrame windowForRun)
    {
+      final Boolean isRunned = Boolean.FALSE;
       final BlockingQueue<Character> bq;
       bq = new ArrayBlockingQueue<Character>(26);
       final ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -116,21 +117,23 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                               Runnable consumer = () ->
                           {
                              char ch = '\0';
+                             int eVnumberOfIteration = 0;
                              do
                              {
                                 try
                                 {
                                    ch = bq.take();
-                                    int eVnumberOfIteration = 0;
+                                   
                                    
                                    if(eVnumberOfIteration < 1)
                                         eVnumberOfIteration = 0;
                                    eVnumberOfIteration++;
                                    long eVcurrentTimeMillis = System.currentTimeMillis();
+                                   
                                     String eVvalueOf = String.valueOf(eVcurrentTimeMillis);
                                     GUIinterfaceNamesFB.GUIComponentObjectStatus eVguiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
                                     String eVwindowName = OldGUIReconstruction.getWindowName("some Gui addition ");
-                                   
+                                    if(eVnumberOfIteration == 1){
                                    JFrame eVframe = valueForThreadedWorkerRun;
                                    
                                    Class<? extends JFrame> aClass = valueForThreadedWorkerRun.getClass();
@@ -177,15 +180,21 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                             };
                                           executorWorkerSun.execute(consumerSunTwo);
                                           executorWorkerSun.shutdownNow();
-            }
-                                      catch (Exception ie)
-                                      {
                                       }
+                                      catch (Exception ieWSError)
+                                      {
+                                          System.out.println(ieWSError.getMessage());
+                                          ieWSError.printStackTrace();
+                                      }
+                                }
+                                   
                                          System.out.printf("%c consumed by " +
                                                      "consumer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 }
                                 catch (InterruptedException ie)
                                 {
+                                    System.out.println(ie.getMessage());
+                                    ie.printStackTrace();
                                 }
                              }
                              while (ch != 'Z');

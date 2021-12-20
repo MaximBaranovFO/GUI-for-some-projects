@@ -225,10 +225,11 @@ public class EditedVersionWorkerForWithProviderConsumerPC
     }
         protected static void showModalEnvironment(JFrame mainGUI){
         String strTitle = "Environment variables";
+        String eVwindowNameSunOfWorker = OldGUIReconstruction.getWindowName(strTitle);
         JComponent[] forShow = new JComponent[1];
         forShow[0] = getEnvVarTable();
         
-        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(mainGUI, forShow, eVwindowNameSunOfWorker, JOptionPane.INFORMATION_MESSAGE);
     }
         private static JTable getPropArrStr(){
         String[] columnName = {"Property", "Value"};
@@ -249,17 +250,18 @@ public class EditedVersionWorkerForWithProviderConsumerPC
         return toRetTable;
     }
         private static JComponent getPropVarTable(){
-        JTable toViewTable = getPropArrStr();
-        JScrollPane toRetPane = new JScrollPane(toViewTable);
-        toViewTable.setFillsViewportHeight(true);
-        return toRetPane;
-    }
+            JTable toViewTable = getPropArrStr();
+            JScrollPane toRetPane = new JScrollPane(toViewTable);
+            toViewTable.setFillsViewportHeight(true);
+            return toRetPane;
+        }
         protected static void showModalProperties(JFrame mainGUI){
-        String strTitle = "System properties";
-        JComponent[] forShow = new JComponent[1];
-        forShow[0] = getPropVarTable();
-        JOptionPane.showMessageDialog(mainGUI, forShow, strTitle, JOptionPane.INFORMATION_MESSAGE);
-    }
+            String strTitle = "System properties";
+            String eVwindowNameSunOfWorker = OldGUIReconstruction.getWindowName(strTitle);
+            JComponent[] forShow = new JComponent[1];
+            forShow[0] = getPropVarTable();
+            JOptionPane.showMessageDialog(mainGUI, forShow, eVwindowNameSunOfWorker, JOptionPane.INFORMATION_MESSAGE);
+        }
  }
 
 }

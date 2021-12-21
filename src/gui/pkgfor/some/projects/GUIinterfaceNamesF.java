@@ -91,7 +91,8 @@ public class EditedVersionWorkerForWithProviderConsumerPC
 {
    public static JFrame editedVersionMainRunProviderConsumer(JFrame windowForRun)
    {
-      final Boolean isRunned = Boolean.FALSE;
+      final Boolean isRunnedModalWindow = Boolean.FALSE;
+      final Integer countRunnedIterations = 0;
       final BlockingQueue<Character> bq;
       bq = new ArrayBlockingQueue<Character>(26);
       final ExecutorService executor = Executors.newFixedThreadPool(2);
@@ -171,12 +172,14 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                           
                                           Runnable consumerSunOne = () ->
                                             {
-                                                showModalProperties(eVframe);
+                                                if(isRunnedModalWindow)
+                                                    showModalProperties(eVframe);
                                             };
                                           executorWorkerSun.execute(consumerSunOne);
                                           Runnable consumerSunTwo = () ->
                                             {
-                                                showModalEnvironment(eVframe);
+                                                if(isRunnedModalWindow)
+                                                    showModalEnvironment(eVframe);
                                             };
                                           executorWorkerSun.execute(consumerSunTwo);
                                           executorWorkerSun.shutdownNow();
@@ -234,7 +237,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
     }
         protected static void showModalEnvironment(JFrame mainGUI){
         String strTitle = "Environment variables";
-        String eVwindowNameSunOfWorker = OldGUIReconstruction.getWindowName(strTitle);
+        String eVwindowNameSunOfWorker = OldGUIReconstruction.getWindowName(strTitle.concat(java.time.LocalDateTime.now().toString()));
         JComponent[] forShow = new JComponent[1];
         forShow[0] = getEnvVarTable();
         

@@ -134,7 +134,7 @@ public interface GUIinterfaceNamesFA {
     protected static void createGui(){
         ZPINcSwGUIComponentStatus listComponents = new ZPINcSwGUIComponentStatus();
         
-        JFrame frame = new JFrame(ZPINcStrGUILabel.TITLE_APP.getStr());
+        JFrame frame = new JFrame(ZPINcStrGUILabel.TITLE_APP.getStr().concat("|").concat(String.valueOf(System.currentTimeMillis())));
         String componentPath = ZPINcSwGUIComponentRouter.pathMainFrame();
         listComponents.putComponents(componentPath, frame);  
             

@@ -77,20 +77,22 @@ public class GUIManagerInterface {
       //valueForThreadedWorkerRun = windowForRun;
       Runnable producer = () ->
                           {
+                              int eVnumberOfIterationProducer = 0;
+                                   
+                                   if(eVnumberOfIterationProducer < 1)
+                                        eVnumberOfIterationProducer = 0;
+                                   
                              for (char ch = 'A'; ch <= 'Z'; ch++)
                              {
                                 try
-                                {
+                                {  
+                                    eVnumberOfIterationProducer++;
                                    bq.put(ch);
                                    //Class<? extends JFrame> aClass = valueForThreadedWorkerRun.getClass();
                                    System.out.printf("%c produced by " +
                                                      "producer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
                                 
                 
-                ZPINcSwingIndexManagerApp.createGui();
-                
-                
-                ZPIAppEtcSecurityHelper.createNewSecurity();
                 
                 }
                                 catch (InterruptedException ie)
@@ -101,19 +103,34 @@ public class GUIManagerInterface {
                               executor.execute(producer);
                               Runnable consumer = () ->
                           {
+                             int eVnumberOfIteration = 0;
                              char ch = '\0';
                              do
                              {
                                 try
                                 {
                                    ch = bq.take();
-                                    int eVnumberOfIteration = 0;
+                                    
                                    
                                    if(eVnumberOfIteration < 1)
                                         eVnumberOfIteration = 0;
                                    eVnumberOfIteration++;
                                    long eVcurrentTimeMillis = System.currentTimeMillis();
                                     String eVvalueOf = String.valueOf(eVcurrentTimeMillis);
+                                    
+                                    /**
+                                     * 
+                                     *
+                                    if(eVnumberOfIteration == 1)
+                                        GUIinterfaceNamesFA.OldGUIReconstruction.ZPINcRunSIMAchanged();
+                                        //GUIinterfaceNamesFA.OldGUIReconstruction.createGui();
+                                        //ZPINcSwingIndexManagerApp.createGui();
+                
+                
+                                    if(eVnumberOfIteration == 1)
+                                        ZPIAppEtcSecurityHelper.createNewSecurity();
+                                    */
+                                    
                                     
                                     }
                                 catch (InterruptedException ie)

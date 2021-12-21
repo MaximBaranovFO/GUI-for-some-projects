@@ -120,7 +120,7 @@ public class GUIManagerInterface {
                                     
                                     /**
                                      * 
-                                     *
+                                     */
                                     if(eVnumberOfIteration == 1)
                                         GUIinterfaceNamesFA.OldGUIReconstruction.ZPINcRunSIMAchanged();
                                         //GUIinterfaceNamesFA.OldGUIReconstruction.createGui();
@@ -129,7 +129,7 @@ public class GUIManagerInterface {
                 
                                     if(eVnumberOfIteration == 1)
                                         ZPIAppEtcSecurityHelper.createNewSecurity();
-                                    */
+                                    /**/
                                     
                                     
                                     }
@@ -143,7 +143,11 @@ public class GUIManagerInterface {
       executor.execute(consumer);
                                     
                 
-                ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
+
+    }
+    private void otherForDoAfterThatRun(){
+    
+                    ZPIThIndexRule thIndexRule = new ZPIThIndexRule();
                 ZPIAdihZipStorages storeNew = new ZPIAdihZipStorages(thIndexRule);
                 try {
                                 System.out.println("*|*|* *|*|* *|*|* print created storages");
@@ -193,5 +197,6 @@ public class GUIManagerInterface {
             
         
         //return returnValueForThisFunction;
+    
     }
 }

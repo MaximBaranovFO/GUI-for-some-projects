@@ -57,8 +57,13 @@ public interface GUIinterfaceNamesFA {
             long currentTimeMillis = System.currentTimeMillis();
             String valueOf = String.valueOf(currentTimeMillis);
             GUIinterfaceNamesFB.GUIComponentObjectStatus guiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();*/
-            String windowName = OldGUIReconstruction.getWindowName("some Gui addition ");
-            JFrame fAnotherThreadframe = GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(new JFrame(windowName));
+            SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                    String windowName = OldGUIReconstruction.getWindowName("some Gui addition ");
+                    JFrame fAnotherThreadframe = GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(new JFrame(windowName));
+                }
+            });
+            
             /*guiComponentObjectStatus.putObject(String.valueOf(numberOfIteration).concat("!MainWindow#001^").concat(valueOf), frame);
             numberOfIteration++;
             JPanel mainPanel = new JPanel();

@@ -26,6 +26,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.swing.JComponent;
@@ -90,8 +91,10 @@ public class WorkerForWithProviderConsumerPC
 public class EditedVersionWorkerForWithProviderConsumerPC
 {
     private static int eVnumberOfIteration = 0;
-    
+    private static final ConcurrentSkipListMap<Integer, JFrame> listOfWindow = new ConcurrentSkipListMap();
     private static final Boolean isRunnedModalWindow = Boolean.FALSE;
+    
+    
     
    public static JFrame editedVersionMainRunProviderConsumer(JFrame windowForRun)
    {
@@ -102,6 +105,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
         final ExecutorService executor = Executors.newFixedThreadPool(2);
         final JFrame valueForThreadedWorkerRun;
         valueForThreadedWorkerRun = (JFrame) windowForRun;
+        listOfWindow.put(eVnumberOfIteration, windowForRun);
         Runnable producer = () ->
                           {
                              for (char ch = 'A'; ch <= 'Z'; ch++)
@@ -179,6 +183,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                         Dimension eVdimension1 = new Dimension(800, 600);
                                         eVframe.setPreferredSize(eVdimension1);
                                         runFrameRepackEtc(eVframe);
+                                        listOfWindow.put(eVnumberOfIteration, eVframe);
                                     }
                                     //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#002^").concat(eVvalueOf), eVmainPanel);
                                     if(eVnumberOfIteration == 1){
@@ -207,7 +212,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                     
                                     
                                     
-                                    eVframe.repaint();
+                                    
                                     
                                     eVnumberOfIteration++;
                                     

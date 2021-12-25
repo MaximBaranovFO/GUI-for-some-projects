@@ -89,16 +89,20 @@ public class WorkerForWithProviderConsumerPC
 //GUIinterfaceNamesF.EditedVersionWorkerForWithProviderConsumerPC.editedVersionMainRunProviderConsumer(JFrame windowForRun);
 public class EditedVersionWorkerForWithProviderConsumerPC
 {
+    private static int eVnumberOfIteration = 0;
+    
+    private static final Boolean isRunnedModalWindow = Boolean.FALSE;
+    
    public static JFrame editedVersionMainRunProviderConsumer(JFrame windowForRun)
    {
-      final Boolean isRunnedModalWindow = Boolean.FALSE;
-      final Integer countRunnedIterations = 0;
-      final BlockingQueue<Character> bq;
-      bq = new ArrayBlockingQueue<Character>(26);
-      final ExecutorService executor = Executors.newFixedThreadPool(2);
-      final JFrame valueForThreadedWorkerRun;
-      valueForThreadedWorkerRun = windowForRun;
-      Runnable producer = () ->
+        
+        final Integer countRunnedIterations = 0;
+        final BlockingQueue<Character> bq;
+        bq = new ArrayBlockingQueue<Character>(26);
+        final ExecutorService executor = Executors.newFixedThreadPool(2);
+        final JFrame valueForThreadedWorkerRun;
+        valueForThreadedWorkerRun = (JFrame) windowForRun;
+        Runnable producer = () ->
                           {
                              for (char ch = 'A'; ch <= 'Z'; ch++)
                              {
@@ -115,56 +119,98 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                              }
                           };
                               executor.execute(producer);
-                              Runnable consumer = () ->
+        Runnable consumer = () ->
                           {
                              char ch = '\0';
-                             int eVnumberOfIteration = 0;
+                             
                              do
                              {
                                 try
                                 {
-                                   ch = bq.take();
-                                   
-                                   
-                                   if(eVnumberOfIteration < 1)
+                                    ch = bq.take();
+                                    
+                                    
+                                    if(eVnumberOfIteration < 1)
                                         eVnumberOfIteration = 0;
-                                   eVnumberOfIteration++;
-                                   long eVcurrentTimeMillis = System.currentTimeMillis();
-                                   
-                                    String eVvalueOf = String.valueOf(eVcurrentTimeMillis);
-                                    GUIinterfaceNamesFB.GUIComponentObjectStatus eVguiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
-                                    String eVwindowName = OldGUIReconstruction.getWindowName("some Gui addition ");
-                                    if(eVnumberOfIteration == 1){
-                                   JFrame eVframe = valueForThreadedWorkerRun;
-                                   
-                                   Class<? extends JFrame> aClass = valueForThreadedWorkerRun.getClass();
-                                   eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVframe);
-                                    eVnumberOfIteration++;
-                                    JPanel eVmainPanel = new JPanel();
-                                    eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#002^").concat(eVvalueOf), eVmainPanel);
-                                    eVnumberOfIteration++;
-                                    BorderLayout eVborderLayout = new BorderLayout();
-                                    eVnumberOfIteration++;
-                                    eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#003^").concat(eVvalueOf), eVborderLayout);
-                                    eVmainPanel.setLayout(eVborderLayout);
-                                    eVnumberOfIteration++;
-                                    eVframe.getContentPane().add(eVmainPanel);
-                                    Dimension eVdimension = new Dimension(320, 240);
-                                    eVnumberOfIteration++;
-                                    eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVdimension);
-                                    eVframe.setMinimumSize(eVdimension);
-                                    Dimension eVdimension1 = new Dimension(800, 600);
-                                    eVnumberOfIteration++;
-                                    eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVdimension1);
                                     eVnumberOfIteration++;
                                     
-                                    eVframe.setPreferredSize(eVdimension1);
-                                    eVnumberOfIteration++;
+                                    if(eVnumberOfIteration == 1){
+                                        ifFirstRunSetValues(valueForThreadedWorkerRun);
+                                    }
+                                   
+                                    System.out.printf("%c consumed by " +
+                                                     "consumer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
+                                }
+                                catch (InterruptedException ie)
+                                {
+                                    System.out.println(ie.getMessage());
+                                    ie.printStackTrace();
+                                }
+                             }
+                             while (ch != 'Z');
+                             executor.shutdownNow();
+                          };
+      executor.execute(consumer);
+      return valueForThreadedWorkerRun;
+   }
+   
+   private static void ifFirstRunSetValues(JFrame temporForFirstRun){
+       
+                                   JFrame eVframe = (JFrame) temporForFirstRun;
+                                   
+                                   GUIinterfaceNamesFB.GUIComponentObjectStatus eVguiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
+                                   
+                                   long eVcurrentTimeMillis = System.currentTimeMillis();
+                                   
+                                   String eVvalueOf = String.valueOf(eVcurrentTimeMillis);
+                                    
+                                   String eVwindowName = OldGUIReconstruction.getWindowName("some Gui addition ");
+                                   
+                                   Class<? extends JFrame> aClass = eVframe.getClass();
+                                   //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVframe);
+                                   
+                                    if(eVnumberOfIteration == 1){
+                                        JPanel eVmainPanel = new JPanel();
+                                        BorderLayout eVborderLayout = new BorderLayout();
+                                        eVmainPanel.setLayout(eVborderLayout);
+                                        eVframe.getContentPane().add(eVmainPanel);
+                                        Dimension eVdimension = new Dimension(320, 240);
+                                        eVframe.setMinimumSize(eVdimension);
+                                        Dimension eVdimension1 = new Dimension(800, 600);
+                                        eVframe.setPreferredSize(eVdimension1);
+                                        runFrameRepackEtc(eVframe);
+                                    }
+                                    //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#002^").concat(eVvalueOf), eVmainPanel);
+                                    if(eVnumberOfIteration == 1){
+                                        
+                                    }
+                                    
+                                    //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#003^").concat(eVvalueOf), eVborderLayout);
+                                    
+                                    
+                                    
+                                    
+                                    if(eVnumberOfIteration == 1){
+                                        
+                                    }
+                                    
+                                    //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVdimension);
+                                    
+                                    
+                                    if(eVnumberOfIteration == 1){
+                                        
+                                    }
+                                    
+                                    //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#001^").concat(eVvalueOf), eVdimension1);
+                                    
+                                    
+                                    
+                                    
+                                    
                                     eVframe.repaint();
-                                    eVframe.revalidate();
-                                    eVframe.pack();
-                                    eVframe.setLocationRelativeTo(null);
-                                    eVframe.setVisible(true);
+                                    
+                                    eVnumberOfIteration++;
+                                    
             
                                     try
                                     {
@@ -189,22 +235,14 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                           System.out.println(ieWSError.getMessage());
                                           ieWSError.printStackTrace();
                                       }
-                                }
-                                   
-                                         System.out.printf("%c consumed by " +
-                                                     "consumer.%n at %s", ch, Thread.currentThread().getName(), System.currentTimeMillis());
-                                }
-                                catch (InterruptedException ie)
-                                {
-                                    System.out.println(ie.getMessage());
-                                    ie.printStackTrace();
-                                }
-                             }
-                             while (ch != 'Z');
-                             executor.shutdownNow();
-                          };
-      executor.execute(consumer);
-      return valueForThreadedWorkerRun;
+   }
+   
+   private static void runFrameRepackEtc(JFrame temporForRun){
+                                    temporForRun.repaint();
+                                    temporForRun.revalidate();
+                                    temporForRun.pack();
+                                    temporForRun.setLocationRelativeTo(null);
+                                    temporForRun.setVisible(true);
    }
    private static void getSystemEnvironment(){
             Map<String, String> env = System.getenv();

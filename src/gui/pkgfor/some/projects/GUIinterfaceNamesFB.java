@@ -16,15 +16,213 @@
 package gui.pkgfor.some.projects;
 
 import java.awt.Component;
+import java.awt.MenuComponent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyListener;
+import java.beans.PropertyChangeListener;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.SubmissionPublisher;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Администратор
  */
 public interface GUIinterfaceNamesFB {
+    
+    public class forGUIComponentListOfCodeNames {
+        //getName, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<String,Long>> codedListOfNames;
+        //hashCode, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<Integer,Long>> codedListOfHashCodeFromNames;
+        protected forGUIComponentListOfCodeNames() {
+            long nowCurrentTimeMillis = System.currentTimeMillis();
+            
+            /**
+             * codedListOfNames = new ConcurrentSkipListMap((o1, o2) -> {
+                o1 = new String("codedListOfNames|JFrame|Component|JButton|JText|etc");
+                o2 = new ConcurrentSkipListMap(
+                (bo1, bo2) -> {
+                    bo1 = new String("Objects for threads or window | parent | fundamental | etc");
+                    bo2 = nowCurrentTimeMillis;
+                    return 0;
+                
+                }
+                );
+                return 0; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/LambdaBody
+            });
+            */
+            ConcurrentSkipListMap<String,Long> someWayOfNamesFromString = new ConcurrentSkipListMap();
+            someWayOfNamesFromString.put(forGUIComponentListOfCodeNames.class.getCanonicalName(), nowCurrentTimeMillis);
+            codedListOfNames = new ConcurrentSkipListMap();
+            codedListOfNames.put(
+                new String("codedListOfNames|JFrame|Component|JButton|JText|etc"),
+                someWayOfNamesFromString
+            );
+            
+            Class<? extends ConcurrentSkipListMap> aClass = codedListOfNames.getClass();
+            String name = aClass.getName();
+            int hashCode = aClass.hashCode();
+            
+            ConcurrentSkipListMap<Integer,Long> someWayOfNamesFromHisHashCode = new ConcurrentSkipListMap();
+            codedListOfHashCodeFromNames = new ConcurrentSkipListMap();
+            someWayOfNamesFromHisHashCode.put(hashCode, nowCurrentTimeMillis);
+            codedListOfHashCodeFromNames.put(
+                    new String("Objects for threads or window | parent | fundamental | etc")
+                    , someWayOfNamesFromHisHashCode
+            );
+            
+        }
+        
+    }
+    
+    public class GUIElementsUpdate{
+        private ConcurrentSkipListMap<Long, JFrame> listOfFrames;
+        private Boolean isElementsCreated = Boolean.FALSE;
+        private Long lastElementWhoAdd;
+        private forGUIComponentListOfCodeNames archiveOfChangedValues;
+        protected GUIElementsUpdate(){
+            archiveOfChangedValues = new forGUIComponentListOfCodeNames();
+            lastElementWhoAdd = Long.valueOf(0);
+            listOfFrames = new ConcurrentSkipListMap();
+            isElementsCreated = Boolean.TRUE;
+        }
+        public Boolean addElementIntoList(JFrame elementForAdd){
+            if( !isElementsCreated )
+                return Boolean.FALSE;
+            if( elementForAdd == null )
+                return Boolean.FALSE;
+            long currentTimeMillis = System.currentTimeMillis();
+            try {
+                listOfFrames.put(currentTimeMillis, elementForAdd);
+            } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                return Boolean.FALSE;
+            } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                return Boolean.FALSE;
+            }
+            if( listOfFrames.size() == 0 )
+                return Boolean.FALSE;
+            lastElementWhoAdd = Long.valueOf(currentTimeMillis);
+            return Boolean.TRUE;
+        }
+        public JFrame getCurrentElementOrNullIfNotHave(){
+            if( !isElementsCreated )
+                return null;
+            if( listOfFrames.size() == 0 )
+                return null;
+            return listOfFrames.get(lastElementWhoAdd);
+        }
+        public Boolean cleanListOfElementsSomeExistAndNotHaveNow(){
+            if( !isElementsCreated )
+                return Boolean.FALSE;
+            do {
+                if( listOfFrames.size() != 0 ) {
+                    Map.Entry<Long, JFrame> pollFirstEntry = listOfFrames.pollFirstEntry();
+                    Long keyFirst = pollFirstEntry.getKey();
+                    keyFirst = null;
+                    JFrame valueFirst = pollFirstEntry.getValue();
+                    destructionElement(valueFirst);
+                    if( valueFirst != null )
+                        valueFirst = null;
+                }
+                if( listOfFrames.size() != 0 ) {
+                    Map.Entry<Long, JFrame> pollLastEntry = listOfFrames.pollLastEntry();
+                    Long keyLast = pollLastEntry.getKey();
+                    keyLast = null;
+                    JFrame valueLast = pollLastEntry.getValue();
+                    destructionElement(valueLast);
+                    if( valueLast != null )
+                        valueLast = null;
+                }
+            } while(listOfFrames.size() != 0);
+            listOfFrames.clear();
+            return Boolean.TRUE;
+        }
+        private JFrame destructionElement(JFrame elementForDestruction){
+            int idx = 0;
+            if( elementForDestruction.isVisible() )
+                elementForDestruction.setVisible(Boolean.FALSE);
+            Component[] components = elementForDestruction.getComponents();
+            idx = components.length;
+            if( idx > 0 ) {
+                do {
+                    Component component = elementForDestruction.getComponent(idx - 1);
+                    component = destructionComponent(component);
+                    if( idx > 0 )
+                        idx--;
+                } while(idx != 0);
+            }
+            ComponentListener[] componentListeners = elementForDestruction.getComponentListeners();
+            componentListeners.notifyAll();
+            elementForDestruction.getComponentCount();
+            elementForDestruction.removeAll();
+            elementForDestruction = null;
+            System.gc();
+            return null;
+        }
+        private Component destructionComponent(Component componentForDestruction){
+            if( componentForDestruction.isVisible() )
+                componentForDestruction.setVisible(Boolean.FALSE);
+            ComponentListener[] componentListeners = componentForDestruction.getComponentListeners();
+            if( componentListeners.length > 0 ) {
+                try {
+                    componentListeners.notifyAll();
+                } catch (IllegalMonitorStateException exMonitor) {
+                    System.out.println(exMonitor.getMessage());
+                    exMonitor.printStackTrace();
+                }
+            }
+            /**
+            componentForDestruction.remove(popup);
+            componentForDestruction.removeComponentListener(l);
+            componentForDestruction.removeFocusListener(l);
+            componentForDestruction.removeHierarchyBoundsListener(l);
+            componentForDestruction.removeHierarchyListener(l);
+            componentForDestruction.removeInputMethodListener(l);
+            componentForDestruction.removeKeyListener(l);
+            componentForDestruction.removeMouseListener(l);
+            componentForDestruction.removeMouseMotionListener(l);
+            componentForDestruction.removeMouseWheelListener(l);
+            componentForDestruction.removePropertyChangeListener(listener);
+            */
+            componentForDestruction.removeNotify();
+            componentForDestruction = null;
+            System.gc();
+            return null;
+        }
+        private MenuComponent currentMenuComponent(Component componentForDestruction){
+            componentForDestruction.getFocusListeners();
+            componentForDestruction.getHierarchyBoundsListeners();
+            componentForDestruction.getHierarchyListeners();
+            componentForDestruction.getInputMethodListeners();
+            KeyListener[] keyListeners = componentForDestruction.getKeyListeners();
+            for(int idxKeyListeners = 0; idxKeyListeners < keyListeners.length - 1; idxKeyListeners++)
+                componentForDestruction.getListeners(keyListeners[idxKeyListeners].getClass());
+            
+            componentForDestruction.getMouseListeners();
+            componentForDestruction.getMouseMotionListeners();
+            componentForDestruction.getMouseWheelListeners();
+            PropertyChangeListener[] propertyChangeListeners = componentForDestruction.getPropertyChangeListeners();
+            
+            propertyChangeListeners.toString();
+            //for do class who set property names in list
+            String propertyName = propertyChangeListeners.getClass().getName();
+            componentForDestruction.getPropertyChangeListeners(propertyName);
+            
+            
+            System.gc();
+            return null;
+        }
+    }
+
+    
     public class GUIComponentObjectStatus {
     
     private TreeMap<Integer, Component> modalLogView;

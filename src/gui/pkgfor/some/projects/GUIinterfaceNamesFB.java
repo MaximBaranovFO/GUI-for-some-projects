@@ -22,6 +22,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeListener;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.SubmissionPublisher;
@@ -77,6 +78,26 @@ public interface GUIinterfaceNamesFB {
             
         }
         
+        protected void detectTypeAndAddIntoList(Class<?> inputedClassForAddedElement) {
+            //12
+            inputedClassForAddedElement.arrayType();
+            inputedClassForAddedElement.componentType();
+            //1.5
+            inputedClassForAddedElement.getCanonicalName();
+            //1.1
+            try {
+                inputedClassForAddedElement.getClasses(); 
+                inputedClassForAddedElement.getDeclaredClasses();
+                inputedClassForAddedElement.getDeclaredFields();
+                inputedClassForAddedElement.getMethods();
+            } catch(SecurityException exSecure){
+                System.out.println(exSecure.getMessage());
+                exSecure.printStackTrace();
+            }
+            //1.8
+            inputedClassForAddedElement.getAnnotatedSuperclass();
+        }
+        
     }
     
     public class GUIElementsUpdate{
@@ -90,7 +111,10 @@ public interface GUIinterfaceNamesFB {
             listOfFrames = new ConcurrentSkipListMap();
             isElementsCreated = Boolean.TRUE;
         }
+        //GUIinterfaceNamesFB.GUIElementsUpdate().addElementIntoList(JFrame elementForAdd);
         public Boolean addElementIntoList(JFrame elementForAdd){
+            ArrayBlockingQueue<String> threadClassGetDeclaredFieldsCommandsOut = ZPIAppObjectsInfoHelperClasses.getThreadClassGetDeclaredFieldsCommandsOut(elementForAdd.getClass());
+            archiveOfChangedValues.detectTypeAndAddIntoList(elementForAdd.getClass());
             if( !isElementsCreated )
                 return Boolean.FALSE;
             if( elementForAdd == null )

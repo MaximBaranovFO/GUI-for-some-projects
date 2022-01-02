@@ -93,12 +93,13 @@ public class EditedVersionWorkerForWithProviderConsumerPC
     private static int eVnumberOfIteration = 0;
     private static final ConcurrentSkipListMap<Integer, JFrame> listOfWindow = new ConcurrentSkipListMap();
     private static final Boolean isRunnedModalWindow = Boolean.FALSE;
-    
+    private static final GUIinterfaceNamesFB.GUIElementsUpdate guiElementsUpdate = new GUIinterfaceNamesFB.GUIElementsUpdate();
     
     
    public static JFrame editedVersionMainRunProviderConsumer(JFrame windowForRun)
    {
         
+        guiElementsUpdate.addElementIntoList(windowForRun);
         final Integer countRunnedIterations = 0;
         final BlockingQueue<Character> bq;
         bq = new ArrayBlockingQueue<Character>(26);
@@ -162,6 +163,8 @@ public class EditedVersionWorkerForWithProviderConsumerPC
        
                                    JFrame eVframe = (JFrame) temporForFirstRun;
                                    
+                                   guiElementsUpdate.addElementIntoList(eVframe);
+                                   
                                    GUIinterfaceNamesFB.GUIComponentObjectStatus eVguiComponentObjectStatus = new GUIinterfaceNamesFB.GUIComponentObjectStatus();
                                    
                                    long eVcurrentTimeMillis = System.currentTimeMillis();
@@ -187,7 +190,7 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                     }
                                     //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#002^").concat(eVvalueOf), eVmainPanel);
                                     if(eVnumberOfIteration == 1){
-                                        
+                                        guiElementsUpdate.addElementIntoList(eVframe);
                                     }
                                     
                                     //eVguiComponentObjectStatus.putObject(String.valueOf(eVnumberOfIteration).concat("!MainWindow#003^").concat(eVvalueOf), eVborderLayout);
@@ -225,12 +228,14 @@ public class EditedVersionWorkerForWithProviderConsumerPC
                                             {
                                                 if(isRunnedModalWindow)
                                                     showModalProperties(eVframe);
+                                                guiElementsUpdate.addElementIntoList(eVframe);
                                             };
                                           executorWorkerSun.execute(consumerSunOne);
                                           Runnable consumerSunTwo = () ->
                                             {
                                                 if(isRunnedModalWindow)
                                                     showModalEnvironment(eVframe);
+                                                guiElementsUpdate.addElementIntoList(eVframe);
                                             };
                                           executorWorkerSun.execute(consumerSunTwo);
                                           executorWorkerSun.shutdownNow();

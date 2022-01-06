@@ -100,16 +100,160 @@ public interface GUIinterfaceNamesFB {
         
     }
     
+    public class forGUIElementListOfCodeNames {
+        //getName, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<String,Long>> codedListOfNames;
+        //hashCode, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<Integer,Long>> codedListOfHashCodeFromNames;
+        protected forGUIElementListOfCodeNames() {
+            long nowCurrentTimeMillis = System.currentTimeMillis();
+            
+            /**
+             * codedListOfNames = new ConcurrentSkipListMap((o1, o2) -> {
+                o1 = new String("codedListOfNames|JFrame|Component|JButton|JText|etc");
+                o2 = new ConcurrentSkipListMap(
+                (bo1, bo2) -> {
+                    bo1 = new String("Objects for threads or window | parent | fundamental | etc");
+                    bo2 = nowCurrentTimeMillis;
+                    return 0;
+                
+                }
+                );
+                return 0; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/LambdaBody
+            });
+            */
+            ConcurrentSkipListMap<String,Long> someWayOfNamesFromString = new ConcurrentSkipListMap();
+            someWayOfNamesFromString.put(forGUIComponentListOfCodeNames.class.getCanonicalName(), nowCurrentTimeMillis);
+            codedListOfNames = new ConcurrentSkipListMap();
+            codedListOfNames.put(
+                new String("codedListOfNames|JFrame|Component|JButton|JText|etc"),
+                someWayOfNamesFromString
+            );
+            
+            Class<? extends ConcurrentSkipListMap> aClass = codedListOfNames.getClass();
+            String name = aClass.getName();
+            int hashCode = aClass.hashCode();
+            
+            ConcurrentSkipListMap<Integer,Long> someWayOfNamesFromHisHashCode = new ConcurrentSkipListMap();
+            codedListOfHashCodeFromNames = new ConcurrentSkipListMap();
+            someWayOfNamesFromHisHashCode.put(hashCode, nowCurrentTimeMillis);
+            codedListOfHashCodeFromNames.put(
+                    new String("Objects for threads or window | parent | fundamental | etc")
+                    , someWayOfNamesFromHisHashCode
+            );
+            
+        }
+        
+        protected void detectTypeAndAddIntoList(Class<?> inputedClassForAddedElement) {
+            //12
+            inputedClassForAddedElement.arrayType();
+            inputedClassForAddedElement.componentType();
+            //1.5
+            inputedClassForAddedElement.getCanonicalName();
+            //1.1
+            try {
+                inputedClassForAddedElement.getClasses(); 
+                inputedClassForAddedElement.getDeclaredClasses();
+                inputedClassForAddedElement.getDeclaredFields();
+                inputedClassForAddedElement.getMethods();
+            } catch(SecurityException exSecure){
+                System.out.println(exSecure.getMessage());
+                exSecure.printStackTrace();
+            }
+            //1.8
+            inputedClassForAddedElement.getAnnotatedSuperclass();
+        }
+        
+    }
+    
+    public class forGUIOutputListOfCodeNames {
+        //getName, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<String,Long>> codedListOfNames;
+        //hashCode, currentTimeMillis
+        private ConcurrentSkipListMap<String, ConcurrentSkipListMap<Integer,Long>> codedListOfHashCodeFromNames;
+        protected forGUIOutputListOfCodeNames() {
+            long nowCurrentTimeMillis = System.currentTimeMillis();
+            
+            /**
+             * codedListOfNames = new ConcurrentSkipListMap((o1, o2) -> {
+                o1 = new String("codedListOfNames|JFrame|Component|JButton|JText|etc");
+                o2 = new ConcurrentSkipListMap(
+                (bo1, bo2) -> {
+                    bo1 = new String("Objects for threads or window | parent | fundamental | etc");
+                    bo2 = nowCurrentTimeMillis;
+                    return 0;
+                
+                }
+                );
+                return 0; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/LambdaBody
+            });
+            */
+            ConcurrentSkipListMap<String,Long> someWayOfNamesFromString = new ConcurrentSkipListMap();
+            someWayOfNamesFromString.put(forGUIComponentListOfCodeNames.class.getCanonicalName(), nowCurrentTimeMillis);
+            codedListOfNames = new ConcurrentSkipListMap();
+            codedListOfNames.put(
+                new String("codedListOfNames|JFrame|Component|JButton|JText|etc"),
+                someWayOfNamesFromString
+            );
+            
+            Class<? extends ConcurrentSkipListMap> aClass = codedListOfNames.getClass();
+            String name = aClass.getName();
+            int hashCode = aClass.hashCode();
+            
+            ConcurrentSkipListMap<Integer,Long> someWayOfNamesFromHisHashCode = new ConcurrentSkipListMap();
+            codedListOfHashCodeFromNames = new ConcurrentSkipListMap();
+            someWayOfNamesFromHisHashCode.put(hashCode, nowCurrentTimeMillis);
+            codedListOfHashCodeFromNames.put(
+                    new String("Objects for threads or window | parent | fundamental | etc")
+                    , someWayOfNamesFromHisHashCode
+            );
+            
+        }
+        
+        protected void detectTypeAndAddIntoList(Class<?> inputedClassForAddedElement) {
+            //12
+            inputedClassForAddedElement.arrayType();
+            inputedClassForAddedElement.componentType();
+            //1.5
+            inputedClassForAddedElement.getCanonicalName();
+            //1.1
+            try {
+                inputedClassForAddedElement.getClasses(); 
+                inputedClassForAddedElement.getDeclaredClasses();
+                inputedClassForAddedElement.getDeclaredFields();
+                inputedClassForAddedElement.getMethods();
+            } catch(SecurityException exSecure){
+                System.out.println(exSecure.getMessage());
+                exSecure.printStackTrace();
+            }
+            //1.8
+            inputedClassForAddedElement.getAnnotatedSuperclass();
+        }
+        
+    }
+    
     public class GUIElementsUpdate{
         private ConcurrentSkipListMap<Long, JFrame> listOfFrames;
+        private Boolean isComponentCreated = Boolean.FALSE;
+        private Long lastComponentWhoAdd;
         private Boolean isElementsCreated = Boolean.FALSE;
         private Long lastElementWhoAdd;
+        private Boolean isOutputCreated = Boolean.FALSE;
+        private Long lastOutputWhoAdd;
         private forGUIComponentListOfCodeNames archiveOfChangedValues;
+        private forGUIElementListOfCodeNames archiveOfInputValues;
+        private forGUIOutputListOfCodeNames archiveOfOutputValues;
         protected GUIElementsUpdate(){
             archiveOfChangedValues = new forGUIComponentListOfCodeNames();
+            archiveOfInputValues = new forGUIElementListOfCodeNames();
+            archiveOfOutputValues = new forGUIOutputListOfCodeNames();
+            lastComponentWhoAdd = Long.valueOf(0);
             lastElementWhoAdd = Long.valueOf(0);
+            lastOutputWhoAdd = Long.valueOf(0);
             listOfFrames = new ConcurrentSkipListMap();
+            isComponentCreated = Boolean.TRUE;
             isElementsCreated = Boolean.TRUE;
+            isOutputCreated = Boolean.TRUE;
         }
         //GUIinterfaceNamesFB.GUIElementsUpdate().addElementIntoList(JFrame elementForAdd);
         public Boolean addElementIntoList(JFrame elementForAdd){

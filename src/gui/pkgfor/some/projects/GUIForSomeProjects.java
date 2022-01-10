@@ -6,6 +6,7 @@
 package gui.pkgfor.some.projects;
 
 import static gui.pkgfor.some.projects.ZPINcSwingIndexManagerApp.createGui;
+import java.awt.EventQueue;
 import java.util.List;
 import java.util.Random;
 import java.awt.event.ActionListener;
@@ -37,7 +38,16 @@ public class GUIForSomeProjects {
         super();
     }
     public static void main(String[] args) {
-        GUIinterfaceNamesA.CreatorForGUINeedChanges creatorForGUINeedChanges = new GUIinterfaceNamesA.CreatorForGUINeedChanges();
-        creatorForGUINeedChanges.InterfaceNamesAmainOfCreatorForGUINeedChanges();
+        try {
+            Runnable r = () ->
+            {
+                GUIinterfaceNamesA.CreatorForGUINeedChanges creatorForGUINeedChanges = new GUIinterfaceNamesA.CreatorForGUINeedChanges();
+                creatorForGUINeedChanges.InterfaceNamesAmainOfCreatorForGUINeedChanges();
+            };
+            EventQueue.invokeLater(r);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
     }
 }

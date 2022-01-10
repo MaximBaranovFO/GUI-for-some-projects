@@ -16,6 +16,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.nio.file.FileSystem;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import java.awt.Container;
@@ -39,12 +41,29 @@ public class GUIForSomeProjects {
     }
     public static void main(String[] args) {
         try {
-            Runnable r = () ->
+            /**
+             * Runnable r = () ->
             {
                 GUIinterfaceNamesA.CreatorForGUINeedChanges creatorForGUINeedChanges = new GUIinterfaceNamesA.CreatorForGUINeedChanges();
                 creatorForGUINeedChanges.InterfaceNamesAmainOfCreatorForGUINeedChanges();
             };
             EventQueue.invokeLater(r);
+            **/
+            final ExecutorService executor = Executors.newFixedThreadPool(1);
+            Runnable r = () ->
+            {
+                GUIinterfaceNamesA.CreatorForGUINeedChanges creatorForGUINeedChanges = new GUIinterfaceNamesA.CreatorForGUINeedChanges();
+                creatorForGUINeedChanges.InterfaceNamesAmainOfCreatorForGUINeedChanges();
+            };
+            executor.execute(r);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();

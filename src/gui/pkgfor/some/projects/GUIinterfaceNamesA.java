@@ -196,9 +196,9 @@ public interface GUIinterfaceNamesA {
         
         GUIinterfaceNamesB.SingleThreadClient.mainFromSingleThreadClient();
         
-        GUIinterfaceNamesC.MotivatedByNetWorkInformation.singleAboutAuthors();
-        GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithResult();
-        GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithContol();
+        runModifiedWithThreadsFour();
+        
+        
         
         runModifiedWithThreadsTwo();
         
@@ -211,7 +211,7 @@ public interface GUIinterfaceNamesA {
     protected static void runModifiedWithThreadsOne(){
         try {
             
-            final ExecutorService executorForSomeOne = Executors.newFixedThreadPool(1);
+            final ExecutorService executorForSomeTwo = Executors.newFixedThreadPool(1);
             Runnable runSomeTwo = () ->
             {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -220,7 +220,7 @@ public interface GUIinterfaceNamesA {
                     }
                 });
             };
-            runThreadPoolWithExceptions(executorForSomeOne,runSomeTwo);
+            runThreadPoolWithExceptions(executorForSomeTwo,runSomeTwo);
         } catch (ClassCastException exKeyCanNotWithKeysList) {
                 System.out.println(exKeyCanNotWithKeysList.getMessage());
                 exKeyCanNotWithKeysList.printStackTrace();
@@ -238,7 +238,7 @@ public interface GUIinterfaceNamesA {
     protected static void runModifiedWithThreadsTwo(){
         try {
             
-            final ExecutorService executorForSomeTwo = Executors.newFixedThreadPool(1);
+            final ExecutorService executorForSomeThree = Executors.newFixedThreadPool(1);
             Runnable runSomeThree = () ->
             {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -249,7 +249,37 @@ public interface GUIinterfaceNamesA {
                     }
                 });
             };
-            runThreadPoolWithExceptions(executorForSomeTwo,runSomeThree);
+            runThreadPoolWithExceptions(executorForSomeThree,runSomeThree);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    protected static void runModifiedWithThreadsFour(){
+        try {
+            
+            final ExecutorService executorForSomeFour = Executors.newFixedThreadPool(1);
+            Runnable runSomeFour = () ->
+            {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        
+                        GUIinterfaceNamesC.MotivatedByNetWorkInformation.singleAboutAuthors();
+                        GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithResult();
+                        GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithContol();
+                    }
+                });
+            };
+            runThreadPoolWithExceptions(executorForSomeFour,runSomeFour);
         } catch (ClassCastException exKeyCanNotWithKeysList) {
                 System.out.println(exKeyCanNotWithKeysList.getMessage());
                 exKeyCanNotWithKeysList.printStackTrace();

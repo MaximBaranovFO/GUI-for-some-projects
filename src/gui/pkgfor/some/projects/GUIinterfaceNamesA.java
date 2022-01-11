@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -210,18 +212,68 @@ public interface GUIinterfaceNamesA {
         GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.doGUIForWorkerControl();
     }
     protected static void runSwingUtilitesIterations(){
+        runInEcecutorServiceOneThree();
+        
+    }
+    protected static void runInEcecutorServiceOneThree(){
+        try {
+            
+            final ExecutorService executor = Executors.newFixedThreadPool(4);
+            Runnable rOne = () ->
+            {
+                runIntefaceACreatorGUINeedChanges();
+            };
+            executor.execute(rOne);
+            Runnable rTwo = () ->
+            {
+                
+                runGuiGridBagAndHelper();
+        
+            };
+            executor.execute(rTwo);
+            Runnable rThree = () ->
+            {
+                
+                runGuiTableTree();
+        
+            };
+            executor.execute(rThree);
+            Runnable rFour = () ->
+            {
+                
+                runThSimpleCR();
+            };
+            executor.execute(rFour);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    protected static void runIntefaceACreatorGUINeedChanges(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GUIinterfaceNamesA.CreatorForGUINeedChanges guiForSomeProjects = new GUIinterfaceNamesA.CreatorForGUINeedChanges();
                 guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiForSomeProjects);
             }
         });
+    }
+    protected static void runGuiGridBagAndHelper(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GuiGridBagAndHelper guiGridBagAndHelper = new GuiGridBagAndHelper();
                 guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiGridBagAndHelper.getWindowOneByExtended());
             }
         });
+    }
+    protected static void runGuiTableTree(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GuiTableTree guiTableTree = new GuiTableTree();
@@ -229,6 +281,8 @@ public interface GUIinterfaceNamesA {
                 guiFromWindowAttrCurrent.correctTitleOfGUIWindow(guiTableTree.getWindowCreated());
             }
         });
+    }
+    protected static void runThSimpleCR(){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //Simple code has thread name and not have JFrame

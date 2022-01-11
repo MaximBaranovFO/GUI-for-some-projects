@@ -179,12 +179,9 @@ public interface GUIinterfaceNamesA {
         
     }
     protected static void runPreIterations(){
-        //Create GUI
-        GUIinterfaceNamesFA.OldGUIReconstruction.doWorkForSingleWithResult();
-        GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
-        //Add console workers
-        GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
-        frockedFieldWorkers.doCreationTaskHowMain();
+        
+        
+        runModifiedWithThreadsFive();
         
         try {
             GUIinterfaceNamesB.MultithreadClient.mainFromPoolWorker();
@@ -280,6 +277,40 @@ public interface GUIinterfaceNamesA {
                 });
             };
             runThreadPoolWithExceptions(executorForSomeFour,runSomeFour);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    protected static void runModifiedWithThreadsFive(){
+        try {
+            
+            final ExecutorService executorForSomeFive = Executors.newFixedThreadPool(1);
+            Runnable runSomeFive = () ->
+            {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        
+                        //Create GUI
+                        GUIinterfaceNamesFA.OldGUIReconstruction.doWorkForSingleWithResult();
+                        GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
+                        //Add console workers
+                        GUIsomenamesB frockedFieldWorkers = new GUIsomenamesB();
+                        frockedFieldWorkers.doCreationTaskHowMain();
+                        
+                    }
+                });
+            };
+            runThreadPoolWithExceptions(executorForSomeFive,runSomeFive);
         } catch (ClassCastException exKeyCanNotWithKeysList) {
                 System.out.println(exKeyCanNotWithKeysList.getMessage());
                 exKeyCanNotWithKeysList.printStackTrace();

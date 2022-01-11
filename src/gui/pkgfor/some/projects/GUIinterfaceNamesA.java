@@ -223,27 +223,31 @@ public interface GUIinterfaceNamesA {
             {
                 runIntefaceACreatorGUINeedChanges();
             };
-            executor.execute(rOne);
+            //executor.execute(rOne);
+            runThreadPoolWithExceptions(executor,rOne);
             Runnable rTwo = () ->
             {
                 
                 runGuiGridBagAndHelper();
         
             };
-            executor.execute(rTwo);
+            //executor.execute(rTwo);
+            runThreadPoolWithExceptions(executor,rTwo);
             Runnable rThree = () ->
             {
                 
                 runGuiTableTree();
         
             };
-            executor.execute(rThree);
+            //executor.execute(rThree);
+            runThreadPoolWithExceptions(executor,rThree);
             Runnable rFour = () ->
             {
                 
                 runThSimpleCR();
             };
-            executor.execute(rFour);
+            //executor.execute(rFour);
+            runThreadPoolWithExceptions(executor,rFour);
         } catch (ClassCastException exKeyCanNotWithKeysList) {
                 System.out.println(exKeyCanNotWithKeysList.getMessage());
                 exKeyCanNotWithKeysList.printStackTrace();
@@ -255,6 +259,20 @@ public interface GUIinterfaceNamesA {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
+        }
+    }
+    protected static void runThreadPoolWithExceptions(ExecutorService executorGlobal, Runnable runTwoElement){
+        try {
+            executorGlobal.execute(runTwoElement);
+        } catch (ThreadDeath exThreadExcept){
+            System.out.println(exThreadExcept.getMessage());
+            exThreadExcept.printStackTrace();
+        } catch (VirtualMachineError exVMWare){
+            System.out.println(exVMWare.getMessage());
+            exVMWare.printStackTrace();
+        } catch (Error exError){
+            System.out.println(exError.getMessage());
+            exError.printStackTrace();
         }
     }
     protected static void runIntefaceACreatorGUINeedChanges(){

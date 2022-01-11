@@ -200,17 +200,97 @@ public interface GUIinterfaceNamesA {
         GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithResult();
         GUIinterfaceNamesC.MotivatedByNetWorkInformation.doWorkForSingleWithContol();
         
-        GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.mainDoWorkerByAuthorsFromNet();
-        GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithForkPool();
-        GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithFork();
+        runModifiedWithThreadsTwo();
+        
         //Create GUI
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
-            }
-        });
-        GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.doGUIForWorkerControl();
+        runModifiedWithThreads();
+        
+        runModifiedWithThreadsOne();
     }
+    
+    protected static void runModifiedWithThreadsOne(){
+        try {
+            
+            final ExecutorService executorForSomeOne = Executors.newFixedThreadPool(1);
+            Runnable runSomeTwo = () ->
+            {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.doGUIForWorkerControl();
+                    }
+                });
+            };
+            runThreadPoolWithExceptions(executorForSomeOne,runSomeTwo);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    protected static void runModifiedWithThreadsTwo(){
+        try {
+            
+            final ExecutorService executorForSomeTwo = Executors.newFixedThreadPool(1);
+            Runnable runSomeThree = () ->
+            {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        GUIinterfaceNamesD.MainDoWorkerByAuthorsFromNet.mainDoWorkerByAuthorsFromNet();
+                        GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithForkPool();
+                        GUIinterfaceNamesD.mainDoWorkerByAuthorsFromNetWithFork();
+                    }
+                });
+            };
+            runThreadPoolWithExceptions(executorForSomeTwo,runSomeThree);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    protected static void runModifiedWithThreads(){
+        try {
+            
+            final ExecutorService executorForSomeOne = Executors.newFixedThreadPool(1);
+            Runnable runSomeOne = () ->
+            {
+                SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        GUIinterfaceNamesFA.OldGUIReconstruction.someGuiCreator();
+                    }
+                });
+            };
+            runThreadPoolWithExceptions(executorForSomeOne,runSomeOne);
+        } catch (ClassCastException exKeyCanNotWithKeysList) {
+                System.out.println(exKeyCanNotWithKeysList.getMessage());
+                exKeyCanNotWithKeysList.printStackTrace();
+                
+        } catch (NullPointerException exNullValInKeyOrVal) {
+                System.out.println(exNullValInKeyOrVal.getMessage());
+                exNullValInKeyOrVal.printStackTrace();
+                
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
     protected static void runSwingUtilitesIterations(){
         runInEcecutorServiceOneThree();
         

@@ -353,10 +353,10 @@ public interface GUIinterfaceNamesA {
     }
     
     protected static void runSwingUtilitesIterations(){
-        runInEcecutorServiceOneThree();
+        runInExecutorServiceOneThree();
         
     }
-    protected static void runInEcecutorServiceOneThree(){
+    protected static void runInExecutorServiceOneThree(){
         try {
             
             final ExecutorService executor = Executors.newFixedThreadPool(4);
